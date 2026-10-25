@@ -65,7 +65,22 @@ def collect(src_dir, dest_dir):
     return pairs
 
 
-datas = collect('web', 'web') + [('lessons', 'lessons'), ('runtime', 'runtime')]
+# PyInstaller собирает из pywinpty только DLL и .pyd, но сам агент консоли не подхватывает,
+# и в собранном exe PtyProcess.spawn() роняет python.exe ученика с 0xc0000142 (ConPTY не
+# стартует). Берём агентов прямо из пакета: OpenConsole.exe — бэкенд ConPTY (по умолчанию,
+# Windows 10 1809+), winpty-agent.exe — legacy-бэкенд для старых систем.
+import winpty as _winpty
+
+_winpty_dir = os.path.dirname(os.path.abspath(_winpty.__file__))
+winpty_agents = [
+    (os.path.join(_winpty_dir, name), 'winpty')
+    for name in ('OpenConsole.exe', 'winpty-agent.exe')
+    if os.path.exists(os.path.join(_winpty_dir, name))
+]
+
+# Без агентов ConPTY в datas запуск кода ученика падает с 0xc0000142:
+# в бандл попадают только DLL, а OpenConsole.exe — нет.
+datas = collect('web', 'web') + [('lessons', 'lessons'), ('runtime', 'runtime')] + winpty_agents
 
 a = Analysis(
     ['main.py'],

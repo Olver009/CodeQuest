@@ -38,18 +38,25 @@ current_temp_file = None
 
 def get_active_lang():
     return ACTIVE_LANG
+
 def get_python_path():
-    # В собранном exe портативный Python лежит внутри _MEIPASS (datas в CodeQuest.spec),
-    # в исходниках — в APP_ROOT. sys.executable здесь последний вариант: в frozen-режиме
-    # это сам CodeQuest.exe, и запускать его вместо интерпретатора нельзя — открылась бы
-    # копия приложения, а не код ученика.
-    for root in (RESOURCE_ROOT, APP_ROOT):
-        portable_path = os.path.join(root, "runtime", "python.exe")
+    if getattr(sys, 'frozen', False):
+        # В onedir сборке PyInstaller runtime лежит внутри _internal
+        base_dir = os.path.dirname(sys.executable)
+        portable_path = os.path.join(base_dir, "_internal", "runtime", "python.exe")
         if os.path.exists(portable_path):
             return portable_path
-    if getattr(sys, "frozen", False):
-        # Портативного Python нет (например, его удалили из папки) — ищем системный.
-        return shutil.which("python") or shutil.which("python3") or sys.executable
+        # На случай onefile сборки
+        if hasattr(sys, '_MEIPASS'):
+            portable_path = os.path.join(sys._MEIPASS, "runtime", "python.exe")
+            if os.path.exists(portable_path):
+                return portable_path
+    else:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        portable_path = os.path.join(base_dir, "runtime", "python.exe")
+        if os.path.exists(portable_path):
+            return portable_path
+
     return sys.executable
 
 def get_dev_mode():
