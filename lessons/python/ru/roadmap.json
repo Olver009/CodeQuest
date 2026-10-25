@@ -1,0 +1,169 @@
+[
+  {
+    "id": 1,
+    "title": "Введение",
+    "lessons": [
+      { "id": 1, "title": "Первая программа", "status": "current" },
+      { "id": 2, "title": "Переменные", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Типы данных",
+    "lessons": [
+      { "id": 3, "title": "Типы данных", "status": "locked" },
+      { "id": 4, "title": "Арифметика", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Ввод, вывод и f-строки",
+    "lessons": [
+      { "id": 5, "title": "Ввод с клавиатуры", "status": "locked" },
+      { "id": 6, "title": "Приведение типов", "status": "locked" },
+      { "id": 7, "title": "f-строки и форматирование", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Условия",
+    "lessons": [
+      { "id": 8, "title": "Конструкция if", "status": "locked" },
+      { "id": 9, "title": "Ветвление: elif и else", "status": "locked" },
+      { "id": 10, "title": "Операторы сравнения", "status": "locked" },
+      { "id": 11, "title": "Логические операторы", "status": "locked" },
+      { "id": 12, "title": "Вложенные условия", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Циклы",
+    "lessons": [
+      { "id": 13, "title": "Цикл while", "status": "locked" },
+      { "id": 14, "title": "Цикл for и range", "status": "locked" },
+      { "id": 15, "title": "break и continue", "status": "locked" },
+      { "id": 16, "title": "Вложенные циклы", "status": "locked" },
+      { "id": 17, "title": "Итоги: Циклы", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Списки",
+    "lessons": [
+      { "id": 18, "title": "Списки: введение", "status": "locked" },
+      { "id": 19, "title": "Срезы списков", "status": "locked" },
+      { "id": 20, "title": "Методы списков", "status": "locked" },
+      { "id": 21, "title": "Функции для списков", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "★ Алгоритмика",
+    "lessons": [
+      { "id": 200, "title": "Шаблон: Накопитель", "status": "locked" },
+      { "id": 201, "title": "Шаблон: Счётчик", "status": "locked" },
+      { "id": 202, "title": "Шаблон: Поиск максимума/минимума", "status": "locked" },
+      { "id": 203, "title": "Шаблон: Фильтрация", "status": "locked" },
+      { "id": 204, "title": "Шаблон: Обмен значений (swap)", "status": "locked" },
+      { "id": 205, "title": "Шаблон: Обход вложенных структур", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "📖 Грокаем алгоритмы",
+    "lessons": [
+      { "id": 100, "title": "Глава 1: Бинарный поиск и O-большое", "type": "book", "status": "locked" },
+      { "id": 101, "title": "Глава 2: Сортировка выбором и массивы", "type": "book", "status": "locked" },
+      { "id": 102, "title": "Глава 3: Рекурсия и стек", "type": "book", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей книги", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Словари",
+    "lessons": [
+      { "id": 22, "title": "Словари: введение", "status": "locked" },
+      { "id": 23, "title": "Методы словарей", "status": "locked" },
+      { "id": 24, "title": "Вложенные структуры", "status": "locked" },
+      { "id": 25, "title": "Кортежи", "status": "locked" },
+      { "id": 26, "title": "Множества", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Функции",
+    "lessons": [
+      { "id": 27, "title": "Определение функции", "status": "locked" },
+      { "id": 28, "title": "Аргументы", "status": "locked" },
+      { "id": 29, "title": "return", "status": "locked" },
+      { "id": 30, "title": "Область видимости", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Строки глубже",
+    "lessons": [
+      { "id": 31, "title": "Методы строк", "status": "locked" },
+      { "id": 32, "title": "Проверки строк", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 12,
+    "title": "Файлы и ошибки",
+    "lessons": [
+      { "id": 33, "title": "Чтение файлов", "status": "locked" },
+      { "id": 34, "title": "Запись файлов", "status": "locked" },
+      { "id": 35, "title": "try/except", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 13,
+    "title": "Модули",
+    "lessons": [
+      { "id": 36, "title": "import и стандартная библиотека", "status": "locked" },
+      { "id": 37, "title": "pip и venv", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 14,
+    "title": "ООП",
+    "lessons": [
+      { "id": 38, "title": "Классы и объекты", "status": "locked" },
+      { "id": 39, "title": "Методы класса", "status": "locked" },
+      { "id": 40, "title": "Конструктор __init__", "status": "locked" },
+      { "id": 41, "title": "Наследование", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 15,
+    "title": "Продвинутое",
+    "lessons": [
+      { "id": 42, "title": "List comprehension", "status": "locked" },
+      { "id": 43, "title": "Генераторы", "status": "locked" },
+      { "id": 44, "title": "JSON", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 16,
+    "title": "Git и финал",
+    "lessons": [
+      { "id": 45, "title": "Git и GitHub", "status": "locked" },
+      { "id": 46, "title": "Финальный проект", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  }
+]

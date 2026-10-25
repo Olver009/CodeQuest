@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>CodeQuest</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="i18n.js"></script>
+    <script src="drag.js"></script>
+    <script src="vendor/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="vendor/highlight/styles/vs2015.min.css">
+    <script src="vendor/highlight/highlight.min.js"></script>
+    <script src="vendor/highlight/languages/python.min.js"></script>
+</head>
+<body>
+<div id="app-container">
+    <div class="titlebar">
+        <div class="titlebar-left"><img src="icons/python.svg" class="titlebar-icon" alt="Icon"></div>
+        <div class="titlebar-right">
+            <button class="titlebar-btn" onclick="pywebview.api.minimize_window()">—</button>
+            <button class="titlebar-btn" onclick="pywebview.api.toggle_maximize()">□</button>
+            <button class="titlebar-btn btn-close" onclick="pywebview.api.close_window()">✕</button>
+        </div>
+    </div>
+
+    <div class="layout">
+        <!-- Узкая панель для режима чтения -->
+        <aside class="sidebar-lesson">
+            <button class="side-btn active">📖</button>
+        </aside>
+
+        <main class="main" style="padding: 0; max-width: 100%; align-items: stretch; overflow: hidden;">
+            <div class="lesson" style="height: 100%;">
+                <header class="lesson-topbar">
+                    <div class="topbar-left">
+                        <a href="index.html" class="close-btn" style="text-decoration: none;">×</a>
+                        <h1 class="lesson-title" id="lesson-title">Загрузка...</h1>
+                    </div>
+                    <div class="topbar-stats">
+                        <div class="stat stat-streak" id="topbar-streak-widget"><span class="stat-icon" id="topbar-streak-icon">🔥</span><span class="stat-val" id="topbar-streak-count">0</span></div>
+                    </div>
+                </header>
+
+                <div class="lesson-body" style="justify-content: center; overflow-y: auto;">
+                    <aside class="theory-panel" style="width: 800px; border-right: none; padding-bottom: 100px;">
+                        <div class="theory-header">
+                            <h2 class="theory-title" id="theory-title">Загрузка...</h2>
+                        </div>
+                        <section class="challenge">
+                            <div class="theory-content" id="theory-content"></div>
+                        </section>
+
+                        <div style="margin-top: 40px; text-align: center;">
+                            <button class="btn btn-run" style="height: 48px; padding: 0 24px; font-size: 16px;" onclick="finishBook()">
+                                Завершить чтение
+                            </button>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script>
+    let lessonId = null;
+
+    window.addEventListener('pywebviewready', async () => {
+        await applyLanguage();
+        const urlParams = new URLSearchParams(window.location.search);
+        lessonId = urlParams.get('id') || 1;
+        localStorage.setItem('lastVisitedNode', `node-${lessonId}`);
+
+        try {
+            const userData = await pywebview.api.load_data();
+            const lessonData = await pywebview.api.get_lesson(lessonId);
+
+            if (lessonData.error) throw new Error(lessonData.error);
+
+            document.getElementById('lesson-title').textContent = lessonData.title;
+            document.getElementById('theory-title').textContent = lessonData.title;
+
+            const theoryDiv = document.getElementById('theory-content');
+            theoryDiv.innerHTML = marked.parse(lessonData.theory || 'Текст не найден.');
+
+            theoryDiv.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+
+            updateStreakUI(userData);
+        } catch (e) {
+            document.getElementById('theory-content').textContent = "Ошибка загрузки: " + e.message;
+        }
+    });
+
+    async function finishBook() {
+        await pywebview.api.save_key(`status_${lessonId}`, 'done');
+        window.location.href = 'index.html';
+    }
+
+    async function updateStreakUI() {
+        try {
+            const status = await pywebview.api.get_streak_status();
+            document.getElementById('topbar-streak-count').textContent = status.streak;
+            const icon = document.getElementById('topbar-streak-icon'), widget = document.getElementById('topbar-streak-widget');
+            if (status.frozen) { icon.style.filter = 'hue-rotate(180deg)'; widget.style.opacity = '1'; }
+            else if (status.streak > 0) { icon.style.filter = 'none'; widget.style.opacity = '1'; }
+            else { icon.style.filter = 'grayscale(100%)'; widget.style.opacity = '0.5'; }
+        } catch(e) {}
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Вход - CodeQuest</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container { max-width: 400px; margin: 80px auto; background: var(--bg-card); padding: 32px; border-radius: 8px; border: var(--border-primary); }
+        .auth-input { width: 100%; padding: 12px; margin-bottom: 12px; background: var(--bg-code-secondary); border: 1px solid var(--border-color); color: white; border-radius: 6px; font-family: inherit; }
+        .auth-btn { width: 100%; padding: 12px; background: var(--brand-primary); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-bottom: 8px; }
+        .auth-btn:hover { background: var(--brand-deep); }
+        .toggle-link { color: var(--brand-bright); cursor: pointer; text-decoration: underline; display: block; text-align: center; margin-top: 16px; font-size: 14px; }
+    </style>
+</head>
+<body>
+<div class="auth-container">
+    <h2 id="auth-title" style="text-align: center; margin-bottom: 24px;">Вход в аккаунт</h2>
+
+    <input type="text" id="username" class="auth-input" placeholder="Ваш ник" style="display: none;">
+    <input type="email" id="email" class="auth-input" placeholder="Email">
+    <input type="password" id="password" class="auth-input" placeholder="Пароль">
+
+    <button id="submit-btn" class="auth-btn" onclick="handleAuth()">Войти</button>
+
+    <span class="toggle-link" id="toggle-link" onclick="toggleMode()">Нет аккаунта? Зарегистрироваться</span>
+    <span class="toggle-link" onclick="window.location.href='index.html'">← Назад на главную</span>
+</div>
+
+<script>
+    let isLoginMode = true;
+
+    function toggleMode() {
+        isLoginMode = !isLoginMode;
+        document.getElementById('auth-title').textContent = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+        document.getElementById('submit-btn').textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+        document.getElementById('toggle-link').textContent = isLoginMode ? 'Нет аккаунта? Зарегистрироваться' : 'Уже есть аккаунт? Войти';
+        document.getElementById('username').style.display = isLoginMode ? 'none' : 'block';
+    }
+
+    async function handleAuth() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const username = document.getElementById('username').value;
+
+        const btn = document.getElementById('submit-btn');
+        btn.textContent = 'Загрузка...';
+        btn.disabled = true;
+
+        let result;
+        if (isLoginMode) {
+            result = await pywebview.api.sign_in_user(email, password);
+        } else {
+            result = await pywebview.api.sign_up_user(email, password, username);
+        }
+
+        if (result.error) {
+            alert(result.error);
+            btn.textContent = isLoginMode ? 'Войти' : 'Зарегистрироваться';
+            btn.disabled = false;
+        } else {
+            await pywebview.api.save_key('is_logged_in', true);
+            if (result.profile) {
+                await pywebview.api.save_key('username', result.profile.username);
+            } else if (!isLoginMode) {
+                await pywebview.api.save_key('username', username);
+            }
+            window.location.href = 'profile.html';
+        }
+    }
+</script>
+</body>
+</html>

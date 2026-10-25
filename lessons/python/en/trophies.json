@@ -1,0 +1,178 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Test: Introduction",
+    "description": "Final task of chapter 1. Checks: print, variables, comments.",
+    "practice": {
+      "description": "Create four variables: `first_name` = `\"Ivan\"`, `last_name` = `\"Petrov\"`, `age` = `25`, `city` = `\"Moscow\"`.\n\nOutput five lines:\n```\nName: Ivan\nSurname: Petrov\nAge: 25\nCity: Moscow\nIvan Petrov\n```\n\nThe last line — first and last name together with a space.\n\n⚠️ All four variables must be used in `print`. Add at least one comment (`#`). Without f-strings — only `print` with commas.",
+      "starter": "# Create 4 variables and output 5 lines\n",
+      "expected": "Name: Ivan\nSurname: Petrov\nAge: 25\nCity: Moscow\nIvan Petrov",
+      "must_contain": ["first_name", "last_name", "age", "city", "print", "#"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Test: Data types and Arithmetic",
+    "description": "Final task of chapter 2. Checks: int, float, //, %, **, type().",
+    "practice": {
+      "description": "Given:\n```python\nnumber = 1234\npercent_base = 2000\n```\n\nOutput five lines:\n```\nLast digit: 4\nHundreds: 12\n2^10: 1024\n15% of 2000: 300.0\nType of percent: <class 'float'>\n```\n\nOutput: the last digit of the number, the number of hundreds (how many whole hundreds in the number), 2 to the power of 10, 15 percent of `percent_base` (result should be float), the type of the result from item 4.\n\n⚠️ Compute in separate variables, output via f-strings.",
+      "starter": "number = 1234\npercent_base = 2000\n\n# Five computations and output\n",
+      "expected": "Last digit: 4\nHundreds: 12\n2^10: 1024\n15% of 2000: 300.0\nType of percent: <class 'float'>",
+      "must_contain": ["//", "%", "**", "type(", "print"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Test: Input/output and type conversion",
+    "description": "Final task of chapter 3. Checks: input, int(), float(), :.2f.",
+    "practice": {
+      "description": "Write a receipt program.\n\nAsk the user for the price per item (float), quantity (int), and discount in percent (int). Compute the subtotal, discount amount, and final cost.\n\nOutput five lines:\n```\nPrice per item: 1500.50\nQuantity: 3\nSubtotal: 4501.50\nDiscount: 450.15\nTotal: 4051.35\n```\n\n**What to type at runtime:**\n```\nLine 1: 1500.50\nLine 2: 3\nLine 3: 10\n```\n\n⚠️ Price, subtotal, discount and total — with two digits after the dot. Quantity — integer. Everything via f-strings.",
+      "starter": "# Three input (float, int, int), computations, five lines of output\n",
+      "expected": "Price per item: 1500.50\nQuantity: 3\nSubtotal: 4501.50\nDiscount: 450.15\nTotal: 4051.35",
+      "must_contain": ["float(input(", "int(input(", ":.2f", "f\"", "print"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Test: Conditions",
+    "description": "Final task of chapter 4. Checks: if/elif/else, and, not, nesting.",
+    "practice": {
+      "description": "Given:\n```python\nage = 20\nexperience = 0\nhas_license = False\n```\n\nDetermine the category by rules:\n\n- age < 18 → `\"Schoolkid\"`\n- age from 18 to 64 (inclusive both sides):\n  - if experience less than 1:\n    - if no license → `\"Need license\"`\n    - otherwise → `\"Intern\"`\n  - if experience less than 5 → `\"Junior specialist\"`\n  - otherwise → `\"Senior specialist\"`\n- age 65 and older → `\"Pensioner\"`\n\nOutput:\n```\nAge: 20\nExperience: 0\nLicense: False\nDecision: Need license\n```\n\n⚠️ The check of experience and license must be **inside** the age check (nested conditions).",
+      "starter": "age = 20\nexperience = 0\nhas_license = False\n\n# Determine category and output 4 lines\n",
+      "expected": "Age: 20\nExperience: 0\nLicense: False\nDecision: Need license",
+      "must_contain": ["if", "elif", "else", "and", "not", "print"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Test: Loops",
+    "description": "Final task of chapter 5. Checks: for, range, len, break, continue, nesting.",
+    "practice": {
+      "description": "Given a matrix:\n```python\ndata = [\n    [4, 7, 2, 0, 9],\n    [8, 5, 3],\n    [6, 9, 12, 0, 100]\n]\n```\n\nFor each row compute the sum of **even** numbers, but stop as soon as you encounter `0` — zero and everything after it is not counted.\n\nOutput:\n```\nRow 1: 6\nRow 2: 8\nRow 3: 18\n```\n\n⚠️ Outer loop over rows, inner over elements. As soon as you encounter zero — interrupt processing of the row. Skip odd. The sum resets for each row.",
+      "starter": "data = [\n    [4, 7, 2, 0, 9],\n    [8, 5, 3],\n    [6, 9, 12, 0, 100]\n]\n\n# Double loop, sum per each row, three lines of output\n",
+      "expected": "Row 1: 6\nRow 2: 8\nRow 3: 18",
+      "must_contain": ["for", "range", "len", "break", "continue", "print"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Test: Lists",
+    "description": "Final task of chapter 6. Checks: filtering, slices, sorted, reversal.",
+    "practice": {
+      "description": "Given a list:\n```python\nnums = [4, -2, 7, 0, -5, 8, -1, 3, 0, 6]\n```\n\nDo five operations:\n1. `positive` — only positive numbers\n2. `negative` — only negative numbers\n3. `middle` — elements from index 3 to 6 inclusive\n4. `ordered` — sorted copy (original untouched)\n5. `reversed_nums` — reversed list\n\nOutput five lines:\n```\npositive: [4, 7, 8, 3, 6]\nnegative: [-2, -5, -1]\nmiddle: [0, -5, 8, -1]\nordered: [-5, -2, -1, 0, 0, 3, 4, 6, 7, 8]\nreversed: [6, 0, 3, -1, 8, -5, 0, 7, -2, 4]\n```\n\n⚠️ Filtering via a loop with `append`. Sorting — via `sorted`, not `sort`.",
+      "starter": "nums = [4, -2, 7, 0, -5, 8, -1, 3, 0, 6]\n\n# 5 operations and output\n",
+      "expected": "positive: [4, 7, 8, 3, 6]\nnegative: [-2, -5, -1]\nmiddle: [0, -5, 8, -1]\nordered: [-5, -2, -1, 0, 0, 3, 4, 6, 7, 8]\nreversed: [6, 0, 3, -1, 8, -5, 0, 7, -2, 4]",
+      "must_contain": ["for", "if", "append", "nums[3:7]", "sorted(", "[::-1]", "print"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Test: Algorithmics",
+    "description": "Final task of the algorithmics block. Checks all 6 patterns: accumulator, counter, search, filtering, swap, nested structures.",
+    "practice": {
+      "description": "Given a list of numbers:\n\n```python\nnums = [4, -2, 7, 0, -5, 8, -1, 3, 0, 6]\n```\n\nApply **all six patterns** and output the results:\n\n1. **Accumulator** — sum of all positives\n2. **Counter** — how many zeros\n3. **Search** — maximum and its index (via a loop, **not** via `max`)\n4. **Filtering** — new list `evens` (only even)\n5. **Swap** — swap the first and last elements in `nums`. Output the list after the swap\n6. **Nested structures** — given a list of dictionaries `users`, output the name and age for each:\n```python\nusers = [\n    {\"name\": \"Anna\", \"age\": 25},\n    {\"name\": \"Ivan\", \"age\": 17},\n    {\"name\": \"Masha\", \"age\": 30}\n]\n```\n\n**Expected output:**\n```\nSum of positives: 28\nZeros: 2\nMax: 8 (index 5)\nEvens: [-2, 0, 8, 0, 6]\nAfter swap: [6, -2, 7, 0, -5, 8, -1, 3, 0, 4]\nAnna: 25\nIvan: 17\nMasha: 30\n```\n\n⚠️ Swap — via `nums[0], nums[-1] = nums[-1], nums[0]`. Without `max()` and `list.index()`.",
+      "starter": "nums = [4, -2, 7, 0, -5, 8, -1, 3, 0, 6]\n\nusers = [\n    {\"name\": \"Anna\", \"age\": 25},\n    {\"name\": \"Ivan\", \"age\": 17},\n    {\"name\": \"Masha\", \"age\": 30}\n]\n\n# Six blocks\n",
+      "expected": "Sum of positives: 28\nZeros: 2\nMax: 8 (index 5)\nEvens: [-2, 0, 8, 0, 6]\nAfter swap: [6, -2, 7, 0, -5, 8, -1, 3, 0, 4]\nAnna: 25\nIvan: 17\nMasha: 30",
+      "must_contain": ["for", "if", "append", "nums[0]", "nums[-1]", "print"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Test: Book (chapters 1–3)",
+    "description": "Final task on three chapters of the book. Checks: binary search, selection sort, recursion.",
+    "practice": {
+      "description": "Three blocks — one per chapter.\n\n**1. Binary search** (chapter 1). List `arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]`. Find `13` via `while`. Output `13 → index 6`.\n\n**2. Selection sort** (chapter 2). Implement two functions:\n- `find_smallest(arr)` — index of the minimum\n- `selection_sort(arr)` — sorting via `find_smallest` and `pop`\n\nSort `[5, 3, 8, 2, 6]` and output the result: `[2, 3, 5, 6, 8]`.\n\n**3. Recursion** (chapter 3). Two recursive functions:\n- `countdown(n)` — prints from n down to 1\n- `factorial(n)` — returns the factorial\n\nCall `countdown(3)` and `print(factorial(5))`.\n\n**Expected output:**\n```\n13 → index 6\n[2, 3, 5, 6, 8]\n3\n2\n1\n120\n```\n\n⚠️ Without built-in `max`, `min`, `sort` — everything by hand.",
+      "starter": "arr = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]\n\n# 1. Binary search (while, low, high, result)\n\n\n# 2. Selection sort\ndef find_smallest(arr):\n    ...\n\ndef selection_sort(arr):\n    ...\n\nprint(selection_sort([5, 3, 8, 2, 6]))\n\n# 3. Recursion\ndef countdown(n):\n    ...\n\ndef factorial(n):\n    ...\n\ncountdown(3)\nprint(factorial(5))\n",
+      "expected": "13 → index 6\n[2, 3, 5, 6, 8]\n3\n2\n1\n120",
+      "must_contain": ["while", "def find_smallest", "def selection_sort", "pop(", "def countdown", "def factorial", "return", "print"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Test: Dictionaries",
+    "description": "Final task of chapter 9. Checks: dict, items, get, counter, nested structures.",
+    "practice": {
+      "description": "Given a list of words:\n```python\nwords = [\"cat\", \"dog\", \"cat\", \"hound\", \"cat\", \"dog\", \"hamster\"]\n```\n\nBuild three dictionaries:\n1. `count` — how many times each word occurs\n2. `popular` — list of words occurring 2 or more times\n3. `by_length` — word length → list of words of that length\n\nOutput:\n```\nCounter: {'cat': 3, 'dog': 2, 'hound': 1, 'hamster': 1}\nPopular: ['cat', 'dog']\nBy length: {3: ['cat', 'hound'], 6: ['hamster'], 5: []}\n```\n\n⚠️ Counter — via `count.get(w, 0) + 1`. For `by_length` — check for key existence before `append`.",
+      "starter": "words = [\"cat\", \"dog\", \"cat\", \"hound\", \"cat\", \"dog\", \"hamster\"]\n\n# Three dictionaries and three lines of output\n",
+      "expected": "Counter: {'cat': 3, 'dog': 2, 'hound': 1, 'hamster': 1}\nPopular: ['cat', 'dog']\nBy length: {3: ['cat', 'hound'], 6: ['hamster'], 5: []}",
+      "must_contain": ["for", ".get(", "items(", "append", "print"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Test: Functions",
+    "description": "Final task of chapter 10. Checks: def, arguments, defaults, return, function as argument.",
+    "practice": {
+      "description": "Write **four functions**:\n\n1. `calculate(a, b, op=\"+\")` — performs arithmetic operation `op` with `a` and `b`. Supports `+`, `-`, `*`, `/`. Returns result. `op` defaults to `\"+\"`.\n2. `average(nums)` — returns the average of the list (float).\n3. `is_even(n)` — returns `True`/`False` depending on evenness.\n4. `filter_list(nums, predicate)` — returns a new list of only those elements for which `predicate(element)` is true. `predicate` — is a **function**, passed as an argument.\n\nCall and output:\n```\n13\n30\n4.5\n[2, 4, 6]\n```\n\n(call order: `calculate(10, 3)`, `calculate(10, 3, \"*\")`, `average([4, 7, 2, 5])`, `filter_list([1, 2, 3, 4, 5, 6], is_even)`)\n\n⚠️ `filter_list` must accept a function as an argument — don't embed the evenness check inside.",
+      "starter": "# Four functions, four outputs\n",
+      "expected": "13\n30\n4.5\n[2, 4, 6]",
+      "must_contain": ["def calculate", "def average", "def is_even", "def filter_list", "return", "print"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Test: Strings",
+    "description": "Final task of chapter 11. Checks: string methods, split, join, checks.",
+    "practice": {
+      "description": "Given a string:\n```python\ntext = \"  Mom washed the frame, mom washed the frame.  \"\n```\n\nProcess the text:\n1. Remove edge spaces\n2. Convert to lowercase\n3. Remove commas and periods, split into words\n4. Find the longest word\n5. Glue words back via `-`\n6. Output the word count and whether the text contains the word `\"frame\"`\n\nOutput:\n```\nWords: 6\nLongest: mom\nJoined: mom-washed-the-frame-mom-washed-the-frame\nWord 'frame' in text: True\n```",
+      "starter": "text = \"  Mom washed the frame, mom washed the frame.  \"\n\n# Processing and 4 lines of output\n",
+      "expected": "Words: 6\nLongest: mom\nJoined: mom-washed-the-frame-mom-washed-the-frame\nWord 'frame' in text: True",
+      "must_contain": ["strip", "lower", "split", "join", "for", "if", "len", "in", "print"]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "title": "Test: Files and errors",
+    "description": "Final task of chapter 12. Checks: reading, writing, try/except.",
+    "practice": {
+      "description": "Three blocks:\n\n**1. Write.** Create a file `log.txt` and write three lines into it: `start`, `process`, `end`.\n\n**2. Read.** Read `log.txt` and output each line in lowercase with prefix `LOG: `. Remove the newline from the ends.\n\n**3. Error handling.** Try to open a non-existent `missing.txt`. Handle the error via `try/except` — in `except` output `File not found`.\n\n**Expected output:**\n```\nLOG: start\nLOG: process\nLOG: end\nFile not found\n```",
+      "starter": "# 1. Write log.txt\n\n# 2. Read and output\n\n# 3. try/except for missing.txt\n",
+      "expected": "LOG: start\nLOG: process\nLOG: end\nFile not found",
+      "must_contain": ["with open", "f.write", "\\n", "try", "except FileNotFoundError", "strip", "lower", "print"]
+    }
+  },
+  "13": {
+    "chapter_id": 13,
+    "title": "Test: Modules",
+    "description": "Final task of chapter 13. Checks: import, from import, as.",
+    "practice": {
+      "description": "Connect four things from the standard library and output:\n\n1. Square root of 81 (via `math`)\n2. Random number from 1 to 1 (via `random.randint` — always 1)\n3. Year of the date `datetime(2024, 1, 1)` (via `from datetime import datetime`)\n4. Floor rounding of `2.7` — via `math`, but imported under the name `m`\n\n**Expected output:**\n```\n9.0\n1\n2024\n2\n```\n\n⚠️ Use all four import variants: `import math`, `import random`, `from datetime import datetime`, `import math as m`.",
+      "starter": "# Four imports, four print\n",
+      "expected": "9.0\n1\n2024\n2",
+      "must_contain": ["import math", "import random", "from datetime import", "import math as", "print"]
+    }
+  },
+  "14": {
+    "chapter_id": 14,
+    "title": "Test: OOP",
+    "description": "Final task of chapter 14. Checks: classes, __init__, methods, inheritance, __str__.",
+    "practice": {
+      "description": "Create a class hierarchy:\n\n**`Account`** — a bank account:\n- On creation accepts the owner's name and initial balance (default 0)\n- Method `deposit(amount)` — tops up the account, prints `Deposited: {amount}`\n- String representation (`__str__`) returns `{owner}: {balance}`\n\n**`SavingsAccount(Account)`** — an account with bonus:\n- Overrides `deposit` — adds 5% on top of the amount, prints `Deposited with bonus: {amount * 1.05}`\n\nScenario:\n1. Create `Account(\"Ivan\", 100)`, deposit 50, output via `print`\n2. Create `SavingsAccount(\"Anna\", 200)`, deposit 100, output via `print`\n\n**Expected output:**\n```\nDeposited: 50\nIvan: 150\nDeposited with bonus: 105.0\nAnna: 305.0\n```",
+      "starter": "# class Account + class SavingsAccount(Account), scenario\n",
+      "expected": "Deposited: 50\nIvan: 150\nDeposited with bonus: 105.0\nAnna: 305.0",
+      "must_contain": ["class Account", "class SavingsAccount(Account)", "def __init__", "def deposit", "def __str__", "return", "print"]
+    }
+  },
+  "15": {
+    "chapter_id": 15,
+    "title": "Test: Advanced",
+    "description": "Final task of chapter 15. Checks: list comprehension, generators, JSON.",
+    "practice": {
+      "description": "Three blocks:\n\n**1. Comprehension.** Given a list `nums = [1..10]`. Via one list comprehension create `evens_squared` — squares of even numbers.\n\n**2. Generator.** Create a generator of cubes of numbers from 1 to 5. Output their sum.\n\n**3. JSON.** Given a dictionary `user = {\"name\": \"Anna\", \"hobbies\": [\"chess\", \"running\"]}`. Convert to JSON string preserving Russian (`ensure_ascii=False`) and output. Then parse back and output the first hobby.\n\n**Expected output:**\n```\n[4, 16, 36, 64, 100]\n225\n{\"name\": \"Anna\", \"hobbies\": [\"chess\", \"running\"]}\nchess\n```",
+      "starter": "import json\n\nnums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\n# 1. comprehension\n# 2. generator of cubes, sum\n# 3. JSON: dumps + loads\n",
+      "expected": "[4, 16, 36, 64, 100]\n225\n{\"name\": \"Anna\", \"hobbies\": [\"chess\", \"running\"]}\nchess",
+      "must_contain": ["for", "if", "sum(", "json.dumps", "json.loads", "ensure_ascii=False", "print"]
+    }
+  },
+  "16": {
+    "chapter_id": 16,
+    "title": "Test: Final",
+    "description": "Final task of the course. Checks: 5 functions + JSON + try/except + enumerate.",
+    "practice": {
+      "description": "A mini-version of a TODO list. Without `input` — data is set in code.\n\nImplement five functions:\n\n1. `add_task(tasks, text)` — adds a task. Task — a dictionary with fields `text` and `done` (default `False`)\n2. `mark_done(tasks, index)` — marks a task by index as done. Via `try/except IndexError` — if index doesn't exist, prints `No task`\n3. `show_tasks(tasks)` — prints all tasks with number (from 1) and status `[x]`/`[ ]`. Via `enumerate`\n4. `save_tasks(tasks, filename)` — saves the list to a JSON file (with Russian not escaped, with indents)\n5. `load_tasks(filename)` — reads a JSON file. If the file doesn't exist — returns an empty list\n\nScenario:\n- Create empty `tasks`\n- Add `Buy bread`, `Do lesson`, `Call mom`\n- Mark `tasks[1]` done\n- Output via `show_tasks`\n- Save to `tasks.json`\n- Load back into `loaded`\n- Output `len(loaded)`\n\n**Expected output:**\n```\n1. [ ] Buy bread\n2. [x] Do lesson\n3. [ ] Call mom\n3\n```",
+      "starter": "import json\n\n# Five functions per description, scenario\n",
+      "expected": "1. [ ] Buy bread\n2. [x] Do lesson\n3. [ ] Call mom\n3",
+      "must_contain": ["def add_task", "def mark_done", "def show_tasks", "def save_tasks", "def load_tasks", "try", "except", "enumerate", "json.dump", "json.load", "ensure_ascii=False", "print"]
+    }
+  }
+}

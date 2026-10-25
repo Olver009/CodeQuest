@@ -1,0 +1,10 @@
+# Зависимости для запуска CodeQuest из исходников (start.bat).
+# Папка runtime\ (Python Embeddable) используется только для запуска кода ученика
+# и эти пакеты не требует.
+#
+# Установка:  pip install -r requirements.txt
+pywebview>=5.1,<7
+pywinpty>=2.0.13
+
+# Сборка .exe (нужна только при пересборке проекта):
+#   pip install pyinstaller

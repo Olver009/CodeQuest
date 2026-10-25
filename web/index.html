@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>CodeQuest</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="i18n.js"></script>
+  <script src="drag.js"></script>
+  <style>
+    .node-top, .node-icon { transition: top 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .node:hover .node-top { top: 2px; }
+    .node:hover .node-icon { top: 14px; }
+    .node.pressed .node-top { top: 6px; }
+    .node.pressed .node-icon { top: 18px; }
+    .node-container.active-tooltip { z-index: 9999 !important; }
+    .node-tooltip {
+      position: absolute; top: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%) translateY(-10px) scale(0.9);
+      background: var(--bg-card); border: var(--border-primary); border-radius: 8px;
+      padding: 16px; width: 220px; text-align: center; opacity: 0; visibility: hidden;
+      transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.7); pointer-events: none; -webkit-app-region: no-drag;
+    }
+    .node-tooltip::before {
+      content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+      border-width: 0 8px 8px 8px; border-style: solid; border-color: transparent transparent var(--bg-card) transparent;
+    }
+    .node-tooltip.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0) scale(1); pointer-events: auto; }
+    .node-tooltip h4 { margin: 0 0 4px 0; font-size: 14px; color: var(--text-white); white-space: normal; word-wrap: break-word; line-height: 1.3; }
+    .node-tooltip .status-text { margin: 0 0 12px 0; font-size: 12px; color: var(--text-secondary); }
+    .node-tooltip .btn-continue { background: var(--brand-primary); color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; font-family: inherit; font-size: 14px; }
+    .node-tooltip .btn-continue:hover { background: var(--brand-deep); }
+  </style>
+</head>
+<body>
+<div id="app-container">
+  <div class="titlebar">
+    <div class="titlebar-left"><img src="icons/python.svg" class="titlebar-icon" alt="Icon"></div>
+    <div class="titlebar-right">
+      <button class="titlebar-btn" onclick="pywebview.api.minimize_window()">—</button>
+      <button class="titlebar-btn" onclick="pywebview.api.toggle_maximize()">□</button>
+      <button class="titlebar-btn btn-close" onclick="pywebview.api.close_window()">✕</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="sidebar-main">
+      <a class="sidebar-logo" href="#">
+        <img src="icons/logo.png" alt="Logo" width="80" height="80" onerror="this.style.display='none'">
+        <span class="sidebar-logo-text">CodeQuest</span>
+      </a>
+      <nav class="sidebar-scroll">
+        <section class="sidebar-group">
+          <h2 class="sidebar-group-label" data-i18n="nav_learn">Учёба</h2>
+          <a class="sidebar-item sidebar-item-active" href="index.html"><img src="icons/journey.svg" width="28" height="28" alt=""><span data-i18n="nav_path">Путь</span><span class="sidebar-dot"></span></a>
+          <a class="sidebar-item" href="cheatsheet.html"><img src="icons/sprav.svg" width="28" height="28" alt=""><span data-i18n="nav_cheatsheet">Справочник</span></a>
+          <a class="sidebar-item" href="achievements.html"><img src="icons/achievement.svg" width="28" height="28" alt=""><span data-i18n="nav_achievements">Достижения</span></a>
+        </section>
+      </nav>
+      <div class="sidebar-footer">
+        <a class="sidebar-item" href="profile.html"><img src="icons/profile.svg" width="28" height="28" alt=""><span data-i18n="nav_profile">Профиль</span></a>
+        <a class="sidebar-item" href="settings.html"><img src="icons/settings.svg" width="28" height="28" alt=""><span data-i18n="nav_settings">Настройки</span></a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="main-header">
+        <div class="main-header-text">
+          <nav class="breadcrumbs"><a href="#" class="breadcrumbs-link" data-i18n="breadcrumb_program">Программа</a><span class="breadcrumbs-sep">›</span><span class="breadcrumbs-current" data-i18n="breadcrumb_section">Раздел 1 · Основы</span></nav>
+          <h1 class="main-title" data-i18n="title_main">Python Основы</h1>
+        </div>
+      </header>
+      <div class="main-body" id="map-container" style="position: relative;"></div>
+    </main>
+
+    <aside class="right-panel">
+      <div class="stats-bar" style="justify-content: flex-start;">
+        <button class="stat-item stat-streak" id="streak-widget"><span class="stat-val" id="streak-count">0</span><span id="streak-icon" style="font-size: 18px;">🔥</span></button>
+      </div>
+      <div class="widget" style="display: flex; flex-direction: column; gap: 12px;">
+        <h3 style="margin: 0; font-size: 16px; font-weight: bold;" data-i18n="progress_title">Ваш прогресс</h3>
+        <div style="display: flex; justify-content: space-between; font-size: 14px; color: var(--text-secondary);">
+          <span data-i18n="progress_lessons">Пройдено уроков/кр</span>
+          <span id="progress-text" style="font-weight: bold; color: #fff;">0 / 0</span>
+        </div>
+        <div class="progress" style="height: 8px;"><div class="progress-fill" id="progress-bar" style="width: 0%; background: var(--product-xp-color);"></div></div>
+        <button id="continue-btn" class="btn btn-run" style="width: 100%; justify-content: center; margin-top: 8px; display: none;" onclick="continueLearning()"><span data-i18n="btn_continue">▶ Продолжить</span></button>
+      </div>
+      <div class="widget">
+        <h3 style="margin: 0 0 8px 0; font-size: 16px; font-weight: bold;" data-i18n="tip_title">Совет дня</h3>
+        <p id="tip-text" style="margin: 0; font-size: 14px; color: var(--text-secondary); line-height: 1.4;">Загрузка...</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<script>
+  let allNodes = [], mapDiv = document.getElementById('map-container'), currentLessonLink = null;
+
+  window.addEventListener('pywebviewready', async () => {
+    await applyLanguage();
+
+    // Загружаем прогресс ДО использования в Совете дня
+    const savedProgress = await pywebview.api.load_data();
+
+    // --- Совет дня ---
+    const tips = {
+      ru: [
+        "В Python можно менять значения переменных местами одной строкой: a, b = b, a",
+        "Используйте f-строки для форматирования: f'Привет, {name}!'",
+        "Функция enumerate() возвращает и индекс, и значение элемента списка.",
+        "Списки можно складывать: [1, 2] + [3, 4] = [1, 2, 3, 4]",
+        "Не забывайте про отступы — в Python они являются частью синтаксиса!",
+        "Срезы (slices) могут менять список: nums[1:3] = [10, 20].",
+        "Кортежи (tuple) неизменяемы, их можно использовать как ключи в словарях.",
+        "Конструкция with автоматически закрывает файл, даже если произошла ошибка.",
+        "Функция zip() позволяет идти по двум спискам одновременно: for x, y in zip(list1, list2).",
+        "В Python есть тернарный оператор: result = 'Да' if x > 0 else 'Нет'.",
+        "Используйте any() и all() для быстрой проверки списка на условия.",
+        "Словари можно объединять оператором | (с версии Python 3.9): dict1 | dict2.",
+        "Моржовый оператор (:=) позволяет присвоить значение и сразу проверить его в if.",
+        "Аннотации типов (def func(a: int) -> str:) не влияют на работу, но помогают IDE.",
+        "Конструкция if __name__ == '__main__': нужна, чтобы код запускался только при прямом вызове.",
+        "collections.Counter — лучший способ быстро посчитать количество элементов в списке.",
+        "Списковые включения (list comprehensions) работают быстрее, чем обычный цикл for.",
+        "Строки в Python неизменяемы. Для сборки строк лучше использовать list и ''.join(list).",
+        "*args и **kwargs позволяют передавать в функцию любое количество аргументов.",
+        "Встроенная функция dir() покажет все доступные методы и атрибуты объекта."
+      ],
+      en: [
+        "You can swap variables in one line: a, b = b, a",
+        "Use f-strings for formatting: f'Hello, {name}!'",
+        "The enumerate() function returns both index and value.",
+        "Lists can be concatenated: [1, 2] + [3, 4] = [1, 2, 3, 4]",
+        "Don't forget indentation — it's part of Python syntax!",
+        "Slices can modify lists: nums[1:3] = [10, 20].",
+        "Tuples are immutable and can be used as dictionary keys.",
+        "The with statement automatically closes files, even on error.",
+        "The zip() function lets you iterate over two lists at once.",
+        "Python has a ternary operator: result = 'Yes' if x > 0 else 'No'.",
+        "Use any() and all() for quick list condition checks.",
+        "Dictionaries can be merged with the | operator (Python 3.9+).",
+        "The walrus operator (:=) assigns and checks a value in one go.",
+        "Type hints (def func(a: int) -> str:) don't affect runtime but help IDEs.",
+        "The if __name__ == '__main__': block runs code only when executed directly.",
+        "collections.Counter is the best way to count items in a list.",
+        "List comprehensions are faster than standard for loops.",
+        "Strings are immutable. Use list and ''.join(list) for efficient concatenation.",
+        "*args and **kwargs allow passing a variable number of arguments.",
+        "The built-in dir() function shows all methods and attributes of an object."
+      ]
+    };
+    const currentLang = savedProgress.settings_lang || 'ru';
+    const tipsArray = tips[currentLang] || tips['ru'];
+
+    // Выбираем совет в зависимости от дня года (меняется раз в сутки)
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+    const tipIndex = dayOfYear % tipsArray.length;
+
+    document.getElementById('tip-text').textContent = tipsArray[tipIndex];
+
+    try {
+      const chapters = await pywebview.api.get_roadmap();
+      const fontSize = savedProgress.settings_font_size || 15;
+      document.documentElement.style.setProperty('--editor-font-size', fontSize + 'px');
+      mapDiv.innerHTML = '';
+      let lessonCounter = 1, sequence = [];
+
+      chapters.forEach(ch => { ch.lessons.forEach(l => sequence.push({ type: 'lesson', data: l, chapterId: ch.id })); sequence.push({ type: 'trophy', data: ch.trophy, chapterId: ch.id }); });
+      const isDevMode = await pywebview.api.get_dev_mode();
+      let currentUnlocked = false;
+
+      sequence.forEach((item) => {
+        let id = item.type === 'lesson' ? item.data.id : `trophy_${item.chapterId}`;
+        let savedStatus = savedProgress[`status_${id}`];
+
+        if (savedStatus === 'done') {
+          item.data.status = 'done';
+        } else if (isDevMode) {
+          item.data.status = 'current'; // В режиме разработчика разблокировано всё
+        } else if (!currentUnlocked) {
+          item.data.status = 'current';
+          currentUnlocked = true;
+        } else {
+          item.data.status = 'locked';
+        }
+      });
+
+      chapters.forEach((chapter) => {
+        const chapterDiv = document.createElement('div');
+        chapterDiv.className = 'chapter';
+        const lang = savedProgress.settings_lang || 'ru';
+        const chapterTitle = typeof chapter.title === 'object' ? (chapter.title[lang] || chapter.title['ru']) : chapter.title;
+        chapterDiv.innerHTML = `<div class="chapter-title"><span class="chapter-title-line"></span><p>${chapterTitle}</p><span class="chapter-title-line"></span></div><div class="chapter-body"></div>`;
+        const bodyDiv = chapterDiv.querySelector('.chapter-body');
+
+        chapter.lessons.forEach((lesson) => {
+          const seqItem = sequence.find(s => s.type === 'lesson' && s.data.id === lesson.id);
+          lesson.status = seqItem.data.status;
+          const type = allNodes.length % 4, marginClass = type === 1 ? 'node-right' : (type === 3 ? 'node-left' : '');
+          const nodeContainer = document.createElement('div');
+          nodeContainer.className = `node-container ${marginClass}`;
+          nodeContainer.id = `node-${lesson.id}`;
+          let base, shadow, top, icon;
+          if (lesson.status === 'done') { base = 'hex-done-base-white.svg'; shadow = 'hex-done-shadow-white.svg'; top = 'hex-done-top-white.svg'; icon = 'lesson-done-white.svg'; }
+          else if (lesson.status === 'current') { base = 'hex-active-base-white.svg'; shadow = 'hex-active-shadow-white.svg'; top = 'hex-active-top-white.svg'; icon = 'lesson-all.svg'; }
+          else { base = 'hex-closed-base-white.svg'; shadow = 'hex-closed-shadow-white.svg'; top = 'hex-closed-top-white.svg'; icon = 'lesson-all.svg'; }
+
+          const isDone = lesson.status === 'done', statusText = lang === 'en' ? (isDone ? 'Lesson completed!' : 'Lesson not passed') : (isDone ? 'Вы прошли урок!' : 'Урок не пройден');
+          const lTitle = typeof lesson.title === 'object' ? (lesson.title[lang] || lesson.title['ru']) : lesson.title;
+          const linkHref = lesson.status !== 'locked' ? (lesson.type === 'book' ? `book.html?id=${lesson.id}` : `lesson.html?id=${lesson.id}`) : '#';
+
+          nodeContainer.innerHTML = `
+              <a class="node ${lesson.status === 'locked' ? 'locked' : ''}" href="${linkHref}">
+                <img class="node-base" src="icons/${base}" alt=""><img class="node-shadow" src="icons/${shadow}" alt=""><img class="node-top" src="icons/${top}" alt=""><img class="node-icon" src="icons/${icon}" alt="">
+              </a>
+              <div class="node-tooltip">
+                  <h4>${lang === 'en' ? 'Lesson' : 'Урок'} ${lessonCounter}: ${lTitle || '...'}</h4>
+                  <p class="status-text">${statusText}</p>
+                  <button class="btn-continue" onclick="window.location.href='${linkHref}'">${lang === 'en' ? 'Continue' : 'Продолжить'}</button>
+              </div>`;
+          lessonCounter++; bodyDiv.appendChild(nodeContainer); allNodes.push(nodeContainer);
+        });
+
+        const seqItem = sequence.find(s => s.type === 'trophy' && s.chapterId === chapter.id);
+        chapter.trophy.status = seqItem.data.status;
+        const type = allNodes.length % 4, marginClass = type === 1 ? 'node-right' : (type === 3 ? 'node-left' : '');
+        const trophyContainer = document.createElement('div');
+        trophyContainer.className = `node-container ${marginClass}`;
+        trophyContainer.id = `node-trophy-${chapter.id}`;
+        let tBase = chapter.trophy.status === 'done' ? 'hex-done-base-white.svg' : (chapter.trophy.status === 'current' ? 'hex-active-base-white.svg' : 'hex-closed-base-white.svg');
+        let tShadow = chapter.trophy.status === 'done' ? 'hex-done-shadow-white.svg' : (chapter.trophy.status === 'current' ? 'hex-active-shadow-white.svg' : 'hex-closed-shadow-white.svg');
+        let tTop = chapter.trophy.status === 'done' ? 'hex-done-top-white.svg' : (chapter.trophy.status === 'current' ? 'hex-active-top-white.svg' : 'hex-closed-top-white.svg');
+        let tIcon = chapter.trophy.status === 'done' ? 'lesson-trophy-done-white.svg' : 'lesson-trophy.svg';
+        const isTDone = chapter.trophy.status === 'done', tStatusText = lang === 'en' ? (isTDone ? 'Quiz passed!' : 'Quiz not passed') : (isTDone ? 'Вы сдали контрольную!' : 'Контрольная не сдана');
+
+        trophyContainer.innerHTML = `
+            <a class="node ${chapter.trophy.status === 'locked' ? 'locked' : ''}" href="${chapter.trophy.status !== 'locked' ? `trophy.html?id=${chapter.id}` : '#'}">
+              <img class="node-base" src="icons/${tBase}" alt=""><img class="node-shadow" src="icons/${tShadow}" alt=""><img class="node-top" src="icons/${tTop}" alt=""><img class="node-icon" src="icons/${tIcon}" alt="">
+            </a>
+            <div class="node-tooltip">
+                <h4>${lang === 'en' ? 'Quiz' : 'Контрольная'}: ${chapterTitle}</h4>
+                <p class="status-text">${tStatusText}</p>
+                <button class="btn-continue" onclick="window.location.href='trophy.html?id=${chapter.id}'">${lang === 'en' ? 'Continue' : 'Продолжить'}</button>
+            </div>`;
+        bodyDiv.appendChild(trophyContainer); allNodes.push(trophyContainer);
+        mapDiv.appendChild(chapterDiv);
+      });
+
+      await updateStreakUI(); drawLines();
+      let totalLessons = sequence.length, doneLessons = sequence.filter(s => s.data.status === 'done').length;
+      document.getElementById('progress-text').textContent = `${doneLessons} / ${totalLessons}`;
+      document.getElementById('progress-bar').style.width = `${(doneLessons / totalLessons) * 100}%`;
+      const currentLessonNode = sequence.find(s => s.data.status === 'current');
+      if (currentLessonNode) {
+        currentLessonLink = currentLessonNode.type === 'trophy' ? `trophy.html?id=${currentLessonNode.chapterId}` : (currentLessonNode.data.type === 'book' ? `book.html?id=${currentLessonNode.data.id}` : `lesson.html?id=${currentLessonNode.data.id}`);
+        document.getElementById('continue-btn').style.display = 'flex';
+      }
+      const savedScroll = localStorage.getItem('mapScrollY');
+      if (savedScroll) {
+        const mainEl = document.querySelector('.main');
+        if (mainEl) {
+          mainEl.scrollTop = parseInt(savedScroll);
+          setTimeout(() => { mainEl.scrollTop = parseInt(savedScroll); }, 100);
+          setTimeout(() => { mainEl.scrollTop = parseInt(savedScroll); }, 300);
+        }
+      }
+    } catch (e) { console.error("Ошибка загрузки меню:", e); }
+  });
+
+  document.addEventListener('click', function(e) {
+    const nodeLink = e.target.closest('.node');
+    if (e.target.classList.contains('btn-continue')) return;
+    document.querySelectorAll('.node').forEach(n => n.classList.remove('pressed'));
+    document.querySelectorAll('.node-container').forEach(c => c.classList.remove('active-tooltip'));
+    document.querySelectorAll('.node-tooltip').forEach(t => t.classList.remove('show'));
+    if (nodeLink) {
+      e.preventDefault(); if (nodeLink.classList.contains('locked')) return;
+      nodeLink.classList.add('pressed');
+      const container = nodeLink.closest('.node-container'); if (container) container.classList.add('active-tooltip');
+      const tooltip = nodeLink.nextElementSibling; if (tooltip && tooltip.classList.contains('node-tooltip')) tooltip.classList.add('show');
+    }
+  });
+
+  function continueLearning() { if (currentLessonLink) window.location.href = currentLessonLink; }
+
+  async function updateStreakUI() {
+    try {
+      const status = await pywebview.api.get_streak_status();
+      document.getElementById('streak-count').textContent = status.streak;
+      const icon = document.getElementById('streak-icon'), widget = document.getElementById('streak-widget');
+      if (status.frozen) { icon.style.filter = 'hue-rotate(180deg)'; widget.style.opacity = '1'; }
+      else if (status.streak > 0) { icon.style.filter = 'none'; widget.style.opacity = '1'; }
+      else { icon.style.filter = 'grayscale(100%)'; widget.style.opacity = '0.5'; }
+    } catch(e) {}
+  }
+
+  function drawLines() {
+    const oldSvg = mapDiv.querySelector('svg'); if (oldSvg) oldSvg.remove();
+    const svgNS = "http://www.w3.org/2000/svg", svg = document.createElementNS(svgNS, "svg");
+    svg.setAttribute("style", "position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;");
+    mapDiv.insertBefore(svg, mapDiv.firstChild);
+    const mapRect = mapDiv.getBoundingClientRect();
+    for (let i = 1; i < allNodes.length; i++) {
+      const prevNode = allNodes[i - 1], currNode = allNodes[i], prevChapter = prevNode.closest('.chapter'), currChapter = currNode.closest('.chapter');
+      if (prevChapter !== currChapter) continue;
+      const prevRect = prevNode.getBoundingClientRect(), currRect = currNode.getBoundingClientRect();
+      const x1 = prevRect.left - mapRect.left + prevRect.width / 2, y1 = prevRect.top - mapRect.top + prevRect.height / 2;
+      const x2 = currRect.left - mapRect.left + currRect.width / 2, y2 = currRect.top - mapRect.top + currRect.height / 2;
+      const yMid = (y1 + y2) / 2, path = document.createElementNS(svgNS, "path");
+      path.setAttribute("d", `M ${x1} ${y1} C ${x1} ${yMid}, ${x2} ${yMid}, ${x2} ${y2}`);
+      path.setAttribute("stroke-width", "6"); path.setAttribute("fill", "none");
+      const prevIconSrc = prevNode.querySelector('.node-icon').src;
+      if (prevIconSrc.includes('done')) path.setAttribute("stroke", "#094c1a");
+      else { path.setAttribute("stroke", "#3f4245"); path.setAttribute("stroke-dasharray", "8,8"); }
+      svg.appendChild(path);
+    }
+  }
+
+  const mainScrollContainer = document.querySelector('.main');
+  if (mainScrollContainer) {
+    mainScrollContainer.addEventListener('scroll', () => {
+      localStorage.setItem('mapScrollY', mainScrollContainer.scrollTop);
+    });
+  }
+
+  const observer = new ResizeObserver(() => requestAnimationFrame(drawLines));
+  observer.observe(mapDiv); window.addEventListener('resize', () => requestAnimationFrame(drawLines));
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+const translations = {
+    ru: {
+        "nav_learn": "Учёба", "nav_path": "Путь", "nav_profile": "Профиль", "nav_settings": "Настройки",
+        "progress_title": "Ваш прогресс", "progress_lessons": "Пройдено уроков/кр", "btn_continue": "Продолжить",
+        "breadcrumb_program": "Программа", "breadcrumb_section": "Раздел 1 · Основы", "title_main": "Python Основы",
+        "profile_title": "Профиль", "profile_subtitle": "Личный кабинет", "profile_learner": "Ученик", "profile_learning": "Изучает Python",
+        "stats_days": "Дней подряд", "stats_lessons": "Уроков пройдено", "stats_trophies": "Контрольных сдано",
+        "settings_title": "Настройки", "set_name": "Ваше имя", "set_name_desc": "Отображается в профиле",
+        "set_avatar": "Аватарка", "set_avatar_desc": "Сбросить текущее изображение", "btn_del_avatar": "Удалить аватарку",
+        "set_font": "Размер шрифта кода", "set_font_desc": "Для редактора и терминала",
+        "set_sound": "Звуки", "set_sound_desc": "Звуковой сигнал при успешном решении",
+        "set_lang": "Язык интерфейса", "set_lang_desc": "Перевод меню и кнопок",
+        "set_export": "Экспорт прогресса", "set_export_desc": "Сохранить резервную копию на компьютер", "btn_export": "Скачать файл",
+        "set_import": "Импорт прогресса", "set_import_desc": "Загрузить ранее сохраненный файл", "btn_import": "Загрузить файл",
+        "set_clear": "Очистить код", "set_clear_desc": "Сбросить код уроков, сохранив прогресс", "btn_clear": "Очистить",
+        "set_reset": "Удалить всё", "set_reset_desc": "Сбросить все уроки и достижения", "btn_reset": "Сбросить всё",
+        "lesson_run": "▶ Запустить код", "lesson_stop": "■ Стоп", "lesson_result": "РЕЗУЛЬТАТ", "lesson_terminal": "Терминал", "lesson_expected": "Ожидаемый вывод",
+        "lesson_theory": "Теория", "lesson_task": "Задание", "lesson_hide": "Скрыть панель", "lesson_show": "Показать панель",
+        "ach_master": "Мастер Python",
+        "ach_master_desc": "Пройдите 50 уроков.",
+        "ach_first_lesson": "Первый шаг",
+        "ach_first_lesson_desc": "Пройдите свой первый урок.",
+        "ach_ten_lessons": "Ученик",
+        "ach_ten_lessons_desc": "Пройдите 10 уроков.",
+        "ach_fifty_lessons": "Мастер Python",
+        "ach_fifty_lessons_desc": "Пройдите 50 уроков.",
+        "ach_first_trophy": "Испытание",
+        "ach_first_trophy_desc": "Сдайте первую контрольную.",
+        "ach_streak_3": "В ударе",
+        "ach_streak_3_desc": "Занимайтесь 3 дня подряд.",
+        "ach_streak_7": "Несокрушимый",
+        "ach_streak_7_desc": "Занимайтесь 7 дней подряд.",
+        "ach_all_trophies": "Коллекционер",
+        "ach_all_trophies_desc": "Сдайте 10 контрольных.",
+        "ach_locked": "Не получено",
+        "ach_unlocked": "Получено!",
+        "ach_py_start": "Змеиный заклинатель",
+        "ach_py_start_desc": "Пройдите первый урок Python.",
+        "ach_py_ten": "Питонист",
+        "ach_py_ten_desc": "Пройдите 10 уроков Python.",
+        "ach_py_master": "Гуру Python",
+        "ach_py_master_desc": "Пройдите 50 уроков Python.",
+        "ach_py_collector": "Змеиная коллекция",
+        "ach_py_collector_desc": "Сдайте 5 контрольных Python.",
+
+        "ach_java_start": "Путь Джавы",
+        "ach_java_start_desc": "Пройдите первый урок Java.",
+        "ach_java_coffee": "Кофейный маг",
+        "ach_java_coffee_desc": "Пройдите 10 уроков Java.",
+        "ach_java_oop": "ООП Архитектор",
+        "ach_java_oop_desc": "Пройдите 30 уроков Java.",
+
+        "ach_first_trophy": "Испытание",
+        "ach_first_trophy_desc": "Сдайте любую контрольную.",
+        "ach_streak_3": "В ударе",
+        "ach_streak_3_desc": "Занимайтесь 3 дня подряд.",
+        "ach_locked": "Не получено",
+        "ach_unlocked": "Получено!",
+        "tip_title": "Совет дня",
+        "font_small": "Мелкий (13px)",
+        "font_std": "Стандартный (15px)",
+        "font_large": "Крупный (18px)",
+        "font_xl": "Очень крупный (22px)",
+        "sound_on": "Включены",
+        "sound_off": "Выключены",
+        "nav_cheatsheet": "Справочник",
+        "nav_achievements": "Достижения",
+        "cheat_title": "Справочник",
+        "toast_name_saved": "Имя успешно сохранено!",
+        "toast_avatar_deleted": "Аватарка удалена!",
+        "toast_export_success": "Файл успешно сохранен!",
+        "toast_import_success": "Прогресс успешно загружен!",
+        "toast_code_cleared": "Код очищен.",
+        "toast_save_error": "Ошибка сохранения!",
+        "ach_unlocked": "Получено!",
+
+    },
+    en: {
+        "nav_learn": "Learn", "nav_path": "Path", "nav_profile": "Profile", "nav_settings": "Settings",
+        "progress_title": "Your progress", "progress_lessons": "Lessons/Quizzes completed", "btn_continue": "Continue",
+        "breadcrumb_program": "Program", "breadcrumb_section": "Section 1 · Basics", "title_main": "Python Basics",
+        "profile_title": "Profile", "profile_subtitle": "Personal Account", "profile_learner": "Student", "profile_learning": "Learning Python",
+        "stats_days": "Days in a row", "stats_lessons": "Lessons completed", "stats_trophies": "Quizzes passed",
+        "settings_title": "Settings", "set_name": "Your name", "set_name_desc": "Displayed in profile",
+        "set_avatar": "Avatar", "set_avatar_desc": "Reset current image", "btn_del_avatar": "Delete avatar",
+        "set_font": "Code font size", "set_font_desc": "For editor and terminal",
+        "set_sound": "Sounds", "set_sound_desc": "Sound alert on successful solution",
+        "set_lang": "Interface language", "set_lang_desc": "Translation of menus and buttons",
+        "set_export": "Export progress", "set_export_desc": "Save a backup to your computer", "btn_export": "Download file",
+        "set_import": "Import progress", "set_import_desc": "Load a previously saved file", "btn_import": "Upload file",
+        "set_clear": "Clear code", "set_clear_desc": "Reset lesson code, keeping progress", "btn_clear": "Clear",
+        "set_reset": "Delete everything", "set_reset_desc": "Reset all lessons and achievements", "btn_reset": "Reset all",
+        "lesson_run": "▶ Run Code", "lesson_stop": "■ Stop", "lesson_result": "RESULT", "lesson_terminal": "Terminal", "lesson_expected": "Expected output",
+        "lesson_theory": "Theory",
+        "lesson_task": "Task",
+        "lesson_hide": "Hide panel",
+        "lesson_show": "Show panel",
+        "btn_save": "Save",
+        "settings_title": "Settings",
+        "app_title": "CodeQuest",
+        "ach_master": "Python Master",
+        "ach_master_desc": "Complete 50 lessons.",
+        "ach_first_lesson": "First Step",
+        "ach_first_lesson_desc": "Complete your first lesson.",
+        "ach_ten_lessons": "Apprentice",
+        "ach_ten_lessons_desc": "Complete 10 lessons.",
+        "ach_fifty_lessons": "Python Master",
+        "ach_fifty_lessons_desc": "Complete 50 lessons.",
+        "ach_first_trophy": "Challenger",
+        "ach_first_trophy_desc": "Pass your first quiz.",
+        "ach_streak_3": "On Fire",
+        "ach_streak_3_desc": "Maintain a 3-day streak.",
+        "ach_streak_7": "Unstoppable",
+        "ach_streak_7_desc": "Maintain a 7-day streak.",
+        "ach_all_trophies": "Collector",
+        "ach_all_trophies_desc": "Pass 10 quizzes.",
+        "ach_locked": "Locked",
+        "ach_unlocked": "Unlocked!",
+        "ach_py_start": "Snake Charmer",
+        "ach_py_start_desc": "Complete your first Python lesson.",
+        "ach_py_ten": "Pythonista",
+        "ach_py_ten_desc": "Complete 10 Python lessons.",
+        "ach_py_master": "Python Guru",
+        "ach_py_master_desc": "Complete 50 Python lessons.",
+        "ach_py_collector": "Snake Collection",
+        "ach_py_collector_desc": "Pass 5 Python quizzes.",
+
+        "ach_java_start": "Java Path",
+        "ach_java_start_desc": "Complete your first Java lesson.",
+        "ach_java_coffee": "Coffee Mage",
+        "ach_java_coffee_desc": "Complete 10 Java lessons.",
+        "ach_java_oop": "OOP Architect",
+        "ach_java_oop_desc": "Complete 30 Java lessons.",
+
+        "ach_first_trophy": "Challenger",
+        "ach_first_trophy_desc": "Pass any quiz.",
+        "ach_streak_3": "On Fire",
+        "ach_streak_3_desc": "Maintain a 3-day streak.",
+        "ach_locked": "Locked",
+        "ach_unlocked": "Unlocked!",
+        "tip_title": "Tip of the Day",
+        "font_small": "Small (13px)",
+        "font_std": "Standard (15px)",
+        "font_large": "Large (18px)",
+        "font_xl": "Extra Large (22px)",
+        "sound_on": "Enabled",
+        "sound_off": "Disabled",
+        "nav_cheatsheet": "Cheat Sheet",
+        "nav_achievements": "Achievements",
+        "cheat_title": "Cheat Sheet",
+        "btn_save": "Save",
+        "btn_export": "Download file",
+        "btn_import": "Upload file",
+        "btn_clear": "Clear",
+        "btn_reset": "Reset all",
+        "btn_del_avatar": "Delete avatar",
+        "btn_next": "Next",
+        "toast_name_saved": "Name successfully saved!",
+        "toast_avatar_deleted": "Avatar deleted!",
+        "toast_export_success": "File saved successfully!",
+        "toast_import_success": "Progress loaded successfully!",
+        "toast_code_cleared": "Code cleared.",
+        "toast_save_error": "Error saving!",
+        "ach_unlocked": "Unlocked!",
+    }
+};
+
+let currentLang = 'ru'; // Глобальная переменная для языка
+
+async function applyLanguage() {
+    if (typeof pywebview === 'undefined') return;
+    try {
+        const data = await pywebview.api.load_data();
+        currentLang = data.settings_lang || 'ru';
+
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[currentLang] && translations[currentLang][key]) {
+                el.textContent = translations[currentLang][key];
+            }
+        });
+    } catch (e) {
+        console.error("Ошибка перевода:", e);
+    }
+}
+
+// Функция для получения перевода по ключу (для тостов)
+function t(key) {
+    if (translations[currentLang] && translations[currentLang][key]) {
+        return translations[currentLang][key];
+    }
+    return key;
+}
