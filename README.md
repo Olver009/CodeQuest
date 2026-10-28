@@ -1,4 +1,3 @@
-
 # CodeQuest 🚀
 
 Локальная десктопная платформа для изучения языков программирования (Python, Java, C++, C, JavaScript, HTML, CSS). 
