@@ -1,0 +1,134 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Chapter Test: First Steps",
+    "description": "Final task of chapter 1. Checks: variables, types, arithmetic, output.",
+    "practice": {
+      "description": "Given:\n```\napples = 12\nboxes = 5\nprice = 45.5\nactive = true\n```\n\nOutput four lines:\n```\nApples per box: 2\nRemainder: 2\nTotal cost: 546.0\nFlag: true\n```",
+      "starter": "public class Main {\n    public static void main(String[] args) {\n        int apples = 12;\n        int boxes = 5;\n        double price = 45.5;\n        boolean active = true;\n        // TODO: four System.out.println\n    }\n}\n",
+      "expected": "Apples per box: 2\nRemainder: 2\nTotal cost: 546.0\nFlag: true",
+      "must_contain": ["int apples", "double price", "boolean active", "/", "%", "*", "System.out.println"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Chapter Test: Input and Strings",
+    "description": "Final task of chapter 2. Checks: Scanner, printf, string methods.",
+    "practice": {
+      "description": "Read three values from stdin (each on a new line): price (double), quantity (int), discount in percent (int).\n\nCompute subtotal, discount amount, total.\n\nOutput via `printf`:\n```\nPrice: 1500.50\nSubtotal: 4501.50\nTotal: 4051.35\n```\n\n**stdin for testing:**\n```\n1500.50\n3\n10\n```",
+      "starter": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // TODO: nextDouble, nextInt, nextInt, calculations, three printf\n    }\n}\n",
+      "expected": "Price: 1500.50\nSubtotal: 4501.50\nTotal: 4051.35",
+      "must_contain": ["import java.util.Scanner", "new Scanner(System.in)", "nextDouble", "nextInt", "System.out.printf", "%.2f"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Chapter Test: Conditionals and Loops",
+    "description": "Final task of chapter 3. Checks: for, switch, if/else, break.",
+    "practice": {
+      "description": "For numbers 1 to 7 output one line each:\n- day of week via `switch` (`1 = Mon`, `2 = Tue`, `3 = Wed`, `4 = Thu`, `5 = Fri`, `6 = Sat`, `7 = Sun`)\n- format: `<n>: <day>`\n- for `n` equal to 6 or 7 append `\" (weekend)\"` (via `if`)\n\n```\n1: Mon\n2: Tue\n3: Wed\n4: Thu\n5: Fri\n6: Sat (weekend)\n7: Sun (weekend)\n```",
+      "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: for 1..7, switch, if, println\n    }\n}\n",
+      "expected": "1: Mon\n2: Tue\n3: Wed\n4: Thu\n5: Fri\n6: Sat (weekend)\n7: Sun (weekend)",
+      "must_contain": ["for", "switch", "case", "break", "if", "System.out.println"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Chapter Test: Arrays and Methods",
+    "description": "Final task of chapter 4. Checks: arrays, traversal, static methods, printf.",
+    "practice": {
+      "description": "Create three `static` methods:\n- `int sumArray(int[] arr)` — sum\n- `int maxArray(int[] arr)` — maximum\n- `double avgArray(int[] arr)` — average\n\nGiven array:\n```\nint[] data = {4, 8, 15, 16, 23, 42};\n```\n\nOutput via `printf`:\n```\nSum: 108\nMax: 42\nAverage: 18.00\n```",
+      "starter": "public class Main {\n    static int sumArray(int[] arr) { return 0; }\n    static int maxArray(int[] arr) { return 0; }\n    static double avgArray(int[] arr) { return 0; }\n\n    public static void main(String[] args) {\n        int[] data = {4, 8, 15, 16, 23, 42};\n        // TODO: three printf\n    }\n}\n",
+      "expected": "Sum: 108\nMax: 42\nAverage: 18.00",
+      "must_contain": ["static int sumArray", "static int maxArray", "static double avgArray", "for", "arr.length", "(double)", "System.out.printf", "%.2f"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Chapter Test: Classes",
+    "description": "Final task of chapter 5. Checks: constructor, private, getters, static.",
+    "practice": {
+      "description": "Create class `Book`:\n- `private String title`\n- `private double price`\n- constructor `Book(String title, double price)`\n- getters `getTitle()`, `getPrice()`\n- `private static int count` — incremented in constructor\n- `public static int getCount()`\n\nIn `main` create three books:\n- `(\"Book1\", 100.0)`, `(\"Book2\", 200.0)`, `(\"Book3\", 300.0)`\n\nOutput via `printf` with `%.1f`:\n```\nBook1: 100.0\nBook2: 200.0\nBook3: 300.0\nTotal: 3\n```",
+      "starter": "class Book {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+      "expected": "Book1: 100.0\nBook2: 200.0\nBook3: 300.0\nTotal: 3",
+      "must_contain": ["class Book", "private String title", "private double price", "private static int count", "public Book(", "getTitle", "getPrice", "getCount", "System.out.printf"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Chapter Test: OOP",
+    "description": "Final task of chapter 6. Checks: interface, implementations, polymorphism.",
+    "practice": {
+      "description": "Interface `Shape` with two methods:\n- `double area()`\n- `String name()`\n\nImplement two classes:\n- `Rectangle` — fields `double width`, `double height`, `area = width * height`, `name = \"Rectangle\"`\n- `Circle` — field `double r`, `area = 3.14 * r * r`, `name = \"Circle\"`\n\nIn `main`:\n```\nShape[] shapes = { new Rectangle(2, 3), new Circle(2) };\n```\n\nIn `for-each` output `System.out.println(name + \": \" + area)`.\n\n```\nRectangle: 6.0\nCircle: 12.56\n```",
+      "starter": "interface Shape {\n    // TODO\n}\n\nclass Rectangle implements Shape {\n    // TODO\n}\n\nclass Circle implements Shape {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+      "expected": "Rectangle: 6.0\nCircle: 12.56",
+      "must_contain": ["interface Shape", "double area", "String name", "implements Shape", "public double area", "public String name", "Shape[]", "for (Shape", "System.out.println"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Chapter Test: Collections and Exceptions",
+    "description": "Final task of chapter 7. Checks: ArrayList, HashMap, try/catch.",
+    "practice": {
+      "description": "1. Create `ArrayList<Integer>` with numbers `1, 2, 1, 3`.\n2. Count frequency of each number in `HashMap<Integer, Integer>`.\n3. Output for each unique key `k: v` (ascending order — iterate `keySet()` with `java.util.Collections.sort`, or simply print for `1, 2, 3`).\n4. Output `Total: 4`.\n5. In `try/catch` try `Integer.parseInt(\"abc\")`. In `catch (NumberFormatException e)` print `Parse error`.\n\n```\n1: 2\n2: 1\n3: 1\nTotal: 4\nParse error\n```",
+      "starter": "import java.util.ArrayList;\nimport java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<Integer> nums = new ArrayList<>();\n        HashMap<Integer, Integer> counts = new HashMap<>();\n        // TODO\n    }\n}\n",
+      "expected": "1: 2\n2: 1\n3: 1\nTotal: 4\nParse error",
+      "must_contain": ["ArrayList", "HashMap", "put", "try", "catch", "NumberFormatException", "System.out.println"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Chapter Test: Practice",
+    "description": "Final task of chapter 8. Checks: interface, implementations, polymorphism, ArrayList, printf.",
+    "practice": {
+      "description": "Interface `Employee`:\n- `double salary()`\n- `String name()`\n\nImplement two classes:\n- `Manager` — fields `String name`, `double baseSalary`, `double bonus`; `salary = baseSalary + bonus`\n- `Developer` — fields `String name`, `double hourlyRate`, `int hours`; `salary = hourlyRate * hours`\n\nIn `main` create `ArrayList<Employee>`:\n- `new Manager(\"Anna\", 100000, 20000)`\n- `new Developer(\"Ivan\", 1500, 80)`\n- `new Manager(\"Peter\", 90000, 10000)`\n\nIn `for-each` via `printf` with `%.2f` output `<name>: <salary>`. Then total `Total: <sum>` with `%.2f`.\n\n```\nAnna: 120000.00\nIvan: 120000.00\nPeter: 100000.00\nTotal: 340000.00\n```",
+      "starter": "import java.util.ArrayList;\n\ninterface Employee {\n    // TODO\n}\n\nclass Manager implements Employee {\n    // TODO\n}\n\nclass Developer implements Employee {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<Employee> staff = new ArrayList<>();\n        // TODO\n    }\n}\n",
+      "expected": "Anna: 120000.00\nIvan: 120000.00\nPeter: 100000.00\nTotal: 340000.00",
+      "must_contain": ["interface Employee", "double salary", "String name", "class Manager implements Employee", "class Developer implements Employee", "ArrayList", "for (Employee", "%.2f", "System.out.printf"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Chapter Test: Lambdas and Streams",
+    "description": "Final task of chapter 9. Checks: lambdas, Stream, filter/map/collect.",
+    "practice": {
+      "description": "Given list:\n```\nList<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\n```\n\nVia Stream:\n1. Keep evens (`filter`)\n2. Multiply by 10 (`map`)\n3. Collect to `List` (`collect(Collectors.toList())`)\n4. Output the result\n\n```\n[20, 40, 60]\n```",
+      "starter": "import java.util.List;\nimport java.util.stream.Collectors;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\n        // TODO: filter + map + collect + println\n    }\n}\n",
+      "expected": "[20, 40, 60]",
+      "must_contain": [".stream()", ".filter(", ".map(", ".collect(", "Collectors.toList", "System.out.println"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Chapter Test: Generics and Optional",
+    "description": "Final task of chapter 10. Checks: generics, wildcards, Optional.",
+    "practice": {
+      "description": "1. Create `class Box<T>` with constructor `Box(T value)` and method `T get()`.\n2. Create `Box<String>(\"Hello\")`, output `get()`.\n3. Create `Optional<String> empty = Optional.empty()`, output `empty.orElse(\"none\")`.\n\n```\nHello\nnone\n```",
+      "starter": "import java.util.Optional;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Box + Optional\n    }\n}\n",
+      "expected": "Hello\nnone",
+      "must_contain": ["class Box<T>", "Optional.empty", ".orElse(", "System.out.println"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Chapter Test: enum, record, try-with-resources",
+    "description": "Final task of chapter 11. Checks: enum, record, AutoCloseable.",
+    "practice": {
+      "description": "1. `enum Color { RED, GREEN, BLUE }` — output `Color.RED`.\n2. `record Point(int x, int y)` — create `new Point(1, 2)` and output.\n3. Class `Res implements AutoCloseable` with `close()` (prints `closed`). Use in `try-with-resources`, inside print `used`.\n\n```\nRED\nPoint[x=1, y=2]\nused\nclosed\n```",
+      "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: enum + record + try-with-resources\n    }\n}\n",
+      "expected": "RED\nPoint[x=1, y=2]\nused\nclosed",
+      "must_contain": ["enum Color", "record Point", "implements AutoCloseable", "try (", "System.out.println"]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "title": "Chapter Test: Final",
+    "description": "Final task of the course. Checks: classes, Stream, Optional.",
+    "practice": {
+      "description": "Class `Product`:\n- fields `String name`, `double price`\n- constructor\n\nGiven list:\n```\nList<Product> products = List.of(\n    new Product(\"A\", 100),\n    new Product(\"B\", 200),\n    new Product(\"C\", 50)\n);\n```\n\n1. Via Stream compute the sum of prices, output `Sum: 350.0`.\n2. Find the first product with price > 150 via `.filter().findFirst()` into `Optional`, output its name via `ifPresentOrElse` → `B`.\n\n```\nSum: 350.0\nB\n```",
+      "starter": "import java.util.List;\nimport java.util.Optional;\n\nclass Product {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+      "expected": "Sum: 350.0\nB",
+      "must_contain": ["class Product", ".stream()", ".mapToDouble(", ".sum()", "Optional", ".findFirst()", "ifPresentOrElse", "System.out.println"]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Корона -->
+    <path d="M 6 5 L 8 8 L 12 3 L 16 8 L 18 5 L 17 9 L 7 9 Z" fill="#FFD700" stroke="#DAA520" stroke-width="1" stroke-linejoin="round"/>
+    <!-- Скобки -->
+    <path d="M 9 13 L 3 18 L 9 23 M 15 13 L 21 18 L 15 23" stroke="#E34F26" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

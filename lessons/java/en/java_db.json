@@ -1,0 +1,663 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "First Program",
+      "theory": "## Why Java\n\nJava is a compiled language. Used in Android, server-side development (banks, e-commerce), and large enterprise systems. The WORA principle (Write Once, Run Anywhere): write once — run everywhere a JVM exists.\n\n## How Java works\n\nUnlike Python, Java does not execute source code directly. First the **compiler** `javac` turns `.java` into **bytecode** `.class`, then the **JVM** executes that bytecode.\n\n```\nMain.java → javac → Main.class → java (JVM) → execution\n```\n\nWhy: the same `.class` runs on Windows, Linux, macOS. The JVM is OS-specific, bytecode is universal.\n\n## Program structure\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello\");\n    }\n}\n```\n\n- `public class Main` — class; name matches the file (`Main.java`).\n- `public static void main(String[] args)` — entry point.\n- `System.out.println(...)` — print string + newline.\n- `{ }` — class/method body.\n- `;` — end of statement.\n\n## Why class and main\n\nThe JVM looks for `public static void main(String[] args)` in the class matching the file name. Without `main` the program cannot start — there is nothing to begin with. Without a class there is nowhere to put `main`: in Java **everything** lives inside classes.\n\n## println vs print\n\n```java\nSystem.out.println(\"A\");\nSystem.out.println(\"B\");   // A, then B on a new line\nSystem.out.print(\"A\");\nSystem.out.print(\"B\");     // AB on one line\n```\n\n`println` — with newline. `print` — without.\n\n## Semicolon\n\nEvery statement ends with `;`. Forget it and you get a **compile error** — the program will not even start. In Python `;` is optional, in Java it is mandatory.\n\n```java\nSystem.out.println(\"ok\");     // correct\nSystem.out.println(\"ok\")      // compile error — no ;\n```\n\n## Comments\n\n```java\n// single line\n/*\n   multi-line\n*/\n```\n\nThe compiler ignores them. Needed to explain code to yourself in a month and to others.\n\n## What if\n\n- Forget `;` — compile error.\n- Name the file `App.java` for `public class Main` — compile error.\n- Remove `main` — JVM cannot find the entry point.\n- Forget `{ }` — compile error.\n\n## Common mistake\n\nWriters with Python habits type `print(\"hi\")` instead of `System.out.println(\"hi\")`. In Java `print` is not a standalone function — it is a method of `System.out`.\n\n## Summary\n\n- `.java` → `javac` → `.class` → `java` (JVM)\n- `public class Main` — class name = file name\n- `main` — entry point\n- `System.out.println` — print + newline\n- `System.out.print` — no newline\n- `;` at the end of every statement",
+      "questions": [
+        { "text": "What does the JVM do?", "options": ["Compiles .java into .class", "Executes bytecode", "Checks semicolons", "Opens files"], "answer": 1, "explanation": "The compiler is `javac`. The JVM executes `.class`." },
+        { "text": "What will be printed?\n```java\nSystem.out.println(\"A\");\nSystem.out.println(\"B\");\n```", "options": ["AB", "A\\nB", "A B", "AB\\n"], "answer": 1, "explanation": "`println` moves to a new line after printing." },
+        { "text": "What happens if `;` is missing in `System.out.println(\"X\")`?", "options": ["Runs", "Compile error", "Runtime error", "Nothing"], "answer": 1, "explanation": "A missing `;` is a compile error." },
+        { "text": "Why `public static void main(String[] args)`?", "options": ["Mandatory method", "Entry point", "Prints text", "A constant"], "answer": 1, "explanation": "The JVM looks for exactly this method." },
+        { "text": "What will be printed?\n```java\nSystem.out.print(\"A\");\nSystem.out.print(\"B\");\n```", "options": ["AB", "A\\nB", "A B", "B A"], "answer": 0, "explanation": "`print` without newline — both on one line." },
+        { "text": "Class `Main`, file `App.java` — what happens?", "options": ["Works", "Compile error", "Works slower", "Works on Linux"], "answer": 1, "explanation": "For `public class` the file name matches the class." }
+      ],
+      "practice": {
+        "description": "Create class `Main` with an entry point. Output three lines via `System.out.println`:\n```\nJava\nLesson 1\nDone\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: three System.out.println\n    }\n}\n",
+        "expected": "Java\nLesson 1\nDone",
+        "must_contain": ["public class Main", "public static void main", "System.out.println", "Java", "Lesson 1", "Done"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Variables and Types",
+      "theory": "## Type is required\n\nIn Java every variable has a **type**, declared when the variable is created:\n\n```java\nint age = 25;\ndouble price = 99.99;\nString name = \"Anna\";\nboolean ok = true;\nchar grade = 'A';\n```\n\nIn Python it was `x = 5`. In Java: type + name + value + `;`.\n\n## Basic types\n\n- `int` — integers\n- `long` — very large integers (`5_000_000_000L`)\n- `double` — floating-point\n- `boolean` — `true`/`false` (not `True`)\n- `char` — single character in **single** quotes: `'A'`\n- `String` — string in **double** quotes: `\"Anna\"`\n\n## String is a class\n\n`String` with a capital letter because it is a class. `int` is a primitive, lowercase.\n\n## Naming rules\n\ncamelCase: `userName`, `totalPrice`. Start with a letter, `$`, `_`. Case-sensitive. Not with a digit.\n\n## final — constant\n\n```java\nfinal int MAX = 100;\n// MAX = 200; // error\n```\n\n## No type change\n\n```java\nint x = 5;\n// x = \"hello\"; // compile error\n```\n\nIn Java a variable does not change type. `int` does not accept `String`.\n\n## What if\n\n- Declare `x` twice in one block — compile error.\n- Assign `int x = \"text\"` — compile error.\n- Use `True` instead of `true` — error, Java has only `true/false`.\n- `char c = \"A\"` — error, `char` uses single quotes.\n\n## Common mistake\n\n`String name = 'Anna'` with single quotes. In Java single quotes are only for `char`. `String` always uses double quotes.\n\n## Summary\n\n- Variables have a type, declared on creation\n- `int`, `double`, `boolean`, `char`, `String`\n- `String` — class, `char` — primitive\n- `final` — constant\n- camelCase for names\n- Type does not change",
+      "questions": [
+        { "text": "Which type for price `99.99`?", "options": ["int", "double", "String", "boolean"], "answer": 1, "explanation": "Floating-point → `double`." },
+        { "text": "How to declare a string?", "options": ["String name = \"Anna\";", "string name = 'Anna';", "String name = 'Anna';", "str name = \"Anna\";"], "answer": 0, "explanation": "`String` with a capital, double quotes." },
+        { "text": "What happens with `int x = 5; x = \"hello\";`?", "options": ["x = \"hello\"", "Compile error", "x = 0", "Runtime error"], "answer": 1, "explanation": "`int` does not accept `String`. The compiler rejects it." },
+        { "text": "What is `final`?", "options": ["A constant", "Mandatory", "Empty", "For output"], "answer": 0, "explanation": "`final` forbids reassignment." },
+        { "text": "What happens with `char c = 'A';`?", "options": ["Works", "Error", "char = \"A\"", "char = 65"], "answer": 0, "explanation": "`char` — one character in single quotes. Correct." },
+        { "text": "Which name is valid?", "options": ["1name", "user_name", "user-name", "user name"], "answer": 1, "explanation": "`user_name` is valid in Java (not starting with a digit, no spaces or dashes). camelCase is preferred but `user_name` compiles." }
+      ],
+      "practice": {
+        "description": "Create four variables: `name` = `\"Ivan\"`, `age` = `30`, `salary` = `75000.50`, `active` = `true`. Output four lines:\n```\nIvan\n30\n75000.5\ntrue\n```\n\n(Tip: `75000.50` via `println` yields `75000.5` — the extra zero is dropped by `double`.)",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: 4 variables and 4 println\n    }\n}\n",
+        "expected": "Ivan\n30\n75000.5\ntrue",
+        "must_contain": ["String name", "int age", "double salary", "boolean active", "System.out.println"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "Arithmetic and Type Casting",
+      "theory": "## Operators\n\n`+ - * / %`. Precedence as in math: `* /` before `+ -`. Parentheses override.\n\n```java\nint a = 7, b = 2;\nSystem.out.println(a + b);  // 9\nSystem.out.println(a - b);  // 5\nSystem.out.println(a * b);  // 14\nSystem.out.println(a / b);  // 3  ← important\nSystem.out.println(a % b);  // 1\n```\n\n## int / int = int\n\n`7 / 2 = 3`, not `3.5`. The fractional part is **truncated**. If you want a floating result, one operand must be `double`:\n\n```java\nSystem.out.println(7 / 2);          // 3\nSystem.out.println(7.0 / 2);        // 3.5\nSystem.out.println((double) 7 / 2); // 3.5\n```\n\n## Casting\n\n```java\nint x = (int) 3.99;      // 3, not 4 (truncation)\nint y = (int) -3.99;     // -3\nint z = (int) 10.0 / 4;  // 10 / 4 = 2\n```\n\n## Increment\n\n```java\nint i = 5;\ni++;      // 6\ni--;      // 5\n```\n\n## Division by zero\n\n- `int` — `ArithmeticException` (crash)\n- `double` — `Infinity`\n\n```java\nSystem.out.println(10 / 0);   // ArithmeticException\nSystem.out.println(10.0 / 0); // Infinity\n```\n\n## What if\n\n- `int` / `int` without casting — you lose the fractional part.\n- `(int) 3.99` — truncates, does not round.\n- `10 / 0` — exception, program crashes.\n\n## Common mistake\n\nExpecting `7 / 2 = 3.5`. In Java `int/int = int`. To get a fraction, cast one operand to `double`.\n\n## Summary\n\n- `int / int = int` — fractional part dropped\n- `(double) x` — cast\n- `(int) 3.99` = 3\n- `%` — remainder\n- `/0` for `int` — exception, for `double` — `Infinity`",
+      "questions": [
+        { "text": "What will `System.out.println(7 / 2);` print?", "options": ["3.5", "3", "4", "Error"], "answer": 1, "explanation": "`int / int = int`." },
+        { "text": "What will `System.out.println(7.0 / 2);` print?", "options": ["3", "3.5", "4", "Error"], "answer": 1, "explanation": "One `double` operand → `double` result." },
+        { "text": "`(int) 3.9` = ?", "options": ["4", "3", "3.9", "Error"], "answer": 1, "explanation": "Casting **truncates**, not rounds." },
+        { "text": "What will `System.out.println(10 / 0);` print?", "options": ["0", "Infinity", "ArithmeticException", "10"], "answer": 2, "explanation": "For `int` — exception." },
+        { "text": "What will `System.out.println(17 % 5);` print?", "options": ["3", "2", "3.4", "12"], "answer": 1, "explanation": "`17 = 5*3 + 2`." },
+        { "text": "How to get `3.5` from `7 / 2`?", "options": ["7 / 2", "7 % 2", "7.0 / 2", "int(7 / 2)"], "answer": 2, "explanation": "One `double` operand — and the result is `double`." }
+      ],
+      "practice": {
+        "description": "Given `int a = 17;` and `int b = 5;`. Output five lines:\n```\nSum: 22\nDifference: 12\nProduct: 85\nDivision: 3.4\nRemainder: 2\n```\n\nDivision must be **fractional** (`3.4`), not `3`.",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int a = 17;\n        int b = 5;\n        // TODO\n    }\n}\n",
+        "expected": "Sum: 22\nDifference: 12\nProduct: 85\nDivision: 3.4\nRemainder: 2",
+        "must_contain": ["a + b", "a - b", "a * b", "(double) a / b", "a % b", "System.out.println"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "Practice: Calculator",
+      "theory": "## Recap\n\nNo new constructs. Variables, arithmetic, `System.out.println`. Goal — combine.\n\n## Approach\n\n1. Read **exactly** what to output.\n2. Declare variables for all inputs.\n3. Compute intermediate results **in variables**, not inside `println`.\n4. Print each line separately.\n\n## Why variables\n\n```java\n// Bad: formula inside println\nSystem.out.println(\"Total: \" + (100 * 3 + 50));\n\n// Good\nint total = 100 * 3 + 50;\nSystem.out.println(\"Total: \" + total);\n```\n\nA variable can be reused. A formula cannot.\n\n## String concatenation\n\n`+` between `String` and a number concatenates: `\"Age: \" + 30` → `\"Age: 30\"`.\n\n```java\nSystem.out.println(\"Total: \" + (2 + 3)); // Total: 5\nSystem.out.println(\"Total: \" + 2 + 3);   // Total: 23 — wrong\n```\n\nParentheses around arithmetic are mandatory if a string is on the left.\n\n## What if\n\n- Forget `(double)` during division — you get `3` instead of `3.5`.\n- Forget parentheses in concatenation — you get string gluing.\n\n## Common mistake\n\n`\"Total: \" + 2 + 3` — you meant 5, got \"Total: 23\". Parentheses around `(2 + 3)` fix it.\n\n## Summary\n\n- Compute in variables\n- `+` with a string — concatenation\n- Arithmetic with a string — in parentheses\n- One line per output",
+      "questions": [
+        { "text": "What will `System.out.println(\"Sum: \" + 2 + 3);` print?", "options": ["Sum: 5", "Sum: 23", "Error", "5"], "answer": 1, "explanation": "Left to right: `\"Sum: \" + 2` = `\"Sum: 2\"`, then `+ 3` appends. Need parentheses." },
+        { "text": "What will `System.out.println(\"x = \" + (5 + 5));` print?", "options": ["x = 10", "x = 55", "Error", "10"], "answer": 0, "explanation": "Parentheses — sum first, then concatenation." },
+        { "text": "What will `int a = 10; int b = 4; System.out.println(a / b);` print?", "options": ["2.5", "2", "3", "Error"], "answer": 1, "explanation": "`int / int = int`." },
+        { "text": "Why compute in variables rather than in println?", "options": ["Prettier", "Variable can be reused", "Faster", "Does not matter"], "answer": 1, "explanation": "A formula in println cannot be reused." }
+      ],
+      "practice": {
+        "description": "Bought `3` pens at `45` each and `2` notebooks at `120` each. Discount — `10%` of the sum.\n\nOutput four lines:\n```\nGoods: 375\nDiscount: 37.5\nTotal: 337.5\nAverage price: 75.0\n```\n\n- Goods — subtotal without discount (integer)\n- Discount and Total — fractional\n- Average price — goods / number of positions (5)\n\nPrices — `375` and `37.5` — not `375.0` for the first and not `37.50` for the second.",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int pensQty = 3, pensPrice = 45;\n        int notebooksQty = 2, notebooksPrice = 120;\n        // TODO: compute in variables, print 4 lines\n    }\n}\n",
+        "expected": "Goods: 375\nDiscount: 37.5\nTotal: 337.5\nAverage price: 75.0",
+        "must_contain": ["int total", "double discount", "double finalTotal", "double avg", "(double)", "System.out.println"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "Scanner: Keyboard Input",
+      "theory": "## Why Scanner\n\n`System.out` is output. Input goes through `Scanner`.\n\n```java\nimport java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int x = sc.nextInt();\n        System.out.println(x * 2);\n    }\n}\n```\n\n`import` goes at the very top of the file, before `class`.\n\n## Methods\n\n- `sc.nextInt()` — integer\n- `sc.nextDouble()` — floating-point\n- `sc.next()` — one word\n- `sc.nextLine()` — the whole line up to `Enter`\n\n## The nextInt + nextLine trap\n\n```java\nint age = sc.nextInt();\nsc.nextLine(); // ← consume the leftover line\nString name = sc.nextLine();\n```\n\n`nextInt()` reads the number but does not consume the `Enter`. `nextLine()` will read an **empty line**. Habit: after `nextInt()` and before `nextLine()` — always call `sc.nextLine();`.\n\n## Mixed input\n\n```java\nScanner sc = new Scanner(System.in);\nString name = sc.nextLine();\nint age = sc.nextInt();\n```\n\nOrder matters. `nextLine` consumes everything up to `Enter`. `nextInt` — only a token.\n\n## input() from Python\n\nIn Python `input()` always returns a string. In Java `Scanner` **converts** to the right type: `nextInt()` → `int`. More reliable, but you must specify the type.\n\n## What if\n\n- `nextInt()` on `abc` — `InputMismatchException` (crash).\n- `nextInt()` + `nextLine()` without a mid-`nextLine()` — empty line.\n- Forget `import` — compile error.\n\n## Common mistake\n\nCall `nextLine()` right after `nextInt()` — you get an empty line, not the input. Insert another `nextLine()` between them.\n\n## Summary\n\n- `import java.util.Scanner;` — mandatory\n- `new Scanner(System.in)` — create\n- `nextInt()/nextDouble()/nextLine()` — read\n- After `nextInt` before `nextLine` — consume Enter\n- `nextInt` on non-number → `InputMismatchException`",
+      "questions": [
+        { "text": "Which import for Scanner?", "options": ["import java.util.Scanner;", "import java.Scanner;", "import.Scanner;", "None"], "answer": 0, "explanation": "`Scanner` is in package `java.util`." },
+        { "text": "What does `sc.nextInt()` read?", "options": ["String", "Integer", "Double", "Character"], "answer": 1, "explanation": "`nextInt` — integer." },
+        { "text": "What goes wrong?\n```java\nint n = sc.nextInt();\nString s = sc.nextLine();\n```", "options": ["s is empty", "Compile error", "n = 0", "Fine"], "answer": 0, "explanation": "`nextInt` does not consume Enter. Need `sc.nextLine()` in between." },
+        { "text": "User types `abc`. What happens on `sc.nextInt()`?", "options": ["n = 0", "n = -1", "InputMismatchException", "Skips"], "answer": 2, "explanation": "`Scanner` throws if the token does not match the type." },
+        { "text": "What does `sc.nextLine()` do?", "options": ["One word", "Whole line up to Enter", "A number", "Everything"], "answer": 1, "explanation": "`nextLine` reads a whole line up to Enter, including spaces." },
+        { "text": "What does `sc.next()` do?", "options": ["One word", "Whole line", "A number", "Nothing"], "answer": 0, "explanation": "`next` reads the next word up to whitespace." }
+      ],
+      "practice": {
+        "description": "Read two integers (each on a new line) and output:\n```\nSum: 13\nDifference: 7\nProduct: 30\n```\n\nSample stdin:\n```\n10\n3\n```",
+        "starter": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // TODO: two nextInt, three println\n    }\n}\n",
+        "expected": "Sum: 13\nDifference: 7\nProduct: 30",
+        "must_contain": ["import java.util.Scanner", "new Scanner(System.in)", "nextInt", "System.out.println"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "title": "Strings: Methods",
+      "theory": "## Strings are immutable\n\n`String` **cannot be changed**. Any method returns a **new** string.\n\n```java\nString s = \"Java\";\ns.toUpperCase();          // returned \"JAVA\", s unchanged\nSystem.out.println(s);    // Java\nString upper = s.toUpperCase();\n```\n\n## Basic methods\n\n```java\nString s = \"Hello, world\";\nSystem.out.println(s.length());        // 12\nSystem.out.println(s.charAt(0));       // 'H'\nSystem.out.println(s.substring(7));    // \"world\"\nSystem.out.println(s.substring(0, 5)); // \"Hello\" (0..4)\nSystem.out.println(s.contains(\"world\")); // true\nSystem.out.println(s.indexOf(\"world\"));  // 7\n```\n\n## equals vs ==\n\n```java\nString a = \"hello\";\nString b = new String(\"hello\");\nSystem.out.println(a == b);       // false — reference comparison\nSystem.out.println(a.equals(b));  // true — content comparison\n```\n\n**Always** compare strings via `.equals()`. `==` for strings is a trap. For `int`/`double` — the reverse, use `==`.\n\n## Concatenation\n\n`\"a\" + \"b\"` → `\"ab\"`. `\"x\" + 5` → `\"x5\"`.\n\n## Empty string\n\n`\"\".isEmpty()` → `true`. `\"\".length()` → `0`.\n\n## What if\n\n- `s.charAt(100)` — `StringIndexOutOfBoundsException`.\n- Compare via `==` — may return `false` even for identical strings.\n- `s.toUpperCase()` without assignment — the result is lost.\n\n## Common mistake\n\nCompare strings with `==`, as if they were numbers. In Java `==` on objects compares references. Always `.equals()`.\n\n## Summary\n\n- `length()` — length, `charAt(i)` — character\n- `substring(a, b)` — from a to b-1\n- `equals()` — compare, **not** `==`\n- Strings are immutable — methods return new\n- `isEmpty()` — emptiness check",
+      "questions": [
+        { "text": "What will be printed?\n```java\nString s = \"Java\";\ns.toUpperCase();\nSystem.out.println(s);\n```", "options": ["JAVA", "Java", "java", "Error"], "answer": 1, "explanation": "`String` is immutable. `s` is unchanged." },
+        { "text": "How to compare two strings?", "options": ["a == b", "a.equals(b)", "a != b", "a.compareTo(b) == 1"], "answer": 1, "explanation": "`==` compares references, `equals` compares content." },
+        { "text": "What does `\"Hello\".substring(1, 3)` return?", "options": ["He", "el", "ell", "llo"], "answer": 1, "explanation": "From index 1 up to 3 exclusive: `e`(1) `l`(2)." },
+        { "text": "What does `\"abc\".length()` return?", "options": ["2", "3", "4", "Error"], "answer": 1, "explanation": "Three characters." },
+        { "text": "What happens with `\"abc\".charAt(5)`?", "options": ["Returns 'c'", "Returns null", "StringIndexOutOfBoundsException", "Skips"], "answer": 2, "explanation": "Index out of range → exception." },
+        { "text": "What does `\"a,b,c\".indexOf(\"b\")` return?", "options": ["1", "2", "-1", "true"], "answer": 1, "explanation": "`a`=0, `,`=1, `b`=2." }
+      ],
+      "practice": {
+        "description": "Given `String word = \"Programming\";`. Output four lines:\n```\nLength: 11\nFirst char: P\nLast char: g\nUpper: PROGRAMMING\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        String word = \"Programming\";\n        // TODO\n    }\n}\n",
+        "expected": "Length: 11\nFirst char: P\nLast char: g\nUpper: PROGRAMMING",
+        "must_contain": ["word.length()", "word.charAt(0)", "word.charAt(word.length() - 1)", "toUpperCase", "System.out.println"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "title": "Formatting: printf",
+      "theory": "## Why printf\n\n`System.out.println(\"Total: \" + 3.14159)` → `Total: 3.14159`. What if you need 2 decimal places? Concatenation cannot help.\n\n## printf\n\n```java\nSystem.out.printf(\"%.2f%n\", 3.14159);    // 3.14\nSystem.out.printf(\"Price: %.2f%n\", 99.5); // Price: 99.50\nSystem.out.printf(\"%d pcs%n\", 5);        // 5 pcs\nSystem.out.printf(\"[%5d]%n\", 42);        // [   42]\nSystem.out.printf(\"[%-5d]%n\", 42);       // [42   ]\n```\n\n- `%d` — integer\n- `%.2f` — `double` with 2 decimals\n- `%s` — string\n- `%n` — newline (prefer `\\n` for platform independence)\n- `%5d` — width 5, left-padded\n\n## String.format\n\nIf you do not want to print immediately:\n\n```java\nString line = String.format(\"Total: %.2f\", 123.456);\nSystem.out.println(line);\n```\n\n## Python f-strings analogy\n\nPython: `f\"Total: {x:.2f}\"`. Java: `String.format(\"Total: %.2f\", x)` or `printf`.\n\n## What if\n\n- `printf(\"%d\", 3.14)` — `IllegalFormatConversionException`.\n- Missing argument: `printf(\"%.2f\")` — `MissingFormatArgumentException`.\n- `printf` does not print a newline — you need `\\n` or `%n`.\n\n## Common mistake\n\n`printf` without `\\n` — the next line sticks to the previous. Or the opposite: `printf` with `\\n` followed by `println` — double newline.\n\n## Summary\n\n- `%d` — `int`, `%f` — `double`, `%s` — `String`\n- `%.2f` — 2 decimals\n- `%n` — newline (prefer `\\n`)\n- `String.format` — when you need a string\n- `printf` does not add a newline",
+      "questions": [
+        { "text": "What does `System.out.printf(\"%.2f%n\", 3.14159);` print?", "options": ["3.14159", "3.14", "3.15", "3"], "answer": 1, "explanation": "`%.2f` — 2 decimals, rounded." },
+        { "text": "Which specifier for `int`?", "options": ["%f", "%s", "%d", "%i"], "answer": 2, "explanation": "`%d` for integers." },
+        { "text": "What does `System.out.printf(\"[%5d]%n\", 42);` print?", "options": ["[42]", "[   42]", "[42   ]", "[00042]"], "answer": 1, "explanation": "`%5d` — width 5, right-aligned." },
+        { "text": "What happens on `printf(\"%d\", 3.14);`?", "options": ["3", "3.14", "IllegalFormatConversionException", "Nothing"], "answer": 2, "explanation": "`%d` expects an `int`." },
+        { "text": "Do you need `\\n` in `printf`?", "options": ["Always", "Only for numbers", "Only if you need a newline", "Never"], "answer": 2, "explanation": "`printf` does not add a newline. Add `\\n` or `%n` manually." }
+      ],
+      "practice": {
+        "description": "Given:\n```java\ndouble price = 1250.5;\nint qty = 3;\ndouble total = price * qty;\n```\n\nOutput via `printf`:\n```\nPrice: 1250.50\nQuantity: 3\nTotal: 3751.50\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        double price = 1250.5;\n        int qty = 3;\n        double total = price * qty;\n        // TODO: three printf\n    }\n}\n",
+        "expected": "Price: 1250.50\nQuantity: 3\nTotal: 3751.50",
+        "must_contain": ["System.out.printf", "%.2f", "%d"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "title": "if / else, ternary",
+      "theory": "## Syntax\n\n```java\nif (x > 0) {\n    System.out.println(\"+\");\n} else if (x < 0) {\n    System.out.println(\"-\");\n} else {\n    System.out.println(\"0\");\n}\n```\n\nDifferences from Python:\n- Condition is **in parentheses** `( )` — mandatory.\n- Body is in braces `{ }` (you can skip for a single statement, but do not).\n- After `if (...)` there is **never** a `;`.\n\n## Comparison operators\n\n`==` `!=` `<` `>` `<=` `>=`. `=` is assignment, not comparison.\n\n## Logical\n\n`&&` — and, `||` — or, `!` — not. In Python: `and`, `or`, `not`.\n\n```java\nif (age >= 18 && hasPassport) { }\nif (name.equals(\"Anna\") || name.equals(\"Ivan\")) { }\n```\n\n## Ternary\n\n```java\nint x = 5;\nString s = x > 0 ? \"positive\" : \"negative\";\nSystem.out.println(s); // positive\n```\n\n`condition ? if_true : if_false` — compact if/else with a result.\n\n## Strings in if\n\n`if (name == \"Anna\")` — does not work! Only `if (name.equals(\"Anna\"))`.\n\n## What if\n\n- `if (x = 5)` — compile error (`=` returns `int`, not `boolean`).\n- `if (x > 0);` — `;` cuts off the body, empty if.\n- Forget braces with multiple statements — only the first goes into `if`.\n\n## Common mistake\n\n`if (name == \"Anna\")` — comparing strings via `==`. It sometimes works by accident but **not always**. Use `.equals()`.\n\n## Summary\n\n- `if (condition) { }` — parentheses and braces\n- `else if` / `else` — continuations\n- `==`, `!=`, `<`, `>`, `<=`, `>=`\n- `&&`, `||`, `!`\n- `a ? b : c` — ternary\n- Strings — `.equals()`, not `==`",
+      "questions": [
+        { "text": "Which condition is correct?", "options": ["if x > 0 { }", "if (x > 0) { }", "if x > 0 then { }", "if (x > 0): { }"], "answer": 1, "explanation": "Parentheses and braces, no `then`, no `:`." },
+        { "text": "What is wrong?\n```java\nif (x = 5) { }\n```", "options": ["Nothing", "`=` instead of `==`", "Need double parentheses", "Need then"], "answer": 1, "explanation": "`=` returns `int`, not `boolean`. Compiler rejects it." },
+        { "text": "How to write `if a and b`?", "options": ["if (a and b)", "if (a && b)", "if (a & b)", "if a && b"], "answer": 1, "explanation": "In Java — `&&`, `||`, `!`." },
+        { "text": "What will be printed?\n```java\nint x = -3;\nString s = x > 0 ? \"positive\" : \"not positive\";\nSystem.out.println(s);\n```", "options": ["positive", "not positive", "Error", "-3"], "answer": 1, "explanation": "Condition false — second branch." },
+        { "text": "How to compare a string to `\"Anna\"`?", "options": ["name == \"Anna\"", "name.equals(\"Anna\")", "name = \"Anna\"", "name != \"Anna\""], "answer": 1, "explanation": "Strings — `.equals()`." }
+      ],
+      "practice": {
+        "description": "Given `int score = 78;`. Output a grade:\n- `>= 90` → `Excellent`\n- `>= 75` → `Good`\n- `>= 60` → `Satisfactory`\n- otherwise → `Fail`\n\nFor `78` the expected output is:\n```\nGood\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int score = 78;\n        // TODO: if / else if / else\n    }\n}\n",
+        "expected": "Good",
+        "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "score >= 60", "System.out.println"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "title": "switch",
+      "theory": "## Classic switch\n\n```java\nint day = 3;\nswitch (day) {\n    case 1:\n        System.out.println(\"Mon\");\n        break;\n    case 2:\n        System.out.println(\"Tue\");\n        break;\n    default:\n        System.out.println(\"Other\");\n}\n```\n\n- `switch (expression)` — only `int`, `char`, `String`, `enum`.\n- `break` is mandatory, otherwise fall-through into the next `case`.\n- `default` — when no `case` matched.\n\n## Fall-through\n\n```java\nswitch (x) {\n    case 1:\n    case 2:\n        System.out.println(\"1 or 2\");\n        break;\n}\n```\n\nEmpty `case` labels group together.\n\n## New switch (Java 14+)\n\n```java\nString result = switch (day) {\n    case 1, 2, 3, 4, 5 -> \"weekday\";\n    case 6, 7 -> \"weekend\";\n    default -> \"?\";\n};\n```\n\n`->` without `break`. Requires a modern JDK.\n\n## switch vs if\n\n`switch` is good for **exact matches** against a few values. `if` is for ranges.\n\n## What if\n\n- Forget `break` — falls through into later `case` blocks.\n- `switch` on `double` — compile error.\n- No `default` and no match — nothing executes.\n\n## Common mistake\n\nForgetting `break` in classic `switch` — the program runs extra `case` blocks.\n\n## Summary\n\n- `switch (expression) { case X: ... break; }`\n- Only `int`, `char`, `String`, `enum`\n- `break` — otherwise fall-through\n- `default` — otherwise nothing\n- Java 14+: `case X -> ...` without break",
+      "questions": [
+        { "text": "What will be printed?\n```java\nint x = 2;\nswitch (x) {\n    case 1: System.out.println(\"one\");\n    case 2: System.out.println(\"two\");\n    case 3: System.out.println(\"three\");\n}\n```", "options": ["two", "two\\nthree", "one\\ntwo\\nthree", "Error"], "answer": 1, "explanation": "No `break` — fall-through into `case 3`." },
+        { "text": "Which type **cannot** be used with `switch`?", "options": ["int", "char", "String", "double"], "answer": 3, "explanation": "`double` is not allowed." },
+        { "text": "What is `default` for?", "options": ["Mandatory", "When no `case` matched", "Ends switch", "Sets type"], "answer": 1, "explanation": "The `else` of switch." },
+        { "text": "What does `break` do?", "options": ["Exits the program", "Exits the switch", "Skips a case", "Goes to default"], "answer": 1, "explanation": "Stops fall-through into the next `case`." },
+        { "text": "What happens with `switch (true) { }`?", "options": ["Works", "Compile error", "All cases", "Nothing"], "answer": 1, "explanation": "`boolean` is not supported by `switch`." }
+      ],
+      "practice": {
+        "description": "Given `String grade = \"B\";`. Via `switch` output:\n- `\"A\"` → `Excellent`\n- `\"B\"` → `Good`\n- `\"C\"` → `Satisfactory`\n- otherwise → `Unknown`\n\nFor `B` the expected output is:\n```\nGood\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        String grade = \"B\";\n        // TODO: switch(grade)\n    }\n}\n",
+        "expected": "Good",
+        "must_contain": ["switch", "case \"A\"", "case \"B\"", "case \"C\"", "default", "break", "System.out.println"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "title": "Loops: for, while, do-while",
+      "theory": "## for\n\n```java\nfor (int i = 1; i <= 5; i++) {\n    System.out.println(i);\n}\n```\n\nThree parts separated by `;`: initialization, condition, step.\n\n## while\n\n```java\nint i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}\n```\n\nCheck **before** the body. If the condition is immediately false — the body runs zero times.\n\n## do-while\n\n```java\nint i = 1;\ndo {\n    System.out.println(i);\n    i++;\n} while (i <= 5);\n```\n\nCheck **after** the body. Runs at least once. `while (...)` **with `;`**.\n\n## break / continue\n\n```java\nfor (int i = 1; i <= 10; i++) {\n    if (i == 5) break;         // exit loop\n    if (i % 2 == 0) continue;  // skip iteration\n    System.out.println(i);\n}\n```\n\n## Nested\n\n```java\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 2; j++) {\n        System.out.println(i + \",\" + j);\n    }\n}\n```\n\nThe inner loop runs fully on each outer iteration.\n\n## What if\n\n- Forget `i++` — infinite loop.\n- Forget `;` after `do { } while (...)` — compile error.\n- `continue` inside `switch` inside `for` — works, but easy to get confused.\n\n## Common mistake\n\nInfinite `while` when you forget to update the variable. The program hangs, only `Ctrl+C` helps.\n\n## Summary\n\n- `for (init; cond; step)` — known iteration count\n- `while (cond)` — by condition\n- `do { } while (cond);` — at least once\n- `break` — exit, `continue` — skip iteration\n- Without update — infinite loop",
+      "questions": [
+        { "text": "How many times?\n```java\nfor (int i = 0; i < 3; i++) { }\n```", "options": ["2", "3", "4", "Infinite"], "answer": 1, "explanation": "i = 0, 1, 2." },
+        { "text": "How does `do-while` differ from `while`?", "options": ["Nothing", "`do-while` checks **after**", "`do-while` has no condition", "`while` is faster"], "answer": 1, "explanation": "`do-while` runs at least once." },
+        { "text": "What does `continue` do?", "options": ["Exits", "Skips the iteration", "Ends program", "Resets"], "answer": 1, "explanation": "`break` exits, `continue` moves to the next iteration." },
+        { "text": "What will be printed?\n```java\nfor (int i = 1; i <= 3; i++) {\n    if (i == 2) continue;\n    System.out.println(i);\n}\n```", "options": ["1\\n2\\n3", "1\\n3", "1\\n2", "2"], "answer": 1, "explanation": "At `i=2` — `continue`, `println` skipped." },
+        { "text": "What happens if `i++` is missing in `while`?", "options": ["Does not run", "Syntax error", "Infinite loop", "Runs once"], "answer": 2, "explanation": "The condition is always true." }
+      ],
+      "practice": {
+        "description": "Output numbers `1..10` via `for`, skipping even ones (`continue`):\n```\n1\n3\n5\n7\n9\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: for, continue on even\n    }\n}\n",
+        "expected": "1\n3\n5\n7\n9",
+        "must_contain": ["for", "continue", "% 2", "System.out.println"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "title": "Arrays: Creation",
+      "theory": "## Fixed length\n\n```java\nint[] arr = new int[5];        // [0, 0, 0, 0, 0]\nint[] b = {1, 2, 3, 4, 5};\nString[] names = {\"Anna\", \"Ivan\"};\n```\n\nLength is set at creation and **never changes**. Want more — create a new array.\n\n## Indices\n\nZero-based. `arr[0]` — first, `arr[arr.length - 1]` — last. `arr.length` is a **field**, not a method (no parentheses).\n\n## Out of bounds\n\n```java\nint[] a = new int[3];\nSystem.out.println(a[3]); // ArrayIndexOutOfBoundsException\n```\n\n## Assignment\n\n```java\nint[] arr = new int[3];\narr[0] = 10;\narr[1] = 20;\narr[2] = 30;\n```\n\n## Array vs list\n\nArray is low-level, fixed length. `ArrayList` grows dynamically (later). Start with arrays.\n\n## What if\n\n- `new int[0]` — length 0, `length = 0`. `arr[0]` — exception.\n- Write to `arr[3]` on `new int[3]` — `ArrayIndexOutOfBoundsException`.\n- `arr.length()` — error: `length` is a field, not a method.\n\n## Common mistake\n\n`arr.length()` instead of `arr.length`. On `String` it is `length()`, on arrays it is `length`. Remember this once and for all.\n\n## Summary\n\n- `int[] a = new int[5]` — array of length 5, zeros\n- `int[] a = {1, 2, 3}` — literal\n- `arr[i]` — access, `arr.length` — length\n- Out of bounds — exception\n- Length never changes",
+      "questions": [
+        { "text": "How to create an array of 5 zeros?", "options": ["int[] a = new int[5];", "int a[5];", "int[] a = int[5];", "array a[5];"], "answer": 0, "explanation": "`new int[5]` — array of length 5 with zeros." },
+        { "text": "What does `arr.length` return for `int[] arr = {1, 2, 3};`?", "options": ["2", "3", "4", "Error"], "answer": 1, "explanation": "`length` — field, no parentheses." },
+        { "text": "What happens on `int[] a = new int[3]; a[3] = 10;`?", "options": ["a[3] = 10", "Array grows to 4", "ArrayIndexOutOfBoundsException", "a[3] = 0"], "answer": 2, "explanation": "Indices are 0..2." },
+        { "text": "How to get the last element?", "options": ["arr[arr.length]", "arr[arr.length - 1]", "arr.last()", "arr[-1]"], "answer": 1, "explanation": "Last index = `length - 1`." },
+        { "text": "What happens on `arr.length()` for an array?", "options": ["Length", "Compile error", "0", "null"], "answer": 1, "explanation": "`length` is a field, not a method. With parentheses — compile error." }
+      ],
+      "practice": {
+        "description": "Create `int[] nums = {4, 8, 15, 16, 23, 42};`. Output:\n```\nFirst: 4\nLast: 42\nLength: 6\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int[] nums = {4, 8, 15, 16, 23, 42};\n        // TODO\n    }\n}\n",
+        "expected": "First: 4\nLast: 42\nLength: 6",
+        "must_contain": ["nums[0]", "nums[nums.length - 1]", "nums.length", "System.out.println"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "title": "Traversing Arrays",
+      "theory": "## Classic for\n\n```java\nint[] arr = {10, 20, 30};\nfor (int i = 0; i < arr.length; i++) {\n    System.out.println(arr[i]);\n}\n```\n\nHas an index `i`. Useful when you need the number or want to modify elements.\n\n## for-each\n\n```java\nfor (int x : arr) {\n    System.out.println(x);\n}\n```\n\nShorter. But **no index** and **no modification** (x is a copy). Ideal for reading.\n\n## Sum\n\n```java\nint sum = 0;\nfor (int x : arr) sum += x;\nSystem.out.println(sum);\n```\n\nAccumulator `sum` **outside** the loop. Inside — resets every iteration.\n\n## Max\n\n```java\nint max = arr[0];\nfor (int x : arr) {\n    if (x > max) max = x;\n}\n```\n\nStart from `arr[0]`. From `0` — for all-negative arrays the max would be `0`, not the real one.\n\n## Search\n\n```java\nint target = 20;\nfor (int x : arr) {\n    if (x == target) {\n        System.out.println(\"found\");\n        break;\n    }\n}\n```\n\n## Modifying — only via index\n\n```java\nfor (int i = 0; i < arr.length; i++) arr[i] *= 2;\n```\n\nfor-each cannot — `x` is a copy.\n\n## What if\n\n- Sum declared inside the loop — resets.\n- Max starting from zero — wrong for negative arrays.\n- for-each with assignment — changes are lost.\n\n## Common mistake\n\n`for (int x : arr) { x = x * 2; }` — you thought you doubled the array. But `x` is a copy. For modification use classic `for`.\n\n## Summary\n\n- `for (i...)` — with index\n- `for (x : arr)` — without, for reading\n- Accumulator — before the loop\n- Max — from `arr[0]`\n- Modify — via `for` with index",
+      "questions": [
+        { "text": "Which construct gives an index?", "options": ["for (int x : arr)", "for (int i = 0; i < arr.length; i++)", "both", "neither"], "answer": 1, "explanation": "for-each — value only." },
+        { "text": "What is wrong?\n```java\nint sum = 0;\nfor (int x : arr) {\n    int sum = 0;\n    sum += x;\n}\nSystem.out.println(sum);\n```", "options": ["Nothing", "sum resets each iteration, prints 0", "Compile error", "Error"], "answer": 1, "explanation": "The inner `sum` is a separate variable and resets." },
+        { "text": "How to find the maximum in an array of negatives?", "options": ["int max = 0;", "int max = arr[0];", "int max = -1;", "int max = 100;"], "answer": 1, "explanation": "Starting from `0` keeps 0 as the max since all negatives are less than 0." },
+        { "text": "What is printed?\n```java\nint[] a = {1, 2, 3};\nfor (int x : a) x *= 2;\nSystem.out.println(a[0]);\n```", "options": ["2", "1", "0", "Error"], "answer": 1, "explanation": "`x` is a copy. The array is unchanged." },
+        { "text": "How to double all elements of an array?", "options": ["for (int x : a) x *= 2;", "for (int i = 0; i < a.length; i++) a[i] *= 2;", "a *= 2;", "Impossible"], "answer": 1, "explanation": "Only through `for` with index." }
+      ],
+      "practice": {
+        "description": "Given `int[] nums = {5, 12, 8, 3, 21, 7};`. Output:\n```\nSum: 56\nMax: 21\nAverage: 9.333333333333334\n```\n\nAverage — `sum / (double) nums.length`, full `double` precision (no formatting).",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int[] nums = {5, 12, 8, 3, 21, 7};\n        // TODO\n    }\n}\n",
+        "expected": "Sum: 56\nMax: 21\nAverage: 9.333333333333334",
+        "must_contain": ["for", "nums.length", "(double)", "System.out.println"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "title": "Methods",
+      "theory": "## Why\n\nBreak the program into pieces: reuse, readability, testability. One method — one task.\n\n## Declaration\n\n```java\nstatic int sum(int a, int b) {\n    return a + b;\n}\n```\n\n- `static` — callable without an object.\n- `int` — return type.\n- `sum` — name.\n- `(int a, int b)` — parameters with types.\n- `return` — return and exit.\n\n## Call\n\n```java\nint s = sum(2, 3);\nSystem.out.println(s); // 5\n```\n\n## void\n\n`void` — returns nothing:\n\n```java\nstatic void greet(String name) {\n    System.out.println(\"Hi, \" + name);\n}\n```\n\nYou can `return;` in `void` to exit early.\n\n## Parameters are copies\n\n```java\nstatic void change(int x) { x = 100; }\nint a = 5;\nchange(a);\nSystem.out.println(a); // 5\n```\n\nPrimitives are passed by value. Arrays — by reference (changes inside are visible outside).\n\n## Overloading\n\n```java\nstatic int sum(int a, int b) { return a + b; }\nstatic int sum(int a, int b, int c) { return a + b + c; }\n```\n\nSame name — different parameters.\n\n## What if\n\n- Forget `return` in a non-`void` method — compile error.\n- `void` with `return 5;` — error.\n- Call a non-`static` method from a `static` main — error (later with OOP).\n\n## Common mistake\n\n`static void f() { return 5; }` — `void` cannot return a value. Either `return;` or no `return`.\n\n## Summary\n\n- `static type name(params) { return ...; }`\n- `void` — no return\n- `return` — exit + value\n- Primitives — copies\n- Overloading — same name, different parameters",
+      "questions": [
+        { "text": "What does `static` mean for a method?", "options": ["Cannot call", "Belongs to class, no object needed", "Returns value", "Takes numbers"], "answer": 1, "explanation": "`static` — class method, usable from `main`." },
+        { "text": "What is returned?\n```java\nstatic int f(int x) { return x * 2; }\nf(5);\n```", "options": ["5", "10", "Error", "0"], "answer": 1, "explanation": "`5 * 2 = 10`." },
+        { "text": "What is wrong?\n```java\nstatic void sayHi() { return 5; }\n```", "options": ["Nothing", "`void` cannot return a value", "Need `return;`", "Both 2 and 3"], "answer": 1, "explanation": "`void` — no value." },
+        { "text": "What is printed?\n```java\nstatic void change(int x) { x = 100; }\nint a = 5;\nchange(a);\nSystem.out.println(a);\n```", "options": ["100", "5", "0", "Error"], "answer": 1, "explanation": "Primitives are copied. Method modifies a copy." },
+        { "text": "What is overloading?", "options": ["Many operators", "Same name, different parameters", "Error", "Inheritance"], "answer": 1, "explanation": "Compiler chooses by parameter count/types." }
+      ],
+      "practice": {
+        "description": "Create two `static` methods:\n- `int square(int x)` — returns `x * x`\n- `boolean isEven(int x)` — `true` if even\n\nIn `main`:\n- for `n = 7` output `Square: 49`\n- for `n = 7` output `Even: false`\n- for `n = 8` output `Even: true`",
+        "starter": "public class Main {\n    static int square(int x) { return 0; }\n    static boolean isEven(int x) { return false; }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Square: 49\nEven: false\nEven: true",
+        "must_contain": ["static int square", "static boolean isEven", "return", "% 2 == 0", "System.out.println"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "title": "Class as a Blueprint",
+      "theory": "## Why classes\n\n`int`, `String` — built-in types. A class is a **custom** type: data + behavior in one place.\n\n```java\nclass Person {\n    String name;\n    int age;\n\n    void sayHi() {\n        System.out.println(\"Hi, \" + name);\n    }\n}\n```\n\n`class Person` — a blueprint. Until an instance is created, nothing exists in memory.\n\n## Creating an object\n\n```java\nPerson p = new Person();\np.name = \"Anna\";\np.age = 25;\np.sayHi(); // Hi, Anna\n```\n\n`new Person()` — create an object. `p` — a reference. `p.name` — field access.\n\n## Difference from Python\n\nIn Python `p = Person()` without `new`, fields created dynamically. In Java — `new`, fields **declared** in the class.\n\n## Several objects\n\n```java\nPerson a = new Person();\nPerson b = new Person();\na.name = \"Anna\";\nb.name = \"Ivan\";\na.sayHi(); // Hi, Anna\nb.sayHi(); // Hi, Ivan\n```\n\nEach object has its own fields. Methods are shared.\n\n## Where to declare\n\nOne `public class` per file. `Person` without `public` — same file:\n\n```java\nclass Person { }\n\npublic class Main {\n    public static void main(String[] args) {\n        Person p = new Person();\n    }\n}\n```\n\n## What if\n\n- `Person p;` without `new`, then `p.name` — `NullPointerException`.\n- Two `public class` in one file — compile error.\n- Access a field that does not exist — compile error.\n\n## Common mistake\n\n`Person p = new Person();` then `p = null; p.sayHi()` — NPE. Check that the object exists.\n\n## Summary\n\n- `class Name { fields; methods; }`\n- `new Name()` — create object\n- `p.field` — access\n- Each object has its own fields\n- `public class` — one per file",
+      "questions": [
+        { "text": "What does `new Person()` do?", "options": ["Declares a class", "Creates an object", "Calls main", "Copies class"], "answer": 1, "explanation": "`new` creates an instance in memory." },
+        { "text": "What happens when accessing `p.age` without `new`?", "options": ["Works", "NullPointerException", "Compile error", "age = 0"], "answer": 1, "explanation": "The reference points to nothing." },
+        { "text": "Where are `name` values stored for two objects?", "options": ["In the class, shared", "In each object, own", "In main", "In JVM"], "answer": 1, "explanation": "Fields are per-instance." },
+        { "text": "How many `public class` per file?", "options": ["Any", "One", "Two", "Zero"], "answer": 1, "explanation": "One `public class` per file, matching the file name." },
+        { "text": "Can we create an object without `new`?", "options": ["Yes", "No, an object requires new", "Only in main", "Only in a loop"], "answer": 1, "explanation": "`Person p = new Person();` — mandatory." }
+      ],
+      "practice": {
+        "description": "Create class `Book` with fields `String title` and `int pages`, method `void info()` that prints `\"<title> — <pages> pages\"`.\n\nIn `main` create two books:\n- `\"Java Guide\"`, `500`\n- `\"Algorithms\"`, `720`\n\nCall `info()` on both. Expected:\n```\nJava Guide — 500 pages\nAlgorithms — 720 pages\n```",
+        "starter": "class Book {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Java Guide — 500 pages\nAlgorithms — 720 pages",
+        "must_contain": ["class Book", "String title", "int pages", "void info", "new Book", ".info()", "System.out.println"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "title": "Constructors, this",
+      "theory": "## The problem\n\n```java\nPerson p = new Person();\np.name = \"Anna\";\np.age = 25;\n```\n\nThree lines just to initialize. Forget a field — silently stays `null` or `0`. A constructor fixes it.\n\n## Constructor\n\n```java\nclass Person {\n    String name;\n    int age;\n\n    Person(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n}\n```\n\nA method without a return type, name equals the class name. Called via `new`:\n\n```java\nPerson p = new Person(\"Anna\", 25);\n```\n\n## this\n\n`this.name` — the object's field, `name` — the parameter. Without `this`, `name = name` does nothing.\n\n## Default constructor\n\nIf you declare **no constructor**, Java creates an empty one. Declare **any** — the empty one **disappears**. `new Person()` stops compiling.\n\n## Overloading\n\n```java\nPerson(String name) { this(name, 0); }\nPerson(String name, int age) { this.name = name; this.age = age; }\n```\n\n`this(...)` — call **another** constructor. Only on the **first line**.\n\n## What if\n\n- Forget `this` — fields not set.\n- Declare a parameterized constructor and call `new Person()` — compile error.\n- `this(...)` not on the first line — compile error.\n\n## Common mistake\n\n`name = name;` in the constructor — the parameter assigns to itself. The field never changes. Need `this.name = name;`.\n\n## Summary\n\n- `ClassName(params)` — constructor\n- Called via `new`\n- `this.field = param` — assign\n- Parameterized constructor → no empty one\n- `this(...)` — call another constructor",
+      "questions": [
+        { "text": "What is a constructor named?", "options": ["Anything", "Like the class", "init", "main"], "answer": 1, "explanation": "Name equals the class name. No return type." },
+        { "text": "What does `this.name = name;` do?", "options": ["Nothing", "Assigns the parameter to the field", "Error", "Creates object"], "answer": 1, "explanation": "`this.name` is the field, `name` is the parameter." },
+        { "text": "Declared one parameterized constructor. Does `new Person()` work?", "options": ["Yes", "Compile error — no empty one", "Creates with zeros", "Creates with null"], "answer": 1, "explanation": "Default constructor exists only if no constructors are declared." },
+        { "text": "What does `this(...)` do?", "options": ["Returns", "Calls another constructor of this class", "Creates object", "Prints"], "answer": 1, "explanation": "Only on the first line." },
+        { "text": "What happens with `Person() { name = name; }` without `this`?", "options": ["Field is set", "Field is not changed, parameter to itself", "Compile error", "name = null"], "answer": 1, "explanation": "Parameter to itself. Need `this.name = name`." }
+      ],
+      "practice": {
+        "description": "Class `Rectangle`:\n- `double width`, `double height`\n- constructor `Rectangle(double width, double height)` via `this`\n- constructor `Rectangle(double side)` — square, calls the first via `this(side, side)`\n- method `double area()` — area\n\nIn `main` create `Rectangle(3, 4)` and `Rectangle(5)`. Output:\n```\nRectangle: 12.0\nSquare: 25.0\n```",
+        "starter": "class Rectangle {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Rectangle: 12.0\nSquare: 25.0",
+        "must_contain": ["class Rectangle", "double width", "double height", "Rectangle(double width", "this(", "double area", "return width * height", "new Rectangle"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "title": "Encapsulation, static",
+      "theory": "## The problem\n\n```java\nPerson p = new Person(\"Anna\", 25);\np.age = -100; // nonsense, but the compiler allows it\n```\n\nFields without a modifier are visible to everyone. Anyone can break the state.\n\n## private\n\n```java\nclass Person {\n    private String name;\n    private int age;\n}\n```\n\n`p.age` from **outside** — compile error. Only methods of the class can touch it.\n\n## Getters/setters\n\n```java\nclass Person {\n    private int age;\n    public int getAge() { return age; }\n    public void setAge(int age) {\n        if (age >= 0) this.age = age;\n    }\n}\n```\n\n`setAge` — **validation**. Invalid values do not pass.\n\n## Convention\n\n`name` → `getName()` / `setName(...)`. `boolean active` → `isActive()` / `setActive(...)`.\n\n## static\n\n`static` — a field **shared** across the class:\n\n```java\nclass Counter {\n    static int total = 0;\n    Counter() { total++; }\n}\nnew Counter();\nnew Counter();\nSystem.out.println(Counter.total); // 2\n```\n\n`Counter.total`, not `p.total`.\n\n## static method\n\n```java\nclass Math2 {\n    static int square(int x) { return x * x; }\n}\nMath2.square(4);\n```\n\nNo `new`. Cannot access instance fields.\n\n## What if\n\n- Access `p.age` with `private` — compile error.\n- From a `static` method access an instance field — error.\n- Forget `static` on a shared counter — each object gets its own.\n\n## Common mistake\n\nTreating `static` as a per-object field. No — it is **class-wide**. Changing it via any instance — visible to all.\n\n## Summary\n\n- `private` — inside the class only\n- Getters/setters — controlled access\n- `static` field — shared across the class\n- `static` method — no object needed\n- No `this` in `static`",
+      "questions": [
+        { "text": "What does `private` do to a field?", "options": ["Faster", "Forbids external access", "Makes it constant", "Hides from compiler"], "answer": 1, "explanation": "Encapsulation." },
+        { "text": "How to name a getter for `boolean active`?", "options": ["getActive()", "isActive()", "getIsActive()", "active()"], "answer": 1, "explanation": "For `boolean` — `is...`." },
+        { "text": "What does `static int total` mean?", "options": ["Per-object", "One per class", "Constant", "Immutable"], "answer": 1, "explanation": "`static` — class-wide, not per-instance." },
+        { "text": "Can a `static` method access a non-static field?", "options": ["Yes", "No — no object yet", "Via `this`", "Only in `main`"], "answer": 1, "explanation": "No `this`, no instance." },
+        { "text": "Who sees a change to a `static` field via one object?", "options": ["Only that one", "All objects of the class", "None", "The JVM"], "answer": 1, "explanation": "Shared across the class." }
+      ],
+      "practice": {
+        "description": "Class `BankAccount`:\n- `private double balance`\n- constructor with initial balance\n- `public double getBalance()`\n- `public void deposit(double amount)` — only if `> 0`\n- `public void withdraw(double amount)` — only if `> 0` and `<= balance`\n- `private static int accountsCount = 0` — incremented in constructor\n- `public static int getAccountsCount()`\n\nIn `main`:\n- create `BankAccount(100)`\n- `deposit(50)`, `withdraw(30)`, `withdraw(500)` (should fail)\n- output `Balance: 120.0` and `Accounts: 1`",
+        "starter": "class BankAccount {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Balance: 120.0\nAccounts: 1",
+        "must_contain": ["private double balance", "private static int accountsCount", "public void deposit", "public void withdraw", "getBalance", "getAccountsCount", "System.out.println"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "title": "Inheritance",
+      "theory": "## Why\n\n`Animal` with shared fields; `Dog` and `Cat` **inherit** — no code duplication.\n\n## extends\n\n```java\nclass Animal {\n    String name;\n    Animal(String name) { this.name = name; }\n    void speak() { System.out.println(\"...\"); }\n}\n\nclass Dog extends Animal {\n    Dog(String name) { super(name); }\n    void wagTail() { System.out.println(name + \" wags tail\"); }\n}\n```\n\n`Dog` receives **all** fields and methods of `Animal`.\n\n## super\n\n- `super(args)` — parent constructor. Only on the **first line**.\n- `super.method()` — parent method.\n\nIf the parent has **no** empty constructor and `super(...)` is not called — compile error.\n\n## What is inherited\n\nEverything except `private` fields and constructors. `private` — only via parent methods.\n\n## Override\n\n```java\nclass Dog extends Animal {\n    Dog(String name) { super(name); }\n    @Override\n    void speak() { System.out.println(name + \": woof\"); }\n}\n```\n\n`@Override` — check: you really are overriding. Typo in the name — compile error.\n\n## Hierarchy\n\n`Object` — root. `Animal` extends `Object`, `Dog` extends `Animal`.\n\n## What if\n\n- Parent has no empty constructor and `super()` is not called — compile error.\n- `private` field in a subclass — inaccessible.\n- Override without `@Override` and with a typo — creates a **new** method.\n\n## Common mistake\n\nForget `@Override`. Typo `speakk` — creates a new method, the parent one is not overridden. `@Override` catches it.\n\n## Summary\n\n- `class B extends A` — inheritance\n- `super(...)` — parent constructor\n- `@Override` — override check\n- `private` is not inherited\n- Override changes behavior",
+      "questions": [
+        { "text": "What does `extends` do?", "options": ["Copies a class", "Inheritance", "Creates an object", "Imports"], "answer": 1, "explanation": "`class B extends A` — B inherits A." },
+        { "text": "What does `super(name)` do?", "options": ["Creates an Animal", "Calls the parent constructor", "Prints", "Returns"], "answer": 1, "explanation": "Parent constructor. First line." },
+        { "text": "Can a subclass access a `private` field of the parent directly?", "options": ["Yes", "No, only via methods", "Via `super.`", "If public"], "answer": 1, "explanation": "`private` — only inside its own class." },
+        { "text": "What is `@Override` for?", "options": ["Mandatory", "Confirms the method overrides a parent method", "Creates new", "Faster"], "answer": 1, "explanation": "Without `@Override`, a typo creates a new method; with it — compile error." },
+        { "text": "Parent has no empty constructor and `super(...)` is missing. What happens?", "options": ["Works", "Compile error", "Created with null", "Created with 0"], "answer": 1, "explanation": "The compiler requires an explicit call." }
+      ],
+      "practice": {
+        "description": "Hierarchy:\n- `Animal` with `String name`, constructor, `void speak()` → `\"...\"`\n- `Dog extends Animal` — overrides `speak`, prints `\"<name>: woof\"`\n- `Cat extends Animal` — `\"<name>: meow\"`\n\nIn `main`:\n- `Dog(\"Rex\")`, `Cat(\"Murka\")`\n- call `speak()` on each\n\n```\nRex: woof\nMurka: meow\n```",
+        "starter": "class Animal {\n    // TODO\n}\n\nclass Dog extends Animal {\n    // TODO\n}\n\nclass Cat extends Animal {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Rex: woof\nMurka: meow",
+        "must_contain": ["class Animal", "class Dog extends Animal", "class Cat extends Animal", "super(", "@Override", "void speak", "System.out.println"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "title": "Polymorphism",
+      "theory": "## Idea\n\nA parent reference can point to a subclass object:\n\n```java\nAnimal a = new Dog(\"Rex\");\na.speak(); // woof — Dog's method runs\n```\n\nWhat prints is decided by the **actual** type of the object (`Dog`), not the reference type. This is **polymorphism**.\n\n## Why\n\nAn array of \"animals\" — dogs, cats, anything:\n\n```java\nAnimal[] zoo = { new Dog(\"Rex\"), new Cat(\"Murka\") };\nfor (Animal a : zoo) a.speak();\n// Rex: woof\n// Murka: meow\n```\n\nOne call — different implementations. No \"if this is Dog then...\".\n\n## What the reference sees\n\nOnly methods **declared in the parent**. `a.wagTail()` for `Animal a = new Dog(...)` — compile error: `Animal` has no `wagTail`.\n\n## Casting\n\n```java\nif (a instanceof Dog) {\n    Dog d = (Dog) a;\n    d.wagTail();\n}\n```\n\n`instanceof` — type check before the cast.\n\n## What if\n\n- Call a method that is not on the parent via a parent reference — error.\n- `(Dog) a` without `instanceof`, and `a` is not `Dog` — `ClassCastException`.\n- `Animal[]` with a `Circle` (not a subclass) — compile error.\n\n## Common mistake\n\n`Animal a = new Animal(\"X\"); a.speak()` — if `speak` is abstract, `Animal` cannot be created. If it is concrete, it works. Check the type before casting.\n\n## Summary\n\n- Parent reference → subclass object\n- Method — by actual type\n- Reference sees only parent methods\n- `instanceof` + `(Type)` — cast\n- `ClassCastException` on bad cast",
+      "questions": [
+        { "text": "What is printed?\n```java\nclass A { void m() { System.out.println(\"A\"); } }\nclass B extends A { void m() { System.out.println(\"B\"); } }\nA x = new B();\nx.m();\n```", "options": ["A", "B", "Error", "AB"], "answer": 1, "explanation": "Reference A, object B — B's method runs." },
+        { "text": "Can `Animal a = new Dog(...)` call `wagTail` (only on Dog)?", "options": ["Yes", "No, need `(Dog) a`", "Only via `super`", "Only in main"], "answer": 1, "explanation": "The reference sees only Animal members." },
+        { "text": "What does `a instanceof Dog` do?", "options": ["Creates Dog", "Checks whether the object is Dog", "Casts", "Calls"], "answer": 1, "explanation": "Returns boolean, safe check before casting." },
+        { "text": "What happens on `(Dog) a` when `a` is a `Cat`?", "options": ["Works", "ClassCastException", "null", "Returns null"], "answer": 1, "explanation": "Cast to an incompatible type — exception." },
+        { "text": "Why polymorphism?", "options": ["Pretty", "One call — different behavior by actual type", "Speed", "Inheritance"], "answer": 1, "explanation": "`for (Animal a : zoo) a.speak()` — uniform interface." }
+      ],
+      "practice": {
+        "description": "Create `Shape` with `double area()` (returns `0`), and subclasses:\n- `Circle` — `double r`, `area = 3.14 * r * r`\n- `Square` — `double side`, `area = side * side`\n\nIn `main`:\n- `Shape[] shapes = { new Circle(2), new Square(3) };`\n- in `for-each` output `Area: <area>`\n\n```\nArea: 12.56\nArea: 9.0\n```",
+        "starter": "class Shape {\n    // TODO\n}\n\nclass Circle extends Shape {\n    // TODO\n}\n\nclass Square extends Shape {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Area: 12.56\nArea: 9.0",
+        "must_contain": ["class Shape", "extends Shape", "double area", "@Override", "Shape[]", "for (Shape", "System.out.println"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "title": "Abstract Classes and Interfaces",
+      "theory": "## Abstract class\n\nA parent that **cannot be instantiated**. A template for subclasses.\n\n```java\nabstract class Shape {\n    abstract double area();\n}\n\nclass Square extends Shape {\n    double side;\n    Square(double s) { side = s; }\n    @Override double area() { return side * side; }\n}\n\n// Shape s = new Shape(); // error\nShape s = new Square(3); // ok\n```\n\n`abstract` on a method — \"implement yourself\". On a class — \"cannot instantiate\".\n\n## Why\n\n`Shape` without a concrete form is meaningless. Abstraction forces subclasses to **implement** `area()`.\n\n## Interface\n\nA contract. A class can implement **many** interfaces.\n\n```java\ninterface Flyable {\n    void fly();\n}\n\ninterface Swimmable {\n    void swim();\n}\n\nclass Duck implements Flyable, Swimmable {\n    public void fly() { System.out.println(\"flying\"); }\n    public void swim() { System.out.println(\"swimming\"); }\n}\n```\n\nMethods are `public abstract` by default.\n\n## Class vs interface\n\n- **Abstract class** — has fields, constructors, some methods with bodies. Only one parent.\n- **Interface** — a method contract. Any number of implementations.\n- Need state — abstract class. Need only obligations — interface.\n\n## default in interfaces (Java 8+)\n\n```java\ninterface Greeter {\n    default void hello() { System.out.println(\"hi\"); }\n}\n```\n\nA body in an interface. Allows adding methods without breaking implementations.\n\n## What if\n\n- `new Shape()` for `abstract` — error.\n- A subclass does not implement an abstract method — must be `abstract` itself, or compile error.\n- Interface method without `public` in the implementation — error (need `public`).\n\n## Common mistake\n\nImplementation method without `public`. The interface requires `public`. `void area()` instead of `public void area()` — compile error.\n\n## Summary\n\n- `abstract class` — cannot instantiate\n- `abstract method` — subclasses must implement\n- `interface` — contract\n- `implements A, B` — any number\n- `default` — method with body in an interface",
+      "questions": [
+        { "text": "Can you instantiate an abstract class?", "options": ["Yes", "No", "Only in main", "Via new"], "answer": 1, "explanation": "`new Shape()` for `abstract` — compile error." },
+        { "text": "How many interfaces can a class implement?", "options": ["One", "Two", "Any number", "Zero"], "answer": 2, "explanation": "`implements A, B, C`." },
+        { "text": "What is a subclass of an abstract class required to do?", "options": ["Nothing", "Implement all abstract methods", "Add a constructor", "Override everything"], "answer": 1, "explanation": "Otherwise it too must be abstract." },
+        { "text": "How does an interface differ from an abstract class?", "options": ["Nothing", "Interface — a contract without state; any number of implementations", "Faster", "Only for main"], "answer": 1, "explanation": "Abstract class has fields/constructor and one parent; interface has none." },
+        { "text": "What happens when an interface method is implemented without `public`?", "options": ["Works", "Compile error", "Slower", "Warning"], "answer": 1, "explanation": "Interface methods must be `public` in the implementation." }
+      ],
+      "practice": {
+        "description": "Interface `Shape` with `double area()`. Implement:\n- `Triangle` — `double base`, `double height`, `area = base * height / 2`\n- `Circle` — `double r`, `area = 3.14 * r * r`\n\nIn `main`:\n- `Shape[] shapes = { new Triangle(4, 5), new Circle(2) };`\n- output `Area: <area>`\n\n```\nArea: 10.0\nArea: 12.56\n```",
+        "starter": "interface Shape {\n    // TODO\n}\n\nclass Triangle implements Shape {\n    // TODO\n}\n\nclass Circle implements Shape {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Area: 10.0\nArea: 12.56",
+        "must_contain": ["interface Shape", "implements Shape", "double area", "public double area", "Shape[]", "for (Shape", "System.out.println"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "title": "ArrayList",
+      "theory": "## Why\n\nAn array has fixed length. A list grows and shrinks.\n\n```java\nimport java.util.ArrayList;\n\nArrayList<String> list = new ArrayList<>();\nlist.add(\"Anna\");\nlist.add(\"Ivan\");\nSystem.out.println(list); // [Anna, Ivan]\n```\n\n`<String>` — generic: \"a list of strings\". Type-checked by the compiler.\n\n## Methods\n\n```java\nlist.add(\"x\");        // append\nlist.add(0, \"first\"); // insert at index\nlist.get(0);          // by index\nlist.size();          // length (method!)\nlist.set(1, \"new\");   // replace\nlist.remove(0);       // by index\nlist.remove(\"x\");     // by value\nlist.contains(\"x\");   // contains\nlist.isEmpty();       // empty\n```\n\n## Traversal\n\n```java\nfor (String s : list) {\n    System.out.println(s);\n}\nfor (int i = 0; i < list.size(); i++) {\n    System.out.println(list.get(i));\n}\n```\n\n## Primitives\n\n`ArrayList<int>` — illegal. Only `ArrayList<Integer>`. Java autoboxes:\n\n```java\nArrayList<Integer> nums = new ArrayList<>();\nnums.add(5);        // int → Integer\nint x = nums.get(0); // Integer → int\n```\n\n`int` → `Integer`, `double` → `Double`, `char` → `Character`.\n\n## What if\n\n- `list.get(100)` on a short list — `IndexOutOfBoundsException`.\n- `list.remove(0)` vs `list.remove(Integer.valueOf(0))` — by index vs by value.\n- `ArrayList<int>` — compile error.\n\n## Common mistake\n\n`list.remove(0)` removes **by index**. To remove the value 0 — `list.remove(Integer.valueOf(0))`.\n\n## Summary\n\n- `import java.util.ArrayList;`\n- `new ArrayList<>()`, `<String>` / `<Integer>`\n- `add`, `get`, `size()`, `set`, `remove`, `contains`\n- `size()` — method; `length` on arrays — field\n- Primitives via wrappers",
+      "questions": [
+        { "text": "How to declare a list of strings?", "options": ["ArrayList list = new ArrayList();", "ArrayList<String> list = new ArrayList<>();", "String[] list = new ArrayList<>();", "list<String> = new ArrayList();"], "answer": 1, "explanation": "With `<String>` generic." },
+        { "text": "What does `list.size()` return for `[a, b, c]`?", "options": ["2", "3", "4", "length"], "answer": 1, "explanation": "`size()` — method." },
+        { "text": "How to declare `ArrayList<Integer>`?", "options": ["ArrayList<int> list", "ArrayList<Integer> list", "ArrayList<integer> list", "ArrayList[Integer] list"], "answer": 1, "explanation": "Generics do not accept primitives." },
+        { "text": "What does `list.remove(0)` do?", "options": ["Removes the value 0", "Removes the element at index 0", "Clears", "Returns the first"], "answer": 1, "explanation": "`remove(int)` — by index." },
+        { "text": "What happens on `list.get(100)` if `size()` = 3?", "options": ["null", "0", "IndexOutOfBoundsException", "Last"], "answer": 2, "explanation": "Indices are 0..2." }
+      ],
+      "practice": {
+        "description": "Create `ArrayList<String>`, add `\"apple\"`, `\"banana\"`, `\"cherry\"`. Output:\n```\nList: [apple, banana, cherry]\nSize: 3\nFirst: apple\nHas banana: true\nAfter removal: [apple, cherry]\n```\n\nThe last — after `list.remove(\"banana\")`.",
+        "starter": "import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<String> list = new ArrayList<>();\n        // TODO\n    }\n}\n",
+        "expected": "List: [apple, banana, cherry]\nSize: 3\nFirst: apple\nHas banana: true\nAfter removal: [apple, cherry]",
+        "must_contain": ["import java.util.ArrayList", "new ArrayList<>", ".add(", ".size()", ".get(0)", ".contains(", ".remove(", "System.out.println"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "title": "HashMap",
+      "theory": "## Dictionary\n\n`HashMap<K, V>` — key-value pairs. Like `dict` in Python.\n\n```java\nimport java.util.HashMap;\n\nHashMap<String, Integer> ages = new HashMap<>();\nages.put(\"Anna\", 25);\nages.put(\"Ivan\", 30);\nSystem.out.println(ages.get(\"Anna\")); // 25\n```\n\n## Methods\n\n```java\nmap.put(\"Anna\", 26);      // add/update\nmap.get(\"Anna\");           // value (null if absent)\nmap.getOrDefault(\"X\", 0); // value or default\nmap.containsKey(\"Anna\");   // has key\nmap.containsValue(26);    // has value\nmap.remove(\"Anna\");       // remove\nmap.size();               // pairs\nmap.keySet();             // key set\nmap.values();             // values\nmap.isEmpty();\n```\n\n## Traversal\n\n```java\nfor (String key : map.keySet()) {\n    System.out.println(key + \" = \" + map.get(key));\n}\nfor (var entry : map.entrySet()) {\n    System.out.println(entry.getKey() + \" = \" + entry.getValue());\n}\n```\n\n## null\n\n```java\nmap.get(\"Peter\");            // null\nmap.getOrDefault(\"Peter\", 0); // 0\n```\n\nNot sure the key exists — `getOrDefault` or `containsKey`. Otherwise `NullPointerException`.\n\n## Order\n\n`HashMap` **does not preserve** insertion order. Need order — `LinkedHashMap` (insertion) or `TreeMap` (by key).\n\n## What if\n\n- `map.get(\"missing\")` returns `null`, not 0.\n- `null + 1` — `NullPointerException`.\n- `HashMap<String, int>` — error, `<Integer>`.\n\n## Common mistake\n\n`map.get(\"x\") + 1` — if the key is absent, `null + 1` crashes. `getOrDefault(\"x\", 0) + 1` works.\n\n## Summary\n\n- `import java.util.HashMap;`\n- `put`, `get`, `getOrDefault`, `containsKey`, `remove`\n- `null` for a missing key\n- `keySet()`, `entrySet()` for traversal\n- Order is not guaranteed",
+      "questions": [
+        { "text": "How to add a pair?", "options": ["map.add(k, v);", "map.put(k, v);", "map[k] = v;", "map.insert(k, v);"], "answer": 1, "explanation": "`put` — add/update." },
+        { "text": "What does `map.get(\"missing\")` return?", "options": ["0", "null", "\"\"", "Exception"], "answer": 1, "explanation": "`null` for a missing key." },
+        { "text": "Does `HashMap` preserve insertion order?", "options": ["Yes", "No", "Only for strings", "Only for int"], "answer": 1, "explanation": "No. Use `LinkedHashMap`/`TreeMap` for order." },
+        { "text": "What does `getOrDefault(\"X\", 0)` return if X is absent?", "options": ["null", "0", "Exception", "\"X\""], "answer": 1, "explanation": "The default instead of null." },
+        { "text": "What happens on `map.get(\"X\") + 1` if X is absent?", "options": ["1", "0", "NullPointerException", "null"], "answer": 2, "explanation": "`null + 1` — exception. Use `getOrDefault`." }
+      ],
+      "practice": {
+        "description": "Create `HashMap<String, Integer>` with grades:\n- `\"Anna\" → 5`, `\"Ivan\" → 4`, `\"Peter\" → 3`\n\nOutput:\n```\nAnna: 5\nIvan: 4\nPeter: 3\nSize: 3\nMary (default): 0\n```\n\nThe last — `getOrDefault(\"Mary\", 0)`.",
+        "starter": "import java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        HashMap<String, Integer> grades = new HashMap<>();\n        // TODO\n    }\n}\n",
+        "expected": "Anna: 5\nIvan: 4\nPeter: 3\nSize: 3\nMary (default): 0",
+        "must_contain": ["import java.util.HashMap", "new HashMap<>", ".put(", ".get(", ".size()", "getOrDefault", "System.out.println"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "title": "Exceptions: try / catch",
+      "theory": "## What is an exception\n\nA runtime error. Without handling — the program crashes and prints a **stack trace**:\n\n```\nException in thread \"main\" java.lang.ArithmeticException: / by zero\n    at Main.main(Main.java:4)\n```\n\n## try / catch\n\n```java\ntry {\n    int result = 10 / 0;\n} catch (ArithmeticException e) {\n    System.out.println(\"Error: \" + e.getMessage());\n}\nSystem.out.println(\"Continuing\");\n```\n\nBody in `try`. Exception — in `catch`. Without `catch` — the program crashes.\n\n## finally\n\n```java\ntry {\n    // risky\n} catch (Exception e) {\n    // handled\n} finally {\n    System.out.println(\"always runs\");\n}\n```\n\n`finally` — **always**.\n\n## Typical exceptions\n\n- `ArithmeticException` — division by zero\n- `NullPointerException` — working with `null`\n- `ArrayIndexOutOfBoundsException` — out of bounds\n- `NumberFormatException` — `Integer.parseInt(\"abc\")`\n- `InputMismatchException` — `Scanner` gets wrong type\n\n## Multiple catch\n\n```java\ntry { }\ncatch (NumberFormatException e) { }\ncatch (ArithmeticException e) { }\n```\n\nFirst match. More specific first.\n\n## What if\n\n- No `catch` — the program crashes on the exception.\n- `catch (Exception e)` catches all — loses specificity.\n- Empty `catch { }` — the error is silently eaten; later you cannot figure out what broke.\n\n## Common mistake\n\nEmpty `catch` (`catch (Exception e) { }`). All errors are swallowed. At least `e.printStackTrace()` or a message.\n\n## Summary\n\n- `try { } catch (Type e) { }`\n- `finally` — always\n- Different types — different catch\n- `e.getMessage()` — the message\n- Do not swallow with empty catch",
+      "questions": [
+        { "text": "What does `catch` do?", "options": ["Prevents", "Handles an exception", "Ends program", "Prints"], "answer": 1, "explanation": "`try` — risky code, `catch` — reaction." },
+        { "text": "When does `finally` run?", "options": ["Only on error", "Only on success", "Always", "Never"], "answer": 2, "explanation": "`finally` — guaranteed." },
+        { "text": "What will be printed?\n```java\ntry { System.out.println(10 / 0); }\ncatch (ArithmeticException e) { System.out.println(\"err\"); }\nSystem.out.println(\"after\");\n```", "options": ["Crashes", "err\\nafter", "after", "err"], "answer": 1, "explanation": "Caught, prints err, then after." },
+        { "text": "Which exception on `Integer.parseInt(\"abc\")`?", "options": ["ArithmeticException", "NumberFormatException", "NullPointerException", "ClassCastException"], "answer": 1, "explanation": "String not parsed as a number — NumberFormatException." },
+        { "text": "What is wrong with an empty `catch { }`?", "options": ["Slow", "Errors are silently lost", "Does not compile", "Only for unchecked"], "answer": 1, "explanation": "You will not see what broke." }
+      ],
+      "practice": {
+        "description": "Array `int[] nums = {10, 0, 5};`. Loop `for (int i = 0; i <= 3; i++)`:\n- `100 / nums[i]`\n- `ArrayIndexOutOfBoundsException` → `No index <i>`\n- `ArithmeticException` → `Division by zero`\n- otherwise → `100 / <nums[i]> = <result>`\n\n```\n100 / 10 = 10\nDivision by zero\n100 / 5 = 20\nNo index 3\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int[] nums = {10, 0, 5};\n        // TODO\n    }\n}\n",
+        "expected": "100 / 10 = 10\nDivision by zero\n100 / 5 = 20\nNo index 3",
+        "must_contain": ["try", "catch", "ArithmeticException", "ArrayIndexOutOfBoundsException", "for", "System.out.println"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "Custom Exceptions, throws",
+      "theory": "## Custom exception\n\n```java\nclass AgeException extends Exception {\n    AgeException(String message) {\n        super(message);\n    }\n}\n```\n\nSubclass `Exception` (checked) or `RuntimeException` (unchecked). `checked` — the compiler forces declaration or catch.\n\n## throw\n\n```java\nstatic void setAge(int age) throws AgeException {\n    if (age < 0) {\n        throw new AgeException(\"age cannot be negative\");\n    }\n    System.out.println(\"OK: \" + age);\n}\n```\n\n`throw new ...` — **throw**. `throws` in the signature — **warn**.\n\n## Caller obligations\n\n```java\ntry {\n    setAge(-5);\n} catch (AgeException e) {\n    System.out.println(\"Error: \" + e.getMessage());\n}\n```\n\nIf `throws AgeException` (checked) — the caller must catch or declare `throws`.\n\n## checked vs unchecked\n\n- `RuntimeException` and subclasses (`NullPointerException`, `ArithmeticException`) — **unchecked**. No `throws` required.\n- `Exception` (not `RuntimeException`) — **checked**. Must declare/catch.\n\n## Inheritance\n\n`class ValidationException extends RuntimeException` — no obligation to catch. Often more convenient.\n\n## e.getMessage()\n\nReturns what you passed to `super(message)`.\n\n## What if\n\n- `throw` without `throws` for a checked exception — compile error.\n- Caller does not catch a checked exception — compile error.\n- `RuntimeException` without `throws` — fine, the compiler does not require it.\n\n## Common mistake\n\nSubclass `Exception` but do not declare `throws` and do not catch — compile error. For simple cases use `extends RuntimeException`.\n\n## Summary\n\n- `class X extends Exception/RuntimeException`\n- `throw new X(...)` — throw\n- `throws X` — declare (checked)\n- Checked — mandatory, unchecked — not\n- `getMessage()` — text",
+      "questions": [
+        { "text": "How does `throw` differ from `throws`?", "options": ["Nothing", "`throw` — throw, `throws` — declare", "Reverse", "Both same"], "answer": 1, "explanation": "`throw new X()` — in code. `throws X` — in signature." },
+        { "text": "Must the caller catch `RuntimeException`?", "options": ["Yes", "No — unchecked", "Only in main", "Only with throws"], "answer": 1, "explanation": "Unchecked — not required." },
+        { "text": "How to create a checked exception?", "options": ["extends Error", "extends Exception", "extends Throwable", "implements Exception"], "answer": 1, "explanation": "`extends Exception` — checked." },
+        { "text": "What does `e.getMessage()` return?", "options": ["Class", "String passed to `super(message)`", "Stack", "null"], "answer": 1, "explanation": "The message set at creation." },
+        { "text": "What happens calling a method with `throws IOException` without try/catch?", "options": ["Works", "Compile error", "NullPointer", "Ignored"], "answer": 1, "explanation": "Checked — you must catch or declare." }
+      ],
+      "practice": {
+        "description": "Create `class NegativeException extends RuntimeException` with a `(String)` constructor passing to `super`.\n\nMethod `static void check(int n)`:\n- if `n < 0` — `throw new NegativeException(\"negative: \" + n)`\n- otherwise prints `OK: <n>`\n\nIn `main`:\n- `check(5)`\n- `check(-3)` in `try/catch (NegativeException e)`, print `Error: <e.getMessage()>`\n\n```\nOK: 5\nError: negative: -3\n```",
+        "starter": "class NegativeException extends RuntimeException {\n    // TODO\n}\n\npublic class Main {\n    static void check(int n) {\n        // TODO\n    }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "OK: 5\nError: negative: -3",
+        "must_contain": ["class NegativeException extends RuntimeException", "super(", "throw new NegativeException", "try", "catch", "getMessage", "System.out.println"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "title": "StringBuilder and String.join",
+      "theory": "## Concatenation problem\n\n`String` is immutable. Each `+=` creates a new string:\n\n```java\nString s = \"\";\nfor (int i = 0; i < 1000; i++) {\n    s += i;  // 1000 new strings\n}\n```\n\nOn large data — slow.\n\n## StringBuilder\n\nMutable string. `append` writes to the buffer:\n\n```java\nStringBuilder sb = new StringBuilder();\nsb.append(\"Hello\");\nsb.append(\", \");\nsb.append(\"world\");\nSystem.out.println(sb.toString()); // Hello, world\n```\n\n`toString()` — get the final `String`.\n\n## Methods\n\n```java\nsb.append(42);       // + \"42\"\nsb.insert(0, \"> \");  // insert\nsb.deleteCharAt(0);  // delete char\nsb.reverse();        // reverse\nsb.length();         // length\nsb.toString();       // to String\n```\n\n## Building a list\n\n```java\nStringBuilder sb = new StringBuilder();\nString[] words = {\"apple\", \"banana\", \"cherry\"};\nfor (int i = 0; i < words.length; i++) {\n    if (i > 0) sb.append(\", \");\n    sb.append(words[i]);\n}\nSystem.out.println(sb); // apple, banana, cherry\n```\n\n## String.join\n\n```java\nString[] parts = {\"a\", \"b\", \"c\"};\nString joined = String.join(\"-\", parts);\nSystem.out.println(joined); // a-b-c\n```\n\n`String.join(separator, elements...)`. Works with arrays and `Iterable` (`ArrayList`).\n\n## When what\n\n- Fixed set — `+` or `String.join`.\n- In a loop with conditions — `StringBuilder`.\n- Few iterations — `+` is fine.\n\n## What if\n\n- `+=` in a loop for 10000 — slow.\n- `String.join` on numbers without `String.valueOf` — error (needs strings).\n- Forget `toString()` — mostly works, but convert if a method needs `String`.\n\n## Common mistake\n\n`+=` in a long loop. `StringBuilder` — O(n) vs O(n²) for `+=`.\n\n## Summary\n\n- `StringBuilder` — for building in a loop\n- `append` — append\n- `toString()` — to String\n- `String.join(sep, arr)` — fast joiner\n- `+=` in a loop — slow",
+      "questions": [
+        { "text": "Why StringBuilder?", "options": ["For numbers", "For efficient string building in loops", "For arrays", "Replaces String"], "answer": 1, "explanation": "`+=` in a loop is O(n²), `append` is O(n)." },
+        { "text": "What does `sb.toString()` do?", "options": ["Clears", "Returns a String", "Prints", "Duplicates"], "answer": 1, "explanation": "The buffer content as a `String`." },
+        { "text": "What does `String.join(\", \", \"a\", \"b\", \"c\")` return?", "options": ["abc", "a, b, c", "a-b-c", "Error"], "answer": 1, "explanation": "Separated by the delimiter." },
+        { "text": "What happens with 10000 `+=` in a loop on String?", "options": ["Fast", "Slowdown", "Error", "Overflow"], "answer": 1, "explanation": "Each `+=` creates a new String. Use StringBuilder for large data." },
+        { "text": "What does `sb.reverse()` do?", "options": ["Removes", "Reverses the buffer content", "Copies", "Counts"], "answer": 1, "explanation": "Reverses the order of characters in the buffer." }
+      ],
+      "practice": {
+        "description": "Array `String[] words = {\"Java\", \"Python\", \"C++\", \"Go\"};`. Via `StringBuilder` build a string with separator `, `:\n```\nLanguages: Java, Python, C++, Go\n```\n\nAlso via `String.join`:\n```\nVia join: Java | Python | C++ | Go\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        String[] words = {\"Java\", \"Python\", \"C++\", \"Go\"};\n        // TODO\n    }\n}\n",
+        "expected": "Languages: Java, Python, C++, Go\nVia join: Java | Python | C++ | Go",
+        "must_contain": ["StringBuilder", ".append(", "toString()", "String.join", "System.out.println"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "title": "Final Project",
+      "theory": "## Putting it together\n\nNo new constructs. Test: classes, constructors, `private`, getters, `ArrayList`, loops, `String.format`/`printf`.\n\n## Approach\n\n1. Read the task, list the **entities** (classes).\n2. For each — fields and methods.\n3. In `main` — data, fill, output.\n\n## Model example\n\n```java\nclass Product {\n    private String name;\n    private double price;\n    public Product(String name, double price) {\n        this.name = name;\n        this.price = price;\n    }\n    public String getName() { return name; }\n    public double getPrice() { return price; }\n}\n```\n\n`ArrayList<Product>` — cart.\n\n## Formatting\n\n```java\nSystem.out.printf(\"%s: %.2f%n\", p.getName(), p.getPrice());\n```\n\n`%.2f` — money. `%n` — newline.\n\n## Checks\n\n- Fields `private`? Getters present?\n- Constructor initializes everything?\n- Output **exactly** matches expected?\n- No `println(\"answer\")` instead of a calculation?\n\n## What if\n\n- Field `public` — lose points for encapsulation.\n- `println` without formatting — `100.0` instead of `100.00`, test fails.\n- Forget `%n` — lines stick together.\n\n## Common mistake\n\nForget `%.2f` — output `100.0` instead of `100.00`. `expected` is compared exactly.\n\n## Summary\n\n- Model: class + constructor + `private` + getters\n- Data — in `ArrayList`\n- Traversal + `printf` with `%.2f`\n- Output must match\n- No `print(\"answer\")`",
+      "questions": [
+        { "text": "How to properly declare a field in a class?", "options": ["public double price;", "private double price; + getter", "double price;", "static double price;"], "answer": 1, "explanation": "Encapsulation." },
+        { "text": "How to traverse `ArrayList<Product>` for a sum?", "options": ["for (int i = 0; i < list.size(); i++)", "for (Product p : list)", "both", "while"], "answer": 2, "explanation": "Both work." },
+        { "text": "How to print a price with two decimals?", "options": ["println(price)", "printf(\"%.2f%n\", price)", "println((int)price)", "Math.round"], "answer": 1, "explanation": "`%.2f` — 2 decimals." },
+        { "text": "What happens with `println` on `100.0` instead of `printf`?", "options": ["Matches expected `100.00`", "Does not match — output `100.0`", "Compile error", "Same"], "answer": 1, "explanation": "`100.0` ≠ `100.00` in string comparison." },
+        { "text": "Why `private` in the model?", "options": ["Prettier", "Encapsulation, access via getters", "Speed", "Mandatory"], "answer": 1, "explanation": "OOP standard, expected by the checker." }
+      ],
+      "practice": {
+        "description": "Class `Product`:\n- `private String name`, `private double price`\n- constructor `Product(String name, double price)`\n- getters `getName()`, `getPrice()`\n\nIn `main`:\n- `ArrayList<Product> cart = new ArrayList<>();`\n- add: `(\"Bread\", 45.5)`, `(\"Milk\", 89.9)`, `(\"Cheese\", 320.0)`\n- in `for-each` via `printf` output `\"<name>: <price with 2 decimals>\\n\"`\n- after the loop — sum and `printf(\"Total: %.2f%n\", sum)`\n\n```\nBread: 45.50\nMilk: 89.90\nCheese: 320.00\nTotal: 455.40\n```",
+        "starter": "import java.util.ArrayList;\n\nclass Product {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Bread: 45.50\nMilk: 89.90\nCheese: 320.00\nTotal: 455.40",
+        "must_contain": ["private String name", "private double price", "public Product(", "getName", "getPrice", "new ArrayList", ".add(", "for (Product", "%.2f", "System.out.printf"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "title": "Lambda Expressions",
+      "theory": "## What a lambda is\n\nA lambda is an **anonymous function** that can be passed as a value.\n\n```java\nRunnable r = () -> System.out.println(\"Hi\");\nr.run(); // Hi\n```\n\nBefore Java 8 this needed an anonymous class — 5 lines instead of one.\n\n## Syntax\n\n```java\n() -> 42                       // no parameters\nx -> x * 2                     // one parameter, no parens\n(a, b) -> a + b                // several, parens required\n(a, b) -> { return a + b; }    // block body, explicit return\n```\n\n- `->` — arrow, separates parameters from body\n- One parameter — parens optional\n- One expression — implicit `return`\n- Block `{ }` — explicit `return`, `;` at the end\n\n## Functional interface\n\nA lambda implements a **functional interface** — an interface with **one** abstract method. Standard ones in `java.util.function`:\n\n- `Function<T, R>` — `R apply(T t)`: transforms\n- `Consumer<T>` — `void accept(T t)`: consumes\n- `Supplier<T>` — `T get()`: supplies\n- `Predicate<T>` — `boolean test(T t)`: tests\n- `BiFunction<T, U, R>` — two arguments\n\n## Example\n\n```java\nimport java.util.function.Function;\nimport java.util.function.Consumer;\nimport java.util.function.Predicate;\n\nFunction<Integer, Integer> square = x -> x * x;\nSystem.out.println(square.apply(5)); // 25\n\nConsumer<String> printer = s -> System.out.println(s);\nprinter.accept(\"hello\"); // hello\n\nPredicate<Integer> isEven = n -> n % 2 == 0;\nSystem.out.println(isEven.test(4)); // true\n```\n\n## Lambda vs anonymous class\n\nBefore:\n\n```java\nRunnable r = new Runnable() {\n    @Override\n    public void run() {\n        System.out.println(\"hi\");\n    }\n};\n```\n\nAfter:\n\n```java\nRunnable r = () -> System.out.println(\"hi\");\n```\n\n## Variable capture\n\nA lambda may use local variables if they are **effectively final**:\n\n```java\nint x = 10;\nRunnable r = () -> System.out.println(x); // ok\n// x = 20; // compile error\n```\n\n## What if\n\n- Lambda without context (`var f = x -> x;`) — error, needs a functional interface type.\n- Lambda with block and no `return` — error if a value is expected.\n- Use a lambda for an interface with two abstract methods — error.\n\n## Common mistake\n\n`x -> x * 2;` — trailing `;` makes it a statement without a type. Need `Function<Integer, Integer> f = x -> x * 2;`.\n\n## Summary\n\n- Lambda — anonymous function\n- `(a, b) -> a + b` — syntax\n- Functional interface — one abstract method\n- `Function`, `Consumer`, `Supplier`, `Predicate`\n- Capture — effectively final only",
+      "questions": [
+        { "text": "What is a lambda?", "options": ["Anonymous class", "Anonymous function", "Interface", "Method"], "answer": 1, "explanation": "Anonymous function implementing a functional interface." },
+        { "text": "How many abstract methods in a functional interface?", "options": ["One", "Two", "Any", "None"], "answer": 0, "explanation": "One — otherwise lambda won't fit." },
+        { "text": "What does `Function<T, R>` do?", "options": ["Returns boolean", "Takes T, returns R", "Nothing", "Prints"], "answer": 1, "explanation": "Transformation." },
+        { "text": "What does `Consumer<T>` do?", "options": ["Returns T", "Takes T, returns nothing", "Takes two", "boolean"], "answer": 1, "explanation": "Consumer." },
+        { "text": "What does `Function<Integer, Integer> f = x -> x * 2; System.out.println(f.apply(5));` print?", "options": ["5", "10", "25", "Error"], "answer": 1, "explanation": "5 * 2 = 10." }
+      ],
+      "practice": {
+        "description": "Create:\n- `Function<Integer, Integer> square = x -> x * x;`\n- `Function<Integer, Integer> doubleIt = x -> x * 2;`\n\nOutput `square.apply(5)` and `doubleIt.apply(10)`.\n\nVisible text:\n```\n25\n20\n```",
+        "starter": "import java.util.function.Function;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: two Function + two println\n    }\n}\n",
+        "expected": "25\n20",
+        "must_contain": ["->", "Function<Integer", "square", "doubleIt", ".apply(", "System.out.println"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "title": "Method References",
+      "theory": "## What they are\n\n`::` — method reference. Short form of a lambda when the lambda **just calls** an existing method.\n\n```java\nFunction<String, Integer> len1 = s -> s.length();\nFunction<String, Integer> len2 = String::length;  // same\n```\n\n## Four kinds\n\n**Static method:**\n\n```java\nFunction<Integer, Integer> abs = Math::abs;\nSystem.out.println(abs.apply(-5)); // 5\n```\n\n**Instance method (bound):**\n\n```java\nConsumer<String> printer = System.out::println;\nprinter.accept(\"hi\"); // hi\n```\n\n`System.out` — specific object, `println` — method.\n\n**Instance method (unbound):**\n\n```java\nFunction<String, String> upper = String::toUpperCase;\nupper.apply(\"hello\"); // \"HELLO\"\n```\n\n`String::toUpperCase` — method called on the object **passed** to the lambda.\n\n**Constructor:**\n\n```java\nSupplier<ArrayList<String>> factory = ArrayList::new;\n```\n\n## When to use\n\nIf a lambda is just `x -> SomeClass.method(x)` or `x -> x.method()` — replace with `SomeClass::method`. Shorter and more readable.\n\n## When not\n\nIf the lambda has **logic** — only a lambda:\n\n```java\nFunction<Integer, Integer> f1 = x -> x * 2;      // cannot use `::`\nFunction<Integer, Integer> f2 = x -> x + 1;      // cannot\n```\n\n## What if\n\n- `String::toUpperCase` in a `Runnable` — error, signatures don't match.\n- Typo `String.toUpperCase` without `::` — won't compile.\n\n## Common mistake\n\nConfusing bound and unbound. `System.out::println` — on `out` object. `String::toUpperCase` — on the object passed in.\n\n## Summary\n\n- `::` — method reference\n- `Math::abs` — static\n- `System.out::println` — bound\n- `String::toUpperCase` — unbound\n- `ArrayList::new` — constructor\n- Only when the lambda just calls a method",
+      "questions": [
+        { "text": "What does `::` mean?", "options": ["Method reference", "Object creation", "Inheritance", "Error"], "answer": 0, "explanation": "Method reference." },
+        { "text": "Is `String::toUpperCase` shorter than `s -> s.toUpperCase()`?", "options": ["Faster", "Same, but shorter", "Different", "Error"], "answer": 1, "explanation": "Syntax sugar." },
+        { "text": "What does `System.out::println` mean?", "options": ["Reference to println", "Creates System.out", "Error", "Returns string"], "answer": 0, "explanation": "Bound reference." },
+        { "text": "When not to use `::`?", "options": ["Always ok", "If the lambda has logic", "Only for static", "Only for constructors"], "answer": 1, "explanation": "Only when lambda just calls a method." }
+      ],
+      "practice": {
+        "description": "Use method references:\n- `Function<String, String> upper = String::toUpperCase;`\n- `Consumer<String> printer = System.out::println;`\n\nOutput `upper.apply(\"hello\")` via `printer`.\n\nVisible text: `HELLO`",
+        "starter": "import java.util.function.Function;\nimport java.util.function.Consumer;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: String::toUpperCase + System.out::println\n    }\n}\n",
+        "expected": "HELLO",
+        "must_contain": ["::", "toUpperCase", "System.out::println"]
+      }
+    },
+    "28": {
+      "id": 28,
+      "title": "Stream API: map, filter",
+      "theory": "## What a Stream is\n\nA Stream is a **pipeline of data** with operations applied to it. Not a collection — a conveyor.\n\n```java\nList<Integer> nums = List.of(1, 2, 3, 4, 5);\nnums.stream()\n    .filter(n -> n % 2 == 0)\n    .forEach(System.out::println);\n// 2\n// 4\n```\n\n## Creating\n\n```java\nlist.stream()                              // from List\nStream.of(\"a\", \"b\", \"c\")                  // from elements\nArrays.stream(new int[]{1, 2, 3})          // from array\n```\n\n## filter\n\nKeep only matching. Takes a `Predicate<T>`:\n\n```java\nnums.stream().filter(n -> n > 2) // 3, 4, 5\n```\n\n## map\n\nTransform each. Takes a `Function<T, R>`:\n\n```java\nnums.stream().map(n -> n * 10) // 10, 20, 30\n```\n\n## Laziness\n\nIntermediate ops (`filter`, `map`) do **nothing** without a terminal op (`forEach`, `collect`, `count`).\n\n```java\nnums.stream().map(n -> n * 2);  // nothing happened\nnums.stream().map(n -> n * 2).forEach(System.out::println); // works\n```\n\n## Chain\n\n```java\nList<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\nnums.stream()\n    .filter(n -> n % 2 == 0)   // 2, 4, 6\n    .map(n -> n * 10)          // 20, 40, 60\n    .forEach(System.out::println);\n```\n\n## What if\n\n- Forget terminal — nothing happens.\n- Reuse a Stream — `IllegalStateException`, stream is one-shot.\n- Modify the collection while streaming — `ConcurrentModificationException`.\n\n## Common mistake\n\n`.forEach(n -> System.out.println(n * 2))` without `filter` — processes everything. Check the chain.\n\n## Summary\n\n- `stream()` — from a collection\n- `filter` — keep\n- `map` — transform\n- Intermediate — lazy\n- Terminal — triggers\n- Stream is one-shot",
+      "questions": [
+        { "text": "What does `filter` do?", "options": ["Transforms each", "Keeps matching", "Removes", "Counts"], "answer": 1, "explanation": "Predicate." },
+        { "text": "What does `map` do?", "options": ["Keeps", "Transforms each", "Counts", "Sums"], "answer": 1, "explanation": "Function." },
+        { "text": "What happens without a terminal op?", "options": ["Works", "Nothing happens", "Error", "One element"], "answer": 1, "explanation": "Lazy — no terminal, no run." },
+        { "text": "What does `List.of(1, 2, 3, 4).stream().filter(n -> n % 2 == 0).count()` print?", "options": ["1", "2", "3", "4"], "answer": 1, "explanation": "Evens 2 and 4 — 2." }
+      ],
+      "practice": {
+        "description": "Given `List<Integer> nums = List.of(1, 2, 3, 4, 5, 6);`.\n\nVia Stream: `filter` evens, `map` × 10, `forEach` println.\n\nVisible text:\n```\n20\n40\n60\n```",
+        "starter": "import java.util.List;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\n        // TODO\n    }\n}\n",
+        "expected": "20\n40\n60",
+        "must_contain": [".stream()", ".filter(", ".map(", ".forEach(", "System.out.println"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "title": "Stream API: reduce, collect",
+      "theory": "## Terminal operations\n\nTrigger the pipeline and return a result.\n\n- `forEach(Consumer)` — iterate\n- `count()` — number of elements\n- `findFirst()` — first in `Optional`\n- `anyMatch` / `allMatch` / `noneMatch` — boolean\n- `collect(Collector)` — gather\n- `reduce(start, BinaryOperator)` — fold\n\n## anyMatch, allMatch\n\n```java\nboolean anyEven = List.of(1, 2, 3).stream().anyMatch(n -> n % 2 == 0);\nSystem.out.println(anyEven); // true\n\nboolean allPositive = List.of(1, 2, 3).stream().allMatch(n -> n > 0);\nSystem.out.println(allPositive); // true\n```\n\n## collect + Collectors.toList\n\n```java\nimport java.util.stream.Collectors;\n\nList<Integer> doubled = List.of(1, 2, 3).stream()\n    .map(n -> n * 2)\n    .collect(Collectors.toList());\nSystem.out.println(doubled); // [2, 4, 6]\n```\n\n## reduce\n\nFold into one value:\n\n```java\nint sum = List.of(1, 2, 3, 4, 5).stream()\n    .reduce(0, (a, b) -> a + b);\nSystem.out.println(sum); // 15\n```\n\n- First argument — start\n- Second — operation\n\nFor numbers — shorter with `mapToInt(Integer::intValue).sum()`:\n\n```java\nint total = List.of(1, 2, 3).stream().mapToInt(n -> n).sum(); // 6\n```\n\n## List.of and Map.of\n\nFactories of immutable collections:\n\n```java\nList<String> list = List.of(\"a\", \"b\");\nMap<String, Integer> map = Map.of(\"a\", 1, \"b\", 2);\n```\n\nCannot modify — `UnsupportedOperationException` on `add`.\n\n## What if\n\n- `collect(Collectors.toList())` without `import` — compile error.\n- `reduce` without start — returns `Optional<T>`, otherwise `T`.\n- Modify `List.of` — `UnsupportedOperationException`.\n\n## Common mistake\n\n`collect(toList())` returns `List`. If you need `ArrayList` — `.collect(Collectors.toCollection(ArrayList::new))`.\n\n## Summary\n\n- Terminal: `forEach`, `count`, `collect`, `reduce`\n- `Collectors.toList()` — to a list\n- `reduce` — fold\n- `mapToInt().sum()` — numeric sum\n- `List.of` / `Map.of` — immutable",
+      "questions": [
+        { "text": "What does `collect(Collectors.toList())` do?", "options": ["Counts", "Collects into a List", "Filters", "Sorts"], "answer": 1, "explanation": "To a list." },
+        { "text": "What does `reduce` do?", "options": ["Splits", "Folds to one value", "Removes", "Duplicates"], "answer": 1, "explanation": "Accumulation." },
+        { "text": "What does `anyMatch` do?", "options": ["All match", "At least one matches", "None", "Counts"], "answer": 1, "explanation": "At least one true." },
+        { "text": "Can you modify `List.of(...)`?", "options": ["Yes", "No, UnsupportedOperationException", "Only add", "Only remove"], "answer": 1, "explanation": "Immutable." }
+      ],
+      "practice": {
+        "description": "Given `List<Integer> nums = List.of(1, 2, 3, 4, 5);`.\n\n1. Sum via `reduce(0, Integer::sum)`, output `15`.\n2. Doubled via `map` + `collect(Collectors.toList())`, output `[2, 4, 6, 8, 10]`.\n\n```\n15\n[2, 4, 6, 8, 10]\n```",
+        "starter": "import java.util.List;\nimport java.util.stream.Collectors;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5);\n        // TODO\n    }\n}\n",
+        "expected": "15\n[2, 4, 6, 8, 10]",
+        "must_contain": [".stream()", ".reduce(", ".map(", ".collect(", "Collectors.toList", "System.out.println"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "title": "Generics",
+      "theory": "## The problem\n\n`ArrayList` without a type stores `Object`. To retrieve — need a cast. Errors at runtime:\n\n```java\nArrayList list = new ArrayList();\nlist.add(\"hi\");\nint x = (int) list.get(0); // ClassCastException at runtime\n```\n\n## Solution: `<T>`\n\n```java\nArrayList<String> list = new ArrayList<>();\nlist.add(\"hi\");\nString s = list.get(0); // no cast\n```\n\nType checked by the **compiler**. Errors — before running.\n\n## Custom class\n\n```java\nclass Box<T> {\n    private T value;\n    Box(T value) { this.value = value; }\n    T get() { return value; }\n}\n\nBox<String> b = new Box<>(\"Hello\");\nBox<Integer> i = new Box<>(42);\n```\n\n`T` — type parameter. `new Box<>()` — type inferred from context.\n\n## Bound `<T extends Number>`\n\nIf you need number methods:\n\n```java\nclass NumericBox<T extends Number> {\n    T value;\n    NumericBox(T v) { value = v; }\n    double asDouble() { return value.doubleValue(); }\n}\n```\n\n`T extends Number` — only `Integer`, `Double` etc.\n\n## Multiple types\n\n```java\nclass Pair<K, V> {\n    K key; V value;\n    Pair(K k, V v) { key = k; value = v; }\n}\nPair<String, Integer> p = new Pair<>(\"a\", 1);\n```\n\n## No primitives\n\n`Box<int>` — error. Only `Box<Integer>`. Java boxes automatically.\n\n## List.of and Map.of\n\n```java\nList<String> list = List.of(\"a\", \"b\");\nMap<String, Integer> map = Map.of(\"a\", 1, \"b\", 2);\n```\n\nCannot modify.\n\n## What if\n\n- `Box<int>` — error.\n- `list.add(42)` in `List<String>` — compile error.\n- Forget `<T>` — back to `Object`, manual cast.\n\n## Common mistake\n\n`Box<String> b = new Box(\"hi\");` without `<>` — warning, but works. Write `new Box<>(\"hi\")`.\n\n## Summary\n\n- Generics — type safety\n- `<T>` — type parameter\n- `<T extends Number>` — bound\n- `<K, V>` — multiple\n- No primitives — wrappers only\n- `List.of` / `Map.of` — factories",
+      "questions": [
+        { "text": "What does `<T>` give?", "options": ["Speed", "Type safety", "Removal", "Error"], "answer": 1, "explanation": "Compile-time check." },
+        { "text": "Is `Box<int>` allowed?", "options": ["Yes", "No, only Integer", "Only for int", "Sometimes"], "answer": 1, "explanation": "Primitives don't work." },
+        { "text": "What does `<T extends Number>` do?", "options": ["Allows any", "Restricts to number types", "Removes", "Error"], "answer": 1, "explanation": "Only Number and subclasses." },
+        { "text": "Can you modify `List.of(...)`?", "options": ["Yes", "No, UnsupportedOperationException", "Only add", "Only first time"], "answer": 1, "explanation": "Immutable." }
+      ],
+      "practice": {
+        "description": "Create `class Box<T>` with constructor `Box(T value)` and `T get()`.\n\nCreate `Box<String>(\"Hello\")` and `Box<Integer>(42)`. Output both `get()`.\n\nVisible text:\n```\nHello\n42\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Hello\n42",
+        "must_contain": ["class Box<T>", "new Box<>", ".get()", "System.out.println"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "title": "Wildcards",
+      "theory": "## The problem\n\n`List<Integer>` is **not** a subtype of `List<Number>` — generics are invariant. This does not compile:\n\n```java\nvoid printAll(List<Number> list) { }\nprintAll(List.of(1, 2, 3)); // error: List<Integer> is not List<Number>\n```\n\n## `? extends T` — producer\n\nRead-only. Accepts `List<Integer>`, `List<Double>` etc. for `List<? extends Number>`:\n\n```java\nstatic double sumAll(List<? extends Number> nums) {\n    double s = 0;\n    for (Number n : nums) s += n.doubleValue();\n    return s;\n}\n\nSystem.out.println(sumAll(List.of(1, 2, 3)));      // 6.0\nSystem.out.println(sumAll(List.of(1.5, 2.5)));      // 4.0\n```\n\n**Read only.** Cannot add — type unknown.\n\n## `? super T` — consumer\n\nWrite-only. Accepts `List<Number>`, `List<Object>` for `List<? super Integer>`:\n\n```java\nstatic void fill(List<? super Integer> list) {\n    list.add(1);\n    list.add(2);\n}\n```\n\n**Write only.** Reading works but returns `Object`.\n\n## PECS\n\n**P**roducer **E**xtends, **C**onsumer **S**uper:\n- Read from a collection — `? extends T`\n- Write to a collection — `? super T`\n- Both — no wildcard, concrete type\n\n## What if\n\n- `list.add(x)` on `? extends T` — compile error.\n- Forget wildcard — only exact type accepted.\n\n## Common mistake\n\n`List<? extends Number>` for writing. Cannot `add`. Wildcard is for reading.\n\n## Summary\n\n- `? extends T` — read\n- `? super T` — write\n- PECS — Producer Extends, Consumer Super\n- No wildcard — exact type",
+      "questions": [
+        { "text": "What does `? extends Number` mean?", "options": ["Only Number", "Number and its subclasses", "Only Object", "Error"], "answer": 1, "explanation": "Or subtype." },
+        { "text": "What can you do with `? extends T`?", "options": ["Read", "Write", "Both", "Nothing"], "answer": 0, "explanation": "Producer — read." },
+        { "text": "What can you do with `? super T`?", "options": ["Read", "Write", "Both", "Nothing"], "answer": 1, "explanation": "Consumer — write." },
+        { "text": "What is PECS?", "options": ["Error", "Producer Extends, Consumer Super", "Method", "Class"], "answer": 1, "explanation": "Rule." }
+      ],
+      "practice": {
+        "description": "Create method `static double sumAll(List<? extends Number> nums)` that sums via `doubleValue()`.\n\nOutput `sumAll(List.of(1, 2, 3))` and `sumAll(List.of(1.5, 2.5))`.\n\n```\n6.0\n4.0\n```",
+        "starter": "import java.util.List;\n\npublic class Main {\n    static double sumAll(List<? extends Number> nums) {\n        // TODO\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "6.0\n4.0",
+        "must_contain": ["? extends Number", "doubleValue()", "System.out.println"]
+      }
+    },
+    "32": {
+      "id": 32,
+      "title": "Optional",
+      "theory": "## The null problem\n\n`null` — source of `NullPointerException`. A method returns `null` or a value — the caller may forget to check.\n\n```java\nString name = findUser(5); // returns null if absent\nSystem.out.println(name.length()); // NPE if absent\n```\n\n## Optional\n\nContainer: **value present** or **empty**. The compiler forces you to handle both cases.\n\n```java\nimport java.util.Optional;\n\nOptional<String> name = findUser(5);\n```\n\n## Creating\n\n```java\nOptional.of(\"Hello\")        // not null\nOptional.empty()             // empty\nOptional.ofNullable(null)    // null → empty\nOptional.of(null)            // NullPointerException\n```\n\n## Checks\n\n```java\nopt.isPresent()   // true if present\nopt.isEmpty()     // true if empty\n```\n\n## Getting the value\n\n```java\nopt.get()                     // error if empty\nopt.orElse(\"default\")         // value or default\nopt.orElseGet(() -> compute())// default function\nopt.orElseThrow(() -> new RuntimeException()) // throw\n```\n\n`orElse` computes the default always. `orElseGet` — only if needed.\n\n## ifPresent\n\n```java\nopt.ifPresent(name -> System.out.println(name));\nopt.ifPresentOrElse(\n    name -> System.out.println(\"has \" + name),\n    () -> System.out.println(\"none\")\n);\n```\n\n## map and flatMap\n\n```java\nOptional<Integer> len = Optional.of(\"Hello\").map(String::length);\nSystem.out.println(len.orElse(0)); // 5\n```\n\n`map` — apply if value present.\n\n## What if\n\n- `Optional.of(null)` — `NullPointerException`.\n- `opt.get()` without checking empty — `NoSuchElementException`.\n- Return `Optional` from class fields — anti-pattern.\n\n## Common mistake\n\n`if (opt.isPresent()) { String s = opt.get(); }` — prefer `opt.ifPresent(s -> ...)` or `orElse`.\n\n## Summary\n\n- `Optional<T>` — may be empty\n- `of`, `ofNullable`, `empty`\n- `orElse`, `orElseGet`, `orElseThrow`\n- `ifPresent` — if present\n- `map` — transform\n- Not for class fields",
+      "questions": [
+        { "text": "What is `Optional`?", "options": ["Collection", "Container that may be empty", "Array", "Error"], "answer": 1, "explanation": "Value or empty." },
+        { "text": "What does `orElse` do?", "options": ["Returns value or default", "Throws", "Prints", "Removes"], "answer": 0, "explanation": "Default if empty." },
+        { "text": "What happens on `Optional.of(null)`?", "options": ["Empty", "NullPointerException", "0", "Syntax error"], "answer": 1, "explanation": "Does not accept null." },
+        { "text": "What does `ifPresent` do?", "options": ["Runs if empty", "Runs if present", "Removes", "Error"], "answer": 1, "explanation": "Present — run." }
+      ],
+      "practice": {
+        "description": "Create:\n- `Optional<String> a = Optional.of(\"Hello\");`\n- `Optional<String> b = Optional.empty();`\n\nOutput `a.orElse(\"none\")` and `b.orElse(\"none\")`.\n\n```\nHello\nnone\n```",
+        "starter": "import java.util.Optional;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Hello\nnone",
+        "must_contain": ["Optional.of", "Optional.empty", ".orElse(", "System.out.println"]
+      }
+    },
+    "33": {
+      "id": 33,
+      "title": "enum",
+      "theory": "## What enum is\n\n`enum` — enumeration of fixed values.\n\n```java\nenum Day { MON, TUE, WED, THU, FRI, SAT, SUN }\n\nDay d = Day.MON;\n```\n\nEach value is an **object** of class `Day`, not a string.\n\n## Methods\n\n```java\nDay[] all = Day.values();          // array of all\nDay mon = Day.valueOf(\"MON\");      // from string\nString name = mon.name();          // \"MON\"\nint index = mon.ordinal();         // 0\n```\n\n## switch with enum\n\n```java\nswitch (d) {\n    case MON:\n        System.out.println(\"Monday\");\n        break;\n    case TUE:\n        System.out.println(\"Tuesday\");\n        break;\n}\n```\n\n## Fields and methods\n\n```java\nenum Planet {\n    MERCURY(3.303e+23, 2.4397e6),\n    EARTH(5.976e+24, 6.37814e6);\n\n    private final double mass;\n    private final double radius;\n\n    Planet(double mass, double radius) {\n        this.mass = mass;\n        this.radius = radius;\n    }\n\n    double surfaceGravity() {\n        return 6.67300E-11 * mass / (radius * radius);\n    }\n}\n```\n\nEach value has its own constructor and fields.\n\n## When to use\n\n- Fixed set: days, order statuses, colors\n- Instead of string constants: `\"MON\"` → `Day.MON`\n- In `switch` — readable and safe\n\n## What if\n\n- `Day.valueOf(\"mon\")` — `IllegalArgumentException`, case-sensitive.\n- Compare `==` — works, because each value is a singleton.\n- `Day.values()` in a hot loop — new array copy each time.\n\n## Common mistake\n\n`switch` without `case` covering all values. Java won't complain but logic breaks. Use `default`.\n\n## Summary\n\n- `enum` — fixed set\n- `values()`, `valueOf()`, `name()`, `ordinal()`\n- Fields and methods — like a class\n- `switch` — cleaner\n- `==` — safe to compare",
+      "questions": [
+        { "text": "What is `enum`?", "options": ["String", "Enumeration of constants", "Number", "Array"], "answer": 1, "explanation": "Set of values." },
+        { "text": "What does `values()` do?", "options": ["Returns array of all", "One value", "String", "Error"], "answer": 0, "explanation": "Array." },
+        { "text": "What does `valueOf(\"MON\")` do?", "options": ["Returns string", "Finds Day.MON", "Error", "Index"], "answer": 1, "explanation": "String to enum." },
+        { "text": "Can you compare with `==` for enum?", "options": ["No", "Yes, safe", "Only equals", "Error"], "answer": 1, "explanation": "Values are singletons." }
+      ],
+      "practice": {
+        "description": "Create `enum Day { MON, TUE, WED }`.\n\nVia `for (Day d : Day.values())` and `switch` output:\n```\nMonday\nTuesday\nWednesday\n```",
+        "starter": "public class Main {\n    enum Day { MON, TUE, WED }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Monday\nTuesday\nWednesday",
+        "must_contain": ["enum Day", "values()", "switch", "case", "System.out.println"]
+      }
+    },
+    "34": {
+      "id": 34,
+      "title": "record and var",
+      "theory": "## record\n\n`record` — immutable data class. Java 14+.\n\n```java\nrecord Point(int x, int y) { }\n\nPoint p = new Point(1, 2);\nSystem.out.println(p.x());   // 1\nSystem.out.println(p);       // Point[x=1, y=2]\n```\n\nAuto-generated:\n- constructor `Point(int x, int y)`\n- getters `x()`, `y()` (no `get`)\n- `equals`, `hashCode`\n- `toString` — `Point[x=1, y=2]`\n\n## When record\n\n- DTOs: data without logic\n- Method result of several values\n- Keys in a Map\n\nNot for:\n- Entities with mutable state\n- Classes with lots of behavior\n- Inheritance (`record` is final)\n\n## Custom methods in record\n\nAllowed:\n\n```java\nrecord Point(int x, int y) {\n    int manhattan() {\n        return Math.abs(x) + Math.abs(y);\n    }\n}\n```\n\n## var\n\n`var` — local type inference. Java 10+.\n\n```java\nvar list = new ArrayList<String>();   // ArrayList<String>\nvar n = 42;                           // int\nvar map = new HashMap<String, Integer>(); // HashMap<String, Integer>\n```\n\nCompiler infers from the **right side**.\n\n## Where it works\n\n- Only **local variables**\n- Only when initialized at declaration\n\n## Where it does not\n\n```java\nvar field;               // error: class field\nvoid f(var x) { }        // error: parameter\nvar x;                   // error: no initializer\nvar x = null;            // error: type not inferred\n```\n\n## When var\n\n- Type is long: `HashMap<String, List<Integer>>`\n- Type is clear from context: `var list = new ArrayList<String>()`\n\nWhen not: type unclear — write it explicitly.\n\n## What if\n\n- `record Point(int x)` — `p.x` without parens — error, need `p.x()`.\n- `var` for a field — compile error.\n\n## Common mistake\n\nUsing `record` as a mutable class. `record` fields are final, cannot change after creation.\n\n## Summary\n\n- `record Name(fields) { }` — DTO\n- Getters without `get`\n- Auto: constructor, equals, toString\n- Immutable\n- `var` — local inference\n- Local only, with initializer",
+      "questions": [
+        { "text": "What is `record`?", "options": ["Mutable class", "Immutable data class", "Interface", "Enum"], "answer": 1, "explanation": "DTO, Java 14+." },
+        { "text": "What is auto-generated in record?", "options": ["Nothing", "Constructor, equals, toString", "Only fields", "Error"], "answer": 1, "explanation": "All generated." },
+        { "text": "What is `var`?", "options": ["A type", "Local type inference", "Keyword for null", "Method"], "answer": 1, "explanation": "Java 10+." },
+        { "text": "Does `var` work for class fields?", "options": ["Yes", "No, local only", "Sometimes", "Error"], "answer": 1, "explanation": "Local only." }
+      ],
+      "practice": {
+        "description": "1. Create `record Point(int x, int y) { }`.\n2. Create `Point p = new Point(1, 2);` and output.\n3. `var n = 42;` and output.\n\n```\nPoint[x=1, y=2]\n42\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Point[x=1, y=2]\n42",
+        "must_contain": ["record Point", "new Point(", "var n = 42", "System.out.println"]
+      }
+    },
+    "35": {
+      "id": 35,
+      "title": "try-with-resources",
+      "theory": "## The problem\n\nResources (files, connections) must be **closed**. Forget — leak.\n\n```java\nBufferedReader r = new BufferedReader(new FileReader(\"f.txt\"));\ntry {\n    // work\n} finally {\n    r.close(); // always\n}\n```\n\nLots of boilerplate for simple closing.\n\n## try-with-resources\n\n```java\ntry (BufferedReader r = new BufferedReader(new FileReader(\"f.txt\"))) {\n    // work\n}\n// r closed automatically\n```\n\nThe resource is declared **in parentheses** after `try`. After the block — closed automatically, even on error.\n\n## AutoCloseable\n\nThe resource must implement `AutoCloseable` (or its subinterface `Closeable`):\n\n```java\nclass Res implements AutoCloseable {\n    public void close() {\n        System.out.println(\"closed\");\n    }\n}\n\ntry (Res r = new Res()) {\n    System.out.println(\"used\");\n}\n// used\n// closed\n```\n\n## Multiple resources\n\n```java\ntry (\n    BufferedReader r = new BufferedReader(new FileReader(\"a.txt\"));\n    BufferedWriter w = new BufferedWriter(new FileWriter(\"b.txt\"))\n) {\n    // both will close\n}\n```\n\nClosed in **reverse** order of declaration.\n\n## Comparison\n\n| | try/finally | try-with-resources |\n|---|---|---|\n| Code | Lots | One line |\n| Forget close | Easy | Impossible |\n| Exception suppression | No | Yes |\n\n## What if\n\n- Resource is not `AutoCloseable` — compile error.\n- `close()` itself throws — added as suppressed to the primary.\n\n## Common mistake\n\nOpen the resource **outside** `try`, then use — `close()` won't fire. Always in parens.\n\n## Summary\n\n- `try (resource) { }` — auto-close\n- Resource must be `AutoCloseable`\n- Multiple via `;`\n- Closed in reverse order\n- Better than `finally`",
+      "questions": [
+        { "text": "What does try-with-resources do?", "options": ["Nothing", "Closes resource automatically", "Speeds up", "Error"], "answer": 1, "explanation": "Auto-close." },
+        { "text": "Which interface is required?", "options": ["Runnable", "AutoCloseable", "Serializable", "Comparable"], "answer": 1, "explanation": "`AutoCloseable`." },
+        { "text": "In what order are multiple resources closed?", "options": ["Forward", "Reverse", "Random", "Parallel"], "answer": 1, "explanation": "Reverse." },
+        { "text": "Is the resource closed on exception?", "options": ["No", "Yes", "Depends", "Only in finally"], "answer": 1, "explanation": "Yes, always." }
+      ],
+      "practice": {
+        "description": "Create `class Res implements AutoCloseable` with `close()` printing `closed`.\n\nUse in `try-with-resources`, output `used` inside.\n\n```\nused\nclosed\n```",
+        "starter": "public class Main {\n    static class Res implements AutoCloseable {\n        // TODO\n    }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "used\nclosed",
+        "must_contain": ["implements AutoCloseable", "public void close()", "try (", "System.out.println"]
+      }
+    },
+    "36": {
+      "id": 36,
+      "title": "Stream API: Practice",
+      "theory": "## Combining\n\n```java\nList<Integer> nums = List.of(3, 1, 4, 1, 5, 9, 2, 6);\n\nList<Integer> result = nums.stream()\n    .filter(n -> n > 2)\n    .sorted()\n    .collect(Collectors.toList());\nSystem.out.println(result); // [3, 4, 5, 6, 9]\n```\n\n`filter`, `sorted` — intermediate, `collect` — terminal.\n\n## Useful Collectors\n\n**groupingBy** — grouping:\n\n```java\nimport java.util.stream.Collectors;\nimport java.util.Map;\n\nList<String> words = List.of(\"a\", \"bb\", \"cc\", \"ddd\");\nMap<Integer, List<String>> byLength = words.stream()\n    .collect(Collectors.groupingBy(String::length));\nSystem.out.println(byLength); // {1=[a], 2=[bb, cc], 3=[ddd]}\n```\n\n**counting** — how many in each group:\n\n```java\nMap<Integer, Long> counts = words.stream()\n    .collect(Collectors.groupingBy(String::length, Collectors.counting()));\n```\n\n**averagingInt** — average:\n\n```java\ndouble avgLen = words.stream()\n    .collect(Collectors.averagingInt(String::length));\n```\n\n**joining** — glue into a string:\n\n```java\nString joined = words.stream()\n    .collect(Collectors.joining(\", \"));\nSystem.out.println(joined); // a, bb, cc, ddd\n```\n\n## mapToInt\n\nPrimitive stream for `sum`, `average`:\n\n```java\nint sum = words.stream().mapToInt(String::length).sum();\n```\n\n## Chains\n\n```java\nList<Integer> nums = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);\nint total = nums.stream()\n    .filter(n -> n % 2 == 0)\n    .map(n -> n * n)\n    .mapToInt(n -> n)\n    .sum();\nSystem.out.println(total); // 4 + 16 + 36 + 64 + 100 = 220\n```\n\n## What if\n\n- Forget `import Collectors` — compile error.\n- `average()` — `OptionalDouble`, not `double`.\n- Modify collection during `forEach` — exception.\n\n## Common mistake\n\n`groupingBy` returns `HashMap` — order not guaranteed. Need `LinkedHashMap`:\n\n```java\n.groupingBy(s -> s, LinkedHashMap::new, Collectors.toList())\n```\n\n## Summary\n\n- `Collectors.groupingBy` — grouping\n- `counting`, `averagingInt`, `joining`\n- `mapToInt().sum()` — arithmetic\n- `sorted()` — sort in stream\n- Chains: filter → map → collect",
+      "questions": [
+        { "text": "What does `Collectors.groupingBy` do?", "options": ["Counts", "Groups by key", "Sorts", "Removes"], "answer": 1, "explanation": "Groups by function." },
+        { "text": "What does `Collectors.joining(\", \")` do?", "options": ["Splits", "Joins with comma", "Removes", "Counts"], "answer": 1, "explanation": "Merge into string." },
+        { "text": "What does `mapToInt(...).sum()` do?", "options": ["Average", "Sum of primitives", "Removes", "Error"], "answer": 1, "explanation": "Sum." },
+        { "text": "What does `average()` return?", "options": ["double", "OptionalDouble", "int", "String"], "answer": 1, "explanation": "OptionalDouble." }
+      ],
+      "practice": {
+        "description": "Given `List<String> words = List.of(\"a\", \"bb\", \"cc\", \"ddd\");`.\n\nCompute the sum of lengths via `mapToInt(String::length).sum()` and output.\n\nVisible text: `8`",
+        "starter": "import java.util.List;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<String> words = List.of(\"a\", \"bb\", \"cc\", \"ddd\");\n        // TODO\n    }\n}\n",
+        "expected": "8",
+        "must_contain": [".stream()", "mapToInt", "String::length", ".sum()", "System.out.println"]
+      }
+    },
+    "37": {
+      "id": 37,
+      "title": "Final",
+      "theory": "## Putting it all together\n\nThe course covered: syntax, OOP, collections, lambdas, Stream, Optional. The final task exercises everything together.\n\n## Model\n\n```java\nclass Product {\n    private final String name;\n    private final double price;\n\n    Product(String name, double price) {\n        this.name = name;\n        this.price = price;\n    }\n\n    String getName() { return name; }\n    double getPrice() { return price; }\n}\n```\n\n## Stream + Optional\n\n```java\nimport java.util.List;\nimport java.util.Optional;\n\nList<Product> products = List.of(\n    new Product(\"A\", 100),\n    new Product(\"B\", 200),\n    new Product(\"C\", 50)\n);\n\ndouble total = products.stream()\n    .mapToDouble(Product::getPrice)\n    .sum();\nSystem.out.printf(\"Sum: %.1f%n\", total); // 350.0\n\nOptional<Product> expensive = products.stream()\n    .filter(p -> p.getPrice() > 150)\n    .findFirst();\n\nexpensive.ifPresentOrElse(\n    p -> System.out.println(p.getName()),  // B\n    () -> System.out.println(\"none\")\n);\n```\n\n## Breakdown\n\n- `stream()` — from list\n- `mapToDouble` — `DoubleStream`, `.sum()` returns `double`\n- `filter` — select\n- `findFirst` — `Optional<Product>`\n- `ifPresentOrElse` — handle both cases\n\n## Checks\n\n- Class with `private final` fields\n- Getters\n- Stream for computation\n- Optional for lookup\n- No `null` in returns\n\n## What if\n\n- `get()` on empty Optional — `NoSuchElementException`.\n- Mutable fields in model — Optional loses meaning.\n- Forget `System.out.printf` — wrong formatting.\n\n## Common mistake\n\n`.map(Product::getPrice).sum()` — does not compile, need `mapToDouble`. `map` returns `Stream<Double>`, no `sum`.\n\n## Summary\n\n- Class + getters\n- Stream: filter, mapToDouble, sum, findFirst\n- Optional + ifPresentOrElse\n- Composition — standard modern Java",
+      "questions": [
+        { "text": "What does `findFirst()` return?", "options": ["Product", "Optional<Product>", "null", "Array"], "answer": 1, "explanation": "Optional." },
+        { "text": "What does `mapToDouble` do?", "options": ["Returns Stream<Double>", "DoubleStream with sum", "Error", "Removes"], "answer": 1, "explanation": "Primitive stream." },
+        { "text": "What happens on `get()` on an empty Optional?", "options": ["null", "NoSuchElementException", "0", "Compile error"], "answer": 1, "explanation": "Exception." },
+        { "text": "Which is better: null or Optional?", "options": ["null", "Optional for returns", "Both bad", "Both good"], "answer": 1, "explanation": "Optional is explicit." }
+      ],
+      "practice": {
+        "description": "Class `Product` with `String name`, `double price`, constructor and getters.\n\nList:\n```\nList<Product> products = List.of(\n    new Product(\"A\", 100),\n    new Product(\"B\", 200),\n    new Product(\"C\", 50)\n);\n```\n\n1. Sum via `stream().mapToDouble().sum()`, output with `printf(\"Sum: %.1f%n\", total)`.\n2. First > 150 via `filter().findFirst()` into `Optional`, output via `ifPresentOrElse` → name.\n\n```\nSum: 350.0\nB\n```",
+        "starter": "import java.util.List;\nimport java.util.Optional;\n\nclass Product {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Sum: 350.0\nB",
+        "must_contain": ["class Product", "private final", "getName", "getPrice", ".stream()", ".mapToDouble(", ".sum()", "Optional", ".findFirst()", "ifPresentOrElse", "System.out.printf"]
+      }
+    }
+  }
+}

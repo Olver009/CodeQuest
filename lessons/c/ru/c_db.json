@@ -1,0 +1,537 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "Что такое C и зачем",
+      "theory": "## Что такое C\n\nC — низкоуровневый компилируемый язык. Создан в 1972 в Bell Labs (Деннис Ритчи) для написания Unix. Применяется в: операционных системах (Linux, Windows частично), встраиваемых системах, драйверах, базах данных (PostgreSQL, SQLite), компиляторах, высоконагруженных серверах.\n\n## Зачем учить C\n\n- База для C++, C#, Objective-C, Go, Rust (синтаксис похож).\n- Понимаешь память, указатели, как работает «под капотом».\n- Маленький язык — учится быстро.\n- Скор и предсказуем.\n\n## Чем отличается от Python и Java\n\n- **Нет сборщика мусора** — память освобождаешь сам.\n- **Указатели** — прямой доступ к памяти.\n- **Нет классов** — только `struct`.\n- **Компилируется в машинный код** (не байт-код, как Java).\n- **Нет автоматических проверок** — легко выстрелить в ногу.\n\n## Компилируемый, а не интерпретируемый\n\nPython читает и выполняет построчно. C сначала **компилируется** в машинный код, потом запускается. Программа — отдельный `.exe`/`.out` файл.\n\n## Что C НЕ умеет\n\n- Строки — не объекты, а `char[]`.\n- Нет исключений.\n- Нет `try/catch`.\n- Нет встроенных коллекций (списков, словарей) — надо писать или брать библиотеки.\n- Нет автоматического управления памятью.\n\n## Стандарты\n\nC89, C99, C11, C17, C23. В курсе — C11 (современный и распространённый).\n\n## Итог\n\n- C — низкоуровневый, компилируемый\n- Основа для многих языков\n- Указатели, ручная память\n- Нет ООП, нет исключений\n- Быстрый, предсказуемый",
+      "questions": [
+        { "text": "Что такое C?", "options": ["Интерпретируемый", "Компилируемый низкоуровневый", "ООП", "Функциональный"], "answer": 1, "explanation": "C — компилируемый, низкоуровневый." },
+        { "text": "Есть ли в C сборщик мусора?", "options": ["Да", "Нет, вручную", "Только в C11", "Только для строк"], "answer": 1, "explanation": "Память — вручную (malloc/free)." },
+        { "text": "Что из этого есть в C?", "options": ["Классы", "try/catch", "struct", "lambda"], "answer": 2, "explanation": "Только `struct`." },
+        { "text": "Как C превращается в программу?", "options": ["Интерпретация", "Компиляция в машинный код", "JIT", "Трансляция в JS"], "answer": 1, "explanation": "Компилятор → машинный код." }
+      ],
+      "practice": {
+        "description": "Выведи через `printf` три строки:\n```\nC\nУрок 1\nГотово\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "C\nУрок 1\nГотово",
+        "must_contain": ["#include <stdio.h>", "int main", "printf", "return 0"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Компиляция: gcc",
+      "theory": "## Как C превращается в программу\n\n`.c` файл → компилятор → `.o` (object) → линкер → исполняемый файл. Обычно одна команда `gcc` делает всё.\n\n## gcc\n\n**GCC** — GNU Compiler Collection. Для C — `gcc`, для C++ — `g++`.\n\n```bash\ngcc hello.c -o hello\n./hello\n```\n\n- `-o hello` — имя выходного файла\n- Без `-o` — `a.out` (на Linux/macOS) или `a.exe` (Windows MinGW)\n\n## Простой пример\n\n`hello.c`:\n\n```c\n#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello\\n\");\n    return 0;\n}\n```\n\nКомпиляция:\n```bash\ngcc hello.c -o hello\n./hello\n```\n\n## Флаги\n\n- `-Wall -Wextra` — предупреждения\n- `-std=c11` — стандарт\n- `-g` — отладочная информация (для gdb)\n- `-O2` — оптимизация\n\nОбычно: `gcc -Wall -Wextra -std=c11 hello.c -o hello`.\n\n## Ошибки\n\n- **Ошибка компиляции** — синтаксис, типы. Программа не создастся.\n- **Ошибка линковки** — не найдена функция (`undefined reference`).\n- **Ошибка выполнения** — сегфолт, деление на ноль.\n\n## Windows\n\nЧерез MinGW (`gcc` в PATH) или WSL. В Visual Studio — `cl.exe`, но синтаксис тот же.\n\n## Что будет, если\n\n- Забыть `-o` — файл будет `a.out`.\n- Забыть `#include` — функция не объявлена.\n- Опечатка в имени — `file not found`.\n\n## Итог\n\n- `gcc file.c -o name`\n- `-Wall -Wextra` — предупреждения\n- `-std=c11` — стандарт\n- Ошибки: компиляции / линковки / выполнения",
+      "questions": [
+        { "text": "Какой компилятор для C?", "options": ["g++", "gcc", "javac", "node"], "answer": 1, "explanation": "`gcc` — для C." },
+        { "text": "Что делает `-o hello`?", "options": ["Оптимизирует", "Задаёт имя выходного файла", "Открывает файл", "Ошибка"], "answer": 1, "explanation": "Имя выходного файла." },
+        { "text": "Что будет без `-o`?", "options": ["Ошибка", "a.out (или a.exe)", "hello.c", "Ничего"], "answer": 1, "explanation": "По умолчанию `a.out`." },
+        { "text": "Что означает `-Wall`?", "options": ["Все предупреждения", "Все ошибки", "Все файлы", "Оптимизация"], "answer": 0, "explanation": "Показать предупреждения." }
+      ],
+      "practice": {
+        "description": "Выведи через `printf`:\n```\ngcc\nКомпиляция\nOK\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "gcc\nКомпиляция\nOK",
+        "must_contain": ["#include <stdio.h>", "printf"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "Первая программа",
+      "theory": "## Минимальная программа\n\n```c\n#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello, world!\\n\");\n    return 0;\n}\n```\n\n## Разбор\n\n- `#include <stdio.h>` — подключить заголовок стандартной библиотеки ввода-вывода. Без него `printf` не объявлена.\n- `int main(void)` — точка входа. `int` — код возврата, `void` — без параметров.\n- `{ ... }` — тело функции.\n- `printf(\"...\\n\")` — вывод. `\\n` — перевод строки.\n- `return 0;` — успешное завершение. Ненулевой код — ошибка.\n\n## `#include`\n\n```c\n#include <stdio.h>   // системный заголовок\n#include \"my.h\"      // свой файл\n```\n\n`<...>` — из системных папок. `\"...\"` — из текущей директории.\n\n## Отличие от Java\n\n- Нет класса, метода, `public static void`. Только `int main`.\n- Нет автоматического `println`. `printf` не переводит строку сам — добавь `\\n`.\n- `void` в скобках — «нет параметров».\n\n## Код возврата\n\n```c\nreturn 0;    // успех\nreturn 1;    // ошибка\n```\n\nПроверяется системой (shell, CI). Забыть `return 0` в `main` — обычно не ошибка (неявно 0), но **всегда** пиши явно.\n\n## Комментарии\n\n```c\n// однострочный\n/*\n   многострочный\n*/\n```\n\n## Что будет, если\n\n- Забыть `;` — ошибка компиляции.\n- Забыть `\\n` — следующая строка прилипнет.\n- Забыть `return 0;` — не критично, но плохой стиль.\n\n## Итог\n\n- `#include <stdio.h>` — для `printf`\n- `int main(void)` — точка входа\n- `printf(\"...\\n\")` — вывод\n- `return 0` — успех\n- `;` в конце каждой инструкции",
+      "questions": [
+        { "text": "Зачем `#include <stdio.h>`?", "options": ["Для компиляции", "Для printf", "Для main", "Ни для чего"], "answer": 1, "explanation": "Объявление printf." },
+        { "text": "Что такое `int main(void)`?", "options": ["Класс", "Точка входа", "Переменная", "Ошибка"], "answer": 1, "explanation": "С неё начинается выполнение." },
+        { "text": "Что делает `\\n` в printf?", "options": ["Печатает n", "Перевод строки", "Удаляет", "Ничего"], "answer": 1, "explanation": "Перевод строки." },
+        { "text": "Зачем `return 0;`?", "options": ["Ничего", "Код успешного завершения", "Печатает", "Ошибка"], "answer": 1, "explanation": "Код возврата." },
+        { "text": "Что будет без `;`?", "options": ["Работает", "Ошибка компиляции", "Ошибка выполнения", "Ничего"], "answer": 1, "explanation": "Синтаксическая ошибка." }
+      ],
+      "practice": {
+        "description": "Выведи через `printf`:\n```\nПервая\nПрограмма\nГотово\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Первая\nПрограмма\nГотово",
+        "must_contain": ["#include <stdio.h>", "int main", "printf", "\\n", "return 0"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "int, char, float, double",
+      "theory": "## Основные типы\n\n```c\nint age = 25;           // целое\nchar letter = 'A';      // один символ\nfloat price = 99.99f;   // дробное (точность ~7)\ndouble pi = 3.14159;    // дробное (точность ~15)\n```\n\n## Размеры\n\n- `char` — 1 байт (обычно)\n- `int` — 4 байта (обычно)\n- `float` — 4 байта\n- `double` — 8 байт\n\nТочные размеры — через `sizeof(int)` и т.д. На разных платформах могут отличаться.\n\n## Суффиксы\n\n```c\nfloat f = 3.14f;     // f — обязательно для float\nlong n = 100000L;    // L — long\nunsigned int u = 5u; // u — unsigned\n```\n\nБез `f` литерал `3.14` — `double` по умолчанию.\n\n## Модификаторы\n\n- `short` / `long` — размер\n- `unsigned` — только положительные (больше диапазон)\n- `signed` — знаковый (по умолчанию)\n\n```c\nunsigned int x = 4000000000u;   // влезает только так\nshort int small = 100;\nlong long big = 9000000000LL;\n```\n\n## char — это int\n\n`char` — тоже число (код ASCII):\n\n```c\nchar c = 'A';\nprintf(\"%d\\n\", c);   // 65\n```\n\n## Объявление и инициализация\n\n```c\nint a = 5;     // с инициализацией\nint b;         // БЕЗ инициализации — мусор\nint c = 0;     // явный ноль\n```\n\n**Важно:** локальная переменная без инициализации содержит **мусор**, не 0. Это частая причина багов.\n\n## Константы\n\n```c\nconst int MAX = 100;\n// MAX = 200; // ошибка компиляции\n#define SIZE 10\n```\n\n`const` — типизированная. `#define` — препроцессор, текстуальная замена. В современном коде предпочитают `const`.\n\n## Что будет, если\n\n- `float f = 3.14;` без `f` — warning, возможна потеря точности.\n- Использовать `b` без инициализации — мусор.\n- `char c = \"A\"` (двойные кавычки) — ошибка, `\"A\"` — строка.\n\n## Частая ошибка\n\n`char c = \"A\"` вместо `char c = 'A'`. Одинарные кавычки — символ, двойные — строка.\n\n## Итог\n\n- `int`, `char`, `float`, `double`\n- Размеры через `sizeof()`\n- Суффиксы `f`, `L`\n- `char` — тоже число\n- Локальная без инициализации — мусор\n- `const` — константа",
+      "questions": [
+        { "text": "Какой тип для одного символа?", "options": ["int", "char", "string", "float"], "answer": 1, "explanation": "`char` — символ." },
+        { "text": "Как правильно объявить float?", "options": ["float f = 3.14;", "float f = 3.14f;", "float f = 3.14d;", "float f = \"3.14\";"], "answer": 1, "explanation": "`f` — обязателен." },
+        { "text": "Что содержит неинициализированная локальная?", "options": ["0", "Мусор", "null", "Ошибку"], "answer": 1, "explanation": "Мусор." },
+        { "text": "Чем `char` отличается от `int`?", "options": ["Ничем", "Размером и диапазоном", "Только синтаксисом", "Ошибка"], "answer": 1, "explanation": "`char` — 1 байт, `int` — 4." },
+        { "text": "Что при `char c = \"A\"`?", "options": ["Работает", "Ошибка (двойные кавычки)", "c = 'A'", "c = A"], "answer": 1, "explanation": "`\"A\"` — строка, нужны одинарные." }
+      ],
+      "practice": {
+        "description": "Создай:\n- `int age = 25;`\n- `double price = 99.5;`\n- `char grade = 'A';`\n\nВыведи:\n```\n25\n99.500000\nA\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n99.500000\nA",
+        "must_contain": ["int age", "double price", "char grade", "printf", "%d", "%f", "%c"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "printf: форматирование",
+      "theory": "## Базовые спецификаторы\n\n```c\nprintf(\"%d\\n\", 42);       // целое\nprintf(\"%f\\n\", 3.14);     // double/float (6 знаков)\nprintf(\"%c\\n\", 'A');      // символ\nprintf(\"%s\\n\", \"hello\");  // строка\n```\n\n## Точность\n\n```c\nprintf(\"%.2f\\n\", 3.14159);   // 3.14\nprintf(\"%8.2f\\n\", 3.14);     // \"    3.14\" (ширина 8)\nprintf(\"%08.2f\\n\", 3.14);    // \"00003.14\" (нули)\n```\n\nФормат: `%[ширина][.точность]тип`.\n\n## Несколько аргументов\n\n```c\nprintf(\"x = %d, y = %d\\n\", 5, 10);\nprintf(\"%s: %d\\n\", \"age\", 25);\n```\n\nКаждый `%` берёт аргумент по порядку. **Несовпадение** типов — UB (мусор в выводе).\n\n## Специальные\n\n- `%%` — сам символ `%`\n- `%ld` — long\n- `%u` — unsigned int\n- `%lf` — double в scanf (в printf — `%f`)\n- `%x` — hex\n\n## printf в C vs Java\n\n- Java: `System.out.printf(\"%.2f%n\", x)`. C: `printf(\"%.2f\\n\", x)`. `\\n` не `%n`.\n- Java: `%d` для int, C: тоже.\n\n## Что будет, если\n\n- `%d` для `double` — UB, мусор.\n- Забыть `\\n` — строки слипаются.\n- Забыть аргумент — UB.\n\n## Частая ошибка\n\n`printf(\"%d\\n\", 3.14)` — вывод мусора. `%d` ожидает `int`.\n\n## Итог\n\n- `%d`, `%f`, `%c`, `%s`\n- `%.2f` — 2 знака\n- `%8.2f` — ширина 8\n- `%%` — символ `%`\n- `\\n` — перевод\n- Тип должен совпадать",
+      "questions": [
+        { "text": "Какой спецификатор для int?", "options": ["%f", "%d", "%s", "%c"], "answer": 1, "explanation": "`%d`." },
+        { "text": "Что выведет `printf(\"%.2f\\n\", 3.14159);`?", "options": ["3.14159", "3.14", "3.15", "3"], "answer": 1, "explanation": "2 знака." },
+        { "text": "Как вывести символ `%`?", "options": ["%", "%%", "\\%", "%c"], "answer": 1, "explanation": "`%%`." },
+        { "text": "Что при `printf(\"%d\\n\", 3.14)`?", "options": ["3", "3.14", "Мусор (UB)", "Ошибка"], "answer": 2, "explanation": "UB — тип не тот." }
+      ],
+      "practice": {
+        "description": "Выведи через `printf`:\n```\nЦелое: 42\nДробное: 3.14\nСимвол: A\nСтрока: hello\nПроцент: 100%\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Целое: 42\nДробное: 3.14\nСимвол: A\nСтрока: hello\nПроцент: 100%",
+        "must_contain": ["%d", "%.2f", "%c", "%s", "%%", "printf"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "title": "Приведение типов",
+      "theory": "## Неявное\n\n```c\nint a = 10;\ndouble b = a;        // int → double, автоматически\nint c = 3.99;        // double → int, ОТБРАСЫВАНИЕ, c = 3\n```\n\nАвтоматически: меньше → больше (безопасно). Больше → меньше — теряется точность.\n\n## Явное\n\n```c\ndouble d = 3.99;\nint i = (int) d;     // 3\nint j = (int) 10.0 / 4;  // 10 / 4 = 2\n```\n\n`(int)` — C-style cast. В C++ рекомендуют `static_cast<int>(d)`.\n\n## Целочисленное деление\n\n```c\nint a = 7, b = 2;\nint c = a / b;                // 3, не 3.5!\ndouble d = (double) a / b;    // 3.5\ndouble e = a / (double) b;    // 3.5\n```\n\n`int / int = int`. Хочешь дробь — приведи **один** операнд.\n\n## char → int\n\n```c\nchar c = 'A';\nint code = c;         // 65\nchar d = 65;          // 'A'\n```\n\n## Опасные приведения\n\n```c\nint big = 1000000000;\nshort small = (short) big;    // переполнение, мусор\ndouble d = 3.99;\nint i = (int) d;              // 3 — отбрасывание, не округление\n```\n\n## sizeof и приведение\n\n`sizeof(int)` возвращает `size_t` (беззнаковое). Сравнение `sizeof(int) > -1` — ложно, из-за преобразования.\n\n## Что будет, если\n\n- `int` в `double` — ок.\n- `double` в `int` без приведения — warning.\n- `(int) 3.99` — 3, не 4 (отбрасывание).\n- `(short) big` при большом — мусор.\n\n## Частая ошибка\n\n`7 / 2` даёт `3`, не `3.5`. Приведи: `(double) 7 / 2`.\n\n## Итог\n\n- `int / int = int` — дробная часть отбрасывается\n- `(double) x` — явное\n- `(int) 3.99` = 3\n- Переполнение → мусор\n- `char` ↔ `int` — код ASCII",
+      "questions": [
+        { "text": "Что выведет `printf(\"%d\", 7 / 2);`?", "options": ["3.5", "3", "4", "Ошибка"], "answer": 1, "explanation": "`int / int = int`." },
+        { "text": "Что выведет `printf(\"%f\", (double) 7 / 2);`?", "options": ["3", "3.500000", "4.000000", "Ошибка"], "answer": 1, "explanation": "Приведение к double." },
+        { "text": "Что при `(int) 3.99`?", "options": ["3", "4", "3.99", "Ошибка"], "answer": 0, "explanation": "Отбрасывание." },
+        { "text": "Что такое `char c = 'A'; int x = c;`?", "options": ["Ошибка", "x = 65", "x = 'A'", "x = 0"], "answer": 1, "explanation": "Код ASCII." }
+      ],
+      "practice": {
+        "description": "Даны `int a = 17; int b = 5;`.\n\nВыведи:\n```\na / b = 3\n(double) a / b = 3.400000\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int a = 17;\n    int b = 5;\n    // TODO\n    return 0;\n}\n",
+        "expected": "a / b = 3\n(double) a / b = 3.400000",
+        "must_contain": ["a / b", "(double)", "printf", "%d", "%f"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "title": "const и размеры",
+      "theory": "## const\n\n```c\nconst int MAX = 100;\n// MAX = 200; // ошибка компиляции\n\nconst double PI = 3.14159;\n```\n\n`const` — **типизированная** константа. Проверяется компилятором.\n\n## #define\n\n```c\n#define SIZE 10\nint arr[SIZE];  // препроцессор подставит 10\n```\n\n`#define` — текстуальная замена. **Без типа**, без проверок. В современном коде предпочитают `const`.\n\n## Разница\n\n```c\nconst int A = 10;    // компилятор проверяет\n#define B 10        // просто текст\n\n// A = 20;  // ошибка\n// B = 20;  // препроцессор заменит на `10 = 20` — синтаксическая ошибка\n```\n\n## sizeof\n\n```c\nprintf(\"%zu\\n\", sizeof(int));     // 4 (обычно)\nprintf(\"%zu\\n\", sizeof(char));    // 1\nprintf(\"%zu\\n\", sizeof(double));  // 8\n```\n\n`%zu` — формат для `size_t`.\n\n## Размер массива\n\n```c\nint arr[10];\nprintf(\"%zu\\n\", sizeof(arr) / sizeof(arr[0]));  // 10\n```\n\n`sizeof(arr)` — весь массив в байтах. Поделить на размер элемента — количество элементов.\n\n## sizeof и указатель\n\n```c\nint arr[10];\nint *p = arr;\nprintf(\"%zu\\n\", sizeof(arr));  // 40\nprintf(\"%zu\\n\", sizeof(p));    // 8 (размер указателя)\n```\n\nДля указателя `sizeof` даёт размер **указателя**, а не массива.\n\n## Что будет, если\n\n- `const` без инициализации — ошибка.\n- `sizeof` от указателя вместо массива — неверный результат.\n- `#define` со сложным выражением без скобок — ловушка.\n\n## Частая ошибка\n\n`sizeof(arr)` в функции, где `arr` — параметр. Параметр — указатель, `sizeof` даёт размер указателя, не массива.\n\n## Итог\n\n- `const` — типизированная константа\n- `#define` — текстуальная\n- `sizeof(type)` — размер\n- `sizeof(arr) / sizeof(arr[0])` — длина\n- Для указателя — размер указателя",
+      "questions": [
+        { "text": "Что лучше для константы?", "options": ["#define", "const", "static", "register"], "answer": 1, "explanation": "`const` — типизированная." },
+        { "text": "Что вернёт `sizeof(int)`?", "options": ["1", "4 (обычно)", "8", "Ошибка"], "answer": 1, "explanation": "4 байта обычно." },
+        { "text": "Как узнать длину массива?", "options": ["sizeof(arr)", "sizeof(arr) / sizeof(arr[0])", "arr.length", "len(arr)"], "answer": 1, "explanation": "Поделить на размер элемента." },
+        { "text": "Что при `sizeof` от указателя на массив?", "options": ["Размер массива", "Размер указателя", "Ошибка", "0"], "answer": 1, "explanation": "Только размер указателя." }
+      ],
+      "practice": {
+        "description": "Выведи:\n```\nint: 4\nchar: 1\ndouble: 8\n```\n\nЧерез `sizeof` и `%zu`.",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "int: 4\nchar: 1\ndouble: 8",
+        "must_contain": ["sizeof(int)", "sizeof(char)", "sizeof(double)", "%zu", "printf"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "title": "scanf: чтение",
+      "theory": "## Что такое scanf\n\n`scanf` читает ввод пользователя. Аналог `input()` в Python, `Scanner` в Java.\n\n```c\n#include <stdio.h>\n\nint main(void) {\n    int x;\n    scanf(\"%d\", &x);\n    printf(\"Вы ввели: %d\\n\", x);\n    return 0;\n}\n```\n\n## Амперсанд `&`\n\n`scanf(\"%d\", &x)` — **адрес** переменной. `scanf` знает, куда положить значение. Без `&` — UB (падает).\n\n**Исключение:** `scanf(\"%s\", str)` — строки уже адрес (массив). Без `&`.\n\n## Спецификаторы\n\n```c\nint n;\nscanf(\"%d\", &n);\n\ndouble d;\nscanf(\"%lf\", &d);   // для double — %lf\n\nchar c;\nscanf(\" %c\", &c);   // пробел перед %c — пропустить whitespace\n\nchar s[100];\nscanf(\"%s\", s);     // без & — s уже адрес\n```\n\n## `%lf` для double\n\nВ `printf` — `%f`. В `scanf` — **`%lf`** для `double`. `%f` для `float`.\n\n## `%s` и пробелы\n\n`%s` читает до пробела. Ввод «Иван Петров» в `%s` даст только «Иван».\n\n## Что будет, если\n\n- Забыть `&` — UB, программа падает или мусор.\n- `%d` для `double` — мусор.\n- `%s` для строк без размера — переполнение буфера (опасно).\n\n## Частая ошибка\n\n`scanf(\"%d\", x)` без `&`. Нужно `scanf(\"%d\", &x)`.\n\n## Итог\n\n- `scanf(\"%d\", &x)` — целое\n- `scanf(\"%lf\", &d)` — double\n- `scanf(\"%s\", str)` — строка, без `&`\n- `&` — адрес для чисел\n- `%s` — до пробела\n- Без `&` для чисел — UB",
+      "questions": [
+        { "text": "Что означает `&` в scanf?", "options": ["И", "Адрес переменной", "Ссылка", "Ошибка"], "answer": 1, "explanation": "Адрес." },
+        { "text": "Зачем `&` в `scanf(\"%d\", &x)`?", "options": ["Не нужен", "scanf пишет в адрес", "Для вывода", "Для проверки"], "answer": 1, "explanation": "Без адреса — UB." },
+        { "text": "Какой формат для double в scanf?", "options": ["%f", "%lf", "%d", "%s"], "answer": 1, "explanation": "`%lf`." },
+        { "text": "Читает ли `%s` строку с пробелами?", "options": ["Да", "Нет, до пробела", "Только в C11", "Ошибка"], "answer": 1, "explanation": "До пробела." }
+      ],
+      "practice": {
+        "description": "Прочитай два целых числа через `scanf`, выведи сумму и произведение:\n```\nСумма: 15\nПроизведение: 50\n```\n\n**stdin:**\n```\n5\n10\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int a, b;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Сумма: 15\nПроизведение: 50",
+        "must_contain": ["scanf", "%d", "&a", "&b", "printf"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "title": "Возврат scanf, ошибки",
+      "theory": "## Возврат scanf\n\n`scanf` возвращает **число успешно прочитанных аргументов**:\n\n```c\nint n;\nint result = scanf(\"%d\", &n);\nif (result == 1) {\n    printf(\"Прочитали: %d\\n\", n);\n} else {\n    printf(\"Ошибка ввода\\n\");\n}\n```\n\n- `1` — прочитали одно значение\n- `0` — не смог прочитать (не число)\n- `EOF` — конец файла\n\n## Проблема с ошибками\n\nЕсли пользователь ввёл `abc` вместо числа, `scanf` **не сдвигает** указатель, продолжает читать то же самое. Бесконечный цикл:\n\n```c\nwhile (scanf(\"%d\", &n) != 1) {\n    // зациклится — abc не сдвигается\n}\n```\n\nРешение — сбросить буфер (прочитать строку и распарсить):\n\n```c\nchar buf[100];\nwhile (fgets(buf, sizeof(buf), stdin)) {\n    if (sscanf(buf, \"%d\", &n) == 1) break;\n    printf(\"Введи число: \");\n}\n```\n\n## Простой ввод\n\nДля большинства учебных задач **достаточно** `scanf(\"%d\", &n)` — считается, что ввод корректный.\n\n## sscanf\n\n`sscanf` — читает **из строки**, не из stdin:\n\n```c\nint a, b;\nsscanf(\"10 20\", \"%d %d\", &a, &b);   // a=10, b=20\n```\n\nУдобно парсить строки.\n\n## Что будет, если\n\n- Не проверить возврат — ошибка ввода → мусор.\n- `%d` а ввели `abc` — застревание.\n\n## Частая ошибка\n\n`while (scanf(...) != 1)` без сброса буфера — бесконечный цикл.\n\n## Итог\n\n- `scanf` возвращает число прочитанных\n- `1` — успех, `0` — не тот тип, `EOF` — конец\n- `sscanf` — из строки\n- Проверяй возврат для надёжности",
+      "questions": [
+        { "text": "Что возвращает scanf при успехе?", "options": ["0", "1 (число прочитанных)", "true", "Ничего"], "answer": 1, "explanation": "Число прочитанных." },
+        { "text": "Что при `scanf(\"%d\", &n)` и вводе `abc`?", "options": ["0", "1", "-1", "Мусор"], "answer": 0, "explanation": "0 — не прочитал." },
+        { "text": "Что делает sscanf?", "options": ["Из stdin", "Из строки", "Из файла", "Из NULL"], "answer": 1, "explanation": "Из строки." },
+        { "text": "Почему бесконечный `while (scanf != 1)`?", "options": ["Ошибка компиляции", "scanf не сдвигается", "Нет return", "Ошибка"], "answer": 1, "explanation": "Указатель стоит на неверном вводе." }
+      ],
+      "practice": {
+        "description": "Прочитай число, проверь возврат `scanf`. Если `!= 1` — выведи `Ошибка`, иначе `OK: <число>`.\n\n**stdin:**\n```\n42\n```\n\n```\nOK: 42\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int n;\n    // TODO\n    return 0;\n}\n",
+        "expected": "OK: 42",
+        "must_contain": ["scanf", "if", "== 1", "printf"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "title": "if / else, тернарный",
+      "theory": "## Синтаксис\n\n```c\nif (x > 0) {\n    printf(\"positive\\n\");\n} else if (x < 0) {\n    printf(\"negative\\n\");\n} else {\n    printf(\"zero\\n\");\n}\n```\n\nУсловие в скобках, тело в фигурных.\n\n## Операторы\n\n`==` `!=` `<` `>` `<=` `>=`. `=` — присваивание, не сравнение.\n\n```c\nif (x = 5) { }    // ОШИБКА: присваивание! x станет 5, условие всегда истина\nif (x == 5) { }   // правильно\n```\n\nКомпилятор `-Wall` предупредит. Но лучше не ошибаться.\n\n## Логические\n\n```c\nif (age >= 18 && has_passport) { }\nif (name == 'A' || name == 'B') { }\nif (!ok) { }\n```\n\n`&&` — и, `||` — или, `!` — не.\n\n## Тернарный\n\n```c\nint x = 5;\nconst char *s = x > 0 ? \"positive\" : \"negative\";\nprintf(\"%s\\n\", s);\n```\n\n`условие ? если_да : если_нет`.\n\n## Ложь и истина\n\nВ C **нет** типа `bool` в старых версиях. С `#include <stdbool.h>` есть `true`/`false`. Без него:\n- `0` — ложь\n- **любое другое** — истина (`1`, `-1`, `"abc"` и т.д.)\n\n```c\nif (5) { }    // истина\nif (0) { }    // ложь\n```\n\n## Что будет, если\n\n- `if (x = 5)` — присваивание, условие всегда истинно.\n- Забыть скобки для двух инструкций — только первая в `if`.\n- `int x = 5 > 3;` — `x = 1` (true).\n\n## Частая ошибка\n\n`if (x = 5)` вместо `if (x == 5)`. Всегда компилируй с `-Wall`.\n\n## Итог\n\n- `if (условие) { }` — скобки и фигурные\n- `else if`, `else`\n- `&&`, `||`, `!`\n- `a ? b : c` — тернарный\n- `0` — ложь, всё остальное — истина\n- `=` vs `==` — разные",
+      "questions": [
+        { "text": "Что делает `if (x = 5)`?", "options": ["Сравнение", "Присваивание, x = 5", "Ошибка компиляции", "Ничего"], "answer": 1, "explanation": "Присваивание — UB." },
+        { "text": "Как правильно сравнить?", "options": ["x = 5", "x == 5", "x === 5", "x eq 5"], "answer": 1, "explanation": "`==`." },
+        { "text": "Что считается ложью в C?", "options": ["Только false", "0", "null", "None"], "answer": 1, "explanation": "`0` — ложь." },
+        { "text": "Что делает тернарный оператор?", "options": ["Цикл", "Компактный if/else", "Функцию", "Массив"], "answer": 1, "explanation": "`a ? b : c`." },
+        { "text": "Что делает `if (5)`?", "options": ["Ложь", "Истина", "Ошибка", "Ничего"], "answer": 1, "explanation": "5 ≠ 0 — истина." }
+      ],
+      "practice": {
+        "description": "Дано `int score = 78;`. Через if/else:\n- `>= 90` → `Отлично`\n- `>= 75` → `Хорошо`\n- иначе → `Плохо`\n\n```\nХорошо\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int score = 78;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Хорошо",
+        "must_contain": ["if", "else", "score >= 90", "score >= 75", "printf"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "title": "switch",
+      "theory": "## Классический switch\n\n```c\nint day = 3;\nswitch (day) {\n    case 1:\n        printf(\"Пн\\n\");\n        break;\n    case 2:\n        printf(\"Вт\\n\");\n        break;\n    default:\n        printf(\"Другой\\n\");\n}\n```\n\n- `switch (выражение)` — только целое (`int`, `char`, `enum`)\n- `break` — выход из switch\n- `default` — если ни один case не подошёл\n\n## Fall-through\n\nЕсли нет `break`, выполнение **провалится** в следующий `case`:\n\n```c\nswitch (x) {\n    case 1:\n    case 2:\n        printf(\"1 или 2\\n\");\n        break;\n}\n```\n\nПустые `case` объединяются. Иногда используется намеренно:\n\n```c\nswitch (grade) {\n    case 'A':\n    case 'B':\n        printf(\"Хорошо\\n\");\n        break;\n    case 'C':\n        printf(\"Средне\\n\");\n        break;\n}\n```\n\n## switch vs if\n\n`switch` — точное совпадение с несколькими значениями. `if` — диапазоны, сложные условия.\n\n## Что будет, если\n\n- Забыть `break` — провал в следующие case.\n- `switch` с `double` — ошибка компиляции.\n- `switch` с `float` — нельзя.\n- Дублировать `case` — ошибка.\n\n## Частая ошибка\n\nЗабыть `break` — программа выполнит лишние `case`.\n\n## Итог\n\n- `switch (int/char)` — точное совпадение\n- `break` — выход, иначе провал\n- `default` — запасной\n- Пустые `case` — группировка\n- Только целые",
+      "questions": [
+        { "text": "Что будет без `break`?", "options": ["Ничего", "Провал в следующий case", "Ошибка", "Выход"], "answer": 1, "explanation": "Fall-through." },
+        { "text": "Для какого типа нельзя?", "options": ["int", "char", "enum", "double"], "answer": 3, "explanation": "`double` — нельзя." },
+        { "text": "Что делает `default`?", "options": ["Обязателен", "Если ни один case не подошёл", "Ошибка", "Первый"], "answer": 1, "explanation": "Аналог `else`." },
+        { "text": "Что выведет?\n```c\nint x = 2;\nswitch(x) {\n    case 1: printf(\"one \");\n    case 2: printf(\"two \");\n    case 3: printf(\"three\");\n}\n```", "options": ["two", "two three", "one two three", "Ошибка"], "answer": 1, "explanation": "Нет break — провал." }
+      ],
+      "practice": {
+        "description": "Дано `int day = 3;`. Через switch выведи:\n- 1 → `Пн`, 2 → `Вт`, 3 → `Ср`\n- иначе → `?`\n\n```\nСр\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int day = 3;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Ср",
+        "must_contain": ["switch", "case 1", "case 2", "case 3", "break", "default", "printf"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "title": "Логические операторы",
+      "theory": "## Базовые\n\n```c\nif (a > 0 && b > 0) { }   // и\nif (a == 0 || b == 0) { }  // или\nif (!flag) { }             // не\n```\n\n## Таблицы\n\n`&&`:\n| A | B | A && B |\n|---|---|---|\n| T | T | T |\n| T | F | F |\n| F | T | F |\n| F | F | F |\n\n`||`:\n| A | B | A \\|\\| B |\n|---|---|---|\n| T | T | T |\n| T | F | T |\n| F | T | T |\n| F | F | F |\n\n## Короткое замыкание\n\n`&&` и `||` **не вычисляют** второй операнд, если результат уже ясен:\n\n```c\nif (b != 0 && a / b > 2) { }\n```\n\nЕсли `b == 0`, то `a / b` **не вычислится** — нет деления на ноль.\n\nПолезно для проверок:\n\n```c\nif (ptr != NULL && ptr->value > 0) { }\n```\n\nБез `&&` — segfault.\n\n## Результат\n\n`&&` и `||` в C возвращают **0 или 1**, а не сами операнды (в отличие от Python).\n\n```c\nint x = 5 && 10;   // x = 1\nint y = 0 || 42;   // y = 1\n```\n\n## Приоритет\n\n`!` > `&&` > `||`. Сомневаешься — ставь скобки.\n\n## Что будет, если\n\n- `a == 1 || 2` — всегда истина, потому что `2` истинно.\n- `x && y` без скобок с несколькими — приоритет запутает.\n\n## Частая ошибка\n\n`if (x == 1 || 2)` — хотели «x равен 1 или 2», а получили «x равен 1 ИЛИ истина» — всегда true. Правильно: `if (x == 1 || x == 2)`.\n\n## Итог\n\n- `&&` — и, `||` — или, `!` — не\n- Короткое замыкание — второй операнд может не вычисляться\n- Результат — 0 или 1\n- Приоритет: `!` > `&&` > `||`\n- `x == 1 || 2` — ошибка",
+      "questions": [
+        { "text": "Что такое `&&`?", "options": ["Или", "И", "Не", "XOR"], "answer": 1, "explanation": "И." },
+        { "text": "Что такое короткое замыкание?", "options": ["Ошибка", "Второй операнд не вычисляется, если результат ясен", "Ускорение", "Не работает"], "answer": 1, "explanation": "Пропуск вычислений." },
+        { "text": "Что не так с `x == 1 || 2`?", "options": ["Ничего", "Всегда истина", "Синтаксис", "Нужно and"], "answer": 1, "explanation": "2 истинно, всегда true." },
+        { "text": "Приоритет `!`, `&&`, `||`?", "options": ["|| > && > !", "! > && > ||", "&& > ! > ||", "Все равны"], "answer": 1, "explanation": "`!` выше всех." }
+      ],
+      "practice": {
+        "description": "Дано `int a = 5; int b = 10;`.\n\nВыведи `1` если `a > 0 и b > 0`, иначе `0`:\n```\n1\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int a = 5;\n    int b = 10;\n    // TODO\n    return 0;\n}\n",
+        "expected": "1",
+        "must_contain": ["&&", "printf", "if"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "title": "for",
+      "theory": "## Синтаксис\n\n```c\nfor (int i = 0; i < 5; i++) {\n    printf(\"%d\\n\", i);\n}\n```\n\nТри части через `;`: **инициализация**; **условие**; **шаг**.\n\n## Пошагово\n\n1. `int i = 0` — один раз.\n2. `i < 5` — проверка перед каждой итерацией.\n3. Тело.\n4. `i++` — после тела.\n5. Повтор с шага 2.\n\n## Обратный\n\n```c\nfor (int i = 5; i > 0; i--) {\n    printf(\"%d\\n\", i);  // 5, 4, 3, 2, 1\n}\n```\n\n## Шаг\n\n```c\nfor (int i = 0; i < 10; i += 2) {\n    printf(\"%d\\n\", i);  // 0, 2, 4, 6, 8\n}\n```\n\n## Объявление снаружи\n\n```c\nint i;\nfor (i = 0; i < 5; i++) { }\nprintf(\"%d\\n\", i);  // 5 — i видна после цикла\n```\n\nС `int i` **внутри** — `i` живёт только в цикле (C99+).\n\n## Бесконечный\n\n```c\nfor (;;) { }   // эквивалент while (1)\n```\n\n## Что будет, если\n\n- Забыть `i++` — бесконечный цикл.\n- `i <= 5` вместо `< 5` — на одну итерацию больше.\n- Использовать `i` вне цикла (C99) — ошибка.\n\n## Частая ошибка\n\n`for (int i = 0; i <= 5; i++)` — пройдёт 0..5 (6 раз), а не 0..4.\n\n## Итог\n\n- `for (init; cond; step)` — три части\n- `int i` внутри — только для цикла\n- `for (;;)` — бесконечный\n- Не забыть шаг",
+      "questions": [
+        { "text": "Сколько раз выполнится `for (int i = 0; i < 5; i++)`?", "options": ["4", "5", "6", "Бесконечно"], "answer": 1, "explanation": "0, 1, 2, 3, 4 — 5 раз." },
+        { "text": "Что будет при забытом `i++`?", "options": ["Не запустится", "Бесконечный", "Один раз", "Ошибка"], "answer": 1, "explanation": "Условие всегда истинно." },
+        { "text": "Что делает `i += 2`?", "options": ["Умножает", "Прибавляет 2", "Сравнивает", "Ошибка"], "answer": 1, "explanation": "Шаг 2." },
+        { "text": "Сколько раз `for (int i = 1; i <= 3; i++)`?", "options": ["2", "3", "4", "Бесконечно"], "answer": 1, "explanation": "1, 2, 3." }
+      ],
+      "practice": {
+        "description": "Через `for` выведи числа `1..5`:\n```\n1\n2\n3\n4\n5\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3\n4\n5",
+        "must_contain": ["for", "printf", "%d"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "title": "while, do-while",
+      "theory": "## while\n\n```c\nint i = 1;\nwhile (i <= 5) {\n    printf(\"%d\\n\", i);\n    i++;\n}\n```\n\nПроверка **до** тела. Условие сразу ложно — тело не выполнится ни разу.\n\n## do-while\n\n```c\nint i = 1;\ndo {\n    printf(\"%d\\n\", i);\n    i++;\n} while (i <= 5);\n```\n\nПроверка **после** тела. Выполнится **минимум один раз**. `;` после `while (...)`.\n\n## Когда while\n\n- Не знаешь заранее, сколько итераций.\n- Читаешь ввод, пока не «выход».\n- Ждёшь события.\n\n## Когда do-while\n\n- Тело должно выполниться хотя бы раз.\n- Меню программы.\n\n## Пример: сумма, пока не 0\n\n```c\nint total = 0;\nint n;\nwhile (scanf(\"%d\", &n) == 1 && n != 0) {\n    total += n;\n}\nprintf(\"Сумма: %d\\n\", total);\n```\n\n## Бесконечный\n\n```c\nwhile (1) {\n    // выход через break\n}\n```\n\n## Что будет, если\n\n- Забыть `i++` — бесконечный.\n- `do-while` без `;` — ошибка компиляции.\n- `while (1)` без break — вечный.\n\n## Частая ошибка\n\nЗабыть `;` после `while (...)` в `do-while`.\n\n## Итог\n\n- `while (cond)` — проверка до\n- `do { } while (cond);` — после, `;` обязателен\n- `do-while` — минимум один раз\n- `while (1)` + `break` — стандарт",
+      "questions": [
+        { "text": "Чем `do-while` отличается от `while`?", "options": ["Ничем", "`do-while` проверяет после", "`do-while` без условия", "`while` быстрее"], "answer": 1, "explanation": "После тела." },
+        { "text": "Сколько раз выполнится `do-while` при ложном условии?", "options": ["0", "1", "2", "Бесконечно"], "answer": 1, "explanation": "Минимум раз." },
+        { "text": "Что будет без `;` после `while (...)` в do-while?", "options": ["Работает", "Ошибка компиляции", "Бесконечно", "Ничего"], "answer": 1, "explanation": "`;` обязателен." },
+        { "text": "Что при забытом `i++` в while?", "options": ["Ошибка", "Бесконечный", "Один раз", "Не запустится"], "answer": 1, "explanation": "Условие всегда истинно." }
+      ],
+      "practice": {
+        "description": "Через `while` выведи `1..5`, каждое на новой строке:\n```\n1\n2\n3\n4\n5\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3\n4\n5",
+        "must_contain": ["while", "printf", "%d"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "title": "break, continue",
+      "theory": "## break — выйти\n\n```c\nfor (int i = 0; i < 10; i++) {\n    if (i == 3) break;\n    printf(\"%d\\n\", i);   // 0, 1, 2\n}\n```\n\n## continue — пропустить итерацию\n\n```c\nfor (int i = 0; i < 5; i++) {\n    if (i == 2) continue;\n    printf(\"%d\\n\", i);   // 0, 1, 3, 4\n}\n```\n\n## Разница\n\n| `break` | `continue` |\n|---|---|\n| Выходит насовсем | Пропускает одну |\n\n## В while\n\n`break` и `continue` работают так же.\n\n```c\nint i = 0;\nwhile (i < 10) {\n    i++;\n    if (i == 5) break;\n    printf(\"%d\\n\", i);\n}\n```\n\nОбрати внимание: `i++` до `continue`, иначе зациклится.\n\n## break во вложенных\n\n`break` выходит только из **текущего** цикла.\n\n```c\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 3; j++) {\n        if (j == 1) break;\n        printf(\"%d,%d\\n\", i, j);\n    }\n}\n```\n\n## Что будет, если\n\n- `continue` до `i++` — бесконечный цикл.\n- `break` вне цикла — ошибка компиляции.\n\n## Частая ошибка\n\nВ `while` с `continue` забыли обновить счётчик — бесконечный цикл.\n\n## Итог\n\n- `break` — выйти\n- `continue` — пропустить итерацию\n- `break` во вложенных — только текущий\n- `continue` в while — обнови счётчик до него",
+      "questions": [
+        { "text": "Что делает `break`?", "options": ["Пропускает", "Выходит из цикла", "Возвращает", "Ничего"], "answer": 1, "explanation": "Из цикла." },
+        { "text": "Что делает `continue`?", "options": ["Выходит", "Пропускает итерацию", "Возвращает", "Ошибка"], "answer": 1, "explanation": "К следующей." },
+        { "text": "Что выведет?\n```c\nfor (int i = 0; i < 5; i++) {\n    if (i == 3) break;\n    printf(\"%d \", i);\n}\n```", "options": ["0 1 2", "0 1 2 3", "0 1 2 4", "3 4"], "answer": 0, "explanation": "break на 3." },
+        { "text": "Из какого цикла выходит break во вложенных?", "options": ["Из всех", "Только из текущего", "Только из внешнего", "Ошибка"], "answer": 1, "explanation": "Только текущий." }
+      ],
+      "practice": {
+        "description": "Через `for` от 1 до 10 выведи только нечётные, используя `continue`:\n```\n1\n3\n5\n7\n9\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n3\n5\n7\n9",
+        "must_contain": ["for", "continue", "% 2", "printf"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "title": "Объявление, параметры, return",
+      "theory": "## Функция\n\n```c\nint sum(int a, int b) {\n    return a + b;\n}\n\nint main(void) {\n    int s = sum(2, 3);\n    printf(\"%d\\n\", s);\n    return 0;\n}\n```\n\n## Разбор\n\n- `int` — тип возврата\n- `sum` — имя\n- `(int a, int b)` — параметры\n- `return` — вернуть и выйти\n\n## Параметры — копии\n\n```c\nvoid change(int x) { x = 100; }\nint a = 5;\nchange(a);\nprintf(\"%d\\n\", a);   // 5\n```\n\nПримитивы передаются **по значению**. Для изменения — через указатель.\n\n## Массивы в параметрах\n\n```c\nvoid fill(int arr[], int n) {\n    for (int i = 0; i < n; i++) arr[i] = i * 2;\n}\n```\n\nМассив передаётся **как указатель**. Изменения видны снаружи.\n\n## Возврат\n\nОдна `return` в функции — обычная практика. Несколько — early return:\n\n```c\nint abs(int x) {\n    if (x < 0) return -x;\n    return x;\n}\n```\n\n## Что будет, если\n\n- Забыть `return` в функции с возвратом — UB.\n- Вернуть не тот тип — приведение, может теряться.\n- Изменить параметр — только копию.\n\n## Частая ошибка\n\nДумать, что изменение параметра-числа изменит оригинал. Нет.\n\n## Итог\n\n- `тип имя(параметры) { return ...; }`\n- `return` — вернуть\n- Примитивы — копии\n- Массивы — по указателю\n- Одна или несколько `return`",
+      "questions": [
+        { "text": "Что возвращает функция `int sum(int a, int b) { return a + b; }`?", "options": ["void", "int", "double", "char"], "answer": 1, "explanation": "`int` в сигнатуре." },
+        { "text": "Как передаются примитивы в функцию?", "options": ["По ссылке", "По значению (копия)", "По указателю", "По адресу"], "answer": 1, "explanation": "Копия." },
+        { "text": "Что будет, если изменить `x` в функции?", "options": ["Оригинал изменится", "Оригинал не изменится", "Ошибка", "UB"], "answer": 1, "explanation": "Копия." },
+        { "text": "Как передаётся массив?", "options": ["Копия", "По указателю", "По значению", "По const"], "answer": 1, "explanation": "Массив — указатель." }
+      ],
+      "practice": {
+        "description": "Создай `int square(int x)` — возвращает `x * x`.\n\nВ `main` выведи `square(5)` и `square(3)`:\n```\n25\n9\n```",
+        "starter": "#include <stdio.h>\n\n// TODO: square\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n9",
+        "must_contain": ["int square", "return", "printf"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "title": "void, прототипы",
+      "theory": "## void\n\n`void` — «ничего». Два применения:\n\n### 1. Как тип возврата\n\n```c\nvoid greet(void) {\n    printf(\"Привет\\n\");\n}\n```\n\nФункция ничего не возвращает. `return;` (без значения) — просто выйти.\n\n### 2. Как параметр\n\n```c\nint main(void) {\n    // нет параметров\n}\n```\n\n`(void)` = «нет параметров». Старый стиль, но идиоматично.\n\n## Прототип функции\n\nОбъявление **до** использования, без тела:\n\n```c\nint sum(int a, int b);  // прототип\n\nint main(void) {\n    printf(\"%d\\n\", sum(2, 3));\n    return 0;\n}\n\nint sum(int a, int b) {  // определение\n    return a + b;\n}\n```\n\nКомпилятор знает сигнатуру при вызове. Работает.\n\n## Зачем прототип\n\n- Разделение кода: заголовок `foo.h` + реализация `foo.c`.\n- Взаимная рекурсия.\n- Порядок в файле не важен.\n\n## Без прототипа\n\nЕсли `main` вызывает `sum` до объявления — современный C выдаст **warning** или ошибку (`implicit declaration`). В C89 — работало, в C99+ — нет.\n\n## Заголовочный файл\n\n`math_utils.h`:\n\n```c\n#ifndef MATH_UTILS_H\n#define MATH_UTILS_H\n\nint sum(int a, int b);\n\n#endif\n```\n\n`math_utils.c`:\n\n```c\n#include \"math_utils.h\"\n\nint sum(int a, int b) {\n    return a + b;\n}\n```\n\n## Что будет, если\n\n- `void f(void) { return 5; }` — ошибка.\n- Вызвать без прототипа — ошибка компиляции в C99+.\n- `void` как обычная переменная — ошибка.\n\n## Частая ошибка\n\n`void main()` — **не** стандарт. Правильно `int main(void) { ... return 0; }`.\n\n## Итог\n\n- `void` — без возврата / без параметров\n- `int main(void)` — стандарт\n- Прототип: `int sum(int, int);`\n- Определение — с телом\n- `void main()` — устаревшее",
+      "questions": [
+        { "text": "Что означает `void` в сигнатуре?", "options": ["Тип", "Ничего", "Ошибка", "Все"], "answer": 1, "explanation": "«Ничего»." },
+        { "text": "Что такое прототип?", "options": ["Вызов", "Объявление без тела", "Ошибка", "Возврат"], "answer": 1, "explanation": "Объявление." },
+        { "text": "Можно ли `void main()`?", "options": ["Да, стандарт", "Нет, стандарт `int main`", "Иногда", "Только в Windows"], "answer": 1, "explanation": "`int main(void)` — стандарт." },
+        { "text": "Что в `void f(void) { return 5; }`?", "options": ["Работает", "Ошибка — void без значения", "Warning", "Ничего"], "answer": 1, "explanation": "`void` — без return с значением." }
+      ],
+      "practice": {
+        "description": "Создай `void hello(void)` — печатает `Привет, мир!`.\n\nПрототип до `main`.\n\n```\nПривет, мир!\n```",
+        "starter": "#include <stdio.h>\n\n// TODO: прототип\n\nint main(void) {\n    // TODO: вызов\n    return 0;\n}\n\n// TODO: определение\n",
+        "expected": "Привет, мир!",
+        "must_contain": ["void hello", "void hello(void);", "printf", "hello()"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "title": "Рекурсия",
+      "theory": "## Что такое рекурсия\n\nФункция вызывает **саму себя** с меньшим аргументом.\n\n```c\nint fact(int n) {\n    if (n <= 1) return 1;\n    return n * fact(n - 1);\n}\n```\n\n## База\n\nОбязательное условие выхода. Без него — бесконечные вызовы → stack overflow (падение).\n\n## Как читать\n\n```\nfact(5) = 5 * fact(4)\nfact(4) = 4 * fact(3)\nfact(3) = 3 * fact(2)\nfact(2) = 2 * fact(1)\nfact(1) = 1\n```\n\nВозврат: `1 * 2 * 3 * 4 * 5 = 120`.\n\n## Взаимная рекурсия\n\n`isEven` и `isOdd`:\n\n```c\nint isEven(int n);\nint isOdd(int n);\n\nint isEven(int n) {\n    if (n == 0) return 1;\n    return isOdd(n - 1);\n}\n\nint isOdd(int n) {\n    if (n == 0) return 0;\n    return isEven(n - 1);\n}\n```\n\nНужны прототипы (взаимные вызовы).\n\n## Стек вызовов\n\nПока работает `fact(5)`, все промежуточные вызовы висят в памяти. Глубина ограничена (~1000 для типичного стека).\n\n## Сравнение с циклом\n\n```c\nint fact_iter(int n) {\n    int result = 1;\n    for (int i = 2; i <= n; i++) result *= i;\n    return result;\n}\n```\n\nИтеративный вариант быстрее и не падает на больших n. Рекурсия — короче, но опаснее.\n\n## Что будет, если\n\n- Забыть базу — stack overflow (segfault).\n- Не уменьшать аргумент — бесконечность.\n- Глубокая рекурсия — переполнение стека.\n\n## Частая ошибка\n\n`return fact(n);` — нет уменьшения. Бесконечный цикл.\n\n## Итог\n\n- Рекурсия — самовызов\n- База — обязательна\n- Стек вызовов\n- Ограничение глубины\n- Итерация быстрее и надёжнее",
+      "questions": [
+        { "text": "Что обязательно в рекурсии?", "options": ["Цикл", "База (условие выхода)", "Массив", "Return void"], "answer": 1, "explanation": "Без базы — переполнение." },
+        { "text": "Что будет без базы?", "options": ["0", "Stack overflow", "1", "Ошибка компиляции"], "answer": 1, "explanation": "Переполнение стека." },
+        { "text": "Что вернёт `fact(5)` при `fact(1) = 1`?", "options": ["5", "120", "1", "Ошибка"], "answer": 1, "explanation": "5! = 120." },
+        { "text": "Что эффективнее для факториала 1000?", "options": ["Рекурсия", "Цикл", "Одинаково", "Ошибка"], "answer": 1, "explanation": "Рекурсия — stack overflow." }
+      ],
+      "practice": {
+        "description": "Создай рекурсивную `int fact(int n)`:\n- `n <= 1` → `1`\n- иначе → `n * fact(n - 1)`\n\nВыведи `fact(5)`:\n```\n120\n```",
+        "starter": "#include <stdio.h>\n\n// TODO: fact\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "120",
+        "must_contain": ["int fact", "if", "return", "fact(n - 1)", "printf"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "title": "Массивы: создание, индексы",
+      "theory": "## Массив\n\n```c\nint arr[5];              // 5 элементов, мусор\nint nums[] = {1, 2, 3, 4, 5};   // 5, из литерала\nint zeros[10] = {0};     // все нули\n```\n\nДлина **фиксирована** при создании.\n\n## Индексы\n\nС нуля. `arr[0]` — первый, `arr[4]` — пятый. `arr[5]` — **выход за границы**, UB (может упасть, может нет).\n\n## Длина\n\n```c\nint arr[5];\nint n = sizeof(arr) / sizeof(arr[0]);  // 5\n```\n\n**Только** для массивов, не для указателей. В функции параметр `int arr[]` — указатель, `sizeof` вернёт размер указателя.\n\n## Присваивание\n\n```c\narr[0] = 10;\narr[1] = 20;\n```\n\n## Выход за границы\n\n```c\nint arr[3] = {1, 2, 3};\narr[5] = 100;    // UB — перезапись чужой памяти\n```\n\nНе падает сразу — может повредить другую переменную. Классический баг.\n\n## Инициализация\n\n```c\nint a[5] = {1, 2, 3};    // {1, 2, 3, 0, 0} — остальные 0\nint b[5] = {0};          // все 0\nint c[] = {1, 2, 3};     // длина 3\n```\n\n## Что будет, если\n\n- `arr[10]` для длины 5 — UB.\n- Массив без инициализации — мусор.\n- `sizeof(arr)` в функции — размер указателя.\n\n## Частая ошибка\n\nВыход за границы массива в C **не проверяется**. Программа может работать, но с багом, который проявится позже.\n\n## Итог\n\n- `int arr[5]` — фиксированная длина\n- Индексы 0..4\n- `sizeof(arr) / sizeof(arr[0])` — длина\n- За границей — UB\n- `{0}` — все нули",
+      "questions": [
+        { "text": "Как объявить массив 5 int?", "options": ["int arr[5];", "int arr(5);", "int[] arr;", "arr int 5;"], "answer": 0, "explanation": "`int arr[5]`." },
+        { "text": "Какой последний индекс для длины 5?", "options": ["5", "4", "6", "0"], "answer": 1, "explanation": "0..4." },
+        { "text": "Что при `arr[5]` для `int arr[5]`?", "options": ["0", "Последний", "UB (выход за границу)", "Ошибка"], "answer": 2, "explanation": "UB." },
+        { "text": "Как получить длину?", "options": ["arr.length", "sizeof(arr) / sizeof(arr[0])", "len(arr)", "arr.size()"], "answer": 1, "explanation": "sizeof." },
+        { "text": "Что в `int a[5] = {1, 2};`?", "options": ["{1, 2}", "{1, 2, 0, 0, 0}", "Ошибка", "Мусор"], "answer": 1, "explanation": "Остальные — 0." }
+      ],
+      "practice": {
+        "description": "Создай `int arr[] = {10, 20, 30, 40, 50};`.\n\nВыведи:\n```\nПервый: 10\nПоследний: 50\nДлина: 5\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int arr[] = {10, 20, 30, 40, 50};\n    // TODO\n    return 0;\n}\n",
+        "expected": "Первый: 10\nПоследний: 50\nДлина: 5",
+        "must_contain": ["arr[0]", "arr[4]", "sizeof", "printf"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "title": "Обход массивов",
+      "theory": "## Через for с индексом\n\n```c\nint arr[] = {10, 20, 30};\nint n = sizeof(arr) / sizeof(arr[0]);\nfor (int i = 0; i < n; i++) {\n    printf(\"%d\\n\", arr[i]);\n}\n```\n\n## Сумма\n\n```c\nint sum = 0;\nfor (int i = 0; i < n; i++) {\n    sum += arr[i];\n}\nprintf(\"%d\\n\", sum);\n```\n\n## Максимум\n\n```c\nint max = arr[0];\nfor (int i = 1; i < n; i++) {\n    if (arr[i] > max) max = arr[i];\n}\n```\n\nСтарт с `arr[0]`, не с `0` — при всех отрицательных максимум был бы `0`.\n\n## Поиск\n\n```c\nint target = 20;\nint found = 0;\nfor (int i = 0; i < n; i++) {\n    if (arr[i] == target) {\n        found = 1;\n        break;\n    }\n}\n```\n\n## for-each в C?\n\nВ C **нет** for-each для массивов. Только `for` с индексом. В C++ — range-based for.\n\n## Двумерные массивы\n\n```c\nint matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};\nfor (int i = 0; i < 2; i++) {\n    for (int j = 0; j < 3; j++) {\n        printf(\"%d \", matrix[i][j]);\n    }\n    printf(\"\\n\");\n}\n```\n\n## Что будет, если\n\n- `i <= n` вместо `< n` — выход за границу.\n- Максимум с `0` — при отрицательных неверный.\n\n## Частая ошибка\n\n`for (int i = 0; i <= n; i++)` — на одну итерацию больше, UB.\n\n## Итог\n\n- `for (int i = 0; i < n; i++)` — стандарт\n- `sizeof(arr) / sizeof(arr[0])` — длина\n- Накопитель — до цикла\n- Максимум — с `arr[0]`\n- `<=` — ошибка",
+      "questions": [
+        { "text": "Как правильно обходить?", "options": ["i <= n", "i < n", "i > n", "i == n"], "answer": 1, "explanation": "`< n`." },
+        { "text": "С чего начинать максимум?", "options": ["0", "arr[0]", "-1", "1"], "answer": 1, "explanation": "`arr[0]`." },
+        { "text": "Есть ли в C for-each?", "options": ["Да", "Нет, только for", "Только для int", "В C11"], "answer": 1, "explanation": "Только for с индексом." },
+        { "text": "Что при `i <= n`?", "options": ["Работает", "Выход за границу (UB)", "Ошибка", "Мусор"], "answer": 1, "explanation": "UB." }
+      ],
+      "practice": {
+        "description": "Дан `int arr[] = {3, 7, 2, 9, 5};`.\n\nВыведи:\n```\nСумма: 26\nМаксимум: 9\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int arr[] = {3, 7, 2, 9, 5};\n    // TODO\n    return 0;\n}\n",
+        "expected": "Сумма: 26\nМаксимум: 9",
+        "must_contain": ["for", "sizeof", "printf"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "title": "Строки: char[], нуль-терминатор",
+      "theory": "## Строка в C\n\nСтроки в C — **массивы `char`**, заканчивающиеся **нулём** `'\\0'`:\n\n```c\nchar str[6] = \"hello\";    // 'h','e','l','l','o','\\0'\n```\n\n`strlen(str)` = 5, но `sizeof(str)` = 6 (с нулём).\n\n## Создание\n\n```c\nchar s1[] = \"hello\";       // длина 6 (5 + \\0)\nchar s2[6] = \"hello\";     // точно влезает\nchar s3[10] = \"hi\";       // 'h','i',0,0,0,0,0,0,0,0\nchar s4[] = {'h', 'i', '\\0'};  // то же\n```\n\n## Без нуля — не строка\n\n```c\nchar s[] = {'h', 'i'};   // массив из 2 char, НЕ строка (нет \\0)\nprintf(\"%s\\n\", s);     // UB — printf ищет \\0, читает мусор\n```\n\n## Ввод\n\n```c\nchar name[50];\nscanf(\"%s\", name);       // без &, до пробела\nfgets(name, 50, stdin);  // вся строка, включая пробелы\n```\n\n`scanf` без размера — **опасно** (переполнение). `fgets` безопасен.\n\n## Длина\n\n```c\nprintf(\"%zu\\n\", strlen(str));   // без \\0\nprintf(\"%zu\\n\", sizeof(str));   // с \\0\n```\n\n## Что будет, если\n\n- Забыть `\\0` — UB при `printf(\"%s\")`.\n- `char s[5] = \"hello\";` — не влезает `\\0`, ошибка/мусор.\n- `scanf(\"%s\")` с длинной строкой — переполнение буфера.\n\n## Частая ошибка\n\n`char s[5] = \"hello\";` — не хватает места под `\\0`. Нужен минимум 6.\n\n## Итог\n\n- Строка — `char[]` + `'\\0'` в конце\n- Длина = символы + 1\n- `scanf(\"%s\")` — до пробела, без `&`\n- `fgets` — вся строка, безопасно\n- `strlen` — без нуля, `sizeof` — с нулём",
+      "questions": [
+        { "text": "Чем заканчивается строка в C?", "options": ["\\n", "\\0", "EOF", "Ничем"], "answer": 1, "explanation": "`\\0`." },
+        { "text": "Сколько байт в `char s[] = \"hello\";`?", "options": ["5", "6", "7", "Ошибка"], "answer": 1, "explanation": "5 + `\\0` = 6." },
+        { "text": "Что при `scanf(\"%s\", str)` без `&`?", "options": ["Ошибка", "Работает", "UB", "Мусор"], "answer": 1, "explanation": "Строка — уже адрес." },
+        { "text": "Что безопаснее для строки с пробелами?", "options": ["scanf %s", "fgets", "cin", "puts"], "answer": 1, "explanation": "`fgets`." },
+        { "text": "Что при `char s[5] = \"hello\";`?", "options": ["Работает", "Ошибка — не влезает \\0", "Обрезает", "UB"], "answer": 1, "explanation": "Нужен 6." }
+      ],
+      "practice": {
+        "description": "Создай `char name[] = \"Иван\";` (4 символа + `\\0`).\n\nВыведи:\n```\nИмя: Иван\nДлина: 4\n```\n\nДлина — через `strlen`.",
+        "starter": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Имя: Иван\nДлина: 4",
+        "must_contain": ["char name", "strlen", "printf", "%s"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "title": "string.h: strlen, strcpy, strcmp",
+      "theory": "## strlen\n\n```c\n#include <string.h>\n\nsize_t len = strlen(\"hello\");   // 5\n```\n\nВозвращает `size_t` (беззнаковый). Без `\\0`.\n\n## strcpy — копирование\n\n```c\nchar dst[20];\nstrcpy(dst, \"hello\");\n```\n\nКопирует до `\\0`. **Не проверяет** размер `dst` — переполнение, если мало.\n\nБезопасный вариант — `strncpy`:\n\n```c\nstrncpy(dst, \"hello\", sizeof(dst) - 1);\ndst[sizeof(dst) - 1] = '\\0';\n```\n\n## strcat — конкатенация\n\n```c\nchar s[20] = \"Hello\";\nstrcat(s, \", world\");    // \"Hello, world\"\n```\n\nДописывает в конец. Тоже не проверяет размер.\n\n## strcmp — сравнение\n\n```c\nif (strcmp(a, b) == 0) { }   // равны\nif (strcmp(a, b) < 0) { }    // a < b\nif (strcmp(a, b) > 0) { }    // a > b\n```\n\n**Не** `a == b` — это сравнение **указателей**, не содержимого.\n\n## strchr, strstr\n\n```c\nchar *pos = strchr(\"hello\", 'l');      // позиция первого 'l'\nchar *sub = strstr(\"hello world\", \"world\");  // позиция подстроки или NULL\n```\n\n## Что будет, если\n\n- `strcpy` в маленький буфер — переполнение (UB).\n- `if (a == b)` для строк — сравнивает адреса, не содержимое.\n- `strcmp` без `#include <string.h>` — ошибка.\n\n## Частая ошибка\n\n`if (str1 == str2)` для строк — **никогда** не используй. Только `strcmp`.\n\n## Итог\n\n- `strlen` — длина\n- `strcpy` — копирование (опасно)\n- `strcat` — конкатенация\n- `strcmp` — сравнение по содержимому\n- `strstr` — поиск подстроки\n- `==` для строк — только адреса",
+      "questions": [
+        { "text": "Что делает `strlen`?", "options": ["Копирует", "Длина", "Сравнивает", "Ищет"], "answer": 1, "explanation": "Длина." },
+        { "text": "Как сравнить две строки?", "options": ["a == b", "strcmp(a, b) == 0", "a < b", "a.equals(b)"], "answer": 1, "explanation": "`strcmp`." },
+        { "text": "Что при `a == b` для строк?", "options": ["Сравнение содержимого", "Сравнение указателей", "Ошибка", "Всегда true"], "answer": 1, "explanation": "Указатели." },
+        { "text": "Что опасно в `strcpy`?", "options": ["Медленно", "Переполнение буфера", "Ничего", "Ошибка"], "answer": 1, "explanation": "Не проверяет размер." }
+      ],
+      "practice": {
+        "description": "Дано:\n```\nchar a[] = \"hello\";\nchar b[] = \"world\";\n```\n\nВыведи:\n```\na: 5\nb: 5\nРавны: 0\n```\n\nПоследняя — через `strcmp`.",
+        "starter": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char a[] = \"hello\";\n    char b[] = \"world\";\n    // TODO\n    return 0;\n}\n",
+        "expected": "a: 5\nb: 5\nРавны: 0",
+        "must_contain": ["strlen", "strcmp", "printf", "%zu", "%d"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "Указатели: адреса, &",
+      "theory": "## Что такое указатель\n\nУказатель — переменная, хранящая **адрес** другой переменной.\n\n```c\nint x = 10;\nint *p = &x;    // p хранит адрес x\n```\n\n- `&x` — адрес переменной x\n- `*p` — тип «указатель на int»\n\n## Синтаксис\n\n```c\nint *p;         // указатель на int\nchar *s;        // указатель на char (часто — на строку)\ndouble *d;      // указатель на double\n```\n\n`int* p` или `int *p` — одно и то же, `*` привязан к переменной, но не к типу.\n\n## Адрес в printf\n\n```c\nint x = 10;\nprintf(\"%p\\n\", (void*)&x);   // адрес в hex: 0x7ffe...\n```\n\n`%p` — спецификатор для указателя.\n\n## Указатель и его значение\n\n```c\nint x = 10;\nint *p = &x;\n\nprintf(\"%p\\n\", (void*)p);    // адрес, например 0x7ffe1234\nprintf(\"%d\\n\", *p);          // 10 — значение по адресу\n```\n\n`p` — адрес. `*p` — значение по адресу.\n\n## Зачем указатели\n\n- Изменять переменную из функции.\n- Работать с динамической памятью (`malloc`).\n- Эффективно передавать большие структуры.\n- Арифметика указателей, массивы.\n\n## NULL\n\n```c\nint *p = NULL;   // никуда не указывает\nif (p != NULL) { /* безопасно разыменовывать */ }\n```\n\nРазыменование `NULL` — segfault.\n\n## Что будет, если\n\n- `int *p = 5;` — ошибка (число не адрес).\n- Разыменовать `NULL` — segfault.\n- Использовать `%p` с не-указателем — UB.\n\n## Частая ошибка\n\n`printf(\"%d\", p)` для указателя — UB. Нужен `%p` и cast `(void*)`.\n\n## Итог\n\n- `&x` — адрес\n- `*p` — разыменование\n- `int *p = &x` — сохранили адрес\n- `%p` — вывод адреса\n- `NULL` — не указывает\n- Разыменование NULL — segfault",
+      "questions": [
+        { "text": "Что делает `&x`?", "options": ["Значение", "Адрес", "Удаление", "Копия"], "answer": 1, "explanation": "Адрес." },
+        { "text": "Что такое `int *p`?", "options": ["int", "Указатель на int", "Массив", "Ошибка"], "answer": 1, "explanation": "Указатель." },
+        { "text": "Что при `printf(\"%p\", (void*)&x)`?", "options": ["Значение", "Адрес", "Ошибка", "10"], "answer": 1, "explanation": "Адрес." },
+        { "text": "Что такое NULL?", "options": ["0", "Указатель никуда", "Пустая строка", "Ошибка"], "answer": 1, "explanation": "Нулевой указатель." }
+      ],
+      "practice": {
+        "description": "Создай `int x = 42;`, указатель `int *p = &x;`.\n\nВыведи `*p` и `p != NULL` как 1/0:\n```\n*p = 42\np is not NULL: 1\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int x = 42;\n    // TODO\n    return 0;\n}\n",
+        "expected": "*p = 42\np is not NULL: 1",
+        "must_contain": ["int *p", "&x", "*p", "NULL", "printf"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "title": "Разыменование *",
+      "theory": "## Разыменование\n\n`*p` — значение по адресу, на который указывает `p`.\n\n```c\nint x = 10;\nint *p = &x;\n\nprintf(\"%d\\n\", *p);    // 10\n*p = 20;                // изменить x через p\nprintf(\"%d\\n\", x);     // 20\n```\n\n## Изменение через указатель\n\n```c\nvoid increment(int *p) {\n    (*p)++;    // скобки обязательны: *p++ — другое\n}\n\nint x = 5;\nincrement(&x);\nprintf(\"%d\\n\", x);   // 6\n```\n\n`(*p)++` — увеличить значение. `*p++` — сдвиг указателя (не то).\n\n## Зачем указатели в функциях\n\n```c\nvoid swap(int *a, int *b) {\n    int t = *a;\n    *a = *b;\n    *b = t;\n}\n\nint x = 1, y = 2;\nswap(&x, &y);\nprintf(\"%d %d\\n\", x, y);   // 2 1\n```\n\nБез указателей swap не сработает — передаются копии.\n\n## Указатель на указатель\n\n```c\nint x = 10;\nint *p = &x;\nint **pp = &p;\nprintf(\"%d\\n\", **pp);   // 10\n```\n\n## Константные указатели\n\n```c\nconst int *p = &x;   // нельзя *p = 5\nint * const p = &x;  // нельзя p = &y\nconst int * const p = &x;   // нельзя ни то, ни то\n```\n\n## Что будет, если\n\n- `*p` без `p` инициализировано — UB (мусорный адрес, segfault).\n- `*p++` вместо `(*p)++` — другая операция.\n- Разыменовать NULL — segfault.\n\n## Частая ошибка\n\n`*p++` — это `*(p++)`, сдвиг указателя, не инкремент значения. Нужны скобки `(*p)++`.\n\n## Итог\n\n- `*p` — значение по адресу\n- `*p = x` — записать\n- `(*p)++` — инкремент значения\n- Для swap — указатели\n- `**pp` — указатель на указатель",
+      "questions": [
+        { "text": "Что делает `*p`?", "options": ["Адрес", "Значение по адресу", "Копия адреса", "Ошибка"], "answer": 1, "explanation": "Значение." },
+        { "text": "Как изменить значение через указатель?", "options": ["*p = 20", "p = 20", "&p = 20", "Ошибка"], "answer": 0, "explanation": "`*p = 20`." },
+        { "text": "Что нужно для swap через указатели?", "options": ["*", "&", "Оба", "Ничего"], "answer": 2, "explanation": "`*` и `&`." },
+        { "text": "Что делает `*p++`?", "options": ["Инкремент значения", "Сдвиг указателя", "Ошибка", "Ничего"], "answer": 1, "explanation": "`*(p++)` — сдвиг." }
+      ],
+      "practice": {
+        "description": "Создай `int x = 10; int *p = &x;`.\n\n1. Выведи `*p`.\n2. Через `*p` присвой 20.\n3. Выведи `x`.\n\n```\n10\n20\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int x = 10;\n    // TODO\n    return 0;\n}\n",
+        "expected": "10\n20",
+        "must_contain": ["int *p", "&x", "*p", "printf"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "title": "malloc / free",
+      "theory": "## Динамическая память\n\nМассив `int arr[5]` — фиксированная длина. Хочешь гибкую — `malloc`.\n\n```c\n#include <stdlib.h>\n\nint *arr = malloc(5 * sizeof(int));\nif (arr == NULL) {\n    // ошибка выделения\n    return 1;\n}\n// использование\narr[0] = 10;\nfree(arr);\n```\n\n## malloc\n\n```c\nvoid *malloc(size_t size);\n```\n\nВозвращает `void*` — указатель на блок памяти или `NULL`. Не инициализирует (мусор).\n\n## calloc\n\n```c\nint *arr = calloc(5, sizeof(int));   // обнуляет\n```\n\n`calloc(количество, размер)`. Все байты 0.\n\n## realloc\n\n```c\narr = realloc(arr, 10 * sizeof(int));   // расширить\n```\n\n## free\n\n```c\nfree(arr);\n```\n\n**Обязательно** после `malloc`. Забыл — утечка (утечка памяти).\n\n## Двойной free — UB\n\n```c\nfree(arr);\nfree(arr);    // UB — падение или порча\n```\n\n## Использование после free\n\n```c\nfree(arr);\narr[0] = 10;   // UB\n```\n\nУказатель после `free` невалидный. Присвой `NULL`:\n\n```c\nfree(arr);\narr = NULL;\n```\n\n## Проверка\n\n```c\nif (arr == NULL) {\n    printf(\"Не хватило памяти\\n\");\n    return 1;\n}\n```\n\nВсегда проверяй!\n\n## Что будет, если\n\n- Забыть `free` — утечка.\n- `free` дважды — UB.\n- Использовать после `free` — UB.\n- Не проверить `NULL` — segfault.\n\n## Частая ошибка\n\nУтечки памяти в цикле: `malloc` без `free`.\n\n## Итог\n\n- `malloc(size)` — выделить\n- `calloc(n, size)` — выделить с нулями\n- `realloc` — изменить размер\n- `free` — освободить\n- Проверять NULL\n- После `free` — `NULL`",
+      "questions": [
+        { "text": "Зачем `malloc`?", "options": ["Ускорить", "Выделить память", "Освободить", "Ничего"], "answer": 1, "explanation": "Выделение." },
+        { "text": "Что делает `free`?", "options": ["Выделяет", "Освобождает", "Обнуляет", "Копирует"], "answer": 1, "explanation": "Освобождение." },
+        { "text": "Что при забытом `free`?", "options": ["Ничего", "Утечка памяти", "Падение", "Ошибка компиляции"], "answer": 1, "explanation": "Утечка." },
+        { "text": "Что при `free` дважды?", "options": ["Нормально", "UB", "Ошибка компиляции", "Утечка"], "answer": 1, "explanation": "UB — двойное освобождение." },
+        { "text": "Что делает `calloc` в отличие от `malloc`?", "options": ["Быстрее", "Обнуляет", "Меньше", "Ошибка"], "answer": 1, "explanation": "Нули." }
+      ],
+      "practice": {
+        "description": "Выдели массив из 3 int через `malloc`, заполни 10, 20, 30, выведи через пробел, освободи.\n\n```\n10 20 30\n```",
+        "starter": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "10 20 30",
+        "must_contain": ["malloc", "free", "printf"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "title": "Указатели и массивы",
+      "theory": "## Массив — указатель на первый\n\n```c\nint arr[] = {10, 20, 30};\nint *p = arr;   // то же, что &arr[0]\n```\n\nИмя массива — **адрес первого элемента**. Не указатель в полном смысле (нельзя `arr = ...`), но работает как указатель в выражениях.\n\n## Индексация и арифметика\n\n```c\nint arr[] = {10, 20, 30};\n\nprintf(\"%d\\n\", arr[0]);      // 10\nprintf(\"%d\\n\", *(arr + 0));  // 10 — то же\nprintf(\"%d\\n\", arr[1]);      // 20\nprintf(\"%d\\n\", *(arr + 1));  // 20\n```\n\n`arr[i]` = `*(arr + i)`.\n\n## Арифметика указателей\n\n`p + 1` — не +1 байт, а +1 **элемент** (на `sizeof(int)` байт).\n\n```c\nint *p = arr;\nprintf(\"%d\\n\", *p);       // 10\np++;                      // сдвиг на 1 элемент\nprintf(\"%d\\n\", *p);       // 20\n```\n\n## Обход\n\n```c\nint arr[] = {10, 20, 30};\nint *p = arr;\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d\\n\", *(p + i));\n}\n```\n\nИли через `p++`:\n\n```c\nfor (int *p = arr; p < arr + 3; p++) {\n    printf(\"%d\\n\", *p);\n}\n```\n\n## Массив в функции\n\n```c\nvoid printArr(int *arr, int n) {\n    for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);\n}\n\nint arr[] = {1, 2, 3};\nprintArr(arr, 3);\n```\n\n`int arr[]` и `int *arr` в параметрах — **одно и то же**. Размер через `sizeof` не работает (это указатель).\n\n## Что будет, если\n\n- `sizeof(arr)` в функции — размер указателя.\n- `arr = ...` — ошибка (имя массива не переприсваивается).\n- `p++` за пределы массива — UB.\n\n## Частая ошибка\n\n`sizeof(arr)` в параметре функции — даст размер указателя, не массива. Передавай `n` отдельно.\n\n## Итог\n\n- `arr` — адрес первого\n- `arr[i]` = `*(arr + i)`\n- `p++` — сдвиг на элемент\n- Массив в функции — указатель\n- `sizeof` не работает в параметрах",
+      "questions": [
+        { "text": "Что такое `arr` в выражении?", "options": ["Значение", "Адрес первого элемента", "Копия", "Ошибка"], "answer": 1, "explanation": "Адрес." },
+        { "text": "Что эквивалентно `arr[2]`?", "options": ["*(arr + 2)", "arr + 2", "*arr + 2", "arr * 2"], "answer": 0, "explanation": "`*(arr + 2)`." },
+        { "text": "На сколько байт сдвигает `p++` для `int*`?", "options": ["1", "4 (sizeof int)", "8", "Зависит"], "answer": 1, "explanation": "На размер элемента." },
+        { "text": "Что даёт `sizeof(arr)` в параметре функции?", "options": ["Размер массива", "Размер указателя", "0", "Ошибка"], "answer": 1, "explanation": "Указатель." }
+      ],
+      "practice": {
+        "description": "Дан `int arr[] = {10, 20, 30, 40, 50};`.\n\nЧерез указатель `int *p = arr;` обойди и выведи:\n```\n10 20 30 40 50\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int arr[] = {10, 20, 30, 40, 50};\n    // TODO: через указатель\n    return 0;\n}\n",
+        "expected": "10 20 30 40 50",
+        "must_contain": ["int *p", "arr", "p++", "*p", "printf"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "title": "struct, typedef",
+      "theory": "## struct\n\n`struct` — свой составной тип: набор полей.\n\n```c\nstruct Point {\n    int x;\n    int y;\n};\n\nstruct Point p;\np.x = 10;\np.y = 20;\n```\n\n## typedef\n\nПсевдоним типа:\n\n```c\ntypedef struct {\n    int x;\n    int y;\n} Point;\n\nPoint p;\np.x = 10;\n```\n\nБез `typedef` пришлось бы писать `struct Point`. С ним — просто `Point`.\n\n## Инициализация\n\n```c\nPoint p = {10, 20};\nPoint q = {.x = 10, .y = 20};   // designated initializers (C99)\n```\n\n## Вложенные\n\n```c\ntypedef struct {\n    Point top_left;\n    Point bottom_right;\n} Rect;\n\nRect r = {{0, 0}, {10, 10}};\n```\n\n## Массив структур\n\n```c\nPoint points[3] = {{1, 2}, {3, 4}, {5, 6}};\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d,%d\\n\", points[i].x, points[i].y);\n}\n```\n\n## Строки в структурах\n\n```c\ntypedef struct {\n    char name[20];\n    int age;\n} Person;\n\nPerson p;\nstrcpy(p.name, \"Иван\");    // копирование\np.age = 25;\n```\n\n**Нельзя** `p.name = \"Иван\"` — массив нельзя переприсвоить.\n\n## Что будет, если\n\n- `p.name = \"Иван\"` — ошибка.\n- Забыть `;` после `struct { }` — ошибка.\n- Использовать `struct Point` без typedef — везде писать `struct`.\n\n## Частая ошибка\n\n`p.name = \"Иван\"` для `char name[20]` — ошибка. Нужен `strcpy`.\n\n## Итог\n\n- `struct` — составной тип\n- `typedef` — псевдоним\n- `.` — доступ к полю\n- `strcpy` для строк\n- `{.x = 10}` — designated\n- `;` после `struct { }`",
+      "questions": [
+        { "text": "Что такое struct?", "options": ["Функция", "Составной тип", "Переменная", "Ошибка"], "answer": 1, "explanation": "Набор полей." },
+        { "text": "Зачем typedef?", "options": ["Псевдоним", "Удаление", "Копирование", "Ошибка"], "answer": 0, "explanation": "Псевдоним типа." },
+        { "text": "Как обратиться к полю?", "options": ["p->x", "p.x", "p:x", "p[x]"], "answer": 1, "explanation": "`.` для значения." },
+        { "text": "Как записать строку в `char name[20]`?", "options": ["p.name = \"Иван\"", "strcpy(p.name, \"Иван\")", "p.name = 'И'", "name = \"Иван\""], "answer": 1, "explanation": "`strcpy`." }
+      ],
+      "practice": {
+        "description": "Создай `typedef struct { int x; int y; } Point;`.\n\nСоздай `Point p` с `x=3, y=7`. Выведи:\n```\nx=3, y=7\n```",
+        "starter": "#include <stdio.h>\n\ntypedef struct {\n    // TODO\n} Point;\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "x=3, y=7",
+        "must_contain": ["typedef struct", "int x", "int y", "Point", "printf"]
+      }
+    },
+    "28": {
+      "id": 28,
+      "title": "Указатели на структуры, ->",
+      "theory": "## Указатель на структуру\n\n```c\ntypedef struct {\n    int x, y;\n} Point;\n\nPoint p = {3, 7};\nPoint *ptr = &p;\n```\n\n## Доступ через `->`\n\n```c\nprintf(\"%d\\n\", ptr->x);   // 3\nprintf(\"%d\\n\", ptr->y);   // 7\n```\n\n`ptr->x` = `(*ptr).x`. `->` удобнее.\n\nМожно и через `(*ptr).x`, но `->` — стандарт.\n\n## Изменение через указатель\n\n```c\nptr->x = 100;\nprintf(\"%d\\n\", p.x);   // 100\n```\n\n## Передача в функцию\n\nБольшие структуры **эффективнее** передавать через указатель:\n\n```c\nvoid move(Point *p, int dx, int dy) {\n    p->x += dx;\n    p->y += dy;\n}\n\nPoint p = {0, 0};\nmove(&p, 5, 10);\nprintf(\"%d,%d\\n\", p.x, p.y);   // 5,10\n```\n\nБез указателя — копия, изменения не вернутся.\n\n## Массив структур\n\n```c\nPoint arr[3] = {{1, 2}, {3, 4}, {5, 6}};\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d,%d\\n\", arr[i].x, arr[i].y);\n}\n```\n\n`arr[i]` — сама структура, `arr[i].x` — поле.\n\n## Указатель на массив структур\n\n```c\nPoint *ptr = arr;\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d\\n\", ptr[i].x);   // или (ptr + i)->x\n}\n```\n\n## const\n\n```c\nvoid printPoint(const Point *p) {\n    printf(\"%d\\n\", p->x);   // только чтение\n    // p->x = 5; // ошибка\n}\n```\n\n## Что будет, если\n\n- `ptr.x` вместо `ptr->x` — ошибка компиляции.\n- Забыть `&` при передаче — копия.\n- Изменять `const` структуру — ошибка.\n\n## Частая ошибка\n\n`ptr.x` для указателя — ошибка. Только `ptr->x`.\n\n## Итог\n\n- `Point *ptr = &p`\n- `ptr->x` = `(*ptr).x`\n- `ptr->x = ...` — изменение\n- В функции — через указатель для модификации\n- `const` — только чтение",
+      "questions": [
+        { "text": "Что эквивалентно `ptr->x`?", "options": ["ptr.x", "(*ptr).x", "&ptr.x", "ptr[x]"], "answer": 1, "explanation": "`(*ptr).x`." },
+        { "text": "Можно ли `ptr.x` для указателя?", "options": ["Да", "Нет, ошибка", "Иногда", "Ошибка"], "answer": 1, "explanation": "Только `->`." },
+        { "text": "Зачем указатель на структуру в функции?", "options": ["Красиво", "Изменить структуру + эффективно", "Ускорить", "Не нужно"], "answer": 1, "explanation": "Модификация без копии." },
+        { "text": "Что такое `const Point *p`?", "options": ["Нельзя изменить *p", "Нельзя p", "Нельзя оба", "Ошибка"], "answer": 0, "explanation": "Только чтение через `*p`." }
+      ],
+      "practice": {
+        "description": "Дан `typedef struct { int x, y; } Point;`.\n\nСоздай `Point p = {3, 7};`, указатель `Point *ptr = &p;`.\n\nВыведи через `->`:\n```\nx=3, y=7\n```",
+        "starter": "#include <stdio.h>\n\ntypedef struct {\n    int x;\n    int y;\n} Point;\n\nint main(void) {\n    Point p = {3, 7};\n    // TODO\n    return 0;\n}\n",
+        "expected": "x=3, y=7",
+        "must_contain": ["Point *ptr", "&p", "->", "printf"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "title": "fopen / fclose, чтение, запись",
+      "theory": "## Файл — FILE*\n\n```c\n#include <stdio.h>\n\nFILE *f = fopen(\"file.txt\", \"w\");\nif (f == NULL) {\n    printf(\"Не открыть файл\\n\");\n    return 1;\n}\nfprintf(f, \"Hello\\n\");\nfclose(f);\n```\n\n## Режимы\n\n- `\"r\"` — чтение\n- `\"w\"` — запись (перезапись)\n- `\"a\"` — дописать\n- `\"r+\"`, `\"w+\"` — чтение + запись\n- `\"rb\"`, `\"wb\"` — бинарные\n\n## Запись\n\n```c\nfprintf(f, \"x = %d\\n\", 5);\nfputs(\"строка\\n\", f);\nfputc('A', f);\n```\n\n## Чтение\n\n**`fscanf`** — как `scanf`, но из файла:\n\n```c\nint x;\nfscanf(f, \"%d\", &x);\n```\n\n**`fgets`** — строка с ограничением:\n\n```c\nchar buf[100];\nwhile (fgets(buf, sizeof(buf), f) != NULL) {\n    printf(\"%s\", buf);\n}\n```\n\n**`fgetc`** — символ:\n\n```c\nint c;\nwhile ((c = fgetc(f)) != EOF) {\n    putchar(c);\n}\n```\n\n## EOF\n\n`EOF` — конец файла. Возвращается из `fgetc`, `fgets` возвращает `NULL`.\n\n## Закрытие\n\n```c\nfclose(f);\n```\n\n**Обязательно.** Не закроешь — данные могут не сохраниться. `fclose` = `fflush` + освобождение.\n\n## Возврат\n\n`fopen` возвращает `NULL` при ошибке — **всегда** проверяй.\n\n## Что будет, если\n\n- Не проверить `fopen` — segfault.\n- Не `fclose` — данные теряются.\n- `\"w\"` на существующем — перезапишет.\n\n## Частая ошибка\n\nЗабыть `fclose` — последние данные не записываются.\n\n## Итог\n\n- `fopen(имя, режим)` → `FILE*`\n- `\"r\"`, `\"w\"`, `\"a\"`\n- `fprintf` — запись\n- `fscanf`, `fgets`, `fgetc` — чтение\n- `fclose` — обязательно\n- Проверять `NULL`",
+      "questions": [
+        { "text": "Что возвращает `fopen`?", "options": ["int", "FILE*", "char*", "NULL всегда"], "answer": 1, "explanation": "`FILE*`." },
+        { "text": "Что делает `\"w\"`?", "options": ["Читает", "Пишет с перезаписью", "Дописывает", "Ошибка"], "answer": 1, "explanation": "Перезапись." },
+        { "text": "Зачем `fclose`?", "options": ["Красиво", "Сохранить + освободить", "Ускорить", "Не нужно"], "answer": 1, "explanation": "Сброс буфера." },
+        { "text": "Что при `fopen` с ошибкой?", "options": ["Падение", "NULL", "0", "Ошибка компиляции"], "answer": 1, "explanation": "NULL — проверяй." }
+      ],
+      "practice": {
+        "description": "1. Открой `test.txt` на запись, запиши `Hello` через `fprintf`.\n2. Закрой.\n3. Открой на чтение, прочитай через `fgets`, выведи `Прочитано: Hello`.\n\n```\nПрочитано: Hello\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Прочитано: Hello",
+        "must_contain": ["fopen", "fprintf", "fgets", "fclose", "printf"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "title": "Мини-проект: TODO-лист",
+      "theory": "## Что делаем\n\nКонсольный TODO-лист. Собираем: массивы, структуры, функции, строки, файлы.\n\n## Модель\n\n```c\ntypedef struct {\n    char text[100];\n    int done;\n} Task;\n```\n\n`done` = 0/1 — не выполнено/выполнено.\n\n## Функции\n\n```c\n#define MAX 100\n\nint addTask(Task tasks[], int count, const char *text);\nvoid showTasks(Task tasks[], int count);\nvoid markDone(Task tasks[], int count, int index);\nint saveTasks(const char *file, Task tasks[], int count);\nint loadTasks(const char *file, Task tasks[]);\n```\n\n- `addTask` — скопировать в `tasks[count]`, вернуть `count + 1`\n- `showTasks` — `for`, вывести `[x]` или `[ ]`\n- `markDone` — `tasks[index].done = 1`\n- `saveTasks` — открыть файл, `fprintf` в цикле, вернуть число\n- `loadTasks` — открыть, `fgets` в цикле, вернуть число\n\n## Пример: saveTasks\n\n```c\nint saveTasks(const char *file, Task tasks[], int count) {\n    FILE *f = fopen(file, \"w\");\n    if (f == NULL) return -1;\n    for (int i = 0; i < count; i++) {\n        fprintf(f, \"%d %s\\n\", tasks[i].done, tasks[i].text);\n    }\n    fclose(f);\n    return count;\n}\n```\n\n## Пример: showTasks\n\n```c\nvoid showTasks(Task tasks[], int count) {\n    for (int i = 0; i < count; i++) {\n        printf(\"%d. [%c] %s\\n\", i + 1, tasks[i].done ? 'x' : ' ', tasks[i].text);\n    }\n}\n```\n\n## Что будет, если\n\n- Не хватает массива — проверяй `count < MAX`.\n- `strcpy` в маленький буфер — переполнение.\n\n## Итог\n\n- struct + массив + функции\n- Файлы — сохранение\n- Проверки на `NULL`, `count`\n- Тернарный — для статуса",
+      "questions": [
+        { "text": "Где хранить задачи?", "options": ["В переменных", "Массив структур", "В файле только", "В строке"], "answer": 1, "explanation": "`Task tasks[MAX]`." },
+        { "text": "Зачем `done`?", "options": ["Сортировать", "Флаг выполнения", "Ошибку", "Ничего"], "answer": 1, "explanation": "Статус." },
+        { "text": "Как сохранить в файл?", "options": ["printf", "fprintf", "scanf", "puts"], "answer": 1, "explanation": "`fprintf`." },
+        { "text": "Что при `count >= MAX`?", "options": ["Падение", "Переполнение — проверяй", "Ошибка", "Ничего"], "answer": 1, "explanation": "Выход за границу." }
+      ],
+      "practice": {
+        "description": "Реализуй `showTasks` для массива задач.\n\n```\ntypedef struct { char text[50]; int done; } Task;\nTask tasks[] = {{\"Купить хлеб\", 0}, {\"Позвонить\", 1}, {\"Урок\", 0}};\n```\n\nВыведи:\n```\n1. [ ] Купить хлеб\n2. [x] Позвонить\n3. [ ] Урок\n```",
+        "starter": "#include <stdio.h>\n\ntypedef struct {\n    char text[50];\n    int done;\n} Task;\n\nint main(void) {\n    Task tasks[] = {{\"Купить хлеб\", 0}, {\"Позвонить\", 1}, {\"Урок\", 0}};\n    // TODO\n    return 0;\n}\n",
+        "expected": "1. [ ] Купить хлеб\n2. [x] Позвонить\n3. [ ] Урок",
+        "must_contain": ["for", "printf", "tasks", "done", "text"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "title": "Итоговая",
+      "theory": "## Собираем всё\n\nКурс охватил: типы, циклы, функции, массивы, строки, указатели, память, структуры, файлы.\n\n## Модель\n\n```c\ntypedef struct {\n    char name[30];\n    int age;\n} Person;\n```\n\nМассив из нескольких `Person` + функции.\n\n## Финальный пример\n\n```c\n#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    char name[30];\n    int age;\n} Person;\n\nPerson oldest(Person arr[], int n) {\n    Person result = arr[0];\n    for (int i = 1; i < n; i++) {\n        if (arr[i].age > result.age) result = arr[i];\n    }\n    return result;\n}\n\nint main(void) {\n    Person people[] = {{\"Иван\", 25}, {\"Мария\", 30}, {\"Пётр\", 28}};\n    Person o = oldest(people, 3);\n    printf(\"Старший: %s (%d)\\n\", o.name, o.age);\n    return 0;\n}\n```\n\n## Проверки\n\n- Класс/структура с полями\n- Массив структур\n- Функция с массивом\n- Возврат структуры или указателя\n- `printf` с `%s` и `%d`\n\n## Что будет, если\n\n- Забыть `strcpy` — ошибка.\n- `sizeof` в функции — размер указателя.\n- `free` после `malloc` — обязателен.\n\n## Итог\n\n- Собирай структуры + массивы + функции\n- Проверяй длины строк\n- Возврат структур — по значению (копия) или через указатель\n- `printf` с правильными спецификаторами",
+      "questions": [
+        { "text": "Как хранить несколько человек?", "options": ["Разные переменные", "Массив структур", "Один struct", "Файл"], "answer": 1, "explanation": "Массив `Person`." },
+        { "text": "Можно ли вернуть структуру из функции?", "options": ["Нет", "Да, по значению", "Только указатель", "Ошибка"], "answer": 1, "explanation": "Да, копия." },
+        { "text": "Что при `sizeof(people)` в функции?", "options": ["Размер массива", "Размер указателя", "Ошибка", "0"], "answer": 1, "explanation": "Указатель." },
+        { "text": "Что нужно для строк в struct?", "options": ["=", "strcpy", "=", "append"], "answer": 1, "explanation": "`strcpy`." }
+      ],
+      "practice": {
+        "description": "Структура `Book`:\n```\ntypedef struct {\n    char title[50];\n    int pages;\n} Book;\n```\n\nМассив:\n```\nBook books[] = {{\"Java\", 500}, {\"C\", 300}, {\"Python\", 400}};\n```\n\nФункция `int totalPages(Book books[], int n)` — сумма страниц.\n\nВыведи:\n```\nВсего страниц: 1200\n```",
+        "starter": "#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    char title[50];\n    int pages;\n} Book;\n\n// TODO: totalPages\n\nint main(void) {\n    Book books[] = {{\"Java\", 500}, {\"C\", 300}, {\"Python\", 400}};\n    // TODO\n    return 0;\n}\n",
+        "expected": "Всего страниц: 1200",
+        "must_contain": ["totalPages", "for", "printf", "books", "pages"]
+      }
+    }
+  }
+}

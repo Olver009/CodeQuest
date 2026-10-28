@@ -1,0 +1,743 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "HTML is Markup, Not Programming",
+      "theory": "## What HTML is\n\nHTML — **HyperText Markup Language**. It is **markup**, not programming. HTML describes the **structure** of a document: \"this is a heading\", \"this is a paragraph\", \"this is a link\". There are no variables, loops, or conditions.\n\nA browser reads the HTML and **renders** it: headings become large bold text, links become clickable, images appear on the page.\n\n## What HTML is not\n\n- Not a programming language (no logic).\n- Not styling — that is CSS.\n- Not interactivity — that is JavaScript.\n\nIf you know Python or Java: HTML has no `if`, no `for`, no functions. It is closer to a Markdown document than to code.\n\n## Tags\n\nA document is made of **tags**:\n\n```html\n<h1>Hello</h1>\n<p>This is a paragraph.</p>\n```\n\nThe opening and closing tags (with `/`) wrap the content. Together with the content they form an **element**.\n\n- `<h1>` — opening tag\n- `Hello` — content\n- `</h1>` — closing tag\n- Whole thing — element\n\n## Self-closing tags\n\nSome have no content:\n\n```html\n<br>\n<img src=\"cat.jpg\" alt=\"cat\">\n```\n\n`<br>` — line break. `<img>` — image. `</br>` and `</img>` are not needed.\n\n## Attributes\n\nIn the opening tag you can add **attributes** — `name=\"value\"` pairs:\n\n```html\n<a href=\"https://example.com\">Example</a>\n<img src=\"cat.jpg\" alt=\"A cat\">\n```\n\n`href` — where the link goes. `src` — image URL. `alt` — text alternative.\n\n## What the browser sees\n\nThe browser parses tags, builds a **DOM** and paints it. The user sees the result — tags are not visible on screen.\n\n## What if\n\n- Forget to close a tag — the browser often closes it for you, but the structure can be wrong.\n- Nest tags incorrectly — `<p><div></p></div>` — the browser may rearrange the DOM.\n- Use `<` in text — must escape as `&lt;`, otherwise the parser treats it as a tag.\n\n## Common mistake\n\nText **outside** any tag: `Hello <p>world</p>` — the browser shows \"Hello\" but it lives in `<body>` without structure. Wrap visible content in a tag.\n\n## Summary\n\n- HTML is markup, not programming\n- Elements: `<tag>content</tag>`\n- Self-closing: `<br>`, `<img>`\n- Attributes: `name=\"value\"` in the opening tag\n- Text must live inside tags",
+      "questions": [
+        { "text": "What is HTML?", "options": ["A programming language", "A markup language for document structure", "A styling language", "A database"], "answer": 1, "explanation": "HTML is markup. No logic. CSS — styling, JavaScript — interactivity." },
+        { "text": "Which tag is self-closing?", "options": ["<p>", "<h1>", "<img>", "<a>"], "answer": 2, "explanation": "`<img>` has no content. `</img>` is not needed." },
+        { "text": "What is `href` in `<a href=\"https://x.com\">`?", "options": ["A tag", "Content", "An attribute", "A closing tag"], "answer": 2, "explanation": "`name=\"value\"` inside the opening tag — attribute." },
+        { "text": "In `<h1>Hello</h1>`, what is `Hello`?", "options": ["Opening tag", "Content", "Attribute", "Closing tag"], "answer": 1, "explanation": "Content between tags." },
+        { "text": "What happens to `<p><div>x</div></p>`?", "options": ["Compile error", "Browser may rearrange the DOM", "Renders normally", "Nothing"], "answer": 1, "explanation": "The browser auto-corrects invalid nesting." }
+      ],
+      "practice": {
+        "description": "Write HTML that displays exactly one line: `Hello, world!`. Use one `<h1>` or one `<p>` — your choice.",
+        "starter": "<!-- TODO: one element with text -->\n",
+        "expected": "Hello, world!",
+        "must_contain": ["Hello, world!"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "First Document",
+      "theory": "## Skeleton of every HTML page\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Hello</h1>\n</body>\n</html>\n```\n\nEvery line has a purpose.\n\n## <!DOCTYPE html>\n\nFirst line. Tells the browser: \"this is modern HTML5\". Without it the browser uses **quirks mode** and renders differently. Always put it first.\n\n## <html>\n\nThe root element. Everything lives inside it. `lang=\"en\"` — document language (helps screen readers and translation).\n\n## <head> — invisible\n\nContent of `<head>` is **not shown** to the user. It holds metadata: encoding (`<meta charset>`), title (`<title>`), linked styles. `<title>` shows in the **browser tab**.\n\n## <body> — visible\n\nEverything the user sees goes in `<body>`: headings, paragraphs, images, forms.\n\n## Why structure matters\n\nThe browser builds the DOM from the structure. Without `<html>`/`<head>`/`<body>` it still renders — but invalid, and tools (search engines, screen readers) get confused.\n\n## What if\n\n- Forget `<!DOCTYPE html>` — quirks mode, unpredictable rendering.\n- Put visible content in `<head>` — moved to `<body>` or hidden.\n- Forget `<title>` — the tab shows the file name.\n- No `charset` — non-ASCII text becomes mojibake.\n\n## Common mistake\n\nWriting everything in `<body>` without `<head>`. Works visually, but without `<meta charset>` non-ASCII text breaks.\n\n## Summary\n\n- `<!DOCTYPE html>` — first line\n- `<html lang=\"...\">` — root\n- `<head>` — invisible: `title`, `meta`, styles\n- `<body>` — visible content\n- `charset=\"UTF-8\"` — for Unicode",
+      "questions": [
+        { "text": "Which is the first line of an HTML5 document?", "options": ["<html>", "<!DOCTYPE html>", "<head>", "<body>"], "answer": 1, "explanation": "`<!DOCTYPE html>` enables standards mode." },
+        { "text": "Where does visible content go?", "options": ["<head>", "<body>", "<title>", "<meta>"], "answer": 1, "explanation": "`<body>` — everything the user sees." },
+        { "text": "Where does `<title>` content appear?", "options": ["On the page", "In the browser tab", "In head", "Nowhere"], "answer": 1, "explanation": "`<title>` sets the tab title." },
+        { "text": "What does `<meta charset=\"UTF-8\">` do?", "options": ["Sets the font", "Sets the text encoding", "Creates a paragraph", "Sets language"], "answer": 1, "explanation": "Tells the browser how to decode bytes." },
+        { "text": "What happens without `<!DOCTYPE html>`?", "options": ["Compile error", "Quirks mode, unpredictable rendering", "Nothing", "Empty page"], "answer": 1, "explanation": "Without DOCTYPE — legacy quirks mode." }
+      ],
+      "practice": {
+        "description": "Write a full HTML document with:\n- `<!DOCTYPE html>`\n- `<html>`, `<head>` with `<title>` \"Hello\"\n- `<body>` with `<h1>` \"Page\"\n\nVisible text: `Page`",
+        "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO: title -->\n</head>\n<body>\n  <!-- TODO: h1 -->\n</body>\n</html>\n",
+        "expected": "Page",
+        "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<title", "Hello", "<body", "<h1", "Page"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "Headings and Paragraphs",
+      "theory": "## Six heading levels\n\n```html\n<h1>Main title</h1>\n<h2>Section</h2>\n<h3>Subsection</h3>\n<h4>...</h4>\n<h5>...</h5>\n<h6>...</h6>\n```\n\n`<h1>` is the largest, `<h6>` the smallest. They define **hierarchy**, not just size. Size is styling — CSS's job.\n\n## One h1 per page\n\nBest practice: **one `<h1>` per page** — the main title. Then `<h2>` for sections, `<h3>` for subsections. Do not skip levels: after `<h1>` comes `<h2>`, not `<h4>`.\n\n## Paragraphs\n\n```html\n<p>This is a paragraph.</p>\n<p>And another one.</p>\n```\n\nEach `<p>` is a block: starts on a new line and adds spacing after. Long text is usually split into several `<p>`.\n\n## Line break vs paragraph\n\n`<br>` — one line break inside a paragraph. `<p>` — a new paragraph with spacing.\n\n```html\n<p>Line one<br>Line two</p>\n<p>New paragraph</p>\n```\n\nDo not use `<br>` to create \"paragraphs\" — use `<p>`.\n\n## Whitespace collapses\n\nHTML collapses multiple spaces and newlines into **one space**. Both render identically:\n\n```html\n<p>Hello      world</p>\n<p>Hello\n   world</p>\n```\n\nBoth → `Hello world`. Want a real break — `<br>`. Want spacing — CSS.\n\n## Why hierarchy matters\n\nSearch engines and screen readers build an outline from headings. Skipping from `<h1>` to `<h4>` breaks navigation.\n\n## What if\n\n- Several `<h1>` — the outline becomes messy.\n- Skip levels — poor accessibility.\n- `<br>` everywhere — text is not divided into semantic paragraphs.\n\n## Common mistake\n\nPicking `<h3>` because \"h1 is too big\". Size is styling. Use `<h1>` for the main title and fix size with CSS.\n\n## Summary\n\n- `<h1>`–`<h6>` — heading hierarchy, one `<h1>` per page\n- `<p>` — paragraph\n- `<br>` — line break inside text\n- Whitespace collapses; code indentation does not affect rendering\n- Headings structure, not just size",
+      "questions": [
+        { "text": "Which level is the main heading?", "options": ["<h0>", "<h1>", "<h6>", "<h7>"], "answer": 1, "explanation": "`<h1>` — main, largest." },
+        { "text": "How many `<h1>` per page?", "options": ["Any number", "One", "Two", "Zero"], "answer": 1, "explanation": "Best practice — one `<h1>` as the main title." },
+        { "text": "What happens to multiple spaces in code?", "options": ["Preserved", "Collapse to one", "Error", "Removed"], "answer": 1, "explanation": "HTML collapses whitespace on render." },
+        { "text": "What does `<br>` do?", "options": ["New paragraph", "Line break", "Bold", "Border"], "answer": 1, "explanation": "`<br>` — one break. No closing tag." },
+        { "text": "How to put `A` and `B` on separate lines with spacing?", "options": ["<p>A</p><p>B</p>", "<p>A<br>B</p>", "A B", "<h1>A B</h1>"], "answer": 0, "explanation": "Two `<p>` — two paragraphs with spacing." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<h1>` \"Book\"\n- `<h2>` \"Chapter 1\"\n- `<p>` \"Once upon a time.\"\n\nVisible text: `Book Chapter 1 Once upon a time.`",
+        "starter": "<!-- TODO: h1, h2, p -->\n",
+        "expected": "Book Chapter 1 Once upon a time.",
+        "must_contain": ["<h1", "Book", "<h2", "Chapter 1", "<p", "Once upon a time."]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "Comments",
+      "theory": "## Why\n\nCode lives longer than memory. Comments explain **why** and **what** to yourself in six months and to others today. In HTML they also **temporarily disable** a block.\n\n## Syntax\n\n```html\n<!-- This is a comment -->\n<p>Visible text</p>\n<!--\n  Multi-line\n  comment\n-->\n```\n\nStarts with `<!--`, ends with `-->`. Everything between is **ignored** by the browser.\n\n## Visible in source\n\nOpen dev tools (F12) — comments are there. Never put passwords, API keys, personal data. Real secrets do not live in HTML.\n\n## Temporarily disabling\n\n```html\n<!-- <p>Hidden</p> -->\n<p>Shown</p>\n```\n\nThe first `<p>` is inside a comment — the browser treats it as text.\n\n## Nested comments do not work\n\n```html\n<!-- outer <!-- inner --> outer -->\n```\n\nThe first `-->` closes the comment. The parser sees `outer -->` as broken markup. Do not nest.\n\n## What if\n\n- `<!-- comment` without `-->` — everything up to EOF becomes a comment.\n- `--` inside (`<!-- a -- b -->`) — technically invalid.\n- Comment out a block and forget to re-enable — page looks broken.\n\n## Common mistake\n\nForget `-->`. Everything after `<!--` is swallowed until the next `-->` or EOF. Page is blank.\n\n## Summary\n\n- `<!-- ... -->` — comment\n- Browser ignores\n- Visible in dev tools — no secrets\n- Nested comments break\n- Forgot `-->` — hid the rest of the page",
+      "questions": [
+        { "text": "How does an HTML comment start?", "options": ["//", "#", "<!--", "/*"], "answer": 2, "explanation": "`<!--` starts, `-->` ends." },
+        { "text": "Does the browser render comments?", "options": ["Yes, in small text", "No", "Only in body", "Only in head"], "answer": 1, "explanation": "Comments are ignored." },
+        { "text": "Can you nest comments?", "options": ["Yes", "No, first `-->` ends it", "One level", "Only in head"], "answer": 1, "explanation": "Nested comments do not work." },
+        { "text": "What happens with `<!-- comment` (no `-->`)?", "options": ["Error visible", "Everything after — comment", "Nothing", "Ignored"], "answer": 1, "explanation": "The parser reads to the next `-->` or EOF." },
+        { "text": "Are comments visible to the user?", "options": ["No", "Yes, on the page", "Only with JS", "Only in head"], "answer": 0, "explanation": "Not on the rendered page. In source — yes." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- One HTML comment (any text)\n- `<p>` \"Visible\"\n\nVisible text: `Visible`",
+        "starter": "<!-- TODO: comment + paragraph -->\n",
+        "expected": "Visible",
+        "must_contain": ["<!--", "-->", "<p", "Visible"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "Lists: ul, ol, li",
+      "theory": "## Two kinds of lists\n\n- **Unordered** `<ul>` — bullets. Order does not matter: shopping list.\n- **Ordered** `<ol>` — numbers. Order matters: steps, recipe.\n\nBoth contain `<li>`.\n\n## Unordered\n\n```html\n<ul>\n  <li>Milk</li>\n  <li>Bread</li>\n  <li>Eggs</li>\n</ul>\n```\n\nRenders as bulleted list.\n\n## Ordered\n\n```html\n<ol>\n  <li>Boil water</li>\n  <li>Add tea</li>\n  <li>Wait</li>\n</ol>\n```\n\nRenders as 1, 2, 3.\n\n## Nesting\n\n```html\n<ul>\n  <li>Fruits\n    <ul>\n      <li>Apple</li>\n      <li>Banana</li>\n    </ul>\n  </li>\n  <li>Vegetables</li>\n</ul>\n```\n\nNested `<ul>` — **inside** `<li>`, not between `<li>`.\n\n## Only li as direct children\n\nInside `<ul>` and `<ol>` only `<li>` are allowed as direct children.\n\n## When which\n\n- Steps, ranking — `<ol>`.\n- Categories, menu — `<ul>`.\n- Navigation menus — `<ul>` inside `<nav>`.\n\n## What if\n\n- Text directly inside `<ul>` — invalid.\n- `<ul>` between `<li>` — invalid, nest **inside** `<li>`.\n- `<ul>` for a recipe — visually bullets; use `<ol>`.\n\n## Common mistake\n\nForget `</li>`. Browser auto-closes, but the structure becomes fragile.\n\n## Summary\n\n- `<ul>` — bullets, `<ol>` — numbers\n- `<li>` — items, direct children only\n- Nested — inside `<li>`\n- `<ol>` for steps, `<ul>` for lists",
+      "questions": [
+        { "text": "Which tag for a numbered list?", "options": ["<ul>", "<ol>", "<li>", "<dl>"], "answer": 1, "explanation": "`<ol>` — ordered." },
+        { "text": "Which tag for a list item?", "options": ["<item>", "<li>", "<list>", "<p>"], "answer": 1, "explanation": "`<li>` — list item." },
+        { "text": "Where can you nest `<ul>`?", "options": ["Between `<li>`", "Inside `<li>`", "After `</ul>`", "Inside `<ul>` outside li"], "answer": 1, "explanation": "Inside `<li>`." },
+        { "text": "Which gives a bulleted list `A` `B`?", "options": ["<ul><li>A</li><li>B</li></ul>", "<ol><li>A</li><li>B</li></ol>", "<p>A</p><p>B</p>", "<li>A</li><li>B</li>"], "answer": 0, "explanation": "`<ul>` — bullets." },
+        { "text": "What is wrong with `<ul>A<li>B</li></ul>`?", "options": ["Nothing", "Text `A` outside `<li>` — invalid", "Missing `</ul>`", "Case"], "answer": 1, "explanation": "Direct children of `<ul>` must be `<li>`." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<h2>` \"Shopping\"\n- `<ul>` with three `<li>`: \"Milk\", \"Bread\", \"Eggs\"\n\nVisible text: `Shopping Milk Bread Eggs`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Shopping Milk Bread Eggs",
+        "must_contain": ["<h2", "Shopping", "<ul", "<li", "Milk", "Bread", "Eggs"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "title": "Links: a href",
+      "theory": "## The anchor tag\n\n```html\n<a href=\"https://example.com\">Click</a>\n```\n\n- `<a>` — anchor, link.\n- `href` — destination URL.\n- Text between tags — what is clickable.\n\n## Absolute vs relative\n\n**Absolute** — full URL: `https://example.com/page`.\n**Relative** — path from the current page: `page.html`, `/about`, `../docs/file.html`.\n\nAbsolute — for external sites. Relative — inside your site.\n\n## target\n\n```html\n<a href=\"https://example.com\" target=\"_blank\">New tab</a>\n```\n\n`target=\"_blank\"` — opens in a new tab. Without it — in the same tab.\n\n## Anchors inside a page\n\n```html\n<a href=\"#section-2\">To section 2</a>\n<h2 id=\"section-2\">Section 2</h2>\n```\n\nClick scrolls to the element with that `id`. `#top` without an element — scroll to top.\n\n## mailto and tel\n\n```html\n<a href=\"mailto:info@example.com\">Write</a>\n<a href=\"tel:+15551234567\">Call</a>\n```\n\nOpen mail client or phone (on mobile).\n\n## Nested tags\n\nWrap an image:\n\n```html\n<a href=\"/home\"><img src=\"logo.png\" alt=\"Logo\"></a>\n```\n\nClick on the image — navigation.\n\n## Link text\n\nBad: `<a href=\"/x\">click here</a>`. Good: `<a href=\"/x\">Download price list</a>`. Screen readers read only the link text.\n\n## What if\n\n- No `href` — `<a>` without URL, not clickable.\n- `href=\"\"` — reloads the page.\n- `href=\"javascript:...\"` — legacy anti-pattern.\n\n## Common mistake\n\n`<a href=\"/page\">` without `https://` for external — the browser treats it as a relative path to your domain.\n\n## Summary\n\n- `<a href=\"...\">text</a>` — link\n- Absolute — full URL, relative — path\n- `target=\"_blank\"` — new tab\n- `#id` — anchor inside page\n- `mailto:` / `tel:`\n- Link text — meaningful",
+      "questions": [
+        { "text": "What does `href` do?", "options": ["Sets text", "URL of the link", "Font size", "Color"], "answer": 1, "explanation": "`href` — destination." },
+        { "text": "What does `target=\"_blank\"` do?", "options": ["Opens in a new tab", "Closes tab", "Error", "Nothing"], "answer": 0, "explanation": "New tab." },
+        { "text": "Which URL is absolute?", "options": ["/page", "page.html", "https://example.com/page", "../page"], "answer": 2, "explanation": "Full with protocol." },
+        { "text": "How to link to an element with `id=\"top\"`?", "options": ["<a href=\"top\">", "<a href=\"#top\">", "<a href=\"id=top\">", "<a id=\"top\">"], "answer": 1, "explanation": "`#id` — anchor." },
+        { "text": "What happens to `<a>` without `href`?", "options": ["Nothing", "Not clickable (not a link)", "Error", "Scrolls up"], "answer": 1, "explanation": "Without `href` — not a link." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<h2>` \"Links\"\n- `<a>` with `href=\"https://example.com\"` and text \"Example\"\n- `<a>` with `href=\"#bottom\"` and text \"Down\"\n- `<p id=\"bottom\">\"Bottom\"</p>`\n\nVisible text: `Links Example Down Bottom`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Links Example Down Bottom",
+        "must_contain": ["<h2", "Links", "<a", "href=", "https://example.com", "Example", "#bottom", "Down", "id=\"bottom\"", "Bottom"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "title": "Images: img src alt",
+      "theory": "## The img tag\n\n```html\n<img src=\"cat.jpg\" alt=\"A cat sitting\">\n```\n\n- `src` — path to the image (URL or relative).\n- `alt` — text if the image fails or for a screen reader.\n\n`<img>` — **self-closing**. `</img>` is not needed.\n\n## Why alt\n\n- **Screen reader** reads `alt` aloud. Without `alt` the user has no idea what is on the image.\n- **Image did not load** — `alt` is shown instead.\n- **SEO** — search engines read `alt`.\n\n`alt=\"\"` (empty) — if the image is **decorative**, no meaning.\n\n## Sizes\n\n```html\n<img src=\"cat.jpg\" alt=\"Cat\" width=\"300\" height=\"200\">\n```\n\n`width` / `height` — in pixels. Optional, but useful: the browser reserves space and does not \"jump\" while loading.\n\n## Formats\n\n- `.jpg` / `.jpeg` — photos.\n- `.png` — transparency.\n- `.svg` — vector (logos, icons).\n- `.webp` — modern, smaller.\n\n## Image as a link\n\n```html\n<a href=\"/home\"><img src=\"logo.png\" alt=\"Home\"></a>\n```\n\nClick on the image — navigation.\n\n## What if\n\n- Forget `src` — empty image or broken icon.\n- No `alt` — screen reader reads the file name (`cat.jpg`).\n- Wrong `src` — broken icon + `alt`.\n- Forget to close — fine, `<img>` is void.\n\n## Common mistake\n\n`alt=\"image\"` or `alt=\"img\"` — useless. `alt` must describe what is in the image: `alt=\"A cat sleeping on a windowsill\"`.\n\n## Summary\n\n- `<img src=\"...\" alt=\"...\">`\n- `alt` is required (empty if decorative)\n- `width` / `height` — reserve space\n- Image can live inside `<a>`\n- Self-closing",
+      "questions": [
+        { "text": "What does `src` do?", "options": ["Description", "Image path", "Size", "Color"], "answer": 1, "explanation": "`src` — image URL." },
+        { "text": "Why `alt`?", "options": ["Pretty", "Description for screen reader and fallback", "Size", "Weight"], "answer": 1, "explanation": "`alt` — text alternative." },
+        { "text": "Which `alt` is correct for a cat photo?", "options": ["alt=\"img\"", "alt=\"photo.jpg\"", "alt=\"Cat sleeping\"", "alt=\"\""], "answer": 2, "explanation": "Describes the content." },
+        { "text": "Do you need `</img>`?", "options": ["Yes", "No, self-closing", "Only in XHTML", "Only for PNG"], "answer": 1, "explanation": "`<img>` is void, no closing." },
+        { "text": "What if `src` is missing?", "options": ["Nothing", "Broken icon", "alt text", "Error"], "answer": 1, "explanation": "No source — no image." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<h2>` \"Image\"\n- `<img>` with `src=\"cat.jpg\"` and `alt=\"Cat\"`\n\nVisible text: `Image Cat`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Image Cat",
+        "must_contain": ["<h2", "Image", "<img", "src=", "cat.jpg", "alt=", "Cat"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "title": "Text Formatting",
+      "theory": "## Why\n\nText can be **important**, *italic*, `code`, broken onto a new line, separated by a line. HTML has tags for each.\n\n## strong and em\n\n```html\n<p>This is <strong>important</strong> and this is <em>emphasized</em>.</p>\n```\n\n- `<strong>` — important text, bold. Meaning: \"pay attention\".\n- `<em>` — emphasis, italic. Meaning: \"vocal stress\".\n\nDo not confuse with `<b>` and `<i>` — they are **visual** (bold/italic without meaning). Current standard — `<strong>` and `<em>`.\n\n## br — line break\n\n```html\n<p>Line 1<br>Line 2</p>\n```\n\n`<br>` — break **inside** a paragraph. Does not replace `<p>`.\n\n## hr — horizontal rule\n\n```html\n<p>Part 1</p>\n<hr>\n<p>Part 2</p>\n```\n\n`<hr>` — a separator line. Meaning: change of topic. Self-closing.\n\n## code and pre\n\n```html\n<p>Command <code>git status</code> shows state.</p>\n<pre>\n  line 1\n  line 2\n</pre>\n```\n\n`<code>` — inline code. `<pre>` — a block that **preserves** spaces and newlines. Inside `<pre>` you can put `<code>`.\n\n## sub and sup\n\n```html\n<p>H<sub>2</sub>O is water. E = mc<sup>2</sup>.</p>\n```\n\n`<sub>` — subscript. `<sup>` — superscript.\n\n## del and ins\n\n```html\n<p>Price: <del>1000</del> <ins>800</ins> USD.</p>\n```\n\n`<del>` — struck-through (removed). `<ins>` — underlined (added). Meaning: show the edit.\n\n## What if\n\n- Use `<b>` instead of `<strong>` — visually the same, worse semantics.\n- `<br><br><br>` for spacing — these are line breaks, not spacing. Spacing — CSS.\n- `<pre>` with indentation in the source — that indentation ends up on the page.\n\n## Common mistake\n\n`<strong>` on everything — \"important\" stops being noticeable. Use sparingly.\n\n## Summary\n\n- `<strong>` — important (bold), `<em>` — emphasis (italic)\n- `<br>` — break, `<hr>` — separator\n- `<code>` — inline code, `<pre>` — block preserving spaces\n- `<sub>` / `<sup>` — indices\n- `<del>` / `<ins>` — edits",
+      "questions": [
+        { "text": "What does `<strong>` do?", "options": ["Italic", "Important text, bold", "Code", "Link"], "answer": 1, "explanation": "`<strong>` — important, bold." },
+        { "text": "What does `<em>` do?", "options": ["Bold", "Emphasis, italic", "Break", "Line"], "answer": 1, "explanation": "`<em>` — emphasis, italic." },
+        { "text": "What does `<hr>` do?", "options": ["Break", "Horizontal separator line", "Heading", "Code"], "answer": 1, "explanation": "`<hr>` — topic separator." },
+        { "text": "Which preserves spaces and newlines?", "options": ["<p>", "<code>", "<pre>", "<br>"], "answer": 2, "explanation": "`<pre>` — preformatted." },
+        { "text": "For H₂O use...", "options": ["<sub>", "<sup>", "<br>", "<hr>"], "answer": 0, "explanation": "`<sub>` — subscript." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<p>` with `<strong>` \"Important\" and `<em>` \"emphasis\"\n- `<hr>`\n- `<p>` with `<code>` \"ls\"\n\nVisible text: `Important emphasis ls`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Important emphasis ls",
+        "must_contain": ["<p", "<strong", "Important", "<em", "emphasis", "<hr", "<code", "ls"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "title": "header, nav, main, footer",
+      "theory": "## What is semantics\n\nPreviously all structure was `<div>`. Semantic tags **describe meaning**: \"this is a header\", \"this is navigation\", \"this is main\". The browser does not care, search engines and screen readers do.\n\n## header\n\nPage or section header:\n\n```html\n<header>\n  <h1>My site</h1>\n  <p>Slogan</p>\n</header>\n```\n\nInside — headings, logo, maybe navigation.\n\n## nav\n\nNavigation block:\n\n```html\n<nav>\n  <a href=\"/\">Home</a>\n  <a href=\"/about\">About</a>\n</nav>\n```\n\nNot every set of links is `<nav>`. Main menu — yes. Links in text — no.\n\n## main\n\n**Main** content of the page. One `<main>` per page. Not inside `<header>`, `<nav>`, `<footer>`.\n\n```html\n<main>\n  <h2>Articles</h2>\n  <p>...</p>\n</main>\n```\n\n## footer\n\nPage footer:\n\n```html\n<footer>\n  <p>© 2024</p>\n</footer>\n```\n\nCopyright, contacts, social links.\n\n## Page scheme\n\n```html\n<body>\n  <header>...</header>\n  <nav>...</nav>\n  <main>...</main>\n  <footer>...</footer>\n</body>\n```\n\nClassic layout. `<header>` and `<footer>` can repeat inside `<article>` and `<section>` — that is fine.\n\n## What if\n\n- Two `<main>` — invalid, one only.\n- `<main>` inside `<header>` — wrong.\n- `<nav>` for inline links — poor for screen readers.\n\n## Common mistake\n\n`<div class=\"header\">` instead of `<header>`. Visually the same, semantically — the meaning is lost.\n\n## Summary\n\n- `<header>` — top\n- `<nav>` — main navigation\n- `<main>` — main content, one per page\n- `<footer>` — bottom\n- Replace `<div>` where there is meaning",
+      "questions": [
+        { "text": "What does `<header>` describe?", "options": ["Footer", "Page/section header", "Menu", "Paragraph"], "answer": 1, "explanation": "`<header>` — top." },
+        { "text": "How many `<main>` per page?", "options": ["Any", "One", "Two", "Zero"], "answer": 1, "explanation": "One `<main>`." },
+        { "text": "What does `<nav>` describe?", "options": ["Header", "Navigation", "Footer", "Article"], "answer": 1, "explanation": "`<nav>` — navigation block." },
+        { "text": "What does `<footer>` describe?", "options": ["Header", "Footer", "Menu", "Paragraph"], "answer": 1, "explanation": "`<footer>` — bottom." },
+        { "text": "Where does `<main>` live?", "options": ["Inside `<header>`", "Inside `<body>`, separate from header/nav/footer", "Inside `<footer>`", "In `<head>`"], "answer": 1, "explanation": "`<main>` — directly in `<body>`." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<header>` with `<h1>` \"Site\"\n- `<nav>` with two `<a>`: \"Home\", \"About\"\n- `<main>` with `<p>` \"Text\"\n- `<footer>` with `<p>` \"© 2024\"\n\nVisible text: `Site Home About Text © 2024`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Site Home About Text © 2024",
+        "must_contain": ["<header", "<h1", "Site", "<nav", "Home", "About", "<main", "<p", "Text", "<footer", "© 2024"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "title": "section, article, aside",
+      "theory": "## section\n\nA **thematic** block with a heading. A part of the page with one theme:\n\n```html\n<section>\n  <h2>Services</h2>\n  <p>What we do.</p>\n</section>\n```\n\nRule: `<section>` **must have** a heading (`<h2>`–`<h6>`) inside. No heading — it is not a `<section>`, it is `<div>`.\n\n## article\n\n**Self-contained** block: post, article, news item, comment. Can exist outside the context:\n\n```html\n<article>\n  <h2>New article</h2>\n  <p>Full text.</p>\n</article>\n```\n\nTake the `<article>` out of the page — it still makes sense. `<section>` usually loses context without the page.\n\n## aside\n\n**To the side** — not main, additional:\n\n```html\n<aside>\n  <h3>Tip of the day</h3>\n  <p>Drink water.</p>\n</aside>\n```\n\nSidebars, callouts, ads, \"read also\".\n\n## Nesting\n\n```html\n<main>\n  <article>\n    <h2>Post</h2>\n    <p>...</p>\n    <section>\n      <h3>Comments</h3>\n      <p>...</p>\n    </section>\n  </article>\n  <aside>...</aside>\n</main>\n```\n\n`<article>` can contain `<section>`. `<aside>` — next to `<main>` or inside `<article>`.\n\n## section vs div\n\nIf there is a **heading** and a **theme** — `<section>`. If you just need a container for CSS — `<div>`. Do not turn everything into `<section>` \"for semantics\".\n\n## article vs section\n\n- `<article>` — self-contained (can be shared, published separately).\n- `<section>` — a part of a bigger document.\n\n## What if\n\n- `<section>` without a heading — semantics lost, use `<div>`.\n- `<article>` inside `<article>` — valid (a comment inside a post), but keep track of meaning.\n- `<aside>` inside `<main>` for the main text — confusing.\n\n## Common mistake\n\nPut everything in `<section>` because \"it is semantic\". If there is no heading — it is `<div>`.\n\n## Summary\n\n- `<section>` — thematic block with a heading\n- `<article>` — self-contained: post, article\n- `<aside>` — additional, to the side\n- `<article>` can contain `<section>`\n- No heading — `<div>`",
+      "questions": [
+        { "text": "What does `<section>` require?", "options": ["Nothing", "A heading inside", "An image", "A form"], "answer": 1, "explanation": "`<section>` — thematic block with a heading." },
+        { "text": "What is `<article>`?", "options": ["A part of a page", "Self-contained block", "Menu", "Footer"], "answer": 1, "explanation": "Post, article — makes sense on its own." },
+        { "text": "What is `<aside>`?", "options": ["Main", "Additional to the side", "Header", "Footer"], "answer": 1, "explanation": "Sidebar, callout." },
+        { "text": "How does `<section>` differ from `<div>`?", "options": ["Nothing", "Semantics + heading", "Size", "Color"], "answer": 1, "explanation": "`<section>` — meaning, `<div>` — just a container." },
+        { "text": "Can you nest `<article>` inside `<article>`?", "options": ["No", "Yes, comment inside a post is fine", "Only with CSS", "Error"], "answer": 1, "explanation": "Nesting allowed." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<main>`\n- inside `<section>` (`<h2>` \"Services\", `<p>` \"Text\")\n- `<aside>` (`<h3>` \"Tip\", `<p>` \"Drink water\")\n\nVisible text: `Services Text Tip Drink water`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Services Text Tip Drink water",
+        "must_contain": ["<main", "<section", "<h2", "Services", "<p", "Text", "<aside", "<h3", "Tip", "Drink water"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "title": "div and span",
+      "theory": "## Why div and span\n\nNot everything has semantic meaning. Sometimes you need **just a container** for styling or grouping. That is `<div>` and `<span>`.\n\n- `<div>` — block-level (new line, full width).\n- `<span>` — inline (inside text, content width).\n\n## div\n\n```html\n<div>\n  <h2>Block</h2>\n  <p>Text.</p>\n</div>\n```\n\nBlock. Wraps a group of elements to apply a CSS class, padding, border.\n\n## span\n\n```html\n<p>Price: <span>1500</span> USD.</p>\n```\n\nInline. Highlights part of text: color a word, change size.\n\n## div vs section\n\n- `<div>` — **no meaning**. Just a container.\n- `<section>` — has meaning, thematic block with a heading.\n\nIf you group for CSS — `<div>`. If the group has a theme and heading — `<section>`.\n\n## span vs em/strong\n\n- `<em>`, `<strong>` — have meaning (\"emphasis\", \"important\").\n- `<span>` — no meaning. For color, size, animation.\n\n## When div is useful\n\n- Wrapper for CSS Grid/Flexbox.\n- Grouping several elements for positioning.\n- A class applied to a group.\n\n## What if\n\n- Put the whole page in `<div>` — semantics lost. Better — `<header>`, `<main>`, `<footer>`.\n- `<span>` with block elements inside — invalid, `<span>` is inline.\n- `<div>` inside `<p>` — invalid, `<div>` is block, `<p>` cannot contain block.\n\n## Common mistake\n\nEverything on `<div>` — works visually, but the screen reader does not understand structure. Use semantic tags where there is meaning.\n\n## Summary\n\n- `<div>` — block container without meaning\n- `<span>` — inline, inside text\n- `<div>` — for CSS wrappers\n- Semantics — in `<section>`, `<article>`, `<header>`\n- Do not put everything in `<div>`",
+      "questions": [
+        { "text": "What is `<div>`?", "options": ["Heading", "Block container without meaning", "Inline container", "Link"], "answer": 1, "explanation": "`<div>` — block container." },
+        { "text": "What is `<span>`?", "options": ["Block", "Inline container", "Paragraph", "Form"], "answer": 1, "explanation": "`<span>` — inline." },
+        { "text": "How does `<div>` differ from `<section>`?", "options": ["Nothing", "div has no meaning, section is thematic", "Size", "span is also div"], "answer": 1, "explanation": "`<section>` — semantics, `<div>` — just container." },
+        { "text": "What to use to highlight a word in text?", "options": ["<div>", "<span>", "<p>", "<section>"], "answer": 1, "explanation": "`<span>` — inline, inside text." },
+        { "text": "Can you put `<div>` inside `<p>`?", "options": ["Yes", "No, `<p>` cannot contain block", "Only with CSS", "Error"], "answer": 1, "explanation": "`<p>` only accepts phrasing content." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<div>` with `<h2>` \"Block\" and `<p>` \"Price: `<span>`500`</span>` USD.\"\n\nVisible text: `Block Price: 500 USD.`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Block Price: 500 USD.",
+        "must_contain": ["<div", "<h2", "Block", "<p", "Price:", "<span", "500", "USD."]
+      }
+    },
+    "12": {
+      "id": 12,
+      "title": "Nesting and Readability",
+      "theory": "## Why indentation\n\nHTML ignores spaces during rendering, but **code readability** is critical. Proper indentation lets you see nesting at a glance: where a block opens, what is inside, where it closes.\n\n## Rule: 2 spaces per level\n\n```html\n<ul>\n  <li>First\n    <ul>\n      <li>Nested</li>\n    </ul>\n  </li>\n  <li>Second</li>\n</ul>\n```\n\nEach nesting level — +2 spaces. The nested `<ul>` inside `<li>` is deeper by 2. Its `<li>` — another 2.\n\n## Closing tag at the level of the opening one\n\n```html\n<section>\n  <h2>Heading</h2>\n  <p>Text</p>\n</section>\n```\n\n`</section>` on the same level as `<section>`. Not \"somewhere at the end of the file\". If your `</section>` drifted 8 spaces right while `<section>` was at 2 — the code reads wrong.\n\n## Nesting by meaning\n\n- `<li>` — inside `<ul>` or `<ol>`.\n- `<ul>` — inside `<li>` if it is a nested list.\n- `<p>` — inside `<section>`, `<article>`, `<div>`.\n- `<div>` — almost everywhere, but **not inside `<p>`**.\n- `<h2>` — directly in `<section>`, not inside `<p>`.\n\n## Validity rules (basic)\n\n- Block inside inline — not allowed: `<div>` inside `<p>` breaks the structure.\n- `<li>` — only as a direct child of `<ul>`/`<ol>`.\n- `<p>` cannot contain another `<p>` — the browser forcibly closes the first.\n- Headings (`<h1>`–`<h6>`) do not nest inside each other.\n\n## Reading someone else's page\n\nOpen any site, F12 → **Elements** tab. You will see the DOM — an element tree. At the top `<html>`, inside it `<head>` and `<body>`, deeper `<header>`, `<main>`, `<section>`. The indentation in dev tools is the structure. Collapsible triangles show what is inside.\n\nUseful: hover a row in Elements — the browser highlights the corresponding block on the page. That way you can see which `<div>` does what.\n\n## What if\n\n- No indentation — code reads like a brick. Works, but maintenance is painful.\n- Too deep (5+ levels) — a signal to revisit the structure, split into components.\n- Mix tabs and spaces — editors render it differently.\n- A closing tag \"got lost\" — the browser may close the wrong block, and the DOM turns out wrong.\n\n## Common mistake\n\nCopying code from a site without reformatting. You get \"one line for the whole block\" — unreadable. Fast fix — open an online Prettier, paste, get formatted HTML.\n\n## Summary\n\n- Indentation — 2 spaces per level\n- Closing tag on the opening level\n- Nesting by meaning: `<li>` in `<ul>`, `<ul>` in `<li>`, etc.\n- `<div>` cannot be in `<p>`, `<p>` does not contain `<p>`\n- Do not mix tabs and spaces\n- Readability = speed of work",
+      "questions": [
+        { "text": "How many spaces per nesting level?", "options": ["1", "2", "4", "8"], "answer": 1, "explanation": "Standard — 2 spaces per level." },
+        { "text": "Where should the closing tag be?", "options": ["On the opening level", "Right after content without indent", "On the `<body>` level", "Does not matter"], "answer": 0, "explanation": "`</section>` — on the `<section>` level." },
+        { "text": "Where should a nested `<ul>` live?", "options": ["Between `<li>`", "Inside `<li>`", "After `</ul>`", "In `<head>`"], "answer": 1, "explanation": "Nested list — **inside** `<li>`, not between them." },
+        { "text": "What matters for code readability?", "options": ["Typing speed", "Proper indentation", "Short names", "Nothing"], "answer": 1, "explanation": "Indentation — readability." },
+        { "text": "Can `<div>` be inside `<p>`?", "options": ["Yes", "No, `<p>` cannot contain block", "Only with CSS", "Only if `<p>` is long"], "answer": 1, "explanation": "`<p>` contains only phrasing content. Block — no." },
+        { "text": "Where in dev tools do you see the page structure?", "options": ["Console", "Elements", "Network", "Sources"], "answer": 1, "explanation": "Elements — the DOM tree tab." }
+      ],
+      "practice": {
+        "description": "Write a page with proper indentation (2 spaces per level):\n- `<section>` with `<h2>` \"Section\"\n- `<ul>` with two `<li>`: \"A\", \"B\"\n\nVisible text: `Section A B`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Section A B",
+        "must_contain": ["<section", "<h2", "Section", "<ul", "<li", "A", "B"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "title": "form, input, label",
+      "theory": "## Why forms\n\nA form collects data from the user: login, search, checkout. Data goes to the server.\n\n## form\n\n```html\n<form>\n  <label for=\"name\">Name</label>\n  <input type=\"text\" id=\"name\" name=\"name\">\n</form>\n```\n\n`<form>` — container. `action` — where to send, `method` — GET/POST (later).\n\n## input\n\n`<input>` — self-closing. Type via `type`:\n\n```html\n<input type=\"text\">\n<input type=\"email\">\n<input type=\"password\">\n```\n\n`name` — field name for submission. `id` — for linking with `<label>`.\n\n## label\n\nLabel for a field. Linked via `for` (on label) = `id` (on input):\n\n```html\n<label for=\"age\">Age</label>\n<input type=\"number\" id=\"age\" name=\"age\">\n```\n\nClick on the label — focus on the field. Screen reader reads the `label` aloud.\n\n## Without for/id\n\nYou can nest input inside label:\n\n```html\n<label>Name <input type=\"text\"></label>\n```\n\nAlso works: click on label focuses the input. Both variants are valid.\n\n## Why for/id is better\n\nExplicit link works even if the label is far from the input. And styling is easier.\n\n## What if\n\n- No `for`/`id` — click on the label does not focus the field.\n- Duplicate `id` — invalid, `for` binds to the first one.\n- `label` without `input` — meaningless (just text).\n\n## Common mistake\n\n`<label>Name</label><input>` — the label is nearby but not linked. Click does not work, the screen reader does not associate them.\n\n## Summary\n\n- `<form>` — container\n- `<input type=\"...\">` — field\n- `<label for=\"id\">` = `<input id=\"id\">` — link\n- Click on label → focus on input\n- Screen reader reads the label",
+      "questions": [
+        { "text": "What does `<form>` do?", "options": ["Button", "Container for fields", "Text", "Link"], "answer": 1, "explanation": "`<form>` — wrapper for fields." },
+        { "text": "How to link label and input?", "options": ["for on label = id on input", "Nest label in input", "Same class", "Same name"], "answer": 0, "explanation": "`for` = `id`." },
+        { "text": "What does `type=\"email\"` do?", "options": ["Nothing", "Validates email format on submit", "Creates a link", "Error"], "answer": 1, "explanation": "Built-in validation." },
+        { "text": "What happens on `<label for=\"x\">` when input has `id=\"x\"`?", "options": ["Nothing", "Focus on input", "Copies text", "Error"], "answer": 1, "explanation": "Linked — focus." },
+        { "text": "Is `for` on label mandatory?", "options": ["Yes, always", "No, you can nest input inside label", "Only for text", "Only in forms"], "answer": 1, "explanation": "Nesting also works." }
+      ],
+      "practice": {
+        "description": "Write a form:\n- `<form>`\n- `<label for=\"name\">` \"Name\"\n- `<input type=\"text\" id=\"name\" name=\"name\">`\n\nVisible text: `Name`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Name",
+        "must_contain": ["<form", "<label", "for=\"name\"", "Name", "<input", "type=\"text\"", "id=\"name\""]
+      }
+    },
+    "14": {
+      "id": 14,
+      "title": "Input Types",
+      "theory": "## Why different types\n\n`<input type=\"text\">` — universal. But **type hints** the browser what to enter: on mobile, email — keyboard with `@`, number — numeric keyboard.\n\n## text\n\n```html\n<input type=\"text\">\n```\n\nPlain text.\n\n## email\n\n```html\n<input type=\"email\">\n```\n\nOn submit the browser checks the format (`@` and a dot).\n\n## password\n\n```html\n<input type=\"password\">\n```\n\nCharacters hidden with dots. In HTML the value is still plaintext — HTTPS is required.\n\n## number\n\n```html\n<input type=\"number\" min=\"1\" max=\"100\">\n```\n\nNumbers only. `min`/`max` — range.\n\n## checkbox\n\n```html\n<label><input type=\"checkbox\"> I agree</label>\n```\n\nMultiple choices, any number.\n\n## radio\n\n```html\n<label><input type=\"radio\" name=\"color\" value=\"red\"> Red</label>\n<label><input type=\"radio\" name=\"color\" value=\"blue\"> Blue</label>\n```\n\nOne option per group. **Same `name`** for the group.\n\n## Others\n\n- `type=\"tel\"` — phone, mobile keyboard.\n- `type=\"date\"` — date, calendar.\n- `type=\"url\"` — URL.\n- `type=\"file\"` — file upload.\n\n## What if\n\n- `radio` with different `name` — you can select all, not one group.\n- `checkbox` with same `name` — browser submits an array, better avoid.\n- `type=\"number\"` with letters — browser blocks (on desktop).\n\n## Common mistake\n\n`radio` for a single switch — meaning lost. `radio` — for two or more options. For one — `checkbox`.\n\n## Summary\n\n- `text`, `email`, `password`, `number` — main types\n- `checkbox` — multiple, `radio` — one from group\n- `radio` share the same `name`\n- `min`/`max` for number\n- Type helps the browser and mobile keyboard",
+      "questions": [
+        { "text": "Which type for a password?", "options": ["text", "password", "secret", "hidden"], "answer": 1, "explanation": "`type=\"password\"`." },
+        { "text": "Which type for one option from a group?", "options": ["checkbox", "radio", "select", "text"], "answer": 1, "explanation": "`radio` — one from the group." },
+        { "text": "What does `type=\"email\"` do?", "options": ["Creates a link", "Validates format on submit", "Encrypts", "Nothing"], "answer": 1, "explanation": "Built-in validation." },
+        { "text": "What groups `radio` together?", "options": ["class", "name", "id", "for"], "answer": 1, "explanation": "Same `name`." },
+        { "text": "What does `min=\"1\"` on number mean?", "options": ["Minimum value", "Color", "Size", "Error"], "answer": 0, "explanation": "Minimum allowed value." }
+      ],
+      "practice": {
+        "description": "Write a form:\n- `<label>` \"Email\" with `<input type=\"email\">`\n- `<label>` with `<input type=\"checkbox\">` and text \"Agree\"\n- Two `<label>` with `<input type=\"radio\" name=\"c\">`: \"Red\", \"Blue\"\n\nVisible text: `Email Agree Red Blue`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Email Agree Red Blue",
+        "must_contain": ["<label", "Email", "type=\"email\"", "type=\"checkbox\"", "Agree", "type=\"radio\"", "name=\"c\"", "Red", "Blue"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "title": "textarea, select, option, button",
+      "theory": "## textarea\n\nMulti-line field:\n\n```html\n<textarea rows=\"4\" cols=\"40\"></textarea>\n```\n\n**Not** self-closing! Needs a closing `</textarea>`. `rows` — visible lines, `cols` — width.\n\n## select and option\n\nDropdown:\n\n```html\n<select name=\"city\">\n  <option value=\"msk\">Moscow</option>\n  <option value=\"spb\">SPb</option>\n</select>\n```\n\n`<option>` — a choice. `value` — what is sent to the server, text — what the user sees.\n\n## Option groups\n\n```html\n<select>\n  <optgroup label=\"Europe\">\n    <option>Moscow</option>\n  </optgroup>\n</select>\n```\n\n`<optgroup>` — grouping.\n\n## button\n\n```html\n<button type=\"submit\">Send</button>\n<button type=\"button\">Button</button>\n```\n\n- `type=\"submit\"` — submit the form (default).\n- `type=\"button\"` — just a button (for JS).\n- `type=\"reset\"` — reset the form.\n\n`<button>` — with text inside, unlike `<input type=\"submit\">`.\n\n## Multiple lines in textarea\n\n```html\n<textarea>Line 1\nLine 2</textarea>\n```\n\nEverything inside `<textarea>` is the default value (do not wrap in tags!).\n\n## What if\n\n- `<textarea/>` self-closing — breaks all the HTML that follows.\n- `<select>` without `<option>` — empty list.\n- `<button>` without `type` inside `<form>` — defaults to submit, may accidentally send.\n\n## Common mistake\n\n`<textarea value=\"text\">` — does not work, value is set by the content between tags. `<input value>` — yes, but not `<textarea>`.\n\n## Summary\n\n- `<textarea></textarea>` — multi-line\n- `<select>` + `<option>` — dropdown\n- `<button type=\"submit\">` — send\n- `<button type=\"button\">` — plain\n- Inside textarea — only text",
+      "questions": [
+        { "text": "Which tag for a multi-line field?", "options": ["<input>", "<textarea>", "<select>", "<p>"], "answer": 1, "explanation": "`<textarea>` — multi-line." },
+        { "text": "Which tag for a dropdown?", "options": ["<select>", "<dropdown>", "<list>", "<input type=\"list\">"], "answer": 0, "explanation": "`<select>` + `<option>`." },
+        { "text": "What does `type=\"submit\"` on a button do?", "options": ["Nothing", "Submits the form", "Resets", "Closes"], "answer": 1, "explanation": "`submit` — submission." },
+        { "text": "Do you need `</textarea>`?", "options": ["No", "Yes, mandatory", "Only in XHTML", "Only if length > 0"], "answer": 1, "explanation": "`<textarea>` has a closing tag." },
+        { "text": "How to set the value of a textarea?", "options": ["value=\"...\"", "By the content between tags", "data-value", "Not possible"], "answer": 1, "explanation": "The content of `<textarea>` is its value." }
+      ],
+      "practice": {
+        "description": "Write a form:\n- `<textarea>` with text \"Note\"\n- `<select>` with `<option>` \"One\", \"Two\"\n- `<button type=\"submit\">` \"OK\"\n\nVisible text: `Note One Two OK`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Note One Two OK",
+        "must_contain": ["<textarea", "Note", "</textarea>", "<select", "<option", "One", "Two", "<button", "type=\"submit\"", "OK"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "title": "HTML Validation",
+      "theory": "## Why validation\n\nThe user can make mistakes: empty field, wrong email. **HTML validation** — a check before submission. Without JavaScript, on the browser side.\n\n## required\n\n```html\n<input type=\"text\" required>\n```\n\nMandatory field. Empty — the form does not submit, the browser highlights it.\n\n## type=\"email\"\n\nAlready validation: needs `@` and something after.\n\n## pattern\n\nA regular expression:\n\n```html\n<input type=\"text\" pattern=\"[0-9]{3}-[0-9]{3}\">\n```\n\nFormat \"123-456\". Does not match — does not submit.\n\n## minlength / maxlength\n\n```html\n<input type=\"text\" minlength=\"3\" maxlength=\"10\">\n```\n\nMinimum/maximum characters.\n\n## min / max / step for number\n\n```html\n<input type=\"number\" min=\"1\" max=\"100\" step=\"1\">\n```\n\nRange and step.\n\n## Error message\n\nThe browser shows its own. Custom — via `setCustomValidity` (JS, later).\n\n## What if\n\n- `required` on a hidden field — form does not submit, unclear why.\n- Invalid `pattern` (bad regex) — the browser ignores it.\n- Client-only validation — the server must validate anyway.\n\n## Common mistake\n\nRelying only on HTML validation. It is easy to bypass (disable JS, send a raw request). The server also validates.\n\n## Summary\n\n- `required` — mandatory\n- `type=\"email\"` — email format\n- `pattern` — regex\n- `minlength` / `maxlength`\n- `min` / `max` / `step` for number\n- The server validates anyway",
+      "questions": [
+        { "text": "What does `required` do?", "options": ["Colors the field", "Mandatory to fill in", "Disables", "Resets"], "answer": 1, "explanation": "No value — no submit." },
+        { "text": "What does `type=\"email\"` validate?", "options": ["Nothing", "Presence of @ and email structure", "Length", "Encrypts"], "answer": 1, "explanation": "Built-in format check." },
+        { "text": "What does `pattern` set?", "options": ["Color", "A regular expression for validation", "Size", "Cursor"], "answer": 1, "explanation": "`pattern` — regex." },
+        { "text": "What does `minlength=\"3\"` do?", "options": ["Minimum 3 characters", "Maximum", "Exactly 3", "Error"], "answer": 0, "explanation": "Minimum length." },
+        { "text": "Can you rely only on HTML validation?", "options": ["Yes", "No, the server must validate too", "Only for email", "Only for numbers"], "answer": 1, "explanation": "Client-side is easy to bypass." }
+      ],
+      "practice": {
+        "description": "Write a form:\n- `<input type=\"email\" required>` with `<label>` \"Email\"\n- `<input type=\"number\" min=\"1\" max=\"10\">` with `<label>` \"Number\"\n\nVisible text: `Email Number`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Email Number",
+        "must_contain": ["<label", "Email", "type=\"email\"", "required", "Number", "type=\"number\"", "min=\"1\"", "max=\"10\""]
+      }
+    },
+    "17": {
+      "id": 17,
+      "title": "Tables: table, tr, td, th",
+      "theory": "## When a table\n\nA table is for **tabular data**: schedule, scores, price list. **Not** for layout (that is a legacy approach; now — CSS Grid/Flexbox).\n\n## table\n\n```html\n<table>\n  <tr>\n    <th>Name</th>\n    <th>Score</th>\n  </tr>\n  <tr>\n    <td>Anna</td>\n    <td>5</td>\n  </tr>\n</table>\n```\n\n- `<table>` — table.\n- `<tr>` — row.\n- `<th>` — header cell (bold, centered).\n- `<td>` — data cell.\n\n## Structure\n\nA row (`<tr>`) contains cells (`<th>` or `<td>`). Each cell goes inside a row. No `<td>` outside `<tr>`.\n\n## Merging cells\n\n```html\n<td colspan=\"2\">Wide</td>\n<td rowspan=\"2\">Tall</td>\n```\n\n`colspan` — how many columns to span. `rowspan` — how many rows.\n\n## Validity\n\n- `<tr>` — only in `<table>` (or `<thead>`/`<tbody>`/`<tfoot>`).\n- `<td>`/`<th>` — only in `<tr>`.\n- The number of `<td>` in each row must match (unless colspan).\n\n## What if\n\n- `<td>` outside `<tr>` — the browser may rebuild or ignore.\n- Different cell counts — the table looks broken.\n- colspan greater than column count — the cell gets cut.\n\n## Common mistake\n\nUsing `<table>` for page layout. Do not — semantics lost, accessibility drops. Only for data.\n\n## Summary\n\n- `<table>` — table\n- `<tr>` — row\n- `<th>` — header, `<td>` — cell\n- `colspan` / `rowspan` — merging\n- Only for data, not for layout",
+      "questions": [
+        { "text": "What is `<tr>`?", "options": ["Table", "Row", "Cell", "Header"], "answer": 1, "explanation": "`<tr>` — table row." },
+        { "text": "What is `<th>`?", "options": ["Data cell", "Header cell", "Row", "Table"], "answer": 1, "explanation": "`<th>` — header, bold centered." },
+        { "text": "What does `colspan=\"2\"` do?", "options": ["Spans 2 columns", "Spans 2 rows", "Deletes", "Copies"], "answer": 0, "explanation": "`colspan` — columns." },
+        { "text": "Where must `<td>` live?", "options": ["In `<table>`", "In `<tr>`", "In `<td>`", "In `<body>`"], "answer": 1, "explanation": "`<td>` — only in `<tr>`." },
+        { "text": "What is a table for?", "options": ["Page layout", "Tabular data", "Navigation", "Forms"], "answer": 1, "explanation": "Data only. Layout — CSS." }
+      ],
+      "practice": {
+        "description": "Write a table:\n- `<table>` with one row of headers (`<th>` \"Name\", `<th>` \"Score\")\n- and one row of data (`<td>` \"Anna\", `<td>` \"5\")\n\nVisible text: `Name Score Anna 5`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Name Score Anna 5",
+        "must_contain": ["<table", "<tr", "<th", "Name", "Score", "<td", "Anna", "5"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "title": "thead, tbody, caption",
+      "theory": "## Why group\n\nA table can be big. Logical sections: header (`<thead>`), body (`<tbody>`), footer (`<tfoot>`). Helps the browser, screen readers, CSS, and printing.\n\n## thead\n\n```html\n<table>\n  <caption>Scores</caption>\n  <thead>\n    <tr><th>Name</th><th>Score</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Anna</td><td>5</td></tr>\n    <tr><td>Ivan</td><td>4</td></tr>\n  </tbody>\n</table>\n```\n\n## caption\n\nTable title. One per table. Does not replace `<h2>` outside, but describes the content.\n\n## tbody\n\nMain body of the table. Can be **multiple** — e.g. by groups.\n\n## tfoot\n\nFooter. For example, the total row:\n\n```html\n<tfoot>\n  <tr><td>Total</td><td>9</td></tr>\n</tfoot>\n```\n\n`<tfoot>` can go **before** `<tbody>` in code — the browser renders it at the bottom.\n\n## Auto-wrapping\n\nIf you do not write `<thead>`/`<tbody>`, the browser wraps `<tr>` in `<tbody>`. Better explicitly.\n\n## What if\n\n- `<caption>` outside `<table>` — invalid.\n- Two `<caption>` — error.\n- `<thead>` after `<tbody>` — valid, but non-standard.\n\n## Common mistake\n\nForget `<tbody>` — the browser adds it, but the source shows \"bare\" `<tr>`. Explicit grouping is better.\n\n## Summary\n\n- `<caption>` — table title\n- `<thead>` — header\n- `<tbody>` — body\n- `<tfoot>` — footer\n- The browser adds `<tbody>` itself, but better explicit",
+      "questions": [
+        { "text": "What is `<caption>`?", "options": ["Row", "Table title", "Cell", "Link"], "answer": 1, "explanation": "`<caption>` — title." },
+        { "text": "What is `<thead>`?", "options": ["Body", "Table header", "Footer", "Page heading"], "answer": 1, "explanation": "`<thead>` — header section." },
+        { "text": "How many `<caption>` per table?", "options": ["One", "Two", "Any", "Zero"], "answer": 0, "explanation": "One `<caption>`." },
+        { "text": "What is `<tfoot>`?", "options": ["Body", "Header", "Footer (totals)", "Cell"], "answer": 2, "explanation": "`<tfoot>` — total section." },
+        { "text": "Is `<tbody>` mandatory?", "options": ["Yes", "No, the browser adds it", "Only for big tables", "Only in HTML5"], "answer": 1, "explanation": "Browser wraps, but better explicit." }
+      ],
+      "practice": {
+        "description": "Write a table:\n- `<table>` with `<caption>` \"Scores\"\n- `<thead>` with `<tr>` and two `<th>`: \"Name\", \"Score\"\n- `<tbody>` with `<tr>`, `<td>` \"Anna\", `<td>` \"5\"\n\nVisible text: `Scores Name Score Anna 5`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Scores Name Score Anna 5",
+        "must_contain": ["<table", "<caption", "Scores", "<thead", "<tr", "<th", "Name", "Score", "<tbody", "<td", "Anna", "5"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "title": "video, audio, iframe",
+      "theory": "## video\n\n```html\n<video src=\"movie.mp4\" controls></video>\n```\n\n- `controls` — control panel (play/pause/volume).\n- `src` — file path.\n\n## source\n\nSeveral formats — the browser picks a supported one:\n\n```html\n<video controls>\n  <source src=\"movie.mp4\" type=\"video/mp4\">\n  <source src=\"movie.webm\" type=\"video/webm\">\n</video>\n```\n\n## video attributes\n\n- `autoplay` — play immediately (often blocked without `muted`).\n- `muted` — no sound.\n- `loop` — loop.\n- `poster` — image before playback.\n\n## audio\n\n```html\n<audio controls src=\"sound.mp3\"></audio>\n```\n\nSame, but sound only. Smaller panel.\n\n## iframe\n\nEmbeds **another page**:\n\n```html\n<iframe src=\"https://example.com\" width=\"600\" height=\"400\"></iframe>\n```\n\nOften for YouTube, maps, widgets.\n\n## iframe security\n\n- `sandbox` — restricts what can happen inside.\n- Embedding other sites may violate their `X-Frame-Options`.\n- Your own content — fine.\n\n## What if\n\n- Forget `controls` — video with no buttons, autoplay only if `autoplay`.\n- `autoplay` without `muted` — most browsers block.\n- `<iframe>` to a site that forbids embedding — empty white block.\n\n## Common mistake\n\n`<video autoplay src=\"...\">` without `muted` — does not play. Browsers block autoplay with sound.\n\n## Summary\n\n- `<video controls>` — video with controls\n- `<source>` — multiple formats\n- `<audio controls>` — sound\n- `<iframe src=\"...\">` — embedded page\n- `autoplay` usually requires `muted`",
+      "questions": [
+        { "text": "What enables the control panel on video?", "options": ["autoplay", "controls", "muted", "loop"], "answer": 1, "explanation": "`controls`." },
+        { "text": "Why `<source>`?", "options": ["Second sound", "Multiple formats", "Subtitles", "Error"], "answer": 1, "explanation": "Browser picks a supported one." },
+        { "text": "What does `<audio>` do?", "options": ["Video", "Sound", "Image", "Link"], "answer": 1, "explanation": "`<audio>` — sound only." },
+        { "text": "What does `<iframe>` do?", "options": ["Image", "Embedded page", "Form", "Link"], "answer": 1, "explanation": "`<iframe>` — embedded page." },
+        { "text": "What is needed for autoplay without blocking?", "options": ["loop", "muted", "controls", "Nothing"], "answer": 1, "explanation": "Browsers block autoplay with sound." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<video>` with `controls` and `<source src=\"a.mp4\">`\n- `<audio>` with `controls` and `src=\"b.mp3\"`\n- `<iframe>` with `src=\"https://example.com\"`\n\nVisible text: (empty — tags only)",
+        "starter": "<!-- TODO -->\n",
+        "expected": "",
+        "must_contain": ["<video", "controls", "<source", "a.mp4", "<audio", "src=\"b.mp3\"", "<iframe", "https://example.com"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "title": "alt and label",
+      "theory": "## Why accessibility\n\nSome users cannot see the screen or use a mouse. **Accessibility (a11y)** — so the site works for everyone: screen readers, keyboard, contrast.\n\n## alt on images\n\n```html\n<img src=\"chart.png\" alt=\"Sales growth chart, January to June\">\n```\n\nThe screen reader reads `alt`. Bad: `alt=\"image\"`, `alt=\"chart.png\"`. Good: description of the content.\n\n**Decorative image:** `alt=\"\"` (empty). The screen reader skips it.\n\n## label on forms\n\n```html\n<label for=\"email\">Email</label>\n<input type=\"email\" id=\"email\">\n```\n\nThe screen reader reads the label when the input is focused. No label — just \"text field\", unclear what to enter.\n\n## placeholder ≠ label\n\n`placeholder=\"Enter email\"` — a hint **inside** the field. Disappears on typing. Does not replace the label.\n\n## What if\n\n- No `alt` — the screen reader reads the file name (`cat.png`).\n- `alt=\"\"` on something important — meaning lost.\n- No `label` — unclear what the field is.\n\n## Common mistake\n\n`<input placeholder=\"Name\">` without `<label>`. Works visually, but for the screen reader it is a nameless field.\n\n## Summary\n\n- `alt` — required, describes content\n- `alt=\"\"` — if decorative\n- `<label for=\"id\">` — field label\n- `placeholder` does not replace label\n- Accessibility — not a bonus, but part of the work",
+      "questions": [
+        { "text": "Why `alt`?", "options": ["Pretty", "Description for the screen reader", "Size", "Color"], "answer": 1, "explanation": "`alt` — text alternative." },
+        { "text": "When `alt=\"\"`?", "options": ["Always", "If the image is decorative", "Only for PNG", "Only for SVG"], "answer": 1, "explanation": "Decorative — empty alt." },
+        { "text": "What links a label to an input?", "options": ["for = id", "name = id", "Same class", "for = name"], "answer": 0, "explanation": "`for` = `id`." },
+        { "text": "Does placeholder replace label?", "options": ["Yes", "No", "Only for email", "Only on mobile"], "answer": 1, "explanation": "Placeholder disappears, label stays." },
+        { "text": "What does the screen reader read without alt?", "options": ["Nothing", "The file name", "Color", "Size"], "answer": 1, "explanation": "The file name as a fallback." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<img>` with `src=\"chart.png\"` and `alt=\"Chart\"`\n- `<label for=\"e\">` \"Email\"\n- `<input type=\"email\" id=\"e\">`\n\nVisible text: `Chart Email`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Chart Email",
+        "must_contain": ["<img", "alt=\"Chart\"", "<label", "for=\"e\"", "Email", "type=\"email\"", "id=\"e\""]
+      }
+    },
+    "21": {
+      "id": 21,
+      "title": "ARIA Basics",
+      "theory": "## What is ARIA\n\n**Accessible Rich Internet Applications** — a set of attributes to improve accessibility. Used when semantic tags are not enough (e.g. complex widgets).\n\n## aria-label\n\nA text label for an element without visible text:\n\n```html\n<button aria-label=\"Close\">X</button>\n```\n\nThe screen reader reads \"Close\", the user sees \"X\".\n\n## aria-hidden\n\n```html\n<span aria-hidden=\"true\">★</span>\n```\n\nHides from the screen reader. Useful for decorative elements — stars, icons.\n\n## role\n\nExplicitly state the role:\n\n```html\n<div role=\"navigation\">...</div>\n```\n\nThe screen reader treats it as `<nav>`. **But:** if `<nav>` exists, use `<nav>`. `role` — only when there is no semantic tag.\n\n## Common roles\n\n- `role=\"button\"` — button.\n- `role=\"navigation\"` — navigation.\n- `role=\"alert\"` — important message.\n- `role=\"dialog\"` — modal window.\n\n## ARIA rule #1\n\n**Do not use ARIA if a semantic tag exists.** `<nav>` is better than `<div role=\"navigation\">`. `<button>` is better than `<div role=\"button\">`.\n\n## What if\n\n- `role=\"button\"` on `<div>` — does not work with the keyboard (Enter/Space), unlike `<button>`.\n- `aria-label` empty — useless.\n- `aria-hidden=\"true\"` on an interactive element — breaks accessibility.\n\n## Common mistake\n\n`<div role=\"button\">` instead of `<button>`. Works visually, but not clickable from the keyboard without JS. Use `<button>`.\n\n## Summary\n\n- `aria-label` — text label\n- `aria-hidden=\"true\"` — hide from the screen reader\n- `role` — explicit role\n- ARIA — only when no semantic tag\n- `<button>` is better than `<div role=\"button\">`",
+      "questions": [
+        { "text": "What does `aria-label` do?", "options": ["Colors", "Text label for the screen reader", "Size", "Error"], "answer": 1, "explanation": "`aria-label` — a label." },
+        { "text": "What does `aria-hidden=\"true\"` do?", "options": ["Hides visually", "Hides from the screen reader", "Deletes", "Colors"], "answer": 1, "explanation": "Only for the screen reader." },
+        { "text": "Which is better: `<div role=\"button\">` or `<button>`?", "options": ["div role", "button", "Same", "Depends"], "answer": 1, "explanation": "`<button>` — works with keyboard." },
+        { "text": "What does `role` do?", "options": ["Style", "Explicit role for the screen reader", "Link", "Form"], "answer": 1, "explanation": "`role` — semantics." },
+        { "text": "When is ARIA needed?", "options": ["Always", "When there is no semantic tag", "Only for forms", "Never"], "answer": 1, "explanation": "Tag exists — use it." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<button aria-label=\"Close\">X</button>`\n- `<nav role=\"navigation\">` with `<a>` \"Home\"\n- `<span aria-hidden=\"true\">★</span>`\n\nVisible text: `X Home ★`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "X Home ★",
+        "must_contain": ["<button", "aria-label=\"Close\"", "X", "<nav", "role=\"navigation\"", "Home", "aria-hidden=\"true\"", "★"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "title": "Semantics vs div",
+      "theory": "## The problem\n\n`<div>` is faceless. Everything on `<div>` — the screen reader does not understand structure, search engines index worse.\n\n## What semantics gives\n\n- **Screen reader:** \"navigation\", \"main content\", \"header\" — a clear structure.\n- **SEO:** search engines distinguish `<article>` and `<main>`.\n- **Code readability:** `<header>` says more than `<div class=\"header\">`.\n\n## Replacements\n\n| div-approach | semantics |\n|---|---|\n| `<div class=\"header\">` | `<header>` |\n| `<div class=\"nav\">` | `<nav>` |\n| `<div class=\"main\">` | `<main>` |\n| `<div class=\"footer\">` | `<footer>` |\n| `<div class=\"article\">` | `<article>` |\n| `<div class=\"section\">` | `<section>` |\n| `<div class=\"aside\">` | `<aside>` |\n\n## When div is justified\n\n- **No meaning** — just for CSS (Flexbox, Grid wrapper).\n- **No heading** — `<section>` without a heading is worse than `<div>`.\n- **Utility container** — for positioning.\n\n## Mixed approach\n\n```html\n<main>\n  <div class=\"grid\">\n    <article>...</article>\n    <article>...</article>\n  </div>\n</main>\n```\n\n`<div class=\"grid\">` — for CSS. `<article>` — semantics. Fine.\n\n## What if\n\n- Everything on `<div>` — works, but semantics is zero.\n- `<section>` without a heading — misuse.\n- `<main>` inside `<div class=\"header\">` — confusion.\n\n## Common mistake\n\nReplacing every `<div>` with `<section>` \"for semantics\". Without a heading, `<section>` is a wrong `<div>`.\n\n## Summary\n\n- Semantics — for meaning: header, nav, main, footer, article, section, aside\n- `<div>` — for a pure CSS container\n- Do not turn everything into `<section>`\n- Mix: semantics + `<div class=\"grid\">`",
+      "questions": [
+        { "text": "How is `<header>` better than `<div class=\"header\">`?", "options": ["Faster", "Semantics for the screen reader and SEO", "Prettier", "Nothing"], "answer": 1, "explanation": "Semantics." },
+        { "text": "When is `<div>` justified?", "options": ["Always", "When there is no meaningful role", "Never", "Only for forms"], "answer": 1, "explanation": "`<div>` — for utility containers." },
+        { "text": "Better: `<section>` without heading or `<div>`?", "options": ["section", "div", "Same", "Depends"], "answer": 1, "explanation": "`<section>` requires a heading." },
+        { "text": "How many `<main>` per page?", "options": ["One", "Two", "Any", "Zero"], "answer": 0, "explanation": "One `<main>`." },
+        { "text": "What replaces `<div class=\"footer\">`?", "options": ["<footer>", "<bottom>", "<p>", "<nav>"], "answer": 0, "explanation": "`<footer>`." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<header>` with `<h1>` \"Site\"\n- `<main>` with `<article>` (`<h2>` \"Post\", `<p>` \"Text.\")\n- `<footer>` with `<p>` \"© 2024\"\n\nVisible text: `Site Post Text. © 2024`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Site Post Text. © 2024",
+        "must_contain": ["<header", "<h1", "Site", "<main", "<article", "<h2", "Post", "<p", "Text.", "<footer", "© 2024"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "figure, figcaption, details, summary",
+      "theory": "## figure and figcaption\n\n**Illustration with a caption:**\n\n```html\n<figure>\n  <img src=\"chart.png\" alt=\"Chart\">\n  <figcaption>Fig. 1. Sales growth</figcaption>\n</figure>\n```\n\n- `<figure>` — a container for an illustration (image, code, table, diagram).\n- `<figcaption>` — the caption. Can be before or after the content.\n\n## Why figure\n\nLinks the image and the caption **semantically**. The screen reader can read them together. A `<p>` with the caption nearby is not the same.\n\n## details and summary\n\n**Collapsible block** without JS:\n\n```html\n<details>\n  <summary>Show more</summary>\n  <p>Hidden text.</p>\n</details>\n```\n\n- `<details>` — container.\n- `<summary>` — heading (always visible, clickable).\n- The rest — hidden until opened.\n\n## Multiple details\n\nCan be used as FAQ:\n\n```html\n<details>\n  <summary>Question 1?</summary>\n  <p>Answer 1.</p>\n</details>\n```\n\n## open attribute\n\n```html\n<details open>\n  <summary>...</summary>\n  <p>Open from the start.</p>\n</details>\n```\n\n## What if\n\n- `<figcaption>` without `<figure>` — invalid.\n- `<summary>` without `<details>` — does not work (no expand).\n- Multiple `<summary>` — only the first works as the heading.\n\n## Common mistake\n\n`<figure>` without `<figcaption>` — works, but less meaning. If a caption is not needed — `<img>` is enough.\n\n## Summary\n\n- `<figure>` + `<figcaption>` — illustration with caption\n- `<details>` + `<summary>` — collapsible block without JS\n- `<summary>` is always visible, the rest is hidden\n- `open` — expand from the start",
+      "questions": [
+        { "text": "What is `<figure>`?", "options": ["Image", "Container for an illustration", "Code", "Table"], "answer": 1, "explanation": "`<figure>` — wrapper." },
+        { "text": "What is `<figcaption>`?", "options": ["Page title", "Caption for the illustration", "Link", "Button"], "answer": 1, "explanation": "`<figcaption>` — caption." },
+        { "text": "What does `<details>` do?", "options": ["Menu", "Collapsible block", "Table", "Form"], "answer": 1, "explanation": "`<details>` + `<summary>` — accordion." },
+        { "text": "What is `<summary>`?", "options": ["Heading of details", "Paragraph", "Link", "Cell"], "answer": 0, "explanation": "Clickable heading." },
+        { "text": "What does `open` on `<details>` do?", "options": ["Open by default", "Closed", "Deletes", "Error"], "answer": 0, "explanation": "`open` — expanded initially." }
+      ],
+      "practice": {
+        "description": "Write a page with:\n- `<figure>` with `<img src=\"a.png\" alt=\"Chart\">` and `<figcaption>` \"Fig. 1\"\n- `<details>` with `<summary>` \"More\" and `<p>` \"Hidden.\"\n\nVisible text: `Fig. 1 More Hidden.`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Fig. 1 More Hidden.",
+        "must_contain": ["<figure", "<img", "alt=\"Chart\"", "<figcaption", "Fig. 1", "<details", "<summary", "More", "Hidden."]
+      }
+    },
+    "24": {
+      "id": 24,
+      "title": "meta: charset, viewport, description",
+      "theory": "## meta in head\n\nPage metadata: encoding, scaling, description. **Not visible** to the user, but important for the browser and search engines.\n\n## charset\n\n```html\n<meta charset=\"UTF-8\">\n```\n\nText encoding. Without it non-ASCII characters break. **Always first** in `<head>`.\n\n## viewport\n\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n```\n\nMobile adaptation. Without it on a phone the page renders as on a big screen — tiny, with horizontal scroll.\n\n## description\n\n```html\n<meta name=\"description\" content=\"HTML course\">\n```\n\nA short page description. May appear in search results. Affects SEO.\n\n## Other common ones\n\n```html\n<meta name=\"author\" content=\"Ivan\">\n<meta property=\"og:title\" content=\"Title\">\n<meta name=\"theme-color\" content=\"#ffffff\">\n```\n\n`og:*` — for social networks (Open Graph): how the preview looks when shared.\n\n## What if\n\n- No `charset` — mojibake (ÐŸÑ€Ð¸Ð²ÐµÑ‚).\n- No `viewport` — tiny text on mobile.\n- `description` longer than 160 chars — truncated in search results.\n\n## Common mistake\n\n`charset` not at the start of `<head>` — the browser may already start parsing with the wrong encoding. Put it first.\n\n## Summary\n\n- `charset` — mandatory, first\n- `viewport` — for mobile\n- `description` — for search engines\n- `og:*` — for social networks\n- Not visible on the page, but critical",
+      "questions": [
+        { "text": "Where does `<meta charset>` go?", "options": ["In body", "In head, first", "In footer", "Nowhere"], "answer": 1, "explanation": "First in `<head>`." },
+        { "text": "Why `viewport`?", "options": ["For SEO", "For mobile, scale", "For font", "For images"], "answer": 1, "explanation": "`viewport` — scale on mobile." },
+        { "text": "What is `description`?", "options": ["Title", "Description for search", "Paragraph", "Image"], "answer": 1, "explanation": "Description, for SEO." },
+        { "text": "What happens without `charset`?", "options": ["Nothing", "Mojibake", "Error", "Empty"], "answer": 1, "explanation": "Wrong encoding — text breaks." },
+        { "text": "What is `og:title`?", "options": ["Open Graph — for social networks", "Error", "For SEO", "Form"], "answer": 0, "explanation": "Open Graph — preview in social networks." }
+      ],
+      "practice": {
+        "description": "Write a `<head>` with:\n- `<meta charset=\"UTF-8\">`\n- `<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">`\n- `<meta name=\"description\" content=\"Course\">`\n- `<title>` \"Site\"\n\nPlus an empty `<body>`.",
+        "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body></body>\n</html>\n",
+        "expected": "",
+        "must_contain": ["<meta charset=\"UTF-8\"", "name=\"viewport\"", "width=device-width", "name=\"description\"", "content=\"Course\"", "<title", "Site"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "title": "Assembling a Page",
+      "theory": "## Putting it together\n\nSo far — individual tags. Now — a **full page** of semantics, text, forms, media. The classic layout.\n\n## Skeleton\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Site</title>\n</head>\n<body>\n  <header>\n    <h1>Site</h1>\n    <nav><a href=\"/\">Home</a></nav>\n  </header>\n  <main>\n    <section>\n      <h2>About</h2>\n      <p>Text.</p>\n    </section>\n  </main>\n  <footer>\n    <p>© 2024</p>\n  </footer>\n</body>\n</html>\n```\n\n## Order of work\n\n1. `<!DOCTYPE html>`, `<html>`, `<head>` with `meta` and `title`.\n2. `<body>`.\n3. Semantic sections: `<header>`, `<nav>`, `<main>`, `<footer>`.\n4. Inside — content.\n5. Check: all closed, indentation, semantics.\n\n## What goes inside each section\n\n- `<header>` — `<h1>`, logo, `<nav>`.\n- `<main>` — `<section>` with `<h2>` and `<p>`, `<article>` for posts.\n- `<footer>` — copyright, links.\n\n## What if\n\n- `<main>` outside `<body>` — invalid.\n- `<header>` inside `<main>` for the page header — meaning lost (inside `<article>` — fine).\n- Forget to close `<body>` — the browser copes, but the code is dirty.\n\n## Common mistake\n\nForget `<meta charset>` — non-ASCII text breaks. Always first line of `<head>`.\n\n## Summary\n\n- Skeleton: DOCTYPE, html, head (charset, viewport, title), body\n- Sections: header, nav, main, footer\n- Inside — own content\n- Check closed tags\n- `charset` — first",
+      "questions": [
+        { "text": "Where is `<main>`?", "options": ["In `<head>`", "In `<body>`, separate", "In `<header>`", "In `<footer>`"], "answer": 1, "explanation": "`<main>` — direct child of `<body>`." },
+        { "text": "Where is `<meta charset>`?", "options": ["In body", "First in head", "In footer", "Nowhere"], "answer": 1, "explanation": "First in `<head>`." },
+        { "text": "What goes in `<footer>`?", "options": ["Heading", "Copyright and utility", "Menu", "Form"], "answer": 1, "explanation": "Footer." },
+        { "text": "Where is `<nav>` usually?", "options": ["In `<footer>`", "Usually in `<header>`", "In `<main>`", "In `<head>`"], "answer": 1, "explanation": "Navigation — usually in the header." },
+        { "text": "Order in `<head>`?", "options": ["title, charset, viewport", "charset, viewport, title", "viewport, charset, title", "Any"], "answer": 1, "explanation": "`charset` first, then `viewport`, then `title`." }
+      ],
+      "practice": {
+        "description": "Assemble a page:\n- DOCTYPE, html, head (charset, title \"Site\"), body\n- `<header>` with `<h1>` \"Site\" and `<nav>` with `<a>` \"Home\"\n- `<main>` with `<h2>` \"About\" and `<p>` \"Text.\"\n- `<footer>` with `<p>` \"© 2024\"\n\nVisible text: `Site Home About Text. © 2024`",
+        "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+        "expected": "Site Home About Text. © 2024",
+        "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<meta charset=", "<title", "Site", "<body", "<header", "<h1", "<nav", "Home", "<main", "<h2", "About", "<p", "Text.", "<footer", "© 2024"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "title": "Mini-project: Business Card",
+      "theory": "## What we build\n\nA personal business card page. Assembles everything from chapters 1–4: structure, text, links, image, contact form.\n\n## Contents\n\n- `<header>` with name and navigation.\n- `<main>` with `<section>` \"About\", `<img>` (photo), `<p>` (description).\n- `<section>` \"Contacts\" with `<form>`: `<label>`, `<input type=\"email\">`, `<button>`.\n- `<footer>` with copyright.\n\n## Skeleton\n\n```html\n<header>\n  <h1>Ivan Petrov</h1>\n  <nav><a href=\"#about\">About</a> <a href=\"#contact\">Contact</a></nav>\n</header>\n<main>\n  <section id=\"about\">\n    <h2>About</h2>\n    <img src=\"me.jpg\" alt=\"Ivan's photo\">\n    <p>Developer.</p>\n  </section>\n  <section id=\"contact\">\n    <h2>Contact</h2>\n    <form>\n      <label for=\"email\">Email</label>\n      <input type=\"email\" id=\"email\" required>\n      <button type=\"submit\">Send</button>\n    </form>\n  </section>\n</main>\n<footer><p>© 2024</p></footer>\n```\n\n## Checks\n\n- Semantics: header, main, footer, section.\n- Anchor links to `#about` and `#contact`.\n- `alt` on the photo.\n- `label for` = `id`.\n- Validation: `required`.\n\n## What if\n\n- No `alt` — the screen reader reads the file name.\n- `label` without `for` — click does not focus the field.\n- Anchor to a non-existent `id` — no scroll.\n\n## Common mistake\n\nForget `id` on `<section>` while linking to `#about`. The link goes \"nowhere\".\n\n## Summary\n\n- Semantic skeleton: header/main/footer\n- `<section id=\"...\">` + anchor links\n- `<img alt>` — required\n- `<label for>` = `<input id>`\n- `required` — validation",
+      "questions": [
+        { "text": "What is needed for `#about` link to work?", "options": ["class=\"about\"", "id=\"about\"", "name=\"about\"", "for=\"about\""], "answer": 1, "explanation": "`id` = value after `#`." },
+        { "text": "Why `alt` on a photo?", "options": ["Pretty", "Description for the screen reader", "Size", "Link"], "answer": 1, "explanation": "`alt` — text alternative." },
+        { "text": "How to link label and input?", "options": ["for = id", "name = id", "class", "value"], "answer": 0, "explanation": "`for` = `id`." },
+        { "text": "What does `required` do?", "options": ["Color", "Mandatory field", "Size", "Email validation"], "answer": 1, "explanation": "`required` — no value, no submit." },
+        { "text": "How many `<main>` per page?", "options": ["Any", "One", "Two", "Zero"], "answer": 1, "explanation": "One `<main>`." }
+      ],
+      "practice": {
+        "description": "Assemble a business card:\n- `<header>` with `<h1>` \"Ivan\" and `<nav>` with two `<a href=\"#...\">`: \"About\", \"Contact\"\n- `<main>` with `<section id=\"about\">` (`<h2>` \"About\", `<img src=\"me.jpg\" alt=\"Photo\">`, `<p>` \"Developer.\")\n- `<section id=\"contact\">` (`<h2>` \"Contact\", `<form>` with `<label for=\"e\">` \"Email\", `<input type=\"email\" id=\"e\" required>`, `<button>` \"OK\")\n- `<footer>` with `<p>` \"© 2024\"\n\nVisible text: `Ivan About Contact About Photo Developer. Contact Email OK © 2024`",
+        "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>Card</title>\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+        "expected": "Ivan About Contact About Photo Developer. Contact Email OK © 2024",
+        "must_contain": ["<header", "<h1", "Ivan", "<nav", "href=\"#about\"", "href=\"#contact\"", "<main", "<section", "id=\"about\"", "<img", "alt=\"Photo\"", "<form", "<label", "for=\"e\"", "type=\"email\"", "id=\"e\"", "required", "<button", "<footer", "© 2024"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "title": "Final Project",
+      "theory": "## The final assembly\n\nEverything from the course: structure, semantics, text, links, images, forms, accessibility. This checks that you own HTML.\n\n## What the page must have\n\n- DOCTYPE, html, head with charset + viewport + title + description.\n- header, nav, main, footer.\n- section, article.\n- A form: label + input + button.\n- Media: img with alt + video/iframe.\n- A table or list.\n\n## Approach\n\n1. Document skeleton.\n2. Sections.\n3. Inside — content.\n4. Accessibility: alt, label, aria.\n5. Check in the browser.\n\n## Typical mistakes\n\n- Forget `charset` — non-ASCII text breaks.\n- No `alt` — inaccessible.\n- `label` without `for`.\n- `<main>` twice.\n- `<section>` without a heading.\n- `<div>` instead of semantics.\n\n## Checks\n\n- Open F12 → Elements. See the structure — semantics in place?\n- Tab through the page — all fields focused?\n- Disable images — is `alt` visible?\n\n## Summary\n\n- Full semantic page\n- Accessibility: alt, label, role\n- Validation: required\n- Metadata in head\n- You know HTML",
+      "questions": [
+        { "text": "What is mandatory in `<head>`?", "options": ["Only title", "charset, viewport, title", "Only charset", "Nothing"], "answer": 1, "explanation": "`charset`, `viewport`, `title` — base set." },
+        { "text": "How many `<main>`?", "options": ["Any", "One", "Two", "Zero"], "answer": 1, "explanation": "One `<main>`." },
+        { "text": "Why `alt`?", "options": ["Style", "Description for the screen reader", "Size", "Error"], "answer": 1, "explanation": "`alt` — for accessibility." },
+        { "text": "What does `<label for=\"e\">` + `<input id=\"e\">` give?", "options": ["Pretty", "Click-focus link and semantics", "Error", "Size"], "answer": 1, "explanation": "Click on label focuses input, screen reader reads it." },
+        { "text": "What to check before submitting?", "options": ["Only visuals", "Structure, accessibility, validation", "Only color", "Nothing"], "answer": 1, "explanation": "Structure + a11y + validity." }
+      ],
+      "practice": {
+        "description": "Assemble the final page:\n- DOCTYPE, html, head (charset, viewport, title \"Portfolio\"), body\n- header (`<h1>` \"Ivan\", nav with `<a>` \"Portfolio\", \"Contact\")\n- main with `<section>` (`<h2>` \"About\", `<p>` \"Developer.\") and `<article>` (`<h2>` \"Project\", `<p>` \"Description.\")\n- form (`<label for=\"e\">` \"Email\", `<input type=\"email\" id=\"e\" required>`, `<button>` \"Send\")\n- img (`<img src=\"p.jpg\" alt=\"Photo\">`)\n- footer (`<p>` \"© 2024\")\n\nVisible text: `Ivan Portfolio Contact About Developer. Project Description. Email Photo Send © 2024`",
+        "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+        "expected": "Ivan Portfolio Contact About Developer. Project Description. Email Photo Send © 2024",
+        "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<meta charset=", "name=\"viewport\"", "<title", "Portfolio", "<body", "<header", "<h1", "Ivan", "<nav", "Contact", "<main", "<section", "<h2", "About", "Developer.", "<article", "Project", "Description.", "<form", "<label", "for=\"e\"", "type=\"email\"", "required", "<button", "Send", "<img", "alt=\"Photo\"", "<footer", "© 2024"]
+      }
+    },
+    "28": {
+      "id": 28,
+      "title": "fieldset, legend",
+      "theory": "## Why group fields\n\nA 10-field form without grouping is a wall. Logical blocks (\"Personal\", \"Address\", \"Payment\") help the user and the screen reader.\n\n## fieldset\n\n```html\n<fieldset>\n  <legend>Personal</legend>\n  <label for=\"name\">Name</label>\n  <input type=\"text\" id=\"name\">\n</fieldset>\n```\n\n`<fieldset>` — a box around a group. Semantic: \"these fields belong together\".\n\n## legend\n\n`<legend>` — title of the group. **First** child of `<fieldset>`. The browser renders it in the frame.\n\nWithout `<legend>` — a box with no label, the screen reader can't tell what the group is.\n\n## disabled on fieldset\n\n```html\n<fieldset disabled>\n  <input type=\"text\">\n  <button>OK</button>\n</fieldset>\n```\n\nAll fields inside — disabled and not submitted. Handy for \"pause the whole block\".\n\n## Nested\n\n```html\n<fieldset>\n  <legend>Address</legend>\n  <fieldset>\n    <legend>City</legend>\n    <input type=\"text\">\n  </fieldset>\n</fieldset>\n```\n\nNesting allowed. Don't overdo it — 2 levels is enough.\n\n## Accessibility\n\nThe screen reader reads `legend` as the group header and when jumping to each field announces: \"Personal, Name, text field\". Without `fieldset` — just \"Name, text field\".\n\n## What if\n\n- `<legend>` not first — the browser may render it, but semantics break.\n- `<fieldset>` without `legend` — meaning lost.\n- `<legend>` outside `<fieldset>` — invalid.\n\n## Common mistake\n\nReplacing `<fieldset>` with a `<div>` with a class. Visually similar, but semantics lost and `disabled` on the group doesn't work.\n\n## Summary\n\n- `<fieldset>` — group of fields\n- `<legend>` — title, first child\n- `disabled` on `<fieldset>` — whole group\n- Helps the screen reader\n- Don't replace with `<div>`",
+      "questions": [
+        { "text": "What does `<fieldset>` do?", "options": ["Button", "Groups form fields", "Submits", "Styles"], "answer": 1, "explanation": "Group of fields with shared semantics." },
+        { "text": "Where must `<legend>` be?", "options": ["Outside fieldset", "First child of fieldset", "At end", "Anywhere"], "answer": 1, "explanation": "First child only." },
+        { "text": "What does `disabled` on `<fieldset>` do?", "options": ["Colors", "Disables all fields inside", "Removes", "Hides"], "answer": 1, "explanation": "Whole group disabled." },
+        { "text": "Why `legend` for accessibility?", "options": ["Pretty", "Screen reader reads as group header", "Size", "Color"], "answer": 1, "explanation": "Group announced." },
+        { "text": "Can you nest `<fieldset>`?", "options": ["No", "Yes, but 2 levels enough", "Only with CSS", "Error"], "answer": 1, "explanation": "Allowed, don't overdo." }
+      ],
+      "practice": {
+        "description": "Write a form:\n- `<fieldset>` with `<legend>` \"Personal\"\n- `<label for=\"n\">` \"Name\", `<input type=\"text\" id=\"n\">\n\nVisible text: `Personal Name`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Personal Name",
+        "must_contain": ["<fieldset", "<legend", "Personal", "<label", "for=\"n\"", "<input", "type=\"text\"", "id=\"n\""]
+      }
+    },
+    "29": {
+      "id": 29,
+      "title": "datalist",
+      "theory": "## What datalist is\n\n`<datalist>` — list of **suggestions** for `<input>`. The user can pick from the list or type their own. Doesn't block input.\n\n## Syntax\n\n```html\n<input list=\"cities\" name=\"city\">\n<datalist id=\"cities\">\n  <option value=\"Moscow\">\n  <option value=\"Saint Petersburg\">\n  <option value=\"Kazan\">\n</datalist>\n```\n\n- `<input list=\"id\">` — link to datalist by `id`.\n- `<datalist id=\"...\">` — the list.\n- `<option value=\"...\">` — variants.\n\n## Not the same as select\n\n`<select>` — only from the list, input locked. `<datalist>` — suggestions, free entry.\n\n```html\n<!-- select: only from list -->\n<select><option>Moscow</option></select>\n\n<!-- datalist: suggestions + free entry -->\n<input list=\"x\">\n<datalist id=\"x\"><option value=\"Moscow\"></datalist>\n```\n\n## option value\n\nIn `<datalist>` only `value` works. Text inside `<option>` is often ignored — put content in `value`.\n\n## When to use\n\n- Autocomplete cities, countries.\n- Frequent values (email domains).\n- Search with suggestions.\n\n## What if\n\n- `list=\"x\"` without `<datalist id=\"x\">` — no suggestions, but typing works.\n- `<datalist>` without `id` — won't link.\n- `<option>` without `value` — variant won't work.\n\n## Common mistake\n\n`<datalist>` with text in `<option>` and no `value` — the browser won't show the suggestion. Always `value=\"...\"`.\n\n## Summary\n\n- `<input list=\"id\">` + `<datalist id=\"...\">`\n- Suggestions, doesn't block input\n- `<option value=\"...\">` — variants\n- Not a `<select>` replacement\n- Always `value`",
+      "questions": [
+        { "text": "What does `<datalist>` do?", "options": ["Strict choice", "Suggestions for input", "Hides", "Submits"], "answer": 1, "explanation": "Suggestions, free input." },
+        { "text": "How to link input with datalist?", "options": ["for", "name", "list = id", "id = id"], "answer": 2, "explanation": "`list=\"id\"`." },
+        { "text": "Can you type your own value?", "options": ["No", "Yes", "Only with JS", "Sometimes"], "answer": 1, "explanation": "Doesn't block input." },
+        { "text": "What must `<option>` have?", "options": ["Only text", "`value`", "`name`", "`id`"], "answer": 1, "explanation": "Works by `value`." },
+        { "text": "Difference from `<select>`?", "options": ["None", "select blocks input, datalist doesn't", "Faster", "Only for numbers"], "answer": 1, "explanation": "Free entry in datalist." }
+      ],
+      "practice": {
+        "description": "Write a form:\n- `<label>` \"City\" with `<input list=\"cities\">`\n- `<datalist id=\"cities\">` with `<option value=\"Moscow\">` and `<option value=\"Kazan\">`\n\nVisible text: `City`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "City",
+        "must_contain": ["<label", "City", "<input", "list=\"cities\"", "<datalist", "id=\"cities\"", "<option", "value=\"Moscow\"", "value=\"Kazan\""]
+      }
+    },
+    "30": {
+      "id": 30,
+      "title": "More input types",
+      "theory": "## date, time, datetime-local\n\n```html\n<input type=\"date\">\n<input type=\"time\">\n<input type=\"datetime-local\">\n```\n\nOpen the built-in calendar / time picker. Value comes as `2024-01-15` / `14:30`.\n\n## color\n\n```html\n<input type=\"color\" value=\"#ff0000\">\n```\n\nColor palette. Returns `#rrggbb`.\n\n## range\n\n```html\n<input type=\"range\" min=\"0\" max=\"100\" value=\"50\" step=\"5\">\n```\n\nSlider. `min` / `max` / `step`. Ideal for volume, brightness.\n\n## file\n\n```html\n<input type=\"file\" accept=\"image/*\" multiple>\n```\n\n- `accept` — allowed types (`.jpg,.png`, `image/*`, `application/pdf`).\n- `multiple` — several files.\n\n**Not sent** without `enctype=\"multipart/form-data\"` on `<form>`.\n\n## search\n\n```html\n<input type=\"search\">\n```\n\nLike `text`, but with a clear button. Semantics: search.\n\n## tel, url\n\n```html\n<input type=\"tel\">\n<input type=\"url\">\n```\n\n`tel` — mobile keyboard with digits. `url` — URL format check.\n\n## What if\n\n- `type=\"date\"` in a browser without calendar (old) — renders as text.\n- `<form>` without `enctype` with `type=\"file\"` — file not sent.\n- `range` without `step` — step 1 by default.\n\n## Common mistake\n\n`type=\"file\"` without `enctype=\"multipart/form-data\"` — file not sent. Common issue.\n\n## Summary\n\n- `date`, `time`, `datetime-local` — date/time\n- `color` — palette\n- `range` — slider\n- `file` — upload (+ `enctype` on form)\n- `search`, `tel`, `url` — mobile keyboard and validation",
+      "questions": [
+        { "text": "Which type for date?", "options": ["text", "date", "calendar", "day"], "answer": 1, "explanation": "`type=\"date\"`." },
+        { "text": "What does `type=\"range\"` do?", "options": ["Slider", "Number", "Date", "Color"], "answer": 0, "explanation": "Slider." },
+        { "text": "What is needed for `type=\"file\"`?", "options": ["Nothing", "enctype=\"multipart/form-data\"", "method=\"post\"", "accept"], "answer": 1, "explanation": "Otherwise file not sent." },
+        { "text": "What does `accept` do?", "options": ["Colors", "Restricts file types", "Compresses", "Submits"], "answer": 1, "explanation": "`.jpg,.png` or `image/*`." },
+        { "text": "What does `type=\"color\"` give?", "options": ["Palette", "Text", "Date", "Number"], "answer": 0, "explanation": "Color palette." }
+      ],
+      "practice": {
+        "description": "Write a form:\n- `<label>` \"Date\" with `<input type=\"date\">`\n- `<label>` \"Color\" with `<input type=\"color\">`\n- `<label>` \"Volume\" with `<input type=\"range\" min=\"0\" max=\"100\">`\n\nVisible text: `Date Color Volume`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Date Color Volume",
+        "must_contain": ["<label", "Date", "type=\"date\"", "Color", "type=\"color\"", "Volume", "type=\"range\"", "min=\"0\"", "max=\"100\""]
+      }
+    },
+    "31": {
+      "id": 31,
+      "title": "output, progress, meter",
+      "theory": "## output\n\nField for a **result** of calculation. Linked to inputs via `for`:\n\n```html\n<input type=\"number\" id=\"a\" value=\"5\">\n+ <input type=\"number\" id=\"b\" value=\"3\">\n= <output for=\"a b\">8</output>\n```\n\nStatic by itself — value changes via JS. Semantics: \"this is a result\".\n\n## progress\n\n**Task completion indicator** (download, progress):\n\n```html\n<progress value=\"30\" max=\"100\">30%</progress>\n```\n\n- `value` — done so far.\n- `max` — total.\n- Text inside — fallback for old browsers.\n- No `value` — indeterminate (spinner without %).\n\n## meter\n\n**Measurement in a known range** (battery, temperature, grade):\n\n```html\n<meter value=\"0.7\" min=\"0\" max=\"1\">70%</meter>\n```\n\n- `value` — current.\n- `min` / `max` — range.\n- `low` / `high` / `optimum` — colors (green / yellow / red by value).\n\n## progress vs meter\n\n- `<progress>` — \"how much of the task is done\" (0 → max, one direction).\n- `<meter>` — \"where we are in the range\" (can be bad or good).\n\nBattery 70% — `meter` (bad if 10%). Download 70% — `progress` (just not finished).\n\n## What if\n\n- `<progress>` without `max` — default 1.\n- `<meter>` with `value` outside `min`/`max` — browser clips.\n- `<output>` without JS — static text.\n\n## Common mistake\n\nConfusing `<progress>` and `<meter>`. If the scale is \"bad-good\" — meter. If \"done-not done\" — progress.\n\n## Summary\n\n- `<output>` — result\n- `<progress>` — task (value / max)\n- `<meter>` — measurement (min / max / low / high)\n- Download — progress, battery — meter",
+      "questions": [
+        { "text": "What is `<output>`?", "options": ["Result of calculation", "Input", "Button", "Link"], "answer": 0, "explanation": "Result semantics." },
+        { "text": "What does `<progress>` show?", "options": ["Battery", "Task (how much of max)", "Grade", "Time"], "answer": 1, "explanation": "Task progress." },
+        { "text": "What does `<meter>` show?", "options": ["Task", "Measurement in a range", "Text", "Link"], "answer": 1, "explanation": "Battery, temperature, grade." },
+        { "text": "What happens with `<progress>` without `value`?", "options": ["0", "Indeterminate", "Error", "100"], "answer": 1, "explanation": "Spinner without %." },
+        { "text": "Which for battery 70%?", "options": ["progress", "meter", "output", "div"], "answer": 1, "explanation": "Measurement in range." }
+      ],
+      "practice": {
+        "description": "Write a page:\n- `<progress value=\"50\" max=\"100\">50%</progress>`\n- `<meter value=\"0.8\" min=\"0\" max=\"1\">80%</meter>`\n- `<output>10</output>`\n\nVisible text: `50% 80% 10`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "50% 80% 10",
+        "must_contain": ["<progress", "value=\"50\"", "max=\"100\"", "<meter", "value=\"0.8\"", "min=\"0\"", "max=\"1\"", "<output", "10"]
+      }
+    },
+    "32": {
+      "id": 32,
+      "title": "srcset, sizes: responsive images",
+      "theory": "## The problem\n\nA 2000×1500 image on a phone with a 400px screen — 500 KB downloaded for nothing. Need **different versions** for different screens.\n\n## srcset\n\n```html\n<img src=\"small.jpg\"\n     srcset=\"small.jpg 400w, medium.jpg 800w, large.jpg 1600w\"\n     alt=\"Photo\">\n```\n\n- `src` — fallback for old browsers.\n- `srcset` — variants with `w` descriptor (width in pixels).\n- Browser picks based on screen width and DPR.\n\n## x descriptor\n\n```html\n<img src=\"1x.jpg\" srcset=\"1x.jpg 1x, 2x.jpg 2x\" alt=\"Photo\">\n```\n\n`x` — pixel density (for Retina). `2x` — double.\n\n## sizes\n\nTells the browser **how much space** the image takes:\n\n```html\n<img src=\"small.jpg\"\n     srcset=\"small.jpg 400w, medium.jpg 800w, large.jpg 1600w\"\n     sizes=\"(max-width: 600px) 100vw, 50vw\"\n     alt=\"Photo\">\n```\n\n- `(max-width: 600px) 100vw` — on narrow, image takes 100% of window.\n- `50vw` — on wide, 50%.\n\nWithout `sizes` the browser assumes 100vw.\n\n## Tips\n\n- `srcset` with `w` + `sizes` — responsive.\n- `srcset` with `x` — retina (logos).\n- Don't duplicate `src` and first `srcset` — redundant.\n\n## What if\n\n- `srcset` without `sizes` and `w` — browser takes first.\n- Typo in filename — broken image.\n- `sizes` with wrong media conditions — wrong size.\n\n## Common mistake\n\nForget `sizes` with `w`. Without it the browser thinks the image is always 100vw and picks the smallest.\n\n## Summary\n\n- `srcset` — variants\n- `w` — width, `x` — density\n- `sizes` — how much space\n- Browser chooses\n- `src` — fallback",
+      "questions": [
+        { "text": "What does `srcset` do?", "options": ["Speeds up", "List of image variants", "Copies", "Removes"], "answer": 1, "explanation": "Different versions to choose." },
+        { "text": "What does `400w` mean?", "options": ["400 pixels wide", "400 KB", "4x DPR", "4 variants"], "answer": 0, "explanation": "Width in pixels." },
+        { "text": "What does `sizes` do?", "options": ["File size", "Hint about displayed size", "Count", "Color"], "answer": 1, "explanation": "How much space." },
+        { "text": "What does `2x` mean?", "options": ["2 images", "2x pixel density", "2 pixels", "2 seconds"], "answer": 1, "explanation": "Retina 2x." },
+        { "text": "What without `sizes`?", "options": ["Works optimally", "Browser picks first", "Error", "Empty"], "answer": 1, "explanation": "Without sizes — smallest." }
+      ],
+      "practice": {
+        "description": "Write `<img>` with `src`, `srcset` (three variants `400w`, `800w`, `1600w`), `sizes` and `alt`.\n\nVisible text: `Photo`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Photo",
+        "must_contain": ["<img", "src=", "srcset=", "400w", "800w", "1600w", "sizes=", "alt=\"Photo\""]
+      }
+    },
+    "33": {
+      "id": 33,
+      "title": "picture, source",
+      "theory": "## Why picture\n\n`srcset` chooses **size**. `<picture>` chooses **format** or **different image** per condition. Example: WebP for supported, JPG for the rest.\n\n## Syntax\n\n```html\n<picture>\n  <source srcset=\"img.webp\" type=\"image/webp\">\n  <source srcset=\"img.jpg\" type=\"image/jpeg\">\n  <img src=\"img.jpg\" alt=\"Photo\">\n</picture>\n```\n\n- `<source>` — variants. Browser takes the first matching `type` / `media`.\n- `<img>` — **required**, fallback for old browsers.\n\n## Choosing by media\n\n```html\n<picture>\n  <source media=\"(min-width: 800px)\" srcset=\"wide.jpg\">\n  <source media=\"(min-width: 400px)\" srcset=\"medium.jpg\">\n  <img src=\"small.jpg\" alt=\"Photo\">\n</picture>\n```\n\n- Wide — `wide.jpg`.\n- Medium — `medium.jpg`.\n- Narrow — `small.jpg` from `<img>`.\n\n## art direction\n\nDifferent **cropping** for different screens. Desktop — horizontal, mobile — vertical crop. `srcset` can't, `<picture>` can.\n\n## type\n\n```html\n<source srcset=\"x.avif\" type=\"image/avif\">\n```\n\nBrowser checks format support. Doesn't support — moves to next.\n\n## Order matters\n\n`<source>` — **top to bottom**. First match wins. Put more specific higher.\n\n## What if\n\n- Forget `<img>` in `<picture>` — invalid, no fallback.\n- `<source>` after `<img>` — won't fire.\n- Wrong `type` — browser skips.\n\n## Common mistake\n\n`<picture>` without `<img>`. Required — fallback and alt source.\n\n## Summary\n\n- `<picture>` — choose image by condition\n- `<source>` — variants\n- `<img>` — required\n- `media` — by width\n- `type` — by format\n- First match wins",
+      "questions": [
+        { "text": "What does `<picture>` do?", "options": ["Copies", "Chooses image by condition", "Styles", "Removes"], "answer": 1, "explanation": "By media/type." },
+        { "text": "Is `<img>` required inside?", "options": ["No", "Yes, fallback + alt", "Only with CSS", "Only for PNG"], "answer": 1, "explanation": "Required." },
+        { "text": "What does `media` in source do?", "options": ["Size", "Condition on screen width", "Type", "Color"], "answer": 1, "explanation": "Like media query." },
+        { "text": "What does `type` in source do?", "options": ["File type check", "Size", "Width condition", "Text"], "answer": 0, "explanation": "MIME type." },
+        { "text": "Which source wins?", "options": ["Last", "First matching", "Random", "All"], "answer": 1, "explanation": "Top to bottom." }
+      ],
+      "practice": {
+        "description": "Write `<picture>`:\n- `<source>` with `srcset=\"a.webp\" type=\"image/webp\"`\n- `<img>` with `src=\"a.jpg\" alt=\"Photo\"`\n\nVisible text: `Photo`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Photo",
+        "must_contain": ["<picture", "<source", "srcset=\"a.webp\"", "type=\"image/webp\"", "<img", "src=\"a.jpg\"", "alt=\"Photo\""]
+      }
+    },
+    "34": {
+      "id": 34,
+      "title": "loading=\"lazy\"",
+      "theory": "## What it is\n\nThe `loading` attribute defers loading of **invisible** images / iframes until the user scrolls to them. Saves traffic, speeds up first paint.\n\n## Syntax\n\n```html\n<img src=\"big.jpg\" alt=\"Photo\" loading=\"lazy\">\n<iframe src=\"...\" loading=\"lazy\"></iframe>\n```\n\n- `loading=\"lazy\"` — lazy load.\n- `loading=\"eager\"` — default, immediate.\n- `loading=\"auto\"` — browser decides.\n\n## Where it works\n\n- `<img>` — yes.\n- `<iframe>` — yes.\n- Other tags — no.\n\n## How browser decides\n\nLoads when the image is **slightly** before the viewport. Threshold varies (usually 1250–3000 px).\n\n## When NOT to use\n\n- Top images (\"above the fold\") — `eager`.\n- Header logo — not lazy.\n- Everything visible immediately.\n\n`lazy` on LCP image (first big image) — slows down. Google Pagespeed penalizes.\n\n## SEO and performance\n\n- `lazy` for galleries, long lists — good.\n- `lazy` for main image — bad.\n\n## What if\n\n- `lazy` on all images — some load slower than they could.\n- JS disabled — `lazy` still works (HTML attribute).\n\n## Common mistake\n\n`loading=\"lazy\"` on the main page image. Degrades LCP (Largest Contentful Paint). For main — `eager`.\n\n## Summary\n\n- `loading=\"lazy\"` — deferred load\n- `<img>`, `<iframe>`\n- Not for above-the-fold\n- Saves traffic\n- Main image — `eager`",
+      "questions": [
+        { "text": "What does `loading=\"lazy\"` do?", "options": ["Speeds up", "Defers load until scroll", "Removes", "Copies"], "answer": 1, "explanation": "Lazy loading." },
+        { "text": "Which tags?", "options": ["Any", "img and iframe", "Only img", "Only video"], "answer": 1, "explanation": "img and iframe." },
+        { "text": "When NOT lazy?", "options": ["Always needed", "Top images", "Galleries", "Long lists"], "answer": 1, "explanation": "Above the fold — eager." },
+        { "text": "JS disabled?", "options": ["Yes, breaks", "No, works", "Sometimes", "Only in Chrome"], "answer": 1, "explanation": "HTML attribute." },
+        { "text": "Default value?", "options": ["lazy", "eager", "auto", "none"], "answer": 1, "explanation": "`eager` by default." }
+      ],
+      "practice": {
+        "description": "Write `<img>` with `src=\"big.jpg\"`, `alt=\"Photo\"` and `loading=\"lazy\"`.\n\nVisible text: `Photo`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Photo",
+        "must_contain": ["<img", "src=\"big.jpg\"", "alt=\"Photo\"", "loading=\"lazy\""]
+      }
+    },
+    "35": {
+      "id": 35,
+      "title": "dialog",
+      "theory": "## What it is\n\n`<dialog>` — native modal. No JS libraries, with focus trap, `Esc` to close, backdrop.\n\n## Syntax\n\n```html\n<dialog id=\"my\">\n  <p>Hello</p>\n  <button>Close</button>\n</dialog>\n<button onclick=\"my.showModal()\">Open</button>\n```\n\n- Hidden by default.\n- `showModal()` — open as modal (with backdrop, blocks clicks on page).\n- `show()` — open as regular block (no block).\n- `close()` — close.\n\n## Form inside dialog\n\n```html\n<dialog>\n  <form method=\"dialog\">\n    <p>Question?</p>\n    <button value=\"yes\">Yes</button>\n    <button value=\"no\">No</button>\n  </form>\n</dialog>\n```\n\n`<form method=\"dialog\">` — buttons close dialog and return `value` as result.\n\n## Esc and backdrop\n\n- `Esc` — closes modal.\n- Backdrop click — **no** default close. Add JS if needed.\n\n## open attribute\n\n```html\n<dialog open>Open immediately</dialog>\n```\n\n`open` — open on load, but not as modal (no backdrop).\n\n## Styling backdrop\n\n```css\ndialog::backdrop {\n  background: rgba(0, 0, 0, 0.5);\n}\n```\n\n## What if\n\n- `showModal()` in old browser — doesn't open.\n- Don't close — locks the page.\n- No `<form method=\"dialog\">` — need JS to close.\n\n## Common mistake\n\nConfusing `show()` and `showModal()`. `show()` — not modal, page clickable. For modal — `showModal()`.\n\n## Summary\n\n- `<dialog>` — native modal\n- `showModal()` — open as modal\n- `close()` — close\n- `<form method=\"dialog\">` — close buttons\n- `::backdrop` — background\n- Esc works out of the box",
+      "questions": [
+        { "text": "What is `<dialog>`?", "options": ["Button", "Native modal", "Form", "Link"], "answer": 1, "explanation": "Modal without libs." },
+        { "text": "What does `showModal()` do?", "options": ["Shows as block", "Opens as modal with backdrop", "Closes", "Removes"], "answer": 1, "explanation": "Modal mode." },
+        { "text": "What closes dialog?", "options": ["Only JS", "Esc or close()", "Click anywhere", "Nothing"], "answer": 1, "explanation": "Esc out of the box." },
+        { "text": "What does `<form method=\"dialog\">` do?", "options": ["Submits", "Closes dialog by buttons", "Opens", "Resets"], "answer": 1, "explanation": "Buttons close." },
+        { "text": "What does `::backdrop` do?", "options": ["Border color", "Background around modal", "Text style", "Removes"], "answer": 1, "explanation": "Darkening behind." }
+      ],
+      "practice": {
+        "description": "Write a page:\n- `<dialog>` with `<p>` \"Hello\"\n- Inside `<form method=\"dialog\">` with `<button>` \"Close\"\n\nVisible text: (empty — tags only)",
+        "starter": "<!-- TODO -->\n",
+        "expected": "",
+        "must_contain": ["<dialog", "<p", "Hello", "<form", "method=\"dialog\"", "<button", "Close"]
+      }
+    },
+    "36": {
+      "id": 36,
+      "title": "template",
+      "theory": "## What it is\n\n`<template>` — **template** of markup, **not displayed** and **not running scripts** until cloned via JS.\n\n## Syntax\n\n```html\n<template id=\"card\">\n  <div class=\"card\">\n    <h2></h2>\n    <p></p>\n  </div>\n</template>\n```\n\nNothing on page. In DOM — exists but hidden.\n\n## Clone via JS\n\n```js\nconst tpl = document.getElementById(\"card\");\nconst clone = tpl.content.cloneNode(true);\nclone.querySelector(\"h2\").textContent = \"Title\";\nclone.querySelector(\"p\").textContent = \"Text\";\ndocument.body.appendChild(clone);\n```\n\n`template.content` — DocumentFragment with content.\n\n## Why template\n\n- Repeated cards (product list).\n- Modals, tooltips.\n- Templates cloned many times.\n\n## Not for\n\n- Hidden content — `hidden` or `<details>`.\n- Lazy load — `loading=\"lazy\"`.\n\n`template` — only for **cloning** via JS.\n\n## Without JS\n\n`template` is useless. Does nothing in HTML markup, only with JS.\n\n## What if\n\n- `<template>` without `id` — can't find via JS.\n- Styles isolated? No, inside template works if added.\n- Insert template in body via HTML without JS — content doesn't show.\n\n## Common mistake\n\nTrying to show `<template>` via CSS `display: block`. Browser still won't render — by design.\n\n## Summary\n\n- `<template>` — template\n- Not displayed\n- Cloned via `content.cloneNode(true)`\n- Used with JS\n- Not for hiding content",
+      "questions": [
+        { "text": "What is `<template>`?", "options": ["Form", "Markup template", "Button", "Link"], "answer": 1, "explanation": "Template for cloning." },
+        { "text": "Is template displayed?", "options": ["Yes", "No until cloned", "Only in head", "Only with CSS"], "answer": 1, "explanation": "Hidden until clone." },
+        { "text": "What's needed to use?", "options": ["Only HTML", "JS for cloning", "CSS", "Nothing"], "answer": 1, "explanation": "Useless without JS." },
+        { "text": "What does `template.content` give?", "options": ["HTML as string", "DocumentFragment", "Styles", "Script"], "answer": 1, "explanation": "Fragment for cloning." },
+        { "text": "For hidden content better?", "options": ["template", "hidden or details", "display: none", "Nothing"], "answer": 1, "explanation": "Template — cloning only." }
+      ],
+      "practice": {
+        "description": "Write `<template>` with `id=\"card\"`, inside `<div>` with `<p>` \"X\".\n\nVisible text: (empty — template not displayed)",
+        "starter": "<!-- TODO -->\n",
+        "expected": "",
+        "must_contain": ["<template", "id=\"card\"", "<div", "<p", "X", "</template>"]
+      }
+    },
+    "37": {
+      "id": 37,
+      "title": "canvas",
+      "theory": "## What it is\n\n`<canvas>` — area for drawing via JS. Pixel canvas for shapes, charts, games.\n\n## Syntax\n\n```html\n<canvas id=\"c\" width=\"200\" height=\"100\"></canvas>\n```\n\nWithout JS — empty rectangle.\n\n## Context\n\n```js\nconst canvas = document.getElementById(\"c\");\nconst ctx = canvas.getContext(\"2d\");\nctx.fillStyle = \"red\";\nctx.fillRect(10, 10, 50, 30);\n```\n\n- `getContext(\"2d\")` — 2D drawing.\n- `getContext(\"webgl\")` — 3D (WebGL).\n- `fillStyle` / `fillRect` — fill and rectangle.\n\n## Basic methods\n\n- `fillRect(x, y, w, h)` — fill rectangle.\n- `strokeRect` — outline.\n- `beginPath` / `moveTo` / `lineTo` / `stroke` — lines.\n- `arc(x, y, r, 0, 2π)` — circle.\n- `fillText(\"hi\", x, y)` — text.\n\n## Canvas vs SVG\n\n- **Canvas** — pixels, faster for animations, no DOM (not stylable via CSS, elements not findable).\n- **SVG** — vector, each element in DOM, stylable and manageable.\n\nFor games — canvas. For icons and charts — SVG.\n\n## Size vs CSS\n\n`width` / `height` on element — **real canvas pixels**. CSS `width` — display. Mismatch — blur.\n\n```html\n<canvas width=\"400\" height=\"300\" style=\"width: 200px\"></canvas>\n```\n\nCanvas 400×300 displayed as 200 — 2x DPR, sharp on retina.\n\n## What if\n\n- No `getContext` — nothing drawn.\n- `width` / `height` not set — 300×150 default.\n- Draw before canvas loaded — `null`.\n\n## Common mistake\n\nCSS `width` confused with attribute `width`. CSS stretches/shrinks, but real size from attribute.\n\n## Summary\n\n- `<canvas>` — drawing canvas\n- `getContext(\"2d\")` — context\n- JS draws\n- CSS width ≠ real size\n- vs SVG: pixels vs vector",
+      "questions": [
+        { "text": "What is `<canvas>`?", "options": ["Form", "Drawing canvas", "Button", "Text"], "answer": 1, "explanation": "Pixel area." },
+        { "text": "What does `getContext(\"2d\")` give?", "options": ["3D", "Context for 2D", "Styles", "Error"], "answer": 1, "explanation": "2D context." },
+        { "text": "What does `fillRect` draw?", "options": ["Line", "Filled rectangle", "Circle", "Text"], "answer": 1, "explanation": "Rectangle." },
+        { "text": "Difference from SVG?", "options": ["None", "Canvas — pixels, SVG — vector", "Canvas slower", "SVG no DOM"], "answer": 1, "explanation": "Pixels vs vector." },
+        { "text": "What matters for quality?", "options": ["CSS width", "Attribute width / height", "Same", "Not important"], "answer": 1, "explanation": "Real size — attribute." }
+      ],
+      "practice": {
+        "description": "Write `<canvas>` with `id=\"c\"`, `width=\"200\"`, `height=\"100\"`.\n\nVisible text: (empty — no JS)",
+        "starter": "<!-- TODO -->\n",
+        "expected": "",
+        "must_contain": ["<canvas", "id=\"c\"", "width=\"200\"", "height=\"100\""]
+      }
+    },
+    "38": {
+      "id": 38,
+      "title": "svg inline",
+      "theory": "## What it is\n\n**SVG** — scalable vector graphics. XML format, each shape is an element. Insert via `<img>` or **inline** directly in HTML.\n\n## Inline example\n\n```html\n<svg width=\"100\" height=\"100\">\n  <circle cx=\"50\" cy=\"50\" r=\"40\" fill=\"red\"/>\n</svg>\n```\n\n- `<svg>` — container.\n- `<circle>` — circle (`cx`, `cy` — center, `r` — radius).\n- `<rect>` — rectangle.\n- `<line>`, `<polygon>`, `<path>` — other shapes.\n\n## Difference from `<img src=\"x.svg\">`\n\n- **`<img>`** — like a regular image. Not stylable via outer CSS, inner elements not accessible.\n- **Inline** — part of DOM. Color via CSS, event handlers, animations.\n\n## Control via CSS\n\n```html\n<svg>\n  <circle class=\"dot\" r=\"10\"/>\n</svg>\n```\n\n```css\n.dot { fill: blue; }\n```\n\n`fill` — fill, `stroke` — stroke.\n\n## Interactivity\n\nEach shape — DOM element. Click on `<circle>` — like click on `<div>`:\n\n```js\ndocument.querySelector(\"circle\").addEventListener(\"click\", ...);\n```\n\n## When inline, when `<img>`\n\n- Inline — need styling / interactivity (icons, charts).\n- `<img>` — simple image, no changes (static logo).\n\n## What if\n\n- No `width` / `height` on `<svg>` — default size (300×150).\n- Inline SVG without `viewBox` — scales poorly.\n- `<img>` for an icon that needs recoloring — won't work.\n\n## Common mistake\n\n`<img src=\"icon.svg\">` and trying to style via CSS. External SVG in `<img>` is isolated, `fill` from outside won't apply.\n\n## Summary\n\n- SVG — vector graphics\n- Inline — part of DOM, stylable\n- `<img>` — isolated\n- `fill` / `stroke` for color\n- `viewBox` for scaling",
+      "questions": [
+        { "text": "What is SVG?", "options": ["Image format", "Vector XML graphics", "Script", "Form"], "answer": 1, "explanation": "Vector." },
+        { "text": "What does `<circle>` do?", "options": ["Square", "Circle", "Line", "Text"], "answer": 1, "explanation": "Circle." },
+        { "text": "Which attribute for fill color?", "options": ["color", "fill", "background", "paint"], "answer": 1, "explanation": "`fill`." },
+        { "text": "Inline SVG vs `<img>`?", "options": ["None", "Inline in DOM, stylable", "Inline slower", "`<img>` for icons"], "answer": 1, "explanation": "Inline in DOM." },
+        { "text": "Why `viewBox`?", "options": ["Color", "Scaling", "File size", "Script"], "answer": 1, "explanation": "For scaling." }
+      ],
+      "practice": {
+        "description": "Write inline `<svg>` with `<circle>` (r=10, fill=red).\n\nVisible text: (empty — graphics)",
+        "starter": "<!-- TODO -->\n",
+        "expected": "",
+        "must_contain": ["<svg", "<circle", "r=\"10\"", "fill=\"red\""]
+      }
+    },
+    "39": {
+      "id": 39,
+      "title": "Practice: registration form",
+      "theory": "## Task\n\nRegistration form with all studied elements: `fieldset`, `label`, `required`, `pattern`, different input types, `datalist`.\n\n## Contents\n\n- `<form>` with `method=\"post\"`.\n- `<fieldset>` \"Personal\" — name (`text`, `required`), email (`email`, `required`).\n- `<fieldset>` \"Account\" — password (`password`, `required`, `minlength=\"6\"`), date of birth (`date`).\n- `<fieldset>` \"Settings\" — country from `datalist`, consent (`checkbox`, `required`).\n- `<button type=\"submit\">` — submit.\n\n## Checks\n\n- All fields with `label for` = `id`.\n- `required` on mandatory.\n- `minlength=\"6\"` on password.\n- `datalist` for country.\n- `submit` button.\n\n## Structure\n\n```html\n<form method=\"post\">\n  <fieldset>\n    <legend>Personal</legend>\n    <label for=\"name\">Name</label>\n    <input type=\"text\" id=\"name\" required>\n  </fieldset>\n  <!-- ... -->\n</form>\n```\n\n## What if\n\n- No `required` — form submits with empty fields.\n- `<fieldset>` without `<legend>` — semantics lost.\n- `label` without `for` — click doesn't focus.\n\n## Common mistake\n\nAll fields in one pile without `fieldset`. Works, but hard to fill and hard for screen readers.\n\n## Summary\n\n- `fieldset` + `legend` for grouping\n- `label for` = `input id`\n- `required`, `minlength`\n- `datalist` for suggestions\n- `type=\"submit\"`",
+      "questions": [
+        { "text": "How to group fields?", "options": ["div", "fieldset + legend", "section", "p"], "answer": 1, "explanation": "`fieldset`." },
+        { "text": "What's required on email?", "options": ["minlength", "required", "pattern", "checkbox"], "answer": 1, "explanation": "`required` for mandatory." },
+        { "text": "How to limit password?", "options": ["maxlength", "minlength", "pattern", "required"], "answer": 1, "explanation": "`minlength`." },
+        { "text": "What does datalist give?", "options": ["Strict choice", "Suggestions", "Button", "Submit"], "answer": 1, "explanation": "Autocomplete." },
+        { "text": "What does `<button type=\"submit\">` do?", "options": ["Resets", "Submits", "Nothing", "Colors"], "answer": 1, "explanation": "Submit." }
+      ],
+      "practice": {
+        "description": "Build a form:\n- `<form>`\n- `<fieldset>` with `<legend>` \"Personal\" and `<label for=\"n\">` \"Name\" + `<input type=\"text\" id=\"n\" required>`\n- `<fieldset>` with `<legend>` \"Account\" and `<label for=\"p\">` \"Password\" + `<input type=\"password\" id=\"p\" minlength=\"6\" required>`\n- `<button type=\"submit\">` \"OK\"\n\nVisible text: `Personal Name Account Password OK`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Personal Name Account Password OK",
+        "must_contain": ["<form", "<fieldset", "<legend", "Personal", "<label", "for=\"n\"", "Name", "type=\"text\"", "required", "Account", "Password", "type=\"password\"", "minlength=\"6\"", "<button", "type=\"submit\""]
+      }
+    },
+    "40": {
+      "id": 40,
+      "title": "Practice: gallery with picture",
+      "theory": "## Task\n\nResponsive gallery: `<picture>` for formats, `srcset` for sizes, `loading=\"lazy\"` for lazy load.\n\n## Contents\n\n- `<h1>` \"Gallery\".\n- Three `<figure>` with `<img>` inside `<picture>`.\n- Each has `<figcaption>` with caption.\n- `loading=\"lazy\"` on images below the first screen.\n- `alt` on each.\n\n## Skeleton\n\n```html\n<figure>\n  <picture>\n    <source srcset=\"p1.webp\" type=\"image/webp\">\n    <img src=\"p1.jpg\" alt=\"Mountains\" loading=\"lazy\"\n         srcset=\"p1-400.jpg 400w, p1-800.jpg 800w\"\n         sizes=\"(max-width: 600px) 100vw, 50vw\">\n  </picture>\n  <figcaption>Mountains</figcaption>\n</figure>\n```\n\n## Checks\n\n- `<picture>` with `<source>` and `<img>` inside.\n- `srcset` and `sizes` on `<img>`.\n- `alt` required.\n- `loading=\"lazy\"` (for all but the first).\n- `<figure>` + `<figcaption>`.\n\n## What if\n\n- No `<img>` in `<picture>` — invalid.\n- Forget `alt` — screen reader reads filename.\n- `lazy` on first — slows LCP.\n\n## Common mistake\n\n`<picture>` without `<img>` inside — doesn't display. `<img>` required.\n\n## Summary\n\n- `<figure>` for image with caption\n- `<picture>` + `<source>` + `<img>`\n- `srcset` / `sizes` for responsive\n- `alt` — required\n- `lazy` — not on first",
+      "questions": [
+        { "text": "What's required in `<picture>`?", "options": ["source", "img", "figure", "figcaption"], "answer": 1, "explanation": "`<img>` fallback." },
+        { "text": "What does `srcset` do?", "options": ["Copies", "Size variants", "Removes", "Styles"], "answer": 1, "explanation": "Different versions." },
+        { "text": "Why `sizes`?", "options": ["File size", "How much space", "Type", "Color"], "answer": 1, "explanation": "Hint." },
+        { "text": "Where lazy NOT needed?", "options": ["Gallery", "First image", "Bottom", "Middle"], "answer": 1, "explanation": "Above the fold — eager." },
+        { "text": "What does `<figcaption>` do?", "options": ["Style", "Caption", "Link", "Form"], "answer": 1, "explanation": "Caption for figure." }
+      ],
+      "practice": {
+        "description": "Write `<figure>`:\n- `<picture>` with `<source srcset=\"a.webp\" type=\"image/webp\">` and `<img src=\"a.jpg\" alt=\"Mountains\" loading=\"lazy\">`\n- `<figcaption>` \"Mountains\"\n\nVisible text: `Mountains Mountains`",
+        "starter": "<!-- TODO -->\n",
+        "expected": "Mountains Mountains",
+        "must_contain": ["<figure", "<picture", "<source", "srcset=\"a.webp\"", "type=\"image/webp\"", "<img", "src=\"a.jpg\"", "alt=\"Mountains\"", "loading=\"lazy\"", "<figcaption", "Mountains"]
+      }
+    },
+    "41": {
+      "id": 41,
+      "title": "Final",
+      "theory": "## Final assembly\n\nEverything from the course: semantics, forms, media, accessibility, metadata. One page — full check.\n\n## What must be there\n\n- DOCTYPE, html, head with charset, viewport, title, description.\n- header, nav, main, footer.\n- section + article.\n- Form with fieldset, label, input (email, date), checkbox, button.\n- `<picture>` with `<source>` and `<img>` (alt, srcset, sizes, lazy).\n- `<dialog>` for modal.\n- `<template>` with something.\n- `<progress>` and `<meter>`.\n\n## Approach\n\n1. Document skeleton.\n2. Sections.\n3. Inside — content.\n4. Accessibility: alt, label, aria.\n5. Validate via F12.\n\n## Checks\n\n- `charset` first in head.\n- One `<main>`.\n- All `<img>` with `alt`.\n- All `<input>` with `label`.\n- `<picture>` contains `<img>`.\n- `dialog` via `showModal()`.\n\n## What if\n\n- Skip `<meta charset>` — Cyrillic breaks.\n- `<section>` without heading — semantics lost.\n- `<picture>` without `<img>` — doesn't display.\n- `fieldset` without `legend` — group unnamed.\n\n## Summary\n\n- Full semantic page\n- Forms + media + accessibility\n- Metadata in head\n- Interactive via `<dialog>`\n- You know HTML in practice",
+      "questions": [
+        { "text": "What's mandatory in `<head>`?", "options": ["Only title", "charset, viewport, title", "Only charset", "Nothing"], "answer": 1, "explanation": "Base set." },
+        { "text": "How many `<main>`?", "options": ["Any", "One", "Two", "Zero"], "answer": 1, "explanation": "One." },
+        { "text": "What's required in `<picture>`?", "options": ["source", "img", "figure", "aria"], "answer": 1, "explanation": "`<img>` for fallback." },
+        { "text": "What does `<fieldset>` + `<legend>` give?", "options": ["Pretty", "Group of fields with title", "Submit", "Validation"], "answer": 1, "explanation": "Group semantics." },
+        { "text": "What to check before submitting?", "options": ["Only visuals", "Structure, accessibility, validity", "Only color", "Nothing"], "answer": 1, "explanation": "Structure + a11y." }
+      ],
+      "practice": {
+        "description": "Build the final page:\n- DOCTYPE, html, head (charset, viewport, title \"Portfolio\"), body\n- header (`<h1>` \"Ivan\", nav with `<a>` \"About\", \"Contact\")\n- main: `<section>` (`<h2>` \"About\", `<p>` \"Developer.\"), `<article>` (`<h2>` \"Article\", `<p>` \"Text.\")\n- `<picture>` with `<source>` and `<img>` (alt=\"Photo\")\n- form with fieldset (`<legend>` \"Contact\"), label (\"Email\"), input (type=\"email\", required), button (\"Send\")\n- footer (`<p>` \"© 2024\")\n\nVisible text: `Ivan About Contact About Developer. Article Text. Photo Contact Email Send © 2024`",
+        "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+        "expected": "Ivan About Contact About Developer. Article Text. Photo Contact Email Send © 2024",
+        "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<meta charset=", "name=\"viewport\"", "<title", "Portfolio", "<body", "<header", "<h1", "Ivan", "<nav", "Contact", "<main", "<section", "<h2", "About", "Developer.", "<article", "Article", "Text.", "<picture", "<source", "<img", "alt=\"Photo\"", "<form", "<fieldset", "<legend", "<label", "type=\"email\"", "required", "<button", "<footer", "© 2024"]
+      }
+    }
+  }
+}

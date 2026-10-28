@@ -1,0 +1,134 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Контрольная: Что такое HTML",
+    "description": "Финальное задание главы 1. Проверяет: DOCTYPE, структуру, заголовки, параграфы, комментарии.",
+    "practice": {
+      "description": "Собери полный HTML-документ:\n- `<!DOCTYPE html>` первой строкой\n- `<html>`, `<head>` с `<title>` \"Моя страница\", `<body>`\n- `<h1>` \"Добро пожаловать\"\n- `<p>` \"Это моя первая страница.\"\n- Минимум один HTML-комментарий\n\nВидимый текст (по порядку): `Добро пожаловать Это моя первая страница.`",
+      "starter": "<!-- TODO: полный документ -->\n",
+      "expected": "Добро пожаловать Это моя первая страница.",
+      "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<title", "Моя страница", "<body", "<h1", "Добро пожаловать", "<p", "Это моя первая страница.", "<!--"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Контрольная: Текст и ссылки",
+    "description": "Финальное задание главы 2. Проверяет: списки, ссылки, изображения, форматирование.",
+    "practice": {
+      "description": "Собери страницу:\n- `<h2>` \"Ресурсы\"\n- `<ul>` с тремя `<li>`: \"Книги\", \"Видео\", \"Статьи\"\n- `<a>` с `href=\"https://example.com\"` и текстом \"Пример\"\n- `<img>` с `src` и `alt=\"Логотип\"` (любой URL)\n- `<p>` с `<strong>` и `<em>` внутри\n\nВидимый текст (по порядку): `Ресурсы Книги Видео Статьи Пример Логотип`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Ресурсы Книги Видео Статьи Пример Логотип",
+      "must_contain": ["<h2", "<ul", "<li", "Книги", "<a", "href=", "https://example.com", "Пример", "<img", "src=", "alt=", "Логотип", "<strong", "<em"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Контрольная: Семантика",
+    "description": "Финальное задание главы 3. Проверяет: header, nav, main, footer, section, article.",
+    "practice": {
+      "description": "Собери страницу с семантической структурой:\n- `<header>` с `<h1>` \"Сайт\"\n- `<nav>` с двумя ссылками: \"Главная\", \"О нас\"\n- `<main>` с `<section>` (`<h2>` \"Новости\") и `<article>` (`<p>` \"Текст новости.\")\n- `<footer>` с `<p>` \"© 2024\"\n\nВидимый текст (по порядку): `Сайт Главная О нас Новости Текст новости. © 2024`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Сайт Главная О нас Новости Текст новости. © 2024",
+      "must_contain": ["<header", "<h1", "Сайт", "<nav", "Главная", "О нас", "<main", "<section", "<h2", "Новости", "<article", "<p", "Текст новости.", "<footer", "© 2024"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Контрольная: Формы",
+    "description": "Финальное задание главы 4. Проверяет: form, input, label, select, button.",
+    "practice": {
+      "description": "Собери форму:\n- `<form>`\n- `<label>` с `for` и `<input type=\"text\">` с `id` — «Имя»\n- `<label>` «Email» и `<input type=\"email\">`\n- `<select>` с двумя `<option>`: \"Один\", \"Два\"\n- `<button type=\"submit\">` с текстом \"Отправить\"\n\nВидимый текст (по порядку): `Имя Email Один Два Отправить`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Имя Email Один Два Отправить",
+      "must_contain": ["<form", "<label", "for=", "<input", "type=\"text\"", "type=\"email\"", "<select", "<option", "Один", "Два", "<button", "type=\"submit\"", "Отправить"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Контрольная: Таблицы и медиа",
+    "description": "Финальное задание главы 5. Проверяет: table, thead, tbody, caption, video.",
+    "practice": {
+      "description": "Собери страницу:\n- `<table>` с `<caption>` \"Оценки\"\n- `<thead>` с `<tr>` и двумя `<th>`: \"Имя\", \"Балл\"\n- `<tbody>` с `<tr>`, `<td>` \"Аня\", `<td>` \"5\"\n- `<video>` с атрибутом `controls` и `<source>` (любой URL)\n\nВидимый текст (по порядку): `Оценки Имя Балл Аня 5`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Оценки Имя Балл Аня 5",
+      "must_contain": ["<table", "<caption", "Оценки", "<thead", "<tr", "<th", "Имя", "Балл", "<tbody", "<td", "Аня", "5", "<video", "controls", "<source"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Контрольная: Доступность",
+    "description": "Финальное задание главы 6. Проверяет: alt, label, aria-label, role.",
+    "practice": {
+      "description": "Собери доступную страницу:\n- `<img>` с непустым `alt=\"Фото кота\"`\n- `<label>` с `for` и `<input>` с `id`\n- `<button>` с `aria-label=\"Закрыть\"` и видимым текстом \"X\"\n- `<nav role=\"navigation\">` с одной ссылкой \"Главная\"\n\nВидимый текст (по порядку): `Фото кота Имя X Главная`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Фото кота Имя X Главная",
+      "must_contain": ["<img", "alt=\"Фото кота\"", "<label", "for=", "<input", "id=", "aria-label=", "Закрыть", "<nav", "role=\"navigation\"", "Главная"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Контрольная: HTML5",
+    "description": "Финальное задание главы 7. Проверяет: figure, details, meta-теги.",
+    "practice": {
+      "description": "Собери страницу:\n- `<figure>` с `<img>` (с `alt`) и `<figcaption>` \"Подпись\"\n- `<details>` с `<summary>` \"Ещё\" и `<p>` \"Скрытый текст.\"\n- `<meta charset=\"UTF-8\">` и `<meta name=\"viewport\" ...>`\n\nВидимый текст (по порядку): `Подпись Ещё Скрытый текст.`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Подпись Ещё Скрытый текст.",
+      "must_contain": ["<figure", "<img", "alt=", "<figcaption", "Подпись", "<details", "<summary", "Ещё", "Скрытый текст.", "<meta charset=", "name=\"viewport\""]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Контрольная: Практика",
+    "description": "Финальное задание главы 8. Полная страница: семантика, формы, медиа, доступность.",
+    "practice": {
+      "description": "Собери страницу:\n- `<!DOCTYPE html>`, `<html>`, `<head>` с `<title>` \"Портфолио\" и `<meta charset=\"UTF-8\">`\n- `<body>` с `<header>` (`<h1>` \"Иван\"), `<nav>` с двумя ссылками \"Портфолио\", \"Контакты\"\n- `<main>` с `<section>` (`<h2>` \"Обо мне\") и `<p>` \"Разработчик.\"\n- `<form>` с `<label>` \"Email\", `<input type=\"email\">`, `<button>` \"Отправить\"\n- `<footer>` с `<p>` \"© 2024\"\n\nВидимый текст (по порядку): `Иван Портфолио Контакты Обо мне Разработчик. Email Отправить © 2024`",
+      "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+      "expected": "Иван Портфолио Контакты Обо мне Разработчик. Email Отправить © 2024",
+      "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<title", "Портфолио", "<meta charset=", "<body", "<header", "<h1", "Иван", "<nav", "Контакты", "<main", "<section", "<h2", "Обо мне", "Разработчик.", "<form", "<label", "Email", "type=\"email\"", "<button", "Отправить", "<footer", "© 2024"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Контрольная: Расширенные формы",
+    "description": "Финальное задание главы 9. Проверяет: fieldset, datalist, расширенные типы input.",
+    "practice": {
+      "description": "Собери форму регистрации:\n- `<form>` с `<fieldset>` (`<legend>` \"Личные\")\n- `<label for=\"n\">` \"Имя\" + `<input type=\"text\" id=\"n\" required>`\n- `<label for=\"c\">` \"Город\" + `<input list=\"cities\" id=\"c\">`\n- `<datalist id=\"cities\">` с `<option value=\"Москва\">` и `<option value=\"Казань\">`\n- `<label for=\"b\">` \"Дата рождения\" + `<input type=\"date\" id=\"b\">`\n- `<label for=\"g\">` \"Громкость\" + `<input type=\"range\" id=\"g\" min=\"0\" max=\"100\">`\n\nВидимый текст: `Личные Имя Город Дата рождения Громкость`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Личные Имя Город Дата рождения Громкость",
+      "must_contain": ["<fieldset", "<legend", "Личные", "for=\"n\"", "required", "list=\"cities\"", "<datalist", "id=\"cities\"", "<option", "value=\"Москва\"", "type=\"date\"", "type=\"range\"", "min=\"0\"", "max=\"100\""]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Контрольная: Адаптивные медиа",
+    "description": "Финальное задание главы 10. Проверяет: srcset, sizes, picture, loading=lazy.",
+    "practice": {
+      "description": "Напиши галерею:\n- `<figure>` с `<picture>`\n- `<source>` с `srcset=\"x.webp\" type=\"image/webp\"`\n- `<img>` с `src=\"x.jpg\"`, `alt=\"Фото\"`, `srcset` (400w, 800w), `sizes` и `loading=\"lazy\"`\n- `<figcaption>` \"Описание\"\n\nВидимый текст: `Фото Описание`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Фото Описание",
+      "must_contain": ["<figure", "<picture", "<source", "type=\"image/webp\"", "<img", "src=", "alt=\"Фото\"", "srcset=", "400w", "800w", "sizes=", "loading=\"lazy\"", "<figcaption", "Описание"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Контрольная: Продвинутый HTML",
+    "description": "Финальное задание главы 11. Проверяет: dialog, template, canvas, svg.",
+    "practice": {
+      "description": "Напиши страницу:\n- `<dialog>` с `<p>` \"Привет\" и `<form method=\"dialog\">` с `<button>` \"OK\"\n- `<template id=\"tpl\">` с `<div>` и `<p>` \"X\"\n- `<canvas id=\"c\" width=\"100\" height=\"50\">`\n- `<svg>` с `<circle>` (r=10, fill=red)\n\nВидимый текст: (пусто — всё скрыто или графика)",
+      "starter": "<!-- TODO -->\n",
+      "expected": "",
+      "must_contain": ["<dialog", "Привет", "method=\"dialog\"", "<template", "id=\"tpl\"", "<canvas", "width=\"100\"", "<svg", "<circle", "r=\"10\"", "fill=\"red\""]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "title": "Контрольная: Итоговая",
+    "description": "Финальное задание курса. Полная страница: семантика, формы, медиа, доступность.",
+    "practice": {
+      "description": "Собери страницу:\n- DOCTYPE, html, head (charset, viewport, title \"Портфолио\")\n- header (`<h1>` \"Иван\", nav `<a>` \"О нас\", \"Контакты\")\n- main: `<article>` (`<h2>` \"Проект\", `<p>` \"Текст.\"), `<section>` (`<h2>` \"Галерея\", `<picture>` с `<source>` и `<img alt=\"Фото\">`)\n- form с `<fieldset>` (`<legend>` \"Контакты\"), `<label for=\"e\">` \"Email\", `<input type=\"email\" id=\"e\" required>`, `<button>` \"OK\"\n- footer (`<p>` \"© 2024\")\n\nВидимый текст: `Иван О нас Контакты Проект Текст. Галерея Фото Контакты Email OK © 2024`",
+      "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+      "expected": "Иван О нас Контакты Проект Текст. Галерея Фото Контакты Email OK © 2024",
+      "must_contain": ["<!DOCTYPE html>", "<meta charset=", "name=\"viewport\"", "<title", "Портфолио", "<header", "<h1", "Иван", "<nav", "О нас", "Контакты", "<main", "<article", "<h2", "Проект", "Текст.", "<section", "Галерея", "<picture", "<source", "<img", "alt=\"Фото\"", "<form", "<fieldset", "<legend", "<label", "type=\"email\"", "required", "<button", "<footer", "© 2024"]
+    }
+  }
+}

@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "title": "Глава 1. Как компьютер исполняет код",
+    "lessons": [
+      { "id": 1, "title": "Что такое алгоритм и программа", "status": "current" },
+      { "id": 2, "title": "Память и переменные: откуда берутся данные", "status": "locked" },
+      { "id": 3, "title": "Выражения: как компьютер вычисляет", "status": "locked" },
+      { "id": 4, "title": "Ввод и вывод: диалог с программой", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы 1", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Глава 2. Логика и управление потоком",
+    "lessons": [
+      { "id": 5, "title": "Ветвление: как программа принимает решения", "status": "locked" },
+      { "id": 6, "title": "Логические операторы: И, ИЛИ, НЕ", "status": "locked" },
+      { "id": 7, "title": "Вложенность и порядок проверок", "status": "locked" },
+      { "id": 8, "title": "Типы данных и преобразование", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы 2", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Глава 3. Циклы и повторение",
+    "lessons": [
+      { "id": 9, "title": "Зачем нужны циклы. Виды циклов", "status": "locked" },
+      { "id": 10, "title": "Паттерн «Накопитель»", "status": "locked" },
+      { "id": 11, "title": "Паттерн «Счётчик» и «Флаг»", "status": "locked" },
+      { "id": 12, "title": "Вложенные циклы", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы 3", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Глава 4. Функции и декомпозиция",
+    "lessons": [
+      { "id": 13, "title": "Зачем нужны функции. Чёрный ящик", "status": "locked" },
+      { "id": 14, "title": "Параметры и возвращаемое значение", "status": "locked" },
+      { "id": 15, "title": "Область видимости", "status": "locked" },
+      { "id": 16, "title": "Рекурсия", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы 4", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Глава 5. Массивы и структуры данных",
+    "lessons": [
+      { "id": 17, "title": "Что такое массив и индексы", "status": "locked" },
+      { "id": 18, "title": "Обход массива", "status": "locked" },
+      { "id": 19, "title": "Поиск, фильтрация, максимум", "status": "locked" },
+      { "id": 20, "title": "Сортировка и swap", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы 5", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Глава 6. Алгоритмическое мышление",
+    "lessons": [
+      { "id": 21, "title": "Как решать задачи по шагам", "status": "locked" },
+      { "id": 22, "title": "Из чего состоит любая программа", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы 6", "status": "locked" }
+  }
+]

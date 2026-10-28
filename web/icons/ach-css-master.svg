@@ -1,0 +1,9 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Корона -->
+    <path d="M 6 4 L 8 7 L 12 2 L 16 7 L 18 4 L 17 8 L 7 8 Z" fill="#FFD700" stroke="#DAA520" stroke-width="1" stroke-linejoin="round"/>
+    <!-- Щит CSS -->
+    <path d="M 12 10 L 20 10 L 19 18 L 12 21 L 5 18 L 4 10 Z" fill="#264DE4" />
+    <path d="M 12 10 L 20 10 L 19 18 L 12 21 Z" fill="#1E3A8A" opacity="0.3"/>
+    <!-- Буквы CSS -->
+    <path d="M 9 14 C 7 14 7 18 9 18 M 13 14 C 11 14 11 16 13 16 C 15 16 15 18 13 18 M 17 14 C 15 14 15 16 17 16 C 19 16 19 18 17 18" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

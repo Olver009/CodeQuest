@@ -1,0 +1,537 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "What C Is and Why",
+      "theory": "## What C is\n\nC — a low-level compiled language. Created in 1972 at Bell Labs (Dennis Ritchie) for Unix. Used in: operating systems (Linux, parts of Windows), embedded systems, drivers, databases (PostgreSQL, SQLite), compilers, high-load servers.\n\n## Why learn C\n\n- Foundation for C++, C#, Objective-C, Go, Rust.\n- You understand memory, pointers, how things work \"under the hood\".\n- Small language — learns quickly.\n- Fast and predictable.\n\n## How it differs from Python and Java\n\n- **No garbage collector** — you free memory yourself.\n- **Pointers** — direct memory access.\n- **No classes** — only `struct`.\n- **Compiles to machine code** (not bytecode like Java).\n- **No automatic checks** — easy to shoot yourself in the foot.\n\n## Compiled, not interpreted\n\nPython reads and executes line by line. C first **compiles** to machine code, then runs. The program is a separate `.exe`/`.out` file.\n\n## What C does NOT have\n\n- Strings are not objects — they are `char[]`.\n- No exceptions.\n- No `try/catch`.\n- No built-in collections (lists, dicts) — write them or use libraries.\n- No automatic memory management.\n\n## Standards\n\nC89, C99, C11, C17, C23. In this course — C11 (modern and widespread).\n\n## Summary\n\n- C is low-level, compiled\n- Foundation for many languages\n- Pointers, manual memory\n- No OOP, no exceptions\n- Fast, predictable",
+      "questions": [
+        { "text": "What is C?", "options": ["Interpreted", "Low-level compiled", "OOP", "Functional"], "answer": 1, "explanation": "C is compiled, low-level." },
+        { "text": "Is there a garbage collector in C?", "options": ["Yes", "No, manual", "Only in C11", "Only for strings"], "answer": 1, "explanation": "Memory — manual (malloc/free)." },
+        { "text": "Which of these is in C?", "options": ["Classes", "try/catch", "struct", "lambda"], "answer": 2, "explanation": "Only `struct`." },
+        { "text": "How does C become a program?", "options": ["Interpretation", "Compilation to machine code", "JIT", "Transpile to JS"], "answer": 1, "explanation": "Compiler → machine code." }
+      ],
+      "practice": {
+        "description": "Output three lines via `printf`:\n```\nC\nLesson 1\nDone\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "C\nLesson 1\nDone",
+        "must_contain": ["#include <stdio.h>", "int main", "printf", "return 0"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Compilation: gcc",
+      "theory": "## How C becomes a program\n\n`.c` file → compiler → `.o` (object) → linker → executable. Usually one `gcc` command does everything.\n\n## gcc\n\n**GCC** — GNU Compiler Collection. For C — `gcc`, for C++ — `g++`.\n\n```bash\ngcc hello.c -o hello\n./hello\n```\n\n- `-o hello` — output filename\n- Without `-o` — `a.out` (Linux/macOS) or `a.exe` (Windows MinGW)\n\n## Simple example\n\n`hello.c`:\n\n```c\n#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello\\n\");\n    return 0;\n}\n```\n\nCompile:\n```bash\ngcc hello.c -o hello\n./hello\n```\n\n## Flags\n\n- `-Wall -Wextra` — warnings\n- `-std=c11` — standard\n- `-g` — debug info (for gdb)\n- `-O2` — optimization\n\nUsually: `gcc -Wall -Wextra -std=c11 hello.c -o hello`.\n\n## Errors\n\n- **Compile error** — syntax, types. Program won't be created.\n- **Link error** — function not found (`undefined reference`).\n- **Runtime error** — segfault, division by zero.\n\n## Windows\n\nVia MinGW (`gcc` in PATH) or WSL. In Visual Studio — `cl.exe`, syntax is the same.\n\n## What if\n\n- Forget `-o` — file will be `a.out`.\n- Forget `#include` — function not declared.\n- Typo in filename — `file not found`.\n\n## Summary\n\n- `gcc file.c -o name`\n- `-Wall -Wextra` — warnings\n- `-std=c11` — standard\n- Errors: compile / link / runtime",
+      "questions": [
+        { "text": "Which compiler for C?", "options": ["g++", "gcc", "javac", "node"], "answer": 1, "explanation": "`gcc` — for C." },
+        { "text": "What does `-o hello` do?", "options": ["Optimizes", "Sets output filename", "Opens file", "Error"], "answer": 1, "explanation": "Output filename." },
+        { "text": "What without `-o`?", "options": ["Error", "a.out (or a.exe)", "hello.c", "Nothing"], "answer": 1, "explanation": "Default `a.out`." },
+        { "text": "What does `-Wall` mean?", "options": ["All warnings", "All errors", "All files", "Optimization"], "answer": 0, "explanation": "Show warnings." }
+      ],
+      "practice": {
+        "description": "Output via `printf`:\n```\ngcc\nCompilation\nOK\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "gcc\nCompilation\nOK",
+        "must_contain": ["#include <stdio.h>", "printf"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "First Program",
+      "theory": "## Minimal program\n\n```c\n#include <stdio.h>\n\nint main(void) {\n    printf(\"Hello, world!\\n\");\n    return 0;\n}\n```\n\n## Breakdown\n\n- `#include <stdio.h>` — include standard I/O library header. Without it, `printf` is not declared.\n- `int main(void)` — entry point. `int` — return code, `void` — no parameters.\n- `{ ... }` — function body.\n- `printf(\"...\\n\")` — output. `\\n` — newline.\n- `return 0;` — successful exit. Non-zero — error.\n\n## `#include`\n\n```c\n#include <stdio.h>   // system header\n#include \"my.h\"      // own file\n```\n\n`<...>` — from system folders. `\"...\"` — from current directory.\n\n## Difference from Java\n\n- No class, method, `public static void`. Only `int main`.\n- No automatic `println`. `printf` doesn't move to a new line — add `\\n`.\n- `void` in parens — \"no parameters\".\n\n## Return code\n\n```c\nreturn 0;    // success\nreturn 1;    // error\n```\n\nChecked by the system (shell, CI). Forgetting `return 0` in `main` — usually not an error (implicit 0), but **always** write it explicitly.\n\n## Comments\n\n```c\n// single line\n/*\n   multi-line\n*/\n```\n\n## What if\n\n- Forget `;` — compile error.\n- Forget `\\n` — next line sticks to previous.\n- Forget `return 0;` — not critical, but bad style.\n\n## Summary\n\n- `#include <stdio.h>` — for `printf`\n- `int main(void)` — entry point\n- `printf(\"...\\n\")` — output\n- `return 0` — success\n- `;` at end of each statement",
+      "questions": [
+        { "text": "Why `#include <stdio.h>`?", "options": ["For compilation", "For printf", "For main", "For nothing"], "answer": 1, "explanation": "Declares printf." },
+        { "text": "What is `int main(void)`?", "options": ["Class", "Entry point", "Variable", "Error"], "answer": 1, "explanation": "Execution starts here." },
+        { "text": "What does `\\n` do in printf?", "options": ["Prints n", "Newline", "Deletes", "Nothing"], "answer": 1, "explanation": "Newline." },
+        { "text": "Why `return 0;`?", "options": ["Nothing", "Success exit code", "Prints", "Error"], "answer": 1, "explanation": "Return code." },
+        { "text": "What without `;`?", "options": ["Works", "Compile error", "Runtime error", "Nothing"], "answer": 1, "explanation": "Syntax error." }
+      ],
+      "practice": {
+        "description": "Output via `printf`:\n```\nFirst\nProgram\nDone\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "First\nProgram\nDone",
+        "must_contain": ["#include <stdio.h>", "int main", "printf", "\\n", "return 0"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "int, char, float, double",
+      "theory": "## Basic types\n\n```c\nint age = 25;           // integer\nchar letter = 'A';      // single character\nfloat price = 99.99f;   // float (~7 digits)\ndouble pi = 3.14159;    // double (~15 digits)\n```\n\n## Sizes\n\n- `char` — 1 byte (usually)\n- `int` — 4 bytes (usually)\n- `float` — 4 bytes\n- `double` — 8 bytes\n\nExact sizes — via `sizeof(int)` etc. On different platforms may vary.\n\n## Suffixes\n\n```c\nfloat f = 3.14f;     // f — mandatory for float\nlong n = 100000L;    // L — long\nunsigned int u = 5u; // u — unsigned\n```\n\nWithout `f`, literal `3.14` is `double` by default.\n\n## Modifiers\n\n- `short` / `long` — size\n- `unsigned` — only positive (larger range)\n- `signed` — signed (default)\n\n```c\nunsigned int x = 4000000000u;   // fits only like this\nshort int small = 100;\nlong long big = 9000000000LL;\n```\n\n## char is int\n\n`char` is also a number (ASCII code):\n\n```c\nchar c = 'A';\nprintf(\"%d\\n\", c);   // 65\n```\n\n## Declaration and initialization\n\n```c\nint a = 5;     // with initialization\nint b;         // NO initialization — garbage\nint c = 0;     // explicit zero\n```\n\n**Important:** a local variable without initialization contains **garbage**, not 0. Common source of bugs.\n\n## Constants\n\n```c\nconst int MAX = 100;\n// MAX = 200; // compile error\n#define SIZE 10\n```\n\n`const` — typed. `#define` — preprocessor, textual replacement. Modern code prefers `const`.\n\n## What if\n\n- `float f = 3.14;` without `f` — warning, possible precision loss.\n- Use `b` without initialization — garbage.\n- `char c = \"A\"` (double quotes) — error, `\"A\"` is a string.\n\n## Common mistake\n\n`char c = \"A\"` instead of `char c = 'A'`. Single quotes — character, double — string.\n\n## Summary\n\n- `int`, `char`, `float`, `double`\n- Sizes via `sizeof()`\n- Suffixes `f`, `L`\n- `char` is also a number\n- Local without initialization — garbage\n- `const` — constant",
+      "questions": [
+        { "text": "Which type for a single character?", "options": ["int", "char", "string", "float"], "answer": 1, "explanation": "`char` — character." },
+        { "text": "How to declare a float correctly?", "options": ["float f = 3.14;", "float f = 3.14f;", "float f = 3.14d;", "float f = \"3.14\";"], "answer": 1, "explanation": "`f` — mandatory." },
+        { "text": "What does an uninitialized local contain?", "options": ["0", "Garbage", "null", "Error"], "answer": 1, "explanation": "Garbage." },
+        { "text": "How does `char` differ from `int`?", "options": ["Nothing", "Size and range", "Only syntax", "Error"], "answer": 1, "explanation": "`char` — 1 byte, `int` — 4." },
+        { "text": "What on `char c = \"A\"`?", "options": ["Works", "Error (double quotes)", "c = 'A'", "c = A"], "answer": 1, "explanation": "`\"A\"` is a string, need single quotes." }
+      ],
+      "practice": {
+        "description": "Create:\n- `int age = 25;`\n- `double price = 99.5;`\n- `char grade = 'A';`\n\nOutput:\n```\n25\n99.500000\nA\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n99.500000\nA",
+        "must_contain": ["int age", "double price", "char grade", "printf", "%d", "%f", "%c"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "printf: Formatting",
+      "theory": "## Basic specifiers\n\n```c\nprintf(\"%d\\n\", 42);       // integer\nprintf(\"%f\\n\", 3.14);     // double/float (6 digits)\nprintf(\"%c\\n\", 'A');      // character\nprintf(\"%s\\n\", \"hello\");  // string\n```\n\n## Precision\n\n```c\nprintf(\"%.2f\\n\", 3.14159);   // 3.14\nprintf(\"%8.2f\\n\", 3.14);     // \"    3.14\" (width 8)\nprintf(\"%08.2f\\n\", 3.14);    // \"00003.14\" (zeros)\n```\n\nFormat: `%[width][.precision]type`.\n\n## Multiple arguments\n\n```c\nprintf(\"x = %d, y = %d\\n\", 5, 10);\nprintf(\"%s: %d\\n\", \"age\", 25);\n```\n\nEach `%` takes an argument in order. **Type mismatch** — UB (garbage in output).\n\n## Special\n\n- `%%` — the `%` character\n- `%ld` — long\n- `%u` — unsigned int\n- `%lf` — double in scanf (in printf — `%f`)\n- `%x` — hex\n\n## printf in C vs Java\n\n- Java: `System.out.printf(\"%.2f%n\", x)`. C: `printf(\"%.2f\\n\", x)`. `\\n` not `%n`.\n- Java: `%d` for int, C: same.\n\n## What if\n\n- `%d` for `double` — UB, garbage.\n- Forget `\\n` — lines stick.\n- Forget argument — UB.\n\n## Common mistake\n\n`printf(\"%d\\n\", 3.14)` — outputs garbage. `%d` expects `int`.\n\n## Summary\n\n- `%d`, `%f`, `%c`, `%s`\n- `%.2f` — 2 digits\n- `%8.2f` — width 8\n- `%%` — `%` symbol\n- `\\n` — newline\n- Type must match",
+      "questions": [
+        { "text": "Which specifier for int?", "options": ["%f", "%d", "%s", "%c"], "answer": 1, "explanation": "`%d`." },
+        { "text": "What does `printf(\"%.2f\\n\", 3.14159);` output?", "options": ["3.14159", "3.14", "3.15", "3"], "answer": 1, "explanation": "2 digits." },
+        { "text": "How to output the `%` symbol?", "options": ["%", "%%", "\\%", "%c"], "answer": 1, "explanation": "`%%`." },
+        { "text": "What on `printf(\"%d\\n\", 3.14)`?", "options": ["3", "3.14", "Garbage (UB)", "Error"], "answer": 2, "explanation": "UB — wrong type." }
+      ],
+      "practice": {
+        "description": "Output via `printf`:\n```\nInteger: 42\nFloat: 3.14\nChar: A\nString: hello\nPercent: 100%\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Integer: 42\nFloat: 3.14\nChar: A\nString: hello\nPercent: 100%",
+        "must_contain": ["%d", "%.2f", "%c", "%s", "%%", "printf"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "title": "Type Casting",
+      "theory": "## Implicit\n\n```c\nint a = 10;\ndouble b = a;        // int → double, automatic\nint c = 3.99;        // double → int, TRUNCATION, c = 3\n```\n\nAutomatically: smaller → larger (safe). Larger → smaller — precision loss.\n\n## Explicit\n\n```c\ndouble d = 3.99;\nint i = (int) d;     // 3\nint j = (int) 10.0 / 4;  // 10 / 4 = 2\n```\n\n`(int)` — C-style cast. In C++ prefer `static_cast<int>(d)`.\n\n## Integer division\n\n```c\nint a = 7, b = 2;\nint c = a / b;                // 3, not 3.5!\ndouble d = (double) a / b;    // 3.5\ndouble e = a / (double) b;    // 3.5\n```\n\n`int / int = int`. Want a fraction — cast **one** operand.\n\n## char → int\n\n```c\nchar c = 'A';\nint code = c;         // 65\nchar d = 65;          // 'A'\n```\n\n## Dangerous casts\n\n```c\nint big = 1000000000;\nshort small = (short) big;    // overflow, garbage\ndouble d = 3.99;\nint i = (int) d;              // 3 — truncation, not rounding\n```\n\n## sizeof and casting\n\n`sizeof(int)` returns `size_t` (unsigned). Comparison `sizeof(int) > -1` is false due to conversion.\n\n## What if\n\n- `int` to `double` — ok.\n- `double` to `int` without cast — warning.\n- `(int) 3.99` — 3, not 4 (truncation).\n- `(short) big` when large — garbage.\n\n## Common mistake\n\n`7 / 2` gives `3`, not `3.5`. Cast: `(double) 7 / 2`.\n\n## Summary\n\n- `int / int = int` — fractional part truncated\n- `(double) x` — explicit\n- `(int) 3.99` = 3\n- Overflow → garbage\n- `char` ↔ `int` — ASCII code",
+      "questions": [
+        { "text": "What does `printf(\"%d\", 7 / 2);` output?", "options": ["3.5", "3", "4", "Error"], "answer": 1, "explanation": "`int / int = int`." },
+        { "text": "What does `printf(\"%f\", (double) 7 / 2);` output?", "options": ["3", "3.500000", "4.000000", "Error"], "answer": 1, "explanation": "Cast to double." },
+        { "text": "What on `(int) 3.99`?", "options": ["3", "4", "3.99", "Error"], "answer": 0, "explanation": "Truncation." },
+        { "text": "What is `char c = 'A'; int x = c;`?", "options": ["Error", "x = 65", "x = 'A'", "x = 0"], "answer": 1, "explanation": "ASCII code." }
+      ],
+      "practice": {
+        "description": "Given `int a = 17; int b = 5;`.\n\nOutput:\n```\na / b = 3\n(double) a / b = 3.400000\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int a = 17;\n    int b = 5;\n    // TODO\n    return 0;\n}\n",
+        "expected": "a / b = 3\n(double) a / b = 3.400000",
+        "must_contain": ["a / b", "(double)", "printf", "%d", "%f"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "title": "const and Sizes",
+      "theory": "## const\n\n```c\nconst int MAX = 100;\n// MAX = 200; // compile error\n\nconst double PI = 3.14159;\n```\n\n`const` — **typed** constant. Checked by the compiler.\n\n## #define\n\n```c\n#define SIZE 10\nint arr[SIZE];  // preprocessor substitutes 10\n```\n\n`#define` — textual replacement. **No type**, no checks. Modern code prefers `const`.\n\n## Difference\n\n```c\nconst int A = 10;    // compiler checks\n#define B 10        // just text\n\n// A = 20;  // error\n// B = 20;  // preprocessor substitutes `10 = 20` — syntax error\n```\n\n## sizeof\n\n```c\nprintf(\"%zu\\n\", sizeof(int));     // 4 (usually)\nprintf(\"%zu\\n\", sizeof(char));    // 1\nprintf(\"%zu\\n\", sizeof(double));  // 8\n```\n\n`%zu` — format for `size_t`.\n\n## Array size\n\n```c\nint arr[10];\nprintf(\"%zu\\n\", sizeof(arr) / sizeof(arr[0]));  // 10\n```\n\n`sizeof(arr)` — entire array in bytes. Divide by element size — number of elements.\n\n## sizeof and pointer\n\n```c\nint arr[10];\nint *p = arr;\nprintf(\"%zu\\n\", sizeof(arr));  // 40\nprintf(\"%zu\\n\", sizeof(p));    // 8 (pointer size)\n```\n\nFor a pointer, `sizeof` returns the **pointer** size, not the array.\n\n## What if\n\n- `const` without initialization — error.\n- `sizeof` from pointer instead of array — wrong result.\n- `#define` with complex expression without parens — trap.\n\n## Common mistake\n\n`sizeof(arr)` in a function where `arr` is a parameter. Parameter is a pointer, `sizeof` returns pointer size, not array size.\n\n## Summary\n\n- `const` — typed constant\n- `#define` — textual\n- `sizeof(type)` — size\n- `sizeof(arr) / sizeof(arr[0])` — length\n- For pointer — pointer size",
+      "questions": [
+        { "text": "Which is better for constants?", "options": ["#define", "const", "static", "register"], "answer": 1, "explanation": "`const` — typed." },
+        { "text": "What does `sizeof(int)` return?", "options": ["1", "4 (usually)", "8", "Error"], "answer": 1, "explanation": "4 bytes usually." },
+        { "text": "How to get array length?", "options": ["sizeof(arr)", "sizeof(arr) / sizeof(arr[0])", "arr.length", "len(arr)"], "answer": 1, "explanation": "Divide by element size." },
+        { "text": "What on `sizeof` of a pointer to an array?", "options": ["Array size", "Pointer size", "Error", "0"], "answer": 1, "explanation": "Only pointer size." }
+      ],
+      "practice": {
+        "description": "Output:\n```\nint: 4\nchar: 1\ndouble: 8\n```\n\nVia `sizeof` and `%zu`.",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "int: 4\nchar: 1\ndouble: 8",
+        "must_contain": ["sizeof(int)", "sizeof(char)", "sizeof(double)", "%zu", "printf"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "title": "scanf: Reading",
+      "theory": "## What scanf is\n\n`scanf` reads user input. Analog of `input()` in Python, `Scanner` in Java.\n\n```c\n#include <stdio.h>\n\nint main(void) {\n    int x;\n    scanf(\"%d\", &x);\n    printf(\"You entered: %d\\n\", x);\n    return 0;\n}\n```\n\n## Ampersand `&`\n\n`scanf(\"%d\", &x)` — **address** of the variable. `scanf` knows where to put the value. Without `&` — UB (crashes).\n\n**Exception:** `scanf(\"%s\", str)` — strings are already an address (array). No `&`.\n\n## Specifiers\n\n```c\nint n;\nscanf(\"%d\", &n);\n\ndouble d;\nscanf(\"%lf\", &d);   // for double — %lf\n\nchar c;\nscanf(\" %c\", &c);   // space before %c — skip whitespace\n\nchar s[100];\nscanf(\"%s\", s);     // no & — s is already an address\n```\n\n## `%lf` for double\n\nIn `printf` — `%f`. In `scanf` — **`%lf`** for `double`. `%f` for `float`.\n\n## `%s` and spaces\n\n`%s` reads up to whitespace. Input \"Ivan Petrov\" with `%s` gives only \"Ivan\".\n\n## What if\n\n- Forget `&` — UB, program crashes or garbage.\n- `%d` for `double` — garbage.\n- `%s` for strings without size — buffer overflow (dangerous).\n\n## Common mistake\n\n`scanf(\"%d\", x)` without `&`. Need `scanf(\"%d\", &x)`.\n\n## Summary\n\n- `scanf(\"%d\", &x)` — integer\n- `scanf(\"%lf\", &d)` — double\n- `scanf(\"%s\", str)` — string, no `&`\n- `&` — address for numbers\n- `%s` — up to whitespace\n- No `&` for numbers — UB",
+      "questions": [
+        { "text": "What does `&` mean in scanf?", "options": ["And", "Variable address", "Reference", "Error"], "answer": 1, "explanation": "Address." },
+        { "text": "Why `&` in `scanf(\"%d\", &x)`?", "options": ["Not needed", "scanf writes to address", "For output", "For checking"], "answer": 1, "explanation": "Without address — UB." },
+        { "text": "Which format for double in scanf?", "options": ["%f", "%lf", "%d", "%s"], "answer": 1, "explanation": "`%lf`." },
+        { "text": "Does `%s` read strings with spaces?", "options": ["Yes", "No, up to whitespace", "Only in C11", "Error"], "answer": 1, "explanation": "Up to whitespace." }
+      ],
+      "practice": {
+        "description": "Read two integers via `scanf`, output sum and product:\n```\nSum: 15\nProduct: 50\n```\n\n**stdin:**\n```\n5\n10\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int a, b;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Sum: 15\nProduct: 50",
+        "must_contain": ["scanf", "%d", "&a", "&b", "printf"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "title": "scanf Return, Errors",
+      "theory": "## scanf return\n\n`scanf` returns the **number of successfully read arguments**:\n\n```c\nint n;\nint result = scanf(\"%d\", &n);\nif (result == 1) {\n    printf(\"Read: %d\\n\", n);\n} else {\n    printf(\"Input error\\n\");\n}\n```\n\n- `1` — read one value\n- `0` — failed to read (not a number)\n- `EOF` — end of file\n\n## Problem with errors\n\nIf the user enters `abc` instead of a number, `scanf` **does not advance** the pointer, keeps reading the same thing. Infinite loop:\n\n```c\nwhile (scanf(\"%d\", &n) != 1) {\n    // will loop — abc doesn't advance\n}\n```\n\nSolution — flush the buffer (read a line and parse):\n\n```c\nchar buf[100];\nwhile (fgets(buf, sizeof(buf), stdin)) {\n    if (sscanf(buf, \"%d\", &n) == 1) break;\n    printf(\"Enter a number: \");\n}\n```\n\n## Simple input\n\nFor most educational tasks, **sufficient** `scanf(\"%d\", &n)` — assumes input is correct.\n\n## sscanf\n\n`sscanf` — reads **from a string**, not stdin:\n\n```c\nint a, b;\nsscanf(\"10 20\", \"%d %d\", &a, &b);   // a=10, b=20\n```\n\nHandy for parsing strings.\n\n## What if\n\n- Don't check return — input error → garbage.\n- `%d` but entered `abc` — sticking.\n\n## Common mistake\n\n`while (scanf(...) != 1)` without flushing buffer — infinite loop.\n\n## Summary\n\n- `scanf` returns number of items read\n- `1` — success, `0` — wrong type, `EOF` — end\n- `sscanf` — from a string\n- Check the return for reliability",
+      "questions": [
+        { "text": "What does scanf return on success?", "options": ["0", "1 (number read)", "true", "Nothing"], "answer": 1, "explanation": "Number read." },
+        { "text": "What on `scanf(\"%d\", &n)` with input `abc`?", "options": ["0", "1", "-1", "Garbage"], "answer": 0, "explanation": "0 — failed to read." },
+        { "text": "What does sscanf do?", "options": ["From stdin", "From a string", "From file", "From NULL"], "answer": 1, "explanation": "From a string." },
+        { "text": "Why is `while (scanf != 1)` infinite?", "options": ["Compile error", "scanf doesn't advance", "No return", "Error"], "answer": 1, "explanation": "Pointer stays on the wrong input." }
+      ],
+      "practice": {
+        "description": "Read a number, check `scanf` return. If `!= 1` output `Error`, else `OK: <number>`.\n\n**stdin:**\n```\n42\n```\n\n```\nOK: 42\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int n;\n    // TODO\n    return 0;\n}\n",
+        "expected": "OK: 42",
+        "must_contain": ["scanf", "if", "== 1", "printf"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "title": "if / else, Ternary",
+      "theory": "## Syntax\n\n```c\nif (x > 0) {\n    printf(\"positive\\n\");\n} else if (x < 0) {\n    printf(\"negative\\n\");\n} else {\n    printf(\"zero\\n\");\n}\n```\n\nCondition in parens, body in braces.\n\n## Operators\n\n`==` `!=` `<` `>` `<=` `>=`. `=` is assignment, not comparison.\n\n```c\nif (x = 5) { }    // ERROR: assignment! x becomes 5, condition always true\nif (x == 5) { }   // correct\n```\n\nThe `-Wall` compiler warns. But better not to make the mistake.\n\n## Logical\n\n```c\nif (age >= 18 && has_passport) { }\nif (name == 'A' || name == 'B') { }\nif (!ok) { }\n```\n\n`&&` — and, `||` — or, `!` — not.\n\n## Ternary\n\n```c\nint x = 5;\nconst char *s = x > 0 ? \"positive\" : \"negative\";\nprintf(\"%s\\n\", s);\n```\n\n`condition ? if_true : if_false`.\n\n## Truth and falsity\n\nC has **no** `bool` type in older versions. With `#include <stdbool.h>`, `true`/`false` exist. Without it:\n- `0` — false\n- **anything else** — true (`1`, `-1`, `\"abc\"` etc.)\n\n```c\nif (5) { }    // true\nif (0) { }    // false\n```\n\n## What if\n\n- `if (x = 5)` — assignment, condition always true.\n- Forget braces for two statements — only the first is in the `if`.\n- `int x = 5 > 3;` — `x = 1` (true).\n\n## Common mistake\n\n`if (x = 5)` instead of `if (x == 5)`. Always compile with `-Wall`.\n\n## Summary\n\n- `if (condition) { }` — parens and braces\n- `else if`, `else`\n- `&&`, `||`, `!`\n- `a ? b : c` — ternary\n- `0` — false, anything else — true\n- `=` vs `==` — different",
+      "questions": [
+        { "text": "What does `if (x = 5)` do?", "options": ["Comparison", "Assignment, x = 5", "Compile error", "Nothing"], "answer": 1, "explanation": "Assignment — UB." },
+        { "text": "How to compare correctly?", "options": ["x = 5", "x == 5", "x === 5", "x eq 5"], "answer": 1, "explanation": "`==`." },
+        { "text": "What counts as false in C?", "options": ["Only false", "0", "null", "None"], "answer": 1, "explanation": "`0` — false." },
+        { "text": "What does the ternary operator do?", "options": ["Loop", "Compact if/else", "Function", "Array"], "answer": 1, "explanation": "`a ? b : c`." },
+        { "text": "What does `if (5)` do?", "options": ["False", "True", "Error", "Nothing"], "answer": 1, "explanation": "5 ≠ 0 — true." }
+      ],
+      "practice": {
+        "description": "Given `int score = 78;`. Via if/else:\n- `>= 90` → `Excellent`\n- `>= 75` → `Good`\n- otherwise → `Fail`\n\n```\nGood\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int score = 78;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Good",
+        "must_contain": ["if", "else", "score >= 90", "score >= 75", "printf"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "title": "switch",
+      "theory": "## Classic switch\n\n```c\nint day = 3;\nswitch (day) {\n    case 1:\n        printf(\"Mon\\n\");\n        break;\n    case 2:\n        printf(\"Tue\\n\");\n        break;\n    default:\n        printf(\"Other\\n\");\n}\n```\n\n- `switch (expression)` — only integer (`int`, `char`, `enum`)\n- `break` — exit switch\n- `default` — if no case matched\n\n## Fall-through\n\nWithout `break`, execution **falls through** to the next `case`:\n\n```c\nswitch (x) {\n    case 1:\n    case 2:\n        printf(\"1 or 2\\n\");\n        break;\n}\n```\n\nEmpty `case`s group together. Sometimes used intentionally:\n\n```c\nswitch (grade) {\n    case 'A':\n    case 'B':\n        printf(\"Good\\n\");\n        break;\n    case 'C':\n        printf(\"Average\\n\");\n        break;\n}\n```\n\n## switch vs if\n\n`switch` — exact match with several values. `if` — ranges, complex conditions.\n\n## What if\n\n- Forget `break` — falls into following cases.\n- `switch` with `double` — compile error.\n- `switch` with `float` — not allowed.\n- Duplicate `case` — error.\n\n## Common mistake\n\nForget `break` — program executes extra `case`s.\n\n## Summary\n\n- `switch (int/char)` — exact match\n- `break` — exit, otherwise fall-through\n- `default` — fallback\n- Empty `case` — grouping\n- Integers only",
+      "questions": [
+        { "text": "What happens without `break`?", "options": ["Nothing", "Fall-through to next case", "Error", "Exit"], "answer": 1, "explanation": "Fall-through." },
+        { "text": "Which type cannot be used?", "options": ["int", "char", "enum", "double"], "answer": 3, "explanation": "`double` — no." },
+        { "text": "What does `default` do?", "options": ["Mandatory", "If no case matched", "Error", "First"], "answer": 1, "explanation": "Analog of `else`." },
+        { "text": "What does this output?\n```c\nint x = 2;\nswitch(x) {\n    case 1: printf(\"one \");\n    case 2: printf(\"two \");\n    case 3: printf(\"three\");\n}\n```", "options": ["two", "two three", "one two three", "Error"], "answer": 1, "explanation": "No break — fall-through." }
+      ],
+      "practice": {
+        "description": "Given `int day = 3;`. Via switch output:\n- 1 → `Mon`, 2 → `Tue`, 3 → `Wed`\n- otherwise → `?`\n\n```\nWed\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int day = 3;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Wed",
+        "must_contain": ["switch", "case 1", "case 2", "case 3", "break", "default", "printf"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "title": "Logical Operators",
+      "theory": "## Basics\n\n```c\nif (a > 0 && b > 0) { }   // and\nif (a == 0 || b == 0) { }  // or\nif (!flag) { }             // not\n```\n\n## Tables\n\n`&&`:\n| A | B | A && B |\n|---|---|---|\n| T | T | T |\n| T | F | F |\n| F | T | F |\n| F | F | F |\n\n`||`:\n| A | B | A \\|\\| B |\n|---|---|---|\n| T | T | T |\n| T | F | T |\n| F | T | T |\n| F | F | F |\n\n## Short-circuit\n\n`&&` and `||` **do not evaluate** the second operand if the result is already clear:\n\n```c\nif (b != 0 && a / b > 2) { }\n```\n\nIf `b == 0`, `a / b` is **not evaluated** — no division by zero.\n\nUseful for checks:\n\n```c\nif (ptr != NULL && ptr->value > 0) { }\n```\n\nWithout `&&` — segfault.\n\n## Result\n\n`&&` and `||` in C return **0 or 1**, not the operands themselves (unlike Python).\n\n```c\nint x = 5 && 10;   // x = 1\nint y = 0 || 42;   // y = 1\n```\n\n## Precedence\n\n`!` > `&&` > `||`. Unsure — use parens.\n\n## What if\n\n- `a == 1 || 2` — always true, because `2` is true.\n- `x && y` without parens with several — precedence confuses.\n\n## Common mistake\n\n`if (x == 1 || 2)` — wanted \"x is 1 or 2\", got \"x is 1 OR true\" — always true. Correct: `if (x == 1 || x == 2)`.\n\n## Summary\n\n- `&&` — and, `||` — or, `!` — not\n- Short-circuit — second operand may not be evaluated\n- Result — 0 or 1\n- Precedence: `!` > `&&` > `||`\n- `x == 1 || 2` — mistake",
+      "questions": [
+        { "text": "What is `&&`?", "options": ["Or", "And", "Not", "XOR"], "answer": 1, "explanation": "And." },
+        { "text": "What is short-circuit?", "options": ["Error", "Second operand not evaluated if result is clear", "Speedup", "Broken"], "answer": 1, "explanation": "Skipping evaluation." },
+        { "text": "What is wrong with `x == 1 || 2`?", "options": ["Nothing", "Always true", "Syntax", "Need and"], "answer": 1, "explanation": "2 is true, always true." },
+        { "text": "Precedence of `!`, `&&`, `||`?", "options": ["|| > && > !", "! > && > ||", "&& > ! > ||", "All equal"], "answer": 1, "explanation": "`!` highest." }
+      ],
+      "practice": {
+        "description": "Given `int a = 5; int b = 10;`.\n\nOutput `1` if `a > 0 and b > 0`, else `0`:\n```\n1\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int a = 5;\n    int b = 10;\n    // TODO\n    return 0;\n}\n",
+        "expected": "1",
+        "must_contain": ["&&", "printf", "if"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "title": "for",
+      "theory": "## Syntax\n\n```c\nfor (int i = 0; i < 5; i++) {\n    printf(\"%d\\n\", i);\n}\n```\n\nThree parts via `;`: **initialization**; **condition**; **step**.\n\n## Step by step\n\n1. `int i = 0` — once.\n2. `i < 5` — check before each iteration.\n3. Body.\n4. `i++` — after the body.\n5. Repeat from step 2.\n\n## Reverse\n\n```c\nfor (int i = 5; i > 0; i--) {\n    printf(\"%d\\n\", i);  // 5, 4, 3, 2, 1\n}\n```\n\n## Step\n\n```c\nfor (int i = 0; i < 10; i += 2) {\n    printf(\"%d\\n\", i);  // 0, 2, 4, 6, 8\n}\n```\n\n## Declaration outside\n\n```c\nint i;\nfor (i = 0; i < 5; i++) { }\nprintf(\"%d\\n\", i);  // 5 — i visible after the loop\n```\n\nWith `int i` **inside** — `i` lives only in the loop (C99+).\n\n## Infinite\n\n```c\nfor (;;) { }   // equivalent to while (1)\n```\n\n## What if\n\n- Forget `i++` — infinite loop.\n- `i <= 5` instead of `< 5` — one extra iteration.\n- Use `i` outside loop (C99) — error.\n\n## Common mistake\n\n`for (int i = 0; i <= 5; i++)` — goes through 0..5 (6 times), not 0..4.\n\n## Summary\n\n- `for (init; cond; step)` — three parts\n- `int i` inside — loop-only\n- `for (;;)` — infinite\n- Don't forget the step",
+      "questions": [
+        { "text": "How many times does `for (int i = 0; i < 5; i++)` run?", "options": ["4", "5", "6", "Infinite"], "answer": 1, "explanation": "0, 1, 2, 3, 4 — 5 times." },
+        { "text": "What if `i++` is missing?", "options": ["Won't run", "Infinite", "Once", "Error"], "answer": 1, "explanation": "Condition always true." },
+        { "text": "What does `i += 2` do?", "options": ["Multiplies", "Adds 2", "Compares", "Error"], "answer": 1, "explanation": "Step 2." },
+        { "text": "How many times `for (int i = 1; i <= 3; i++)`?", "options": ["2", "3", "4", "Infinite"], "answer": 1, "explanation": "1, 2, 3." }
+      ],
+      "practice": {
+        "description": "Via `for` output numbers `1..5`:\n```\n1\n2\n3\n4\n5\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3\n4\n5",
+        "must_contain": ["for", "printf", "%d"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "title": "while, do-while",
+      "theory": "## while\n\n```c\nint i = 1;\nwhile (i <= 5) {\n    printf(\"%d\\n\", i);\n    i++;\n}\n```\n\nCheck **before** body. If the condition is immediately false — body doesn't run once.\n\n## do-while\n\n```c\nint i = 1;\ndo {\n    printf(\"%d\\n\", i);\n    i++;\n} while (i <= 5);\n```\n\nCheck **after** body. Runs **at least once**. `;` after `while (...)`.\n\n## When while\n\n- Don't know iterations in advance.\n- Read input until \"exit\".\n- Wait for an event.\n\n## When do-while\n\n- Body must run at least once.\n- Program menu.\n\n## Example: sum until 0\n\n```c\nint total = 0;\nint n;\nwhile (scanf(\"%d\", &n) == 1 && n != 0) {\n    total += n;\n}\nprintf(\"Sum: %d\\n\", total);\n```\n\n## Infinite\n\n```c\nwhile (1) {\n    // exit via break\n}\n```\n\n## What if\n\n- Forget `i++` — infinite.\n- `do-while` without `;` — compile error.\n- `while (1)` without break — forever.\n\n## Common mistake\n\nForget `;` after `while (...)` in `do-while`.\n\n## Summary\n\n- `while (cond)` — check before\n- `do { } while (cond);` — after, `;` mandatory\n- `do-while` — at least once\n- `while (1)` + `break` — standard",
+      "questions": [
+        { "text": "How is `do-while` different from `while`?", "options": ["Same", "`do-while` checks after", "`do-while` no condition", "`while` faster"], "answer": 1, "explanation": "After body." },
+        { "text": "How many times does `do-while` run with a false condition?", "options": ["0", "1", "2", "Infinite"], "answer": 1, "explanation": "At least once." },
+        { "text": "What if no `;` after `while (...)` in do-while?", "options": ["Works", "Compile error", "Infinite", "Nothing"], "answer": 1, "explanation": "`;` mandatory." },
+        { "text": "What if `i++` is missing in while?", "options": ["Error", "Infinite", "Once", "Won't run"], "answer": 1, "explanation": "Condition always true." }
+      ],
+      "practice": {
+        "description": "Via `while` output `1..5`, each on a new line:\n```\n1\n2\n3\n4\n5\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3\n4\n5",
+        "must_contain": ["while", "printf", "%d"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "title": "break, continue",
+      "theory": "## break — exit\n\n```c\nfor (int i = 0; i < 10; i++) {\n    if (i == 3) break;\n    printf(\"%d\\n\", i);   // 0, 1, 2\n}\n```\n\n## continue — skip iteration\n\n```c\nfor (int i = 0; i < 5; i++) {\n    if (i == 2) continue;\n    printf(\"%d\\n\", i);   // 0, 1, 3, 4\n}\n```\n\n## Difference\n\n| `break` | `continue` |\n|---|---|\n| Exits completely | Skips one iteration |\n\n## In while\n\n`break` and `continue` work the same.\n\n```c\nint i = 0;\nwhile (i < 10) {\n    i++;\n    if (i == 5) break;\n    printf(\"%d\\n\", i);\n}\n```\n\nNote: `i++` before `continue`, otherwise infinite.\n\n## break in nested loops\n\n`break` exits only the **current** loop.\n\n```c\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 3; j++) {\n        if (j == 1) break;\n        printf(\"%d,%d\\n\", i, j);\n    }\n}\n```\n\n## What if\n\n- `continue` before `i++` — infinite loop.\n- `break` outside loop — compile error.\n\n## Common mistake\n\nIn `while` with `continue` forgot to update the counter — infinite loop.\n\n## Summary\n\n- `break` — exit\n- `continue` — skip iteration\n- `break` in nested — current only\n- `continue` in while — update counter before it",
+      "questions": [
+        { "text": "What does `break` do?", "options": ["Skips", "Exits the loop", "Returns", "Nothing"], "answer": 1, "explanation": "Exits." },
+        { "text": "What does `continue` do?", "options": ["Exits", "Skips iteration", "Returns", "Error"], "answer": 1, "explanation": "Next iteration." },
+        { "text": "What does this output?\n```c\nfor (int i = 0; i < 5; i++) {\n    if (i == 3) break;\n    printf(\"%d \", i);\n}\n```", "options": ["0 1 2", "0 1 2 3", "0 1 2 4", "3 4"], "answer": 0, "explanation": "break at 3." },
+        { "text": "Which loop does break exit in nested?", "options": ["All", "Only current", "Only outer", "Error"], "answer": 1, "explanation": "Only current." }
+      ],
+      "practice": {
+        "description": "Via `for` from 1 to 10 output only odds, using `continue`:\n```\n1\n3\n5\n7\n9\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n3\n5\n7\n9",
+        "must_contain": ["for", "continue", "% 2", "printf"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "title": "Declaration, Parameters, return",
+      "theory": "## Function\n\n```c\nint sum(int a, int b) {\n    return a + b;\n}\n\nint main(void) {\n    int s = sum(2, 3);\n    printf(\"%d\\n\", s);\n    return 0;\n}\n```\n\n## Breakdown\n\n- `int` — return type\n- `sum` — name\n- `(int a, int b)` — parameters\n- `return` — return and exit\n\n## Parameters are copies\n\n```c\nvoid change(int x) { x = 100; }\nint a = 5;\nchange(a);\nprintf(\"%d\\n\", a);   // 5\n```\n\nPrimitives are passed **by value**. To modify — via pointer.\n\n## Arrays in parameters\n\n```c\nvoid fill(int arr[], int n) {\n    for (int i = 0; i < n; i++) arr[i] = i * 2;\n}\n```\n\nArray is passed **as a pointer**. Changes visible outside.\n\n## Return\n\nOne `return` in a function — typical. Multiple — early return:\n\n```c\nint abs(int x) {\n    if (x < 0) return -x;\n    return x;\n}\n```\n\n## What if\n\n- Forget `return` in a function with return type — UB.\n- Return wrong type — cast, may lose.\n- Modify parameter — only copy.\n\n## Common mistake\n\nThinking that modifying a numeric parameter changes the original. No.\n\n## Summary\n\n- `type name(parameters) { return ...; }`\n- `return` — return\n- Primitives — copies\n- Arrays — by pointer\n- One or several `return`s",
+      "questions": [
+        { "text": "What does `int sum(int a, int b) { return a + b; }` return?", "options": ["void", "int", "double", "char"], "answer": 1, "explanation": "`int` in the signature." },
+        { "text": "How are primitives passed?", "options": ["By reference", "By value (copy)", "By pointer", "By address"], "answer": 1, "explanation": "Copy." },
+        { "text": "What happens if you modify `x` in a function?", "options": ["Original changes", "Original unchanged", "Error", "UB"], "answer": 1, "explanation": "Copy." },
+        { "text": "How is an array passed?", "options": ["Copy", "By pointer", "By value", "By const"], "answer": 1, "explanation": "Array — pointer." }
+      ],
+      "practice": {
+        "description": "Create `int square(int x)` — returns `x * x`.\n\nIn `main` output `square(5)` and `square(3)`:\n```\n25\n9\n```",
+        "starter": "#include <stdio.h>\n\n// TODO: square\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n9",
+        "must_contain": ["int square", "return", "printf"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "title": "void, Prototypes",
+      "theory": "## void\n\n`void` — \"nothing\". Two uses:\n\n### 1. As return type\n\n```c\nvoid greet(void) {\n    printf(\"Hi\\n\");\n}\n```\n\nFunction returns nothing. `return;` (no value) — just exit.\n\n### 2. As parameter\n\n```c\nint main(void) {\n    // no parameters\n}\n```\n\n`(void)` = \"no parameters\". Old style, but idiomatic.\n\n## Function prototype\n\nDeclaration **before** use, without body:\n\n```c\nint sum(int a, int b);  // prototype\n\nint main(void) {\n    printf(\"%d\\n\", sum(2, 3));\n    return 0;\n}\n\nint sum(int a, int b) {  // definition\n    return a + b;\n}\n```\n\nThe compiler knows the signature at the call site. Works.\n\n## Why prototype\n\n- Split code: header `foo.h` + implementation `foo.c`.\n- Mutual recursion.\n- Order in the file doesn't matter.\n\n## Without prototype\n\nIf `main` calls `sum` before its declaration — modern C gives a **warning** or error (`implicit declaration`). In C89 it worked, in C99+ it doesn't.\n\n## Header file\n\n`math_utils.h`:\n\n```c\n#ifndef MATH_UTILS_H\n#define MATH_UTILS_H\n\nint sum(int a, int b);\n\n#endif\n```\n\n`math_utils.c`:\n\n```c\n#include \"math_utils.h\"\n\nint sum(int a, int b) {\n    return a + b;\n}\n```\n\n## What if\n\n- `void f(void) { return 5; }` — error.\n- Call without a prototype — compile error in C99+.\n- `void` as a normal variable — error.\n\n## Common mistake\n\n`void main()` — **not** standard. Correct is `int main(void) { ... return 0; }`.\n\n## Summary\n\n- `void` — no return / no parameters\n- `int main(void)` — standard\n- Prototype: `int sum(int, int);`\n- Definition — with body\n- `void main()` — legacy",
+      "questions": [
+        { "text": "What does `void` mean in a signature?", "options": ["Type", "Nothing", "Error", "All"], "answer": 1, "explanation": "\"Nothing\"." },
+        { "text": "What is a prototype?", "options": ["Call", "Declaration without body", "Error", "Return"], "answer": 1, "explanation": "Declaration." },
+        { "text": "Is `void main()` allowed?", "options": ["Yes, standard", "No, standard is `int main`", "Sometimes", "Only on Windows"], "answer": 1, "explanation": "`int main(void)` is standard." },
+        { "text": "What is wrong in `void f(void) { return 5; }`?", "options": ["Works", "Error — void has no value", "Warning", "Nothing"], "answer": 1, "explanation": "`void` — no return with value." }
+      ],
+      "practice": {
+        "description": "Create `void hello(void)` — prints `Hello, world!`.\n\nPrototype before `main`.\n\n```\nHello, world!\n```",
+        "starter": "#include <stdio.h>\n\n// TODO: prototype\n\nint main(void) {\n    // TODO: call\n    return 0;\n}\n\n// TODO: definition\n",
+        "expected": "Hello, world!",
+        "must_contain": ["void hello", "void hello(void);", "printf", "hello()"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "title": "Recursion",
+      "theory": "## What recursion is\n\nA function calls **itself** with a smaller argument.\n\n```c\nint fact(int n) {\n    if (n <= 1) return 1;\n    return n * fact(n - 1);\n}\n```\n\n## Base case\n\nMandatory exit condition. Without it — infinite calls → stack overflow (crash).\n\n## How to read\n\n```\nfact(5) = 5 * fact(4)\nfact(4) = 4 * fact(3)\nfact(3) = 3 * fact(2)\nfact(2) = 2 * fact(1)\nfact(1) = 1\n```\n\nReturn: `1 * 2 * 3 * 4 * 5 = 120`.\n\n## Mutual recursion\n\n`isEven` and `isOdd`:\n\n```c\nint isEven(int n);\nint isOdd(int n);\n\nint isEven(int n) {\n    if (n == 0) return 1;\n    return isOdd(n - 1);\n}\n\nint isOdd(int n) {\n    if (n == 0) return 0;\n    return isEven(n - 1);\n}\n```\n\nPrototypes needed (mutual calls).\n\n## Call stack\n\nWhile `fact(5)` runs, all intermediate calls sit in memory. Depth limited (~1000 for typical stack).\n\n## Compared to loop\n\n```c\nint fact_iter(int n) {\n    int result = 1;\n    for (int i = 2; i <= n; i++) result *= i;\n    return result;\n}\n```\n\nIterative is faster and doesn't crash on large n. Recursion is shorter but riskier.\n\n## What if\n\n- Forget base case — stack overflow (segfault).\n- Not shrink the argument — infinite.\n- Deep recursion — stack overflow.\n\n## Common mistake\n\n`return fact(n);` — no decrement. Infinite.\n\n## Summary\n\n- Recursion — self-call\n- Base case — mandatory\n- Call stack\n- Depth limit\n- Iteration is faster and safer",
+      "questions": [
+        { "text": "What is mandatory in recursion?", "options": ["Loop", "Base case (exit condition)", "Array", "Return void"], "answer": 1, "explanation": "Without base — overflow." },
+        { "text": "What happens without base case?", "options": ["0", "Stack overflow", "1", "Compile error"], "answer": 1, "explanation": "Stack overflow." },
+        { "text": "What does `fact(5)` return if `fact(1) = 1`?", "options": ["5", "120", "1", "Error"], "answer": 1, "explanation": "5! = 120." },
+        { "text": "Which is more efficient for factorial 1000?", "options": ["Recursion", "Loop", "Same", "Error"], "answer": 1, "explanation": "Recursion — stack overflow." }
+      ],
+      "practice": {
+        "description": "Create recursive `int fact(int n)`:\n- `n <= 1` → `1`\n- otherwise → `n * fact(n - 1)`\n\nOutput `fact(5)`:\n```\n120\n```",
+        "starter": "#include <stdio.h>\n\n// TODO: fact\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "120",
+        "must_contain": ["int fact", "if", "return", "fact(n - 1)", "printf"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "title": "Arrays: Creation, Indices",
+      "theory": "## Array\n\n```c\nint arr[5];              // 5 elements, garbage\nint nums[] = {1, 2, 3, 4, 5};   // 5, from literal\nint zeros[10] = {0};     // all zeros\n```\n\nLength **fixed** at creation.\n\n## Indices\n\nFrom zero. `arr[0]` — first, `arr[4]` — fifth. `arr[5]` — **out of bounds**, UB (may crash, may not).\n\n## Length\n\n```c\nint arr[5];\nint n = sizeof(arr) / sizeof(arr[0]);  // 5\n```\n\n**Only** for arrays, not pointers. In a function parameter `int arr[]` — pointer, `sizeof` returns pointer size.\n\n## Assignment\n\n```c\narr[0] = 10;\narr[1] = 20;\n```\n\n## Out of bounds\n\n```c\nint arr[3] = {1, 2, 3};\narr[5] = 100;    // UB — overwrites another memory\n```\n\nDoesn't crash immediately — may corrupt another variable. Classic bug.\n\n## Initialization\n\n```c\nint a[5] = {1, 2, 3};    // {1, 2, 3, 0, 0} — rest are 0\nint b[5] = {0};          // all zeros\nint c[] = {1, 2, 3};     // length 3\n```\n\n## What if\n\n- `arr[10]` for length 5 — UB.\n- Array without initialization — garbage.\n- `sizeof(arr)` in a function — pointer size.\n\n## Common mistake\n\nOut of bounds is **not checked** in C. Program may run with a bug that manifests later.\n\n## Summary\n\n- `int arr[5]` — fixed length\n- Indices 0..4\n- `sizeof(arr) / sizeof(arr[0])` — length\n- Out of bounds — UB\n- `{0}` — all zeros",
+      "questions": [
+        { "text": "How to declare an array of 5 int?", "options": ["int arr[5];", "int arr(5);", "int[] arr;", "arr int 5;"], "answer": 0, "explanation": "`int arr[5]`." },
+        { "text": "What is the last index for length 5?", "options": ["5", "4", "6", "0"], "answer": 1, "explanation": "0..4." },
+        { "text": "What on `arr[5]` for `int arr[5]`?", "options": ["0", "Last", "UB (out of bounds)", "Error"], "answer": 2, "explanation": "UB." },
+        { "text": "How to get length?", "options": ["arr.length", "sizeof(arr) / sizeof(arr[0])", "len(arr)", "arr.size()"], "answer": 1, "explanation": "sizeof." },
+        { "text": "What in `int a[5] = {1, 2};`?", "options": ["{1, 2}", "{1, 2, 0, 0, 0}", "Error", "Garbage"], "answer": 1, "explanation": "Rest — 0." }
+      ],
+      "practice": {
+        "description": "Create `int arr[] = {10, 20, 30, 40, 50};`.\n\nOutput:\n```\nFirst: 10\nLast: 50\nLength: 5\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int arr[] = {10, 20, 30, 40, 50};\n    // TODO\n    return 0;\n}\n",
+        "expected": "First: 10\nLast: 50\nLength: 5",
+        "must_contain": ["arr[0]", "arr[4]", "sizeof", "printf"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "title": "Traversing Arrays",
+      "theory": "## Via for with index\n\n```c\nint arr[] = {10, 20, 30};\nint n = sizeof(arr) / sizeof(arr[0]);\nfor (int i = 0; i < n; i++) {\n    printf(\"%d\\n\", arr[i]);\n}\n```\n\n## Sum\n\n```c\nint sum = 0;\nfor (int i = 0; i < n; i++) {\n    sum += arr[i];\n}\nprintf(\"%d\\n\", sum);\n```\n\n## Maximum\n\n```c\nint max = arr[0];\nfor (int i = 1; i < n; i++) {\n    if (arr[i] > max) max = arr[i];\n}\n```\n\nStart from `arr[0]`, not `0` — if all negative, max would be `0`.\n\n## Search\n\n```c\nint target = 20;\nint found = 0;\nfor (int i = 0; i < n; i++) {\n    if (arr[i] == target) {\n        found = 1;\n        break;\n    }\n}\n```\n\n## for-each in C?\n\nC has **no** for-each for arrays. Only `for` with index. In C++ — range-based for.\n\n## 2D arrays\n\n```c\nint matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};\nfor (int i = 0; i < 2; i++) {\n    for (int j = 0; j < 3; j++) {\n        printf(\"%d \", matrix[i][j]);\n    }\n    printf(\"\\n\");\n}\n```\n\n## What if\n\n- `i <= n` instead of `< n` — out of bounds.\n- Max from `0` — wrong for negatives.\n\n## Common mistake\n\n`for (int i = 0; i <= n; i++)` — one extra iteration, UB.\n\n## Summary\n\n- `for (int i = 0; i < n; i++)` — standard\n- `sizeof(arr) / sizeof(arr[0])` — length\n- Accumulator — before loop\n- Max — from `arr[0]`\n- `<=` — mistake",
+      "questions": [
+        { "text": "How to traverse correctly?", "options": ["i <= n", "i < n", "i > n", "i == n"], "answer": 1, "explanation": "`< n`." },
+        { "text": "Where to start max?", "options": ["0", "arr[0]", "-1", "1"], "answer": 1, "explanation": "`arr[0]`." },
+        { "text": "Does C have for-each?", "options": ["Yes", "No, only for", "Only for int", "In C11"], "answer": 1, "explanation": "Only for with index." },
+        { "text": "What on `i <= n`?", "options": ["Works", "Out of bounds (UB)", "Error", "Garbage"], "answer": 1, "explanation": "UB." }
+      ],
+      "practice": {
+        "description": "Given `int arr[] = {3, 7, 2, 9, 5};`.\n\nOutput:\n```\nSum: 26\nMax: 9\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int arr[] = {3, 7, 2, 9, 5};\n    // TODO\n    return 0;\n}\n",
+        "expected": "Sum: 26\nMax: 9",
+        "must_contain": ["for", "sizeof", "printf"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "title": "Strings: char[], Null Terminator",
+      "theory": "## String in C\n\nStrings in C are **`char` arrays** ending with a **null** `'\\0'`:\n\n```c\nchar str[6] = \"hello\";    // 'h','e','l','l','o','\\0'\n```\n\n`strlen(str)` = 5, but `sizeof(str)` = 6 (with null).\n\n## Creating\n\n```c\nchar s1[] = \"hello\";       // length 6 (5 + \\0)\nchar s2[6] = \"hello\";     // exactly fits\nchar s3[10] = \"hi\";       // 'h','i',0,0,0,0,0,0,0,0\nchar s4[] = {'h', 'i', '\\0'};  // same\n```\n\n## Without null — not a string\n\n```c\nchar s[] = {'h', 'i'};   // array of 2 char, NOT a string (no \\0)\nprintf(\"%s\\n\", s);     // UB — printf looks for \\0, reads garbage\n```\n\n## Input\n\n```c\nchar name[50];\nscanf(\"%s\", name);       // no &, up to whitespace\nfgets(name, 50, stdin);  // whole line, including spaces\n```\n\n`scanf` without size — **dangerous** (overflow). `fgets` is safe.\n\n## Length\n\n```c\nprintf(\"%zu\\n\", strlen(str));   // without \\0\nprintf(\"%zu\\n\", sizeof(str));   // with \\0\n```\n\n## What if\n\n- Forget `\\0` — UB on `printf(\"%s\")`.\n- `char s[5] = \"hello\";` — no room for `\\0`, error/garbage.\n- `scanf(\"%s\")` with a long string — buffer overflow.\n\n## Common mistake\n\n`char s[5] = \"hello\";` — not enough room for `\\0`. Need at least 6.\n\n## Summary\n\n- String is `char[]` + `'\\0'` at the end\n- Length = characters + 1\n- `scanf(\"%s\")` — up to whitespace, no `&`\n- `fgets` — whole line, safe\n- `strlen` — without null, `sizeof` — with null",
+      "questions": [
+        { "text": "How does a string end in C?", "options": ["\\n", "\\0", "EOF", "Nothing"], "answer": 1, "explanation": "`\\0`." },
+        { "text": "How many bytes in `char s[] = \"hello\";`?", "options": ["5", "6", "7", "Error"], "answer": 1, "explanation": "5 + `\\0` = 6." },
+        { "text": "What on `scanf(\"%s\", str)` without `&`?", "options": ["Error", "Works", "UB", "Garbage"], "answer": 1, "explanation": "String is already an address." },
+        { "text": "What is safer for a string with spaces?", "options": ["scanf %s", "fgets", "cin", "puts"], "answer": 1, "explanation": "`fgets`." },
+        { "text": "What on `char s[5] = \"hello\";`?", "options": ["Works", "Error — no room for \\0", "Truncates", "UB"], "answer": 1, "explanation": "Need 6." }
+      ],
+      "practice": {
+        "description": "Create `char name[] = \"Ivan\";` (4 chars + `\\0`).\n\nOutput:\n```\nName: Ivan\nLength: 4\n```\n\nLength — via `strlen`.",
+        "starter": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Name: Ivan\nLength: 4",
+        "must_contain": ["char name", "strlen", "printf", "%s"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "title": "string.h: strlen, strcpy, strcmp",
+      "theory": "## strlen\n\n```c\n#include <string.h>\n\nsize_t len = strlen(\"hello\");   // 5\n```\n\nReturns `size_t` (unsigned). Without `\\0`.\n\n## strcpy — copy\n\n```c\nchar dst[20];\nstrcpy(dst, \"hello\");\n```\n\nCopies up to `\\0`. **Does not check** the size of `dst` — overflow if too small.\n\nSafe variant — `strncpy`:\n\n```c\nstrncpy(dst, \"hello\", sizeof(dst) - 1);\ndst[sizeof(dst) - 1] = '\\0';\n```\n\n## strcat — concatenation\n\n```c\nchar s[20] = \"Hello\";\nstrcat(s, \", world\");    // \"Hello, world\"\n```\n\nAppends at the end. Also does not check size.\n\n## strcmp — comparison\n\n```c\nif (strcmp(a, b) == 0) { }   // equal\nif (strcmp(a, b) < 0) { }    // a < b\nif (strcmp(a, b) > 0) { }    // a > b\n```\n\n**Not** `a == b` — that compares **pointers**, not contents.\n\n## strchr, strstr\n\n```c\nchar *pos = strchr(\"hello\", 'l');      // position of first 'l'\nchar *sub = strstr(\"hello world\", \"world\");  // substring position or NULL\n```\n\n## What if\n\n- `strcpy` into a small buffer — overflow (UB).\n- `if (a == b)` for strings — compares addresses, not contents.\n- `strcmp` without `#include <string.h>` — error.\n\n## Common mistake\n\n`if (str1 == str2)` for strings — **never** use. Only `strcmp`.\n\n## Summary\n\n- `strlen` — length\n- `strcpy` — copy (dangerous)\n- `strcat` — concatenation\n- `strcmp` — content comparison\n- `strstr` — substring search\n- `==` for strings — addresses only",
+      "questions": [
+        { "text": "What does `strlen` do?", "options": ["Copies", "Length", "Compares", "Searches"], "answer": 1, "explanation": "Length." },
+        { "text": "How to compare two strings?", "options": ["a == b", "strcmp(a, b) == 0", "a < b", "a.equals(b)"], "answer": 1, "explanation": "`strcmp`." },
+        { "text": "What on `a == b` for strings?", "options": ["Content comparison", "Pointer comparison", "Error", "Always true"], "answer": 1, "explanation": "Pointers." },
+        { "text": "What is dangerous in `strcpy`?", "options": ["Slow", "Buffer overflow", "Nothing", "Error"], "answer": 1, "explanation": "Does not check size." }
+      ],
+      "practice": {
+        "description": "Given:\n```\nchar a[] = \"hello\";\nchar b[] = \"world\";\n```\n\nOutput:\n```\na: 5\nb: 5\nEqual: 0\n```\n\nLast one — via `strcmp`.",
+        "starter": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char a[] = \"hello\";\n    char b[] = \"world\";\n    // TODO\n    return 0;\n}\n",
+        "expected": "a: 5\nb: 5\nEqual: 0",
+        "must_contain": ["strlen", "strcmp", "printf", "%zu", "%d"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "Pointers: Addresses, &",
+      "theory": "## What a pointer is\n\nA pointer is a variable that stores the **address** of another variable.\n\n```c\nint x = 10;\nint *p = &x;    // p stores the address of x\n```\n\n- `&x` — address of x\n- `*p` — type \"pointer to int\"\n\n## Syntax\n\n```c\nint *p;         // pointer to int\nchar *s;        // pointer to char (often — a string)\ndouble *d;      // pointer to double\n```\n\n`int* p` or `int *p` — same, `*` binds to the variable but not to the type.\n\n## Address in printf\n\n```c\nint x = 10;\nprintf(\"%p\\n\", (void*)&x);   // address in hex: 0x7ffe...\n```\n\n`%p` — specifier for a pointer.\n\n## Pointer and its value\n\n```c\nint x = 10;\nint *p = &x;\n\nprintf(\"%p\\n\", (void*)p);    // address, e.g. 0x7ffe1234\nprintf(\"%d\\n\", *p);          // 10 — value at address\n```\n\n`p` — address. `*p` — value at address.\n\n## Why pointers\n\n- Modify a variable from a function.\n- Work with dynamic memory (`malloc`).\n- Efficiently pass large structs.\n- Pointer arithmetic, arrays.\n\n## NULL\n\n```c\nint *p = NULL;   // points nowhere\nif (p != NULL) { /* safe to dereference */ }\n```\n\nDereferencing `NULL` — segfault.\n\n## What if\n\n- `int *p = 5;` — error (number not an address).\n- Dereference `NULL` — segfault.\n- Use `%p` with a non-pointer — UB.\n\n## Common mistake\n\n`printf(\"%d\", p)` for a pointer — UB. Need `%p` and cast `(void*)`.\n\n## Summary\n\n- `&x` — address\n- `*p` — dereference\n- `int *p = &x` — store address\n- `%p` — address output\n- `NULL` — points nowhere\n- Dereferencing NULL — segfault",
+      "questions": [
+        { "text": "What does `&x` do?", "options": ["Value", "Address", "Delete", "Copy"], "answer": 1, "explanation": "Address." },
+        { "text": "What is `int *p`?", "options": ["int", "Pointer to int", "Array", "Error"], "answer": 1, "explanation": "Pointer." },
+        { "text": "What on `printf(\"%p\", (void*)&x)`?", "options": ["Value", "Address", "Error", "10"], "answer": 1, "explanation": "Address." },
+        { "text": "What is NULL?", "options": ["0", "Pointer to nowhere", "Empty string", "Error"], "answer": 1, "explanation": "Null pointer." }
+      ],
+      "practice": {
+        "description": "Create `int x = 42;`, pointer `int *p = &x;`.\n\nOutput `*p` and `p != NULL` as 1/0:\n```\n*p = 42\np is not NULL: 1\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int x = 42;\n    // TODO\n    return 0;\n}\n",
+        "expected": "*p = 42\np is not NULL: 1",
+        "must_contain": ["int *p", "&x", "*p", "NULL", "printf"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "title": "Dereference *",
+      "theory": "## Dereference\n\n`*p` — the value at the address `p` points to.\n\n```c\nint x = 10;\nint *p = &x;\n\nprintf(\"%d\\n\", *p);    // 10\n*p = 20;                // change x through p\nprintf(\"%d\\n\", x);     // 20\n```\n\n## Change through pointer\n\n```c\nvoid increment(int *p) {\n    (*p)++;    // parens mandatory: *p++ is different\n}\n\nint x = 5;\nincrement(&x);\nprintf(\"%d\\n\", x);   // 6\n```\n\n`(*p)++` — increment the value. `*p++` — move the pointer (not what we want).\n\n## Why pointers in functions\n\n```c\nvoid swap(int *a, int *b) {\n    int t = *a;\n    *a = *b;\n    *b = t;\n}\n\nint x = 1, y = 2;\nswap(&x, &y);\nprintf(\"%d %d\\n\", x, y);   // 2 1\n```\n\nWithout pointers swap wouldn't work — copies are passed.\n\n## Pointer to pointer\n\n```c\nint x = 10;\nint *p = &x;\nint **pp = &p;\nprintf(\"%d\\n\", **pp);   // 10\n```\n\n## Const pointers\n\n```c\nconst int *p = &x;   // cannot *p = 5\nint * const p = &x;  // cannot p = &y\nconst int * const p = &x;   // neither\n```\n\n## What if\n\n- `*p` with `p` not initialized — UB (garbage address, segfault).\n- `*p++` instead of `(*p)++` — different operation.\n- Dereference NULL — segfault.\n\n## Common mistake\n\n`*p++` is `*(p++)`, pointer shift, not value increment. Need parens `(*p)++`.\n\n## Summary\n\n- `*p` — value at address\n- `*p = x` — write\n- `(*p)++` — increment value\n- For swap — pointers\n- `**pp` — pointer to pointer",
+      "questions": [
+        { "text": "What does `*p` do?", "options": ["Address", "Value at address", "Copy address", "Error"], "answer": 1, "explanation": "Value." },
+        { "text": "How to change value through pointer?", "options": ["*p = 20", "p = 20", "&p = 20", "Error"], "answer": 0, "explanation": "`*p = 20`." },
+        { "text": "What is needed for swap via pointers?", "options": ["*", "&", "Both", "Nothing"], "answer": 2, "explanation": "`*` and `&`." },
+        { "text": "What does `*p++` do?", "options": ["Increment value", "Shift pointer", "Error", "Nothing"], "answer": 1, "explanation": "`*(p++)` — shift." }
+      ],
+      "practice": {
+        "description": "Create `int x = 10; int *p = &x;`.\n\n1. Output `*p`.\n2. Assign 20 through `*p`.\n3. Output `x`.\n\n```\n10\n20\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int x = 10;\n    // TODO\n    return 0;\n}\n",
+        "expected": "10\n20",
+        "must_contain": ["int *p", "&x", "*p", "printf"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "title": "malloc / free",
+      "theory": "## Dynamic memory\n\nArray `int arr[5]` — fixed length. Want flexible — `malloc`.\n\n```c\n#include <stdlib.h>\n\nint *arr = malloc(5 * sizeof(int));\nif (arr == NULL) {\n    // allocation error\n    return 1;\n}\n// use\narr[0] = 10;\nfree(arr);\n```\n\n## malloc\n\n```c\nvoid *malloc(size_t size);\n```\n\nReturns `void*` — pointer to block or `NULL`. Doesn't initialize (garbage).\n\n## calloc\n\n```c\nint *arr = calloc(5, sizeof(int));   // zeroes\n```\n\n`calloc(count, size)`. All bytes 0.\n\n## realloc\n\n```c\narr = realloc(arr, 10 * sizeof(int));   // grow\n```\n\n## free\n\n```c\nfree(arr);\n```\n\n**Mandatory** after `malloc`. Forget — leak.\n\n## Double free — UB\n\n```c\nfree(arr);\nfree(arr);    // UB — crash or corruption\n```\n\n## Use after free\n\n```c\nfree(arr);\narr[0] = 10;   // UB\n```\n\nThe pointer after `free` is invalid. Assign `NULL`:\n\n```c\nfree(arr);\narr = NULL;\n```\n\n## Check\n\n```c\nif (arr == NULL) {\n    printf(\"Out of memory\\n\");\n    return 1;\n}\n```\n\nAlways check!\n\n## What if\n\n- Forget `free` — leak.\n- `free` twice — UB.\n- Use after `free` — UB.\n- Don't check `NULL` — segfault.\n\n## Common mistake\n\nLeaks in a loop: `malloc` without `free`.\n\n## Summary\n\n- `malloc(size)` — allocate\n- `calloc(n, size)` — allocate with zeroes\n- `realloc` — resize\n- `free` — free\n- Check NULL\n- After `free` — `NULL`",
+      "questions": [
+        { "text": "Why `malloc`?", "options": ["Speed up", "Allocate memory", "Free", "Nothing"], "answer": 1, "explanation": "Allocation." },
+        { "text": "What does `free` do?", "options": ["Allocates", "Frees", "Zeroes", "Copies"], "answer": 1, "explanation": "Freeing." },
+        { "text": "What if `free` is forgotten?", "options": ["Nothing", "Memory leak", "Crash", "Compile error"], "answer": 1, "explanation": "Leak." },
+        { "text": "What on `free` twice?", "options": ["Fine", "UB", "Compile error", "Leak"], "answer": 1, "explanation": "UB — double free." },
+        { "text": "What does `calloc` do compared to `malloc`?", "options": ["Faster", "Zeroes", "Smaller", "Error"], "answer": 1, "explanation": "Zeroes." }
+      ],
+      "practice": {
+        "description": "Allocate an array of 3 int via `malloc`, fill 10, 20, 30, output space-separated, free.\n\n```\n10 20 30\n```",
+        "starter": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "10 20 30",
+        "must_contain": ["malloc", "free", "printf"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "title": "Pointers and Arrays",
+      "theory": "## Array — pointer to first\n\n```c\nint arr[] = {10, 20, 30};\nint *p = arr;   // same as &arr[0]\n```\n\nArray name — **address of the first element**. Not a full pointer (can't `arr = ...`), but works as one in expressions.\n\n## Indexing and arithmetic\n\n```c\nint arr[] = {10, 20, 30};\n\nprintf(\"%d\\n\", arr[0]);      // 10\nprintf(\"%d\\n\", *(arr + 0));  // 10 — same\nprintf(\"%d\\n\", arr[1]);      // 20\nprintf(\"%d\\n\", *(arr + 1));  // 20\n```\n\n`arr[i]` = `*(arr + i)`.\n\n## Pointer arithmetic\n\n`p + 1` — not +1 byte, but +1 **element** (+ `sizeof(int)` bytes).\n\n```c\nint *p = arr;\nprintf(\"%d\\n\", *p);       // 10\np++;                      // shift by 1 element\nprintf(\"%d\\n\", *p);       // 20\n```\n\n## Traversal\n\n```c\nint arr[] = {10, 20, 30};\nint *p = arr;\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d\\n\", *(p + i));\n}\n```\n\nOr via `p++`:\n\n```c\nfor (int *p = arr; p < arr + 3; p++) {\n    printf(\"%d\\n\", *p);\n}\n```\n\n## Array in function\n\n```c\nvoid printArr(int *arr, int n) {\n    for (int i = 0; i < n; i++) printf(\"%d \", arr[i]);\n}\n\nint arr[] = {1, 2, 3};\nprintArr(arr, 3);\n```\n\n`int arr[]` and `int *arr` in parameters — **same**. Size via `sizeof` doesn't work (it's a pointer).\n\n## What if\n\n- `sizeof(arr)` in a function — pointer size.\n- `arr = ...` — error (array name not reassigned).\n- `p++` beyond array — UB.\n\n## Common mistake\n\n`sizeof(arr)` in a function parameter — gives pointer size, not array. Pass `n` separately.\n\n## Summary\n\n- `arr` — address of the first\n- `arr[i]` = `*(arr + i)`\n- `p++` — shift by element\n- Array in function — pointer\n- `sizeof` doesn't work in parameters",
+      "questions": [
+        { "text": "What is `arr` in an expression?", "options": ["Value", "Address of first element", "Copy", "Error"], "answer": 1, "explanation": "Address." },
+        { "text": "What is equivalent to `arr[2]`?", "options": ["*(arr + 2)", "arr + 2", "*arr + 2", "arr * 2"], "answer": 0, "explanation": "`*(arr + 2)`." },
+        { "text": "How many bytes does `p++` shift for `int*`?", "options": ["1", "4 (sizeof int)", "8", "Depends"], "answer": 1, "explanation": "By element size." },
+        { "text": "What does `sizeof(arr)` in a function parameter give?", "options": ["Array size", "Pointer size", "0", "Error"], "answer": 1, "explanation": "Pointer." }
+      ],
+      "practice": {
+        "description": "Given `int arr[] = {10, 20, 30, 40, 50};`.\n\nVia pointer `int *p = arr;` traverse and output:\n```\n10 20 30 40 50\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    int arr[] = {10, 20, 30, 40, 50};\n    // TODO: via pointer\n    return 0;\n}\n",
+        "expected": "10 20 30 40 50",
+        "must_contain": ["int *p", "arr", "p++", "*p", "printf"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "title": "struct, typedef",
+      "theory": "## struct\n\n`struct` — custom composite type: a set of fields.\n\n```c\nstruct Point {\n    int x;\n    int y;\n};\n\nstruct Point p;\np.x = 10;\np.y = 20;\n```\n\n## typedef\n\nType alias:\n\n```c\ntypedef struct {\n    int x;\n    int y;\n} Point;\n\nPoint p;\np.x = 10;\n```\n\nWithout `typedef` you'd write `struct Point`. With it — just `Point`.\n\n## Initialization\n\n```c\nPoint p = {10, 20};\nPoint q = {.x = 10, .y = 20};   // designated initializers (C99)\n```\n\n## Nested\n\n```c\ntypedef struct {\n    Point top_left;\n    Point bottom_right;\n} Rect;\n\nRect r = {{0, 0}, {10, 10}};\n```\n\n## Array of structs\n\n```c\nPoint points[3] = {{1, 2}, {3, 4}, {5, 6}};\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d,%d\\n\", points[i].x, points[i].y);\n}\n```\n\n## Strings in structs\n\n```c\ntypedef struct {\n    char name[20];\n    int age;\n} Person;\n\nPerson p;\nstrcpy(p.name, \"Ivan\");    // copy\np.age = 25;\n```\n\n**Cannot** `p.name = \"Ivan\"` — array not reassignable.\n\n## What if\n\n- `p.name = \"Ivan\"` — error.\n- Forget `;` after `struct { }` — error.\n- Use `struct Point` without typedef — write `struct` everywhere.\n\n## Common mistake\n\n`p.name = \"Ivan\"` for `char name[20]` — error. Need `strcpy`.\n\n## Summary\n\n- `struct` — composite type\n- `typedef` — alias\n- `.` — field access\n- `strcpy` for strings\n- `{.x = 10}` — designated\n- `;` after `struct { }`",
+      "questions": [
+        { "text": "What is `struct`?", "options": ["Function", "Composite type", "Variable", "Error"], "answer": 1, "explanation": "Set of fields." },
+        { "text": "Why typedef?", "options": ["Alias", "Delete", "Copy", "Error"], "answer": 0, "explanation": "Type alias." },
+        { "text": "How to access a field?", "options": ["p->x", "p.x", "p:x", "p[x]"], "answer": 1, "explanation": "`.` for value." },
+        { "text": "How to write a string into `char name[20]`?", "options": ["p.name = \"Ivan\"", "strcpy(p.name, \"Ivan\")", "p.name = 'I'", "name = \"Ivan\""], "answer": 1, "explanation": "`strcpy`." }
+      ],
+      "practice": {
+        "description": "Create `typedef struct { int x; int y; } Point;`.\n\nCreate `Point p` with `x=3, y=7`. Output:\n```\nx=3, y=7\n```",
+        "starter": "#include <stdio.h>\n\ntypedef struct {\n    // TODO\n} Point;\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "x=3, y=7",
+        "must_contain": ["typedef struct", "int x", "int y", "Point", "printf"]
+      }
+    },
+    "28": {
+      "id": 28,
+      "title": "Pointers to Structs, ->",
+      "theory": "## Pointer to struct\n\n```c\ntypedef struct {\n    int x, y;\n} Point;\n\nPoint p = {3, 7};\nPoint *ptr = &p;\n```\n\n## Access via `->`\n\n```c\nprintf(\"%d\\n\", ptr->x);   // 3\nprintf(\"%d\\n\", ptr->y);   // 7\n```\n\n`ptr->x` = `(*ptr).x`. `->` is more convenient.\n\nYou can also use `(*ptr).x`, but `->` is the standard.\n\n## Change through pointer\n\n```c\nptr->x = 100;\nprintf(\"%d\\n\", p.x);   // 100\n```\n\n## Passing to a function\n\nLarge structs are **more efficiently** passed by pointer:\n\n```c\nvoid move(Point *p, int dx, int dy) {\n    p->x += dx;\n    p->y += dy;\n}\n\nPoint p = {0, 0};\nmove(&p, 5, 10);\nprintf(\"%d,%d\\n\", p.x, p.y);   // 5,10\n```\n\nWithout pointer — copy, changes not returned.\n\n## Array of structs\n\n```c\nPoint arr[3] = {{1, 2}, {3, 4}, {5, 6}};\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d,%d\\n\", arr[i].x, arr[i].y);\n}\n```\n\n`arr[i]` — the struct itself, `arr[i].x` — field.\n\n## Pointer to array of structs\n\n```c\nPoint *ptr = arr;\nfor (int i = 0; i < 3; i++) {\n    printf(\"%d\\n\", ptr[i].x);   // or (ptr + i)->x\n}\n```\n\n## const\n\n```c\nvoid printPoint(const Point *p) {\n    printf(\"%d\\n\", p->x);   // read only\n    // p->x = 5; // error\n}\n```\n\n## What if\n\n- `ptr.x` instead of `ptr->x` — compile error.\n- Forget `&` when passing — copy.\n- Modify `const` struct — error.\n\n## Common mistake\n\n`ptr.x` for a pointer — error. Only `ptr->x`.\n\n## Summary\n\n- `Point *ptr = &p`\n- `ptr->x` = `(*ptr).x`\n- `ptr->x = ...` — modify\n- In a function — via pointer for modification\n- `const` — read only",
+      "questions": [
+        { "text": "What is equivalent to `ptr->x`?", "options": ["ptr.x", "(*ptr).x", "&ptr.x", "ptr[x]"], "answer": 1, "explanation": "`(*ptr).x`." },
+        { "text": "Can you use `ptr.x` for a pointer?", "options": ["Yes", "No, error", "Sometimes", "Error"], "answer": 1, "explanation": "Only `->`." },
+        { "text": "Why pass pointer to struct in a function?", "options": ["Pretty", "Modify struct + efficiency", "Speed up", "Not needed"], "answer": 1, "explanation": "Modify without copy." },
+        { "text": "What is `const Point *p`?", "options": ["Cannot modify *p", "Cannot modify p", "Cannot modify both", "Error"], "answer": 0, "explanation": "Read-only through `*p`." }
+      ],
+      "practice": {
+        "description": "Given `typedef struct { int x, y; } Point;`.\n\nCreate `Point p = {3, 7};`, pointer `Point *ptr = &p;`.\n\nOutput via `->`:\n```\nx=3, y=7\n```",
+        "starter": "#include <stdio.h>\n\ntypedef struct {\n    int x;\n    int y;\n} Point;\n\nint main(void) {\n    Point p = {3, 7};\n    // TODO\n    return 0;\n}\n",
+        "expected": "x=3, y=7",
+        "must_contain": ["Point *ptr", "&p", "->", "printf"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "title": "fopen / fclose, Read, Write",
+      "theory": "## File — FILE*\n\n```c\n#include <stdio.h>\n\nFILE *f = fopen(\"file.txt\", \"w\");\nif (f == NULL) {\n    printf(\"Cannot open file\\n\");\n    return 1;\n}\nfprintf(f, \"Hello\\n\");\nfclose(f);\n```\n\n## Modes\n\n- `\"r\"` — read\n- `\"w\"` — write (overwrite)\n- `\"a\"` — append\n- `\"r+\"`, `\"w+\"` — read + write\n- `\"rb\"`, `\"wb\"` — binary\n\n## Write\n\n```c\nfprintf(f, \"x = %d\\n\", 5);\nfputs(\"line\\n\", f);\nfputc('A', f);\n```\n\n## Read\n\n**`fscanf`** — like `scanf` but from file:\n\n```c\nint x;\nfscanf(f, \"%d\", &x);\n```\n\n**`fgets`** — string with limit:\n\n```c\nchar buf[100];\nwhile (fgets(buf, sizeof(buf), f) != NULL) {\n    printf(\"%s\", buf);\n}\n```\n\n**`fgetc`** — character:\n\n```c\nint c;\nwhile ((c = fgetc(f)) != EOF) {\n    putchar(c);\n}\n```\n\n## EOF\n\n`EOF` — end of file. Returned by `fgetc`, `fgets` returns `NULL`.\n\n## Close\n\n```c\nfclose(f);\n```\n\n**Mandatory.** Don't close — data may not be saved. `fclose` = `fflush` + free.\n\n## Return\n\n`fopen` returns `NULL` on error — **always** check.\n\n## What if\n\n- Don't check `fopen` — segfault.\n- Don't `fclose` — data lost.\n- `\"w\"` on existing file — overwrites.\n\n## Common mistake\n\nForget `fclose` — last data not written.\n\n## Summary\n\n- `fopen(name, mode)` → `FILE*`\n- `\"r\"`, `\"w\"`, `\"a\"`\n- `fprintf` — write\n- `fscanf`, `fgets`, `fgetc` — read\n- `fclose` — mandatory\n- Check `NULL`",
+      "questions": [
+        { "text": "What does `fopen` return?", "options": ["int", "FILE*", "char*", "NULL always"], "answer": 1, "explanation": "`FILE*`." },
+        { "text": "What does `\"w\"` do?", "options": ["Reads", "Writes with overwrite", "Appends", "Error"], "answer": 1, "explanation": "Overwrite." },
+        { "text": "Why `fclose`?", "options": ["Pretty", "Flush + free", "Speed up", "Not needed"], "answer": 1, "explanation": "Flush buffer." },
+        { "text": "What on `fopen` error?", "options": ["Crash", "NULL", "0", "Compile error"], "answer": 1, "explanation": "NULL — check." }
+      ],
+      "practice": {
+        "description": "1. Open `test.txt` for write, write `Hello` via `fprintf`.\n2. Close.\n3. Open for read, read via `fgets`, output `Read: Hello`.\n\n```\nRead: Hello\n```",
+        "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Read: Hello",
+        "must_contain": ["fopen", "fprintf", "fgets", "fclose", "printf"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "title": "Mini-project: TODO List",
+      "theory": "## What we build\n\nConsole TODO list. Assembles: arrays, structs, functions, strings, files.\n\n## Model\n\n```c\ntypedef struct {\n    char text[100];\n    int done;\n} Task;\n```\n\n`done` = 0/1 — not done/done.\n\n## Functions\n\n```c\n#define MAX 100\n\nint addTask(Task tasks[], int count, const char *text);\nvoid showTasks(Task tasks[], int count);\nvoid markDone(Task tasks[], int count, int index);\nint saveTasks(const char *file, Task tasks[], int count);\nint loadTasks(const char *file, Task tasks[]);\n```\n\n- `addTask` — copy into `tasks[count]`, return `count + 1`\n- `showTasks` — `for`, output `[x]` or `[ ]`\n- `markDone` — `tasks[index].done = 1`\n- `saveTasks` — open file, `fprintf` in loop, return count\n- `loadTasks` — open, `fgets` in loop, return count\n\n## Example: saveTasks\n\n```c\nint saveTasks(const char *file, Task tasks[], int count) {\n    FILE *f = fopen(file, \"w\");\n    if (f == NULL) return -1;\n    for (int i = 0; i < count; i++) {\n        fprintf(f, \"%d %s\\n\", tasks[i].done, tasks[i].text);\n    }\n    fclose(f);\n    return count;\n}\n```\n\n## Example: showTasks\n\n```c\nvoid showTasks(Task tasks[], int count) {\n    for (int i = 0; i < count; i++) {\n        printf(\"%d. [%c] %s\\n\", i + 1, tasks[i].done ? 'x' : ' ', tasks[i].text);\n    }\n}\n```\n\n## What if\n\n- Array too small — check `count < MAX`.\n- `strcpy` into small buffer — overflow.\n\n## Summary\n\n- struct + array + functions\n- Files — save/load\n- Checks on `NULL`, `count`\n- Ternary — for status",
+      "questions": [
+        { "text": "Where to store tasks?", "options": ["Variables", "Array of structs", "Only in file", "In a string"], "answer": 1, "explanation": "`Task tasks[MAX]`." },
+        { "text": "Why `done`?", "options": ["Sort", "Completion flag", "Error", "Nothing"], "answer": 1, "explanation": "Status." },
+        { "text": "How to save to file?", "options": ["printf", "fprintf", "scanf", "puts"], "answer": 1, "explanation": "`fprintf`." },
+        { "text": "What if `count >= MAX`?", "options": ["Crash", "Overflow — check", "Error", "Nothing"], "answer": 1, "explanation": "Out of bounds." }
+      ],
+      "practice": {
+        "description": "Implement `showTasks` for an array of tasks.\n\n```\ntypedef struct { char text[50]; int done; } Task;\nTask tasks[] = {{\"Buy bread\", 0}, {\"Call\", 1}, {\"Lesson\", 0}};\n```\n\nOutput:\n```\n1. [ ] Buy bread\n2. [x] Call\n3. [ ] Lesson\n```",
+        "starter": "#include <stdio.h>\n\ntypedef struct {\n    char text[50];\n    int done;\n} Task;\n\nint main(void) {\n    Task tasks[] = {{\"Buy bread\", 0}, {\"Call\", 1}, {\"Lesson\", 0}};\n    // TODO\n    return 0;\n}\n",
+        "expected": "1. [ ] Buy bread\n2. [x] Call\n3. [ ] Lesson",
+        "must_contain": ["for", "printf", "tasks", "done", "text"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "title": "Final",
+      "theory": "## Putting it all together\n\nThe course covered: types, loops, functions, arrays, strings, pointers, memory, structs, files.\n\n## Model\n\n```c\ntypedef struct {\n    char name[30];\n    int age;\n} Person;\n```\n\nArray of several `Person` + functions.\n\n## Final example\n\n```c\n#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    char name[30];\n    int age;\n} Person;\n\nPerson oldest(Person arr[], int n) {\n    Person result = arr[0];\n    for (int i = 1; i < n; i++) {\n        if (arr[i].age > result.age) result = arr[i];\n    }\n    return result;\n}\n\nint main(void) {\n    Person people[] = {{\"Ivan\", 25}, {\"Maria\", 30}, {\"Peter\", 28}};\n    Person o = oldest(people, 3);\n    printf(\"Oldest: %s (%d)\\n\", o.name, o.age);\n    return 0;\n}\n```\n\n## Checks\n\n- Struct with fields\n- Array of structs\n- Function with array\n- Return struct or pointer\n- `printf` with `%s` and `%d`\n\n## What if\n\n- Forget `strcpy` — error.\n- `sizeof` in a function — pointer size.\n- `free` after `malloc` — mandatory.\n\n## Summary\n\n- Combine structs + arrays + functions\n- Check string lengths\n- Return structs by value (copy) or pointer\n- `printf` with correct specifiers",
+      "questions": [
+        { "text": "How to store several people?", "options": ["Separate vars", "Array of structs", "One struct", "File"], "answer": 1, "explanation": "Array `Person`." },
+        { "text": "Can a struct be returned from a function?", "options": ["No", "Yes, by value", "Only pointer", "Error"], "answer": 1, "explanation": "Yes, copy." },
+        { "text": "What on `sizeof(people)` in a function?", "options": ["Array size", "Pointer size", "Error", "0"], "answer": 1, "explanation": "Pointer." },
+        { "text": "What is needed for strings in struct?", "options": ["=", "strcpy", "=", "append"], "answer": 1, "explanation": "`strcpy`." }
+      ],
+      "practice": {
+        "description": "Struct `Book`:\n```\ntypedef struct {\n    char title[50];\n    int pages;\n} Book;\n```\n\nArray:\n```\nBook books[] = {{\"Java\", 500}, {\"C\", 300}, {\"Python\", 400}};\n```\n\nFunction `int totalPages(Book books[], int n)` — sum of pages.\n\nOutput:\n```\nTotal pages: 1200\n```",
+        "starter": "#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    char title[50];\n    int pages;\n} Book;\n\n// TODO: totalPages\n\nint main(void) {\n    Book books[] = {{\"Java\", 500}, {\"C\", 300}, {\"Python\", 400}};\n    // TODO\n    return 0;\n}\n",
+        "expected": "Total pages: 1200",
+        "must_contain": ["totalPages", "for", "printf", "books", "pages"]
+      }
+    }
+  }
+}

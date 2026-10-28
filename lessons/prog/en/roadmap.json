@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "title": "Chapter 1. How a Computer Executes Code",
+    "lessons": [
+      { "id": 1, "title": "What Is an Algorithm and a Program", "status": "current" },
+      { "id": 2, "title": "Memory and Variables: Where Data Comes From", "status": "locked" },
+      { "id": 3, "title": "Expressions: How a Computer Computes", "status": "locked" },
+      { "id": 4, "title": "Input and Output: Dialogue with a Program", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter 1 Trophy", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Chapter 2. Logic and Control Flow",
+    "lessons": [
+      { "id": 5, "title": "Branching: How a Program Makes Decisions", "status": "locked" },
+      { "id": 6, "title": "Logical Operators: AND, OR, NOT", "status": "locked" },
+      { "id": 7, "title": "Nesting and Order of Checks", "status": "locked" },
+      { "id": 8, "title": "Data Types and Conversion", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter 2 Trophy", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Chapter 3. Loops and Repetition",
+    "lessons": [
+      { "id": 9, "title": "Why Loops Are Needed. Types of Loops", "status": "locked" },
+      { "id": 10, "title": "Pattern: Accumulator", "status": "locked" },
+      { "id": 11, "title": "Pattern: Counter and Flag", "status": "locked" },
+      { "id": 12, "title": "Nested Loops", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter 3 Trophy", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Chapter 4. Functions and Decomposition",
+    "lessons": [
+      { "id": 13, "title": "Why Functions Are Needed. The Black Box", "status": "locked" },
+      { "id": 14, "title": "Parameters and Return Value", "status": "locked" },
+      { "id": 15, "title": "Scope", "status": "locked" },
+      { "id": 16, "title": "Recursion", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter 4 Trophy", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Chapter 5. Arrays and Data Structures",
+    "lessons": [
+      { "id": 17, "title": "What Is an Array and Indices", "status": "locked" },
+      { "id": 18, "title": "Traversing an Array", "status": "locked" },
+      { "id": 19, "title": "Search, Filter, Maximum", "status": "locked" },
+      { "id": 20, "title": "Sorting and Swap", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter 5 Trophy", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Chapter 6. Algorithmic Thinking",
+    "lessons": [
+      { "id": 21, "title": "How to Solve Problems Step by Step", "status": "locked" },
+      { "id": 22, "title": "What Any Program Consists Of", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter 6 Trophy", "status": "locked" }
+  }
+]

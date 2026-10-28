@@ -1,0 +1,145 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Chapter Test: Introduction",
+    "description": "Final task of chapter 1. Checks: iostream, compilation, cout.",
+    "practice": {
+      "description": "Write a program with `#include <iostream>`, `int main()`, output three lines via `std::cout`:\n```\nC++\nLesson 1\nDone\n```\nFinish with `return 0;`.",
+      "starter": "#include <iostream>\n\nint main() {\n    // TODO: three std::cout\n    return 0;\n}\n",
+      "expected": "C++\nLesson 1\nDone",
+      "must_contain": ["#include <iostream>", "std::cout", "return 0"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Chapter Test: Fundamentals",
+    "description": "Final task of chapter 2. Checks: types, cin/cout, references.",
+    "practice": {
+      "description": "Read two integers via `std::cin`, output via `std::cout`:\n```\nSum: 15\nProduct: 50\n```\n\n**stdin:**\n```\n5\n10\n```",
+      "starter": "#include <iostream>\n\nint main() {\n    int a, b;\n    // TODO: cin + cout\n    return 0;\n}\n",
+      "expected": "Sum: 15\nProduct: 50",
+      "must_contain": ["std::cin", "std::cout", "a + b", "a * b"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Chapter Test: Control Flow",
+    "description": "Final task of chapter 3. Checks: if, for, break.",
+    "practice": {
+      "description": "Via `for` from 1 to 10 output only odds:\n```\n1\n3\n5\n7\n9\n```",
+      "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "1\n3\n5\n7\n9",
+      "must_contain": ["for", "continue", "% 2", "std::cout"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Chapter Test: Functions",
+    "description": "Final task of chapter 4. Checks: functions, overloading, references.",
+    "practice": {
+      "description": "Create:\n- `int square(int x)` — returns `x * x`\n- `void incr(int &x)` — increments `x` by 1 via reference\n\nIn `main`:\n- `n = 5`, output `square(5)`\n- output `incr(n)` (n becomes 6)\n\n```\n25\n6\n```",
+      "starter": "#include <iostream>\n\n// TODO: square, incr\n\nint main() {\n    int n = 5;\n    // TODO\n    return 0;\n}\n",
+      "expected": "25\n6",
+      "must_contain": ["int square", "void incr", "int &x", "std::cout"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Chapter Test: Arrays and Strings",
+    "description": "Final task of chapter 5. Checks: vector, string, range-for.",
+    "practice": {
+      "description": "Given `std::vector<int> nums = {3, 7, 2, 9, 5};`.\n\nOutput:\n```\nSum: 26\nMax: 9\nString: hello (5)\n```\n\nLast one — `std::string s = \"hello\";` and `s.size()`.",
+      "starter": "#include <iostream>\n#include <vector>\n#include <string>\n\nint main() {\n    std::vector<int> nums = {3, 7, 2, 9, 5};\n    // TODO\n    return 0;\n}\n",
+      "expected": "Sum: 26\nMax: 9\nString: hello (5)",
+      "must_contain": ["std::vector", "for", "std::string", "std::cout"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Chapter Test: Classes",
+    "description": "Final task of chapter 6. Checks: class, constructor, private, static.",
+    "practice": {
+      "description": "Class `Book`:\n- `private std::string title`, `private int pages`\n- constructor `Book(std::string t, int p)`\n- getters `getTitle()`, `getPages()`\n\nIn `main` create `Book b(\"Java\", 500)` and output:\n```\nJava: 500\n```",
+      "starter": "#include <iostream>\n#include <string>\n\n// TODO: class Book\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Java: 500",
+      "must_contain": ["class Book", "private", "Book(", "getTitle", "getPages", "std::cout"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Chapter Test: OOP",
+    "description": "Final task of chapter 7. Checks: inheritance, virtual functions.",
+    "practice": {
+      "description": "Abstract class `Shape` with `virtual double area() = 0` and `virtual std::string name() = 0`.\n\nSubclasses:\n- `Rectangle` — `width * height`, name `\"Rectangle\"`\n- `Circle` — `3.14 * r * r`, name `\"Circle\"`\n\nVia `std::vector<Shape*>` or `std::vector<std::unique_ptr<Shape>>` output:\n```\nRectangle: 6\nCircle: 12.56\n```",
+      "starter": "#include <iostream>\n#include <string>\n#include <vector>\n\n// TODO: Shape, Rectangle, Circle\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Rectangle: 6\nCircle: 12.56",
+      "must_contain": ["class Shape", "virtual", "= 0", "class Rectangle", "class Circle", "override", "std::cout"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Chapter Test: STL Containers",
+    "description": "Final task of chapter 8. Checks: vector, map, set.",
+    "practice": {
+      "description": "1. `std::vector<int> v = {1, 2, 3};` — output `size`.\n2. `std::map<std::string, int> m; m[\"a\"] = 1; m[\"b\"] = 2;` — output `m[\"a\"]`.\n3. `std::set<int> s = {1, 2, 2, 3, 3, 3};` — output `size`.\n\n```\nVector: 3\nMap a: 1\nSet: 3\n```",
+      "starter": "#include <iostream>\n#include <vector>\n#include <map>\n#include <set>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Vector: 3\nMap a: 1\nSet: 3",
+      "must_contain": ["std::vector", "std::map", "std::set", ".size()", "std::cout"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Chapter Test: Algorithms",
+    "description": "Final task of chapter 9. Checks: sort, accumulate, lambdas.",
+    "practice": {
+      "description": "Given `std::vector<int> v = {5, 3, 8, 2, 7};`.\n\n1. `std::sort` — output sorted (space-separated).\n2. `std::accumulate` — output sum.\n3. Lambda filter: output all > 4 via `for_each` and lambda.\n\n```\nSorted: 2 3 5 7 8\nSum: 25\n> 4: 5 7 8\n```",
+      "starter": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\nint main() {\n    std::vector<int> v = {5, 3, 8, 2, 7};\n    // TODO\n    return 0;\n}\n",
+      "expected": "Sorted: 2 3 5 7 8\nSum: 25\n> 4: 5 7 8",
+      "must_contain": ["std::sort", "std::accumulate", "[](", "std::cout"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Chapter Test: Smart Pointers",
+    "description": "Final task of chapter 10. Checks: unique_ptr, shared_ptr.",
+    "practice": {
+      "description": "1. `std::unique_ptr<int> p = std::make_unique<int>(42);` — output `*p`.\n2. `std::shared_ptr<int> q = std::make_shared<int>(10);` — output `*q` and `q.use_count()`.\n\n```\nunique: 42\nshared: 10 (count 1)\n```",
+      "starter": "#include <iostream>\n#include <memory>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "unique: 42\nshared: 10 (count 1)",
+      "must_contain": ["std::unique_ptr", "std::make_unique", "std::shared_ptr", "std::make_shared", "use_count", "std::cout"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Chapter Test: Exceptions",
+    "description": "Final task of chapter 11. Checks: throw, try/catch, custom exceptions.",
+    "practice": {
+      "description": "1. Create `class MyError : public std::runtime_error { using std::runtime_error::runtime_error; };`.\n2. Function `check(int x)`: if `x < 0` — `throw MyError(\"negative\")`.\n3. In `main`: call `check(-1)` in `try/catch` and output `Error: negative`.\n\n```\nError: negative\n```",
+      "starter": "#include <iostream>\n#include <stdexcept>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Error: negative",
+      "must_contain": ["class MyError", "std::runtime_error", "throw", "try", "catch", "std::cout"]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "title": "Chapter Test: Templates",
+    "description": "Final task of chapter 12. Checks: function templates, class templates.",
+    "practice": {
+      "description": "1. `template <typename T> T maxOf(T a, T b) { return a > b ? a : b; }`.\n2. Output `maxOf(3, 7)` and `maxOf(3.5, 2.1)`.\n\n```\n7\n3.5\n```",
+      "starter": "#include <iostream>\n\n// TODO: template\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "7\n3.5",
+      "must_contain": ["template", "typename", "maxOf", "std::cout"]
+    }
+  },
+  "13": {
+    "chapter_id": 13,
+    "title": "Chapter Test: Final",
+    "description": "Final task of the course. Checks: classes, STL, algorithms.",
+    "practice": {
+      "description": "Class `Product` with `std::string name`, `double price`, getters.\n\n`std::vector<Product> products = { {\"A\", 100}, {\"B\", 200}, {\"C\", 50} };`\n\n1. Sum via `std::accumulate` with a lambda.\n2. First with price > 150 via `std::find_if`.\n\n```\nSum: 350\nExpensive: B\n```",
+      "starter": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n#include <numeric>\n\n// TODO: Product\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Sum: 350\nExpensive: B",
+      "must_contain": ["class Product", "std::accumulate", "std::find_if", "[](", "std::cout"]
+    }
+  }
+}

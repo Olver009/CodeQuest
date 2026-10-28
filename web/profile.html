@@ -35,6 +35,20 @@
         }
         .stat-box .val { font-size: 24px; font-weight: bold; color: var(--brand-bright); }
         .stat-box .label { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+        .lang-progress-card {
+            background: var(--bg-card); border: var(--border-primary); border-radius: 8px;
+            padding: 20px; margin-top: 20px;
+        }
+        .lang-progress-title { margin: 0 0 16px 0; font-size: 18px; font-weight: bold; }
+        .lang-row { display: flex; align-items: center; gap: 14px; padding: 10px 0; }
+        .lang-row + .lang-row { border-top: 1px solid var(--border-color); }
+        .lang-row-icon { width: 32px; height: 32px; object-fit: contain; flex-shrink: 0; }
+        .lang-row-main { flex: 1; min-width: 0; }
+        .lang-row-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+        .lang-row-name { font-size: 15px; font-weight: bold; color: var(--text-white); }
+        .lang-row-count { font-size: 13px; color: var(--text-secondary); white-space: nowrap; }
+        .lang-row .progress { height: 6px; }
+        .lang-row.idle .lang-row-name, .lang-row.idle .lang-row-count { opacity: 0.55; }
     </style>
 </head>
 <body>
@@ -87,10 +101,15 @@
                         <input type="file" id="avatar-upload" accept="image/*" style="display: none;">
                         <div class="profile-info">
                             <h2 id="profile-name">Ученик</h2>
-                            <p data-i18n="profile_learning">Изучает Python</p>
+                            <p id="profile-learning">Изучает</p>
                         </div>
                     </div>
                     <div class="profile-stats" id="profile-stats"></div>
+                </div>
+
+                <div class="lang-progress-card">
+                    <h3 class="lang-progress-title" data-i18n="profile_lang_progress">Прогресс по языкам</h3>
+                    <div id="lang-progress-list"></div>
                 </div>
             </div>
         </main>
@@ -110,6 +129,12 @@
         await applyLanguage();
         try {
             const data = await pywebview.api.load_data();
+
+            // Применяем тему (если выбрана светлая)
+            if (data.settings_app_theme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+
             if (data.username) {
                 document.getElementById('profile-name').textContent = data.username;
             }
@@ -141,21 +166,51 @@
                 };
                 reader.readAsDataURL(file);
             });
-            let doneLessons = 0, doneTrophies = 0;
-            for (const key in data) {
-                if (key.startsWith('status_') && data[key] === 'done') {
-                    if (key.startsWith('status_trophy_')) doneTrophies++; else doneLessons++;
-                }
+            // Счётчики считаем по активному курсу: раньше в них попадали все языки сразу.
+            const activeLang = await pywebview.api.get_active_lang();
+            const langStats = await pywebview.api.get_lang_stats();
+            const allStats = await pywebview.api.get_all_lang_stats();
+
+            const learningEl = document.getElementById('profile-learning');
+            if (learningEl) {
+                learningEl.textContent = `${t('profile_learning')}: ${langStats.name}`;
             }
+
+            // Огонёк общий для всех курсов, поэтому берём его из get_streak_status.
+            const streakStatus = await pywebview.api.get_streak_status();
+            const timeStats = await pywebview.api.get_time_stats();
             document.getElementById('profile-stats').innerHTML = `
-        <div class="stat-box"><div class="val">${data.streak || 0}</div><div class="label" data-i18n="stats_days">Дней подряд</div></div>
-        <div class="stat-box"><div class="val">${doneLessons}</div><div class="label" data-i18n="stats_lessons">Уроков пройдено</div></div>
-        <div class="stat-box"><div class="val">${doneTrophies}</div><div class="label" data-i18n="stats_trophies">Контрольных сдано</div></div>`;
+        <div class="stat-box"><div class="val">${streakStatus.streak}</div><div class="label" data-i18n="stats_days">Дней подряд</div></div>
+        <div class="stat-box"><div class="val">${langStats.lessons_done}</div><div class="label" data-i18n="stats_lessons">Уроков пройдено</div></div>
+        <div class="stat-box"><div class="val">${langStats.trophies_done}</div><div class="label" data-i18n="stats_trophies">Контрольных сдано</div></div>
+        <div class="stat-box"><div class="val">${timeStats.today_minutes}</div><div class="label" data-i18n="stats_time_today">Мин. сегодня</div></div>
+        <div class="stat-box"><div class="val">${timeStats.week_minutes}</div><div class="label" data-i18n="stats_time_week">Мин. за неделю</div></div>`;
+
+            const langIcons = {
+                "python": "icons/python.svg", "java": "icons/java.svg", "cpp": "icons/cplusplus.svg",
+                "c": "icons/c.svg", "javascript": "icons/javascript.svg", "html": "icons/html.svg",
+                "css": "icons/css.svg", "prog": "icons/prog.svg"
+            };
+            document.getElementById('lang-progress-list').innerHTML = allStats.map(s => {
+                const percent = s.total > 0 ? (s.done / s.total) * 100 : 0;
+                return `<div class="lang-row ${s.done === 0 ? 'idle' : ''}">
+                    <img class="lang-row-icon" src="${langIcons[s.lang] || 'icons/prog.svg'}" alt="" onerror="this.style.display='none'">
+                    <div class="lang-row-main">
+                        <div class="lang-row-head">
+                            <span class="lang-row-name">${s.name}</span>
+                            <span class="lang-row-count">${s.done} / ${s.total}</span>
+                        </div>
+                        <div class="progress"><div class="progress-fill" style="width: ${percent}%; background: var(--product-xp-color);"></div></div>
+                    </div>
+                </div>`;
+            }).join('');
+
             await applyLanguage();
             const status = await pywebview.api.get_streak_status();
             document.getElementById('streak-count').textContent = status.streak;
             const icon = document.getElementById('streak-icon');
-            if (status.frozen) icon.style.filter = 'hue-rotate(180deg)';
+            const widget = document.getElementById('streak-widget');
+            if (status.frozen) { icon.style.filter = 'hue-rotate(180deg)'; if (widget) widget.title = t('streak_frozen_hint'); }
             else if (status.streak > 0) icon.style.filter = 'none';
             else icon.style.filter = 'grayscale(100%)';
         } catch (e) { console.error(e); }

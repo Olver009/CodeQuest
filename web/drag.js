@@ -1,6 +1,5 @@
 let isDragging = false;
 let isResizing = false;
-let wasMaximizedOnDragStart = false;
 let currentDir = '';
 let startX, startY, startWinX, startWinY, startW, startH;
 
@@ -24,6 +23,7 @@ document.addEventListener('mousemove', async (e) => {
 });
 
 document.addEventListener('mousedown', async (e) => {
+    // 1. ПРОВЕРКА НА РЕСАЙЗ (изменение размера за края)
     const threshold = 8;
     const w = window.innerWidth;
     const h = window.innerHeight;
@@ -34,7 +34,6 @@ document.addEventListener('mousedown', async (e) => {
     if (e.clientY < threshold) dir += 'top';
     if (e.clientY > h - threshold) dir += 'bottom';
 
-    // ИЗМЕНЕНИЕ РАЗМЕРА
     if (dir) {
         isResizing = true;
         currentDir = dir;
@@ -42,7 +41,6 @@ document.addEventListener('mousedown', async (e) => {
         if (window.pywebview) {
             const isMax = await pywebview.api.is_maximized();
             if (isMax) await pywebview.api.toggle_maximize();
-
             const rect = await pywebview.api.get_window_rect();
             startW = rect.w; startH = rect.h;
             startWinX = rect.x; startWinY = rect.y;
@@ -51,18 +49,37 @@ document.addEventListener('mousedown', async (e) => {
         return;
     }
 
-    // НАЧАЛО ПЕРЕТАСКИВАНИЯ
-    const interactive = e.target.closest('button, a, input, select, textarea, .CodeMirror, .xterm, .node, .sidebar-item, .btn, .icon-btn, .widget, .profile-card, .settings-card, .titlebar-btn');
+    // 2. ПРОВЕРКА НА ПЕРЕТАСКИВАНИЕ
+    // Игнорируем клики по кнопкам, полям ввода, редактору кода и т.д.
+    const interactive = e.target.closest('button, a, input, select, textarea, .CodeMirror, .xterm, .node, .sidebar-item, .btn, .icon-btn, .widget, .profile-card, .settings-card, .titlebar-btn, .node-container, .node-tooltip');
     if (interactive) return;
 
+    const isLessonPage = !!document.querySelector('.lesson-topbar');
+    const isTitlebar = !!e.target.closest('.titlebar');
+
+    // Логика зон захвата:
+    if (isLessonPage) {
+        // На уроках, КР и книге — ТОЛЬКО за чёлку
+        if (!isTitlebar) return;
+    } else {
+        // На остальных страницах (главная, профиль и т.д.) — за чёлку ИЛИ за верхнюю область (до 150px)
+        if (!isTitlebar && e.clientY > 150) return;
+    }
+
     isDragging = true;
-    startX = e.screenX; startY = e.screenY;
+    startX = e.screenX;
+    startY = e.screenY;
 
     if (window.pywebview) {
         const isMax = await pywebview.api.is_maximized();
-        wasMaximizedOnDragStart = isMax; // Запоминаем, что окно было развернуто
-
-        if (!isMax) {
+        if (isMax) {
+            await pywebview.api.toggle_maximize();
+            const newRect = await pywebview.api.get_window_rect();
+            startWinX = newRect.x;
+            startWinY = newRect.y;
+            startX = e.screenX;
+            startY = e.screenY;
+        } else {
             const rect = await pywebview.api.get_window_rect();
             startWinX = rect.x;
             startWinY = rect.y;
@@ -84,32 +101,24 @@ document.addEventListener('mousemove', (e) => {
 
         if (window.pywebview) pywebview.api.resize_and_move(newX, newY, newW, newH);
     } else if (isDragging) {
-        if (window.pywebview) {
-            // Если окно было развернуто и мы начали двигать мышь — съеживаем его
-            if (wasMaximizedOnDragStart) {
-                wasMaximizedOnDragStart = false; // Ставим false, чтобы не вызывалось повторно
-
-                pywebview.api.toggle_maximize().then(async () => {
-                    const newRect = await pywebview.api.get_window_rect();
-                    startWinX = newRect.x;
-                    startWinY = newRect.y;
-                    // Привязываем окно к текущей позиции мыши, чтобы избежать скачка
-                    startX = e.screenX;
-                    startY = e.screenY;
-                    pywebview.api.move_window(startWinX, startWinY);
-                });
-            } else {
-                const dx = e.screenX - startX;
-                const dy = e.screenY - startY;
-                pywebview.api.move_window(startWinX + dx, startWinY + dy);
-            }
-        }
+        const dx = e.screenX - startX;
+        const dy = e.screenY - startY;
+        if (window.pywebview) pywebview.api.move_window(startWinX + dx, startWinY + dy);
     }
 });
 
 document.addEventListener('mouseup', () => {
     isDragging = false;
     isResizing = false;
-    wasMaximizedOnDragStart = false;
     currentDir = '';
 });
+
+// --- ТАЙМЕР УЧЕБЫ ---
+setInterval(() => {
+    // Считаем время только если окно открыто и в фокусе
+    if (document.visibilityState === 'visible' && document.hasFocus()) {
+        if (window.pywebview) {
+            pywebview.api.add_time_spent(10);
+        }
+    }
+}, 10000); // Каждые 10 секунд

@@ -1,0 +1,158 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "check_type": "console",
+    "title": "Chapter Test: Introduction",
+    "description": "Final task of chapter 1. Checks: console.log, let, const.",
+    "practice": {
+      "description": "Create three `const`:\n- `name` = `\"Ivan\"`\n- `age` = `25`\n- `city` = `\"Moscow\"`\n\nOutput five lines:\n```\nName: Ivan\nAge: 25\nCity: Moscow\nIvan, 25, Moscow\nDone\n```",
+      "starter": "// TODO: 3 variables + 5 console.log\n",
+      "expected": "Name: Ivan\nAge: 25\nCity: Moscow\nIvan, 25, Moscow\nDone",
+      "must_contain": ["const name", "const age", "const city", "console.log"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "check_type": "console",
+    "title": "Chapter Test: Data Types",
+    "description": "Final task of chapter 2. Checks: types, coercion, == vs ===.",
+    "practice": {
+      "description": "Given:\n```\nlet a = \"5\";\nlet b = 5;\nlet c = 3.14;\n```\n\nOutput:\n```\ntypeof a: string\ntypeof b: number\ntypeof c: number\na == b: true\na === b: false\nNumber(a) + b: 10\n```",
+      "starter": "let a = \"5\";\nlet b = 5;\nlet c = 3.14;\n// TODO\n",
+      "expected": "typeof a: string\ntypeof b: number\ntypeof c: number\na == b: true\na === b: false\nNumber(a) + b: 10",
+      "must_contain": ["typeof a", "typeof b", "typeof c", "a == b", "a === b", "Number(a)", "console.log"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "check_type": "console",
+    "title": "Chapter Test: Conditionals and Loops",
+    "description": "Final task of chapter 3. Checks: if/else, switch, for, break.",
+    "practice": {
+      "description": "For numbers 1..7 output:\n- day via `switch` (`1 = Mon`, `2 = Tue`, `3 = Wed`, `4 = Thu`, `5 = Fri`, `6 = Sat`, `7 = Sun`)\n- format: `<n>: <day>`\n- for `n` = 6 or 7 append `\" (weekend)\"`\n\n```\n1: Mon\n2: Tue\n3: Wed\n4: Thu\n5: Fri\n6: Sat (weekend)\n7: Sun (weekend)\n```",
+      "starter": "// TODO: for 1..7, switch, if, console.log\n",
+      "expected": "1: Mon\n2: Tue\n3: Wed\n4: Thu\n5: Fri\n6: Sat (weekend)\n7: Sun (weekend)",
+      "must_contain": ["for", "switch", "case", "break", "if", "console.log"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "check_type": "console",
+    "title": "Chapter Test: Functions",
+    "description": "Final task of chapter 4. Checks: functions, arrows, rest, return.",
+    "practice": {
+      "description": "Create three functions:\n- `square(n)` — arrow, returns `n²`\n- `sumAll(...nums)` — with rest, returns sum\n- `greet(name = \"guest\")` — with default, `\"Hello, <name>!\"`\n\nOutput:\n```\n16\n10\nHello, Anna!\nHello, guest!\n```",
+      "starter": "// TODO\n",
+      "expected": "16\n10\nHello, Anna!\nHello, guest!",
+      "must_contain": ["=>", "...nums", "name =", "console.log"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "check_type": "console",
+    "title": "Chapter Test: Arrays and Objects",
+    "description": "Final task of chapter 5. Checks: methods, map/filter/reduce, objects.",
+    "practice": {
+      "description": "Given array `const nums = [3, 7, 2, 8, 5];`.\n\nOutput:\n```\nSquares: 9,49,4,64,25\nEvens: 2,8\nSum: 25\n```\n\n- `squares` — via `map`\n- `evens` — via `filter`\n- `sum` — via `reduce`",
+      "starter": "const nums = [3, 7, 2, 8, 5];\n// TODO\n",
+      "expected": "Squares: 9,49,4,64,25\nEvens: 2,8\nSum: 25",
+      "must_contain": [".map(", ".filter(", ".reduce(", "join", "console.log"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "check_type": "console",
+    "title": "Chapter Test: Destructuring, Spread, Errors",
+    "description": "Final task of chapter 6. Checks: destructuring, spread, try/catch.",
+    "practice": {
+      "description": "Given object:\n```\nconst user = { name: \"Anna\", age: 25, city: \"Moscow\" };\n```\n\n1. Destructure `name` and `age`, output `Anna 25`.\n2. Via spread create `{ ...user, age: 26 }`, output `age: 26`.\n3. In `try/catch` try `JSON.parse(\"not json\")`, in `catch` output `Parse error`.\n\n```\nAnna 25\nage: 26\nParse error\n```",
+      "starter": "const user = { name: \"Anna\", age: 25, city: \"Moscow\" };\n// TODO\n",
+      "expected": "Anna 25\nage: 26\nParse error",
+      "must_contain": ["const { name", "= user", "...user", "try", "catch", "console.log"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "check_type": "console",
+    "title": "Chapter Test: Set, Map, Regex",
+    "description": "Final task of chapter 7. Checks: Set, Map, regular expressions.",
+    "practice": {
+      "description": "1. Create `new Set([1, 2, 2, 3, 3, 3])`, output `size`.\n2. Create `new Map([[\"a\", 1], [\"b\", 2]])`, output `map.get(\"a\")`.\n3. Via regex find all digits in `\"a1b22c333\"` and output count.\n\n```\nUnique: 3\nMap a: 1\nDigits: 6\n```",
+      "starter": "// TODO\n",
+      "expected": "Unique: 3\nMap a: 1\nDigits: 6",
+      "must_contain": ["new Set(", "new Map(", ".get(", "match", "console.log"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "check_type": "console",
+    "title": "Chapter Test: Classes and this",
+    "description": "Final task of chapter 8. Checks: classes, constructor, methods, inheritance.",
+    "practice": {
+      "description": "Class `Animal`:\n- `constructor(name)` — stores `this.name`\n- `speak()` — `\"<name> makes a sound\"`\n\nClass `Dog extends Animal`:\n- overrides `speak()` — `\"<name>: woof\"`\n\nCreate `new Animal(\"Mystery\")`, `new Dog(\"Rex\")`, call `speak()` on both.\n\n```\nMystery makes a sound\nRex: woof\n```",
+      "starter": "// TODO\n",
+      "expected": "Mystery makes a sound\nRex: woof",
+      "must_contain": ["class Animal", "constructor", "class Dog extends Animal", "super(", "speak()", "console.log"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "check_type": "dom",
+    "title": "Chapter Test: DOM",
+    "description": "Final task of chapter 9. Checks: querySelector, textContent, classList, createElement.",
+    "practice": {
+      "description": "HTML:\n```html\n<h1 id=\"title\"></h1>\n<ul id=\"list\"></ul>\n```\n\nVia JS:\n1. Set `#title` text to \"Task list\"\n2. Three `<li>`: \"Milk\", \"Bread\", \"Eggs\" — append to `#list`\n3. Add class `active` to `#list`\n\nVisible text: `Task list Milk Bread Eggs`",
+      "starter": "<h1 id=\"title\"></h1>\n<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
+      "expected": "Task list Milk Bread Eggs",
+      "must_contain": ["querySelector", "textContent", "createElement", "appendChild", "classList.add"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "check_type": "dom",
+    "title": "Chapter Test: Events",
+    "description": "Final task of chapter 10. Checks: addEventListener, click, submit.",
+    "practice": {
+      "description": "HTML:\n```html\n<button id=\"btn\">Click</button>\n<p id=\"out\"></p>\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Send</button>\n</form>\n```\n\nVia JS:\n1. Click on `#btn` → `#out` text \"Clicked\"\n2. `#f` — `submit` with `preventDefault`, `#inp` value to `#out`\n\nVisible text: `Click Send`",
+      "starter": "<button id=\"btn\">Click</button>\n<p id=\"out\"></p>\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Send</button>\n</form>\n<script>\n  // TODO\n</script>\n",
+      "expected": "Click Send",
+      "must_contain": ["addEventListener", "click", "submit", "preventDefault", "querySelector"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "check_type": "console",
+    "title": "Chapter Test: Asynchrony",
+    "description": "Final task of chapter 11. Checks: Promise, async/await.",
+    "practice": {
+      "description": "1. Create `delay(ms)` — returns a `Promise` that resolves via `setTimeout`.\n2. In `async` function `main`, `await delay(10)` and output `Done`.\n3. Catch: `Promise.reject(new Error(\"fail\"))` via `.catch`, output `Caught: fail`.\n\n```\nDone\nCaught: fail\n```",
+      "starter": "// TODO\n",
+      "expected": "Done\nCaught: fail",
+      "must_contain": ["new Promise", "resolve", "async", "await", ".catch", "console.log"]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "check_type": "console",
+    "title": "Chapter Test: Modules",
+    "description": "Final task of chapter 12. Checks: import/export.",
+    "practice": {
+      "description": "Simulating modules in one file (real project — separate files).\n\n1. Declare `add(a, b)`.\n2. Declare `const PI = 3.14`.\n3. Output `add(2, 3)` and `PI`.\n\n```\n5\n3.14\n```\n\nJust checking you understand the meaning of export — `export` syntax in one file is not required.",
+      "starter": "// TODO\n",
+      "expected": "5\n3.14",
+      "must_contain": ["function add", "const PI", "console.log"]
+    }
+  },
+  "13": {
+    "chapter_id": 13,
+    "check_type": "dom",
+    "title": "Chapter Test: Final",
+    "description": "Final task of the course. Checks: DOM + events + arrays.",
+    "practice": {
+      "description": "HTML:\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Add</button>\n<ul id=\"list\"></ul>\n```\n\nVia JS:\n1. Click on `#add` — create `<li>` with `#inp` text\n2. Append to `#list`\n3. Clear `#inp` after adding\n\nVisible text: `Add`",
+      "starter": "<input id=\"inp\" type=\"text\">\n<button id=\"add\">Add</button>\n<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
+      "expected": "Add",
+      "must_contain": ["addEventListener", "click", "createElement", "appendChild", "value", "querySelector"]
+    }
+  }
+}

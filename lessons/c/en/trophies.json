@@ -1,0 +1,123 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Chapter Test: Introduction",
+    "description": "Final task of chapter 1. Checks: compilation, main structure, printf.",
+    "practice": {
+      "description": "Write a program with `#include <stdio.h>`, `int main()`, output three lines via `printf`:\n```\nC\nLesson 1\nDone\n```\nFinish with `return 0;`.",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO: three printf\n    return 0;\n}\n",
+      "expected": "C\nLesson 1\nDone",
+      "must_contain": ["#include <stdio.h>", "int main", "printf", "return 0"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Chapter Test: Variables and Types",
+    "description": "Final task of chapter 2. Checks: types, printf, casting.",
+    "practice": {
+      "description": "Given:\n```\nint a = 7;\nint b = 2;\ndouble c = 3.5;\n```\n\nOutput via `printf`:\n```\na + b = 9\na / b = 3\na % b = 1\n(double) a / b = 3.500000\nc * 2 = 7.000000\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int a = 7;\n    int b = 2;\n    double c = 3.5;\n    // TODO\n    return 0;\n}\n",
+      "expected": "a + b = 9\na / b = 3\na % b = 1\n(double) a / b = 3.500000\nc * 2 = 7.000000",
+      "must_contain": ["int a", "double c", "(double)", "%d", "%f", "printf"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Chapter Test: Input",
+    "description": "Final task of chapter 3. Checks: scanf, arithmetic with input.",
+    "practice": {
+      "description": "Read two integers via `scanf`, output:\n```\nSum: 15\nProduct: 50\n```\n\n**stdin:**\n```\n5\n10\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int a, b;\n    // TODO: scanf + printf\n    return 0;\n}\n",
+      "expected": "Sum: 15\nProduct: 50",
+      "must_contain": ["scanf", "%d", "printf", "a + b", "a * b"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Chapter Test: Conditionals",
+    "description": "Final task of chapter 4. Checks: if/else, switch.",
+    "practice": {
+      "description": "Given `int score = 78;`. Via `if / else if / else`:\n- `>= 90` → `Excellent`\n- `>= 75` → `Good`\n- `>= 60` → `Satisfactory`\n- otherwise → `Fail`\n\nFor 78:\n```\nGood\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int score = 78;\n    // TODO\n    return 0;\n}\n",
+      "expected": "Good",
+      "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "score >= 60", "printf"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Chapter Test: Loops",
+    "description": "Final task of chapter 5. Checks: for, continue, accumulator.",
+    "practice": {
+      "description": "Via `for` from 1 to 10 compute the sum of odds (skip evens via `continue`). Output:\n```\nSum of odds: 25\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int total = 0;\n    // TODO\n    return 0;\n}\n",
+      "expected": "Sum of odds: 25",
+      "must_contain": ["for", "continue", "% 2", "total", "printf"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Chapter Test: Functions",
+    "description": "Final task of chapter 6. Checks: functions, parameters, return, recursion.",
+    "practice": {
+      "description": "Create two functions:\n- `int square(int x)` — returns `x * x`\n- `int fact(int n)` — recursive factorial\n\nIn `main` output `square(5)` and `fact(5)`:\n```\nSquare: 25\nFactorial: 120\n```",
+      "starter": "#include <stdio.h>\n\n// TODO: square, fact\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Square: 25\nFactorial: 120",
+      "must_contain": ["int square", "int fact", "return", "printf"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Chapter Test: Arrays and Strings",
+    "description": "Final task of chapter 7. Checks: arrays, traversal, string.h.",
+    "practice": {
+      "description": "Given array `int arr[] = {3, 7, 2, 9, 5};` (5 elements).\n\nOutput:\n```\nSum: 26\nMax: 9\nString length 'hello': 5\n```",
+      "starter": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    int arr[] = {3, 7, 2, 9, 5};\n    // TODO\n    return 0;\n}\n",
+      "expected": "Sum: 26\nMax: 9\nString length 'hello': 5",
+      "must_contain": ["for", "arr", "strlen", "printf", "sizeof"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Chapter Test: Pointers",
+    "description": "Final task of chapter 8. Checks: pointers, dereference, malloc/free.",
+    "practice": {
+      "description": "1. Create `int x = 10;`, pointer `int *p = &x;`. Output `*p` (dereference).\n2. Change `x` to 20 through `p`, output `x`.\n3. `malloc` for array of 3 int, fill 10, 20, 30, output them. Free memory.\n\n```\n*p = 10\nx = 20\n10 20 30\n```",
+      "starter": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "*p = 10\nx = 20\n10 20 30",
+      "must_contain": ["int *p", "&x", "*p", "malloc", "free", "printf"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Chapter Test: Structures",
+    "description": "Final task of chapter 9. Checks: struct, typedef, field access.",
+    "practice": {
+      "description": "Create `typedef struct { char name[20]; int age; } Person;`.\n\n1. Create `Person p`, set `name = \"Ivan\"`, `age = 25`.\n2. Output via `.` — `Ivan 25`.\n3. Pointer `Person *ptr = &p`, via `->` output `Ivan 25`.\n\n```\nIvan 25\nIvan 25\n```",
+      "starter": "#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    // TODO\n} Person;\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Ivan 25\nIvan 25",
+      "must_contain": ["typedef struct", "Person", "strcpy", "->", "printf", "."]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Chapter Test: Files",
+    "description": "Final task of chapter 10. Checks: fopen, fprintf, fscanf, fclose.",
+    "practice": {
+      "description": "1. Open `test.txt` for write `\"w\"`, write `Hello`.\n2. Close.\n3. Open for read `\"r\"`, read via `fgets` into buffer, output `Read: Hello`.\n\n```\nRead: Hello\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Read: Hello",
+      "must_contain": ["fopen", "fprintf", "fgets", "fclose", "printf"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Chapter Test: Final",
+    "description": "Final task of the course. Checks: structs, arrays, functions, loops.",
+    "practice": {
+      "description": "Struct `Book` — `char title[50]`, `int pages`.\n\nArray of three books:\n- `(\"Java\", 500)`, `(\"C\", 300)`, `(\"Python\", 400)`\n\nFunction `int totalPages(Book books[], int n)` — returns the sum of pages.\n\nOutput:\n```\nTotal pages: 1200\n```",
+      "starter": "#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    // TODO\n} Book;\n\n// TODO: totalPages\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Total pages: 1200",
+      "must_contain": ["typedef struct", "Book", "totalPages", "for", "printf"]
+    }
+  }
+}

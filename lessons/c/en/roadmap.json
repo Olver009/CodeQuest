@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction",
+    "lessons": [
+      { "id": 1, "title": "What C Is and Why", "status": "current" },
+      { "id": 2, "title": "Compilation: gcc", "status": "locked" },
+      { "id": 3, "title": "First Program", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Variables and Types",
+    "lessons": [
+      { "id": 4, "title": "int, char, float, double", "status": "locked" },
+      { "id": 5, "title": "printf: Formatting", "status": "locked" },
+      { "id": 6, "title": "Type Casting", "status": "locked" },
+      { "id": 7, "title": "const and Sizes", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Keyboard Input",
+    "lessons": [
+      { "id": 8, "title": "scanf: Reading", "status": "locked" },
+      { "id": 9, "title": "scanf Return, Errors", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Conditionals",
+    "lessons": [
+      { "id": 10, "title": "if / else, Ternary", "status": "locked" },
+      { "id": 11, "title": "switch", "status": "locked" },
+      { "id": 12, "title": "Logical Operators", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Loops",
+    "lessons": [
+      { "id": 13, "title": "for", "status": "locked" },
+      { "id": 14, "title": "while, do-while", "status": "locked" },
+      { "id": 15, "title": "break, continue", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Functions",
+    "lessons": [
+      { "id": 16, "title": "Declaration, Parameters, return", "status": "locked" },
+      { "id": 17, "title": "void, Prototypes", "status": "locked" },
+      { "id": 18, "title": "Recursion", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Arrays and Strings",
+    "lessons": [
+      { "id": 19, "title": "Arrays: Creation, Indices", "status": "locked" },
+      { "id": 20, "title": "Traversing Arrays", "status": "locked" },
+      { "id": 21, "title": "Strings: char[], Null Terminator", "status": "locked" },
+      { "id": 22, "title": "string.h: strlen, strcpy, strcmp", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Pointers and Memory",
+    "lessons": [
+      { "id": 23, "title": "Pointers: Addresses, &", "status": "locked" },
+      { "id": 24, "title": "Dereference *", "status": "locked" },
+      { "id": 25, "title": "malloc / free", "status": "locked" },
+      { "id": 26, "title": "Pointers and Arrays", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Structures",
+    "lessons": [
+      { "id": 27, "title": "struct, typedef", "status": "locked" },
+      { "id": 28, "title": "Pointers to Structs, ->", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Files",
+    "lessons": [
+      { "id": 29, "title": "fopen / fclose, Read, Write", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Practice",
+    "lessons": [
+      { "id": 30, "title": "Mini-project: TODO List", "status": "locked" },
+      { "id": 31, "title": "Final", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  }
+]

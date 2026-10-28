@@ -40,11 +40,6 @@ html, body {
     font-family: "Segoe UI", system-ui, sans-serif; overflow: hidden;
 }
 
-/* ================= ПЕРЕТАСКИВАНИЕ ОКНА ================= */
-.titlebar { -webkit-app-region: drag; }
-.titlebar-btn, button, a, input, select, textarea, .CodeMirror, .xterm, .node, .sidebar-item, .widget {
-    -webkit-app-region: no-drag;
-}
 
 /* ================= ЗАГОЛОВОК ОКНА ================= */
 .titlebar {
@@ -111,15 +106,19 @@ html, body {
 }
 
 .main-header {
-    width: 100%; max-width: 600px; display: flex; align-items: flex-start; justify-content: space-between;
-    padding: 16px 20px; margin-top: 20px; background: var(--bg-card); border: var(--border-primary); border-radius: 8px; z-index: 5;
+    position: sticky; top: 0; width: 100%; max-width: 600px;
+    display: flex; align-items: flex-start; justify-content: space-between;
+    padding: 16px 20px; margin-top: 20px; background: var(--bg-card); border: var(--border-primary); border-radius: 8px; z-index: 50;
 }
-.main-header-text { display: flex; flex-direction: column; gap: 4px; }
+.main-header-text { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 .breadcrumbs { display: flex; align-items: center; gap: 6px; font-size: 13px; }
 .breadcrumbs-link { color: var(--brand-bright); text-decoration: none; font-weight: 600; }
 .breadcrumbs-sep { color: var(--text-secondary); }
 .breadcrumbs-current { color: var(--text-secondary); }
 .main-title { margin: 0; font-size: 20px; font-weight: 700; }
+/* Подпись под заголовком: текущий урок, на который навёл курсор. */
+.main-subtitle { font-size: 13px; color: var(--text-secondary); min-height: 18px; }
+.main-subtitle strong { color: var(--text-primary); font-weight: 600; }
 .main-body { width: 100%; max-width: 600px; padding: 24px 20px 80px; position: relative; }
 
 /* ================= 3. ПРАВАЯ ПАНЕЛЬ ================= */
@@ -136,8 +135,7 @@ html, body {
 
 /* ================= КАРТА ================= */
 .chapter { width: 100%; display: flex; flex-direction: column; align-items: center; direction: ltr; margin-bottom: 20px; }
-.chapter-title { margin: 20px 0 30px; display: flex; align-items: center; justify-content: center; width: 100%; z-index: 5; }
-.chapter-title-line { height: 1px; flex: 1; background-color: var(--text-secondary); opacity: .3; }
+.chapter-title { margin: 20px 0 30px; display: flex; align-items: center; justify-content: center; width: 100%; z-index: 2; }.chapter-title-line { height: 1px; flex: 1; background-color: var(--text-secondary); opacity: .3; }
 .chapter-title p { margin: 0 16px; white-space: nowrap; font-size: 18px; font-weight: bold; color: var(--text-secondary); background: var(--bg-primary); padding: 0 10px; }
 .chapter-body { width: 100%; display: flex; flex-direction: column; align-items: center; padding-top: 10px; }
 .node-container { margin: 15px 0; position: relative; z-index: 2; }
@@ -202,6 +200,17 @@ html, body {
 .quiz-option.correct { background: #14532d; border-color: #22c55e; }
 .quiz-option.wrong { background: #7f1d1d; border-color: #ef4444; }
 .quiz-feedback { margin-top: 20px; padding: 16px; background: var(--bg-code-secondary); border-radius: 8px; border-left: 4px solid var(--brand-bright); color: var(--text-primary); }
+
+/* Полоска прогресса по вопросам урока/контрольной */
+.quiz-progress { margin-bottom: 26px; }
+.quiz-progress-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; font-size: 13px; color: var(--text-secondary); }
+.quiz-progress-track { height: 6px; border-radius: 999px; background: var(--bg-progress); overflow: hidden; }
+.quiz-progress-fill { height: 100%; width: 0; border-radius: 999px; background: var(--brand-bright); transition: width 0.3s ease; }
+
+.quiz-complete { text-align: center; padding: 40px 0; }
+.quiz-complete-icon { font-size: 46px; margin-bottom: 12px; }
+.quiz-complete h3 { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.quiz-complete p { color: var(--text-secondary); }
 .editor-container { display: flex; flex-direction: column; height: 100%; width: 100%; }
 .editor-toolbar { height: 48px; background: var(--bg-code-primary); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; flex-shrink: 0; }
 .lang-select { height: 26px; padding: 0 10px; background: var(--bg-code-secondary); border: 1px solid var(--border-color); border-radius: 4px; display: inline-flex; align-items: center; font-size: 14px; color: var(--text-primary); }
@@ -371,3 +380,222 @@ li.CodeMirror-hint-active { background: #094771; color: #fff; }
     from { opacity: 1; transform: translateY(0); }
     to { opacity: 0; transform: translateY(-20px); }
 }
+
+/* ================= ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ ================= */
+.lang-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.lang-trigger {
+    background: var(--bg-code-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.lang-trigger:hover {
+    background: var(--hover-background);
+    border-color: var(--text-secondary);
+}
+
+.lang-trigger img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Выпадающее меню (сетка 4x2, прижато вправо) */
+.lang-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0; /* Прижимаем к правому краю кнопки */
+    background: var(--bg-card);
+    border: var(--border-primary);
+    border-radius: 8px;
+    padding: 8px;
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.8);
+    z-index: 100;
+    width: max-content;
+}
+
+.lang-menu.open {
+    display: grid;
+}
+
+/* Кнопка с иконкой языка */
+.lang-item {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.lang-item:hover {
+    background: var(--hover-background);
+}
+
+.lang-item img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+}
+
+/* Пузырь с названием языка (появляется СПРАВА от иконки) */
+.lang-bubble {
+    position: absolute;
+    left: calc(100% + 8px); /* Справа от иконки */
+    top: 50%;
+    transform: translateY(-50%) translateX(-10px) scale(0.9);
+    background: var(--bg-card);
+    border: 1px solid var(--brand-bright);
+    border-radius: 8px;
+    padding: 8px 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+    pointer-events: none;
+    z-index: 999;
+    white-space: nowrap;
+}
+
+/* Указатель на пузыре (треугольник слева) */
+.lang-bubble::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px 6px 6px 0;
+    border-style: solid;
+    border-color: transparent var(--brand-bright) transparent transparent;
+}
+
+.lang-bubble h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-white);
+}
+
+/* Появление пузыря при наведении */
+.lang-item:hover .lang-bubble {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0) scale(1);
+}
+
+.status-icon {
+    width: 14px;
+    height: 14px;
+    vertical-align: text-bottom;
+    margin-right: 4px;
+}
+
+/* ================= СВЕТЛАЯ ТЕМА ================= */
+body.light-theme {
+    --bg-primary: #f3f4f6;
+    --bg-secondary: #e5e7eb;
+    --bg-card: #ffffff;
+    --bg-progress: #d1d5db;
+    --bg-code-primary: #ffffff;
+    --bg-code-secondary: #f9fafb;
+    --bg-titlebar: #e5e7eb;
+
+    --border-color: #d1d5db;
+
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-white: #111827; /* В светлой теме "белый" текст это черный */
+
+    --hover-background: rgba(0,0,0,.05);
+    --selection-background: rgba(41,171,226,.15);
+}
+
+/* Исправление кода в теории для светлой темы */
+body.light-theme .theory-content pre {
+    background: #f8f9fa !important;
+    border: 1px solid #d1d5db !important;
+}
+body.light-theme .theory-content code {
+    background: #e5e7eb !important;
+    color: #1f2937 !important;
+}
+body.light-theme .theory-content pre code {
+    background: transparent !important;
+    color: #1f2937 !important;
+}
+
+/* ================= КРАСИВЫЙ ПРЕДПРОСМОТР (БРАУЗЕР) ================= */
+.browser-preview {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin: 12px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 24px);
+}
+.browser-header {
+    background: #e5e7eb;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #d1d5db;
+}
+.browser-dots { display: flex; gap: 6px; }
+.browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+.browser-dot.red { background: #ef4444; }
+.browser-dot.yellow { background: #f59e0b; }
+.browser-dot.green { background: #10b981; }
+.browser-address {
+    flex: 1;
+    background: #f3f4f6;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    color: #6b7280;
+    font-family: monospace;
+    text-align: center;
+}
+.browser-content {
+    flex: 1;
+    background: #fff;
+    position: relative;
+}
+.browser-content iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%; border: none;
+}
+
+/* ================= ЯРКАЯ ПОДСВЕТКА СИНТАКСИСА (CodeMirror) ================= */
+/* Строки ("текст") - зеленый */
+.cm-s-material-darker .cm-string, .cm-s-dracula .cm-string, .cm-s-monokai .cm-string { color: #98c379 !important; }
+/* Ключевые слова (public, class, if) - фиолетовый/красный */
+.cm-s-material-darker .cm-keyword, .cm-s-dracula .cm-keyword, .cm-s-monokai .cm-keyword { color: #c678dd !important; font-weight: bold; }
+/* Теги (div, p) - красный */
+.cm-s-material-darker .cm-tag, .cm-s-dracula .cm-tag, .cm-s-monokai .cm-tag { color: #e06c75 !important; }
+/* Атрибуты (src, href) - оранжевый */
+.cm-s-material-darker .cm-attribute, .cm-s-dracula .cm-attribute, .cm-s-monokai .cm-attribute { color: #d19a66 !important; }
+/* Числа - желтый */
+.cm-s-material-darker .cm-number, .cm-s-dracula .cm-number, .cm-s-monokai .cm-number { color: #d19a66 !important; }
+/* Комментарии - серый */
+.cm-s-material-darker .cm-comment, .cm-s-dracula .cm-comment, .cm-s-monokai .cm-comment { color: #5c6370 !important; font-style: italic; }

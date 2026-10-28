@@ -1,0 +1,16 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Сундук -->
+    <rect x="3" y="12" width="18" height="8" rx="2" fill="#5D4037"/>
+    <rect x="3" y="10" width="18" height="4" rx="2" fill="#8D6E63"/>
+    <!-- Полосы на сундуке -->
+    <path d="M 7 10 V 20 M 17 10 V 20" stroke="#3E2723" stroke-width="1.5"/>
+    <!-- Замок -->
+    <rect x="10" y="13" width="4" height="4" rx="1" fill="#FFC107"/>
+    <circle cx="12" cy="15" r="1" fill="#3E2723"/>
+    <!-- Змея 1 (Синяя) -->
+    <path d="M 8 12 C 8 8 5 8 5 5 C 5 3 7 3 7 5 C 7 7 9 7 9 10" stroke="#3776AB" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="5" cy="5" r="1.5" fill="#FFD43B"/>
+    <!-- Змея 2 (Желтая) -->
+    <path d="M 16 12 C 16 9 19 9 19 6 C 19 4 17 4 17 6" stroke="#FFD43B" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="17" cy="6" r="1.2" fill="#3776AB"/>
+</svg>

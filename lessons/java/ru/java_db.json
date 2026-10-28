@@ -1,0 +1,663 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "Первая программа",
+      "theory": "## Зачем Java\n\nJava — компилируемый язык. Применяется в Android, серверной разработке (банки, e-commerce), крупных корпоративных системах. Принцип WORA (Write Once, Run Anywhere): один раз написал — работает везде, где есть JVM.\n\n## Как работает Java\n\nВ отличие от Python, Java не исполняет код напрямую. Сначала **компилятор** `javac` превращает `.java` в **байт-код** `.class`, затем **JVM** исполняет этот байт-код.\n\n```\nMain.java → javac → Main.class → java (JVM) → выполнение\n```\n\nЗачем так: один и тот же `.class` работает на Windows, Linux, macOS. JVM под каждую ОС своя, байт-код один.\n\n## Структура программы\n\n```java\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Привет\");\n    }\n}\n```\n\n- `public class Main` — класс, имя совпадает с файлом (`Main.java`).\n- `public static void main(String[] args)` — точка входа.\n- `System.out.println(...)` — вывод строки + перевод строки.\n- `{ }` — тело класса/метода.\n- `;` — конец инструкции.\n\n## Зачем класс и main\n\nJVM ищет `public static void main(String[] args)` в классе с именем файла. Без main программа не запустится — не с чего начинать. Без класса некуда положить main: в Java **всё** находится в классах.\n\n## println vs print\n\n```java\nSystem.out.println(\"A\");\nSystem.out.println(\"B\");   // A, затем B с новой строки\nSystem.out.print(\"A\");\nSystem.out.print(\"B\");     // AB на одной строке\n```\n\n`println` — с переводом строки. `print` — без.\n\n## Точка с запятой\n\nЗабыл — ошибка **компиляции**, программа даже не запустится. В Python `;` не нужна, в Java обязательна.\n\n```java\nSystem.out.println(\"ok\");     // правильно\nSystem.out.println(\"ok\")      // ошибка компиляции — нет ;\n```\n\n## Комментарии\n\n```java\n// однострочный\n/*\n   многострочный\n*/\n```\n\n## Что будет, если\n\n- Забыть `;` — ошибка компиляции.\n- Назвать файл `App.java` для `public class Main` — ошибка компиляции.\n- Убрать `main` — JVM не найдёт точку входа.\n- Забыть `{ }` — ошибка компиляции.\n\n## Частая ошибка\n\nПишут `print(\"hi\")` вместо `System.out.println(\"hi\")` — по привычке из Python. В Java `print` — не отдельная функция, а метод `System.out`.\n\n## Итог\n\n- `.java` → `javac` → `.class` → `java` (JVM)\n- `public class Main` — имя класса = имя файла\n- `main` — точка входа\n- `System.out.println` — вывод + перевод\n- `System.out.print` — без перевода\n- `;` в конце инструкции",
+      "questions": [
+        { "text": "Что делает JVM?", "options": ["Компилирует .java в .class", "Исполняет байт-код", "Проверяет точки с запятой", "Открывает файл"], "answer": 1, "explanation": "Компилятор — `javac`. JVM исполняет `.class`." },
+        { "text": "Что выведет?\n```java\nSystem.out.println(\"A\");\nSystem.out.println(\"B\");\n```", "options": ["AB", "A\\nB", "A B", "AB\\n"], "answer": 1, "explanation": "`println` после вывода переводит строку." },
+        { "text": "Что при забытой `;` в `System.out.println(\"X\")`?", "options": ["Запустится", "Ошибка компиляции", "Ошибка во время работы", "Ничего"], "answer": 1, "explanation": "Пропущенная `;` — ошибка компиляции." },
+        { "text": "Зачем `public static void main(String[] args)`?", "options": ["Обязательный метод", "Точка входа", "Печатает текст", "Константа"], "answer": 1, "explanation": "JVM ищет именно этот метод." },
+        { "text": "Что выведет?\n```java\nSystem.out.print(\"A\");\nSystem.out.print(\"B\");\n```", "options": ["AB", "A\\nB", "A B", "B A"], "answer": 0, "explanation": "`print` без перевода — обе на одной строке." },
+        { "text": "Класс `Main`, файл `App.java` — что будет?", "options": ["Работает", "Ошибка компиляции", "Работает медленнее", "Работает на Linux"], "answer": 1, "explanation": "Для `public class` имя файла совпадает с классом." }
+      ],
+      "practice": {
+        "description": "Создай класс `Main` с точкой входа. Выведи три строки через `System.out.println`:\n```\nJava\nУрок 1\nГотово\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: три System.out.println\n    }\n}\n",
+        "expected": "Java\nУрок 1\nГотово",
+        "must_contain": ["public class Main", "public static void main", "System.out.println", "Java", "Урок 1", "Готово"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Переменные и типы",
+      "theory": "## Тип обязателен\n\nВ Java у переменной всегда есть **тип**, указывается при объявлении:\n\n```java\nint age = 25;\ndouble price = 99.99;\nString name = \"Аня\";\nboolean ok = true;\nchar grade = 'A';\n```\n\nВ Python было `x = 5`. В Java: тип + имя + значение + `;`.\n\n## Основные типы\n\n- `int` — целые\n- `long` — очень большие целые (`5_000_000_000L`)\n- `double` — дробные\n- `boolean` — `true`/`false` (не `True`)\n- `char` — один символ в **одинарных** кавычках: `'A'`\n- `String` — строка в **двойных**: `\"Аня\"`\n\n## String — это класс\n\n`String` с заглавной, потому что это класс. `int` — примитив, с маленькой.\n\n## Правила имён\n\ncamelCase: `userName`, `totalPrice`. С буквы, `$`, `_`. Регистр важен. Не с цифры.\n\n## final — константа\n\n```java\nfinal int MAX = 100;\n// MAX = 200; // ошибка\n```\n\n## Не меняет тип\n\n```java\nint x = 5;\n// x = \"hello\"; // ошибка компиляции\n```\n\nВ Java переменная не меняет тип. `int` не принимает `String`.\n\n## Что будет, если\n\n- Объявить `x` дважды в одном блоке — ошибка компиляции.\n- Присвоить `int x = \"text\"` — ошибка компиляции.\n- Использовать `True` вместо `true` — ошибка, в Java только `true/false`.\n- `char c = \"A\"` — ошибка, `char` в одинарных кавычках.\n\n## Частая ошибка\n\n`String name = 'Аня'` — с одинарными кавычками. В Java одинарные — только для `char`. `String` — всегда двойные.\n\n## Итог\n\n- У переменной есть тип, он указывается при объявлении\n- `int`, `double`, `boolean`, `char`, `String`\n- `String` — класс, `char` — примитив\n- `final` — константа\n- camelCase для имён\n- Тип не меняется",
+      "questions": [
+        { "text": "Какой тип для цены `99.99`?", "options": ["int", "double", "String", "boolean"], "answer": 1, "explanation": "Дробное — `double`." },
+        { "text": "Как объявить строку?", "options": ["String name = \"Аня\";", "string name = 'Аня';", "String name = 'Аня';", "str name = \"Аня\";"], "answer": 0, "explanation": "`String` с большой, кавычки двойные." },
+        { "text": "Что при `int x = 5; x = \"hello\";`?", "options": ["x = \"hello\"", "Ошибка компиляции", "x = 0", "Ошибка при запуске"], "answer": 1, "explanation": "`int` не принимает `String`." },
+        { "text": "Что такое `final`?", "options": ["Константа", "Обязательная", "Пустая", "Для вывода"], "answer": 0, "explanation": "`final` запрещает переприсваивание." },
+        { "text": "Что при `char c = 'A';`?", "options": ["Работает", "Ошибка", "char = \"A\"", "char = 65"], "answer": 0, "explanation": "`char` — один символ в одинарных кавычках." },
+        { "text": "Какое имя правильное?", "options": ["1name", "user_name", "user-name", "user name"], "answer": 1, "explanation": "`user_name` — валидно (не с цифры, без пробелов и дефисов)." }
+      ],
+      "practice": {
+        "description": "Создай четыре переменные: `name` = `\"Иван\"`, `age` = `30`, `salary` = `75000.50`, `active` = `true`. Выведи четыре строки:\n```\nИван\n30\n75000.5\ntrue\n```\n\n(`75000.50` через `println` даст `75000.5` — лишний ноль `double` отбрасывает.)",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: 4 переменные и 4 println\n    }\n}\n",
+        "expected": "Иван\n30\n75000.5\ntrue",
+        "must_contain": ["String name", "int age", "double salary", "boolean active", "System.out.println"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "Арифметика и приведение типов",
+      "theory": "## Операторы\n\n`+ - * / %`. Приоритет как в математике: `* /` раньше `+ -`. Скобки меняют.\n\n```java\nint a = 7, b = 2;\nSystem.out.println(a + b);  // 9\nSystem.out.println(a - b);  // 5\nSystem.out.println(a * b);  // 14\nSystem.out.println(a / b);  // 3\nSystem.out.println(a % b);  // 1\n```\n\n## int / int = int\n\n`7 / 2 = 3`, не `3.5`. Дробная часть **отбрасывается**. Хочешь дробный результат — один операнд должен быть `double`:\n\n```java\nSystem.out.println(7 / 2);          // 3\nSystem.out.println(7.0 / 2);        // 3.5\nSystem.out.println((double) 7 / 2); // 3.5\n```\n\n## Приведение\n\n```java\nint x = (int) 3.99;      // 3, не 4 (отбрасывание)\nint y = (int) -3.99;     // -3\nint z = (int) 10.0 / 4;  // 10 / 4 = 2\n```\n\n## Инкремент\n\n```java\nint i = 5;\ni++;      // 6\ni--;      // 5\n```\n\n## Деление на ноль\n\n- `int` — `ArithmeticException` (падение)\n- `double` — `Infinity`\n\n```java\nSystem.out.println(10 / 0);   // ArithmeticException\nSystem.out.println(10.0 / 0); // Infinity\n```\n\n## Что будет, если\n\n- `int` / `int` без приведения — теряешь дробную часть.\n- `(int) 3.99` — отбрасывает, не округляет.\n- `10 / 0` — исключение, программа падает.\n\n## Частая ошибка\n\nОжидать, что `7 / 2 = 3.5`. В Java `int/int = int`. Хочешь дробь — приводи один операнд к `double`.\n\n## Итог\n\n- `int / int = int` — дробная часть отбрасывается\n- `(double) x` — приведение\n- `(int) 3.99` = 3\n- `%` — остаток\n- `/0` для `int` — исключение, для `double` — `Infinity`",
+      "questions": [
+        { "text": "Что выведет `System.out.println(7 / 2);`?", "options": ["3.5", "3", "4", "Ошибка"], "answer": 1, "explanation": "`int / int = int`." },
+        { "text": "Что выведет `System.out.println(7.0 / 2);`?", "options": ["3", "3.5", "4", "Ошибка"], "answer": 1, "explanation": "Один операнд `double` → результат `double`." },
+        { "text": "`(int) 3.9` = ?", "options": ["4", "3", "3.9", "Ошибка"], "answer": 1, "explanation": "Приведение **отбрасывает**, не округляет." },
+        { "text": "Что выведет `System.out.println(10 / 0);`?", "options": ["0", "Infinity", "ArithmeticException", "10"], "answer": 2, "explanation": "Для `int` — исключение." },
+        { "text": "Что выведет `System.out.println(17 % 5);`?", "options": ["3", "2", "3.4", "12"], "answer": 1, "explanation": "`17 = 5*3 + 2`." },
+        { "text": "Как получить `3.5` из `7 / 2`?", "options": ["7 / 2", "7 % 2", "7.0 / 2", "int(7 / 2)"], "answer": 2, "explanation": "Один операнд `double` — и результат `double`." }
+      ],
+      "practice": {
+        "description": "Даны `int a = 17;` и `int b = 5;`. Выведи пять строк:\n```\nСумма: 22\nРазность: 12\nПроизведение: 85\nДеление: 3.4\nОстаток: 2\n```\n\nДеление — **дробное** (`3.4`), не `3`.",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int a = 17;\n        int b = 5;\n        // TODO\n    }\n}\n",
+        "expected": "Сумма: 22\nРазность: 12\nПроизведение: 85\nДеление: 3.4\nОстаток: 2",
+        "must_contain": ["a + b", "a - b", "a * b", "(double) a / b", "a % b", "System.out.println"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "Практика: калькулятор",
+      "theory": "## Закрепление\n\nНовых конструкций нет. Только переменные, арифметика, `System.out.println`.\n\n## Как подходить\n\n1. Прочитать **точно**, что вывести.\n2. Завести переменные для всех входных значений.\n3. Считать промежуточные **в переменных**, не в `println`.\n4. Вывести каждую строку отдельно.\n\n## Почему в переменных\n\n```java\n// Плохо: формула внутри println\nSystem.out.println(\"Итого: \" + (100 * 3 + 50));\n\n// Хорошо\nint total = 100 * 3 + 50;\nSystem.out.println(\"Итого: \" + total);\n```\n\n## Конкатенация строк\n\n`+` между `String` и числом склеивает: `\"Возраст: \" + 30` → `\"Возраст: 30\"`.\n\n```java\nSystem.out.println(\"Итог: \" + (2 + 3)); // Итог: 5\nSystem.out.println(\"Итог: \" + 2 + 3);   // Итог: 23 — ошибка\n```\n\nСкобки вокруг арифметики обязательны, если есть строка слева.\n\n## Что будет, если\n\n- Забыть `(double)` при делении — получишь `3` вместо `3.5`.\n- Забыть скобки в конкатенации — получишь склейку.\n\n## Частая ошибка\n\n`\"Итог: \" + 2 + 3` — думал получить 5, получил строку \"Итог: 23\".\n\n## Итог\n\n- Всё считать в переменных\n- `+` со строкой — конкатенация\n- Арифметику со строкой — в скобках\n- По одной строке на вывод",
+      "questions": [
+        { "text": "Что выведет `System.out.println(\"Сумма: \" + 2 + 3);`?", "options": ["Сумма: 5", "Сумма: 23", "Ошибка", "5"], "answer": 1, "explanation": "Слева направо: `\"Сумма: \" + 2` = `\"Сумма: 2\"`, потом `+ 3` приклеивает." },
+        { "text": "Что выведет `System.out.println(\"x = \" + (5 + 5));`?", "options": ["x = 10", "x = 55", "Ошибка", "10"], "answer": 0, "explanation": "Скобки — сначала сумма." },
+        { "text": "Что выведет `int a = 10; int b = 4; System.out.println(a / b);`?", "options": ["2.5", "2", "3", "Ошибка"], "answer": 1, "explanation": "`int / int = int`." },
+        { "text": "Почему в переменных, а не в println?", "options": ["Красивее", "Переменную можно использовать повторно", "Быстрее", "Не важно"], "answer": 1, "explanation": "Формулу в println нельзя переиспользовать." }
+      ],
+      "practice": {
+        "description": "Купили `3` ручки по `45` рублей и `2` блокнота по `120` рублей. Скидка — `10%` от суммы.\n\nВыведи четыре строки:\n```\nТовары: 375\nСкидка: 37.5\nИтого: 337.5\nСредняя цена: 75.0\n```\n\n- Товары — общая стоимость без скидки (целое)\n- Скидка и Итого — дробные\n- Средняя цена — стоимость товаров / количество позиций (5)",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int pensQty = 3, pensPrice = 45;\n        int notebooksQty = 2, notebooksPrice = 120;\n        // TODO\n    }\n}\n",
+        "expected": "Товары: 375\nСкидка: 37.5\nИтого: 337.5\nСредняя цена: 75.0",
+        "must_contain": ["int total", "double discount", "double finalTotal", "double avg", "(double)", "System.out.println"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "Scanner: ввод с клавиатуры",
+      "theory": "## Зачем Scanner\n\n`System.out` — вывод. Ввод — через `Scanner`.\n\n```java\nimport java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int x = sc.nextInt();\n        System.out.println(x * 2);\n    }\n}\n```\n\n`import` — в самом верху файла, до `class`.\n\n## Методы\n\n- `sc.nextInt()` — целое\n- `sc.nextDouble()` — дробное\n- `sc.next()` — одно слово\n- `sc.nextLine()` — целая строка до `Enter`\n\n## Ловушка nextInt + nextLine\n\n```java\nint age = sc.nextInt();\nsc.nextLine(); // ← съесть остаток строки\nString name = sc.nextLine();\n```\n\n`nextInt()` читает число, но не «съедает» `Enter`. `nextLine()` прочитает **пустую строку**. Привыкай: после `nextInt()` перед `nextLine()` — всегда `sc.nextLine();`.\n\n## Ввод разных типов\n\n```java\nScanner sc = new Scanner(System.in);\nString name = sc.nextLine();\nint age = sc.nextInt();\n```\n\nПорядок важен.\n\n## input() из Python\n\nВ Python `input()` всегда возвращает строку. В Java `Scanner` **сразу приводит** к нужному типу: `nextInt()` → `int`.\n\n## Что будет, если\n\n- `nextInt()` на `abc` — `InputMismatchException` (падение).\n- `nextInt()` + `nextLine()` без промежуточного `nextLine()` — пустая строка.\n- Забыть `import` — ошибка компиляции.\n\n## Частая ошибка\n\nПосле `nextInt()` сразу `nextLine()` — получаешь пустую строку. Между ними нужен ещё один `nextLine()`.\n\n## Итог\n\n- `import java.util.Scanner;`\n- `new Scanner(System.in)`\n- `nextInt()/nextDouble()/nextLine()`\n- После `nextInt` перед `nextLine` — съесть Enter\n- `nextInt` на не-числе → `InputMismatchException`",
+      "questions": [
+        { "text": "Какой импорт для Scanner?", "options": ["import java.util.Scanner;", "import java.Scanner;", "import.Scanner;", "Никакого"], "answer": 0, "explanation": "`Scanner` в пакете `java.util`." },
+        { "text": "Что читает `sc.nextInt()`?", "options": ["Строку", "Целое", "Дробное", "Символ"], "answer": 1, "explanation": "`nextInt` — целое." },
+        { "text": "Что пойдёт не так?\n```java\nint n = sc.nextInt();\nString s = sc.nextLine();\n```", "options": ["s пустая", "Ошибка компиляции", "n = 0", "Нормально"], "answer": 0, "explanation": "`nextInt` не съедает Enter." },
+        { "text": "Пользователь вводит `abc`. Что при `sc.nextInt()`?", "options": ["n = 0", "n = -1", "InputMismatchException", "Пропустит"], "answer": 2, "explanation": "`Scanner` бросает исключение." },
+        { "text": "Что делает `sc.nextLine()`?", "options": ["Одно слово", "Всю строку до Enter", "Число", "Всё содержимое"], "answer": 1, "explanation": "`nextLine` — вся строка до Enter." },
+        { "text": "Что делает `sc.next()`?", "options": ["Одно слово", "Всю строку", "Число", "Ничего"], "answer": 0, "explanation": "`next` — только слово." }
+      ],
+      "practice": {
+        "description": "Прочитай два целых числа (каждое на новой строке) и выведи:\n```\nСумма: 13\nРазность: 7\nПроизведение: 30\n```\n\nПример stdin:\n```\n10\n3\n```",
+        "starter": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // TODO: два nextInt, три println\n    }\n}\n",
+        "expected": "Сумма: 13\nРазность: 7\nПроизведение: 30",
+        "must_contain": ["import java.util.Scanner", "new Scanner(System.in)", "nextInt", "System.out.println"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "title": "Строки: методы",
+      "theory": "## Строки неизменяемы\n\n`String` **нельзя изменить**. Любой метод возвращает **новую** строку.\n\n```java\nString s = \"Java\";\ns.toUpperCase();          // вернуло \"JAVA\", s не изменилось\nSystem.out.println(s);    // Java\nString upper = s.toUpperCase();\n```\n\n## Основные методы\n\n```java\nString s = \"Привет, мир\";\nSystem.out.println(s.length());        // 11\nSystem.out.println(s.charAt(0));       // 'П'\nSystem.out.println(s.substring(8));    // \"мир\"\nSystem.out.println(s.substring(0, 6)); // \"Привет\" (0..5)\nSystem.out.println(s.contains(\"мир\")); // true\nSystem.out.println(s.indexOf(\"мир\"));  // 8\n```\n\n## equals vs ==\n\n```java\nString a = \"hello\";\nString b = new String(\"hello\");\nSystem.out.println(a == b);       // false — сравнение ссылок\nSystem.out.println(a.equals(b));  // true — сравнение содержимого\n```\n\n**Всегда** сравнивай строки через `.equals()`.\n\n## Конкатенация\n\n`\"a\" + \"b\"` → `\"ab\"`. `\"x\" + 5` → `\"x5\"`.\n\n## Пустая строка\n\n`\"\".isEmpty()` → `true`. `\"\".length()` → `0`.\n\n## Что будет, если\n\n- `s.charAt(100)` — `StringIndexOutOfBoundsException`.\n- Сравнить через `==` — может вернуть `false`.\n- `s.toUpperCase()` без присваивания — результат потерян.\n\n## Частая ошибка\n\nСравнивать строки `==`. Всегда `.equals()`.\n\n## Итог\n\n- `length()` — длина, `charAt(i)` — символ\n- `substring(a, b)` — от a до b-1\n- `equals()` — сравнение, **не** `==`\n- Строки неизменяемы\n- `isEmpty()` — проверка",
+      "questions": [
+        { "text": "Что выведет?\n```java\nString s = \"Java\";\ns.toUpperCase();\nSystem.out.println(s);\n```", "options": ["JAVA", "Java", "java", "Ошибка"], "answer": 1, "explanation": "`String` неизменяема." },
+        { "text": "Как сравнить две строки?", "options": ["a == b", "a.equals(b)", "a != b", "a.compareTo(b) == 1"], "answer": 1, "explanation": "`==` сравнивает ссылки, `equals` — содержимое." },
+        { "text": "Что вернёт `\"Hello\".substring(1, 3)`?", "options": ["He", "el", "ell", "llo"], "answer": 1, "explanation": "С индекса 1 по 3 не включая: `e`(1) `l`(2)." },
+        { "text": "Что вернёт `\"abc\".length()`?", "options": ["2", "3", "4", "Ошибка"], "answer": 1, "explanation": "Три символа." },
+        { "text": "Что при `\"abc\".charAt(5)`?", "options": ["Возвращает 'c'", "Возвращает null", "StringIndexOutOfBoundsException", "Пропустит"], "answer": 2, "explanation": "Индекс за пределами → исключение." },
+        { "text": "Что вернёт `\"a,b,c\".indexOf(\"b\")`?", "options": ["1", "2", "-1", "true"], "answer": 1, "explanation": "`a`=0, `,`=1, `b`=2." }
+      ],
+      "practice": {
+        "description": "Дана строка `String word = \"Программирование\";`. Выведи четыре строки:\n```\nДлина: 16\nПервый символ: П\nПоследний символ: е\nВерхний регистр: ПРОГРАММИРОВАНИЕ\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        String word = \"Программирование\";\n        // TODO\n    }\n}\n",
+        "expected": "Длина: 16\nПервый символ: П\nПоследний символ: е\nВерхний регистр: ПРОГРАММИРОВАНИЕ",
+        "must_contain": ["word.length()", "word.charAt(0)", "word.charAt(word.length() - 1)", "toUpperCase", "System.out.println"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "title": "Форматирование: printf",
+      "theory": "## Зачем printf\n\n`System.out.println(\"Итог: \" + 3.14159)` → `Итог: 3.14159`. А если нужно 2 знака после точки? Конкатенация не поможет.\n\n## printf\n\n```java\nSystem.out.printf(\"%.2f%n\", 3.14159);    // 3.14\nSystem.out.printf(\"Цена: %.2f%n\", 99.5); // Цена: 99.50\nSystem.out.printf(\"%d штук%n\", 5);       // 5 штук\nSystem.out.printf(\"[%5d]%n\", 42);        // [   42]\nSystem.out.printf(\"[%-5d]%n\", 42);       // [42   ]\n```\n\n- `%d` — целое\n- `%.2f` — `double` с 2 знаками после точки\n- `%s` — строка\n- `%n` — перевод строки (лучше `\\n` по платформе)\n- `%5d` — ширина 5, с пробелами слева\n\n## String.format\n\n```java\nString line = String.format(\"Итог: %.2f\", 123.456);\nSystem.out.println(line);\n```\n\n## Аналог f-строк Python\n\nPython: `f\"Итог: {x:.2f}\"`. Java: `String.format(\"Итог: %.2f\", x)` или `printf`.\n\n## Что будет, если\n\n- `printf(\"%d\", 3.14)` — `IllegalFormatConversionException`.\n- Забыть аргумент: `printf(\"%.2f\")` — `MissingFormatArgumentException`.\n- `printf` не переводит строку автоматически — нужен `\\n` или `%n`.\n\n## Частая ошибка\n\n`printf` без `\\n` — следующая строка прилипает к предыдущей.\n\n## Итог\n\n- `%d` — `int`, `%f` — `double`, `%s` — `String`\n- `%.2f` — 2 знака после точки\n- `%n` — перевод строки (лучше `\\n`)\n- `String.format` — если нужна строка\n- `printf` не переводит строку сам",
+      "questions": [
+        { "text": "Что выведет `System.out.printf(\"%.2f%n\", 3.14159);`?", "options": ["3.14159", "3.14", "3.15", "3"], "answer": 1, "explanation": "`%.2f` — 2 знака, округление." },
+        { "text": "Какой спецификатор для `int`?", "options": ["%f", "%s", "%d", "%i"], "answer": 2, "explanation": "`%d` для целых." },
+        { "text": "Что выведет `System.out.printf(\"[%5d]%n\", 42);`?", "options": ["[42]", "[   42]", "[42   ]", "[00042]"], "answer": 1, "explanation": "`%5d` — ширина 5, вправо." },
+        { "text": "Что при `printf(\"%d\", 3.14);`?", "options": ["3", "3.14", "IllegalFormatConversionException", "Ничего"], "answer": 2, "explanation": "`%d` ожидает `int`." },
+        { "text": "Нужен ли `\\n` в `printf`?", "options": ["Всегда", "Только для чисел", "Только если нужен перевод", "Никогда"], "answer": 2, "explanation": "`printf` не переводит строку сам." }
+      ],
+      "practice": {
+        "description": "Даны:\n```java\ndouble price = 1250.5;\nint qty = 3;\ndouble total = price * qty;\n```\n\nВыведи через `printf`:\n```\nЦена: 1250.50\nКоличество: 3\nИтого: 3751.50\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        double price = 1250.5;\n        int qty = 3;\n        double total = price * qty;\n        // TODO: три printf\n    }\n}\n",
+        "expected": "Цена: 1250.50\nКоличество: 3\nИтого: 3751.50",
+        "must_contain": ["System.out.printf", "%.2f", "%d"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "title": "if / else, тернарный",
+      "theory": "## Синтаксис\n\n```java\nif (x > 0) {\n    System.out.println(\"+\");\n} else if (x < 0) {\n    System.out.println(\"-\");\n} else {\n    System.out.println(\"0\");\n}\n```\n\n- Условие **в скобках** `( )`.\n- Тело — в фигурных `{ }`.\n- После `if (...)` **не бывает** `;`.\n\n## Операторы сравнения\n\n`==` `!=` `<` `>` `<=` `>=`. `=` — присваивание.\n\n## Логические\n\n`&&` — и, `||` — или, `!` — не.\n\n```java\nif (age >= 18 && hasPassport) { }\nif (name.equals(\"Аня\") || name.equals(\"Ваня\")) { }\n```\n\n## Тернарный\n\n```java\nint x = 5;\nString s = x > 0 ? \"плюс\" : \"минус\";\n```\n\n## Строки в if\n\n`if (name == \"Аня\")` — не работает! Только `if (name.equals(\"Аня\"))`.\n\n## Что будет, если\n\n- `if (x = 5)` — ошибка компиляции.\n- `if (x > 0);` — `;` отсекает тело.\n\n## Частая ошибка\n\n`if (name == \"Аня\")` — иногда работает случайно, но **не всегда**. Всегда `.equals()`.\n\n## Итог\n\n- `if (условие) { }` — скобки и фигурные\n- `else if` / `else`\n- `==`, `!=`, `<`, `>`, `<=`, `>=`\n- `&&`, `||`, `!`\n- `a ? b : c` — тернарный\n- Строки — `.equals()`, не `==`",
+      "questions": [
+        { "text": "Какое условие правильное?", "options": ["if x > 0 { }", "if (x > 0) { }", "if x > 0 then { }", "if (x > 0): { }"], "answer": 1, "explanation": "Скобки и фигурные, без `then` и `:`." },
+        { "text": "Что не так?\n```java\nif (x = 5) { }\n```", "options": ["Всё верно", "`=` вместо `==`", "Нужны двойные скобки", "Нужен then"], "answer": 1, "explanation": "`=` возвращает `int`, не `boolean`." },
+        { "text": "Как записать `if a и b`?", "options": ["if (a and b)", "if (a && b)", "if (a & b)", "if a && b"], "answer": 1, "explanation": "В Java — `&&`, `||`, `!`." },
+        { "text": "Что выведет?\n```java\nint x = -3;\nString s = x > 0 ? \"positive\" : \"not positive\";\nSystem.out.println(s);\n```", "options": ["positive", "not positive", "Ошибка", "-3"], "answer": 1, "explanation": "Условие ложно — вторая ветка." },
+        { "text": "Как сравнить строку с `\"Аня\"`?", "options": ["name == \"Аня\"", "name.equals(\"Аня\")", "name = \"Аня\"", "name != \"Аня\""], "answer": 1, "explanation": "Строки — `.equals()`." }
+      ],
+      "practice": {
+        "description": "Дано `int score = 78;`. Выведи оценку:\n- `>= 90` → `Отлично`\n- `>= 75` → `Хорошо`\n- `>= 60` → `Удовлетворительно`\n- иначе → `Неудовлетворительно`\n\nДля `78` ожидается:\n```\nХорошо\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int score = 78;\n        // TODO: if/else if/else\n    }\n}\n",
+        "expected": "Хорошо",
+        "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "score >= 60", "System.out.println"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "title": "switch",
+      "theory": "## Классический switch\n\n```java\nint day = 3;\nswitch (day) {\n    case 1:\n        System.out.println(\"Пн\");\n        break;\n    case 2:\n        System.out.println(\"Вт\");\n        break;\n    default:\n        System.out.println(\"Другой\");\n}\n```\n\n- `switch (выражение)` — только `int`, `char`, `String`, `enum`.\n- `break` обязателен, иначе «провал» в следующий `case`.\n- `default` — если ни один `case` не подошёл.\n\n## Fall-through\n\n```java\nswitch (x) {\n    case 1:\n    case 2:\n        System.out.println(\"1 или 2\");\n        break;\n}\n```\n\nПустые `case` объединяются.\n\n## Новый switch (Java 14+)\n\n```java\nString result = switch (day) {\n    case 1, 2, 3, 4, 5 -> \"рабочий\";\n    case 6, 7 -> \"выходной\";\n    default -> \"?\";\n};\n```\n\n`->` без `break`.\n\n## switch vs if\n\n`switch` удобен для **точного совпадения** с несколькими значениями. `if` — для диапазонов.\n\n## Что будет, если\n\n- Забыть `break` — провал в следующие `case`.\n- `switch` с `double` — ошибка компиляции.\n- Нет `default` и нет совпадения — ничего не выполнится.\n\n## Частая ошибка\n\nЗабыть `break` — программа выполнит лишние `case`.\n\n## Итог\n\n- `switch (выражение) { case X: ... break; }`\n- Только `int`, `char`, `String`, `enum`\n- `break` — иначе провал\n- `default` — иначе ничего\n- Java 14+: `case X -> ...` без break",
+      "questions": [
+        { "text": "Что выведет?\n```java\nint x = 2;\nswitch (x) {\n    case 1: System.out.println(\"one\");\n    case 2: System.out.println(\"two\");\n    case 3: System.out.println(\"three\");\n}\n```", "options": ["two", "two\\nthree", "one\\ntwo\\nthree", "Ошибка"], "answer": 1, "explanation": "Нет `break` — провал." },
+        { "text": "Для какого типа **нельзя** `switch`?", "options": ["int", "char", "String", "double"], "answer": 3, "explanation": "`double` — нельзя." },
+        { "text": "Зачем `default`?", "options": ["Обязательный", "Если ни один `case` не подошёл", "Завершает switch", "Задаёт тип"], "answer": 1, "explanation": "Аналог `else`." },
+        { "text": "Что делает `break`?", "options": ["Завершает программу", "Выходит из switch", "Пропускает case", "Идёт в default"], "answer": 1, "explanation": "Останавливает провал." },
+        { "text": "Что при `switch (true) { }`?", "options": ["Работает", "Ошибка компиляции", "Все case", "Ничего"], "answer": 1, "explanation": "`boolean` не поддерживается." }
+      ],
+      "practice": {
+        "description": "Дано `String grade = \"B\";`. Через `switch` выведи:\n- `\"A\"` → `Отлично`\n- `\"B\"` → `Хорошо`\n- `\"C\"` → `Удовлетворительно`\n- остальное → `Неизвестно`\n\nДля `B` ожидается:\n```\nХорошо\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        String grade = \"B\";\n        // TODO: switch(grade)\n    }\n}\n",
+        "expected": "Хорошо",
+        "must_contain": ["switch", "case \"A\"", "case \"B\"", "case \"C\"", "default", "break", "System.out.println"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "title": "Циклы: for, while, do-while",
+      "theory": "## for\n\n```java\nfor (int i = 1; i <= 5; i++) {\n    System.out.println(i);\n}\n```\n\nТри части через `;`: инициализация, условие, шаг.\n\n## while\n\n```java\nint i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n    i++;\n}\n```\n\nПроверка **до** тела.\n\n## do-while\n\n```java\nint i = 1;\ndo {\n    System.out.println(i);\n    i++;\n} while (i <= 5);\n```\n\nПроверка **после** тела. Выполнится хотя бы раз. `while (...)` **с `;`**.\n\n## break / continue\n\n```java\nfor (int i = 1; i <= 10; i++) {\n    if (i == 5) break;\n    if (i % 2 == 0) continue;\n    System.out.println(i);\n}\n```\n\n## Вложенные\n\n```java\nfor (int i = 0; i < 3; i++) {\n    for (int j = 0; j < 2; j++) {\n        System.out.println(i + \",\" + j);\n    }\n}\n```\n\n## Что будет, если\n\n- Забыть `i++` — бесконечный цикл.\n- Забыть `;` после `do { } while (...)` — ошибка компиляции.\n\n## Частая ошибка\n\nБесконечный `while`, когда забыли обновление переменной.\n\n## Итог\n\n- `for (init; cond; step)`\n- `while (cond)`\n- `do { } while (cond);` — хотя бы раз\n- `break` — выйти, `continue` — пропустить\n- Без обновления — вечный цикл",
+      "questions": [
+        { "text": "Сколько раз?\n```java\nfor (int i = 0; i < 3; i++) { }\n```", "options": ["2", "3", "4", "Бесконечно"], "answer": 1, "explanation": "i = 0, 1, 2." },
+        { "text": "Чем `do-while` отличается от `while`?", "options": ["Ничем", "`do-while` проверяет **после**", "`do-while` без условия", "`while` быстрее"], "answer": 1, "explanation": "`do-while` выполнится минимум раз." },
+        { "text": "Что делает `continue`?", "options": ["Выходит", "Пропускает итерацию", "Завершает", "Сбрасывает"], "answer": 1, "explanation": "`break` — из цикла, `continue` — следующая." },
+        { "text": "Что выведет?\n```java\nfor (int i = 1; i <= 3; i++) {\n    if (i == 2) continue;\n    System.out.println(i);\n}\n```", "options": ["1\\n2\\n3", "1\\n3", "1\\n2", "2"], "answer": 1, "explanation": "На `i=2` — `continue`." },
+        { "text": "Что при забытом `i++` в `while`?", "options": ["Не запустится", "Синтаксис", "Бесконечный цикл", "Один раз"], "answer": 2, "explanation": "Условие всегда истинно." }
+      ],
+      "practice": {
+        "description": "Выведи через `for` числа `1..10`, пропуская чётные (`continue`):\n```\n1\n3\n5\n7\n9\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: for, continue для чётных\n    }\n}\n",
+        "expected": "1\n3\n5\n7\n9",
+        "must_contain": ["for", "continue", "% 2", "System.out.println"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "title": "Массивы: создание",
+      "theory": "## Фиксированная длина\n\n```java\nint[] arr = new int[5];        // [0, 0, 0, 0, 0]\nint[] b = {1, 2, 3, 4, 5};\nString[] names = {\"Аня\", \"Ваня\"};\n```\n\nДлина задаётся при создании и **не меняется**.\n\n## Индексы\n\nС нуля. `arr[0]` — первый, `arr[arr.length - 1]` — последний. `arr.length` — **поле**, не метод (без скобок).\n\n## Выход за границы\n\n```java\nint[] a = new int[3];\nSystem.out.println(a[3]); // ArrayIndexOutOfBoundsException\n```\n\n## Присваивание\n\n```java\nint[] arr = new int[3];\narr[0] = 10;\narr[1] = 20;\narr[2] = 30;\n```\n\n## Массив vs список\n\nМассив низкоуровневый, длина фиксирована. `ArrayList` растёт динамически (позже).\n\n## Что будет, если\n\n- `new int[0]` — массив длины 0. `arr[0]` — исключение.\n- `arr[3]` для `new int[3]` — `ArrayIndexOutOfBoundsException`.\n- `arr.length()` — ошибка: `length` — поле.\n\n## Частая ошибка\n\n`arr.length()` вместо `arr.length`. У `String` — `length()`, у массива — `length`.\n\n## Итог\n\n- `int[] a = new int[5]` — нули\n- `int[] a = {1, 2, 3}` — сразу\n- `arr[i]` — доступ, `arr.length` — длина\n- За границей — исключение\n- Длина не меняется",
+      "questions": [
+        { "text": "Как создать массив из 5 нулей?", "options": ["int[] a = new int[5];", "int a[5];", "int[] a = int[5];", "array a[5];"], "answer": 0, "explanation": "`new int[5]` — массив длины 5." },
+        { "text": "Что вернёт `arr.length` для `int[] arr = {1, 2, 3};`?", "options": ["2", "3", "4", "Ошибка"], "answer": 1, "explanation": "`length` — поле, без скобок." },
+        { "text": "Что при `int[] a = new int[3]; a[3] = 10;`?", "options": ["a[3] = 10", "Массив станет длины 4", "ArrayIndexOutOfBoundsException", "a[3] = 0"], "answer": 2, "explanation": "Индексы 0..2." },
+        { "text": "Как взять последний элемент?", "options": ["arr[arr.length]", "arr[arr.length - 1]", "arr.last()", "arr[-1]"], "answer": 1, "explanation": "Последний индекс = `length - 1`." },
+        { "text": "Что при `arr.length()` для массива?", "options": ["Длина", "Ошибка компиляции", "0", "null"], "answer": 1, "explanation": "`length` — поле, не метод." }
+      ],
+      "practice": {
+        "description": "Создай `int[] nums = {4, 8, 15, 16, 23, 42};`. Выведи:\n```\nПервый: 4\nПоследний: 42\nДлина: 6\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int[] nums = {4, 8, 15, 16, 23, 42};\n        // TODO\n    }\n}\n",
+        "expected": "Первый: 4\nПоследний: 42\nДлина: 6",
+        "must_contain": ["nums[0]", "nums[nums.length - 1]", "nums.length", "System.out.println"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "title": "Обход массивов",
+      "theory": "## Обычный for\n\n```java\nint[] arr = {10, 20, 30};\nfor (int i = 0; i < arr.length; i++) {\n    System.out.println(arr[i]);\n}\n```\n\nЕсть индекс `i`.\n\n## for-each\n\n```java\nfor (int x : arr) {\n    System.out.println(x);\n}\n```\n\nКороче. Но **не даёт индекса** и **не меняет** массив.\n\n## Сумма\n\n```java\nint sum = 0;\nfor (int x : arr) sum += x;\nSystem.out.println(sum);\n```\n\nСчётчик **вне** цикла.\n\n## Максимум\n\n```java\nint max = arr[0];\nfor (int x : arr) {\n    if (x > max) max = x;\n}\n```\n\nСтарт с `arr[0]`. С `0` — при всех отрицательных максимум будет `0`.\n\n## Поиск\n\n```java\nint target = 20;\nfor (int x : arr) {\n    if (x == target) {\n        System.out.println(\"нашли\");\n        break;\n    }\n}\n```\n\n## Менять элементы — только через индекс\n\n```java\nfor (int i = 0; i < arr.length; i++) arr[i] *= 2;\n```\n\nfor-each так не может.\n\n## Что будет, если\n\n- Сумма объявлена внутри цикла — обнуляется.\n- Максимум с нуля — при отрицательных неверный.\n- for-each с изменением массива — изменения не сохранятся.\n\n## Частая ошибка\n\n`for (int x : arr) { x = x * 2; }` — `x` копия. Для изменения — обычный `for`.\n\n## Итог\n\n- `for (i...)` — с индексом\n- `for (x : arr)` — без, для чтения\n- Накопитель — до цикла\n- Максимум — с `arr[0]`\n- Менять — через `for` с индексом",
+      "questions": [
+        { "text": "Какая конструкция даёт индекс?", "options": ["for (int x : arr)", "for (int i = 0; i < arr.length; i++)", "оба", "ни одна"], "answer": 1, "explanation": "for-each — только значение." },
+        { "text": "Что не так?\n```java\nint sum = 0;\nfor (int x : arr) {\n    int sum = 0;\n    sum += x;\n}\nSystem.out.println(sum);\n```", "options": ["Всё верно", "sum обнуляется каждый раз, выведет 0", "Ошибка компиляции", "Ошибка"], "answer": 1, "explanation": "Внутренний `sum` — своя переменная." },
+        { "text": "Как найти максимум в массиве отрицательных?", "options": ["int max = 0;", "int max = arr[0];", "int max = -1;", "int max = 100;"], "answer": 1, "explanation": "С `0` все отрицательные останутся меньше 0." },
+        { "text": "Что выведет?\n```java\nint[] a = {1, 2, 3};\nfor (int x : a) x *= 2;\nSystem.out.println(a[0]);\n```", "options": ["2", "1", "0", "Ошибка"], "answer": 1, "explanation": "`x` — копия." },
+        { "text": "Как изменить все элементы массива в 2 раза?", "options": ["for (int x : a) x *= 2;", "for (int i = 0; i < a.length; i++) a[i] *= 2;", "a *= 2;", "Никак"], "answer": 1, "explanation": "Только через `for` с индексом." }
+      ],
+      "practice": {
+        "description": "Дан массив `int[] nums = {5, 12, 8, 3, 21, 7};`. Выведи:\n```\nСумма: 56\nМаксимум: 21\nСреднее: 9.333333333333334\n```\n\nСреднее — `sum / (double) nums.length`, полная точность `double`.",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int[] nums = {5, 12, 8, 3, 21, 7};\n        // TODO\n    }\n}\n",
+        "expected": "Сумма: 56\nМаксимум: 21\nСреднее: 9.333333333333334",
+        "must_contain": ["for", "nums.length", "(double)", "System.out.println"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "title": "Методы",
+      "theory": "## Зачем\n\nРазбить программу на куски: переиспользование, читаемость, тестируемость.\n\n## Объявление\n\n```java\nstatic int sum(int a, int b) {\n    return a + b;\n}\n```\n\n- `static` — вызывается без объекта\n- `int` — тип возврата\n- `sum` — имя\n- `(int a, int b)` — параметры\n- `return` — вернуть и выйти\n\n## Вызов\n\n```java\nint s = sum(2, 3);\nSystem.out.println(s); // 5\n```\n\n## void\n\n```java\nstatic void greet(String name) {\n    System.out.println(\"Привет, \" + name);\n}\n```\n\nВ `void` можно `return;` — просто выйти.\n\n## Параметры — копии\n\n```java\nstatic void change(int x) { x = 100; }\nint a = 5;\nchange(a);\nSystem.out.println(a); // 5\n```\n\nПримитивы передаются по значению.\n\n## Перегрузка\n\n```java\nstatic int sum(int a, int b) { return a + b; }\nstatic int sum(int a, int b, int c) { return a + b + c; }\n```\n\n## Что будет, если\n\n- Забыть `return` в методе с типом — ошибка компиляции.\n- `void` с `return 5;` — ошибка.\n\n## Частая ошибка\n\n`static void f() { return 5; }` — `void` не возвращает значение.\n\n## Итог\n\n- `static тип имя(параметры) { return ...; }`\n- `void` — без возврата\n- `return` — выход + значение\n- Примитивы — копии\n- Перегрузка — одно имя, разные параметры",
+      "questions": [
+        { "text": "Что означает `static` у метода?", "options": ["Нельзя вызвать", "Принадлежит классу, без объекта", "Возвращает значение", "Принимает числа"], "answer": 1, "explanation": "`static` — метод класса." },
+        { "text": "Что вернёт?\n```java\nstatic int f(int x) { return x * 2; }\nf(5);\n```", "options": ["5", "10", "Ошибка", "0"], "answer": 1, "explanation": "`5 * 2 = 10`." },
+        { "text": "Что не так?\n```java\nstatic void sayHi() { return 5; }\n```", "options": ["Всё верно", "`void` не возвращает значение", "Нужен `return;`", "Оба 2 и 3"], "answer": 1, "explanation": "`void` — без значения." },
+        { "text": "Что выведет?\n```java\nstatic void change(int x) { x = 100; }\nint a = 5;\nchange(a);\nSystem.out.println(a);\n```", "options": ["100", "5", "0", "Ошибка"], "answer": 1, "explanation": "Примитивы — копии." },
+        { "text": "Что такое перегрузка?", "options": ["Много операторов", "Одно имя метода — разные параметры", "Ошибка", "Наследование"], "answer": 1, "explanation": "Компилятор выбирает по типам/числу аргументов." }
+      ],
+      "practice": {
+        "description": "Создай два `static` метода:\n- `int square(int x)` — возвращает `x * x`\n- `boolean isEven(int x)` — `true`, если чётное\n\nВ `main`:\n- для `n = 7` выведи `Квадрат: 49`\n- для `n = 7` выведи `Чётное: false`\n- для `n = 8` выведи `Чётное: true`",
+        "starter": "public class Main {\n    static int square(int x) { return 0; }\n    static boolean isEven(int x) { return false; }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Квадрат: 49\nЧётное: false\nЧётное: true",
+        "must_contain": ["static int square", "static boolean isEven", "return", "% 2 == 0", "System.out.println"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "title": "Класс как чертёж",
+      "theory": "## Зачем классы\n\n`int`, `String` — готовые типы. Класс — **свой** тип: данные + поведение в одном месте.\n\n```java\nclass Person {\n    String name;\n    int age;\n\n    void sayHi() {\n        System.out.println(\"Привет, \" + name);\n    }\n}\n```\n\n`class Person` — чертёж. Пока не создан экземпляр — в памяти ничего нет.\n\n## Создание объекта\n\n```java\nPerson p = new Person();\np.name = \"Аня\";\np.age = 25;\np.sayHi(); // Привет, Аня\n```\n\n## Отличие от Python\n\nВ Python `p = Person()` без `new`, поля создаются динамически. В Java — `new`, поля **объявлены** в классе.\n\n## Несколько объектов\n\n```java\nPerson a = new Person();\nPerson b = new Person();\na.name = \"Аня\";\nb.name = \"Ваня\";\na.sayHi();\nb.sayHi();\n```\n\nУ каждого объекта — свои поля.\n\n## Где объявлять\n\nОдин `public class` на файл. `Person` без `public` — в том же файле:\n\n```java\nclass Person { }\n\npublic class Main {\n    public static void main(String[] args) {\n        Person p = new Person();\n    }\n}\n```\n\n## Что будет, если\n\n- `Person p;` без `new`, потом `p.name` — `NullPointerException`.\n- Два `public class` в одном файле — ошибка компиляции.\n- Обратиться к полю, которого нет — ошибка компиляции.\n\n## Частая ошибка\n\n`Person p = new Person();` и потом `p = null; p.sayHi()` — падает с NPE.\n\n## Итог\n\n- `class Имя { поля; методы; }`\n- `new Имя()` — создать объект\n- `p.поле` — доступ\n- У каждого объекта свои поля\n- `public class` — один на файл",
+      "questions": [
+        { "text": "Что делает `new Person()`?", "options": ["Объявляет класс", "Создаёт объект", "Вызывает main", "Копирует класс"], "answer": 1, "explanation": "`new` создаёт экземпляр." },
+        { "text": "Что при обращении к `p.age` без `new`?", "options": ["Всё верно", "NullPointerException", "Ошибка компиляции", "age = 0"], "answer": 1, "explanation": "Ссылка никуда не указывает." },
+        { "text": "Где хранятся значения `name` у двух объектов?", "options": ["В классе, общие", "В каждом объекте свои", "В main", "В JVM"], "answer": 1, "explanation": "Поля — часть каждого экземпляра." },
+        { "text": "Сколько `public class` на файл?", "options": ["Сколько угодно", "Один", "Два", "Ноль"], "answer": 1, "explanation": "Один `public class` на файл." },
+        { "text": "Можно ли без `new`?", "options": ["Да", "Нет, для объекта нужен new", "Только в main", "Только в цикле"], "answer": 1, "explanation": "`Person p = new Person();` — обязательно." }
+      ],
+      "practice": {
+        "description": "Создай класс `Book` с полями `String title` и `int pages`, методом `void info()` — печатает `\"<title> — <pages> стр.\"`.\n\nВ `main` создай две книги:\n- `\"Java. Руководство\"`, `500`\n- `\"Алгоритмы\"`, `720`\n\nВызови `info()` у обеих. Ожидаемо:\n```\nJava. Руководство — 500 стр.\nАлгоритмы — 720 стр.\n```",
+        "starter": "class Book {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Java. Руководство — 500 стр.\nАлгоритмы — 720 стр.",
+        "must_contain": ["class Book", "String title", "int pages", "void info", "new Book", ".info()", "System.out.println"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "title": "Конструкторы, this",
+      "theory": "## Проблема\n\n```java\nPerson p = new Person();\np.name = \"Аня\";\np.age = 25;\n```\n\nТри строки на инициализацию. Забыл поле — молча останется `null` или `0`.\n\n## Конструктор\n\n```java\nclass Person {\n    String name;\n    int age;\n\n    Person(String name, int age) {\n        this.name = name;\n        this.age = age;\n    }\n}\n```\n\nМетод без возвращаемого типа, имя = имени класса. Вызывается через `new`:\n\n```java\nPerson p = new Person(\"Аня\", 25);\n```\n\n## this\n\n`this.name` — поле объекта, `name` — параметр.\n\n## Дефолтный конструктор\n\nЕсли **не объявил ни одного** — Java создаст пустой. Объявил хоть один — пустого **не будет**.\n\n## Перегрузка\n\n```java\nPerson(String name) { this(name, 0); }\nPerson(String name, int age) { this.name = name; this.age = age; }\n```\n\n`this(...)` — вызов **другого** конструктора. Только **первой строкой**.\n\n## Что будет, если\n\n- Забыть `this` — поля не установятся.\n- Объявить параметризованный и вызвать `new Person()` — ошибка.\n- `this(...)` не первой строкой — ошибка.\n\n## Частая ошибка\n\n`name = name;` в конструкторе — параметр сам себе.\n\n## Итог\n\n- `ИмяКласса(параметры)` — конструктор\n- Вызывается через `new`\n- `this.поле = параметр`\n- Есть параметризованный → пустого нет\n- `this(...)` — вызов другого",
+      "questions": [
+        { "text": "Как называется конструктор?", "options": ["Как угодно", "Как класс", "init", "main"], "answer": 1, "explanation": "Имя = имени класса." },
+        { "text": "Что делает `this.name = name;`?", "options": ["Ничего", "Присваивает полю значение параметра", "Ошибка", "Создаёт объект"], "answer": 1, "explanation": "`this.name` — поле, `name` — параметр." },
+        { "text": "Объявили параметризованный. Работает ли `new Person()`?", "options": ["Да", "Ошибка компиляции", "Создаст с нулями", "Создаст с null"], "answer": 1, "explanation": "Дефолтный есть только если ни один не объявлен." },
+        { "text": "Что делает `this(...)`?", "options": ["Возвращает", "Вызывает другой конструктор этого класса", "Создаёт объект", "Печатает"], "answer": 1, "explanation": "Только первой строкой." },
+        { "text": "Что при `Person() { name = name; }` без this?", "options": ["Поле установится", "Поле не изменится", "Ошибка компиляции", "name = null"], "answer": 1, "explanation": "Параметр сам себе." }
+      ],
+      "practice": {
+        "description": "Класс `Rectangle`:\n- `double width`, `double height`\n- конструктор `Rectangle(double width, double height)` через `this`\n- конструктор `Rectangle(double side)` — квадрат, через `this(side, side)`\n- метод `double area()`\n\nВ `main` создай `Rectangle(3, 4)` и `Rectangle(5)`. Выведи:\n```\nПрямоугольник: 12.0\nКвадрат: 25.0\n```",
+        "starter": "class Rectangle {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Прямоугольник: 12.0\nКвадрат: 25.0",
+        "must_contain": ["class Rectangle", "double width", "double height", "Rectangle(double width", "this(", "double area", "return width * height", "new Rectangle"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "title": "Инкапсуляция, static",
+      "theory": "## Проблема\n\n```java\nPerson p = new Person(\"Аня\", 25);\np.age = -100; // нонсенс\n```\n\nПоля без модификатора доступны всем.\n\n## private\n\n```java\nclass Person {\n    private String name;\n    private int age;\n}\n```\n\n`p.age` снаружи — ошибка компиляции.\n\n## Геттеры/сеттеры\n\n```java\nclass Person {\n    private int age;\n    public int getAge() { return age; }\n    public void setAge(int age) {\n        if (age >= 0) this.age = age;\n    }\n}\n```\n\n`setAge` — **проверка**.\n\n## Соглашение\n\n`name` → `getName()` / `setName(...)`. `boolean active` → `isActive()` / `setActive(...)`.\n\n## static\n\n`static` — поле **одно** на класс:\n\n```java\nclass Counter {\n    static int total = 0;\n    Counter() { total++; }\n}\nnew Counter();\nnew Counter();\nSystem.out.println(Counter.total); // 2\n```\n\n## static-метод\n\n```java\nclass Math2 {\n    static int square(int x) { return x * x; }\n}\nMath2.square(4);\n```\n\nБез `new`. Не имеет доступа к экземплярным полям.\n\n## Что будет, если\n\n- Обратиться `p.age` с `private` — ошибка.\n- Из `static`-метода к экземплярному полю — ошибка.\n- Забыть `static` у общего счётчика — у каждого свой.\n\n## Частая ошибка\n\nСчитать `static` полем объекта. Нет — **общее** на класс.\n\n## Итог\n\n- `private` — только внутри класса\n- Геттеры/сеттеры — контролируемый доступ\n- `static` поле — общее\n- `static` метод — без объекта\n- Из `static` нет `this`",
+      "questions": [
+        { "text": "Что даёт `private` у поля?", "options": ["Ускоряет", "Запрещает доступ снаружи класса", "Делает константой", "Скрывает от компилятора"], "answer": 1, "explanation": "Инкапсуляция." },
+        { "text": "Как назвать геттер для `boolean active`?", "options": ["getActive()", "isActive()", "getIsActive()", "active()"], "answer": 1, "explanation": "Для `boolean` — `is...`." },
+        { "text": "Что означает `static int total`?", "options": ["Своё у каждого", "Одно на класс", "Константа", "Нельзя менять"], "answer": 1, "explanation": "`static` — на класс." },
+        { "text": "Можно ли из `static`-метода к нестатическому полю?", "options": ["Да", "Нет — объекта ещё нет", "Через `this`", "Только в `main`"], "answer": 1, "explanation": "`this` нет." },
+        { "text": "Кто увидит изменение `static` поля?", "options": ["Только он", "Все объекты класса", "Никто", "JVM"], "answer": 1, "explanation": "Общее поле." }
+      ],
+      "practice": {
+        "description": "Класс `BankAccount`:\n- `private double balance`\n- конструктор с начальным балансом\n- `getBalance()`\n- `deposit(double)` — только если `> 0`\n- `withdraw(double)` — только если `> 0` и `<= balance`\n- `private static int accountsCount = 0`, увеличивается в конструкторе\n- `public static int getAccountsCount()`\n\nВ `main`:\n- `BankAccount(100)`\n- `deposit(50)`, `withdraw(30)`, `withdraw(500)` (не пройдёт)\n- выведи `Баланс: 120.0` и `Счетов: 1`",
+        "starter": "class BankAccount {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Баланс: 120.0\nСчетов: 1",
+        "must_contain": ["private double balance", "private static int accountsCount", "public void deposit", "public void withdraw", "getBalance", "getAccountsCount", "System.out.println"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "title": "Наследование",
+      "theory": "## Зачем\n\n`Animal` с общими полями, `Dog` и `Cat` **наследуют** — не дублируют код.\n\n## extends\n\n```java\nclass Animal {\n    String name;\n    Animal(String name) { this.name = name; }\n    void speak() { System.out.println(\"...\"); }\n}\n\nclass Dog extends Animal {\n    Dog(String name) { super(name); }\n    void wagTail() { System.out.println(name + \" виляет\"); }\n}\n```\n\n`Dog` получает **все** поля и методы `Animal`.\n\n## super\n\n- `super(args)` — конструктор родителя. Только **первой строкой**.\n- `super.method()` — родительский метод.\n\nЕсли родитель **без** пустого конструктора, а `super(...)` не вызван — ошибка.\n\n## Что наследуется\n\nВсё, кроме `private` и конструкторов.\n\n## Переопределение\n\n```java\nclass Dog extends Animal {\n    Dog(String name) { super(name); }\n    @Override\n    void speak() { System.out.println(name + \": гав\"); }\n}\n```\n\n`@Override` — проверка: точно переопределяешь.\n\n## Иерархия\n\n`Object` — корень. `Animal` — его наследник, `Dog` — `Animal`.\n\n## Что будет, если\n\n- Родитель без пустого, `super()` не вызван — ошибка.\n- `private`-поле в наследнике — недоступно.\n- Опечатка в override без `@Override` — создаст **новый** метод.\n\n## Частая ошибка\n\nЗабыть `@Override`. Опечатка `speakk` — новый метод.\n\n## Итог\n\n- `class B extends A`\n- `super(...)` — конструктор родителя\n- `@Override` — проверка\n- `private` не наследуется\n- Переопределение меняет поведение",
+      "questions": [
+        { "text": "Что делает `extends`?", "options": ["Копирует класс", "Наследование", "Создаёт объект", "Импорт"], "answer": 1, "explanation": "`class B extends A`." },
+        { "text": "Что делает `super(name)`?", "options": ["Создаёт Animal", "Вызывает конструктор родителя", "Печатает", "Возвращает"], "answer": 1, "explanation": "Первой строкой." },
+        { "text": "Можно ли из Dog к `private` полю Animal?", "options": ["Да", "Нет, только через методы", "Через `super.`", "Если public"], "answer": 1, "explanation": "`private` — только внутри своего класса." },
+        { "text": "Зачем `@Override`?", "options": ["Обязательна", "Проверяет, что метод переопределяет", "Создаёт новый", "Ускоряет"], "answer": 1, "explanation": "Опечатка без `@Override` — новый метод." },
+        { "text": "Что при родителе без пустого и без `super(...)`?", "options": ["Работает", "Ошибка компиляции", "Создаст с null", "Создаст с 0"], "answer": 1, "explanation": "Компилятор требует явный вызов." }
+      ],
+      "practice": {
+        "description": "Иерархия:\n- `Animal` с `String name`, конструктором, `void speak()` → `\"...\"`\n- `Dog extends Animal` — overrides `speak` → `\"<name>: гав\"`\n- `Cat extends Animal` — `\"<name>: мяу\"`\n\nВ `main`:\n- `Dog(\"Бобик\")`, `Cat(\"Мурка\")`\n- вызови `speak()` у каждого\n\n```\nБобик: гав\nМурка: мяу\n```",
+        "starter": "class Animal {\n    // TODO\n}\n\nclass Dog extends Animal {\n    // TODO\n}\n\nclass Cat extends Animal {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Бобик: гав\nМурка: мяу",
+        "must_contain": ["class Animal", "class Dog extends Animal", "class Cat extends Animal", "super(", "@Override", "void speak", "System.out.println"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "title": "Полиморфизм",
+      "theory": "## Идея\n\nСсылка родителя может указывать на объект наследника:\n\n```java\nAnimal a = new Dog(\"Бобик\");\na.speak(); // гав\n```\n\nЧто напечатается — решает **фактический** тип объекта.\n\n## Зачем\n\nМассив «зверей»:\n\n```java\nAnimal[] zoo = { new Dog(\"Бобик\"), new Cat(\"Мурка\") };\nfor (Animal a : zoo) a.speak();\n```\n\nОдин вызов — разные реализации.\n\n## Что доступно через ссылку\n\nТолько методы, **объявленные в родителе**. `a.wagTail()` для `Animal` — ошибка компиляции.\n\n## Приведение\n\n```java\nif (a instanceof Dog) {\n    Dog d = (Dog) a;\n    d.wagTail();\n}\n```\n\n`instanceof` — проверка перед приведением.\n\n## Что будет, если\n\n- Вызвать метод, которого нет у родителя — ошибка.\n- `(Dog) a` без `instanceof` и `a` не `Dog` — `ClassCastException`.\n\n## Частая ошибка\n\n`Animal a = new Animal(\"X\"); a.speak()` — если `speak` абстрактный — не создать. Если обычный — работает.\n\n## Итог\n\n- Родительская ссылка → объект наследника\n- Метод — по фактическому типу\n- Ссылка видит только методы родителя\n- `instanceof` + `(Type)`\n- `ClassCastException` при неверном приведении",
+      "questions": [
+        { "text": "Что выведет?\n```java\nclass A { void m() { System.out.println(\"A\"); } }\nclass B extends A { void m() { System.out.println(\"B\"); } }\nA x = new B();\nx.m();\n```", "options": ["A", "B", "Ошибка", "AB"], "answer": 1, "explanation": "Ссылка A, объект B — вызывается метод B." },
+        { "text": "Можно ли через `Animal a = new Dog()` вызвать `wagTail`?", "options": ["Да", "Нет, нужен `(Dog) a`", "Через `super`", "Только в main"], "answer": 1, "explanation": "Ссылка видит только методы Animal." },
+        { "text": "Что делает `a instanceof Dog`?", "options": ["Создаёт Dog", "Проверяет, Dog ли объект", "Приводит", "Вызывает"], "answer": 1, "explanation": "Безопасная проверка." },
+        { "text": "Что при `(Dog) a`, если `a` — `Cat`?", "options": ["Работает", "ClassCastException", "null", "Возвращает null"], "answer": 1, "explanation": "Несовместимое приведение — исключение." },
+        { "text": "Зачем полиморфизм?", "options": ["Для красоты", "Один вызов — разное поведение по типу", "Ускорение", "Наследование"], "answer": 1, "explanation": "`for (Animal a : zoo) a.speak()`." }
+      ],
+      "practice": {
+        "description": "`Shape` с методом `double area()` (возвращает `0`), наследники:\n- `Circle` — `double r`, `area = 3.14 * r * r`\n- `Square` — `double side`, `area = side * side`\n\nВ `main`:\n- `Shape[] shapes = { new Circle(2), new Square(3) };`\n- в `for-each` выведи `Площадь: <area>`\n\n```\nПлощадь: 12.56\nПлощадь: 9.0\n```",
+        "starter": "class Shape {\n    // TODO\n}\n\nclass Circle extends Shape {\n    // TODO\n}\n\nclass Square extends Shape {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Площадь: 12.56\nПлощадь: 9.0",
+        "must_contain": ["class Shape", "extends Shape", "double area", "@Override", "Shape[]", "for (Shape", "System.out.println"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "title": "Абстрактные классы и интерфейсы",
+      "theory": "## Абстрактный класс\n\nРодитель, который **не создаётся** сам.\n\n```java\nabstract class Shape {\n    abstract double area();\n}\n\nclass Square extends Shape {\n    double side;\n    Square(double s) { side = s; }\n    @Override double area() { return side * side; }\n}\n\n// Shape s = new Shape(); // ошибка\nShape s = new Square(3);\n```\n\n`abstract` у метода — «реализуй сам». У класса — «создавать нельзя».\n\n## Зачем\n\n`Shape` без формы бессмыслен. Абстракция заставляет реализовать `area()`.\n\n## Интерфейс\n\nКонтракт. Класс может реализовать **много** интерфейсов.\n\n```java\ninterface Flyable {\n    void fly();\n}\n\ninterface Swimmable {\n    void swim();\n}\n\nclass Duck implements Flyable, Swimmable {\n    public void fly() { System.out.println(\"лечу\"); }\n    public void swim() { System.out.println(\"плыву\"); }\n}\n```\n\n## Класс vs интерфейс\n\n- **Абстрактный класс** — поля, конструкторы, часть с телом. Родитель один.\n- **Интерфейс** — контракт на методы. Реализаций сколько угодно.\n\n## default в интерфейсе (Java 8+)\n\n```java\ninterface Greeter {\n    default void hello() { System.out.println(\"hi\"); }\n}\n```\n\nМетод с телом.\n\n## Что будет, если\n\n- `new Shape()` для `abstract` — ошибка.\n- Наследник не реализовал абстрактный метод — сам должен быть `abstract`.\n- Метод интерфейса без `public` — ошибка.\n\n## Частая ошибка\n\nМетод реализации без `public`. `void area()` вместо `public void area()` — ошибка.\n\n## Итог\n\n- `abstract class` — нельзя объект\n- `abstract метод` — реализовать\n- `interface` — контракт\n- `implements A, B` — сколько угодно\n- `default` — метод с телом",
+      "questions": [
+        { "text": "Можно ли создать объект абстрактного класса?", "options": ["Да", "Нет", "Только в main", "Через new"], "answer": 1, "explanation": "`new Shape()` для `abstract` — ошибка." },
+        { "text": "Сколько интерфейсов реализовать?", "options": ["Один", "Два", "Сколько угодно", "Ни одного"], "answer": 2, "explanation": "`implements A, B, C`." },
+        { "text": "Что обязан сделать наследник абстрактного класса?", "options": ["Ничего", "Реализовать все абстрактные методы", "Создать конструктор", "Всё переопределить"], "answer": 1, "explanation": "Иначе и он `abstract`." },
+        { "text": "Чем интерфейс отличается от абстрактного класса?", "options": ["Ничем", "Интерфейс — контракт без состояния, реализаций много", "Быстрее", "Только для main"], "answer": 1, "explanation": "Абстрактный — один родитель." },
+        { "text": "Что при реализации метода интерфейса без `public`?", "options": ["Работает", "Ошибка компиляции", "Медленнее", "Предупреждение"], "answer": 1, "explanation": "Метод интерфейса в классе — `public`." }
+      ],
+      "practice": {
+        "description": "Интерфейс `Shape` с методом `double area()`. Реализуй:\n- `Triangle` — `double base`, `double height`, `area = base * height / 2`\n- `Circle` — `double r`, `area = 3.14 * r * r`\n\nВ `main`:\n- `Shape[] shapes = { new Triangle(4, 5), new Circle(2) };`\n- выведи `Площадь: <area>`\n\n```\nПлощадь: 10.0\nПлощадь: 12.56\n```",
+        "starter": "interface Shape {\n    // TODO\n}\n\nclass Triangle implements Shape {\n    // TODO\n}\n\nclass Circle implements Shape {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Площадь: 10.0\nПлощадь: 12.56",
+        "must_contain": ["interface Shape", "implements Shape", "double area", "public double area", "Shape[]", "for (Shape", "System.out.println"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "title": "ArrayList",
+      "theory": "## Зачем\n\nМассив — фиксированная длина. Список — растёт и сжимается.\n\n```java\nimport java.util.ArrayList;\n\nArrayList<String> list = new ArrayList<>();\nlist.add(\"Аня\");\nlist.add(\"Ваня\");\nSystem.out.println(list); // [Аня, Ваня]\n```\n\n`<String>` — обобщение.\n\n## Методы\n\n```java\nlist.add(\"x\");\nlist.add(0, \"first\");\nlist.get(0);\nlist.size();\nlist.set(1, \"new\");\nlist.remove(0);\nlist.remove(\"x\");\nlist.contains(\"x\");\nlist.isEmpty();\n```\n\n## Обход\n\n```java\nfor (String s : list) {\n    System.out.println(s);\n}\nfor (int i = 0; i < list.size(); i++) {\n    System.out.println(list.get(i));\n}\n```\n\n## Примитивы\n\n`ArrayList<int>` — нельзя. Только `ArrayList<Integer>`. Автоупаковка:\n\n```java\nArrayList<Integer> nums = new ArrayList<>();\nnums.add(5);\nint x = nums.get(0);\n```\n\n## Что будет, если\n\n- `list.get(100)` на коротком — `IndexOutOfBoundsException`.\n- `list.remove(0)` vs `list.remove(Integer.valueOf(0))` — индекс vs значение.\n- `ArrayList<int>` — ошибка компиляции.\n\n## Частая ошибка\n\n`list.remove(0)` — по **индексу**. Хочешь значение 0 — `list.remove(Integer.valueOf(0))`.\n\n## Итог\n\n- `import java.util.ArrayList;`\n- `new ArrayList<>()`, `<String>` / `<Integer>`\n- `add`, `get`, `size()`, `set`, `remove`, `contains`\n- `size()` — метод\n- Примитивы через обёртки",
+      "questions": [
+        { "text": "Как объявить список строк?", "options": ["ArrayList list = new ArrayList();", "ArrayList<String> list = new ArrayList<>();", "String[] list = new ArrayList<>();", "list<String> = new ArrayList();"], "answer": 1, "explanation": "С `<String>`." },
+        { "text": "Что вернёт `list.size()` для `[a, b, c]`?", "options": ["2", "3", "4", "length"], "answer": 1, "explanation": "`size()` — метод." },
+        { "text": "Как объявить `ArrayList<Integer>`?", "options": ["ArrayList<int> list", "ArrayList<Integer> list", "ArrayList<integer> list", "ArrayList[Integer] list"], "answer": 1, "explanation": "Только обёртка." },
+        { "text": "Что делает `list.remove(0)`?", "options": ["Удаляет 0", "Удаляет по индексу 0", "Очищает", "Возвращает первый"], "answer": 1, "explanation": "`remove(int)` — по индексу." },
+        { "text": "Что при `list.get(100)` если `size()` = 3?", "options": ["null", "0", "IndexOutOfBoundsException", "Последний"], "answer": 2, "explanation": "Индексы 0..2." }
+      ],
+      "practice": {
+        "description": "Создай `ArrayList<String>`, добавь `\"яблоко\"`, `\"банан\"`, `\"вишня\"`. Выведи:\n```\nСписок: [яблоко, банан, вишня]\nРазмер: 3\nПервый: яблоко\nЕсть банан: true\nПосле удаления: [яблоко, вишня]\n```\n\nПоследняя — после `list.remove(\"банан\")`.",
+        "starter": "import java.util.ArrayList;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<String> list = new ArrayList<>();\n        // TODO\n    }\n}\n",
+        "expected": "Список: [яблоко, банан, вишня]\nРазмер: 3\nПервый: яблоко\nЕсть банан: true\nПосле удаления: [яблоко, вишня]",
+        "must_contain": ["import java.util.ArrayList", "new ArrayList<>", ".add(", ".size()", ".get(0)", ".contains(", ".remove(", "System.out.println"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "title": "HashMap",
+      "theory": "## Словарь\n\n`HashMap<K, V>` — пары «ключ → значение».\n\n```java\nimport java.util.HashMap;\n\nHashMap<String, Integer> ages = new HashMap<>();\nages.put(\"Аня\", 25);\nages.put(\"Ваня\", 30);\nSystem.out.println(ages.get(\"Аня\")); // 25\n```\n\n## Методы\n\n```java\nmap.put(\"Аня\", 26);\nmap.get(\"Аня\");\nmap.getOrDefault(\"X\", 0);\nmap.containsKey(\"Аня\");\nmap.containsValue(26);\nmap.remove(\"Аня\");\nmap.size();\nmap.keySet();\nmap.values();\nmap.isEmpty();\n```\n\n## Обход\n\n```java\nfor (String key : map.keySet()) {\n    System.out.println(key + \" = \" + map.get(key));\n}\nfor (var entry : map.entrySet()) {\n    System.out.println(entry.getKey() + \" = \" + entry.getValue());\n}\n```\n\n## null\n\n```java\nmap.get(\"Петя\");            // null\nmap.getOrDefault(\"Петя\", 0); // 0\n```\n\n## Порядок\n\n`HashMap` **не сохраняет** порядок вставки. Нужен порядок — `LinkedHashMap` (вставки) или `TreeMap` (сортировка).\n\n## Что будет, если\n\n- `map.get(\"нет\")` вернёт `null`.\n- Сложение `null + 1` — `NullPointerException`.\n- `HashMap<String, int>` — ошибка, `<Integer>`.\n\n## Частая ошибка\n\n`map.get(\"x\") + 1` — если ключа нет, `null + 1` падает. `getOrDefault`.\n\n## Итог\n\n- `import java.util.HashMap;`\n- `put`, `get`, `getOrDefault`, `containsKey`, `remove`\n- `null` за отсутствующий ключ\n- `keySet()`, `entrySet()`\n- Порядок не гарантирован",
+      "questions": [
+        { "text": "Как добавить пару?", "options": ["map.add(k, v);", "map.put(k, v);", "map[k] = v;", "map.insert(k, v);"], "answer": 1, "explanation": "`put`." },
+        { "text": "Что вернёт `map.get(\"нет\")`?", "options": ["0", "null", "\"\"", "Исключение"], "answer": 1, "explanation": "`null`." },
+        { "text": "Сохраняет ли `HashMap` порядок вставки?", "options": ["Да", "Нет", "Только для строк", "Только для int"], "answer": 1, "explanation": "Нет." },
+        { "text": "Что вернёт `getOrDefault(\"X\", 0)` если X нет?", "options": ["null", "0", "Исключение", "\"X\""], "answer": 1, "explanation": "Дефолт." },
+        { "text": "Что при `map.get(\"X\") + 1`, если X нет?", "options": ["1", "0", "NullPointerException", "null"], "answer": 2, "explanation": "`null + 1` — исключение." }
+      ],
+      "practice": {
+        "description": "Создай `HashMap<String, Integer>`:\n- `\"Аня\" → 5`, `\"Ваня\" → 4`, `\"Петя\" → 3`\n\nВыведи:\n```\nАня: 5\nВаня: 4\nПетя: 3\nРазмер: 3\nМаша (дефолт): 0\n```\n\nПоследнее — `getOrDefault(\"Маша\", 0)`.",
+        "starter": "import java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        HashMap<String, Integer> grades = new HashMap<>();\n        // TODO\n    }\n}\n",
+        "expected": "Аня: 5\nВаня: 4\nПетя: 3\nРазмер: 3\nМаша (дефолт): 0",
+        "must_contain": ["import java.util.HashMap", "new HashMap<>", ".put(", ".get(", ".size()", "getOrDefault", "System.out.println"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "title": "Исключения: try / catch",
+      "theory": "## Что такое исключение\n\nОшибка во время выполнения. Без обработки — программа падает, печатает **stack trace**.\n\n```\nException in thread \"main\" java.lang.ArithmeticException: / by zero\n```\n\n## try / catch\n\n```java\ntry {\n    int result = 10 / 0;\n} catch (ArithmeticException e) {\n    System.out.println(\"Ошибка: \" + e.getMessage());\n}\nSystem.out.println(\"Продолжаем\");\n```\n\n## finally\n\n```java\ntry {\n    // risky\n} catch (Exception e) {\n    // обработали\n} finally {\n    System.out.println(\"выполнится всегда\");\n}\n```\n\n## Типичные\n\n- `ArithmeticException` — деление на 0\n- `NullPointerException` — работа с `null`\n- `ArrayIndexOutOfBoundsException` — за границей\n- `NumberFormatException` — `Integer.parseInt(\"abc\")`\n- `InputMismatchException` — `Scanner`\n\n## Много catch\n\n```java\ntry { }\ncatch (NumberFormatException e) { }\ncatch (ArithmeticException e) { }\n```\n\nПервый подходящий. Более конкретные — выше.\n\n## Что будет, если\n\n- Нет `catch` — программа падает.\n- `catch (Exception e)` — теряется конкретика.\n- Пустой `catch { }` — ошибка молча съедена.\n\n## Частая ошибка\n\nПустой `catch`. Хотя бы `e.printStackTrace()`.\n\n## Итог\n\n- `try { } catch (Тип e) { }`\n- `finally` — всегда\n- Разные типы — разные catch\n- `e.getMessage()`\n- Не глотай",
+      "questions": [
+        { "text": "Что делает `catch`?", "options": ["Предотвращает", "Обрабатывает исключение", "Завершает", "Печатает"], "answer": 1, "explanation": "Реакция на ошибку." },
+        { "text": "Когда выполняется `finally`?", "options": ["Только при ошибке", "Только без ошибки", "Всегда", "Никогда"], "answer": 2, "explanation": "Всегда." },
+        { "text": "Что выведет?\n```java\ntry { System.out.println(10 / 0); }\ncatch (ArithmeticException e) { System.out.println(\"err\"); }\nSystem.out.println(\"after\");\n```", "options": ["Падает", "err\\nafter", "after", "err"], "answer": 1, "explanation": "Ловится, печатает err, потом after." },
+        { "text": "Какое исключение при `Integer.parseInt(\"abc\")`?", "options": ["ArithmeticException", "NumberFormatException", "NullPointerException", "ClassCastException"], "answer": 1, "explanation": "Не парсится — NumberFormatException." },
+        { "text": "Что плохого в пустом `catch { }`?", "options": ["Медленно", "Ошибки молча теряются", "Не компилируется", "Только для unchecked"], "answer": 1, "explanation": "Не увидишь, что сломалось." }
+      ],
+      "practice": {
+        "description": "Массив `int[] nums = {10, 0, 5};`. Цикл `for (int i = 0; i <= 3; i++)`:\n- `100 / nums[i]`\n- `ArrayIndexOutOfBoundsException` → `Нет индекса <i>`\n- `ArithmeticException` → `Деление на 0`\n- иначе → `100 / <nums[i]> = <результат>`\n\n```\n100 / 10 = 10\nДеление на 0\n100 / 5 = 20\nНет индекса 3\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        int[] nums = {10, 0, 5};\n        // TODO\n    }\n}\n",
+        "expected": "100 / 10 = 10\nДеление на 0\n100 / 5 = 20\nНет индекса 3",
+        "must_contain": ["try", "catch", "ArithmeticException", "ArrayIndexOutOfBoundsException", "for", "System.out.println"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "Свои исключения, throws",
+      "theory": "## Своё исключение\n\n```java\nclass AgeException extends Exception {\n    AgeException(String message) {\n        super(message);\n    }\n}\n```\n\nНаследник `Exception` (checked) или `RuntimeException` (unchecked).\n\n## throw\n\n```java\nstatic void setAge(int age) throws AgeException {\n    if (age < 0) {\n        throw new AgeException(\"возраст не может быть отрицательным\");\n    }\n    System.out.println(\"OK: \" + age);\n}\n```\n\n`throw new ...` — **бросить**. `throws` в сигнатуре — **предупредить**.\n\n## Обязанность вызывающего\n\n```java\ntry {\n    setAge(-5);\n} catch (AgeException e) {\n    System.out.println(\"Ошибка: \" + e.getMessage());\n}\n```\n\nДля checked — обязан ловить или объявить `throws`.\n\n## checked vs unchecked\n\n- `RuntimeException` и наследники — **unchecked**.\n- `Exception` (не `RuntimeException`) — **checked**.\n\n## Наследование\n\n`class ValidationException extends RuntimeException` — не обязан ловить.\n\n## Что будет, если\n\n- `throw` без `throws` для checked — ошибка компиляции.\n- Вызывающий не ловит checked — ошибка компиляции.\n- `RuntimeException` без `throws` — нормально.\n\n## Частая ошибка\n\nНаследовать от `Exception` и не ловить — ошибка компиляции. Для простых случаев — `extends RuntimeException`.\n\n## Итог\n\n- `class X extends Exception/RuntimeException`\n- `throw new X(...)`\n- `throws X` (для checked)\n- Checked — обязаловка\n- `getMessage()` — текст",
+      "questions": [
+        { "text": "Чем `throw` от `throws`?", "options": ["Ничем", "`throw` — бросить, `throws` — объявить", "Наоборот", "Оба"], "answer": 1, "explanation": "`throw new X()` — в коде. `throws X` — в сигнатуре." },
+        { "text": "Обязан ли вызывающий ловить `RuntimeException`?", "options": ["Да", "Нет — unchecked", "Только в main", "Только с throws"], "answer": 1, "explanation": "Unchecked — не обязателен." },
+        { "text": "Как создать checked-исключение?", "options": ["extends Error", "extends Exception", "extends Throwable", "implements Exception"], "answer": 1, "explanation": "`extends Exception` — checked." },
+        { "text": "Что вернёт `e.getMessage()`?", "options": ["Класс", "Строку из `super(message)`", "Стек", "null"], "answer": 1, "explanation": "Сообщение." },
+        { "text": "Что при вызове метода с `throws IOException` без try/catch?", "options": ["Работает", "Ошибка компиляции", "NullPointer", "Игнорируется"], "answer": 1, "explanation": "Checked — обязан ловить." }
+      ],
+      "practice": {
+        "description": "Создай `class NegativeException extends RuntimeException` с конструктором `(String)` → `super`.\n\nМетод `static void check(int n)`:\n- если `n < 0` — `throw new NegativeException(\"negative: \" + n)`\n- иначе — `OK: <n>`\n\nВ `main`:\n- `check(5)`\n- `check(-3)` в `try/catch (NegativeException e)`, печатай `Ошибка: <e.getMessage()>`\n\n```\nOK: 5\nОшибка: negative: -3\n```",
+        "starter": "class NegativeException extends RuntimeException {\n    // TODO\n}\n\npublic class Main {\n    static void check(int n) {\n        // TODO\n    }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "OK: 5\nОшибка: negative: -3",
+        "must_contain": ["class NegativeException extends RuntimeException", "super(", "throw new NegativeException", "try", "catch", "getMessage", "System.out.println"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "title": "StringBuilder и String.join",
+      "theory": "## Проблема конкатенации\n\n`String` неизменяема. Каждое `+=` создаёт новую:\n\n```java\nString s = \"\";\nfor (int i = 0; i < 1000; i++) {\n    s += i;  // 1000 новых строк\n}\n```\n\n## StringBuilder\n\nИзменяемая строка. `append` дописывает в буфер:\n\n```java\nStringBuilder sb = new StringBuilder();\nsb.append(\"Привет\");\nsb.append(\", \");\nsb.append(\"мир\");\nSystem.out.println(sb.toString()); // Привет, мир\n```\n\n## Методы\n\n```java\nsb.append(42);\nsb.insert(0, \"> \");\nsb.deleteCharAt(0);\nsb.reverse();\nsb.length();\nsb.toString();\n```\n\n## Сборка списка\n\n```java\nStringBuilder sb = new StringBuilder();\nString[] words = {\"яблоко\", \"банан\", \"вишня\"};\nfor (int i = 0; i < words.length; i++) {\n    if (i > 0) sb.append(\", \");\n    sb.append(words[i]);\n}\nSystem.out.println(sb); // яблоко, банан, вишня\n```\n\n## String.join\n\n```java\nString[] parts = {\"a\", \"b\", \"c\"};\nString joined = String.join(\"-\", parts);\nSystem.out.println(joined); // a-b-c\n```\n\nРаботает с массивом и `Iterable`.\n\n## Когда что\n\n- Фиксированный набор — `+` или `String.join`.\n- В цикле — `StringBuilder`.\n- Мало итераций — `+` тоже ок.\n\n## Что будет, если\n\n- `+=` в цикле на 10000 — медленно.\n- `String.join` на числах без `String.valueOf` — ошибка.\n\n## Частая ошибка\n\n`+=` в длинном цикле. `StringBuilder` — O(n) против O(n²).\n\n## Итог\n\n- `StringBuilder` — для сборки\n- `append` — дописать\n- `toString()` — в String\n- `String.join(sep, arr)` — склейщик\n- `+=` в цикле — медленно",
+      "questions": [
+        { "text": "Зачем StringBuilder?", "options": ["Для чисел", "Эффективная сборка в цикле", "Для массивов", "Заменяет String"], "answer": 1, "explanation": "`+=` — O(n²), `append` — O(n)." },
+        { "text": "Что делает `sb.toString()`?", "options": ["Очищает", "Возвращает String", "Печатает", "Дублирует"], "answer": 1, "explanation": "Содержимое буфера." },
+        { "text": "Что вернёт `String.join(\", \", \"a\", \"b\", \"c\")`?", "options": ["abc", "a, b, c", "a-b-c", "Ошибка"], "answer": 1, "explanation": "Через запятую." },
+        { "text": "Что при 10000 `+=` в цикле?", "options": ["Быстро", "Замедление", "Ошибка", "Переполнение"], "answer": 1, "explanation": "Каждый `+=` — новый String." },
+        { "text": "Что делает `sb.reverse()`?", "options": ["Удаляет", "Разворачивает", "Копирует", "Считает"], "answer": 1, "explanation": "Обратный порядок." }
+      ],
+      "practice": {
+        "description": "Дан массив `String[] words = {\"Java\", \"Python\", \"C++\", \"Go\"};`. Через `StringBuilder` с разделителем `, `:\n```\nЯзыки: Java, Python, C++, Go\n```\n\nЧерез `String.join`:\n```\nЧерез join: Java | Python | C++ | Go\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        String[] words = {\"Java\", \"Python\", \"C++\", \"Go\"};\n        // TODO\n    }\n}\n",
+        "expected": "Языки: Java, Python, C++, Go\nЧерез join: Java | Python | C++ | Go",
+        "must_contain": ["StringBuilder", ".append(", "toString()", "String.join", "System.out.println"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "title": "Итоговая задача",
+      "theory": "## Собираем всё\n\nНовых конструкций нет. Проверяем: классы, конструкторы, `private`, геттеры, `ArrayList`, циклы, `printf`.\n\n## Подход\n\n1. Прочитать условие, выписать **сущности**.\n2. Для каждой — поля и методы.\n3. В `main` — данные, наполнение, вывод.\n\n## Пример модели\n\n```java\nclass Product {\n    private String name;\n    private double price;\n    public Product(String name, double price) {\n        this.name = name;\n        this.price = price;\n    }\n    public String getName() { return name; }\n    public double getPrice() { return price; }\n}\n```\n\n`ArrayList<Product>` — корзина.\n\n## Форматирование\n\n```java\nSystem.out.printf(\"%s: %.2f%n\", p.getName(), p.getPrice());\n```\n\n## Проверки\n\n- Поля `private`? Геттеры?\n- Конструктор инициализирует?\n- Вывод **точно** совпадает?\n- Нет `println(\"ответ\")` вместо расчёта?\n\n## Что будет, если\n\n- Поле `public` — теряешь балл.\n- `println` без форматирования — `100.0` вместо `100.00`.\n- Забыть `%n` — строки слипнутся.\n\n## Частая ошибка\n\nЗабыть `%.2f` — вывести `100.0`. `expected` сравнивается точно.\n\n## Итог\n\n- Модель: класс + конструктор + `private` + геттеры\n- Данные — в `ArrayList`\n- Обход + `printf` с `%.2f`\n- Вывод должен совпадать",
+      "questions": [
+        { "text": "Как правильно сделать поле в классе?", "options": ["public double price;", "private double price; + геттер", "double price;", "static double price;"], "answer": 1, "explanation": "Инкапсуляция." },
+        { "text": "Чем обходить `ArrayList<Product>` для суммы?", "options": ["for (int i = 0; i < list.size(); i++)", "for (Product p : list)", "оба варианта", "while"], "answer": 2, "explanation": "Оба корректны." },
+        { "text": "Как вывести цену с двумя знаками?", "options": ["println(price)", "printf(\"%.2f%n\", price)", "println((int)price)", "Math.round"], "answer": 1, "explanation": "`%.2f`." },
+        { "text": "Что при `println` для `100.0` вместо `printf`?", "options": ["Совпадёт с `100.00`", "Не совпадёт", "Ошибка компиляции", "То же самое"], "answer": 1, "explanation": "`100.0` ≠ `100.00`." },
+        { "text": "Зачем `private` в модели?", "options": ["Красиво", "Инкапсуляция", "Скорость", "Обязательно"], "answer": 1, "explanation": "Стандарт ООП." }
+      ],
+      "practice": {
+        "description": "Класс `Product`:\n- `private String name`, `private double price`\n- конструктор\n- геттеры\n\nВ `main`:\n- `ArrayList<Product> cart = new ArrayList<>();`\n- `(\"Хлеб\", 45.5)`, `(\"Молоко\", 89.9)`, `(\"Сыр\", 320.0)`\n- `for-each` + `printf` `\"<name>: <price 2 знака>\\n\"`\n- сумма + `printf(\"Итого: %.2f%n\", sum)`\n\n```\nХлеб: 45.50\nМолоко: 89.90\nСыр: 320.00\nИтого: 455.40\n```",
+        "starter": "import java.util.ArrayList;\n\nclass Product {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Хлеб: 45.50\nМолоко: 89.90\nСыр: 320.00\nИтого: 455.40",
+        "must_contain": ["private String name", "private double price", "public Product(", "getName", "getPrice", "new ArrayList", ".add(", "for (Product", "%.2f", "System.out.printf"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "title": "Лямбда-выражения",
+      "theory": "## Что такое лямбда\n\nЛямбда — **анонимная функция**, которую можно передать как значение.\n\n```java\nRunnable r = () -> System.out.println(\"Привет\");\nr.run(); // Привет\n```\n\n## Синтаксис\n\n```java\n() -> 42                       // без параметров\nx -> x * 2                     // один параметр, без скобок\n(a, b) -> a + b                // несколько, скобки нужны\n(a, b) -> { return a + b; }    // блок, return явный\n```\n\n## Функциональный интерфейс\n\nИнтерфейс с **одним** абстрактным методом. Стандартные в `java.util.function`:\n\n- `Function<T, R>` — `R apply(T t)`\n- `Consumer<T>` — `void accept(T t)`\n- `Supplier<T>` — `T get()`\n- `Predicate<T>` — `boolean test(T t)`\n\n## Пример\n\n```java\nimport java.util.function.Function;\nimport java.util.function.Predicate;\n\nFunction<Integer, Integer> square = x -> x * x;\nSystem.out.println(square.apply(5)); // 25\n\nPredicate<Integer> isEven = n -> n % 2 == 0;\nSystem.out.println(isEven.test(4)); // true\n```\n\n## Лямбда вместо анонимного класса\n\nБыло:\n\n```java\nRunnable r = new Runnable() {\n    @Override\n    public void run() {\n        System.out.println(\"hi\");\n    }\n};\n```\n\nСтало:\n\n```java\nRunnable r = () -> System.out.println(\"hi\");\n```\n\n## Захват переменных\n\nТолько **effectively final**:\n\n```java\nint x = 10;\nRunnable r = () -> System.out.println(x); // ok\n// x = 20; // ошибка\n```\n\n## Что будет, если\n\n- Лямбда без контекста (`var f = x -> x;`) — ошибка.\n- Блок без `return` — ошибка, если функция возвращает.\n- Лямбда для интерфейса с двумя абстрактными — ошибка.\n\n## Частая ошибка\n\n`x -> x * 2;` — `;` в конце делает строку инструкцией без типа. Нужен `Function<Integer, Integer> f = x -> x * 2;`.\n\n## Итог\n\n- Лямбда — анонимная функция\n- `(a, b) -> a + b`\n- Функциональный интерфейс — один метод\n- `Function`, `Consumer`, `Supplier`, `Predicate`\n- Захват — effectively final",
+      "questions": [
+        { "text": "Что такое лямбда?", "options": ["Анонимный класс", "Анонимная функция", "Интерфейс", "Метод"], "answer": 1, "explanation": "Анонимная функция, реализующая функциональный интерфейс." },
+        { "text": "Сколько абстрактных в функциональном интерфейсе?", "options": ["Один", "Два", "Любое", "Ни одного"], "answer": 0, "explanation": "Один." },
+        { "text": "Что делает `Function<T, R>`?", "options": ["Возвращает boolean", "Принимает T, возвращает R", "Ничего", "Печатает"], "answer": 1, "explanation": "Преобразование." },
+        { "text": "Что делает `Consumer<T>`?", "options": ["Возвращает T", "Принимает T, ничего", "Принимает два", "boolean"], "answer": 1, "explanation": "Потребитель." },
+        { "text": "Что выведет `Function<Integer, Integer> f = x -> x * 2; System.out.println(f.apply(5));`?", "options": ["5", "10", "25", "Ошибка"], "answer": 1, "explanation": "5 * 2 = 10." }
+      ],
+      "practice": {
+        "description": "Создай:\n- `Function<Integer, Integer> square = x -> x * x;`\n- `Function<Integer, Integer> doubleIt = x -> x * 2;`\n\nВыведи `square.apply(5)` и `doubleIt.apply(10)`.\n\n```\n25\n20\n```",
+        "starter": "import java.util.function.Function;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "25\n20",
+        "must_contain": ["->", "Function<Integer", "square", "doubleIt", ".apply(", "System.out.println"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "title": "Method references",
+      "theory": "## Что это\n\n`::` — ссылка на метод. Короткая форма лямбды, когда лямбда **просто вызывает** метод.\n\n```java\nFunction<String, Integer> len1 = s -> s.length();\nFunction<String, Integer> len2 = String::length;  // то же\n```\n\n## Четыре вида\n\n**Статический:**\n\n```java\nFunction<Integer, Integer> abs = Math::abs;\nSystem.out.println(abs.apply(-5)); // 5\n```\n\n**Метод экземпляра (bound):**\n\n```java\nConsumer<String> printer = System.out::println;\nprinter.accept(\"hi\");\n```\n\n**Метод экземпляра (unbound):**\n\n```java\nFunction<String, String> upper = String::toUpperCase;\nupper.apply(\"hello\"); // \"HELLO\"\n```\n\n**Конструктор:**\n\n```java\nSupplier<ArrayList<String>> factory = ArrayList::new;\n```\n\n## Когда использовать\n\nЕсли лямбда — просто `x -> SomeClass.method(x)` или `x -> x.method()` — заменяй на `::`. Короче.\n\n## Когда НЕ использовать\n\nЕсли внутри логика — только лямбда:\n\n```java\nFunction<Integer, Integer> f1 = x -> x * 2;      // нельзя `::`\n```\n\n## Что будет, если\n\n- `String::toUpperCase` в `Runnable` — ошибка, сигнатуры не совпадают.\n- Опечатка без `::` — не компилируется.\n\n## Частая ошибка\n\nПутать bound и unbound. `System.out::println` — на `out`. `String::toUpperCase` — на объекте извне.\n\n## Итог\n\n- `::` — ссылка на метод\n- `Math::abs` — статический\n- `System.out::println` — bound\n- `String::toUpperCase` — unbound\n- `ArrayList::new` — конструктор\n- Только когда лямбда просто вызывает метод",
+      "questions": [
+        { "text": "Что означает `::`?", "options": ["Ссылку на метод", "Создание объекта", "Наследование", "Ошибку"], "answer": 0, "explanation": "Method reference." },
+        { "text": "Чем `String::toUpperCase` короче `s -> s.toUpperCase()`?", "options": ["Быстрее", "То же, но короче", "По-другому", "Ошибка"], "answer": 1, "explanation": "Синтаксический сахар." },
+        { "text": "Что делает `System.out::println`?", "options": ["Ссылка на метод println", "Создаёт System.out", "Ошибка", "Возвращает строку"], "answer": 0, "explanation": "Bound reference." },
+        { "text": "Когда НЕ использовать `::`?", "options": ["Всегда можно", "Если в лямбде логика", "Только для static", "Только для конструкторов"], "answer": 1, "explanation": "Только когда просто вызывает метод." }
+      ],
+      "practice": {
+        "description": "Используй method references:\n- `Function<String, String> upper = String::toUpperCase;`\n- `Consumer<String> printer = System.out::println;`\n\nВыведи `upper.apply(\"hello\")` через `printer`.\n\nВидимый текст: `HELLO`",
+        "starter": "import java.util.function.Function;\nimport java.util.function.Consumer;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "HELLO",
+        "must_contain": ["::", "toUpperCase", "System.out::println"]
+      }
+    },
+    "28": {
+      "id": 28,
+      "title": "Stream API: map, filter",
+      "theory": "## Что такое Stream\n\nStream — **поток данных**, по которому применяются операции.\n\n```java\nList<Integer> nums = List.of(1, 2, 3, 4, 5);\nnums.stream()\n    .filter(n -> n % 2 == 0)\n    .forEach(System.out::println);\n// 2\n// 4\n```\n\n## Создание\n\n```java\nlist.stream()\nStream.of(\"a\", \"b\", \"c\")\nArrays.stream(new int[]{1, 2, 3})\n```\n\n## filter\n\nОставить только подходящие. `Predicate<T>`:\n\n```java\nnums.stream().filter(n -> n > 2) // 3, 4, 5\n```\n\n## map\n\nПреобразовать каждый. `Function<T, R>`:\n\n```java\nnums.stream().map(n -> n * 10) // 10, 20, 30\n```\n\n## Ленивость\n\nПромежуточные (`filter`, `map`) **ничего не выполняют** без терминальной (`forEach`, `collect`).\n\n```java\nnums.stream().map(n -> n * 2);  // ничего\nnums.stream().map(n -> n * 2).forEach(System.out::println); // работает\n```\n\n## Цепочка\n\n```java\nList<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\nnums.stream()\n    .filter(n -> n % 2 == 0)\n    .map(n -> n * 10)\n    .forEach(System.out::println);\n```\n\n## Что будет, если\n\n- Без терминальной — ничего.\n- Использовать Stream повторно — `IllegalStateException`.\n- Изменять коллекцию — `ConcurrentModificationException`.\n\n## Частая ошибка\n\n`.forEach(n -> System.out.println(n * 2))` без `filter` — обрабатывает всё.\n\n## Итог\n\n- `stream()` — из коллекции\n- `filter` — оставить\n- `map` — преобразовать\n- Промежуточные — lazy\n- Терминальные — запускают\n- Stream одноразовый",
+      "questions": [
+        { "text": "Что делает `filter`?", "options": ["Меняет", "Оставляет подходящие", "Удаляет", "Считает"], "answer": 1, "explanation": "Predicate." },
+        { "text": "Что делает `map`?", "options": ["Оставляет", "Преобразует", "Считает", "Складывает"], "answer": 1, "explanation": "Function." },
+        { "text": "Что без терминальной?", "options": ["Работает", "Ничего не произойдёт", "Ошибка", "Один элемент"], "answer": 1, "explanation": "Lazy." },
+        { "text": "Что выведет `List.of(1, 2, 3, 4).stream().filter(n -> n % 2 == 0).count()`?", "options": ["1", "2", "3", "4"], "answer": 1, "explanation": "2 и 4 — 2." }
+      ],
+      "practice": {
+        "description": "Дан `List<Integer> nums = List.of(1, 2, 3, 4, 5, 6);`.\n\nЧерез Stream: `filter` чётные, `map` × 10, `forEach` println.\n\n```\n20\n40\n60\n```",
+        "starter": "import java.util.List;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\n        // TODO\n    }\n}\n",
+        "expected": "20\n40\n60",
+        "must_contain": [".stream()", ".filter(", ".map(", ".forEach(", "System.out.println"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "title": "Stream API: reduce, collect",
+      "theory": "## Терминальные\n\n- `forEach` — пройти\n- `count()` — сколько\n- `findFirst()` — первый в `Optional`\n- `anyMatch` / `allMatch` / `noneMatch`\n- `collect(Collector)` — собрать\n- `reduce(start, BinaryOperator)` — свернуть\n\n## anyMatch, allMatch\n\n```java\nboolean anyEven = List.of(1, 2, 3).stream().anyMatch(n -> n % 2 == 0);\nSystem.out.println(anyEven); // true\n```\n\n## collect\n\n```java\nimport java.util.stream.Collectors;\n\nList<Integer> doubled = List.of(1, 2, 3).stream()\n    .map(n -> n * 2)\n    .collect(Collectors.toList());\nSystem.out.println(doubled); // [2, 4, 6]\n```\n\n## reduce\n\n```java\nint sum = List.of(1, 2, 3, 4, 5).stream()\n    .reduce(0, (a, b) -> a + b);\nSystem.out.println(sum); // 15\n```\n\nДля чисел — `mapToInt(...).sum()`.\n\n## List.of и Map.of\n\n```java\nList<String> list = List.of(\"a\", \"b\");\nMap<String, Integer> map = Map.of(\"a\", 1, \"b\", 2);\n```\n\nИзменять нельзя.\n\n## Что будет, если\n\n- `collect(Collectors.toList())` без `import` — ошибка.\n- `reduce` без старта — `Optional<T>`.\n- Изменять `List.of` — `UnsupportedOperationException`.\n\n## Частая ошибка\n\n`collect(toList())` возвращает `List`. Для `ArrayList` — `.collect(Collectors.toCollection(ArrayList::new))`.\n\n## Итог\n\n- `forEach`, `count`, `collect`, `reduce`\n- `Collectors.toList()` — в список\n- `reduce` — свёртка\n- `mapToInt().sum()` — сумма\n- `List.of` / `Map.of` — неизменяемые",
+      "questions": [
+        { "text": "Что делает `collect(Collectors.toList())`?", "options": ["Считает", "Собирает в List", "Фильтрует", "Сортирует"], "answer": 1, "explanation": "В список." },
+        { "text": "Что делает `reduce`?", "options": ["Разбивает", "Сворачивает", "Удаляет", "Дублирует"], "answer": 1, "explanation": "К одному." },
+        { "text": "Что делает `anyMatch`?", "options": ["Все", "Хоть один", "Ни один", "Считает"], "answer": 1, "explanation": "Хоть один true." },
+        { "text": "Можно ли изменить `List.of(...)`?", "options": ["Да", "Нет", "Только add", "Только remove"], "answer": 1, "explanation": "Неизменяемый." }
+      ],
+      "practice": {
+        "description": "Дан `List<Integer> nums = List.of(1, 2, 3, 4, 5);`.\n\n1. Сумма через `reduce(0, Integer::sum)` → `15`.\n2. Удвоенные через `map` + `collect(Collectors.toList())` → `[2, 4, 6, 8, 10]`.\n\n```\n15\n[2, 4, 6, 8, 10]\n```",
+        "starter": "import java.util.List;\nimport java.util.stream.Collectors;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5);\n        // TODO\n    }\n}\n",
+        "expected": "15\n[2, 4, 6, 8, 10]",
+        "must_contain": [".stream()", ".reduce(", ".map(", ".collect(", "Collectors.toList", "System.out.println"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "title": "Generics",
+      "theory": "## Проблема\n\n`ArrayList` без типа хранит `Object`. Достаёшь — приведение. Ошибки в рантайме:\n\n```java\nArrayList list = new ArrayList();\nlist.add(\"hi\");\nint x = (int) list.get(0); // ClassCastException\n```\n\n## Решение: `<T>`\n\n```java\nArrayList<String> list = new ArrayList<>();\nString s = list.get(0); // без приведения\n```\n\nТип проверяется **компилятором**.\n\n## Свой класс\n\n```java\nclass Box<T> {\n    private T value;\n    Box(T value) { this.value = value; }\n    T get() { return value; }\n}\n\nBox<String> b = new Box<>(\"Привет\");\nBox<Integer> i = new Box<>(42);\n```\n\n## Ограничение `<T extends Number>`\n\n```java\nclass NumericBox<T extends Number> {\n    T value;\n    NumericBox(T v) { value = v; }\n    double asDouble() { return value.doubleValue(); }\n}\n```\n\n## Несколько\n\n```java\nclass Pair<K, V> {\n    K key; V value;\n    Pair(K k, V v) { key = k; value = v; }\n}\n```\n\n## Примитивы нельзя\n\n`Box<int>` — ошибка. Только `Box<Integer>`.\n\n## Что будет, если\n\n- `Box<int>` — ошибка.\n- `list.add(42)` в `List<String>` — ошибка компиляции.\n- Забыть `<T>` — снова `Object`.\n\n## Частая ошибка\n\n`Box<String> b = new Box(\"hi\");` без `<>` — warning.\n\n## Итог\n\n- Generics — типобезопасность\n- `<T>` — параметр\n- `<T extends Number>` — ограничение\n- `<K, V>` — несколько\n- Примитивов нет\n- `List.of` / `Map.of`",
+      "questions": [
+        { "text": "Что даёт `<T>`?", "options": ["Скорость", "Типобезопасность", "Удаление", "Ошибку"], "answer": 1, "explanation": "Компилятор проверяет." },
+        { "text": "Можно ли `Box<int>`?", "options": ["Да", "Нет, только Integer", "Только для int", "Иногда"], "answer": 1, "explanation": "Примитивы нет." },
+        { "text": "Что делает `<T extends Number>`?", "options": ["Разрешает любые", "Ограничивает числами", "Удаляет", "Ошибка"], "answer": 1, "explanation": "Number и наследники." },
+        { "text": "Можно ли менять `List.of(...)`?", "options": ["Да", "Нет", "Только add", "Только в первый раз"], "answer": 1, "explanation": "Неизменяемая." }
+      ],
+      "practice": {
+        "description": "Создай `class Box<T>` с конструктором `Box(T value)` и `T get()`.\n\n`Box<String>(\"Привет\")` и `Box<Integer>(42)`. Выведи оба `get()`.\n\n```\nПривет\n42\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Привет\n42",
+        "must_contain": ["class Box<T>", "new Box<>", ".get()", "System.out.println"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "title": "Wildcards",
+      "theory": "## Проблема\n\n`List<Integer>` **не** подтип `List<Number>` — generics инвариантны.\n\n```java\nvoid printAll(List<Number> list) { }\nprintAll(List.of(1, 2, 3)); // ошибка\n```\n\n## `? extends T` — producer\n\n```java\nstatic double sumAll(List<? extends Number> nums) {\n    double s = 0;\n    for (Number n : nums) s += n.doubleValue();\n    return s;\n}\n\nSystem.out.println(sumAll(List.of(1, 2, 3)));      // 6.0\nSystem.out.println(sumAll(List.of(1.5, 2.5)));      // 4.0\n```\n\n**Только читать.** Добавить нельзя.\n\n## `? super T` — consumer\n\n```java\nstatic void fill(List<? super Integer> list) {\n    list.add(1);\n    list.add(2);\n}\n```\n\n**Только писать.**\n\n## PECS\n\n**P**roducer **E**xtends, **C**onsumer **S**uper:\n- Читаешь — `? extends T`\n- Пишешь — `? super T`\n- И так, и так — без wildcard\n\n## Что будет, если\n\n- `list.add(x)` для `? extends T` — ошибка компиляции.\n- Забыть wildcard — только точный тип.\n\n## Частая ошибка\n\n`List<? extends Number>` для записи. Нельзя `add`.\n\n## Итог\n\n- `? extends T` — читать\n- `? super T` — писать\n- PECS\n- Без wildcard — точный тип",
+      "questions": [
+        { "text": "Что означает `? extends Number`?", "options": ["Только Number", "Number и наследники", "Только Object", "Ошибка"], "answer": 1, "explanation": "Или подтип." },
+        { "text": "Что с `? extends T`?", "options": ["Читать", "Писать", "Оба", "Ничего"], "answer": 0, "explanation": "Producer." },
+        { "text": "Что с `? super T`?", "options": ["Читать", "Писать", "Оба", "Ничего"], "answer": 1, "explanation": "Consumer." },
+        { "text": "Что такое PECS?", "options": ["Ошибка", "Producer Extends, Consumer Super", "Метод", "Класс"], "answer": 1, "explanation": "Правило." }
+      ],
+      "practice": {
+        "description": "Создай `static double sumAll(List<? extends Number> nums)`, суммирует через `doubleValue()`.\n\nВыведи `sumAll(List.of(1, 2, 3))` и `sumAll(List.of(1.5, 2.5))`.\n\n```\n6.0\n4.0\n```",
+        "starter": "import java.util.List;\n\npublic class Main {\n    static double sumAll(List<? extends Number> nums) {\n        // TODO\n        return 0;\n    }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "6.0\n4.0",
+        "must_contain": ["? extends Number", "doubleValue()", "System.out.println"]
+      }
+    },
+    "32": {
+      "id": 32,
+      "title": "Optional",
+      "theory": "## Проблема null\n\n`null` — источник `NullPointerException`.\n\n```java\nString name = findUser(5); // null\nSystem.out.println(name.length()); // NPE\n```\n\n## Optional\n\nКонтейнер: **значение есть** или **пусто**.\n\n```java\nimport java.util.Optional;\n\nOptional<String> name = findUser(5);\n```\n\n## Создание\n\n```java\nOptional.of(\"Привет\")\nOptional.empty()\nOptional.ofNullable(null)    // null → empty\nOptional.of(null)            // NPE\n```\n\n## Проверки\n\n```java\nopt.isPresent()\nopt.isEmpty()\n```\n\n## Достать\n\n```java\nopt.get()                     // ошибка если пусто\nopt.orElse(\"по умолчанию\")\nopt.orElseGet(() -> compute())\nopt.orElseThrow(() -> new RuntimeException())\n```\n\n`orElse` вычисляет дефолт всегда. `orElseGet` — только если нужно.\n\n## ifPresent\n\n```java\nopt.ifPresent(name -> System.out.println(name));\nopt.ifPresentOrElse(\n    name -> System.out.println(\"есть \" + name),\n    () -> System.out.println(\"нет\")\n);\n```\n\n## map и flatMap\n\n```java\nOptional<Integer> len = Optional.of(\"Привет\").map(String::length);\nSystem.out.println(len.orElse(0)); // 6\n```\n\n## Что будет, если\n\n- `Optional.of(null)` — NPE.\n- `opt.get()` без проверки — `NoSuchElementException`.\n- `Optional` в полях класса — антипаттерн.\n\n## Частая ошибка\n\n`if (opt.isPresent()) { String s = opt.get(); }` — лучше `ifPresent` или `orElse`.\n\n## Итог\n\n- `Optional<T>` — может быть пусто\n- `of`, `ofNullable`, `empty`\n- `orElse`, `orElseGet`, `orElseThrow`\n- `ifPresent`\n- `map`\n- Не для полей",
+      "questions": [
+        { "text": "Что такое `Optional`?", "options": ["Коллекция", "Контейнер с возможным отсутствием", "Массив", "Ошибка"], "answer": 1, "explanation": "Значение или пусто." },
+        { "text": "Что делает `orElse`?", "options": ["Значение или дефолт", "Бросает", "Печатает", "Удаляет"], "answer": 0, "explanation": "Дефолт если пусто." },
+        { "text": "Что при `Optional.of(null)`?", "options": ["Пусто", "NullPointerException", "0", "Ошибка синтаксиса"], "answer": 1, "explanation": "Не принимает null." },
+        { "text": "Что делает `ifPresent`?", "options": ["Если пусто", "Если есть", "Удаляет", "Ошибка"], "answer": 1, "explanation": "Есть — выполнить." }
+      ],
+      "practice": {
+        "description": "Создай:\n- `Optional<String> a = Optional.of(\"Привет\");`\n- `Optional<String> b = Optional.empty();`\n\nВыведи `a.orElse(\"нет\")` и `b.orElse(\"нет\")`.\n\n```\nПривет\nнет\n```",
+        "starter": "import java.util.Optional;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Привет\nнет",
+        "must_contain": ["Optional.of", "Optional.empty", ".orElse(", "System.out.println"]
+      }
+    },
+    "33": {
+      "id": 33,
+      "title": "enum",
+      "theory": "## Что такое enum\n\n`enum` — перечисление фиксированных значений.\n\n```java\nenum Day { MON, TUE, WED, THU, FRI, SAT, SUN }\n\nDay d = Day.MON;\n```\n\nКаждое значение — **объект** класса `Day`.\n\n## Методы\n\n```java\nDay[] all = Day.values();\nDay mon = Day.valueOf(\"MON\");\nString name = mon.name();\nint index = mon.ordinal();\n```\n\n## switch с enum\n\n```java\nswitch (d) {\n    case MON:\n        System.out.println(\"Понедельник\");\n        break;\n}\n```\n\n## Поля и методы\n\n```java\nenum Planet {\n    MERCURY(3.303e+23, 2.4397e6),\n    EARTH(5.976e+24, 6.37814e6);\n\n    private final double mass;\n    private final double radius;\n\n    Planet(double mass, double radius) {\n        this.mass = mass;\n        this.radius = radius;\n    }\n}\n```\n\n## Когда\n\n- Дни, статусы, цвета\n- Вместо `\"MON\"` → `Day.MON`\n- В `switch` — чище\n\n## Что будет, если\n\n- `valueOf(\"mon\")` — `IllegalArgumentException`.\n- Сравнивать `==` — работает (singleton).\n\n## Частая ошибка\n\n`switch` без `case`, покрывающего все значения — логика сломается.\n\n## Итог\n\n- `enum` — фиксированный набор\n- `values()`, `valueOf()`, `name()`, `ordinal()`\n- Поля и методы\n- `switch` — чище\n- `==` — можно",
+      "questions": [
+        { "text": "Что такое `enum`?", "options": ["Строка", "Перечисление", "Число", "Массив"], "answer": 1, "explanation": "Набор значений." },
+        { "text": "Что делает `values()`?", "options": ["Массив всех", "Одно", "Строку", "Ошибку"], "answer": 0, "explanation": "Массив." },
+        { "text": "Что делает `valueOf(\"MON\")`?", "options": ["Строку", "Day.MON", "Ошибка", "Индекс"], "answer": 1, "explanation": "Из строки в enum." },
+        { "text": "Можно ли `==` для enum?", "options": ["Нет", "Да", "Только equals", "Ошибка"], "answer": 1, "explanation": "Значения — единственные объекты." }
+      ],
+      "practice": {
+        "description": "Создай `enum Day { MON, TUE, WED }`.\n\n`for (Day d : Day.values())` + `switch` выведи:\n```\nПонедельник\nВторник\nСреда\n```",
+        "starter": "public class Main {\n    enum Day { MON, TUE, WED }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Понедельник\nВторник\nСреда",
+        "must_contain": ["enum Day", "values()", "switch", "case", "System.out.println"]
+      }
+    },
+    "34": {
+      "id": 34,
+      "title": "record и var",
+      "theory": "## record\n\n`record` — неизменяемый класс данных. Java 14+.\n\n```java\nrecord Point(int x, int y) { }\n\nPoint p = new Point(1, 2);\nSystem.out.println(p.x());   // 1\nSystem.out.println(p);       // Point[x=1, y=2]\n```\n\nАвтоматически:\n- конструктор\n- геттеры `x()`, `y()` (без `get`)\n- `equals`, `hashCode`\n- `toString` — `Point[x=1, y=2]`\n\n## Когда record\n\n- DTO\n- Результат метода\n- Ключи Map\n\nНЕ для:\n- Сущностей с изменяемым состоянием\n- Большого поведения\n- Наследования\n\n## Кастомные методы\n\n```java\nrecord Point(int x, int y) {\n    int manhattan() {\n        return Math.abs(x) + Math.abs(y);\n    }\n}\n```\n\n## var\n\n`var` — локальный вывод типа. Java 10+.\n\n```java\nvar list = new ArrayList<String>();\nvar n = 42;\nvar map = new HashMap<String, Integer>();\n```\n\n## Где работает\n\n- Только **локальные**\n- С инициализацией\n\n## Где НЕ работает\n\n```java\nvar field;\nvoid f(var x) { }\nvar x;\nvar x = null;\n```\n\n## Когда var\n\n- Длинный тип\n- Ясно из контекста\n\n## Что будет, если\n\n- `p.x` без скобок — ошибка, нужен `p.x()`.\n- `var` для поля — ошибка компиляции.\n\n## Частая ошибка\n\n`record` как изменяемый класс. Поля — final.\n\n## Итог\n\n- `record Name(поля)` — DTO\n- Геттеры без `get`\n- Автоматом: конструктор, equals, toString\n- Неизменяемый\n- `var` — локальный вывод\n- Только локально, с инициализацией",
+      "questions": [
+        { "text": "Что такое `record`?", "options": ["Изменяемый", "Неизменяемый класс данных", "Интерфейс", "Enum"], "answer": 1, "explanation": "DTO, Java 14+." },
+        { "text": "Что автоматически в record?", "options": ["Ничего", "Конструктор, equals, toString", "Только поля", "Ошибка"], "answer": 1, "explanation": "Всё генерируется." },
+        { "text": "Что такое `var`?", "options": ["Тип", "Локальный вывод типа", "Ключевое слово null", "Метод"], "answer": 1, "explanation": "Java 10+." },
+        { "text": "Работает ли `var` для поля?", "options": ["Да", "Нет, только локально", "Иногда", "Ошибка"], "answer": 1, "explanation": "Только локально." }
+      ],
+      "practice": {
+        "description": "1. `record Point(int x, int y) { }`.\n2. `Point p = new Point(1, 2);` — выведи.\n3. `var n = 42;` — выведи.\n\n```\nPoint[x=1, y=2]\n42\n```",
+        "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Point[x=1, y=2]\n42",
+        "must_contain": ["record Point", "new Point(", "var n = 42", "System.out.println"]
+      }
+    },
+    "35": {
+      "id": 35,
+      "title": "try-with-resources",
+      "theory": "## Проблема\n\nРесурсы (файлы, соединения) нужно **закрывать**. Забыл — утечка.\n\n```java\nBufferedReader r = new BufferedReader(new FileReader(\"f.txt\"));\ntry {\n    // работа\n} finally {\n    r.close();\n}\n```\n\nМного кода.\n\n## try-with-resources\n\n```java\ntry (BufferedReader r = new BufferedReader(new FileReader(\"f.txt\"))) {\n    // работа\n}\n// r закрывается автоматически\n```\n\nРесурс в **скобках** после `try`. Закрывается после блока, даже при ошибке.\n\n## AutoCloseable\n\nРесурс реализует `AutoCloseable`:\n\n```java\nclass Res implements AutoCloseable {\n    public void close() {\n        System.out.println(\"closed\");\n    }\n}\n\ntry (Res r = new Res()) {\n    System.out.println(\"used\");\n}\n// used\n// closed\n```\n\n## Несколько ресурсов\n\n```java\ntry (\n    BufferedReader r = new BufferedReader(new FileReader(\"a.txt\"));\n    BufferedWriter w = new BufferedWriter(new FileWriter(\"b.txt\"))\n) { }\n```\n\nЗакрываются в **обратном** порядке.\n\n## Что будет, если\n\n- Ресурс не `AutoCloseable` — ошибка компиляции.\n- `close()` бросает — suppressed.\n\n## Частая ошибка\n\nОткрыть вне `try` — `close()` не сработает.\n\n## Итог\n\n- `try (ресурс) { }` — автозакрытие\n- `AutoCloseable`\n- Несколько через `;`\n- Обратный порядок\n- Лучше `finally`",
+      "questions": [
+        { "text": "Что делает try-with-resources?", "options": ["Ничего", "Закрывает автоматически", "Ускоряет", "Ошибка"], "answer": 1, "explanation": "Автозакрытие." },
+        { "text": "Какой интерфейс?", "options": ["Runnable", "AutoCloseable", "Serializable", "Comparable"], "answer": 1, "explanation": "`AutoCloseable`." },
+        { "text": "В каком порядке закрываются?", "options": ["Прямом", "Обратном", "Случайном", "Параллельно"], "answer": 1, "explanation": "Обратный." },
+        { "text": "Закроется при исключении?", "options": ["Нет", "Да", "Зависит", "Только в finally"], "answer": 1, "explanation": "Да." }
+      ],
+      "practice": {
+        "description": "Создай `class Res implements AutoCloseable` с `close()` → `closed`.\n\nИспользуй в `try-with-resources`, внутри — `used`.\n\n```\nused\nclosed\n```",
+        "starter": "public class Main {\n    static class Res implements AutoCloseable {\n        // TODO\n    }\n\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "used\nclosed",
+        "must_contain": ["implements AutoCloseable", "public void close()", "try (", "System.out.println"]
+      }
+    },
+    "36": {
+      "id": 36,
+      "title": "Stream API: практика",
+      "theory": "## Комбинирование\n\n```java\nList<Integer> nums = List.of(3, 1, 4, 1, 5, 9, 2, 6);\n\nList<Integer> result = nums.stream()\n    .filter(n -> n > 2)\n    .sorted()\n    .collect(Collectors.toList());\nSystem.out.println(result); // [3, 4, 5, 6, 9]\n```\n\n## Collectors\n\n**groupingBy:**\n\n```java\nMap<Integer, List<String>> byLength = words.stream()\n    .collect(Collectors.groupingBy(String::length));\n```\n\n**counting:**\n\n```java\nMap<Integer, Long> counts = words.stream()\n    .collect(Collectors.groupingBy(String::length, Collectors.counting()));\n```\n\n**averagingInt:**\n\n```java\ndouble avgLen = words.stream()\n    .collect(Collectors.averagingInt(String::length));\n```\n\n**joining:**\n\n```java\nString joined = words.stream()\n    .collect(Collectors.joining(\", \"));\n```\n\n## mapToInt\n\n```java\nint sum = words.stream().mapToInt(String::length).sum();\n```\n\n## Цепочки\n\n```java\nint total = nums.stream()\n    .filter(n -> n % 2 == 0)\n    .map(n -> n * n)\n    .mapToInt(n -> n)\n    .sum();\n```\n\n## Что будет, если\n\n- Забыть `import Collectors` — ошибка.\n- `average()` — `OptionalDouble`.\n- Изменять — исключение.\n\n## Частая ошибка\n\n`groupingBy` возвращает `HashMap` — порядок не гарантирован.\n\n## Итог\n\n- `Collectors.groupingBy` — группировка\n- `counting`, `averagingInt`, `joining`\n- `mapToInt().sum()` — сумма\n- `sorted()` — сортировка\n- Цепочки: filter → map → collect",
+      "questions": [
+        { "text": "Что делает `Collectors.groupingBy`?", "options": ["Считает", "Группирует", "Сортирует", "Удаляет"], "answer": 1, "explanation": "Группы." },
+        { "text": "Что делает `Collectors.joining(\", \")`?", "options": ["Разбивает", "Склеивает через запятую", "Удаляет", "Считает"], "answer": 1, "explanation": "Строка." },
+        { "text": "Что делает `mapToInt().sum()`?", "options": ["Среднее", "Сумма", "Удаление", "Ошибка"], "answer": 1, "explanation": "Сумма." },
+        { "text": "Что возвращает `average()`?", "options": ["double", "OptionalDouble", "int", "String"], "answer": 1, "explanation": "OptionalDouble." }
+      ],
+      "practice": {
+        "description": "Дан `List<String> words = List.of(\"a\", \"bb\", \"cc\", \"ddd\");`.\n\nСумма длин через `mapToInt(String::length).sum()`.\n\nВидимый текст: `8`",
+        "starter": "import java.util.List;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<String> words = List.of(\"a\", \"bb\", \"cc\", \"ddd\");\n        // TODO\n    }\n}\n",
+        "expected": "8",
+        "must_contain": [".stream()", "mapToInt", "String::length", ".sum()", "System.out.println"]
+      }
+    },
+    "37": {
+      "id": 37,
+      "title": "Итоговая",
+      "theory": "## Собираем всё\n\nКурс охватил: синтаксис, ООП, коллекции, лямбды, Stream, Optional.\n\n## Модель\n\n```java\nclass Product {\n    private final String name;\n    private final double price;\n\n    Product(String name, double price) {\n        this.name = name;\n        this.price = price;\n    }\n\n    String getName() { return name; }\n    double getPrice() { return price; }\n}\n```\n\n## Stream + Optional\n\n```java\nList<Product> products = List.of(\n    new Product(\"A\", 100),\n    new Product(\"B\", 200),\n    new Product(\"C\", 50)\n);\n\ndouble total = products.stream()\n    .mapToDouble(Product::getPrice)\n    .sum();\nSystem.out.printf(\"Сумма: %.1f%n\", total); // 350.0\n\nOptional<Product> expensive = products.stream()\n    .filter(p -> p.getPrice() > 150)\n    .findFirst();\n\nexpensive.ifPresentOrElse(\n    p -> System.out.println(p.getName()),  // B\n    () -> System.out.println(\"нет\")\n);\n```\n\n## Разбор\n\n- `stream()` — из списка\n- `mapToDouble` — `DoubleStream`, `.sum()`\n- `filter` — отобрать\n- `findFirst` — `Optional<Product>`\n- `ifPresentOrElse`\n\n## Проверки\n\n- Класс с `private final`\n- Геттеры\n- Stream\n- Optional\n- Нет `null` в возврате\n\n## Что будет, если\n\n- `get()` у пустого — `NoSuchElementException`.\n- Изменяемые поля — теряется смысл Optional.\n- Забыть `printf` — неверный формат.\n\n## Частая ошибка\n\n`.map(Product::getPrice).sum()` — не работает, нужен `mapToDouble`.\n\n## Итог\n\n- Класс + геттеры\n- Stream: filter, mapToDouble, sum, findFirst\n- Optional + ifPresentOrElse\n- Композиция — стандарт",
+      "questions": [
+        { "text": "Что возвращает `findFirst()`?", "options": ["Продукт", "Optional<Product>", "null", "Массив"], "answer": 1, "explanation": "Optional." },
+        { "text": "Что делает `mapToDouble`?", "options": ["Stream<Double>", "DoubleStream с sum", "Ошибка", "Удаляет"], "answer": 1, "explanation": "Примитивный поток." },
+        { "text": "Что при `get()` на пустом Optional?", "options": ["null", "NoSuchElementException", "0", "Ошибка компиляции"], "answer": 1, "explanation": "Исключение." },
+        { "text": "Что лучше: null или Optional?", "options": ["null", "Optional для возвратов", "Оба плохи", "Оба хороши"], "answer": 1, "explanation": "Optional — явно." }
+      ],
+      "practice": {
+        "description": "Класс `Product` с `String name`, `double price`, конструктором и геттерами.\n\n```\nList<Product> products = List.of(\n    new Product(\"A\", 100),\n    new Product(\"B\", 200),\n    new Product(\"C\", 50)\n);\n```\n\n1. Сумма через `stream().mapToDouble().sum()`, выведи `printf(\"Сумма: %.1f%n\", total)`.\n2. Первый > 150 через `filter().findFirst()` в `Optional`, `ifPresentOrElse` → имя.\n\n```\nСумма: 350.0\nB\n```",
+        "starter": "import java.util.List;\nimport java.util.Optional;\n\nclass Product {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+        "expected": "Сумма: 350.0\nB",
+        "must_contain": ["class Product", "private final", "getName", "getPrice", ".stream()", ".mapToDouble(", ".sum()", "Optional", ".findFirst()", "ifPresentOrElse", "System.out.printf"]
+      }
+    }
+  }
+}

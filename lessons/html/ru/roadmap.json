@@ -1,0 +1,127 @@
+[
+  {
+    "id": 1,
+    "title": "Что такое HTML",
+    "lessons": [
+      { "id": 1, "title": "HTML — разметка, не программирование", "status": "current" },
+      { "id": 2, "title": "Первый документ", "status": "locked" },
+      { "id": 3, "title": "Заголовки и параграфы", "status": "locked" },
+      { "id": 4, "title": "Комментарии", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Текст и ссылки",
+    "lessons": [
+      { "id": 5, "title": "Списки: ul, ol, li", "status": "locked" },
+      { "id": 6, "title": "Ссылки: a href", "status": "locked" },
+      { "id": 7, "title": "Изображения: img src alt", "status": "locked" },
+      { "id": 8, "title": "Форматирование текста", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Семантика и структура",
+    "lessons": [
+      { "id": 9, "title": "header, nav, main, footer", "status": "locked" },
+      { "id": 10, "title": "section, article, aside", "status": "locked" },
+      { "id": 11, "title": "div и span", "status": "locked" },
+      { "id": 12, "title": "Вложенность и читаемость", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Формы",
+    "lessons": [
+      { "id": 13, "title": "form, input, label", "status": "locked" },
+      { "id": 14, "title": "Типы input", "status": "locked" },
+      { "id": 15, "title": "textarea, select, option, button", "status": "locked" },
+      { "id": 16, "title": "Валидация HTML", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Таблицы и медиа",
+    "lessons": [
+      { "id": 17, "title": "Таблицы: table, tr, td, th", "status": "locked" },
+      { "id": 18, "title": "thead, tbody, caption", "status": "locked" },
+      { "id": 19, "title": "video, audio, iframe", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Доступность",
+    "lessons": [
+      { "id": 20, "title": "alt и label", "status": "locked" },
+      { "id": 21, "title": "ARIA базово", "status": "locked" },
+      { "id": 22, "title": "Семантика вместо div", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "HTML5 и продвинутое",
+    "lessons": [
+      { "id": 23, "title": "figure, figcaption, details, summary", "status": "locked" },
+      { "id": 24, "title": "meta: charset, viewport, description", "status": "locked" },
+      { "id": 25, "title": "Собираем страницу", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Практика",
+    "lessons": [
+      { "id": 26, "title": "Мини-проект: визитка", "status": "locked" },
+      { "id": 27, "title": "Итоговая", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Расширенные формы",
+    "lessons": [
+      { "id": 28, "title": "fieldset, legend", "status": "locked" },
+      { "id": 29, "title": "datalist", "status": "locked" },
+      { "id": 30, "title": "Дополнительные input types", "status": "locked" },
+      { "id": 31, "title": "output, progress, meter", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Адаптивные медиа",
+    "lessons": [
+      { "id": 32, "title": "srcset, sizes", "status": "locked" },
+      { "id": 33, "title": "picture, source", "status": "locked" },
+      { "id": 34, "title": "loading=\"lazy\"", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Продвинутый HTML",
+    "lessons": [
+      { "id": 35, "title": "dialog", "status": "locked" },
+      { "id": 36, "title": "template", "status": "locked" },
+      { "id": 37, "title": "canvas", "status": "locked" },
+      { "id": 38, "title": "svg inline", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 12,
+    "title": "Практика",
+    "lessons": [
+      { "id": 39, "title": "Практика: форма регистрации", "status": "locked" },
+      { "id": 40, "title": "Практика: галерея с picture", "status": "locked" },
+      { "id": 41, "title": "Итоговая", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  }
+]

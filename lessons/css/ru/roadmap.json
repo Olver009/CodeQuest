@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "title": "Введение",
+    "lessons": [
+      { "id": 1, "title": "Что такое CSS и зачем", "status": "current" },
+      { "id": 2, "title": "Подключение CSS", "status": "locked" },
+      { "id": 3, "title": "Синтаксис: правила, селектор, свойство", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Селекторы",
+    "lessons": [
+      { "id": 4, "title": "Селекторы: тег, класс, id", "status": "locked" },
+      { "id": 5, "title": "Комбинированные селекторы", "status": "locked" },
+      { "id": 6, "title": "Псевдоклассы: :hover, :focus", "status": "locked" },
+      { "id": 7, "title": "Приоритет селекторов", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Цвета и текст",
+    "lessons": [
+      { "id": 8, "title": "Цвета: color и background", "status": "locked" },
+      { "id": 9, "title": "Шрифты", "status": "locked" },
+      { "id": 10, "title": "Выравнивание и отступы текста", "status": "locked" },
+      { "id": 11, "title": "Стили текста", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Блочная модель",
+    "lessons": [
+      { "id": 12, "title": "box-sizing и размеры", "status": "locked" },
+      { "id": 13, "title": "margin и padding", "status": "locked" },
+      { "id": 14, "title": "border и border-radius", "status": "locked" },
+      { "id": 15, "title": "Карточка целиком", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Раскладка",
+    "lessons": [
+      { "id": 16, "title": "display: block, inline, none", "status": "locked" },
+      { "id": 17, "title": "Flexbox: контейнер и оси", "status": "locked" },
+      { "id": 18, "title": "Flexbox: выравнивание", "status": "locked" },
+      { "id": 19, "title": "Grid базово", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Позиционирование",
+    "lessons": [
+      { "id": 20, "title": "position: static, relative, absolute", "status": "locked" },
+      { "id": 21, "title": "position: fixed, sticky", "status": "locked" },
+      { "id": 22, "title": "z-index и стекинг", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Адаптивность",
+    "lessons": [
+      { "id": 23, "title": "Единицы: px, %, em, rem", "status": "locked" },
+      { "id": 24, "title": "Media queries", "status": "locked" },
+      { "id": 25, "title": "Mobile-first", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Переходы и анимации",
+    "lessons": [
+      { "id": 26, "title": "transition", "status": "locked" },
+      { "id": 27, "title": "transform", "status": "locked" },
+      { "id": 28, "title": "@keyframes и animation", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Продвинутый CSS",
+    "lessons": [
+      { "id": 29, "title": ":nth-child, :not(), :first-child", "status": "locked" },
+      { "id": 30, "title": "CSS-переменные и calc()", "status": "locked" },
+      { "id": 31, "title": "object-fit и aspect-ratio", "status": "locked" },
+      { "id": 32, "title": "filter и @font-face", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Практика",
+    "lessons": [
+      { "id": 33, "title": "Мини-проект: карточка товара", "status": "locked" },
+      { "id": 34, "title": "Итоговая: адаптивная страница", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  }
+]

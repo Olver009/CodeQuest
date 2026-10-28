@@ -1,0 +1,224 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Chapter Test: Foundations of Code Understanding",
+    "description": "Checks understanding of how a computer executes commands, works with memory, and processes data.",
+    "questions": [
+      {
+        "text": "What happens in memory on `x = 5` then `x = 10`?",
+        "options": ["Two variables are created", "The old value 5 is erased, 10 is written", "Both are kept", "Error"],
+        "answer": 1,
+        "explanation": "Assignment overwrites the value."
+      },
+      {
+        "text": "What does this output?\n```\na = 2\nb = 3\na = b\nb = a\nprint a, b\n```",
+        "options": ["2, 3", "3, 3", "3, 2", "2, 2"],
+        "answer": 1,
+        "explanation": "a=b sets a=3. b=a sets b=3. Both 3."
+      },
+      {
+        "text": "What is `2 + 3 * 4 - 1`?",
+        "options": ["19", "13", "11", "15"],
+        "answer": 1,
+        "explanation": "3*4=12. 2+12-1 = 13."
+      },
+      {
+        "text": "What does this output?\n```\nprint \"2\" + \"2\"\n```",
+        "options": ["4", "22", "\"4\"", "Error"],
+        "answer": 1,
+        "explanation": "Strings concatenate."
+      },
+      {
+        "text": "Why convert user input to a number?",
+        "options": ["For aesthetics", "To perform math operations instead of concatenating text", "For security", "Not needed"],
+        "answer": 1,
+        "explanation": "Input is a string by default."
+      }
+    ]
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Chapter Test: Branching and Logic",
+    "description": "Checks understanding of conditions, logical operators, and execution order.",
+    "questions": [
+      {
+        "text": "What does this output?\n```\nx = 5\nif x > 0:\n    print \"A\"\nif x > 3:\n    print \"B\"\nelse:\n    print \"C\"\n```",
+        "options": ["A", "AB", "AC", "ABC"],
+        "answer": 1,
+        "explanation": "Two independent `if`. A and B are printed."
+      },
+      {
+        "text": "What is `not (true and false)`?",
+        "options": ["true", "false", "Error", "Depends"],
+        "answer": 0,
+        "explanation": "true and false = false. not false = true."
+      },
+      {
+        "text": "Which code correctly checks the range 1 to 10?",
+        "options": ["x >= 1 and x <= 10", "x > 1 or x < 10", "x > 1 and < 10", "not (x < 1)"],
+        "answer": 0,
+        "explanation": "Two full conditions with AND."
+      },
+      {
+        "text": "What is wrong with the order `if x > 0 ... else if x > 10`?",
+        "options": ["Nothing", "For x=20 the first fires, the second is skipped", "Error", "Both fire"],
+        "answer": 1,
+        "explanation": "Order cuts off variants."
+      },
+      {
+        "text": "What does this output?\n```\nx = \"Apple\"\nif x == \"apple\":\n    print \"Yes\"\nelse:\n    print \"No\"\n```",
+        "options": ["Yes", "No", "Error", "Nothing"],
+        "answer": 1,
+        "explanation": "Strings are case-sensitive."
+      }
+    ]
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Chapter Test: Loops and Accumulation",
+    "description": "Checks accumulator, counter patterns, and nested loops.",
+    "questions": [
+      {
+        "text": "How many times does this run?\n```\nfor i from 2 to 5:\n    print i\n```",
+        "options": ["3", "4", "5", "Infinite"],
+        "answer": 1,
+        "explanation": "2, 3, 4, 5 — 4 times."
+      },
+      {
+        "text": "What does this output?\n```\ntotal = 0\nfor i from 1 to 4:\n    total += i\nprint total\n```",
+        "options": ["4", "10", "6", "0"],
+        "answer": 1,
+        "explanation": "1+2+3+4 = 10."
+      },
+      {
+        "text": "What is wrong with `while` without changing the variable?",
+        "options": ["Nothing", "Infinite loop", "Error", "Loop won't start"],
+        "answer": 1,
+        "explanation": "Condition always true."
+      },
+      {
+        "text": "How many iterations for nested loops 2 by 3?",
+        "options": ["5", "6", "8", "9"],
+        "answer": 1,
+        "explanation": "2 * 3 = 6."
+      },
+      {
+        "text": "What does this output?\n```\nfound = false\nfor i from 1 to 3:\n    if i == 5:\n        found = true\nprint found\n```",
+        "options": ["true", "false", "5", "Error"],
+        "answer": 1,
+        "explanation": "No 5. The flag stays false."
+      }
+    ]
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Chapter Test: Functions and Recursion",
+    "description": "Checks return, parameters, scope, and basic recursion.",
+    "questions": [
+      {
+        "text": "What does this output?\n```\nfunction f(a):\n    print a * 2\nprint f(3)\n```",
+        "options": ["6", "6\\nNothing", "Nothing", "Error"],
+        "answer": 1,
+        "explanation": "First prints 6 inside, then returns \"nothing\", which also prints."
+      },
+      {
+        "text": "What does this output?\n```\nfunction f(a):\n    return a * 2\nprint f(3)\n```",
+        "options": ["6", "3", "Error", "Nothing"],
+        "answer": 0,
+        "explanation": "Returns 6, prints 6."
+      },
+      {
+        "text": "What happens?\n```\nx = 10\nfunction f():\n    x = 5\nf()\nprint x\n```",
+        "options": ["5", "10", "Error", "Nothing"],
+        "answer": 1,
+        "explanation": "Local x doesn't change the global."
+      },
+      {
+        "text": "What is required in recursion?",
+        "options": ["A loop", "Base case (exit condition)", "A global variable", "An array"],
+        "answer": 1,
+        "explanation": "Without base — stack overflow."
+      },
+      {
+        "text": "What does `f(3)` return?\n```\nfunction f(n):\n    if n == 0:\n        return 0\n    return n + f(n-1)\n```",
+        "options": ["3", "6", "0", "Infinite"],
+        "answer": 1,
+        "explanation": "3 + 2 + 1 + 0 = 6."
+      }
+    ]
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Chapter Test: Arrays",
+    "description": "Checks indices, traversal, search, and swap.",
+    "questions": [
+      {
+        "text": "What does this output?\n```\na = [10, 20, 30]\nprint a[1]\n```",
+        "options": ["10", "20", "30", "Error"],
+        "answer": 1,
+        "explanation": "Zero-based indexing."
+      },
+      {
+        "text": "What is wrong with `max = 0` for finding max of `[-5, -10]`?",
+        "options": ["Nothing", "Answer will be 0, though the numbers are negative", "Error", "Infinite"],
+        "answer": 1,
+        "explanation": "0 is greater than all negatives."
+      },
+      {
+        "text": "What does this output?\n```\na = [1, 2, 3]\ncount = 0\nfor x in a:\n    if x % 2 == 0:\n        count += 1\nprint count\n```",
+        "options": ["1", "2", "3", "0"],
+        "answer": 0,
+        "explanation": "One even — 2."
+      },
+      {
+        "text": "How to correctly swap a and b?",
+        "options": ["a = b; b = a", "t = a; a = b; b = t", "b = a; a = b", "a = a + b; b = a - b; a = b - a"],
+        "answer": 1,
+        "explanation": "Need a third variable."
+      },
+      {
+        "text": "Where does an out-of-bounds error occur for `a = [1, 2, 3]`?",
+        "options": ["for i from 0 to 2", "for i from 0 to 3", "for x in a", "a[2]"],
+        "answer": 1,
+        "explanation": "Indices only 0, 1, 2."
+      }
+    ]
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Chapter Test: Algorithmic Thinking",
+    "description": "Checks understanding of how a program is structured and how to solve problems.",
+    "questions": [
+      {
+        "text": "What three parts does any program consist of?",
+        "options": ["Loops, functions, arrays", "Input, processing, output", "Variables, conditions, recursion", "Theory, practice, tests"],
+        "answer": 1,
+        "explanation": "The basic scheme of how a program works."
+      },
+      {
+        "text": "What is task decomposition?",
+        "options": ["Deleting code", "Breaking a big task into small subtasks", "Rewriting code", "Compiling"],
+        "answer": 1,
+        "explanation": "Makes solving easier."
+      },
+      {
+        "text": "Why test edge cases (0, -1, empty string)?",
+        "options": ["For aesthetics", "Logic errors most often occur there", "For speed", "Not required"],
+        "answer": 1,
+        "explanation": "Edges are the source of bugs."
+      },
+      {
+        "text": "If a program works incorrectly, how do you find the bug?",
+        "options": ["Delete half the code", "Walk through the steps manually (tracing)", "Rewrite from scratch", "Use another language"],
+        "answer": 1,
+        "explanation": "Tracing shows where logic diverges from expectation."
+      },
+      {
+        "text": "What is the \"program state\"?",
+        "options": ["Speed of operation", "The values of all variables at a given moment", "Line count", "Errors in code"],
+        "answer": 1,
+        "explanation": "A snapshot of memory."
+      }
+    ]
+  }
+}

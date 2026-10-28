@@ -1,0 +1,145 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Контрольная: Введение",
+    "description": "Финальное задание главы 1. Проверяет: iostream, компиляцию, cout.",
+    "practice": {
+      "description": "Напиши программу с `#include <iostream>`, `int main()`, выведи три строки через `std::cout`:\n```\nC++\nУрок 1\nГотово\n```\nЗаверши `return 0;`.",
+      "starter": "#include <iostream>\n\nint main() {\n    // TODO: три std::cout\n    return 0;\n}\n",
+      "expected": "C++\nУрок 1\nГотово",
+      "must_contain": ["#include <iostream>", "std::cout", "return 0"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Контрольная: Основы",
+    "description": "Финальное задание главы 2. Проверяет: типы, cin/cout, ссылки.",
+    "practice": {
+      "description": "Прочитай два целых через `std::cin`, выведи через `std::cout`:\n```\nСумма: 15\nПроизведение: 50\n```\n\n**stdin:**\n```\n5\n10\n```",
+      "starter": "#include <iostream>\n\nint main() {\n    int a, b;\n    // TODO: cin + cout\n    return 0;\n}\n",
+      "expected": "Сумма: 15\nПроизведение: 50",
+      "must_contain": ["std::cin", "std::cout", "a + b", "a * b"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Контрольная: Управление",
+    "description": "Финальное задание главы 3. Проверяет: if, for, break.",
+    "practice": {
+      "description": "Через `for` от 1 до 10 выведи только нечётные:\n```\n1\n3\n5\n7\n9\n```",
+      "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "1\n3\n5\n7\n9",
+      "must_contain": ["for", "continue", "% 2", "std::cout"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Контрольная: Функции",
+    "description": "Финальное задание главы 4. Проверяет: функции, перегрузку, ссылки.",
+    "practice": {
+      "description": "Создай:\n- `int square(int x)` — возвращает `x * x`\n- `void incr(int &x)` — увеличивает `x` на 1 через ссылку\n\nВ `main`:\n- `n = 5`, выведи `square(5)`\n- выведи `incr(n)` (n станет 6)\n\n```\n25\n6\n```",
+      "starter": "#include <iostream>\n\n// TODO: square, incr\n\nint main() {\n    int n = 5;\n    // TODO\n    return 0;\n}\n",
+      "expected": "25\n6",
+      "must_contain": ["int square", "void incr", "int &x", "std::cout"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Контрольная: Массивы и строки",
+    "description": "Финальное задание главы 5. Проверяет: vector, string, range-for.",
+    "practice": {
+      "description": "Дан `std::vector<int> nums = {3, 7, 2, 9, 5};`.\n\nВыведи:\n```\nСумма: 26\nМаксимум: 9\nСтрока: hello (5)\n```\n\nПоследнее — `std::string s = \"hello\";` и `s.size()`.",
+      "starter": "#include <iostream>\n#include <vector>\n#include <string>\n\nint main() {\n    std::vector<int> nums = {3, 7, 2, 9, 5};\n    // TODO\n    return 0;\n}\n",
+      "expected": "Сумма: 26\nМаксимум: 9\nСтрока: hello (5)",
+      "must_contain": ["std::vector", "for", "std::string", "std::cout"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Контрольная: Классы",
+    "description": "Финальное задание главы 6. Проверяет: класс, конструктор, private, static.",
+    "practice": {
+      "description": "Класс `Book`:\n- `private std::string title`, `private int pages`\n- конструктор `Book(std::string t, int p)`\n- геттеры `getTitle()`, `getPages()`\n\nВ `main` создай `Book b(\"Java\", 500)` и выведи:\n```\nJava: 500\n```",
+      "starter": "#include <iostream>\n#include <string>\n\n// TODO: class Book\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Java: 500",
+      "must_contain": ["class Book", "private", "Book(", "getTitle", "getPages", "std::cout"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Контрольная: ООП",
+    "description": "Финальное задание главы 7. Проверяет: наследование, виртуальные функции.",
+    "practice": {
+      "description": "Абстрактный класс `Shape` с `virtual double area() = 0` и `virtual std::string name() = 0`.\n\nНаследники:\n- `Rectangle` — `width * height`, name `\"Rectangle\"`\n- `Circle` — `3.14 * r * r`, name `\"Circle\"`\n\nЧерез `std::vector<Shape*>` или `std::vector<std::unique_ptr<Shape>>` выведи:\n```\nRectangle: 6\nCircle: 12.56\n```",
+      "starter": "#include <iostream>\n#include <string>\n#include <vector>\n\n// TODO: Shape, Rectangle, Circle\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Rectangle: 6\nCircle: 12.56",
+      "must_contain": ["class Shape", "virtual", "= 0", "class Rectangle", "class Circle", "override", "std::cout"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Контрольная: STL контейнеры",
+    "description": "Финальное задание главы 8. Проверяет: vector, map, set.",
+    "practice": {
+      "description": "1. `std::vector<int> v = {1, 2, 3};` — выведи `size`.\n2. `std::map<std::string, int> m; m[\"a\"] = 1; m[\"b\"] = 2;` — выведи `m[\"a\"]`.\n3. `std::set<int> s = {1, 2, 2, 3, 3, 3};` — выведи `size`.\n\n```\nVector: 3\nMap a: 1\nSet: 3\n```",
+      "starter": "#include <iostream>\n#include <vector>\n#include <map>\n#include <set>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Vector: 3\nMap a: 1\nSet: 3",
+      "must_contain": ["std::vector", "std::map", "std::set", ".size()", "std::cout"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Контрольная: Алгоритмы",
+    "description": "Финальное задание главы 9. Проверяет: sort, accumulate, лямбды.",
+    "practice": {
+      "description": "Дан `std::vector<int> v = {5, 3, 8, 2, 7};`.\n\n1. `std::sort` — выведи отсортированный (через пробел).\n2. `std::accumulate` — выведи сумму.\n3. Лямбда-фильтр: выведи все > 4 через `for_each` и лямбду.\n\n```\nSorted: 2 3 5 7 8\nSum: 25\n> 4: 5 7 8\n```",
+      "starter": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\nint main() {\n    std::vector<int> v = {5, 3, 8, 2, 7};\n    // TODO\n    return 0;\n}\n",
+      "expected": "Sorted: 2 3 5 7 8\nSum: 25\n> 4: 5 7 8",
+      "must_contain": ["std::sort", "std::accumulate", "[](", "std::cout"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Контрольная: Умные указатели",
+    "description": "Финальное задание главы 10. Проверяет: unique_ptr, shared_ptr.",
+    "practice": {
+      "description": "1. `std::unique_ptr<int> p = std::make_unique<int>(42);` — выведи `*p`.\n2. `std::shared_ptr<int> q = std::make_shared<int>(10);` — выведи `*q` и `q.use_count()`.\n\n```\nunique: 42\nshared: 10 (count 1)\n```",
+      "starter": "#include <iostream>\n#include <memory>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "unique: 42\nshared: 10 (count 1)",
+      "must_contain": ["std::unique_ptr", "std::make_unique", "std::shared_ptr", "std::make_shared", "use_count", "std::cout"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Контрольная: Исключения",
+    "description": "Финальное задание главы 11. Проверяет: throw, try/catch, свои исключения.",
+    "practice": {
+      "description": "1. Создай `class MyError : public std::runtime_error { using std::runtime_error::runtime_error; };`.\n2. Функция `check(int x)`: если `x < 0` — `throw MyError(\"negative\")`.\n3. В `main`: вызови `check(-1)` в `try/catch` и выведи `Ошибка: negative`.\n\n```\nОшибка: negative\n```",
+      "starter": "#include <iostream>\n#include <stdexcept>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Ошибка: negative",
+      "must_contain": ["class MyError", "std::runtime_error", "throw", "try", "catch", "std::cout"]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "title": "Контрольная: Шаблоны",
+    "description": "Финальное задание главы 12. Проверяет: шаблоны функций, классов.",
+    "practice": {
+      "description": "1. `template <typename T> T maxOf(T a, T b) { return a > b ? a : b; }`.\n2. Выведи `maxOf(3, 7)` и `maxOf(3.5, 2.1)`.\n\n```\n7\n3.5\n```",
+      "starter": "#include <iostream>\n\n// TODO: template\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "7\n3.5",
+      "must_contain": ["template", "typename", "maxOf", "std::cout"]
+    }
+  },
+  "13": {
+    "chapter_id": 13,
+    "title": "Контрольная: Итоговая",
+    "description": "Финальное задание курса. Проверяет: классы, STL, алгоритмы.",
+    "practice": {
+      "description": "Класс `Product` с `std::string name`, `double price`, геттерами.\n\n`std::vector<Product> products = { {\"A\", 100}, {\"B\", 200}, {\"C\", 50} };`\n\n1. Сумма через `std::accumulate` с лямбдой.\n2. Первый с ценой > 150 через `std::find_if`.\n\n```\nСумма: 350\nДорогой: B\n```",
+      "starter": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n#include <numeric>\n\n// TODO: Product\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Сумма: 350\nДорогой: B",
+      "must_contain": ["class Product", "std::accumulate", "std::find_if", "[](", "std::cout"]
+    }
+  }
+}

@@ -1,0 +1,618 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "check_type": "dom",
+      "title": "Что такое CSS и зачем",
+      "theory": "## Что такое CSS\n\nCSS — **Cascading Style Sheets** (каскадные таблицы стилей). Язык **оформления**. HTML описывает **структуру**, CSS — **внешний вид**: цвета, шрифты, отступы, расположение.\n\n## Почему не в HTML\n\nРаньше стили писали прямо в HTML: `<font color=\"red\">`. Это плохо:\n- Стили мешаются со структурой.\n- Менять оформление — править каждую страницу.\n- Огромный HTML.\n\nCSS вынесен отдельно. Один файл стилей — весь сайт.\n\n## Каскад\n\n**Каскад** — правила применяются по приоритету. Несколько правил для одного элемента — побеждает то, что «сильнее» (специфичность, порядок, `!important`). Отсюда название.\n\n## Стилизация примера\n\n```html\n<p class=\"intro\">Текст</p>\n<style>\n  .intro { color: blue; font-size: 20px; }\n</style>\n```\n\nБез CSS — обычный текст. С CSS — синий, 20px.\n\n## Что можно стилизовать\n\n- Цвет текста и фона\n- Размер, шрифт, жирность\n- Отступы и границы\n- Расположение (блоки, flexbox, grid)\n- Анимации, переходы\n- И многое другое\n\n## CSS не заменяет HTML и JS\n\n- HTML — структура\n- CSS — оформление\n- JS — поведение\n\nБез HTML не к чему применять CSS. Без CSS сайт работает, но выглядит как документ 1995 года.\n\n## Что будет, если\n\n- Стилизовать несуществующий элемент — правило просто не применится.\n- Забыть `;` после свойства — правило может не сработать.\n\n## Частая ошибка\n\nПисать стили прямо в HTML через `style=\"...\"`. Работает, но не масштабируется.\n\n## Итог\n\n- CSS — оформление\n- HTML — структура, CSS — вид, JS — поведение\n- Каскад — приоритет правил\n- Один файл стилей на весь сайт",
+      "questions": [
+        { "text": "Что такое CSS?", "options": ["Разметка", "Язык оформления", "Язык программирования", "База данных"], "answer": 1, "explanation": "CSS — стили." },
+        { "text": "Чем CSS отличается от HTML?", "options": ["Ничем", "HTML — структура, CSS — внешний вид", "HTML быстрее", "CSS только для текста"], "answer": 1, "explanation": "Разные задачи." },
+        { "text": "Что такое каскад?", "options": ["Водопад", "Приоритет правил при конфликте", "Цикл", "Функция"], "answer": 1, "explanation": "Каскад решает, какое правило применить." },
+        { "text": "Где НЕ стоит писать стили?", "options": ["В `<style>`", "В отдельном `.css`", "Прямо в HTML атрибутом `style=`", "Все варианты работают"], "answer": 2, "explanation": "Inline — плохо масштабируется." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<p class=\"intro\">Привет</p>\n```\n\nВ `<style>` задай `.intro`:\n- `color: green;`\n- `font-size: 24px;`\n\nВидимый текст: `Привет`",
+        "starter": "<p class=\"intro\">Привет</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Привет",
+        "must_contain": [".intro", "color:", "green", "font-size:", "24px"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "check_type": "dom",
+      "title": "Подключение CSS",
+      "theory": "## Три способа\n\n1. **Внешний файл** (лучший):\n```html\n<link rel=\"stylesheet\" href=\"style.css\">\n```\n\n2. **Внутри `<style>`**:\n```html\n<style>\n  p { color: red; }\n</style>\n```\n\n3. **Inline**:\n```html\n<p style=\"color: red;\">Текст</p>\n```\n\n## Внешний файл\n\n`<link>` в `<head>`:\n\n```html\n<head>\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n```\n\nОдин `style.css` — на все страницы.\n\n## `<style>`\n\nПрямо в HTML. Хорошо для прототипа, плохо для проекта.\n\n## Inline\n\n`style=\"...\"` в атрибуте. Самый высокий приоритет, **самый плохой** для поддержки.\n\n## Порядок\n\n1. Inline\n2. `<style>`\n3. `<link>`\n\nВнутри одного источника — каскад.\n\n## Что будет, если\n\n- `<link>` без `rel=\"stylesheet\"` — файл не подключится.\n- `href=\"style.css\"` а файл называется `styles.css` — 404.\n- `<style>` в `<body>` — работает, но не по стандарту.\n\n## Частая ошибка\n\n`<style>` после `</body>` — браузер может проигнорировать.\n\n## Итог\n\n- Внешний файл — лучший\n- `<style>` — для прототипа\n- Inline — только динамика\n- `<link rel=\"stylesheet\">` в `<head>`",
+      "questions": [
+        { "text": "Как подключить внешний CSS?", "options": ["<style src=\"...\">", "<link rel=\"stylesheet\" href=\"...\">", "<css href=\"...\">", "<script href=\"...\">"], "answer": 1, "explanation": "`<link rel=\"stylesheet\">`." },
+        { "text": "Какой способ лучший для проекта?", "options": ["Inline", "<style>", "Внешний файл", "Все одинаковы"], "answer": 2, "explanation": "Внешний — переиспользование." },
+        { "text": "Где ставить `<link>`?", "options": ["В `<body>`", "В `<head>`", "В `<footer>`", "Перед DOCTYPE"], "answer": 1, "explanation": "В `<head>`." },
+        { "text": "Какой способ имеет наивысший приоритет?", "options": ["<link>", "<style>", "Inline `style=`", "Все одинаково"], "answer": 2, "explanation": "Inline — самый сильный." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<h1>Заголовок</h1>\n```\n\nВ `<style>` задай `h1`:\n- `color: navy;`\n- `text-align: center;`\n\nВидимый текст: `Заголовок`",
+        "starter": "<h1>Заголовок</h1>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Заголовок",
+        "must_contain": ["<style", "h1", "color:", "navy", "text-align:", "center"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "check_type": "dom",
+      "title": "Синтаксис: правила, селектор, свойство",
+      "theory": "## Структура правила\n\n```css\nселектор {\n  свойство: значение;\n  свойство: значение;\n}\n```\n\n## Разбор\n\n- `p` — **селектор**\n- `color: red;` — **декларация**\n- `{ }` — блок правил\n- `;` — конец декларации, **обязательна**\n\n## Несколько селекторов\n\n```css\nh1, h2, h3 {\n  color: navy;\n}\n```\n\n## Вложенные стили (не работают)\n\nCSS не поддерживает вложенность как SASS. `p { span { ... } }` — не сработает.\n\n## Комментарии\n\n```css\n/* Это комментарий */\n```\n\n`//` **не работает** в CSS (в отличие от JS).\n\n## Что будет, если\n\n- Забыть `;` — CSS может проигнорировать правило.\n- Забыть `{ }` — правило не распознается.\n- `//` вместо `/* */` — ошибка.\n\n## Частая ошибка\n\n`// комментарий` — привычка из JS. В CSS — только `/* */`.\n\n## Итог\n\n- `селектор { свойство: значение; }`\n- Несколько селекторов — через запятую\n- `;` — после каждой декларации\n- Комментарии — `/* */`",
+      "questions": [
+        { "text": "Как выглядит правило CSS?", "options": ["selector => property", "selector { property: value; }", "selector: property=value", "property { selector }"], "answer": 1, "explanation": "`селектор { свойство: значение; }`." },
+        { "text": "Зачем `;` в конце?", "options": ["Для красоты", "Разделить декларации", "Обязательно в HTML", "Ничего"], "answer": 1, "explanation": "Без `;` парсер может пропустить правило." },
+        { "text": "Как сделать комментарий?", "options": ["// text", "# text", "<!-- text -->", "/* text */"], "answer": 3, "explanation": "В CSS — только `/* */`." },
+        { "text": "Можно ли стилизовать несколько тегов одним правилом?", "options": ["Нет", "Да, через запятую", "Только через класс", "Только через id"], "answer": 1, "explanation": "`h1, h2, h3 { ... }`." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<h1>Заголовок</h1>\n<p>Текст</p>\n```\n\nВ `<style>`:\n1. `h1, p` — `font-family: sans-serif;`\n2. `h1` — `color: #333;`\n3. `p` — `color: gray;`\n\nВидимый текст: `Заголовок Текст`",
+        "starter": "<h1>Заголовок</h1>\n<p>Текст</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Заголовок Текст",
+        "must_contain": ["h1, p", "font-family", "sans-serif", "color:", "#333", "gray"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "check_type": "dom",
+      "title": "Селекторы: тег, класс, id",
+      "theory": "## По тегу\n\n```css\np { color: red; }\n```\n\nСтилизует **все** `<p>`.\n\n## По классу\n\n```css\n.intro { color: blue; }\n```\n\n`.intro` — селектор класса. Один класс — на много элементов.\n\n## По id\n\n```css\n#header { background: black; }\n```\n\n`#header` — селектор id. **Один id — на странице один элемент.**\n\n## Отличия\n\n| Селектор | Пример | На сколько |\n|---|---|---|\n| тег | `p` | все `<p>` |\n| класс | `.intro` | все с `class=\"intro\"` |\n| id | `#header` | один с `id=\"header\"` |\n\n## Именование классов\n\n- Строчные, через дефис: `card-title`\n- По смыслу: `card`, не `red-text`\n- Не с цифры\n\n## Что будет, если\n\n- `class=\"intro\"` а селектор `intro { }` (без точки) — не сработает.\n- `id=\"x\"` и `.x` (точка вместо решётки) — не сработает.\n\n## Частая ошибка\n\nЗабыть `.` перед классом: `intro { }` — ищет тег `<intro>`.\n\n## Итог\n\n- `p` — тег\n- `.class` — класс, основной\n- `#id` — id, один\n- Точка и решётка обязательны",
+      "questions": [
+        { "text": "Какой селектор для класса?", "options": ["intro", ".intro", "#intro", "class=intro"], "answer": 1, "explanation": "Класс — с точкой." },
+        { "text": "Какой селектор для id?", "options": ["id", ".id", "#id", "$id"], "answer": 2, "explanation": "id — с `#`." },
+        { "text": "Сколько элементов стилизует класс?", "options": ["Один", "Сколько угодно с этим классом", "Только первый", "Ни одного"], "answer": 1, "explanation": "Класс — переиспользуемый." },
+        { "text": "Что такое `p`?", "options": ["Класс", "id", "Тег", "Свойство"], "answer": 2, "explanation": "`p` — тег." },
+        { "text": "Что не так с `intro { color: red; }` для `<p class=\"intro\">`?", "options": ["Всё верно", "Нужна `.` — `.intro`", "Нужна `#`", "Нужно `class=`"], "answer": 1, "explanation": "Без точки — ищет тег `<intro>`." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<h1 id=\"title\">Заголовок</h1>\n<p class=\"text\">Абзац</p>\n```\n\nВ `<style>`:\n1. `#title` — `color: red;`\n2. `.text` — `color: blue;`\n\nВидимый текст: `Заголовок Абзац`",
+        "starter": "<h1 id=\"title\">Заголовок</h1>\n<p class=\"text\">Абзац</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Заголовок Абзац",
+        "must_contain": ["#title", ".text", "color:", "red", "blue"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "check_type": "dom",
+      "title": "Комбинированные селекторы",
+      "theory": "## Потомок (пробел)\n\n```css\ndiv p { color: red; }\n```\n\nВсе `<p>` **внутри** `<div>` на любом уровне.\n\n## Дочерний (>)\n\n```css\ndiv > p { color: red; }\n```\n\nТолько **прямые** дети.\n\n## Группировка (,)\n\n```css\nh1, h2, p { color: navy; }\n```\n\nОдно правило на три селектора.\n\n## Соседний (+)\n\n```css\nh2 + p { margin-top: 0; }\n```\n\n`<p>` **сразу после** `<h2>`.\n\n## Все следующие (~)\n\n```css\nh2 ~ p { color: gray; }\n```\n\nВсе `<p>` **после** `<h2>` в одном родителе.\n\n## Что будет, если\n\n- `div p` vs `div>p` — разные результаты.\n- Пропустить пробел: `divp` — не тег.\n\n## Частая ошибка\n\n`div>p` без пробелов вокруг `>`. С пробелами `div > p` — то же, но читабельнее.\n\n## Итог\n\n- `a b` — потомок\n- `a > b` — прямой ребёнок\n- `a + b` — сосед\n- `a ~ b` — все следующие\n- `a, b` — группировка",
+      "questions": [
+        { "text": "Что значит `div p`?", "options": ["div и p", "p внутри div", "p рядом с div", "p без div"], "answer": 1, "explanation": "Пробел — потомок." },
+        { "text": "Что значит `div > p`?", "options": ["Все p внутри", "Прямой ребёнок div", "p перед div", "Ничего"], "answer": 1, "explanation": "`>` — только прямой." },
+        { "text": "Что делает `,`?", "options": ["Потомок", "Группировка", "Соседний", "Ничего"], "answer": 1, "explanation": "`h1, h2` — оба." },
+        { "text": "Что делает `+`?", "options": ["Потомок", "Прямой ребёнок", "Соседний", "Группировка"], "answer": 2, "explanation": "`h2 + p` — p сразу после h2." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"card\">\n  <h2>Заголовок</h2>\n  <p>Текст</p>\n</div>\n```\n\nВ `<style>`:\n1. `.card h2` — `color: navy;`\n2. `.card > p` — `color: gray;`\n\nВидимый текст: `Заголовок Текст`",
+        "starter": "<div class=\"card\">\n  <h2>Заголовок</h2>\n  <p>Текст</p>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Заголовок Текст",
+        "must_contain": [".card h2", ".card > p", "color:", "navy", "gray"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "check_type": "dom",
+      "title": "Псевдоклассы: :hover, :focus",
+      "theory": "## Что такое псевдокласс\n\nПсевдокласс — состояние элемента. `:hover` — курсор наведён, `:focus` — в фокусе.\n\n## :hover\n\n```css\nbutton:hover {\n  background: blue;\n}\n```\n\n## :focus\n\n```css\ninput:focus {\n  border-color: blue;\n  outline: none;\n}\n```\n\n## :active\n\n```css\na:active {\n  color: red;\n}\n```\n\nВ момент нажатия.\n\n## :visited\n\n```css\na:visited {\n  color: purple;\n}\n```\n\nПосещённая ссылка.\n\n## Порядок для ссылок\n\n`LVHA`: `:link`, `:visited`, `:hover`, `:active`.\n\n## Что будет, если\n\n- Забыть `:` — `hover { }` не сработает.\n- `:hover` на мобильном — работает при касании с задержкой.\n\n## Частая ошибка\n\n`:hover` без базового стиля. Без `button { ... }` переход будет резким.\n\n## Итог\n\n- `:hover` — наведение\n- `:focus` — фокус\n- `:active` — нажатие\n- `:visited` — посещено\n- Порядок LVHA",
+      "questions": [
+        { "text": "Что делает `:hover`?", "options": ["Фокус", "Наведение мыши", "Активное нажатие", "Посещение"], "answer": 1, "explanation": "Hover — наведение." },
+        { "text": "Что делает `:focus`?", "options": ["Наведение", "Фокус (Tab, клик)", "Ничего", "Отключает"], "answer": 1, "explanation": "Focus — фокус." },
+        { "text": "Как пишется `:hover` для кнопки?", "options": ["button.hover", "button:hover", "button.hover()", "hover button"], "answer": 1, "explanation": "`button:hover`." },
+        { "text": "Порядок состояний ссылок?", "options": ["Hover, focus, active, visited", "LVHA", "Alphabetical", "Не важно"], "answer": 1, "explanation": "LVHA." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<button class=\"btn\">Кнопка</button>\n```\n\nВ `<style>`:\n1. `.btn` — `background: gray; color: white;`\n2. `.btn:hover` — `background: blue;`\n\nВидимый текст: `Кнопка`",
+        "starter": "<button class=\"btn\">Кнопка</button>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Кнопка",
+        "must_contain": [".btn", ".btn:hover", "background:", "gray", "blue", "color:"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "check_type": "dom",
+      "title": "Приоритет селекторов",
+      "theory": "## Специфичность\n\nЕсли два правила претендуют на один элемент — применяется «сильнейшее».\n\n## Веса\n\n- Тег (`p`) — 1\n- Класс (`.x`) — 10\n- id (`#x`) — 100\n- Inline (`style=`) — 1000\n\n## Пример\n\n```css\np { color: red; }        /* 1 */\n.text { color: blue; }    /* 10 */\n#main { color: green; }   /* 100 */\n```\n\n`<p id=\"main\" class=\"text\">` — зелёный.\n\n## Порядок\n\nПри равенстве — выигрывает **последнее** правило.\n\n## !important\n\nПеребивает всё, кроме другого `!important`. **Избегай**.\n\n## Что будет, если\n\n- `#x` перебивает `.x`.\n- `!important` везде — каскад сломан.\n\n## Частая ошибка\n\n`!important` чтобы «просто работало». Правильнее — разобраться в специфичности.\n\n## Итог\n\n- id > класс > тег > звёздочка\n- Inline — сильнее всех\n- При равенстве — последнее правило\n- `!important` — избегай",
+      "questions": [
+        { "text": "Что сильнее: класс или id?", "options": ["Класс", "id", "Одинаково", "Зависит"], "answer": 1, "explanation": "id (100) > класс (10)." },
+        { "text": "Что сильнее: тег или класс?", "options": ["Тег", "Класс", "Одинаково", "Зависит"], "answer": 1, "explanation": "Класс (10) > тег (1)." },
+        { "text": "При равной специфичности?", "options": ["Первое", "Последнее", "Ни одно", "Ошибка"], "answer": 1, "explanation": "Последнее правило." },
+        { "text": "Что делает `!important`?", "options": ["Ускоряет", "Перебивает всё кроме другого !important", "Удаляет", "Ничего"], "answer": 1, "explanation": "Форсирует правило." },
+        { "text": "Что лучше для стилизации?", "options": ["id", "класс", "тег", "inline"], "answer": 1, "explanation": "Классы — предсказуемая специфичность." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<p id=\"main\" class=\"text\">Текст</p>\n```\n\nВ `<style>`:\n1. `p` — `color: red;`\n2. `.text` — `color: blue;`\n3. `#main` — `color: green;`\n\nВидимый текст: `Текст` (должен примениться green из-за id)",
+        "starter": "<p id=\"main\" class=\"text\">Текст</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Текст",
+        "must_contain": ["p {", ".text {", "#main {", "color:", "red", "blue", "green"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "check_type": "dom",
+      "title": "Цвета: color и background",
+      "theory": "## color — цвет текста\n\n```css\np { color: red; }\n```\n\n## background — фон\n\n```css\np { background: yellow; }\n```\n\n## Способы задать цвет\n\n1. **Имя**: `red`, `blue`, `navy`, `tomato`.\n2. **HEX**: `#ff0000`, `#333`, `#007bff`.\n3. **rgb / rgba**: `rgb(255, 0, 0)`, `rgba(0, 0, 0, 0.5)`.\n4. **hsl / hsla**: `hsl(0, 100%, 50%)`.\n\n## HEX\n\n`#RRGGBB`. `#f00` = `#ff0000`.\n\n- `#000000` — чёрный\n- `#ffffff` — белый\n- `#808080` — серый\n\n## rgba и прозрачность\n\n```css\nbackground: rgba(0, 0, 0, 0.5);\n```\n\n## Что будет, если\n\n- `#ff` — невалидно.\n- `color: 255` — не цвет.\n- Опечатка `backgroud` — правило игнорируется.\n\n## Частая ошибка\n\n`background-color: #fff` без `#` — `fff` не цвет.\n\n## Итог\n\n- `color` — текст, `background` — фон\n- Имя, HEX, rgb, hsl\n- `rgba` — с прозрачностью\n- HEX — `#rrggbb` или `#rgb`",
+      "questions": [
+        { "text": "Что меняет `color`?", "options": ["Фон", "Цвет текста", "Размер", "Отступ"], "answer": 1, "explanation": "`color` — текст." },
+        { "text": "Что меняет `background`?", "options": ["Фон", "Текст", "Границу", "Шрифт"], "answer": 0, "explanation": "Фон." },
+        { "text": "Что такое `#ff0000`?", "options": ["Невалидно", "Красный в HEX", "Синий", "Чёрный"], "answer": 1, "explanation": "`#f00` = `#ff0000`." },
+        { "text": "Как задать полупрозрачный фон?", "options": ["rgba(0,0,0,0.5)", "#000", "background=black", "opacity: bg"], "answer": 0, "explanation": "`rgba` с alpha." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"box\">Цвет</div>\n```\n\nВ `<style>`:\n1. `body` — `background: #f0f0f0;`\n2. `.box` — `background: navy; color: white;`\n\nВидимый текст: `Цвет`",
+        "starter": "<div class=\"box\">Цвет</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Цвет",
+        "must_contain": ["body", "background:", "#f0f0f0", ".box", "navy", "color:", "white"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "check_type": "dom",
+      "title": "Шрифты",
+      "theory": "## font-family\n\n```css\nbody {\n  font-family: Arial, sans-serif;\n}\n```\n\nЧерез запятую — список. `sans-serif` — системный «без засечек».\n\n## font-size\n\n```css\np { font-size: 16px; }\nh1 { font-size: 2rem; }\n```\n\n## font-weight\n\n```css\nb { font-weight: bold; }        /* 700 */\np { font-weight: normal; }      /* 400 */\nh1 { font-weight: 900; }\n```\n\n## font-style\n\n```css\nem { font-style: italic; }\n```\n\n`normal` / `italic` / `oblique`.\n\n## Подключение своего шрифта\n\n```css\n@import url('https://fonts.googleapis.com/css2?family=Roboto');\nbody { font-family: 'Roboto', sans-serif; }\n```\n\nТребует интернета.\n\n## Что будет, если\n\n- `font-family: \"Roboto\"` без подключения — браузер использует fallback.\n- `font-size: 20` без единиц — ошибка.\n- Неверное имя — fallback.\n\n## Частая ошибка\n\nЗабыть fallback: `font-family: \"MyFont\"`. Всегда добавляй `, sans-serif`.\n\n## Итог\n\n- `font-family` — список с fallback\n- `font-size` — размер (px, rem)\n- `font-weight` — 100–900\n- `font-style` — italic / normal",
+      "questions": [
+        { "text": "Что делает `font-family`?", "options": ["Размер", "Семейство шрифта", "Цвет", "Отступ"], "answer": 1, "explanation": "Семейство." },
+        { "text": "Зачем `sans-serif` в конце?", "options": ["Красиво", "Fallback если первый недоступен", "Ошибка", "Ускоряет"], "answer": 1, "explanation": "Резервный шрифт." },
+        { "text": "Что делает `font-weight: bold`?", "options": ["Курсив", "Жирный", "Размер", "Цвет"], "answer": 1, "explanation": "Жирный (700)." },
+        { "text": "Что делает `font-style: italic`?", "options": ["Жирный", "Курсив", "Размер", "Цвет"], "answer": 1, "explanation": "Курсив." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<h1>Заголовок</h1>\n<p>Текст</p>\n```\n\nВ `<style>`:\n1. `body` — `font-family: Arial, sans-serif;`\n2. `h1` — `font-size: 32px; font-weight: bold;`\n3. `p` — `font-size: 16px;`\n\nВидимый текст: `Заголовок Текст`",
+        "starter": "<h1>Заголовок</h1>\n<p>Текст</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Заголовок Текст",
+        "must_contain": ["font-family", "Arial", "sans-serif", "font-size:", "32px", "font-weight:", "bold", "16px"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "check_type": "dom",
+      "title": "Выравнивание и отступы текста",
+      "theory": "## text-align\n\n```css\nh1 { text-align: center; }\np { text-align: justify; }\n```\n\n- `left` — по левому\n- `right` — по правому\n- `center` — по центру\n- `justify` — по ширине\n\n## line-height\n\n```css\np { line-height: 1.5; }\n```\n\nБез единиц — множитель от `font-size`. Стандарт: 1.4–1.6.\n\n## letter-spacing\n\n```css\nh1 { letter-spacing: 2px; }\n```\n\n## text-indent\n\n```css\np { text-indent: 2em; }\n```\n\nКрасная строка.\n\n## Что будет, если\n\n- `text-align: center` на inline — не сработает.\n- `line-height` < 1 — строки слипаются.\n\n## Частая ошибка\n\n`line-height: 1.5px` — единицы, получилось 1.5 пикселя. Без единиц — множитель.\n\n## Итог\n\n- `text-align` — left / right / center / justify\n- `line-height` — 1.5 (без единиц)\n- `letter-spacing` — между буквами\n- `text-indent` — красная строка",
+      "questions": [
+        { "text": "Что делает `text-align: center`?", "options": ["Центрирует текст", "Меняет шрифт", "Меняет цвет", "Отступы"], "answer": 0, "explanation": "По центру." },
+        { "text": "Что делает `line-height: 1.5`?", "options": ["Ширину", "Межстрочный в 1.5 раза больше шрифта", "Цвет", "Отступ"], "answer": 1, "explanation": "Множитель." },
+        { "text": "Как задать красную строку?", "options": ["margin-top", "text-indent", "padding-left", "line-height"], "answer": 1, "explanation": "`text-indent`." },
+        { "text": "Что лучше для `line-height`?", "options": ["px", "множитель без единиц", "%", "rem"], "answer": 1, "explanation": "Без единиц — масштабируется." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<h1>Заголовок</h1>\n<p>Длинный текст для чтения.</p>\n```\n\nВ `<style>`:\n1. `h1` — `text-align: center;`\n2. `p` — `line-height: 1.6; text-align: justify;`\n\nВидимый текст: `Заголовок Длинный текст для чтения.`",
+        "starter": "<h1>Заголовок</h1>\n<p>Длинный текст для чтения.</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Заголовок Длинный текст для чтения.",
+        "must_contain": ["text-align:", "center", "line-height:", "1.6", "justify"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "check_type": "dom",
+      "title": "Стили текста",
+      "theory": "## text-decoration\n\n```css\na { text-decoration: none; }\n.underline { text-decoration: underline; }\n.strike { text-decoration: line-through; }\n```\n\n## text-transform\n\n```css\nh1 { text-transform: uppercase; }\n```\n\n- `uppercase` — ЗАГЛАВНЫМИ\n- `lowercase` — строчными\n- `capitalize` — Каждое С Заглавной\n- `none` — как есть\n\n## white-space\n\n```css\n.nowrap { white-space: nowrap; }\n```\n\n## text-shadow\n\n```css\nh1 { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }\n```\n\n## Что будет, если\n\n- `text-transform` меняет **только визуально**.\n- `text-decoration: none` на `<a>` — ссылка неотличима от текста.\n\n## Частая ошибка\n\n`text-decoration: none` без hover-эффекта.\n\n## Итог\n\n- `text-decoration` — underline / none / line-through\n- `text-transform` — регистр визуально\n- `white-space` — переносы\n- `text-shadow` — тень",
+      "questions": [
+        { "text": "Что делает `text-decoration: underline`?", "options": ["Подчёркивает", "Зачёркивает", "Убирает", "Курсив"], "answer": 0, "explanation": "Подчёркивание." },
+        { "text": "Что делает `text-transform: uppercase`?", "options": ["Заглавные визуально", "Меняет HTML", "Курсив", "Подчёркивает"], "answer": 0, "explanation": "Визуально заглавные." },
+        { "text": "Как убрать подчёркивание у ссылки?", "options": ["text-decoration: none", "text-decoration: no", "underline: none", "a.underline: 0"], "answer": 0, "explanation": "`none`." },
+        { "text": "Что такое `text-shadow`?", "options": ["Тень текста", "Размер", "Цвет", "Отступ"], "answer": 0, "explanation": "Тень." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<a href=\"#\">Ссылка</a>\n<h2 class=\"heading\">заголовок</h2>\n```\n\nВ `<style>`:\n1. `a` — `text-decoration: none; color: #007bff;`\n2. `a:hover` — `text-decoration: underline;`\n3. `.heading` — `text-transform: uppercase;`\n\nВидимый текст: `Ссылка заголовок`",
+        "starter": "<a href=\"#\">Ссылка</a>\n<h2 class=\"heading\">заголовок</h2>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Ссылка заголовок",
+        "must_contain": ["a {", "text-decoration:", "none", "color:", "a:hover", "underline", "text-transform:", "uppercase"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "check_type": "dom",
+      "title": "box-sizing и размеры",
+      "theory": "## Блочная модель\n\nЭлемент — прямоугольник из слоёв:\n1. **content** — контент\n2. **padding** — внутренний отступ\n3. **border** — граница\n4. **margin** — внешний отступ\n\n## width и height\n\nПо умолчанию — размер **content**. Padding и border добавляются **сверху**:\n\n```\nитоговая ширина = width + padding*2 + border*2\n```\n\n## box-sizing\n\n```css\n* {\n  box-sizing: border-box;\n}\n```\n\nМеняет логику: `width` включает padding и border. **Правило хорошего тона**.\n\n## Разница\n\n```css\n.box {\n  width: 200px;\n  padding: 20px;\n  border: 2px solid black;\n}\n/* content-box: итог 244px */\n/* border-box: итог 200px */\n```\n\n## max-width и min-width\n\n```css\nimg {\n  max-width: 100%;\n  height: auto;\n}\n```\n\n## Что будет, если\n\n- Без `border-box` — `width: 100%` + `padding: 20px` = вылезет.\n- `width` без единиц — ошибка.\n\n## Частая ошибка\n\n`width: 100%; padding: 20px;` без `border-box` — шире 100%.\n\n## Итог\n\n- content + padding + border + margin\n- `box-sizing: border-box` — width включает всё\n- `max-width: 100%` — не вылезать\n- `* { box-sizing: border-box }` — всем",
+      "questions": [
+        { "text": "Из чего состоит блочная модель?", "options": ["Только width", "content + padding + border + margin", "Только цвет", "Только шрифт"], "answer": 1, "explanation": "Четыре слоя." },
+        { "text": "Что делает `box-sizing: border-box`?", "options": ["Ничего", "width включает padding и border", "Добавляет margin", "Убирает border"], "answer": 1, "explanation": "Меняет логику размера." },
+        { "text": "Разница между `width` и `max-width`?", "options": ["Никакой", "max-width — предел, width — фиксированная", "max-width для img", "Ошибка"], "answer": 1, "explanation": "max — предел." },
+        { "text": "Что делает `img { max-width: 100%; height: auto; }`?", "options": ["Растягивает", "Картинка не больше родителя, пропорции сохранены", "Обрезает", "Ничего"], "answer": 1, "explanation": "Адаптивность." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"box\">Box</div>\n```\n\nВ `<style>`:\n1. `*` — `box-sizing: border-box;`\n2. `.box` — `width: 200px; padding: 20px; border: 1px solid black;`\n\nВидимый текст: `Box`",
+        "starter": "<div class=\"box\">Box</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Box",
+        "must_contain": ["box-sizing:", "border-box", ".box", "width:", "200px", "padding:", "border:", "solid"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "check_type": "dom",
+      "title": "margin и padding",
+      "theory": "## padding — внутренний\n\n```css\n.card { padding: 20px; }\n```\n\n## margin — внешний\n\n```css\n.card { margin: 16px; }\n```\n\n## Стороны\n\n```css\n.box {\n  padding: 10px 20px;            /* верх-низ 10, бока 20 */\n  margin: 10px 20px 30px;        /* верх 10, бока 20, низ 30 */\n  padding: 10px 20px 30px 40px;  /* верх, право, низ, лево */\n}\n```\n\nПорядок — по часовой стрелке.\n\n## Отдельные стороны\n\n```css\nmargin-top: 10px;\npadding-left: 15px;\n```\n\n## Центрирование\n\n```css\n.box {\n  width: 300px;\n  margin: 0 auto;\n}\n```\n\n`auto` по горизонтали = центрирование.\n\n## Схлопывание margin\n\nВертикальные margin **схлопываются** — берётся больший:\n\n```\n20 + 30 = 30 (не 50)\n```\n\nГоризонтальные не схлопываются.\n\n## Что будет, если\n\n- `margin: 0 auto` без `width` — не центрирует.\n- `padding` больше width — контент вылезет.\n\n## Частая ошибка\n\n`margin-bottom: 20px` + `margin-top: 20px` = 20 (схлопывание).\n\n## Итог\n\n- `padding` — внутри, `margin` — снаружи\n- 1/2/3/4 значения\n- `margin: 0 auto` — центрирование\n- Вертикальные margin схлопываются",
+      "questions": [
+        { "text": "Что такое `padding`?", "options": ["Внешний отступ", "Внутренний отступ", "Граница", "Размер"], "answer": 1, "explanation": "Внутри." },
+        { "text": "Что такое `margin`?", "options": ["Внешний отступ", "Внутренний", "Граница", "Цвет"], "answer": 0, "explanation": "Снаружи." },
+        { "text": "Что делает `margin: 0 auto`?", "options": ["Ничего", "Центрирует по горизонтали", "Убирает отступы", "Прижимает влево"], "answer": 1, "explanation": "`auto` — центрирование." },
+        { "text": "Что с двумя margin 20 и 30 сверху-снизу?", "options": ["50", "30 (схлопывание)", "20", "0"], "answer": 1, "explanation": "Вертикальные схлопываются." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"card\">Карточка</div>\n```\n\nВ `<style>` для `.card`:\n- `padding: 20px;`\n- `margin: 16px auto;`\n- `width: 300px;`\n- `background: #f5f5f5;`\n\nВидимый текст: `Карточка`",
+        "starter": "<div class=\"card\">Карточка</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Карточка",
+        "must_contain": [".card", "padding:", "20px", "margin:", "auto", "width:", "300px", "background:"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "check_type": "dom",
+      "title": "border и border-radius",
+      "theory": "## border\n\n```css\n.box {\n  border: 1px solid black;\n}\n```\n\nТри части: **толщина** + **стиль** + **цвет**.\n\n## Стили\n\n- `solid` — сплошная\n- `dashed` — пунктир\n- `dotted` — точки\n- `double` — двойная\n- `none` — убрать\n\n## Стороны\n\n```css\nborder-top: 2px solid red;\nborder-bottom: 1px dashed gray;\n```\n\n## border-radius\n\nСкругление:\n\n```css\n.box { border-radius: 8px; }\n.pill { border-radius: 999px; }\n.circle { border-radius: 50%; }\n```\n\n## Отдельные углы\n\n```css\nborder-radius: 10px 0 0 0;   /* только верхний левый */\n```\n\nПорядок: верх-лево, верх-право, низ-право, низ-лево.\n\n## Круг\n\n```css\n.avatar {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n}\n```\n\n## Что будет, если\n\n- `border: solid` без толщины — не отобразится.\n- `border-radius: 50%` при разных width/height — овал.\n\n## Частая ошибка\n\n`border: 1px black` без стиля — не сработает.\n\n## Итог\n\n- `border: толщина стиль цвет`\n- Стили: solid / dashed / dotted\n- `border-radius` — скругление\n- `50%` = круг",
+      "questions": [
+        { "text": "Из чего состоит `border`?", "options": ["Только цвет", "Толщина, стиль, цвет", "Только толщина", "Размер"], "answer": 1, "explanation": "Три части." },
+        { "text": "Какой стиль даёт пунктир?", "options": ["solid", "dashed", "dotted", "double"], "answer": 1, "explanation": "`dashed`." },
+        { "text": "Как сделать круг?", "options": ["border-radius: 50%", "border-radius: 8px", "circle", "round"], "answer": 0, "explanation": "`50%` при равных width/height." },
+        { "text": "Что не так с `border: 1px black`?", "options": ["Всё верно", "Нет стиля (solid)", "Нет цвета", "Нет толщины"], "answer": 1, "explanation": "Стиль обязателен." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"card\">Карточка</div>\n```\n\nВ `<style>` для `.card`:\n- `border: 1px solid #ccc;`\n- `border-radius: 8px;`\n- `padding: 20px;`\n- `width: 300px;`\n\nВидимый текст: `Карточка`",
+        "starter": "<div class=\"card\">Карточка</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Карточка",
+        "must_contain": [".card", "border:", "solid", "#ccc", "border-radius:", "8px", "padding:"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "check_type": "dom",
+      "title": "Карточка целиком",
+      "theory": "## Собираем\n\nКарточка — типовой элемент сайта.\n\n```css\n.card {\n  padding: 20px;\n  border: 1px solid #e0e0e0;\n  border-radius: 8px;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  max-width: 320px;\n  background: white;\n}\n```\n\n## box-shadow\n\n```css\nbox-shadow: сдвиг_x сдвиг_y размытие цвет;\n```\n\n## Заголовок и текст\n\n```css\n.card h2 {\n  margin-top: 0;\n  color: #333;\n}\n```\n\n## Кнопка\n\n```css\n.card button {\n  padding: 8px 16px;\n  background: #007bff;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}\n```\n\n## cursor: pointer\n\nКурсор-«рука». Стандарт для кликабельных.\n\n## Что будет, если\n\n- Нет `border: none` на кнопке — браузерный стиль «торчит».\n- Нет `background: white` — тени выглядят странно.\n\n## Частая ошибка\n\nЗабыть `margin-top: 0` у `<h2>` — большие отступы.\n\n## Итог\n\n- padding + border + radius + shadow\n- box-shadow — 4 параметра\n- `cursor: pointer` — для кнопок\n- Сбросы для h2 и button",
+      "questions": [
+        { "text": "Из чего состоит `box-shadow`?", "options": ["Только цвет", "Сдвиг X, Y, размытие, цвет", "Только размер", "Ничего"], "answer": 1, "explanation": "4 параметра." },
+        { "text": "Что делает `cursor: pointer`?", "options": ["Курсор-рука", "Удаляет", "Ускоряет", "Ничего"], "answer": 0, "explanation": "Курсор «рука»." },
+        { "text": "Зачем `border: none` у кнопки?", "options": ["Красиво", "Сбросить стандартный бордер", "Удаляет кнопку", "Ошибка"], "answer": 1, "explanation": "Браузерный стиль." },
+        { "text": "Зачем `margin-top: 0` у h2 в карточке?", "options": ["Красиво", "Убрать стандартный отступ сверху", "Удаляет заголовок", "Ускоряет"], "answer": 1, "explanation": "Без него — большой отступ." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"card\">\n  <h2>Заголовок</h2>\n  <p>Текст</p>\n  <button>OK</button>\n</div>\n```\n\nВ `<style>`:\n1. `.card` — `padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; max-width: 320px;`\n2. `.card h2` — `margin-top: 0;`\n3. `.card button` — `background: #007bff; color: white; border: none; padding: 8px 16px; cursor: pointer;`\n\nВидимый текст: `Заголовок Текст OK`",
+        "starter": "<div class=\"card\">\n  <h2>Заголовок</h2>\n  <p>Текст</p>\n  <button>OK</button>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Заголовок Текст OK",
+        "must_contain": [".card", "padding:", "border:", "border-radius:", "max-width:", ".card h2", "margin-top: 0", ".card button", "background:", "cursor:", "pointer"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "check_type": "dom",
+      "title": "display: block, inline, none",
+      "theory": "## display\n\nОпределяет, как элемент ведёт себя в потоке.\n\n## block\n\nВся ширина, новая строка:\n\n```css\n.box { display: block; }\n```\n\n`<div>`, `<p>`, `<h1>` — блочные.\n\n## inline\n\nПо ширине содержимого, в строке:\n\n```css\n.tag { display: inline; }\n```\n\n`<span>`, `<a>` — строчные. **Не работает** с `width`, `height`, `margin-top/bottom`.\n\n## inline-block\n\nКак inline + `width`/`height`:\n\n```css\n.card { display: inline-block; width: 200px; }\n```\n\n## none\n\nУбирает из потока:\n\n```css\n.hidden { display: none; }\n```\n\nНе видно, места не занимает.\n\n## visibility: hidden\n\nСкрыт, но **место остаётся**.\n\n## Что будет, если\n\n- `width` на inline — игнорируется.\n- `display: none` через JS — нельзя transition.\n\n## Частая ошибка\n\n`<div>` с `display: inline` — перестал занимать ширину.\n\n## Итог\n\n- `block` — вся ширина\n- `inline` — по контенту, без width\n- `inline-block` — в строке + width\n- `none` — убрать полностью\n- `visibility: hidden` — скрыть, место",
+      "questions": [
+        { "text": "Что делает `display: block`?", "options": ["Новая строка, вся ширина", "В строке", "Скрывает", "Ничего"], "answer": 0, "explanation": "Блочный." },
+        { "text": "Что делает `display: inline`?", "options": ["В строке, по контенту", "Вся ширина", "Скрывает", "Новая строка"], "answer": 0, "explanation": "Строчный." },
+        { "text": "Работает ли `width` на `inline`?", "options": ["Да", "Нет, игнорируется", "Только с !important", "Только с height"], "answer": 1, "explanation": "Не работает." },
+        { "text": "Что убирает элемент полностью?", "options": ["visibility: hidden", "display: none", "opacity: 0", "position: absolute"], "answer": 1, "explanation": "`display: none` — вне потока." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"box\">A</div>\n<div class=\"box\">B</div>\n<span class=\"hidden\">X</span>\n```\n\nВ `<style>`:\n1. `.box` — `display: inline-block; width: 100px;`\n2. `.hidden` — `display: none;`\n\nВидимый текст: `A B` (X скрыт)",
+        "starter": "<div class=\"box\">A</div>\n<div class=\"box\">B</div>\n<span class=\"hidden\">X</span>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B",
+        "must_contain": [".box", "display:", "inline-block", "width:", "100px", ".hidden", "none"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "check_type": "dom",
+      "title": "Flexbox: контейнер и оси",
+      "theory": "## Что такое flexbox\n\nСовременный способ раскладки: элементы в ряд/столбец с выравниванием.\n\n## display: flex\n\nНа **родителе**:\n\n```css\n.row {\n  display: flex;\n}\n```\n\nВсе прямые дети — flex-элементы, в ряд.\n\n## Оси\n\n- **main axis** — по умолчанию горизонтальная\n- **cross axis** — вертикальная\n\n## flex-direction\n\n```css\n.row { flex-direction: row; }\n.col { flex-direction: column; }\n```\n\n## gap\n\n```css\n.row { gap: 10px; }\n```\n\nРасстояние между.\n\n## Что будет, если\n\n- `display: flex` на дочернем — flex на родителе.\n- `column` без `height` — по высоте контента.\n\n## Частая ошибка\n\n`gap` в старых браузерах не работает. Сейчас — стандарт.\n\n## Итог\n\n- `display: flex` — на родителе\n- `flex-direction` — row / column\n- `gap` — расстояние\n- Главная ось — направление",
+      "questions": [
+        { "text": "Куда ставить `display: flex`?", "options": ["На дочерних", "На родителе", "На обоих", "Не важно"], "answer": 1, "explanation": "На контейнере." },
+        { "text": "Что делает `flex-direction: column`?", "options": ["В ряд", "В столбец", "Ничего", "Скрывает"], "answer": 1, "explanation": "Столбец." },
+        { "text": "Что делает `gap`?", "options": ["Отступы между", "Внешний margin", "Внутренний padding", "Цвет"], "answer": 0, "explanation": "Расстояние между." },
+        { "text": "По умолчанию flex-direction?", "options": ["column", "row", "row-reverse", "нет"], "answer": 1, "explanation": "`row`." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n```\n\nВ `<style>` для `.row`:\n- `display: flex;`\n- `gap: 10px;`\n- `padding: 10px;`\n- `background: #f5f5f5;`\n\nВидимый текст: `A B C`",
+        "starter": "<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C",
+        "must_contain": [".row", "display:", "flex", "gap:", "10px", "padding:", "background:"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "check_type": "dom",
+      "title": "Flexbox: выравнивание",
+      "theory": "## justify-content — по главной оси\n\n```css\n.row { justify-content: center; }\n```\n\n- `flex-start` — в начале\n- `flex-end` — в конце\n- `center` — по центру\n- `space-between` — по краям\n- `space-around` — вокруг\n- `space-evenly` — равные промежутки\n\n## align-items — по поперечной\n\n```css\n.row { align-items: center; }\n```\n\n- `flex-start` — сверху\n- `flex-end` — снизу\n- `center` — по центру\n- `stretch` — растянуть\n- `baseline` — по базовой линии\n\n## Идеальный центр\n\n```css\n.center {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 200px;\n}\n```\n\n## flex-wrap\n\n```css\n.row { flex-wrap: wrap; }\n```\n\nПеренос на новую строку.\n\n## Что будет, если\n\n- `align-items: center` без `height` — не видно.\n- `wrap` без gap — слипаются.\n\n## Частая ошибка\n\n`justify-content: center` для `column` — центрирует по вертикали.\n\n## Итог\n\n- `justify-content` — главная\n- `align-items` — поперечная\n- `center` + `center` + `height` = центр\n- `flex-wrap: wrap` — перенос",
+      "questions": [
+        { "text": "Что выравнивает `justify-content`?", "options": ["Главную ось", "Поперечную", "Текст", "Размер"], "answer": 0, "explanation": "Главная." },
+        { "text": "Что выравнивает `align-items`?", "options": ["Главная", "Поперечная", "Цвет", "Отступы"], "answer": 1, "explanation": "Поперечная." },
+        { "text": "Как центрировать по обеим осям?", "options": ["justify + align: center", "display: block", "margin auto", "text-align"], "answer": 0, "explanation": "Оба `center`." },
+        { "text": "Что делает `flex-wrap: wrap`?", "options": ["Перенос", "Скрывает", "Удаляет", "Растягивает"], "answer": 0, "explanation": "На новую строку." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n</div>\n```\n\nВ `<style>` для `.row`:\n- `display: flex;`\n- `justify-content: center;`\n- `align-items: center;`\n- `height: 200px;`\n- `gap: 20px;`\n\nВидимый текст: `A B`",
+        "starter": "<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B",
+        "must_contain": [".row", "display:", "flex", "justify-content:", "center", "align-items:", "height:", "200px"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "check_type": "dom",
+      "title": "Grid базово",
+      "theory": "## Что такое Grid\n\nCSS Grid — двумерная сетка. Для строк и столбцов.\n\n## display: grid\n\n```css\n.grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 10px;\n}\n```\n\nТри равные колонки.\n\n## Повтор\n\n```css\n.grid {\n  grid-template-columns: repeat(3, 1fr);\n}\n```\n\n## Что такое fr\n\nFractional unit — доля. `1fr 2fr` — вторая в 2 раза шире.\n\n## auto-fit\n\n```css\n.grid {\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n}\n```\n\nАдаптивная сетка.\n\n## Grid vs Flexbox\n\n- **Flexbox** — 1D\n- **Grid** — 2D\n\nКарточки — Grid. Меню — Flexbox.\n\n## Что будет, если\n\n- `display: grid` без `grid-template-columns` — одна колонка.\n- `1fr` без `gap` — слипаются.\n\n## Частая ошибка\n\n`grid` для меню — избыточно.\n\n## Итог\n\n- `display: grid` — 2D\n- `grid-template-columns: repeat(3, 1fr)`\n- `1fr` — доля\n- `auto-fit` + `minmax` — адаптив\n- Grid — сетки, Flexbox — линии",
+      "questions": [
+        { "text": "Что такое `fr`?", "options": ["Пиксели", "Доля свободного места", "Проценты", "Цвет"], "answer": 1, "explanation": "Fractional unit." },
+        { "text": "Что делает `repeat(3, 1fr)`?", "options": ["3 раза по 1fr", "3 колонки", "Оба варианта", "Ничего"], "answer": 2, "explanation": "3 колонки одинаковой ширины." },
+        { "text": "Когда Grid лучше Flexbox?", "options": ["Всегда", "Двумерные сетки", "Меню", "Никогда"], "answer": 1, "explanation": "Grid — 2D." },
+        { "text": "Что делает `auto-fit`?", "options": ["Удаляет", "Подстраивает количество колонок", "Фиксирует", "Ничего"], "answer": 1, "explanation": "Адаптив." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"grid\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n```\n\nВ `<style>` для `.grid`:\n- `display: grid;`\n- `grid-template-columns: repeat(3, 1fr);`\n- `gap: 10px;`\n\nВидимый текст: `A B C`",
+        "starter": "<div class=\"grid\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C",
+        "must_contain": [".grid", "display:", "grid", "grid-template-columns:", "repeat", "1fr", "gap:"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "check_type": "dom",
+      "title": "position: static, relative, absolute",
+      "theory": "## position\n\n## static\n\nПо умолчанию. `top`, `left` **не работают**.\n\n## relative\n\n```css\n.box { position: relative; top: 10px; left: 20px; }\n```\n\nСмещение от **своего места**. Место сохраняется.\n\n## absolute\n\n```css\n.parent { position: relative; }\n.child { position: absolute; top: 10px; right: 10px; }\n```\n\nОтносительно **ближайшего родителя с position ≠ static**.\n\nУдаляется из потока.\n\n## Пример: бейдж\n\n```css\n.card { position: relative; }\n.badge { position: absolute; top: 8px; right: 8px; }\n```\n\n## Что будет, если\n\n- `absolute` без `relative` родителя — улетит в угол `<body>`.\n- `top` без `position` — не работает.\n\n## Частая ошибка\n\n`absolute` без `position: relative` на родителе.\n\n## Итог\n\n- `static` — обычное\n- `relative` — сдвиг от места\n- `absolute` — от ближайшего `relative`\n- `absolute` — из потока",
+      "questions": [
+        { "text": "Что такое `position: static`?", "options": ["Обычное", "Относительное", "Абсолютное", "Фиксированное"], "answer": 0, "explanation": "По умолчанию." },
+        { "text": "От чего `relative` смещает?", "options": ["От родителя", "От своего места", "От окна", "От соседа"], "answer": 1, "explanation": "Своё место." },
+        { "text": "От чего `absolute` позиционируется?", "options": ["От `<html>`", "От ближайшего с position ≠ static", "От себя", "От соседа"], "answer": 1, "explanation": "`relative` родитель." },
+        { "text": "Удаляется ли `absolute` из потока?", "options": ["Нет", "Да", "Зависит", "Иногда"], "answer": 1, "explanation": "Из потока." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"card\">\n  <span class=\"badge\">X</span>\n  <p>Текст</p>\n</div>\n```\n\nВ `<style>`:\n1. `.card` — `position: relative; padding: 20px;`\n2. `.badge` — `position: absolute; top: 10px; right: 10px; background: red; color: white; padding: 4px 8px;`\n\nВидимый текст: `X Текст`",
+        "starter": "<div class=\"card\">\n  <span class=\"badge\">X</span>\n  <p>Текст</p>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "X Текст",
+        "must_contain": [".card", "position:", "relative", ".badge", "absolute", "top:", "right:", "background:", "red"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "check_type": "dom",
+      "title": "position: fixed, sticky",
+      "theory": "## fixed\n\nПрибит к **окну**:\n\n```css\n.nav { position: fixed; top: 0; left: 0; width: 100%; }\n```\n\nОстаётся при скролле. Из потока.\n\n## sticky\n\nГибрид:\n\n```css\n.header { position: sticky; top: 0; }\n```\n\n`relative`, пока не достигнет `top: 0`, дальше «прилипает».\n\n## Требования sticky\n\n- Родитель без `overflow: hidden`\n- Должен быть `top` (или другой)\n- Родитель выше\n\n## fixed vs sticky\n\n- **fixed** — всегда прибит к окну\n- **sticky** — прилипает при прокрутке\n\n## Что будет, если\n\n- `sticky` без `top` — не работает.\n- `sticky` в `overflow: hidden` — не работает.\n\n## Частая ошибка\n\n`sticky` без указания позиции.\n\n## Итог\n\n- `fixed` — к окну\n- `sticky` — прилипает при скролле\n- `sticky` требует `top`\n- fixed из потока",
+      "questions": [
+        { "text": "К чему `fixed` прибит?", "options": ["К окну", "К родителю", "К себе", "К соседу"], "answer": 0, "explanation": "К окну." },
+        { "text": "Как ведёт себя `sticky`?", "options": ["Как `relative` всегда", "`relative` → `fixed` при скролле", "Как `absolute`", "Ничего"], "answer": 1, "explanation": "Гибрид." },
+        { "text": "Что обязательно для `sticky`?", "options": ["width", "top/bottom/left/right", "height", "color"], "answer": 1, "explanation": "Нужна позиция." },
+        { "text": "Работает ли `sticky` в `overflow: hidden` родителе?", "options": ["Да", "Нет", "Иногда", "Зависит"], "answer": 1, "explanation": "Ломается." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<header class=\"header\">Шапка</header>\n<main>Текст</main>\n```\n\nВ `<style>` для `.header`:\n- `position: sticky;`\n- `top: 0;`\n- `background: white;`\n- `padding: 10px;`\n\nВидимый текст: `Шапка Текст`",
+        "starter": "<header class=\"header\">Шапка</header>\n<main>Текст</main>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Шапка Текст",
+        "must_contain": [".header", "position:", "sticky", "top:", "0", "background:", "white"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "check_type": "dom",
+      "title": "z-index и стекинг",
+      "theory": "## Наложение\n\nКогда элементы накладываются — **z-index** решает слой.\n\n```css\n.a { position: absolute; z-index: 1; }\n.b { position: absolute; z-index: 10; }\n```\n\n`b` выше.\n\n## Работает только с position\n\n`z-index` **не работает** для `position: static`. Нужен `relative`, `absolute`, `fixed` или `sticky`.\n\n## Порядок в DOM\n\nЕсли `z-index` равны, элемент **позже в HTML** — выше.\n\n## Отрицательный\n\n```css\n.bg { position: absolute; z-index: -1; }\n```\n\nУходит под родителя.\n\n## stacking context\n\nРодитель с `position: relative` + `z-index` создаёт контекст. Дети не могут «прыгнуть» над элементами **вне** этого родителя.\n\n## Что будет, если\n\n- `z-index: 999` без `position` — не работает.\n- Вложенные stacking context — не пробивает.\n\n## Частая ошибка\n\n`z-index: 9999` без `position`.\n\n## Итог\n\n- `z-index` — порядок по слою\n- Только с `position ≠ static`\n- Больше число — выше\n- Stacking context ограничивает",
+      "questions": [
+        { "text": "Что делает `z-index`?", "options": ["Позиция по Z", "Размер", "Отступ", "Цвет"], "answer": 0, "explanation": "Наложение." },
+        { "text": "С каким position работает?", "options": ["static", "relative/absolute/fixed/sticky", "Только absolute", "Только fixed"], "answer": 1, "explanation": "Любой кроме static." },
+        { "text": "Что выше: z-index 1 или 10?", "options": ["1", "10", "Одинаково", "Не важно"], "answer": 1, "explanation": "10 больше." },
+        { "text": "Что будет с `z-index: 999` без position?", "options": ["Работает", "Не работает", "Только в Chrome", "Ошибка"], "answer": 1, "explanation": "Нужен position." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"a\">A</div>\n<div class=\"b\">B</div>\n```\n\nВ `<style>`:\n1. `.a` — `position: absolute; z-index: 1;`\n2. `.b` — `position: absolute; z-index: 10; top: 20px;`\n\nВидимый текст: `A B`",
+        "starter": "<div class=\"a\">A</div>\n<div class=\"b\">B</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B",
+        "must_contain": [".a", "position:", "absolute", "z-index:", "1", ".b", "10"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "check_type": "dom",
+      "title": "Единицы: px, %, em, rem",
+      "theory": "## Абсолютные\n\n`px` — пиксели. Фиксировано.\n\n## Относительные\n\n- `%` — от родителя\n- `em` — от `font-size` **родителя**\n- `rem` — от `font-size` **корневого**\n- `vw` / `vh` — % от окна\n\n## rem vs em\n\n```css\nhtml { font-size: 16px; }\n.a { font-size: 2rem; }   /* 32px */\n.b { font-size: 1em; }    /* от родителя */\n```\n\n`rem` — предсказуемо. `em` — вложенно, может быть неожиданно.\n\n## vw / vh\n\n```css\n.hero { height: 100vh; }\n```\n\nВся высота окна.\n\n## Когда что\n\n- **px** — границы, тени\n- **rem** — шрифты, отступы\n- **%** — адаптивные ширины\n- **vw/vh** — полноэкранное\n\n## Что будет, если\n\n- `font-size: 20` без единиц — ошибка.\n- `%` для высоты без `height` родителя — 0.\n\n## Частая ошибка\n\n`font-size: 20` без единиц.\n\n## Итог\n\n- `px` — фикс\n- `rem` — от `<html>`\n- `em` — от родителя\n- `%` — от родителя\n- `vw/vh` — окно\n- Шрифты — в `rem`",
+      "questions": [
+        { "text": "Что такое `rem`?", "options": ["От родителя", "От `<html>`", "Пиксели", "Проценты"], "answer": 1, "explanation": "От корня." },
+        { "text": "Что такое `em`?", "options": ["От родителя/текущего", "От `<html>`", "Пиксели", "Проценты"], "answer": 0, "explanation": "От родителя." },
+        { "text": "Что такое `100vh`?", "options": ["100 пикселей", "Высота окна", "Половина", "Ошибка"], "answer": 1, "explanation": "100% высоты окна." },
+        { "text": "Что лучше для шрифтов?", "options": ["px", "rem", "%", "cm"], "answer": 1, "explanation": "`rem` — масштабируется." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"box\">Текст</div>\n```\n\nВ `<style>`:\n1. `html` — `font-size: 16px;`\n2. `.box` — `font-size: 1.5rem; padding: 1rem; width: 50%;`\n\nВидимый текст: `Текст`",
+        "starter": "<div class=\"box\">Текст</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Текст",
+        "must_contain": ["html", "font-size:", "16px", ".box", "1.5rem", "padding:", "1rem", "width:", "50%"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "check_type": "dom",
+      "title": "Media queries",
+      "theory": "## Что это\n\nСтили для разных условий: ширина экрана, ориентация, тема.\n\n## Синтаксис\n\n```css\n@media (max-width: 600px) {\n  .box { font-size: 14px; }\n}\n```\n\nПри ширине **до 600px**.\n\n## min-width\n\n```css\n@media (min-width: 601px) {\n  .box { font-size: 18px; }\n}\n```\n\nПри ширине **от 601px**.\n\n## min vs max\n\n- **min-width** — от размера и больше. Mobile-first.\n- **max-width** — до размера. Desktop-first.\n\n## Несколько\n\n```css\n@media (min-width: 600px) and (max-width: 900px) {\n  /* планшеты */\n}\n```\n\n## Частые\n\n- `max-width: 768px` — планшет\n- `max-width: 480px` — мобильный\n- `prefers-color-scheme: dark` — тёмная тема\n\n## Что будет, если\n\n- Забыть `@media` — правила всегда.\n- Неверный синтаксис — не работает.\n\n## Частая ошибка\n\n`@media screen` без условий — всегда.\n\n## Итог\n\n- `@media (условие) { ... }`\n- `min-width` — от\n- `max-width` — до\n- `and` — комбинировать",
+      "questions": [
+        { "text": "Что делает `@media`?", "options": ["Стили для условия", "Удаляет", "Ускоряет", "Ничего"], "answer": 0, "explanation": "Условные стили." },
+        { "text": "Что означает `max-width: 600px`?", "options": ["До 600", "От 600", "Ровно 600", "Ошибка"], "answer": 0, "explanation": "До 600." },
+        { "text": "Что означает `min-width: 601px`?", "options": ["До 601", "От 601", "Ровно 601", "Ничего"], "answer": 1, "explanation": "От 601." },
+        { "text": "Можно ли комбинировать?", "options": ["Нет", "Да, через `and`", "Только `or`", "Только одно"], "answer": 1, "explanation": "`and`." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"box\">Адаптив</div>\n```\n\nВ `<style>`:\n1. `.box` — `font-size: 18px;`\n2. Media `(max-width: 600px)`: `.box { font-size: 14px; }`\n\nВидимый текст: `Адаптив`",
+        "starter": "<div class=\"box\">Адаптив</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Адаптив",
+        "must_contain": ["@media", "max-width:", "600px", ".box", "font-size:", "18px", "14px"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "check_type": "dom",
+      "title": "Mobile-first",
+      "theory": "## Что такое\n\nСначала мобильные, потом большие экраны.\n\n## Почему\n\n- Большинство трафика — мобильные.\n- Проще добавлять.\n- Меньше CSS.\n\n## Как\n\n```css\n/* Базовые — для мобильных */\n.box { font-size: 14px; }\n\n@media (min-width: 768px) {\n  .box { font-size: 18px; }\n}\n\n@media (min-width: 1200px) {\n  .box { font-size: 20px; }\n}\n```\n\nТолько `min-width`. По возрастанию.\n\n## Desktop-first\n\n```css\n.box { font-size: 20px; }\n@media (max-width: 1200px) { .box { font-size: 18px; } }\n```\n\nТолько `max-width`. По убыванию.\n\n## viewport meta\n\nВ HTML **обязательно**:\n\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n```\n\nБез него — мелко на телефоне.\n\n## Что будет, если\n\n- Забыть viewport — mobile-first не работает.\n- Смешивать min/max — путаница.\n\n## Частая ошибка\n\nЗабыть `<meta name=\"viewport\">`.\n\n## Итог\n\n- Mobile-first — базовые для мобильных\n- Только `min-width`\n- По возрастанию\n- viewport meta обязательна",
+      "questions": [
+        { "text": "Что такое mobile-first?", "options": ["Сначала для мобильных", "Сначала для десктопа", "Только для мобильных", "Не важно"], "answer": 0, "explanation": "Сначала мобильные." },
+        { "text": "Какие media queries?", "options": ["max-width", "min-width", "Оба", "Не использовать"], "answer": 1, "explanation": "`min-width`." },
+        { "text": "Нужен ли viewport meta?", "options": ["Да", "Нет", "Иногда", "Только для мобильных"], "answer": 0, "explanation": "Без него — мелко." },
+        { "text": "Порядок media queries?", "options": ["По убыванию", "По возрастанию", "Любой", "Случайный"], "answer": 1, "explanation": "От меньшего." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"box\">Адаптив</div>\n```\n\nВ `<style>`:\n1. `.box` — `font-size: 14px;`\n2. `@media (min-width: 768px)` — `.box { font-size: 18px; }`\n3. `@media (min-width: 1200px)` — `.box { font-size: 20px; }`\n\nВидимый текст: `Адаптив`",
+        "starter": "<div class=\"box\">Адаптив</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Адаптив",
+        "must_contain": ["@media", "min-width:", "768px", "1200px", "14px", "18px", "20px"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "check_type": "dom",
+      "title": "transition",
+      "theory": "## Что такое\n\nПлавное изменение свойства во времени.\n\n```css\n.btn {\n  background: gray;\n  transition: background 0.3s ease;\n}\n.btn:hover {\n  background: blue;\n}\n```\n\n## Синтаксис\n\n```css\ntransition: property duration timing-function delay;\n```\n\n- `property` — что меняется\n- `duration` — сколько (0.3s)\n- `timing-function` — ease, linear, ease-in, ease-out\n- `delay` — задержка\n\n## Несколько\n\n```css\n.btn {\n  transition: background 0.3s ease, color 0.2s linear;\n}\n```\n\nИли `all`.\n\n## Timing functions\n\n- `ease` — медленно-быстро-медленно\n- `linear` — равномерно\n- `ease-in` — медленно в начале\n- `ease-out` — медленно в конце\n- `ease-in-out` — медленно по краям\n\n## Что анимируется\n\n`background`, `color`, `opacity`, `transform`, `width`, `height` — да. `display` — нет.\n\n## Что будет, если\n\n- `transition: background` без `duration` — мгновенно.\n- `transition` на `display` — не работает.\n\n## Частая ошибка\n\nЗабыть `transition` на **базовом** правиле, а не на `:hover`.\n\n## Итог\n\n- `transition: property duration timing delay`\n- Через запятую — несколько\n- `all` — всё\n- Не работает на `display`\n- На базовом правиле",
+      "questions": [
+        { "text": "Что делает `transition`?", "options": ["Ускоряет", "Плавно анимирует", "Удаляет", "Ничего"], "answer": 1, "explanation": "Плавный переход." },
+        { "text": "Что делает `0.3s`?", "options": ["Длительность 0.3 секунды", "Задержку", "Скорость", "Ошибка"], "answer": 0, "explanation": "Длительность." },
+        { "text": "Где указывать `transition`?", "options": ["На `:hover`", "На базовом правиле", "В HTML", "Не важно"], "answer": 1, "explanation": "На базовом." },
+        { "text": "Работает ли на `display`?", "options": ["Да", "Нет", "Иногда", "Только с !important"], "answer": 1, "explanation": "`display` — мгновенно." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<a class=\"link\" href=\"#\">Ссылка</a>\n```\n\nВ `<style>`:\n1. `.link` — `color: gray; text-decoration: none; transition: color 0.3s ease;`\n2. `.link:hover` — `color: blue;`\n\nВидимый текст: `Ссылка`",
+        "starter": "<a class=\"link\" href=\"#\">Ссылка</a>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Ссылка",
+        "must_contain": [".link", "transition:", "color", "0.3s", "ease", ".link:hover", "color:", "blue"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "check_type": "dom",
+      "title": "transform",
+      "theory": "## Что такое\n\nГеометрические изменения. Не влияет на поток.\n\n## Основные\n\n```css\n.box { transform: translateX(20px); }\n.box { transform: scale(1.2); }\n.box { transform: rotate(45deg); }\n.box { transform: skew(10deg); }\n```\n\n## translate\n\n```css\ntransform: translate(x, y);\ntransform: translateX(20px);\ntransform: translateY(-10px);\n```\n\n## scale\n\n```css\ntransform: scale(2);\ntransform: scale(1.5, 0.5);\n```\n\nОт центра.\n\n## rotate\n\n```css\ntransform: rotate(45deg);\n```\n\nПо часовой.\n\n## Несколько\n\n```css\ntransform: translate(10px, 20px) rotate(45deg) scale(1.2);\n```\n\nПорядок важен.\n\n## transform-origin\n\n```css\n.box { transform-origin: top left; }\n```\n\n## Transition + transform\n\n```css\nimg { transition: transform 0.3s ease; }\nimg:hover { transform: scale(1.05); }\n```\n\n## Что будет, если\n\n- `rotate` без `deg` — не работает.\n- Забыть `transform-origin` — от центра.\n- Порядок функций важен.\n\n## Частая ошибка\n\n`transform: rotate(45)` без `deg`.\n\n## Итог\n\n- `translate` — сдвиг\n- `scale` — масштаб\n- `rotate` — поворот\n- Через пробел, порядок важен\n- `transform-origin` — точка\n- Плавно — `transition`",
+      "questions": [
+        { "text": "Что делает `translateX(20px)`?", "options": ["Сдвиг по X", "Поворот", "Масштаб", "Удаление"], "answer": 0, "explanation": "Сдвиг." },
+        { "text": "Что делает `scale(2)`?", "options": ["Поворот", "Увеличение в 2 раза", "Сдвиг", "Наклон"], "answer": 1, "explanation": "Масштаб." },
+        { "text": "Что делает `rotate(45deg)`?", "options": ["Сдвиг", "Масштаб", "Поворот на 45°", "Наклон"], "answer": 2, "explanation": "Поворот." },
+        { "text": "Что нужно для плавного transform?", "options": ["animation", "transition", "Ничего", "JS"], "answer": 1, "explanation": "Transition." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"box\">A</div>\n```\n\nВ `<style>`:\n1. `.box` — `transition: transform 0.3s ease;`\n2. `.box:hover` — `transform: scale(1.2) rotate(5deg);`\n\nВидимый текст: `A`",
+        "starter": "<div class=\"box\">A</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A",
+        "must_contain": ["transition:", "transform", "0.3s", ".box:hover", "scale(", "rotate("]
+      }
+    },
+    "28": {
+      "id": 28,
+      "check_type": "dom",
+      "title": "@keyframes и animation",
+      "theory": "## Что такое\n\nМногошаговая анимация.\n\n## @keyframes\n\n```css\n@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n```\n\n`from` = 0%, `to` = 100%. Можно промежуточные:\n\n```css\n@keyframes bounce {\n  0% { transform: translateY(0); }\n  50% { transform: translateY(-20px); }\n  100% { transform: translateY(0); }\n}\n```\n\n## animation\n\n```css\n.box {\n  animation: fadeIn 0.5s ease;\n}\n```\n\nСинтаксис:\n```css\nanimation: name duration timing delay iteration direction fill-mode;\n```\n\n- `iteration-count` — сколько (`infinite`)\n- `direction` — normal / reverse / alternate\n- `fill-mode` — forwards\n\n## Частые значения\n\n```css\nanimation: spin 2s linear infinite;\nanimation: fadeIn 0.3s ease forwards;\nanimation: pulse 1s ease-in-out infinite alternate;\n```\n\n## Отличие от transition\n\n- **transition** — 2 состояния\n- **animation** — много, циклы\n\n## Что будет, если\n\n- `animation` без `@keyframes` — ничего.\n- Забыть `infinite` — один раз.\n\n## Частая ошибка\n\n`animation: spin` без длительности.\n\n## Итог\n\n- `@keyframes name { ... }`\n- `animation: name duration ...`\n- `infinite` — бесконечно\n- `alternate` — туда-обратно\n- `forwards` — в конце\n- Многошагово",
+      "questions": [
+        { "text": "Что делает `@keyframes`?", "options": ["Создаёт анимацию", "Определяет траекторию", "Удаляет", "Ускоряет"], "answer": 1, "explanation": "Траектория." },
+        { "text": "Что делает `infinite`?", "options": ["Один раз", "Бесконечно", "Никогда", "Ошибка"], "answer": 1, "explanation": "Бесконечно." },
+        { "text": "Что делает `forwards`?", "options": ["Остаться в конце", "В начале", "Не работает", "Отменить"], "answer": 0, "explanation": "В конечном." },
+        { "text": "Чем animation отличается от transition?", "options": ["Ничем", "Animation — многошагово", "Transition быстрее", "Animation только для transform"], "answer": 1, "explanation": "Мощнее." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"loader\">Загрузка</div>\n```\n\nВ `<style>`:\n1. `@keyframes pulse` — 0% opacity 1, 50% opacity 0.5, 100% opacity 1\n2. `.loader` — `animation: pulse 1.5s ease-in-out infinite;`\n\nВидимый текст: `Загрузка`",
+        "starter": "<div class=\"loader\">Загрузка</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Загрузка",
+        "must_contain": ["@keyframes", "pulse", "0%", "50%", "100%", "animation:", "1.5s", "infinite"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "check_type": "dom",
+      "title": ":nth-child, :not(), :first-child",
+      "theory": "## :first-child и :last-child\n\n```css\nli:first-child { font-weight: bold; }\nli:last-child { border-bottom: none; }\n```\n\n## :nth-child(n)\n\n```css\nli:nth-child(2) { color: red; }\nli:nth-child(odd) { background: #eee; }\nli:nth-child(even) { background: #fff; }\nli:nth-child(3n) { color: blue; }\n```\n\n## :not(selector)\n\n```css\nli:not(:last-child) { border-bottom: 1px solid #ccc; }\n```\n\nВсе, **кроме** указанных.\n\n## :first-of-type / :last-of-type\n\nВ пределах **типа**:\n\n```css\np:first-of-type { font-size: 1.2em; }\n```\n\n## :nth-of-type(n)\n\n```css\np:nth-of-type(2) { color: red; }\n```\n\n## Что будет, если\n\n- `li:nth-child(2)` — не «второй `li`», а «второй ребёнок и `li`».\n- `:not(.a.b)` — ошибка в старых браузерах.\n\n## Частая ошибка\n\n`:nth-child(2)` на `<li>`, но между `li` вставлен `<h2>` — второй не второй `li`. Нужен `:nth-of-type(2)`.\n\n## Итог\n\n- `:first-child`, `:last-child`\n- `:nth-child(n)` — по счёту\n- `odd` / `even`\n- `:not(sel)` — исключение\n- `-of-type` — своего типа",
+      "questions": [
+        { "text": "Что выбирает `li:nth-child(3)`?", "options": ["Третий li", "Третий элемент, если он li", "Все li", "Ничего"], "answer": 1, "explanation": "Позиция среди всех детей." },
+        { "text": "Что делает `:not(.primary)`?", "options": ["Только .primary", "Все кроме .primary", "Ничего", "Удаляет"], "answer": 1, "explanation": "Исключение." },
+        { "text": "Что выбирает `:nth-child(odd)`?", "options": ["Чётные", "Нечётные (1, 3, 5)", "Все", "Ничего"], "answer": 1, "explanation": "Odd." },
+        { "text": "Что такое `:first-of-type`?", "options": ["Первый ребёнок", "Первый своего типа", "Ошибка", "Все"], "answer": 1, "explanation": "Своего типа." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<ul class=\"list\">\n  <li>A</li>\n  <li>B</li>\n  <li>C</li>\n  <li>D</li>\n</ul>\n```\n\nВ `<style>`:\n1. `.list li:nth-child(2)` — `color: blue;`\n2. `.list li:not(:last-child)` — `border-bottom: 1px solid #ccc;`\n3. `.list li:first-child` — `font-weight: bold;`\n\nВидимый текст: `A B C D`",
+        "starter": "<ul class=\"list\">\n  <li>A</li>\n  <li>B</li>\n  <li>C</li>\n  <li>D</li>\n</ul>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C D",
+        "must_contain": ["nth-child", ":not(", "last-child", "first-child", "color:", "border-bottom:"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "check_type": "dom",
+      "title": "CSS-переменные и calc()",
+      "theory": "## Зачем\n\nОдин цвет в 20 правилах. Меняешь — 20 раз правишь. CSS-переменные решают.\n\n## Синтаксис\n\n```css\n:root {\n  --primary: #007bff;\n  --radius: 8px;\n}\n```\n\n`:root` — корневой элемент.\n\n## Использование\n\n```css\n.button {\n  background: var(--primary);\n  border-radius: var(--radius);\n}\n```\n\n## Fallback\n\n```css\ncolor: var(--text, black);\n```\n\n## calc()\n\n```css\n.box {\n  width: calc(100% - 40px);\n}\n```\n\nПоддерживает `+ - * /`. Пробелы обязательны!\n\n## calc + переменные\n\n```css\n:root { --gap: 16px; }\n.box {\n  padding: calc(var(--gap) * 2);\n}\n```\n\n## Что будет, если\n\n- `var(--undefined)` без fallback — свойство не применится.\n- `calc(100%-40px)` — не работает.\n\n## Частая ошибка\n\n`calc()` без пробелов.\n\n## Итог\n\n- `:root { --name: value; }`\n- `var(--name)`\n- `var(--name, fallback)`\n- `calc(a + b)`\n- Пробелы в calc",
+      "questions": [
+        { "text": "Как объявить переменную?", "options": ["--name: value", "var(--name)", "--name = value", "name: var"], "answer": 0, "explanation": "`--name: value`." },
+        { "text": "Как использовать?", "options": ["--name", "var(--name)", "$name", "name()"], "answer": 1, "explanation": "`var(--name)`." },
+        { "text": "Что делает `calc(100% - 40px)`?", "options": ["Ничего", "Вычитает 40px из 100%", "Умножает", "Ошибка"], "answer": 1, "explanation": "Математика." },
+        { "text": "Нужны ли пробелы в calc?", "options": ["Нет", "Да, вокруг операторов", "Только для *", "Не важно"], "answer": 1, "explanation": "Обязательны." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<button class=\"btn\">OK</button>\n```\n\nВ `<style>`:\n1. `:root` — `--primary: #007bff; --radius: 8px;`\n2. `.btn` — `background: var(--primary); padding: calc(8px + 0.5rem); border-radius: var(--radius);`\n\nВидимый текст: `OK`",
+        "starter": "<button class=\"btn\">OK</button>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "OK",
+        "must_contain": [":root", "--primary", "--radius", "var(--primary)", "var(--radius)", "calc(", "padding:"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "check_type": "dom",
+      "title": "object-fit и aspect-ratio",
+      "theory": "## Проблема\n\nКартинка 1200×800, контейнер 200×200.\n\n## object-fit\n\n```css\nimg {\n  width: 200px;\n  height: 200px;\n  object-fit: cover;\n}\n```\n\n- `fill` — растянуть\n- `contain` — вписать целиком\n- `cover` — заполнить, обрезать\n- `none` — оригинал\n\n## object-position\n\n```css\nimg {\n  object-fit: cover;\n  object-position: center;\n}\n```\n\n## aspect-ratio\n\n```css\n.card {\n  aspect-ratio: 16 / 9;\n  width: 100%;\n}\n```\n\n## Часто с картинками\n\n```css\nimg {\n  aspect-ratio: 1 / 1;\n  object-fit: cover;\n  width: 100%;\n}\n```\n\n## Что будет, если\n\n- `object-fit` без `width`/`height` — не работает.\n- `aspect-ratio` без `object-fit` — без обрезки.\n\n## Частая ошибка\n\n`object-fit` без фиксированной высоты.\n\n## Итог\n\n- `cover` — с обрезкой\n- `contain` — целиком\n- `object-position` — точка\n- `aspect-ratio: 16/9` — пропорции\n- Идеально для картинок",
+      "questions": [
+        { "text": "Что делает `object-fit: cover`?", "options": ["Растягивает", "Заполняет с обрезкой", "Вписывает", "Удаляет"], "answer": 1, "explanation": "С обрезкой." },
+        { "text": "Что делает `object-fit: contain`?", "options": ["Вписывает целиком", "Заполняет", "Удаляет", "Искажает"], "answer": 0, "explanation": "Целиком." },
+        { "text": "Что делает `aspect-ratio: 16 / 9`?", "options": ["Ширину", "Соотношение сторон", "Цвет", "Ошибка"], "answer": 1, "explanation": "Пропорции." },
+        { "text": "Что нужно для `object-fit`?", "options": ["Только width", "Width и height (или aspect-ratio)", "Только height", "Ничего"], "answer": 1, "explanation": "Размеры." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<img class=\"avatar\" src=\"me.jpg\" alt=\"Аватар\">\n```\n\nВ `<style>`:\n- `.avatar` — `width: 80px; height: 80px; object-fit: cover; border-radius: 50%;`\n\nВидимый текст: `Аватар`",
+        "starter": "<img class=\"avatar\" src=\"me.jpg\" alt=\"Аватар\">\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Аватар",
+        "must_contain": [".avatar", "width:", "80px", "height:", "object-fit:", "cover", "border-radius:", "50%"]
+      }
+    },
+    "32": {
+      "id": 32,
+      "check_type": "dom",
+      "title": "filter и @font-face",
+      "theory": "## filter\n\nВизуальные эффекты:\n\n```css\nimg { filter: grayscale(100%); }\n.box { filter: blur(4px); }\n```\n\n- `blur(px)` — размытие\n- `brightness(x)` — яркость\n- `contrast(x)` — контраст\n- `grayscale(x)` — ч/б\n- `sepia(x)` — сепия\n- `saturate(x)` — насыщенность\n- `drop-shadow(...)` — тень\n\n## Несколько\n\n```css\nimg {\n  filter: grayscale(0.5) brightness(1.1);\n}\n```\n\n## @font-face\n\n```css\n@font-face {\n  font-family: 'MyFont';\n  src: url('font.woff2') format('woff2');\n}\n\nbody {\n  font-family: 'MyFont', sans-serif;\n}\n```\n\n## Форматы\n\n- `woff2` — современный\n- `woff` — старый\n- `ttf`, `otf`\n\n## Google Fonts\n\n```html\n<link href=\"https://fonts.googleapis.com/css2?family=Roboto\" rel=\"stylesheet\">\n```\n\n## Что будет, если\n\n- `filter` на огромной — тормоза\n- `@font-face` без `format` — может не загрузить\n\n## Частая ошибка\n\nЗабыть `font-family` в `@font-face`.\n\n## Итог\n\n- `filter: grayscale(1)` — эффекты\n- Несколько через пробел\n- `@font-face` — свой шрифт\n- `woff2` — формат\n- Fallback обязателен",
+      "questions": [
+        { "text": "Что делает `filter: blur(4px)`?", "options": ["Размытие", "Яркость", "Контраст", "Ничего"], "answer": 0, "explanation": "Blur." },
+        { "text": "Что делает `grayscale(1)`?", "options": ["Ч/б", "Сепия", "Яркость", "Удаление"], "answer": 0, "explanation": "Полностью ч/б." },
+        { "text": "Как подключить свой шрифт?", "options": ["@font-face", "@import", "font: url", "В HTML"], "answer": 0, "explanation": "`@font-face`." },
+        { "text": "Какой формат шрифта приоритет?", "options": ["ttf", "woff2", "otf", "eot"], "answer": 1, "explanation": "`woff2`." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<img class=\"pic\" src=\"photo.jpg\" alt=\"Фото\">\n<p class=\"custom\">Текст</p>\n```\n\nВ `<style>`:\n1. `.pic` — `filter: grayscale(100%);`\n2. `.pic:hover` — `filter: grayscale(0);`\n3. `@font-face { font-family: 'Custom'; src: url('font.woff2') format('woff2'); }`\n4. `.custom` — `font-family: 'Custom', sans-serif;`\n\nВидимый текст: `Фото Текст`",
+        "starter": "<img class=\"pic\" src=\"photo.jpg\" alt=\"Фото\">\n<p class=\"custom\">Текст</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Фото Текст",
+        "must_contain": ["filter:", "grayscale", ".pic:hover", "@font-face", "font-family:", "url(", "woff2", ".custom"]
+      }
+    },
+    "33": {
+      "id": 33,
+      "check_type": "dom",
+      "title": "Мини-проект: карточка товара",
+      "theory": "## Что делаем\n\nКарточку товара — типовая единица магазина.\n\n## CSS\n\n```css\n.product {\n  padding: 20px;\n  border: 1px solid #e0e0e0;\n  border-radius: 12px;\n  max-width: 320px;\n  transition: box-shadow 0.3s ease;\n}\n\n.product:hover {\n  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);\n}\n\n.product h2 {\n  margin: 0 0 8px;\n  font-size: 1.25rem;\n  color: #222;\n}\n\n.product .price {\n  font-size: 1.5rem;\n  color: #007bff;\n  font-weight: bold;\n}\n\n.product button {\n  width: 100%;\n  padding: 10px;\n  background: #007bff;\n  color: white;\n  border: none;\n  border-radius: 8px;\n  cursor: pointer;\n  transition: background 0.2s ease;\n}\n\n.product button:hover {\n  background: #0056b3;\n}\n```\n\n## Что будет, если\n\n- Нет `border-radius` — дёшево.\n- Кнопка без `cursor: pointer`.\n\n## Частая ошибка\n\nЗабыть `box-sizing` — карточка «толстеет».\n\n## Итог\n\n- padding + border + radius\n- Иерархия\n- Кнопка на всю ширину\n- Hover\n- Transition\n- `box-sizing`",
+      "questions": [
+        { "text": "Что делает карточку привлекательной?", "options": ["border-radius", "Только border", "Только цвет", "Только шрифт"], "answer": 0, "explanation": "Скругления и тень." },
+        { "text": "Зачем `width: 100%` на кнопке?", "options": ["Растянуть", "Убрать", "Уменьшить", "Скрыть"], "answer": 0, "explanation": "На всю ширину." },
+        { "text": "Зачем hover?", "options": ["Красиво", "Фидбек", "Ошибка", "Не нужно"], "answer": 1, "explanation": "Обратная связь." },
+        { "text": "Зачем `box-sizing: border-box`?", "options": ["Красиво", "width включает padding", "Убирает border", "Ничего"], "answer": 1, "explanation": "Контроль." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"product\">\n  <h2>Книга</h2>\n  <p class=\"price\">500 ₽</p>\n  <p>Хорошая книга для чтения.</p>\n  <button>Купить</button>\n</div>\n```\n\nВ `<style>`:\n1. `.product` — `padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px; max-width: 320px; transition: box-shadow 0.3s ease;`\n2. `.product:hover` — `box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);`\n3. `.product h2` — `margin: 0 0 8px;`\n4. `.product .price` — `color: #007bff; font-size: 1.5rem; font-weight: bold;`\n5. `.product button` — `width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s ease;`\n6. `.product button:hover` — `background: #0056b3;`\n\nВидимый текст: `Книга 500 ₽ Хорошая книга для чтения. Купить`",
+        "starter": "<div class=\"product\">\n  <h2>Книга</h2>\n  <p class=\"price\">500 ₽</p>\n  <p>Хорошая книга для чтения.</p>\n  <button>Купить</button>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Книга 500 ₽ Хорошая книга для чтения. Купить",
+        "must_contain": [".product", "padding:", "border:", "border-radius:", "max-width:", "transition:", ".product:hover", "box-shadow:", ".product h2", ".product .price", "color:", "#007bff", ".product button", "width:", "100%", "background:", "cursor:", "pointer"]
+      }
+    },
+    "34": {
+      "id": 34,
+      "check_type": "dom",
+      "title": "Итоговая: адаптивная страница",
+      "theory": "## Собираем всё\n\nСтраница с тремя карточками.\n\n## CSS\n\n```css\n* { box-sizing: border-box; }\nbody { font-family: Arial, sans-serif; }\n\n.grid {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 16px;\n  padding: 16px;\n}\n\n.card {\n  padding: 20px;\n  border: 1px solid #e0e0e0;\n  border-radius: 8px;\n  transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n\n.card:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);\n}\n\n@media (min-width: 768px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n```\n\n## Проверки\n\n- Базово — 1 колонка\n- ≥768 — 3\n- `box-sizing`\n- Шрифт\n- Padding + border\n- Hover через transform + transition\n\n## Что будет, если\n\n- Без `@media` — всегда 3.\n- Без `box-sizing` — вылезают.\n\n## Частая ошибка\n\nМедиа не работает — забыл viewport meta.\n\n## Итог\n\n- 1fr → 3 колонки\n- `@media (min-width: 768px)`\n- `box-sizing: border-box`\n- viewport meta\n- Transition + transform",
+      "questions": [
+        { "text": "Как перейти к 3 колонкам?", "options": ["@media (min-width: 768px)", "display: block", "margin auto", "flex-wrap"], "answer": 0, "explanation": "Media query." },
+        { "text": "Что делает `repeat(3, 1fr)`?", "options": ["1 колонка", "3 равные", "Удаляет", "Ошибка"], "answer": 1, "explanation": "3 равные." },
+        { "text": "Зачем `box-sizing`?", "options": ["Красиво", "width включает padding", "Убирает всё", "Ничего"], "answer": 1, "explanation": "Контроль." },
+        { "text": "Что обязательно в HTML?", "options": ["viewport meta", "script", "font", "table"], "answer": 0, "explanation": "`<meta name=\"viewport\">`." }
+      ],
+      "practice": {
+        "description": "Дан HTML:\n```html\n<div class=\"grid\">\n  <div class=\"card\">A</div>\n  <div class=\"card\">B</div>\n  <div class=\"card\">C</div>\n</div>\n```\n\nВ `<style>`:\n1. `*` — `box-sizing: border-box;`\n2. `body` — `font-family: Arial, sans-serif;`\n3. `.grid` — `display: grid; grid-template-columns: 1fr; gap: 16px; padding: 16px;`\n4. `.card` — `padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; transition: transform 0.2s ease, box-shadow 0.2s ease;`\n5. `.card:hover` — `transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);`\n6. `@media (min-width: 768px)` — `.grid { grid-template-columns: repeat(3, 1fr); }`\n\nВидимый текст: `A B C`",
+        "starter": "<div class=\"grid\">\n  <div class=\"card\">A</div>\n  <div class=\"card\">B</div>\n  <div class=\"card\">C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C",
+        "must_contain": ["box-sizing:", "border-box", "font-family:", ".grid", "display:", "grid", "grid-template-columns:", "1fr", "gap:", ".card", "padding:", "border:", "border-radius:", "transition:", ".card:hover", "transform:", "box-shadow:", "@media", "min-width:", "768px", "repeat", "3"]
+      }
+    }
+  }
+}

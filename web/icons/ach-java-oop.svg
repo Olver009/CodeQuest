@@ -1,0 +1,11 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- 3D куб (Класс) -->
+    <path d="M 12 3 L 20 7 V 15 L 12 19 L 4 15 V 7 Z" fill="#5382A1"/>
+    <path d="M 12 3 L 20 7 L 12 11 L 4 7 Z" fill="#7BA4C2"/>
+    <path d="M 12 11 V 19 L 4 15 V 7 Z" fill="#3D6380"/>
+    <!-- Маленькие кубики (Объекты) -->
+    <path d="M 6 17 L 9 19 V 22 L 6 20 Z" fill="#F89820"/>
+    <path d="M 6 17 L 9 19 L 6 21 L 3 19 Z" fill="#FFC04C"/>
+    <path d="M 15 19 L 18 17 V 20 L 15 22 Z" fill="#F89820"/>
+    <path d="M 15 19 L 18 17 L 21 19 L 18 21 Z" fill="#FFC04C"/>
+</svg>

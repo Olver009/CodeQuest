@@ -1,32 +1,37 @@
 import os
+import shutil
 
-def create_empty_lang_folders():
-    base_dir = os.path.join("lessons", "python")
-    ru_dir = os.path.join(base_dir, "ru")
-
-    if not os.path.exists(ru_dir):
-        print(f"❌ Ошибка: Папка {ru_dir} не найдена! Убедись, что русские файлы лежат там.")
-        return
-
-    target_langs = ["en", "es", "de", "fr"]
-    files_to_create = ["roadmap.json", "python_db.json", "trophies.json"]
+def create_all_lang_folders():
+    base_dir = "lessons"
+    target_langs = ["java", "cpp", "c", "javascript", "html", "css", "prog"]
+    locales = ["ru", "en", "es", "de", "fr"]
 
     for lang in target_langs:
-        lang_dir = os.path.join(base_dir, lang)
-        os.makedirs(lang_dir, exist_ok=True)
-        print(f"📁 Создана папка: {lang_dir}")
+        for loc in locales:
+            dir_path = os.path.join(base_dir, lang, loc)
+            os.makedirs(dir_path, exist_ok=True)
 
-        for file in files_to_create:
-            dst = os.path.join(lang_dir, file)
-
-            # Если файл уже существует, не перезаписываем его (чтобы не удалить твой перевод)
-            if not os.path.exists(dst):
-                with open(dst, 'w', encoding='utf-8') as f:
-                    f.write("{}") # Пишем пустой JSON, чтобы приложение не падало
-                print(f"  📄 Создан пустой {file} -> {lang}")
+            # 1. Копируем карту пути из python (чтобы визуал был одинаковый)
+            src_roadmap = os.path.join(base_dir, "python", loc, "roadmap.json")
+            dst_roadmap = os.path.join(dir_path, "roadmap.json")
+            if os.path.exists(src_roadmap):
+                shutil.copyfile(src_roadmap, dst_roadmap)
             else:
-                print(f"  ⏩ {file} уже существует -> {lang} (пропущено)")
+                with open(dst_roadmap, "w", encoding="utf-8") as f: f.write("[]")
+
+            # 2. Создаем пустую базу уроков, если нет
+            db_path = os.path.join(dir_path, f"{lang}_db.json")
+            if not os.path.exists(db_path):
+                with open(db_path, "w", encoding="utf-8") as f:
+                    f.write('{"lessons": {}}')
+
+            # 3. Создаем пустые контрольные, если нет
+            trophy_path = os.path.join(dir_path, "trophies.json")
+            if not os.path.exists(trophy_path):
+                with open(trophy_path, "w", encoding="utf-8") as f:
+                    f.write("{}")
+
+            print(f"✅ Создана структура для {lang} ({loc})")
 
 if __name__ == "__main__":
-    create_empty_lang_folders()
-    print("\n✨ Готово! Теперь у тебя есть пустые файлы. Можно вставлять в них переводы.")
+    create_all_lang_folders()

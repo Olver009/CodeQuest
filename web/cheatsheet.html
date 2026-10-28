@@ -76,15 +76,30 @@
     window.addEventListener('pywebviewready', async () => {
         await applyLanguage();
         const progress = await pywebview.api.load_data();
+
+        // Применяем тему (если выбрана светлая)
+        if (progress.settings_app_theme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+
         const roadmap = await pywebview.api.get_roadmap();
+        const activeLang = await pywebview.api.get_active_lang();
+        const langIcons = {
+            "python": "icons/python.svg", "java": "icons/java.svg", "cpp": "icons/cplusplus.svg",
+            "c": "icons/c.svg", "javascript": "icons/javascript.svg", "html": "icons/html.svg",
+            "css": "icons/css.svg", "prog": "icons/prog.svg"
+        };
+        document.querySelector('.titlebar-icon').src = langIcons[activeLang] || "icons/python.svg";
 
         const container = document.getElementById('cheat-container');
 
-        // Собираем все ID пройденных уроков
+        // Собираем ID пройденных уроков только текущего языка
+        const lessonPrefix = `${activeLang}_status_`;
+        const trophyPrefix = `${activeLang}_status_trophy_`;
         let completedLessonIds = [];
         for (const key in progress) {
-            if (key.startsWith('status_') && !key.startsWith('status_trophy_') && progress[key] === 'done') {
-                completedLessonIds.push(parseInt(key.replace('status_', '')));
+            if (key.startsWith(lessonPrefix) && !key.startsWith(trophyPrefix) && progress[key] === 'done') {
+                completedLessonIds.push(parseInt(key.slice(lessonPrefix.length)));
             }
         }
 

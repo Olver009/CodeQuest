@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction",
+    "lessons": [
+      { "id": 1, "title": "What C++ Is and Why", "status": "current" },
+      { "id": 2, "title": "Compilation: g++", "status": "locked" },
+      { "id": 3, "title": "First Program: iostream", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Fundamentals",
+    "lessons": [
+      { "id": 4, "title": "Data Types", "status": "locked" },
+      { "id": 5, "title": "cin / cout, Formatting", "status": "locked" },
+      { "id": 6, "title": "References and Pointers", "status": "locked" },
+      { "id": 7, "title": "const and auto", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Control Flow",
+    "lessons": [
+      { "id": 8, "title": "if / switch", "status": "locked" },
+      { "id": 9, "title": "Loops: for, while, do-while", "status": "locked" },
+      { "id": 10, "title": "break, continue, Range-for", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Functions",
+    "lessons": [
+      { "id": 11, "title": "Declaration and Calls", "status": "locked" },
+      { "id": 12, "title": "Overloading, Default Arguments", "status": "locked" },
+      { "id": 13, "title": "Pass by Reference, const-ref", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Arrays and Strings",
+    "lessons": [
+      { "id": 14, "title": "Arrays and std::array", "status": "locked" },
+      { "id": 15, "title": "std::string", "status": "locked" },
+      { "id": 16, "title": "std::vector", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Classes",
+    "lessons": [
+      { "id": 17, "title": "Class, Constructor, Methods", "status": "locked" },
+      { "id": 18, "title": "Encapsulation: private / public", "status": "locked" },
+      { "id": 19, "title": "static, this, Field Initialization", "status": "locked" },
+      { "id": 20, "title": "Destructor and RAII", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Inheritance and Polymorphism",
+    "lessons": [
+      { "id": 21, "title": "Inheritance, protected", "status": "locked" },
+      { "id": 22, "title": "Virtual Functions", "status": "locked" },
+      { "id": 23, "title": "Abstract Classes, Interfaces", "status": "locked" },
+      { "id": 24, "title": "Virtual Destructor", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "STL Containers",
+    "lessons": [
+      { "id": 25, "title": "vector: In Depth", "status": "locked" },
+      { "id": 26, "title": "map and unordered_map", "status": "locked" },
+      { "id": 27, "title": "set and unordered_set", "status": "locked" },
+      { "id": 28, "title": "Iterators", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "STL Algorithms and Lambdas",
+    "lessons": [
+      { "id": 29, "title": "sort, reverse, min/max", "status": "locked" },
+      { "id": 30, "title": "find, count, accumulate", "status": "locked" },
+      { "id": 31, "title": "Lambda Expressions", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Smart Pointers",
+    "lessons": [
+      { "id": 32, "title": "Stack, Heap, new / delete", "status": "locked" },
+      { "id": 33, "title": "unique_ptr", "status": "locked" },
+      { "id": 34, "title": "shared_ptr and weak_ptr", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Exceptions",
+    "lessons": [
+      { "id": 35, "title": "try / catch / throw", "status": "locked" },
+      { "id": 36, "title": "Custom Exceptions, noexcept", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 12,
+    "title": "Templates and Move",
+    "lessons": [
+      { "id": 37, "title": "Function Templates", "status": "locked" },
+      { "id": 38, "title": "Class Templates", "status": "locked" },
+      { "id": 39, "title": "Move Semantics, rvalue" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 13,
+    "title": "Practice",
+    "lessons": [
+      { "id": 40, "title": "Mini-project: Phone Book", "status": "locked" },
+      { "id": 41, "title": "Final", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  }
+]

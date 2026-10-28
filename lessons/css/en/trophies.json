@@ -1,0 +1,122 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "check_type": "dom",
+    "title": "Chapter Test: CSS Introduction",
+    "description": "Final task of chapter 1. Checks: connection, syntax, simple styles.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<h1 class=\"title\">Title</h1>\n<p class=\"text\">Text</p>\n```\n\nIn `<style>` set:\n- `.title`: `color: red;`\n- `.text`: `color: blue;`\n\nVisible text: `Title Text`",
+      "starter": "<h1 class=\"title\">Title</h1>\n<p class=\"text\">Text</p>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Title Text",
+      "must_contain": ["<style", ".title", ".text", "color:", "red", "blue"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "check_type": "dom",
+    "title": "Chapter Test: Selectors",
+    "description": "Final task of chapter 2. Checks: tags, classes, id, descendants.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<div id=\"main\">\n  <p class=\"note\">One</p>\n  <p class=\"note\">Two</p>\n</div>\n```\n\nIn `<style>`:\n1. `#main` — `background: lightgray;`\n2. `.note` — `color: green;`\n3. `#main p` — `font-size: 20px;`\n\nVisible text: `One Two`",
+      "starter": "<div id=\"main\">\n  <p class=\"note\">One</p>\n  <p class=\"note\">Two</p>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "One Two",
+      "must_contain": ["#main", ".note", "#main p", "background:", "color:", "font-size:"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "check_type": "dom",
+    "title": "Chapter Test: Colors and Text",
+    "description": "Final task of chapter 3. Checks: colors, fonts, alignment.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<h1>Title</h1>\n<p>Paragraph</p>\n```\n\nIn `<style>`:\n1. `body` — `font-family: Arial, sans-serif;`\n2. `h1` — `color: darkblue; text-align: center;`\n3. `p` — `font-size: 18px; line-height: 1.6;`\n\nVisible text: `Title Paragraph`",
+      "starter": "<h1>Title</h1>\n<p>Paragraph</p>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Title Paragraph",
+      "must_contain": ["font-family", "h1", "darkblue", "text-align", "center", "font-size", "line-height"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "check_type": "dom",
+    "title": "Chapter Test: Box Model",
+    "description": "Final task of chapter 4. Checks: padding, margin, border, border-radius.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<div class=\"card\">Card</div>\n```\n\nIn `<style>` for `.card`:\n- `padding: 20px;`\n- `margin: 10px auto;`\n- `border: 1px solid #ccc;`\n- `border-radius: 8px;`\n- `width: 300px;`\n\nVisible text: `Card`",
+      "starter": "<div class=\"card\">Card</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Card",
+      "must_contain": [".card", "padding:", "margin:", "auto", "border:", "solid", "border-radius:", "width:"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "check_type": "dom",
+    "title": "Chapter Test: Layout",
+    "description": "Final task of chapter 5. Checks: display, flexbox.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<div class=\"row\">\n  <div class=\"item\">A</div>\n  <div class=\"item\">B</div>\n  <div class=\"item\">C</div>\n</div>\n```\n\nIn `<style>`:\n1. `.row` — `display: flex; gap: 10px; justify-content: center;`\n2. `.item` — `padding: 10px; border: 1px solid black;`\n\nVisible text: `A B C`",
+      "starter": "<div class=\"row\">\n  <div class=\"item\">A</div>\n  <div class=\"item\">B</div>\n  <div class=\"item\">C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "A B C",
+      "must_contain": ["display:", "flex", "gap:", "justify-content:", "center", ".item"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "check_type": "dom",
+    "title": "Chapter Test: Positioning",
+    "description": "Final task of chapter 6. Checks: position, z-index.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<div class=\"container\">\n  <div class=\"box\">X</div>\n</div>\n```\n\nIn `<style>`:\n1. `.container` — `position: relative; height: 200px;`\n2. `.box` — `position: absolute; top: 20px; right: 20px; z-index: 10;`\n\nVisible text: `X`",
+      "starter": "<div class=\"container\">\n  <div class=\"box\">X</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "X",
+      "must_contain": ["position:", "relative", "absolute", "top:", "right:", "z-index:"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "check_type": "dom",
+    "title": "Chapter Test: Responsiveness",
+    "description": "Final task of chapter 7. Checks: units, media queries.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<div class=\"box\">Adaptive</div>\n```\n\nIn `<style>`:\n1. `.box` — `font-size: 1rem; padding: 1rem;`\n2. Media query for `max-width: 600px`: `.box { font-size: 2rem; }`\n\nVisible text: `Adaptive`",
+      "starter": "<div class=\"box\">Adaptive</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Adaptive",
+      "must_contain": ["@media", "max-width", "600px", "rem", "font-size"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "check_type": "dom",
+    "title": "Chapter Test: Transitions and Animations",
+    "description": "Final task of chapter 8. Checks: transition, transform, animation.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<button class=\"btn\">Button</button>\n<div class=\"spin\">X</div>\n```\n\nIn `<style>`:\n1. `.btn` — `background: gray; color: white; padding: 8px 16px; border: none; transition: background 0.3s ease;`\n2. `.btn:hover` — `background: blue;`\n3. `.spin` — `display: inline-block; animation: rotate 2s linear infinite;`\n4. `@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`\n\nVisible text: `Button X`",
+      "starter": "<button class=\"btn\">Button</button>\n<div class=\"spin\">X</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Button X",
+      "must_contain": ["transition:", "0.3s", "ease", ".btn:hover", "@keyframes", "animation:", "transform:", "rotate"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "check_type": "dom",
+    "title": "Chapter Test: Advanced CSS",
+    "description": "Final task of chapter 9. Checks: :nth-child, CSS variables, calc, object-fit.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<ul class=\"list\">\n  <li>One</li>\n  <li>Two</li>\n  <li>Three</li>\n</ul>\n<img class=\"photo\" src=\"pic.jpg\" alt=\"Photo\">\n```\n\nIn `<style>`:\n1. `:root` — `--accent: #007bff;`\n2. `.list li` — `padding: calc(8px + 0.5rem);`\n3. `.list li:nth-child(2)` — `color: var(--accent);`\n4. `.list li:not(:last-child)` — `border-bottom: 1px solid #ccc;`\n5. `.photo` — `width: 200px; height: 200px; object-fit: cover;`\n\nVisible text: `One Two Three`",
+      "starter": "<ul class=\"list\">\n  <li>One</li>\n  <li>Two</li>\n  <li>Three</li>\n</ul>\n<img class=\"photo\" src=\"pic.jpg\" alt=\"Photo\">\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "One Two Three",
+      "must_contain": ["--accent", "var(--accent)", ":root", "calc(", "nth-child", ":not(", "object-fit:", "cover"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "check_type": "dom",
+    "title": "Chapter Test: Final",
+    "description": "Final task of the course. Build an adaptive card with flexbox and responsiveness.",
+    "practice": {
+      "description": "Given HTML:\n```html\n<div class=\"card\">\n  <h2>Product</h2>\n  <p>Description</p>\n  <button>Buy</button>\n</div>\n```\n\nIn `<style>`:\n- `.card` — `padding: 20px; border: 1px solid #ccc; border-radius: 8px; max-width: 300px;`\n- `.card h2` — `color: #333;`\n- `button` — `padding: 8px 16px; background: #007bff; color: white; border: none; cursor: pointer;`\n\nVisible text: `Product Description Buy`",
+      "starter": "<div class=\"card\">\n  <h2>Product</h2>\n  <p>Description</p>\n  <button>Buy</button>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Product Description Buy",
+      "must_contain": [".card", "padding:", "border:", "border-radius:", "max-width:", ".card h2", "button", "background:", "color:", "cursor:"]
+    }
+  }
+}

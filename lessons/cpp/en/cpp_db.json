@@ -1,0 +1,661 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "What C++ Is and Why",
+      "theory": "## What C++ is\n\nC++ — superset of C with OOP, templates, exceptions, STL. Bjarne Stroustrup, 1983. Used in games (Unreal), high-load servers, browsers (Chrome, Firefox), databases, embedded.\n\n## C++ vs C\n\n- OOP: classes, inheritance, polymorphism\n- References (`int &r`)\n- Standard library: `std::string`, `std::vector`, `std::map`\n- Templates\n- Exceptions\n- RAII + smart pointers\n\n## C++ vs Java\n\nNo JVM, compiles to machine code. No GC — RAII. Operator overloading. Templates instead of generics. Multiple inheritance.\n\n## C++ vs Python\n\nPython interpreted, C++ compiled. C++ 10–100× faster. C++ more flexible but dangerous (UB).\n\n## Standards\n\nC++11, C++14, C++17, C++20, C++23. Course — C++17.\n\n## What if\n\n- Forget `return 0;` — implicitly 0, but write explicitly.\n- UB — may work today, crash tomorrow.\n\n## Summary\n\n- Superset of C with OOP, templates, STL\n- Machine code, no GC\n- Complex but powerful\n- C++17",
+      "questions": [
+        { "text": "What is C++?", "options": ["Interpreted", "Superset of C with OOP", "Pure functional", "Scripting"], "answer": 1, "explanation": "C with OOP, templates, STL." },
+        { "text": "GC in C++?", "options": ["Yes", "No, RAII + smart pointers", "Only C++11", "Only C++20"], "answer": 1, "explanation": "RAII." },
+        { "text": "Which compiler?", "options": ["gcc", "g++", "javac", "node"], "answer": 1, "explanation": "`g++`." }
+      ],
+      "practice": {
+        "description": "Output via `std::cout`:\n```\nC++\nLesson 1\nDone\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "C++\nLesson 1\nDone",
+        "must_contain": ["#include <iostream>", "std::cout", "return 0"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Compilation: g++",
+      "theory": "## Pipeline\n\n`.cpp` → compiler → `.o` → linker → executable.\n\n```bash\ng++ hello.cpp -o hello\n./hello\n```\n\n## Flags\n\n- `-Wall -Wextra` — warnings\n- `-std=c++17` — standard\n- `-o name` — output\n- `-O2` — optimization\n- `-g` — debug\n\n## Errors\n\n- Compile — syntax\n- Link — `undefined reference`\n- Runtime — segfault, UB\n\n## g++ vs gcc\n\n`gcc` for C, `g++` for C++. `gcc hello.cpp` — undefined reference to stdlib C++.\n\n## Summary\n\n- `g++ -std=c++17 file.cpp -o name`\n- `-Wall -Wextra` — warnings",
+      "questions": [
+        { "text": "Compiler for C++?", "options": ["gcc", "g++", "javac", "node"], "answer": 1, "explanation": "`g++`." },
+        { "text": "What does `-std=c++17` do?", "options": ["Optimization", "Standard", "Debug", "Import"], "answer": 1, "explanation": "Standard." },
+        { "text": "What on `gcc hello.cpp`?", "options": ["Works", "Link error", "Compiles"], "answer": 1, "explanation": "undefined reference." }
+      ],
+      "practice": {
+        "description": "Output:\n```\ng++\nCompilation\nOK\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "g++\nCompilation\nOK",
+        "must_contain": ["#include <iostream>", "std::cout"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "First Program: iostream",
+      "theory": "## iostream\n\n`#include <iostream>` — I/O header. `std::cout` (output), `std::cin` (input).\n\n```cpp\n#include <iostream>\nint main() {\n    std::cout << \"Hello\\n\";\n    return 0;\n}\n```\n\n## cout and <<\n\n`std::cout << x` — output. Chainable: `std::cout << \"x = \" << 42 << \"\\n\";`\n\n## endl vs \\n\n\n- `std::endl` — newline + flush (slower)\n- `\\n` — newline only\n\nUse `\\n`.\n\n## using namespace std\n\nSkips `std::`. Fine for learning, avoid in large projects.\n\n## What if\n\n- No `<iostream>` — undefined reference\n- No `std::` without using — `'cout' was not declared`\n\n## Summary\n\n- `#include <iostream>` mandatory\n- `std::cout << x << \"\\n\"`\n- `\\n` faster than `endl`\n- `using namespace std;` shortens",
+      "questions": [
+        { "text": "What does `std::cout` do?", "options": ["Input", "Output", "Nothing", "Error"], "answer": 1, "explanation": "Output." },
+        { "text": "Operator for output?", "options": ["<<", ">>", "=", "=="], "answer": 0, "explanation": "`<<`." },
+        { "text": "What is faster?", "options": ["endl", "\\n", "Same", "OS"], "answer": 1, "explanation": "`\\n`." }
+      ],
+      "practice": {
+        "description": "Output:\n```\nFirst\nProgram\nDone\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "First\nProgram\nDone",
+        "must_contain": ["#include <iostream>", "std::cout", "\\n", "return 0"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "Data Types",
+      "theory": "## Basic\n\n```cpp\nint age = 25;\ndouble price = 99.5;\nchar letter = 'A';\nbool ok = true;\n```\n\n## Sizes\n\n- char 1, int 4, double 8, bool 1\n- `sizeof(type)`\n\n## Suffixes\n\n`3.14f` float, `100L` long, `9000LL` long long, `5u` unsigned.\n\n## std::string\n\n```cpp\n#include <string>\nstd::string name = \"Anna\";\nname += \"!\";\n```\n\n## auto\n\n`auto` — infer:\n\n```cpp\nauto x = 42;          // int\nauto y = 3.14;        // double\nauto s = std::string(\"hi\");\n```\n\n## Zero init\n\n```cpp\nint a = 0;\nint b{};    // C++11, 0\nint d;      // garbage\n```\n\n## Summary\n\n- `int`, `double`, `char`, `bool`, `std::string`\n- `sizeof`\n- `auto` inference\n- `{}` zero-init",
+      "questions": [
+        { "text": "Type for strings?", "options": ["char[]", "std::string", "String", "str"], "answer": 1, "explanation": "`std::string`." },
+        { "text": "What is `auto`?", "options": ["Empty type", "Inference", "Error", "Type"], "answer": 1, "explanation": "Inference." },
+        { "text": "What on `int x = 3.99`?", "options": ["4", "3", "3.99", "Error"], "answer": 1, "explanation": "Truncation." }
+      ],
+      "practice": {
+        "description": "Create:\n- `int age = 25;`\n- `double price = 99.5;`\n- `std::string name = \"Ivan\";`\n\nOutput:\n```\n25\n99.5\nIvan\n```",
+        "starter": "#include <iostream>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n99.5\nIvan",
+        "must_contain": ["int age", "double price", "std::string", "std::cout"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "cin / cout, Formatting",
+      "theory": "## cin\n\n```cpp\nint x;\nstd::cin >> x;\n```\n\n`>>` — read up to whitespace.\n\n## Multiple\n\n```cpp\nint a, b;\nstd::cin >> a >> b;\n```\n\n## Strings\n\n`>>` — up to whitespace. `getline` — whole line.\n\n**Trap**: after `cin >> x`, `\\n` in buffer. `getline` reads empty. `cin.ignore()` before.\n\n```cpp\nint age;\nstd::cin >> age;\nstd::cin.ignore();\nstd::string name;\nstd::getline(std::cin, name);\n```\n\n## Formatting\n\n```cpp\n#include <iomanip>\nstd::cout << std::fixed << std::setprecision(2) << 3.14159;   // 3.14\n```\n\n## Summary\n\n- `cin >> x`\n- `getline(cin, s)` whole line\n- `ignore()` consumes leftover\n- `fixed` + `setprecision`\n- `#include <iomanip>`",
+      "questions": [
+        { "text": "Operator for cin?", "options": ["<<", ">>", "=", "=="], "answer": 1, "explanation": "`>>`." },
+        { "text": "`cin >> s` reads?", "options": ["Whole line", "Up to whitespace", "One char", "Nothing"], "answer": 1, "explanation": "Up to whitespace." },
+        { "text": "Why `cin.ignore()`?", "options": ["Delete cin", "Consume leftover", "Clear", "Nothing"], "answer": 1, "explanation": "Remove `\\n`." }
+      ],
+      "practice": {
+        "description": "Read two numbers:\n```\nSum: 15\nProduct: 50\n```\n\nstdin:\n```\n5\n10\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    int a, b;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Sum: 15\nProduct: 50",
+        "must_contain": ["std::cin", ">>", "std::cout", "a + b", "a * b"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "title": "References and Pointers",
+      "theory": "## References\n\n`int &r` — alias. Must init. Cannot reassign.\n\n```cpp\nint x = 10;\nint &r = x;\nr = 20;   // x becomes 20\n```\n\n## In parameters\n\n```cpp\nvoid incr(int &x) { x++; }\nint n = 5;\nincr(n);   // n = 6\n```\n\n## Pointers\n\n```cpp\nint x = 10;\nint *p = &x;\nstd::cout << *p;   // 10\n```\n\n## Ref vs ptr\n\n- Ref: always init, no reassign, no arithmetic\n- Ptr: NULL possible, arithmetic\n\n## nullptr\n\n`nullptr` (C++11) instead of NULL, type-safe.\n\n## Summary\n\n- `int &r = x` — reference\n- `int &x` param — modify outside\n- Ptr like C\n- `nullptr`",
+      "questions": [
+        { "text": "What is `int &r`?", "options": ["Pointer", "Reference", "Copy", "Error"], "answer": 1, "explanation": "Alias." },
+        { "text": "Reassign reference?", "options": ["Yes", "No", "Sometimes", "Via *"], "answer": 1, "explanation": "No." },
+        { "text": "`nullptr` better than `NULL`?", "options": ["Faster", "Type-safe", "Shorter", "Nothing"], "answer": 1, "explanation": "Type-safe." }
+      ],
+      "practice": {
+        "description": "`int x = 10; int &r = x;`. Via `r` set 20, output `x` and `r`:\n```\nx = 20\nr = 20\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    int x = 10;\n    // TODO\n    return 0;\n}\n",
+        "expected": "x = 20\nr = 20",
+        "must_contain": ["int &r", "= x", "std::cout"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "title": "const and auto",
+      "theory": "## const\n\n```cpp\nconst int MAX = 100;\n// MAX = 200; // error\n```\n\n## const &\n\n```cpp\nvoid print(const std::string &s) {\n    std::cout << s;\n}\n```\n\nNo copy, read only. Standard for large objects.\n\n## const methods\n\n```cpp\nclass Point {\n    int x;\npublic:\n    int getX() const { return x; }\n};\n```\n\n`const` after parens — doesn't modify object.\n\n## auto\n\n`auto x = 42;` — int. `auto s = std::string(\"hi\")` — string.\n\n**Careful**: `auto s = \"hi\"` — `const char*`, not `std::string`.\n\n## const auto &\n\n```cpp\nfor (const auto &item : v) { ... }\n```\n\nNo copy, read only.\n\n## Summary\n\n- `const` — no change\n- `const &` — no copy, read\n- `const` method — no modify\n- `auto` inference\n- `auto s = \"hi\"` — `const char*`",
+      "questions": [
+        { "text": "What does `const` do?", "options": ["Speeds up", "Forbids change", "Copies", "Nothing"], "answer": 1, "explanation": "Forbids." },
+        { "text": "`const &` in param?", "options": ["Copies", "No copy, read", "Nothing", "Error"], "answer": 1, "explanation": "Read without copy." },
+        { "text": "`auto s = \"hi\"` type?", "options": ["std::string", "const char*", "char[]", "Error"], "answer": 1, "explanation": "`const char*`." }
+      ],
+      "practice": {
+        "description": "`const int MAX = 100;`, `auto pi = 3.14;`\n\nOutput:\n```\nMAX = 100\npi = 3.14\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "MAX = 100\npi = 3.14",
+        "must_contain": ["const int MAX", "auto pi", "std::cout"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "title": "if / switch",
+      "theory": "## if / else\n\n```cpp\nif (x > 0) { std::cout << \"+\\n\"; }\nelse if (x < 0) { std::cout << \"-\\n\"; }\nelse { std::cout << \"0\\n\"; }\n```\n\n## switch\n\n```cpp\nswitch (day) {\n    case 1: std::cout << \"Mon\\n\"; break;\n    default: std::cout << \"?\\n\";\n}\n```\n\nOnly `int`, `char`, `enum`. Not `std::string`.\n\n## Ternary\n\n```cpp\nauto s = x > 0 ? \"positive\" : \"negative\";\n```\n\n## Logical\n\n`&&`, `||`, `!`.\n\n## What if\n\n- `if (x = 5)` — assignment bug\n- Forget `break` — fall-through\n- `switch` on `std::string` — error\n\n## Summary\n\n- `if/else` like C\n- `switch` — int/char/enum only\n- `break` mandatory\n- Ternary `? :`",
+      "questions": [
+        { "text": "Cannot use in switch?", "options": ["int", "char", "enum", "std::string"], "answer": 3, "explanation": "Only int/char/enum." },
+        { "text": "Without break?", "options": ["Nothing", "Fall-through", "Error", "Exit"], "answer": 1, "explanation": "Fall-through." },
+        { "text": "`?:` is?", "options": ["Loop", "Ternary", "Function", "Array"], "answer": 1, "explanation": "Compact if/else." }
+      ],
+      "practice": {
+        "description": "`int score = 78;`. Output grade:\n- `>= 90` Excellent\n- `>= 75` Good\n- `>= 60` Satisfactory\n- else Fail\n\n```\nGood\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    int score = 78;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Good",
+        "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "std::cout"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "title": "Loops: for, while, do-while",
+      "theory": "## for\n\n```cpp\nfor (int i = 0; i < 5; i++) { ... }\n```\n\n## while\n\n```cpp\nint i = 0;\nwhile (i < 5) { ...; i++; }\n```\n\n## do-while\n\n```cpp\ndo { ...; i++; } while (i < 5);\n```\n\nAt least once, `;` after.\n\n## Range-for (C++11)\n\n```cpp\nfor (int x : v) { ... }\n```\n\n- `int x` — copy\n- `int &x` — reference, modify\n- `const auto &x` — read without copy\n\n## What if\n\n- Forget `i++` — infinite\n- Modify container in range-for — UB\n\n## Summary\n\n- `for (init; cond; step)`\n- `while (cond)`\n- `do {} while (cond);`\n- `for (x : v)` range-for",
+      "questions": [
+        { "text": "`for (int i = 0; i < 3; i++)` times?", "options": ["2", "3", "4", "Infinite"], "answer": 1, "explanation": "0,1,2." },
+        { "text": "`do-while` checks?", "options": ["After", "Before", "Never", "Both"], "answer": 0, "explanation": "After." },
+        { "text": "`for (auto &x : v) x *= 2` — ?", "options": ["Copies", "Modifies", "Error", "UB"], "answer": 1, "explanation": "Reference modifies." }
+      ],
+      "practice": {
+        "description": "Via `for` output 1..5:\n```\n1\n2\n3\n4\n5\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3\n4\n5",
+        "must_contain": ["for", "std::cout"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "title": "break, continue, Range-for",
+      "theory": "## break\n\n```cpp\nfor (int i = 0; i < 10; i++) {\n    if (i == 3) break;\n    std::cout << i;   // 0 1 2\n}\n```\n\n## continue\n\n```cpp\nfor (int i = 0; i < 5; i++) {\n    if (i == 2) continue;\n    std::cout << i;   // 0 1 3 4\n}\n```\n\n## Range-for modify\n\n```cpp\nfor (int &x : v) x *= 2;\n```\n\n## Range-for read\n\n```cpp\nfor (const auto &x : v) { ... }\n```\n\n## What if\n\n- `continue` in while before `i++` — infinite\n- Remove from vector in range-for — UB\n\n## Summary\n\n- `break` — exit\n- `continue` — skip\n- `for (auto &x : v)` — modify\n- `for (const auto &x : v)` — read",
+      "questions": [
+        { "text": "`break`?", "options": ["Skips", "Exits", "Returns", "Nothing"], "answer": 1, "explanation": "Exits." },
+        { "text": "`continue`?", "options": ["Exits", "Skips", "Returns", "Error"], "answer": 1, "explanation": "Skips." },
+        { "text": "Modify in range-for needs?", "options": ["int x", "auto x", "auto &x", "auto *x"], "answer": 2, "explanation": "`auto &x`." }
+      ],
+      "practice": {
+        "description": "Via `for` 1..10, only odds (`continue`):\n```\n1\n3\n5\n7\n9\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n3\n5\n7\n9",
+        "must_contain": ["for", "continue", "% 2", "std::cout"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "title": "Declaration and Calls",
+      "theory": "## Function\n\n```cpp\nint sum(int a, int b) { return a + b; }\n```\n\n## Prototype\n\n```cpp\nint sum(int a, int b);   // prototype\nint main() { std::cout << sum(2, 3); }\nint sum(int a, int b) { return a + b; }\n```\n\n## Copies\n\n```cpp\nvoid change(int x) { x = 100; }\nint a = 5;\nchange(a);   // a still 5\n```\n\nFor modify — `int &x`.\n\n## void\n\n```cpp\nvoid greet() { std::cout << \"Hi\\n\"; }\n```\n\n## What if\n\n- No `return` — UB\n- Return ref to local — dangling (UB)\n\n## Summary\n\n- `type name(params) { return; }`\n- Parameters — copies\n- Modify — `&`\n- `void` — no return",
+      "questions": [
+        { "text": "Primitives passed?", "options": ["By reference", "By value", "By pointer", "Address"], "answer": 1, "explanation": "Copy." },
+        { "text": "Modify from function?", "options": ["int x", "int &x", "int *x", "Nowhere"], "answer": 1, "explanation": "`int &x`." },
+        { "text": "Return ref to local?", "options": ["Works", "UB", "Error", "Garbage"], "answer": 1, "explanation": "UB." }
+      ],
+      "practice": {
+        "description": "`int square(int x)` — `x * x`.\n\nOutput `square(5)`, `square(3)`:\n```\n25\n9\n```",
+        "starter": "#include <iostream>\n\n// TODO: square\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n9",
+        "must_contain": ["int square", "return", "std::cout"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "title": "Overloading, Default Arguments",
+      "theory": "## Overloading\n\n```cpp\nint sum(int a, int b) { return a + b; }\ndouble sum(double a, double b) { return a + b; }\n```\n\nCompiler picks by type/count.\n\n## Default args\n\n```cpp\nint sum(int a, int b = 10) { return a + b; }\nsum(5);       // 15\nsum(5, 20);   // 25\n```\n\nDefaults — after non-defaults.\n\n## Not by return type\n\n```cpp\n// int f();\n// double f();   // error\n```\n\n## Ambiguity\n\nTwo overloads that both fit — error.\n\n## Summary\n\n- Overload: same name, different params\n- Defaults at end\n- Not by return type\n- Ambiguity — error",
+      "questions": [
+        { "text": "Overloading is?", "options": ["Many loops", "Same name, different params", "Error", "Return"], "answer": 1, "explanation": "Same name, different params." },
+        { "text": "Defaults position?", "options": ["Anywhere", "At end", "At start", "Main only"], "answer": 1, "explanation": "At end." },
+        { "text": "Overload by return type?", "options": ["Yes", "No", "Sometimes", "int only"], "answer": 1, "explanation": "No." }
+      ],
+      "practice": {
+        "description": "`int sum(int a, int b = 10)`, `int sum(int a, int b, int c)`.\n\nOutput `sum(5)`, `sum(1, 2, 3)`:\n```\n15\n6\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "15\n6",
+        "must_contain": ["int sum(int a, int b = 10)", "int sum(int a, int b, int c)", "std::cout"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "title": "Pass by Reference, const-ref",
+      "theory": "## By value\n\n```cpp\nvoid f(int x) { x = 100; }   // copy\n```\n\n## By reference\n\n```cpp\nvoid f(int &x) { x = 100; }\nint a = 5;\nf(a);   // a = 100\n```\n\n## const-ref\n\n```cpp\nvoid print(const std::string &s) { std::cout << s; }\n```\n\nNo copy, no modify. Standard for large objects.\n\n## When what\n\n- Primitives — by value\n- Large — `const &` (read), `&` (modify)\n\n## Summary\n\n- Primitives by value\n- Large: `const &` read, `&` modify\n- `const &` — efficient and safe",
+      "questions": [
+        { "text": "For large — efficient?", "options": ["By value", "const &", "int &", "Pointer"], "answer": 1, "explanation": "`const &`." },
+        { "text": "`int &x` param?", "options": ["Copy", "Reference modify", "Error", "Nothing"], "answer": 1, "explanation": "Modify outside." },
+        { "text": "Modify `const &`?", "options": ["Works", "Compile error", "UB", "Nothing"], "answer": 1, "explanation": "Error." }
+      ],
+      "practice": {
+        "description": "`void addOne(int &x)` — increments by 1.\n\n`int n = 5; addOne(n);` output n:\n```\n6\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    int n = 5;\n    // TODO\n    return 0;\n}\n",
+        "expected": "6",
+        "must_contain": ["void addOne", "int &x", "std::cout"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "title": "Arrays and std::array",
+      "theory": "## C array\n\n```cpp\nint arr[5] = {1, 2, 3, 4, 5};\n```\n\nFixed, no checks.\n\n## std::array\n\n```cpp\n#include <array>\nstd::array<int, 5> arr = {1, 2, 3, 4, 5};\narr.size();      // 5\narr.at(0);       // safe\n```\n\n## C vs std::array\n\n- C: `sizeof` only in scope, becomes pointer in function\n- std::array: `.size()` always, copied in function\n\n## Summary\n\n- C-array — fast, no checks\n- `std::array<T, N>` — size, `.at()`\n- `.at()` throws, `[]` UB",
+      "questions": [
+        { "text": "std::array better than C?", "options": ["Faster", ".size() + .at()", "Prettier", "Nothing"], "answer": 1, "explanation": "Size and checks." },
+        { "text": "`.at(10)` size 5?", "options": ["0", "UB", "std::out_of_range", "Garbage"], "answer": 2, "explanation": "Exception." },
+        { "text": "Declare?", "options": ["std::array<int, 5> a;", "std::array a[5];", "int[5] a;", "array<int> a;"], "answer": 0, "explanation": "`std::array<int, 5>`." }
+      ],
+      "practice": {
+        "description": "`std::array<int, 5> arr = {10, 20, 30, 40, 50};`\n\nOutput:\n```\nFirst: 10\nLast: 50\nSize: 5\n```",
+        "starter": "#include <iostream>\n#include <array>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "First: 10\nLast: 50\nSize: 5",
+        "must_contain": ["std::array", "arr[0]", "arr[4]", ".size()", "std::cout"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "title": "std::string",
+      "theory": "## What\n\nDynamic string. Grows automatically.\n\n```cpp\n#include <string>\nstd::string s = \"Hello\";\ns += \", world\";\n```\n\n## Methods\n\n```cpp\ns.size();\ns.empty();\ns[0];\ns.substr(0, 5);\ns.find(\"wor\");\ns == \"Hello\";   // OK, compares content\n```\n\n## Conversions\n\n```cpp\nstd::string s = std::to_string(42);\nint n = std::stoi(\"42\");\n```\n\n`stoi` throws on bad input.\n\n## Summary\n\n- `std::string` dynamic\n- `==` works\n- `.size()`, `.substr()`, `.find()`\n- `to_string`, `stoi`",
+      "questions": [
+        { "text": "std::string?", "options": ["char*", "Dynamic string", "Array", "Pointer"], "answer": 1, "explanation": "Dynamic string." },
+        { "text": "`==` compares content?", "options": ["No (addr)", "Yes", "Sometimes", "Error"], "answer": 1, "explanation": "Yes." },
+        { "text": "Read whole line?", "options": ["cin >> s", "getline(cin, s)", "cin.readline", "gets"], "answer": 1, "explanation": "`getline`." }
+      ],
+      "practice": {
+        "description": "`std::string s = \"Hello\";`\n\nOutput:\n```\nHello\nLength: 5\n```",
+        "starter": "#include <iostream>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Hello\nLength: 5",
+        "must_contain": ["std::string", ".size()", "std::cout"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "title": "std::vector",
+      "theory": "## What\n\nDynamic array. Grows with `push_back`.\n\n```cpp\n#include <vector>\nstd::vector<int> v;\nv.push_back(10);\nv.push_back(20);\n```\n\n## Methods\n\n```cpp\nv.push_back(x);\nv.pop_back();\nv.size();\nv.empty();\nv[i];        // no check\nv.at(i);     // check\nv.front();\nv.back();\nv.clear();\n```\n\n## Init\n\n```cpp\nstd::vector<int> a = {1, 2, 3};\nstd::vector<int> b(5);       // 5 zeros\nstd::vector<int> c(5, 100);  // 5 × 100\n```\n\n## reserve\n\nPrevents reallocations. `v.reserve(1000)`.\n\n## What if\n\n- `v[100]` — UB\n- `.at(100)` — `std::out_of_range`\n\n## Summary\n\n- `std::vector<T>`\n- `push_back`, `size()`, `[]`\n- `.at()` checked\n- `reserve` ahead",
+      "questions": [
+        { "text": "Add to end?", "options": ["v.add()", "v.push_back()", "v.append()", "v.insert()"], "answer": 1, "explanation": "`push_back`." },
+        { "text": "`v[100]` size 3?", "options": ["Error", "Exception", "UB", "0"], "answer": 2, "explanation": "UB." },
+        { "text": "`v.at(100)`?", "options": ["0", "UB", "std::out_of_range", "Nothing"], "answer": 2, "explanation": "Exception." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {10, 20, 30};`\n\nOutput:\n```\nFirst: 10\nLast: 30\nSize: 3\n```",
+        "starter": "#include <iostream>\n#include <vector>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "First: 10\nLast: 30\nSize: 3",
+        "must_contain": ["std::vector", "v.front", "v.back", ".size()", "std::cout"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "title": "Class, Constructor, Methods",
+      "theory": "## Class\n\n```cpp\nclass Point {\npublic:\n    int x, y;\n    Point(int x, int y) : x(x), y(y) {}\n    void print() { std::cout << x << \",\" << y; }\n};\n\nPoint p(3, 7);\np.print();\n```\n\n## Init list\n\n`: x(x), y(y)` — efficient. Assign in body — worse.\n\n## this\n\n```cpp\nPoint& setX(int x) { this->x = x; return *this; }\n```\n\n## Most vexing parse\n\n`Point p();` — function declaration. Use `Point p;` or `Point p{};`.\n\n## Summary\n\n- `class Name { ... };`\n- Constructor `Name(params)`\n- `: field(value)` init\n- `this->field`\n- `public:` / `private:`",
+      "questions": [
+        { "text": "Constructor?", "options": ["Method with return", "Init method named as class", "Error", "Destructor"], "answer": 1, "explanation": "Named as class, no return." },
+        { "text": "Better in constructor?", "options": ["this->x = x", ": x(x)", "Both bad", "x = x"], "answer": 1, "explanation": "Init list." },
+        { "text": "`Point p();`?", "options": ["Object", "Function declaration", "Error", "nullptr"], "answer": 1, "explanation": "Most vexing parse." }
+      ],
+      "practice": {
+        "description": "Class `Book` with `std::string title`, `int pages`, constructor, `print()`.\n\n`Book b(\"Java\", 500); b.print();`\n\n```\nJava: 500\n```",
+        "starter": "#include <iostream>\n#include <string>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Java: 500",
+        "must_contain": ["class Book", "Book(std::string", "void print", "std::cout"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "title": "Encapsulation: private / public",
+      "theory": "## private / public\n\n```cpp\nclass Account {\nprivate:\n    double balance;\npublic:\n    Account(double b) : balance(b) {}\n    double getBalance() const { return balance; }\n    void deposit(double a) { if (a > 0) balance += a; }\n};\n```\n\n## Rule\n\n- `private` — default for `class`\n- `public` — for API\n\n## const methods\n\n`const` after parens — method doesn't modify fields. Required for getters on const objects.\n\n## class vs struct\n\n- `class` — default private\n- `struct` — default public\n\n## Summary\n\n- `private:` fields\n- `public:` methods\n- `const` getters\n- `class` vs `struct` default",
+      "questions": [
+        { "text": "Default access in class?", "options": ["public", "private", "protected", "static"], "answer": 1, "explanation": "private." },
+        { "text": "Why const on getter?", "options": ["Pretty", "No modify", "Speed", "Not needed"], "answer": 1, "explanation": "Const-correctness." },
+        { "text": "struct vs class?", "options": ["Same", "Default access", "Memory only", "Data only"], "answer": 1, "explanation": "struct public, class private." }
+      ],
+      "practice": {
+        "description": "`Account` with `private double balance`, constructor, `getBalance() const`, `deposit()`.\n\n`Account a(100); a.deposit(50);` output `Balance: 150`.\n\n```\nBalance: 150\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Balance: 150",
+        "must_contain": ["class Account", "private", "double balance", "getBalance", "deposit", "std::cout"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "title": "static, this, Field Initialization",
+      "theory": "## static fields\n\nOne per class:\n\n```cpp\nclass Counter {\npublic:\n    static int total;\n    Counter() { total++; }\n};\nint Counter::total = 0;   // definition\n```\n\n## static methods\n\n```cpp\nstatic int square(int x) { return x * x; }\n```\n\nNo `this`, no access to instance fields.\n\n## In-class init (C++11)\n\n```cpp\nclass Point {\n    int x = 0;\n    int y = 0;\npublic:\n    Point() = default;\n};\n```\n\n## = default / = delete\n\n```cpp\nPoint() = default;\nPoint(const Point&) = delete;\n```\n\n## What if\n\n- `static int total;` without `int Counter::total = 0;` — undefined reference\n\n## Summary\n\n- `static` — per class\n- Defined outside\n- `static` method — no object\n- In-class init — C++11\n- `= default`, `= delete`",
+      "questions": [
+        { "text": "Where static field defined?", "options": ["Class", "Class + external definition", "main", "Constructor"], "answer": 1, "explanation": "External." },
+        { "text": "static method?", "options": ["Per object", "Per class", "Error", "Returns static"], "answer": 1, "explanation": "Class." },
+        { "text": "`= delete`?", "options": ["Generate", "Forbid", "Delete class", "Error"], "answer": 1, "explanation": "Forbid." }
+      ],
+      "practice": {
+        "description": "`Counter` with `static int total`, constructor increments, `static int getTotal()`.\n\nTwo Counter, output `2`.\n\n```\n2\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "2",
+        "must_contain": ["class Counter", "static int total", "Counter::total", "getTotal", "std::cout"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "title": "Destructor and RAII",
+      "theory": "## Destructor\n\nCalled automatically at destruction:\n\n```cpp\nclass File {\n    std::FILE* f;\npublic:\n    File(const std::string& n) { f = std::fopen(n.c_str(), \"r\"); }\n    ~File() { if (f) std::fclose(f); }\n};\n```\n\n## RAII\n\nResource Acquisition Is Initialization. Acquire in constructor, release in destructor.\n\n**Even with exceptions** — destructor runs.\n\n## Examples\n\n`std::string`, `std::vector`, `unique_ptr`, `std::fstream` — RAII.\n\n## What if\n\n- Forget destructor — leak\n- Throw from destructor — UB (C++11+)\n- No virtual destructor for polymorphism — lesson 24\n\n## Summary\n\n- `~ClassName()`\n- RAII — acquire in ctor, release in dtor\n- Works with exceptions\n- No throwing from destructors",
+      "questions": [
+        { "text": "When destructor runs?", "options": ["On create", "On destroy", "Manually", "Never"], "answer": 1, "explanation": "On destroy." },
+        { "text": "RAII?", "options": ["Type", "Acquire in ctor, release in dtor", "Error", "Pattern"], "answer": 1, "explanation": "Resource pattern." },
+        { "text": "Throw from destructor?", "options": ["Yes", "No (UB)", "Sometimes", "With noexcept"], "answer": 1, "explanation": "UB." }
+      ],
+      "practice": {
+        "description": "`Tracker` — ctor prints `created`, dtor prints `destroyed`.\n\nIn scope:\n```\ncreated\ndestroyed\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "created\ndestroyed",
+        "must_contain": ["class Tracker", "~Tracker", "std::cout"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "title": "Inheritance, protected",
+      "theory": "## Syntax\n\n```cpp\nclass Animal {\npublic:\n    std::string name;\n    Animal(std::string n) : name(n) {}\n    void speak() { std::cout << name << \"\\n\"; }\n};\n\nclass Dog : public Animal {\npublic:\n    Dog(std::string n) : Animal(n) {}\n};\n```\n\n## public / protected / private\n\n- public — everywhere\n- protected — class + subclasses\n- private — class only\n\n## Constructor order\n\nParent → child fields → child body. Destructors reverse.\n\n## What if\n\n- `class Dog : Animal` (no `public`) — private inheritance\n- Forget `: Animal(n)` — needs default ctor\n\n## Summary\n\n- `class B : public A`\n- `: A(args)` — parent ctor\n- `protected` — for subclasses\n- Parent first",
+      "questions": [
+        { "text": "`class Dog : public Animal`?", "options": ["Copy", "Inheritance", "Composition", "Error"], "answer": 1, "explanation": "Inheritance." },
+        { "text": "protected scope?", "options": ["Outside", "Class + subclasses", "Class only", "Nowhere"], "answer": 1, "explanation": "Class + subclasses." },
+        { "text": "Constructor order?", "options": ["Child → parent", "Parent → child", "Random", "Parallel"], "answer": 1, "explanation": "Parent first." }
+      ],
+      "practice": {
+        "description": "`Animal` with `name` and `speak()` → `<name>: ...`.\n`Dog : public Animal` — `wag()` → `<name>: woof`.\n\n```\nRex: ...\nRex: woof\n```",
+        "starter": "#include <iostream>\n#include <string>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Rex: ...\nRex: woof",
+        "must_contain": ["class Animal", "class Dog : public Animal", "speak", "wag", "std::cout"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "title": "Virtual Functions",
+      "theory": "## Problem\n\n```cpp\nAnimal* a = new Dog();\na->speak();   // Animal::speak (no virtual)\n```\n\n## virtual\n\n```cpp\nclass Animal {\npublic:\n    virtual void speak() { std::cout << \"...\\n\"; }\n};\n```\n\nDynamic dispatch by actual type.\n\n## override\n\n```cpp\nvoid speak() override { std::cout << \"woof\\n\"; }\n```\n\nCheck override. Typo — compile error.\n\n## Mechanism\n\nvtable — virtual function table. Cost: ~8 bytes per object, slower calls.\n\n## final\n\nNo further override.\n\n## What if\n\n- No `virtual` — static dispatch\n- `override` without base virtual — error\n\n## Summary\n\n- `virtual` — dynamic\n- `override` — check\n- vtable cost\n- No `virtual` — static",
+      "questions": [
+        { "text": "`virtual` does?", "options": ["Speeds up", "Dynamic dispatch", "Error", "Copy"], "answer": 1, "explanation": "By actual type." },
+        { "text": "`override` for?", "options": ["Pretty", "Check override", "Speed", "Not needed"], "answer": 1, "explanation": "Check." },
+        { "text": "Without virtual?", "options": ["Dog::speak", "Animal::speak", "Error", "Both"], "answer": 1, "explanation": "By pointer type." }
+      ],
+      "practice": {
+        "description": "`Animal` with `virtual speak()` → `...`.\n`Dog : public Animal` — `speak() override` → `woof`.\n\n`Animal* a = new Dog(); a->speak();`\n\n```\nwoof\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "woof",
+        "must_contain": ["virtual", "override", "class Animal", "class Dog : public Animal", "std::cout"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "Abstract Classes, Interfaces",
+      "theory": "## Pure virtual\n\n```cpp\nclass Shape {\npublic:\n    virtual double area() const = 0;\n};\n```\n\n`= 0` — must implement.\n\n## Abstract\n\nAny class with pure virtual. Cannot instantiate.\n\n```cpp\n// Shape s;   // error\nShape* p = new Rectangle(2, 3);   // OK\n```\n\n## Subclass\n\nMust implement all pure virtuals or be abstract itself.\n\n## Interface\n\nOnly pure virtuals, no fields:\n\n```cpp\nclass Drawable {\npublic:\n    virtual void draw() const = 0;\n    virtual ~Drawable() = default;\n};\n```\n\n## What if\n\n- `new Shape()` — error\n- Missing override — remains abstract\n- No virtual dtor — leak\n\n## Summary\n\n- `= 0` pure virtual\n- Abstract class\n- Subclass must implement\n- Interface = all `= 0`",
+      "questions": [
+        { "text": "`= 0` means?", "options": ["Return 0", "Pure virtual", "Error", "Default"], "answer": 1, "explanation": "Pure virtual." },
+        { "text": "Instantiate abstract?", "options": ["Yes", "No", "With new", "By pointer"], "answer": 1, "explanation": "Cannot." },
+        { "text": "Interface?", "options": ["Type", "Class with pure virtuals", "Template", "Error"], "answer": 1, "explanation": "Pure virtual class." }
+      ],
+      "practice": {
+        "description": "Abstract `Shape` with `virtual double area() const = 0` and `virtual ~Shape() = default`.\n\n`Square : public Shape` — `side * side`.\n\n`Shape* s = new Square(4); std::cout << s->area();`\n\n```\n16\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "16",
+        "must_contain": ["class Shape", "= 0", "virtual ~Shape", "class Square", "override", "std::cout"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "title": "Virtual Destructor",
+      "theory": "## Problem\n\n```cpp\nclass Animal { public: ~Animal() {} };\nclass Dog : public Animal {\n    int* data;\npublic:\n    Dog() : data(new int[100]) {}\n    ~Dog() { delete[] data; }\n};\n\nAnimal* a = new Dog();\ndelete a;   // only ~Animal → leak\n```\n\n## Solution\n\n```cpp\nclass Animal {\npublic:\n    virtual ~Animal() = default;\n};\n```\n\nVirtual destructor — correct dtor on delete via base pointer.\n\n## Rule\n\nIf class is for inheritance (has virtual functions) — virtual destructor mandatory.\n\n## Summary\n\n- `virtual ~ClassName() = default;`\n- Required with inheritance\n- All interfaces — virtual dtor\n- Without — leak",
+      "questions": [
+        { "text": "Why virtual dtor?", "options": ["Speed", "Correct dtor on delete via base", "Pretty", "Not needed"], "answer": 1, "explanation": "Correct dtor." },
+        { "text": "When required?", "options": ["Always", "Inheritance + virtuals", "int only", "Never"], "answer": 1, "explanation": "Polymorphism." },
+        { "text": "Delete via base without virtual?", "options": ["Works", "Leak/UB", "Error", "Slow"], "answer": 1, "explanation": "UB." }
+      ],
+      "practice": {
+        "description": "`Animal` with `virtual ~Animal() = default`.\n`Dog : public Animal` dtor prints `Dog destroyed`.\n\n`Animal* a = new Dog(); delete a;`\n\n```\nDog destroyed\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Dog destroyed",
+        "must_contain": ["virtual ~Animal", "class Dog", "~Dog", "delete", "std::cout"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "title": "vector: In Depth",
+      "theory": "## Methods\n\n```cpp\nv.push_back(x);\nv.pop_back();\nv.insert(v.begin() + 1, 99);\nv.erase(v.begin() + 1);\nv.clear();\n```\n\n## capacity vs size\n\n`capacity` — allocated. `size` — used.\n\n## reserve\n\n`v.reserve(1000)` — avoid reallocations.\n\n## Nested\n\n```cpp\nstd::vector<std::vector<int>> m = {{1, 2}, {3, 4}};\nm[0][1];   // 2\n```\n\n## What if\n\n- `insert`/`erase` mid — O(n)\n- `v[i]` out of bounds — UB\n\n## Summary\n\n- `push_back`, `pop_back`, `insert`, `erase`\n- `capacity` vs `size`\n- `reserve` ahead\n- `insert`/`erase` — O(n)",
+      "questions": [
+        { "text": "`push_back`?", "options": ["Begin", "End", "Remove", "Sort"], "answer": 1, "explanation": "End." },
+        { "text": "capacity is?", "options": ["= size", "Allocated", "Speed", "Index"], "answer": 1, "explanation": "Allocated." },
+        { "text": "`insert` mid complexity?", "options": ["O(1)", "O(n)", "O(log n)", "O(n²)"], "answer": 1, "explanation": "Shift — O(n)." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {1, 2, 3};`\n`v.push_back(4); v.insert(v.begin() + 1, 99);`\n\nOutput space-separated:\n```\n1 99 2 3 4\n```",
+        "starter": "#include <iostream>\n#include <vector>\n\nint main() {\n    std::vector<int> v = {1, 2, 3};\n    // TODO\n    return 0;\n}\n",
+        "expected": "1 99 2 3 4",
+        "must_contain": ["std::vector", "push_back", "insert", "std::cout"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "title": "map and unordered_map",
+      "theory": "## map\n\nSorted (red-black tree):\n\n```cpp\n#include <map>\nstd::map<std::string, int> ages;\nages[\"Anna\"] = 25;\n```\n\n## Methods\n\n```cpp\nages[k];\nages.at(k);\nages.count(k);\nages.find(k);\nages.erase(k);\n```\n\n## Traversal\n\n```cpp\nfor (const auto &[k, v] : ages) {\n    std::cout << k << \": \" << v;\n}\n```\n\n## unordered_map\n\nHash table. Faster avg (O(1) vs O(log n)), no order.\n\n## operator[] trap\n\n```cpp\nm[\"missing\"] == 0   // creates pair with 0!\n```\n\nFor check — `find` / `count`.\n\n## Summary\n\n- `std::map` sorted\n- `std::unordered_map` hash\n- `[key]` creates if absent\n- `find`, `count` for checks",
+      "questions": [
+        { "text": "map vs unordered?", "options": ["Same", "map sorted, unordered hash", "Faster", "int only"], "answer": 1, "explanation": "Order." },
+        { "text": "`m[\"new\"]`?", "options": ["Error", "Creates 0 pair", "nullptr", "Nothing"], "answer": 1, "explanation": "Creates." },
+        { "text": "Check without creating?", "options": ["m[k]", "m.find(k) != m.end()", "m[k] == 0", "m[k].exists()"], "answer": 1, "explanation": "`find`." }
+      ],
+      "practice": {
+        "description": "`std::map<std::string, int> m; m[\"a\"] = 1; m[\"b\"] = 2;`\n\nOutput:\n```\na: 1\nb: 2\nSize: 2\n```",
+        "starter": "#include <iostream>\n#include <map>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "a: 1\nb: 2\nSize: 2",
+        "must_contain": ["std::map", "for", "std::cout"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "title": "set and unordered_set",
+      "theory": "## set\n\nUnique sorted:\n\n```cpp\n#include <set>\nstd::set<int> s = {3, 1, 2, 2};\n// {1, 2, 3}\n```\n\n## Methods\n\n```cpp\ns.insert(5);\ns.erase(1);\ns.count(2);\ns.find(3);\ns.size();\n```\n\n## unordered_set\n\nHash, faster, no order.\n\n## No []\n\n`set[0]` — error.\n\n## From vector\n\n```cpp\nstd::set<int> unique(v.begin(), v.end());\n```\n\n## Summary\n\n- `set` — unique, sorted\n- `unordered_set` — hash\n- `insert`, `count`, `find`\n- No `[]`",
+      "questions": [
+        { "text": "std::set special?", "options": ["Indexed", "Unique sorted", "Dynamic", "Hash"], "answer": 1, "explanation": "Unique + sorted." },
+        { "text": "Duplicate insert?", "options": ["Adds", "Not added", "Error", "Replaces"], "answer": 1, "explanation": "Not added." },
+        { "text": "`s[0]`?", "options": ["Yes", "No", "Sometimes", "int only"], "answer": 1, "explanation": "No indexing." }
+      ],
+      "practice": {
+        "description": "`std::set<int> s = {3, 1, 2, 2, 1, 3};`\n\nOutput:\n```\n1 2 3\nSize: 3\n```",
+        "starter": "#include <iostream>\n#include <set>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1 2 3\nSize: 3",
+        "must_contain": ["std::set", "for", ".size()", "std::cout"]
+      }
+    },
+    "28": {
+      "id": 28,
+      "title": "Iterators",
+      "theory": "## What\n\nGeneralized pointers. `begin()` first, `end()` past-last.\n\n```cpp\nfor (auto it = v.begin(); it != v.end(); ++it) {\n    std::cout << *it;\n}\n```\n\n## Operations\n\n- `*it` — value\n- `++it` — next\n- `it == end()` — end\n\n## Range-for = iterators\n\n## Invalidation\n\nModifying container may invalidate iterators:\n\n```cpp\nv.push_back(x);   // may reallocate\n*it;              // UB\n```\n\n## map\n\n```cpp\nit->first;    // key\nit->second;   // value\n```\n\n## What if\n\n- Use after modify — UB\n- Deref `end()` — UB\n- Delete while iterating — invalidation\n\n## Summary\n\n- `begin()` / `end()`\n- `*it`, `++it`\n- Invalidation on modify\n- map: `it->first`, `it->second`",
+      "questions": [
+        { "text": "`end()` is?", "options": ["Last", "Past-last", "First", "Error"], "answer": 1, "explanation": "Past-last." },
+        { "text": "`*it`?", "options": ["Value", "Next", "Delete", "Address"], "answer": 0, "explanation": "Value." },
+        { "text": "Use after push_back?", "options": ["Works", "UB", "Error", "Nothing"], "answer": 1, "explanation": "UB." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {1, 2, 3};`\n\nVia iterator output:\n```\n1\n2\n3\n```",
+        "starter": "#include <iostream>\n#include <vector>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3",
+        "must_contain": ["begin()", "end()", "++it", "*it", "std::cout"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "title": "sort, reverse, min/max",
+      "theory": "## sort\n\n```cpp\n#include <algorithm>\nstd::sort(v.begin(), v.end());\n```\n\n## Descending\n\n```cpp\nstd::sort(v.begin(), v.end(), std::greater<int>());\nstd::sort(v.begin(), v.end(), [](int a, int b) { return a > b; });\n```\n\n## reverse\n\n```cpp\nstd::reverse(v.begin(), v.end());\n```\n\n## min / max\n\n```cpp\nstd::min(a, b);\nstd::max(a, b);\nstd::max_element(v.begin(), v.end());\n```\n\n## Comparator\n\nReturn `true` if `a` goes before `b`. `a <= b` — UB.\n\n## Summary\n\n- `std::sort` ascending\n- Comparator 3rd arg\n- `std::reverse`\n- `min`, `max`, `min_element`, `max_element`",
+      "questions": [
+        { "text": "Sort descending?", "options": ["sort(b, e)", "sort(b, e, greater<int>())", "sort_desc", "Error"], "answer": 1, "explanation": "`greater<>`." },
+        { "text": "`max(5, 10)`?", "options": ["5", "10", "15", "Error"], "answer": 1, "explanation": "10." },
+        { "text": "Comparator should return?", "options": ["a == b", "a < b", "a > b always", "Error"], "answer": 1, "explanation": "Strict less." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {5, 2, 8, 1, 9};`\n\nSort, output:\n```\n1 2 5 8 9\n```",
+        "starter": "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1 2 5 8 9",
+        "must_contain": ["std::sort", "std::cout"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "title": "find, count, accumulate",
+      "theory": "## find\n\n```cpp\nauto it = std::find(v.begin(), v.end(), 7);\nif (it != v.end()) { ... }\n```\n\n## find_if\n\n```cpp\nauto it = std::find_if(v.begin(), v.end(), [](int x) { return x > 5; });\n```\n\n## count\n\n```cpp\nint n = std::count(v.begin(), v.end(), 7);\nint evens = std::count_if(v.begin(), v.end(), [](int x) { return x % 2 == 0; });\n```\n\n## accumulate\n\n```cpp\n#include <numeric>\nint sum = std::accumulate(v.begin(), v.end(), 0);\n```\n\nStart type determines result type. `0` int, `0.0` double.\n\n## any_of / all_of\n\n```cpp\nstd::any_of(v.begin(), v.end(), [](int x) { return x % 2 == 0; });\nstd::all_of(v.begin(), v.end(), [](int x) { return x > 0; });\n```\n\n## Summary\n\n- `find` — first equal\n- `find_if` — first by predicate\n- `count` — how many\n- `accumulate` — sum\n- Start type matters",
+      "questions": [
+        { "text": "find not found?", "options": ["nullptr", "end()", "-1", "Error"], "answer": 1, "explanation": "`end()`." },
+        { "text": "count?", "options": ["Count", "How many", "Sort", "Remove"], "answer": 1, "explanation": "Frequency." },
+        { "text": "accumulate with 0 on doubles?", "options": ["Double", "Int (loss)", "Error", "Empty"], "answer": 1, "explanation": "0 is int." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {3, 7, 2, 9, 5};`\n\n1. count of 7\n2. sum via accumulate\n\n```\nCount 7: 1\nSum: 26\n```",
+        "starter": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Count 7: 1\nSum: 26",
+        "must_contain": ["std::count", "std::accumulate", "std::cout"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "title": "Lambda Expressions",
+      "theory": "## Syntax\n\n```cpp\n[capture](params) -> type { body }\n```\n\n## Simple\n\n```cpp\nauto add = [](int a, int b) { return a + b; };\n```\n\n## Capture\n\n- `[x]` — by value\n- `[&x]` — by reference\n- `[=]` — all by value\n- `[&]` — all by ref\n- `[this]` — this pointer\n\n## mutable\n\n```cpp\nint x = 10;\nauto f = [x]() mutable { x++; return x; };\n```\n\nWithout mutable — captured copy is const.\n\n## In algorithms\n\n```cpp\nstd::sort(v.begin(), v.end(), [](int a, int b) { return a > b; });\n```\n\n## What if\n\n- Forget `[]` — error\n- Capture local by ref, use after scope — UB\n\n## Summary\n\n- `[cap](params) { body }`\n- `[x]` value, `[&x]` ref\n- `[=]`, `[&]` all\n- `mutable` for modify copy",
+      "questions": [
+        { "text": "`[]` is?", "options": ["Params", "Capture", "Body", "Return"], "answer": 1, "explanation": "Capture." },
+        { "text": "`[x]`?", "options": ["By ref", "By value", "Delete", "Error"], "answer": 1, "explanation": "By value." },
+        { "text": "`mutable`?", "options": ["Capture", "Modify captured copy", "Speed", "Nothing"], "answer": 1, "explanation": "Modify copy." }
+      ],
+      "practice": {
+        "description": "`auto add = [](int a, int b) { return a + b; };`\n\nOutput `add(3, 4)`:\n```\n7\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "7",
+        "must_contain": ["[](", "auto add", "std::cout"]
+      }
+    },
+    "32": {
+      "id": 32,
+      "title": "Stack, Heap, new / delete",
+      "theory": "## Stack\n\nLocals — on stack. Auto-cleanup at scope end.\n\n```cpp\nvoid f() { int x = 10; }   // x destroyed\n```\n\nFast, limited (~8 MB).\n\n## Heap\n\nVia `new`. Manual `delete`.\n\n```cpp\nint* p = new int(42);\nstd::cout << *p;\ndelete p;\n```\n\nArrays — `new[]` / `delete[]`:\n\n```cpp\nint* arr = new int[10];\ndelete[] arr;\n```\n\n## Leaks\n\nForget `delete` — leak.\n\n## new vs new[]\n\nMismatch `delete` / `delete[]` — UB.\n\n## Modern\n\nSmart pointers instead. `make_unique`, `make_shared`.\n\n## Summary\n\n- Stack fast, auto\n- Heap via `new`, manual\n- `new`/`delete`, `new[]`/`delete[]`\n- Modern: smart pointers",
+      "questions": [
+        { "text": "Locals live on?", "options": ["Heap", "Stack", "Registers", "File"], "answer": 1, "explanation": "Stack." },
+        { "text": "`new` allocates?", "options": ["Stack", "Heap", "File", "Remove"], "answer": 1, "explanation": "Heap." },
+        { "text": "Forget delete?", "options": ["Compile error", "Leak", "Crash", "Nothing"], "answer": 1, "explanation": "Leak." }
+      ],
+      "practice": {
+        "description": "`int` via `new`, set 42, output, `delete`:\n```\n42\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "42",
+        "must_contain": ["new int", "delete", "std::cout"]
+      }
+    },
+    "33": {
+      "id": 33,
+      "title": "unique_ptr",
+      "theory": "## What\n\n`std::unique_ptr<T>` — single owner. Auto-delete at scope end. Not copyable, movable.\n\n```cpp\n#include <memory>\nauto p = std::make_unique<int>(42);\nstd::cout << *p;\n```\n\n## Move\n\n```cpp\nauto p2 = std::move(p);\n```\n\n## Passing\n\n```cpp\nvoid process(std::unique_ptr<int> p) { ... }   // takes ownership\nprocess(std::move(p));\n```\n\nIf not taking ownership — `T*` or `T&`:\n\n```cpp\nvoid show(const int* p) { std::cout << *p; }\nshow(p.get());\n```\n\n## Summary\n\n- `unique_ptr` single owner\n- `make_unique`\n- No copy, `std::move`\n- Auto-delete\n- `.get()` raw pointer",
+      "questions": [
+        { "text": "Copy unique_ptr?", "options": ["Yes", "No, only move", "Sometimes", "Via get"], "answer": 1, "explanation": "Move only." },
+        { "text": "`make_unique<int>(42)`?", "options": ["Stack", "unique_ptr 42", "Error", "int"], "answer": 1, "explanation": "Creates ptr." },
+        { "text": "`.get()`?", "options": ["Owner", "Raw pointer", "Copy", "Delete"], "answer": 1, "explanation": "Raw pointer." }
+      ],
+      "practice": {
+        "description": "`auto p = std::make_unique<int>(42);`\n\nOutput `*p`:\n```\n42\n```",
+        "starter": "#include <iostream>\n#include <memory>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "42",
+        "must_contain": ["std::unique_ptr", "std::make_unique", "*p", "std::cout"]
+      }
+    },
+    "34": {
+      "id": 34,
+      "title": "shared_ptr and weak_ptr",
+      "theory": "## shared_ptr\n\nMultiple owners. Deleted when last destroyed.\n\n```cpp\nauto p1 = std::make_shared<int>(42);\nauto p2 = p1;\nstd::cout << p1.use_count();   // 2\n```\n\n## Cycles\n\n```cpp\nclass A { std::shared_ptr<B> b; };\nclass B { std::shared_ptr<A> a; };\n```\n\nCycle — leak. Use `weak_ptr` for one side.\n\n## weak_ptr\n\nNo ownership:\n\n```cpp\nclass B { std::weak_ptr<A> a; };\nauto sp = b->a.lock();   // shared_ptr or nullptr\n```\n\n## When what\n\n- `unique_ptr` — single\n- `shared_ptr` — many\n- `weak_ptr` — observe\n- `T*` — no owner\n\n## Summary\n\n- `shared_ptr` shared\n- `use_count`\n- `weak_ptr` no ownership\n- Cycles — leak\n- `lock()` from weak",
+      "questions": [
+        { "text": "When shared deletes?", "options": ["Immediately", "Last owner dies", "After 1s", "Manual"], "answer": 1, "explanation": "Last." },
+        { "text": "`use_count`?", "options": ["Size", "Owner count", "Address", "Type"], "answer": 1, "explanation": "Owner count." },
+        { "text": "shared cycle?", "options": ["Works", "Leak", "Error", "Faster"], "answer": 1, "explanation": "Leak." }
+      ],
+      "practice": {
+        "description": "`auto p = std::make_shared<int>(42);`\n\nOutput:\n```\n*p = 42\ncount = 1\n```",
+        "starter": "#include <iostream>\n#include <memory>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "*p = 42\ncount = 1",
+        "must_contain": ["std::shared_ptr", "std::make_shared", "use_count", "std::cout"]
+      }
+    },
+    "35": {
+      "id": 35,
+      "title": "try / catch / throw",
+      "theory": "## try / catch\n\n```cpp\ntry {\n    // risky\n} catch (const std::exception& e) {\n    std::cout << \"Error: \" << e.what();\n}\n```\n\n## throw\n\n```cpp\nthrow std::runtime_error(\"Failed\");\n```\n\n## Standard\n\n- `std::runtime_error`\n- `std::invalid_argument`\n- `std::out_of_range`\n- `std::bad_alloc`\n\nAll have `.what()`.\n\n## Multiple catch\n\nMore specific first.\n\n## What if\n\n- Uncaught — `std::terminate`\n- `catch (...)` — loses type\n\n## Summary\n\n- `try { } catch (const std::exception& e) { }`\n- `throw std::runtime_error(...)`\n- `.what()`\n- Always `&` in catch",
+      "questions": [
+        { "text": "`throw`?", "options": ["Catch", "Throw exception", "Return", "Nothing"], "answer": 1, "explanation": "Throw." },
+        { "text": "`.what()`?", "options": ["Type", "Error text", "Stack", "Delete"], "answer": 1, "explanation": "Text." },
+        { "text": "Why `&` in catch?", "options": ["Copy", "No copy, no slicing", "Speed", "Not needed"], "answer": 1, "explanation": "No slicing." }
+      ],
+      "practice": {
+        "description": "Throw `std::runtime_error(\"bad\")` in `try`, catch and output `Error: bad`.\n\n```\nError: bad\n```",
+        "starter": "#include <iostream>\n#include <stdexcept>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Error: bad",
+        "must_contain": ["try", "catch", "throw", "std::runtime_error", "what()", "std::cout"]
+      }
+    },
+    "36": {
+      "id": 36,
+      "title": "Custom Exceptions, noexcept",
+      "theory": "## Custom\n\n```cpp\n#include <stdexcept>\nclass MyError : public std::runtime_error {\npublic:\n    using std::runtime_error::runtime_error;\n};\n```\n\n`using` — inherit constructors. Now `throw MyError(\"msg\")`.\n\n## Catch\n\n```cpp\ntry { throw MyError(\"custom\"); }\ncatch (const MyError& e) { std::cout << e.what(); }\n```\n\n## noexcept\n\nPromise not to throw:\n\n```cpp\nint safeDivide(int a, int b) noexcept {\n    return b == 0 ? 0 : a / b;\n}\n```\n\nThrow inside noexcept — `std::terminate`.\n\n## Where important\n\n- Move constructor — should be `noexcept`\n- Destructors — `noexcept` by default\n\n## Summary\n\n- `class MyError : public std::runtime_error`\n- `using` inherits ctors\n- `noexcept` — doesn't throw\n- Not throwing from destructors",
+      "questions": [
+        { "text": "Inherit from?", "options": ["std::string", "std::runtime_error", "int", "Error"], "answer": 1, "explanation": "`runtime_error`." },
+        { "text": "`noexcept`?", "options": ["Speed", "Promise no throw", "Error", "Catch"], "answer": 1, "explanation": "No throw." },
+        { "text": "Throw in noexcept?", "options": ["Works", "std::terminate", "Compile error", "Ignore"], "answer": 1, "explanation": "Terminate." }
+      ],
+      "practice": {
+        "description": "`class MyError : public std::runtime_error { using std::runtime_error::runtime_error; };`\n\nThrow `MyError(\"custom\")`, catch `const MyError&`, output `MyError: custom`.\n\n```\nMyError: custom\n```",
+        "starter": "#include <iostream>\n#include <stdexcept>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "MyError: custom",
+        "must_contain": ["class MyError", "std::runtime_error", "throw", "try", "catch", "what()", "std::cout"]
+      }
+    },
+    "37": {
+      "id": 37,
+      "title": "Function Templates",
+      "theory": "## What\n\nFunction parameterized by type:\n\n```cpp\ntemplate <typename T>\nT maxOf(T a, T b) { return a > b ? a : b; }\n\nmaxOf(3, 7);      // int\nmaxOf(3.5, 2.1);  // double\n```\n\nCompiler creates versions for each type.\n\n## typename vs class\n\nSame.\n\n## Explicit\n\n```cpp\nmaxOf<int>(3, 7);\n```\n\n## Multiple\n\n```cpp\ntemplate <typename T, typename U>\nauto add(T a, U b) { return a + b; }\n```\n\n## What if\n\n- Op not supported — error at instantiation\n- `maxOf(3, 7.5)` — T ambiguous\n\n## Summary\n\n- `template <typename T>`\n- Compiler creates versions\n- `maxOf(3, 7)` → T=int\n- Errors at instantiation",
+      "questions": [
+        { "text": "`template <typename T>`?", "options": ["Loop", "Template with type param", "Error", "Function"], "answer": 1, "explanation": "Type param." },
+        { "text": "`maxOf(3, 7)`?", "options": ["Error", "T=int", "T=double", "Nothing"], "answer": 1, "explanation": "T=int." },
+        { "text": "`maxOf(3, 7.5)`?", "options": ["Works", "Error (ambiguous T)", "5", "7.5"], "answer": 1, "explanation": "T ambiguous." }
+      ],
+      "practice": {
+        "description": "`template <typename T> T maxOf(T a, T b)`\n\nOutput `maxOf(3, 7)` and `maxOf(3.5, 2.1)`:\n```\n7\n3.5\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "7\n3.5",
+        "must_contain": ["template", "typename", "maxOf", "std::cout"]
+      }
+    },
+    "38": {
+      "id": 38,
+      "title": "Class Templates",
+      "theory": "## Template class\n\n```cpp\ntemplate <typename T>\nclass Box {\n    T value;\npublic:\n    Box(T v) : value(v) {}\n    T get() const { return value; }\n};\n\nBox<int> b1(42);\nBox<std::string> b2(\"hi\");\n```\n\n## STL = templates\n\n`std::vector<T>`, `std::map<K, V>`, `std::unique_ptr<T>`.\n\n## Value params\n\n```cpp\ntemplate <typename T, int N>\nclass Array { T data[N]; };\nArray<int, 5> arr;\n```\n\n## What if\n\n- Missing `<int>` — error\n- Op not supported — error at instantiation\n\n## Summary\n\n- `template <typename T> class Name`\n- `Name<int>`\n- Value params `<T, int N>`\n- Errors at instantiation",
+      "questions": [
+        { "text": "`template <typename T> class Box`?", "options": ["Class", "Class template", "Function", "Error"], "answer": 1, "explanation": "Class template." },
+        { "text": "Create?", "options": ["Box b;", "Box<int> b;", "new Box;", "class Box<int>"], "answer": 1, "explanation": "`Box<int>`." },
+        { "text": "Value params?", "options": ["No", "Yes `<T, int N>`", "C++20 only", "Error"], "answer": 1, "explanation": "Yes." }
+      ],
+      "practice": {
+        "description": "Template `Box<T>` with ctor and `get()`.\n\n`Box<int> b(42); std::cout << b.get();`\n\n```\n42\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "42",
+        "must_contain": ["template", "class Box", "Box<int>", ".get()", "std::cout"]
+      }
+    },
+    "39": {
+      "id": 39,
+      "title": "Move Semantics, rvalue",
+      "theory": "## Copy problem\n\n```cpp\nstd::vector<int> makeVector() {\n    std::vector<int> v(1000000);\n    return v;   // copy 1M?\n}\n```\n\nRVO often optimizes, but not always.\n\n## lvalue vs rvalue\n\n- lvalue — has address\n- rvalue — temporary\n\n## std::move\n\n```cpp\nstd::vector<int> a = {1, 2, 3};\nstd::vector<int> b = std::move(a);   // b steals a's data\n// a empty\n```\n\n## Move ctor\n\n```cpp\nclass Buffer {\n    int* data;\npublic:\n    Buffer(Buffer&& other) noexcept\n        : data(other.data) {\n        other.data = nullptr;\n    }\n};\n```\n\n## After move\n\nValid, unspecified state. Don't use contents.\n\n## What if\n\n- Use after `std::move` — unspecified\n- No `noexcept` on move — vector won't use it for growth\n\n## Summary\n\n- `std::move` — cast to rvalue\n- Move ctor — steal resources\n- `noexcept` for efficiency\n- After move — valid but empty",
+      "questions": [
+        { "text": "`std::move`?", "options": ["Moves", "Casts to rvalue", "Delete", "Copy"], "answer": 1, "explanation": "Cast." },
+        { "text": "After `std::move(a)`?", "options": ["a deleted", "a valid but unspecified", "Error", "a copy"], "answer": 1, "explanation": "Valid, empty." },
+        { "text": "Why `noexcept` on move?", "options": ["Pretty", "vector uses for growth", "Speed", "Nothing"], "answer": 1, "explanation": "For growth." }
+      ],
+      "practice": {
+        "description": "`std::string a = \"hello\"; std::string b = std::move(a);`\n\nOutput `b`:\n```\nhello\n```",
+        "starter": "#include <iostream>\n#include <string>\n#include <utility>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "hello",
+        "must_contain": ["std::move", "std::string", "std::cout"]
+      }
+    },
+    "40": {
+      "id": 40,
+      "title": "Mini-project: Phone Book",
+      "theory": "## What\n\nPhone book with `std::map<std::string, std::string>`. Add, find, save, load.\n\n## Model\n\n```cpp\nclass PhoneBook {\n    std::map<std::string, std::string> data;\npublic:\n    void add(const std::string& n, const std::string& p) {\n        data[n] = p;\n    }\n    void print() const {\n        for (const auto& [n, p] : data)\n            std::cout << n << \": \" << p << \"\\n\";\n    }\n    void save(const std::string& file) const {\n        std::ofstream f(file);\n        for (const auto& [n, p] : data)\n            f << n << \",\" << p << \"\\n\";\n    }\n};\n```\n\n## Used\n\n- class + private\n- `std::map`\n- `std::string` (find, substr)\n- `std::ofstream`, `std::ifstream`\n- Structured bindings\n\n## What if\n\n- No `find` check — creates empty via `[]`\n- No `pos == npos` check — UB on `substr`\n\n## Summary\n\n- class + map\n- Files via ofstream/ifstream\n- Structured bindings\n- Check `find` and `npos`",
+      "questions": [
+        { "text": "Store pairs?", "options": ["vector", "map<string, string>", "set", "queue"], "answer": 1, "explanation": "`map`." },
+        { "text": "`data[name]` if absent?", "options": ["Error", "Creates empty pair", "Nothing", "nullptr"], "answer": 1, "explanation": "Creates." },
+        { "text": "Write to file?", "options": ["cout", "ofstream", "ifstream", "cin"], "answer": 1, "explanation": "`ofstream`." }
+      ],
+      "practice": {
+        "description": "`PhoneBook` with `add` and `print`.\n\nAdd `(\"Anna\", \"123\")` and `(\"Ivan\", \"456\")`:\n```\nAnna: 123\nIvan: 456\n```",
+        "starter": "#include <iostream>\n#include <map>\n#include <string>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Anna: 123\nIvan: 456",
+        "must_contain": ["class PhoneBook", "std::map", "add", "print", "std::cout"]
+      }
+    },
+    "41": {
+      "id": 41,
+      "title": "Final",
+      "theory": "## Putting together\n\nCourse covered: syntax, refs, classes, inheritance, polymorphism, STL, lambdas, smart pointers, exceptions, templates.\n\n## Final example\n\n```cpp\n#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\nclass Product {\n    std::string name_;\n    double price_;\npublic:\n    Product(std::string name, double price)\n        : name_(std::move(name)), price_(price) {}\n    const std::string& name() const { return name_; }\n    double price() const { return price_; }\n};\n\nint main() {\n    std::vector<Product> products = {{\"A\", 100}, {\"B\", 200}, {\"C\", 50}};\n    double total = std::accumulate(products.begin(), products.end(), 0.0,\n        [](double s, const Product& p) { return s + p.price(); });\n    std::cout << \"Sum: \" << total << \"\\n\";\n\n    auto it = std::find_if(products.begin(), products.end(),\n        [](const Product& p) { return p.price() > 150; });\n    if (it != products.end())\n        std::cout << \"Expensive: \" << it->name() << \"\\n\";\n}\n```\n\n## Checks\n\n- class + private + ctor + const getters\n- `std::vector`, `accumulate`, `find_if`\n- Lambdas\n- Structured bindings\n\n## What if\n\n- No `const` getter — fails on const object\n- `it == end()` unchecked — UB\n\n## Summary\n\n- class + STL + algorithms + lambdas\n- Compose: sort → filter → accumulate\n- Smart pointers for polymorphism\n- Check `end()`",
+      "questions": [
+        { "text": "First by predicate?", "options": ["find", "find_if", "count", "sort"], "answer": 1, "explanation": "`find_if`." },
+        { "text": "find_if not found?", "options": ["nullptr", "end()", "0", "Error"], "answer": 1, "explanation": "`end()`." },
+        { "text": "accumulate?", "options": ["Sum", "Sort", "Find", "Copy"], "answer": 0, "explanation": "Sum." },
+        { "text": "Const getter for?", "options": ["Pretty", "Works on const object", "Speed", "Not needed"], "answer": 1, "explanation": "Const-correctness." }
+      ],
+      "practice": {
+        "description": "`Product` with `std::string name`, `double price`, getters.\n\n`std::vector<Product> products = {{\"A\", 100}, {\"B\", 200}, {\"C\", 50}};`\n\n1. Sum via `accumulate` + lambda\n2. First > 150 via `find_if`\n\n```\nSum: 350\nExpensive: B\n```",
+        "starter": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n#include <numeric>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Sum: 350\nExpensive: B",
+        "must_contain": ["class Product", "std::accumulate", "std::find_if", "[](", "std::cout"]
+      }
+    }
+  }
+}

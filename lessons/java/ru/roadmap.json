@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "title": "Первые шаги",
+    "lessons": [
+      { "id": 1, "title": "Первая программа", "status": "current" },
+      { "id": 2, "title": "Переменные и типы", "status": "locked" },
+      { "id": 3, "title": "Арифметика и приведение типов", "status": "locked" },
+      { "id": 4, "title": "Практика: калькулятор", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Ввод и строки",
+    "lessons": [
+      { "id": 5, "title": "Scanner: ввод с клавиатуры", "status": "locked" },
+      { "id": 6, "title": "Строки: методы", "status": "locked" },
+      { "id": 7, "title": "Форматирование: printf", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Ветвления и циклы",
+    "lessons": [
+      { "id": 8, "title": "if / else, тернарный", "status": "locked" },
+      { "id": 9, "title": "switch", "status": "locked" },
+      { "id": 10, "title": "Циклы: for, while, do-while", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Массивы и методы",
+    "lessons": [
+      { "id": 11, "title": "Массивы: создание", "status": "locked" },
+      { "id": 12, "title": "Обход массивов", "status": "locked" },
+      { "id": 13, "title": "Методы", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Классы",
+    "lessons": [
+      { "id": 14, "title": "Класс как чертёж", "status": "locked" },
+      { "id": 15, "title": "Конструкторы, this", "status": "locked" },
+      { "id": 16, "title": "Инкапсуляция, static", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "ООП: наследование и полиморфизм",
+    "lessons": [
+      { "id": 17, "title": "Наследование", "status": "locked" },
+      { "id": 18, "title": "Полиморфизм", "status": "locked" },
+      { "id": 19, "title": "Абстрактные классы и интерфейсы", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Коллекции и исключения",
+    "lessons": [
+      { "id": 20, "title": "ArrayList", "status": "locked" },
+      { "id": 21, "title": "HashMap", "status": "locked" },
+      { "id": 22, "title": "Исключения: try / catch", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Практика",
+    "lessons": [
+      { "id": 23, "title": "Свои исключения, throws", "status": "locked" },
+      { "id": 24, "title": "StringBuilder и String.join", "status": "locked" },
+      { "id": 25, "title": "Итоговая задача", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Лямбды и Stream API",
+    "lessons": [
+      { "id": 26, "title": "Лямбда-выражения", "status": "locked" },
+      { "id": 27, "title": "Method references", "status": "locked" },
+      { "id": 28, "title": "Stream API: map, filter", "status": "locked" },
+      { "id": 29, "title": "Stream API: reduce, collect", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Generics и Optional",
+    "lessons": [
+      { "id": 30, "title": "Generics", "status": "locked" },
+      { "id": 31, "title": "Wildcards", "status": "locked" },
+      { "id": 32, "title": "Optional", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "enum, record, try-with-resources",
+    "lessons": [
+      { "id": 33, "title": "enum", "status": "locked" },
+      { "id": 34, "title": "record и var", "status": "locked" },
+      { "id": 35, "title": "try-with-resources", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 12,
+    "title": "Продвинутая практика",
+    "lessons": [
+      { "id": 36, "title": "Stream API: практика", "status": "locked" },
+      { "id": 37, "title": "Итоговая", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  }
+]

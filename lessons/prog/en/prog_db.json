@@ -1,0 +1,686 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "What Is an Algorithm and a Program",
+      "theory": "## An algorithm is a recipe\nAn algorithm is an exact sequence of steps to solve a task. The computer does not understand meaning — it executes basic commands. A program is an instruction for the computer.\n\n## Why the computer is \"dumb\"\nIf you tell a human \"make tea\", they will figure it out. You have to tell the computer: \"take a cup\", \"pour water\". Programming is the skill of breaking the complex into simple steps.\n\n## Program state\nA program has state: the values in memory right now. Each command changes the state. The order of commands is logic. The computer will not guess what you meant — it will do exactly what is written.",
+      "questions": [
+        {
+          "text": "What is an algorithm?",
+          "options": ["Any program", "An exact sequence of steps to solve a task", "A programming language", "A computer device"],
+          "answer": 1,
+          "explanation": "An algorithm is the solution logic. A program is the algorithm in a specific language."
+        },
+        {
+          "text": "Why can't a computer guess what we meant?",
+          "options": ["It can't think — it executes commands", "It knows the language poorly", "It has little memory", "You have to explain twice"],
+          "answer": 0,
+          "explanation": "The computer is an executor. If you write something wrong, it will make a mistake."
+        },
+        {
+          "text": "What is \"program state\"?",
+          "options": ["The screen", "The values in memory at the current moment", "Line count", "An error"],
+          "answer": 1,
+          "explanation": "State is a snapshot of memory plus execution position."
+        },
+        {
+          "text": "If you swap two commands, will the result change?",
+          "options": ["Always", "Never", "It depends on their relationship", "Error"],
+          "answer": 2,
+          "explanation": "If one uses the result of another, the order is critical."
+        }
+      ]
+    },
+    "2": {
+      "id": 2,
+      "title": "Memory and Variables: Where Data Comes From",
+      "theory": "## Memory is like a cabinet\nMemory is cells with addresses. It's inconvenient for a human to remember addresses, so variables are used.\n\n## A variable is a label\n`x = 5` means: \"find a cell, put 5 in it, and label it x\". If you write `x = 10`, the old value is erased.\n\n## Right and left side\nIn `x = x + 1`, the right side (old x + 1) is computed first, and only then is the result placed in the left side (into x).\n\n## Common mistake\nConfusing the name and the value. `x = y` does not link them forever. It means \"take the value from y and put it into x\".",
+      "questions": [
+        {
+          "text": "What happens on `x = 10`?",
+          "options": ["A new variable is created", "10 is written into the cell x, the old one is erased", "A comparison", "Nothing"],
+          "answer": 1,
+          "explanation": "Assignment overwrites the old value."
+        },
+        {
+          "text": "What does this output?\n```\nx = 5\ny = x\nx = 10\nprint y\n```",
+          "options": ["5", "10", "15", "Error"],
+          "answer": 0,
+          "explanation": "y gets a copy of x's value (5). Then x changes, but y already holds 5."
+        },
+        {
+          "text": "What does `x = x + 1` do?",
+          "options": ["Creates x", "Compares x with 1", "Takes the old x, adds 1, writes back", "Deletes x"],
+          "answer": 2,
+          "explanation": "The right side is computed first, then the result is written into x."
+        },
+        {
+          "text": "Why are variables called \"labels\"?",
+          "options": ["They stick onto the screen", "They provide a convenient name for a memory cell", "They change color", "They are deleted"],
+          "answer": 1,
+          "explanation": "A name is a reference to memory for human convenience."
+        }
+      ]
+    },
+    "3": {
+      "id": 3,
+      "title": "Expressions: How a Computer Computes",
+      "theory": "## What an expression is\nA combination of data and operations that produces a result. `2 + 2` is an expression.\n\n## Operator precedence\nMultiplication and division come before addition. `2 + 2 * 2` is `2 + 4 = 6`.\n\n## Parentheses\nChange the order. `(2 + 2) * 2 = 8`. Parentheses tell the computer: \"do this first\".\n\n## Modulo\nOperator `%` gives the remainder. `10 % 3 = 1`. Needed to check for evenness and split numbers.",
+      "questions": [
+        {
+          "text": "What is `2 + 3 * 4`?",
+          "options": ["20", "14", "24", "9"],
+          "answer": 1,
+          "explanation": "Multiplication first (12), then addition (14)."
+        },
+        {
+          "text": "What is `%` for?",
+          "options": ["For division", "For remainder", "For power", "For comparison"],
+          "answer": 1,
+          "explanation": "Remainder shows whether a number divides evenly."
+        },
+        {
+          "text": "What is `10 % 3`?",
+          "options": ["3", "1", "0", "3.33"],
+          "answer": 1,
+          "explanation": "10 = 3*3 + 1. Remainder 1."
+        },
+        {
+          "text": "What do parentheses do in `(2 + 3) * 4`?",
+          "options": ["Nothing", "Force the addition to run first", "Delete numbers", "Change the type"],
+          "answer": 1,
+          "explanation": "Parentheses change precedence."
+        }
+      ]
+    },
+    "4": {
+      "id": 4,
+      "title": "Input and Output: Dialogue with a Program",
+      "theory": "## Output\n`print` shows data on screen. The only way to see what is inside.\n\n## Input\n`input` waits until the user types text and returns it.\n\n## Why input is a string\nThe computer does not know what you will enter: a number or a word. So by default it reads everything as text (a string). If you need math, you have to convert explicitly: `number(input())`.\n\n## Common mistake\nForgetting to convert input. `2` + `3` gives `23` instead of `5` because it concatenates strings.",
+      "questions": [
+        {
+          "text": "What does `print` do?",
+          "options": ["Reads keyboard", "Shows data on screen", "Saves to file", "Deletes variables"],
+          "answer": 1,
+          "explanation": "Output shows the result of work."
+        },
+        {
+          "text": "What does `input` return?",
+          "options": ["A number", "A string (text)", "A boolean", "An array"],
+          "answer": 1,
+          "explanation": "By default it's text."
+        },
+        {
+          "text": "Why can `2` + `3` give `23`?",
+          "options": ["The computer broke", "These are strings, they concatenate", "2+3=23", "Language error"],
+          "answer": 1,
+          "explanation": "+ for strings is concatenation."
+        },
+        {
+          "text": "Why is type conversion needed?",
+          "options": ["To slow things down", "So the computer understands these are numbers, not text", "For saving", "Not needed"],
+          "answer": 1,
+          "explanation": "Conversion enables math."
+        }
+      ]
+    },
+    "5": {
+      "id": 5,
+      "title": "Branching: How a Program Makes Decisions",
+      "theory": "## Linear code is boring\nIf a program just executes commands top-down, it doesn't react to the situation. We need logic.\n\n## Comparison\nThe computer can compare. The result is true or false. `5 > 3` is true.\n\n## Condition\n`if` checks a condition. If true, the block executes. `else` is the fallback (if the condition is false).\n\n## Common mistake\nConfusing `=` (assignment) and `==` (comparison). One equals puts, two equals ask.",
+      "questions": [
+        {
+          "text": "What is a logical expression?",
+          "options": ["Math", "An expression producing true or false", "A string", "An error"],
+          "answer": 1,
+          "explanation": "Used in conditions."
+        },
+        {
+          "text": "How is `=` different from `==`?",
+          "options": ["Nothing", "`=` assigns, `==` compares", "The reverse", "Only for strings"],
+          "answer": 1,
+          "explanation": "Assignment changes, comparison asks."
+        },
+        {
+          "text": "What happens if the condition is false and there is no `else`?",
+          "options": ["Crash", "Nothing executes", "The `if` body runs", "Asks again"],
+          "answer": 1,
+          "explanation": "The block is skipped."
+        },
+        {
+          "text": "What does this output?\n```\nx = 10\nif x > 5:\n    print \"Yes\"\nelse:\n    print \"No\"\n```",
+          "options": ["Yes", "No", "10", "Error"],
+          "answer": 0,
+          "explanation": "10 > 5 — true."
+        }
+      ]
+    },
+    "6": {
+      "id": 6,
+      "title": "Logical Operators: AND, OR, NOT",
+      "theory": "## Why connectives\nOne condition is often not enough. \"The number is greater than 0 and less than 10\" — two conditions.\n\n## AND\nTrue only if both are true.\n\n## OR\nTrue if at least one is true.\n\n## NOT\nFlips true to false and false to true.\n\n## Common mistake\nWriting `x > 0 and < 10`. Each comparison must be complete: `x > 0 and x < 10`.",
+      "questions": [
+        {
+          "text": "What does `true AND false` return?",
+          "options": ["true", "false", "Error", "Depends"],
+          "answer": 1,
+          "explanation": "AND requires both."
+        },
+        {
+          "text": "What does `true OR false` return?",
+          "options": ["true", "false", "Error", "Depends"],
+          "answer": 0,
+          "explanation": "OR requires at least one."
+        },
+        {
+          "text": "How to check that x is from 0 to 10?",
+          "options": ["x > 0 and x < 10", "x > 0 or x < 10", "x > 0 and < 10", "x > 0 or x > 10"],
+          "answer": 0,
+          "explanation": "Two full conditions with AND."
+        },
+        {
+          "text": "What does `not (5 > 3)` do?",
+          "options": ["True", "False, since 5>3 is true", "Error", "Returns 5"],
+          "answer": 1,
+          "explanation": "Negation of true is false."
+        }
+      ]
+    },
+    "7": {
+      "id": 7,
+      "title": "Nesting and Order of Checks",
+      "theory": "## Chain of conditions\n`if ... else if ... else`. The computer checks top-down and executes only the first matching block.\n\n## Order matters\nIf `x > 0` comes first and `x > 10` after, then for 20 the first fires and the second is not reached.\n\n## Nesting\nConditions inside conditions. The inner is checked only inside the outer.\n\n## Boundaries\nCheck 0, negatives, empty strings. Bugs hide at the boundary.\n\n## Common mistake\nMany independent `if` instead of `else if`. All matching ones will run.",
+      "questions": [
+        {
+          "text": "How is `else if` different from a new `if`?",
+          "options": ["Nothing", "`else if` is checked only if the previous were false", "Works only with numbers", "Faster"],
+          "answer": 1,
+          "explanation": "It continues the chain."
+        },
+        {
+          "text": "What does this output?\n```\nx = 0\nif x > 0:\n    print \"+\"\nelse if x < 0:\n    print \"-\"\nelse:\n    print \"0\"\n```",
+          "options": ["+", "-", "0", "Nothing"],
+          "answer": 2,
+          "explanation": "0 is neither greater nor less. The `else` block."
+        },
+        {
+          "text": "Why test edge cases?",
+          "options": ["For beauty", "Bugs most often occur at range boundaries", "For slowness", "Requirement"],
+          "answer": 1,
+          "explanation": "Boundaries are a common place for bugs."
+        },
+        {
+          "text": "What is wrong with two `if` in a row (x>10 and x>5)?",
+          "options": ["Nothing", "For x=15 both letters print", "Need `or`", "Need `not`"],
+          "answer": 1,
+          "explanation": "Need `else if` for exclusion."
+        }
+      ]
+    },
+    "8": {
+      "id": 8,
+      "title": "Data Types and Conversion",
+      "theory": "## Why types\nA computer distinguishes numbers and text. Numbers add, text concatenates. Types are the rules of the game.\n\n## Basic types\nNumbers, strings, boolean.\n\n## Conversion\nExplicit turning of a string into a number (on input) or a number into a string. `number(\"5\")`.\n\n## Implicit conversion\nThe language tries to guess the type. Dangerous: `\"5\" + 3` may give `\"53\"` or `8`. Better be explicit.\n\n## Common mistake\nForgetting to convert input. The string `\"5\"` does not work in math.",
+      "questions": [
+        {
+          "text": "What does `\"2\" + \"3\"` output?",
+          "options": ["5", "23", "6", "Error"],
+          "answer": 1,
+          "explanation": "Strings concatenate."
+        },
+        {
+          "text": "What does `number()` do?",
+          "options": ["String to number", "Number to string", "Deletes", "Rounds"],
+          "answer": 0,
+          "explanation": "Turns text into a math number."
+        },
+        {
+          "text": "What happens on `number(\"abc\")`?",
+          "options": ["0", "Error", "Nothing", "\"abc\""],
+          "answer": 1,
+          "explanation": "\"abc\" is not a number."
+        },
+        {
+          "text": "Why make conversion explicit?",
+          "options": ["For clarity and predictability", "For speed", "For saving", "Not necessary"],
+          "answer": 0,
+          "explanation": "Protects against unexpected concatenations."
+        }
+      ]
+    },
+    "9": {
+      "id": 9,
+      "title": "Why Loops Are Needed. Types of Loops",
+      "theory": "## Repetition\nIf you need to do 100 identical actions, writing 100 lines is silly. You need a loop.\n\n## while loop\nRuns while the condition is true. Used when the number of repetitions is unknown. The key is to change the variable inside, otherwise infinite loop.\n\n## for loop\nUsed when the number of repetitions is known. It changes the counter itself.\n\n## Common mistake\nForgetting to change the variable in `while`. The program hangs.",
+      "questions": [
+        {
+          "text": "When is `while` better?",
+          "options": ["When the number of repetitions is unknown", "When you need 5 times", "When there is an array", "Always"],
+          "answer": 0,
+          "explanation": "`while` depends on the condition."
+        },
+        {
+          "text": "What happens if the variable in `while` isn't changed?",
+          "options": ["Error", "Infinite loop", "Nothing", "The loop won't start"],
+          "answer": 1,
+          "explanation": "Condition always true."
+        },
+        {
+          "text": "How is `for` more convenient than `while`?",
+          "options": ["Faster", "It changes the counter itself, fewer chances to err", "Requires no conditions", "Works with text"],
+          "answer": 1,
+          "explanation": "It takes the routine off your hands."
+        },
+        {
+          "text": "How many times does this run?\n```\nfor i from 1 to 4:\n    print i\n```",
+          "options": ["3", "4", "5", "Infinite"],
+          "answer": 1,
+          "explanation": "i = 1, 2, 3, 4 (4 times)."
+        }
+      ]
+    },
+    "10": {
+      "id": 10,
+      "title": "Pattern: Accumulator",
+      "theory": "## What it is\nA variable that collects the result piece by piece (sum, product).\n\n## Initialization rule\nFor sum — 0. For product — 1. The value must be neutral.\n\n## How it works\nEach step adds the current value to the accumulator.\n\n## Common mistake\nDeclaring the accumulator inside the loop. It resets each iteration and ends up holding the last value, not the sum.",
+      "questions": [
+        {
+          "text": "What does this output?\n```\ntotal = 0\nfor i from 1 to 3:\n    total = total + i\nprint total\n```",
+          "options": ["3", "6", "1", "0"],
+          "answer": 1,
+          "explanation": "1+2+3=6."
+        },
+        {
+          "text": "Why does the sum start at 0?",
+          "options": ["Custom", "0 is neutral for addition", "Otherwise error", "For beauty"],
+          "answer": 1,
+          "explanation": "0 + x = x."
+        },
+        {
+          "text": "What happens if `total = 0` is inside the loop?",
+          "options": ["6", "3", "0", "Error"],
+          "answer": 1,
+          "explanation": "It resets. After i=3 the total is 3."
+        },
+        {
+          "text": "Where to start product accumulation?",
+          "options": ["At 0", "At 1", "At -1", "Doesn't matter"],
+          "answer": 1,
+          "explanation": "1 * x = x."
+        }
+      ]
+    },
+    "11": {
+      "id": 11,
+      "title": "Pattern: Counter and Flag",
+      "theory": "## Counter\nCounts the number of events. `count = count + 1`.\n\n## Flag\nA boolean variable (true/false). Answers \"did the event happen?\"\n\n## Difference\nCounter — how many. Flag — happened or not.\n\n## Common mistake\nForgetting to initialize before the loop.",
+      "questions": [
+        {
+          "text": "What does this output?\n```\ncount = 0\nfor i from 1 to 5:\n    if i > 2:\n        count += 1\nprint count\n```",
+          "options": ["2", "3", "5", "0"],
+          "answer": 1,
+          "explanation": "3, 4, 5 — three numbers."
+        },
+        {
+          "text": "What is a flag?",
+          "options": ["A number", "A true/false variable", "A string", "A loop"],
+          "answer": 1,
+          "explanation": "A logical variable."
+        },
+        {
+          "text": "Where to initialize the counter?",
+          "options": ["Inside the loop", "Before the loop", "After the loop", "Not needed"],
+          "answer": 1,
+          "explanation": "Before, so it accumulates."
+        },
+        {
+          "text": "How is counter different from flag?",
+          "options": ["Nothing", "Counter counts occurrences, flag answers whether an event happened", "Flag faster", "Counter only for numbers"],
+          "answer": 1,
+          "explanation": "Different purposes."
+        }
+      ]
+    },
+    "12": {
+      "id": 12,
+      "title": "Nested Loops",
+      "theory": "## A loop in a loop\nThe outer loop takes a step, the inner loop runs its full range. And so on for each step of the outer loop.\n\n## How many iterations\nN outer steps * M inner steps = N*M.\n\n## Why\nTables, matrices, enumerating combinations.\n\n## Common mistake\nUsing the same variable for both loops (the inner overwrites the outer).",
+      "questions": [
+        {
+          "text": "How many times does the inner loop run?\n```\nfor i from 1 to 3:\n    for j from 1 to 4:\n        print i\n```",
+          "options": ["3", "4", "7", "12"],
+          "answer": 3,
+          "explanation": "3 * 4 = 12."
+        },
+        {
+          "text": "What does this output?\n```\nfor i from 1 to 2:\n    for j from 1 to 2:\n        print i\n```",
+          "options": ["1 2", "1 1 2 2", "1 2 1 2", "2 2 1 1"],
+          "answer": 1,
+          "explanation": "For i=1 two prints of 1, for i=2 two prints of 2."
+        },
+        {
+          "text": "What is wrong if both loops use `i`?",
+          "options": ["Nothing", "Inner overwrites the outer `i`", "Infinite", "Error"],
+          "answer": 1,
+          "explanation": "Different variables needed."
+        },
+        {
+          "text": "How to read nested loops?",
+          "options": ["Bottom-up", "Outer slow, inner fast", "Simultaneously", "Inner only"],
+          "answer": 1,
+          "explanation": "Outer sets the context, inner works within."
+        }
+      ]
+    },
+    "13": {
+      "id": 13,
+      "title": "Why Functions Are Needed. The Black Box",
+      "theory": "## Copy-paste is evil\nIf code repeats, it is hard to change.\n\n## Function\nA named block. We give meaning a name. We call by name when needed.\n\n## Black box\nWe don't care how the function is built inside. What matters is what it takes (input) and what it returns (output).\n\n## Common mistake\nThinking the function runs when it is declared. Only when it is called.",
+      "questions": [
+        {
+          "text": "When does the function code run?",
+          "options": ["On declaration", "On call", "Always", "Never"],
+          "answer": 1,
+          "explanation": "Declaration is a recipe, call is cooking."
+        },
+        {
+          "text": "Why functions?",
+          "options": ["For length", "To avoid code duplication and give meaning a name", "For complexity", "Requirement"],
+          "answer": 1,
+          "explanation": "Modularity and reuse."
+        },
+        {
+          "text": "What does this output?\n```\nfunction f():\n    print \"A\"\nprint \"B\"\nf()\n```",
+          "options": ["A B", "B A", "A", "B"],
+          "answer": 1,
+          "explanation": "B first, then the f call."
+        },
+        {
+          "text": "What if the function is declared but not called?",
+          "options": ["Nothing", "It runs", "Error", "Prints the name"],
+          "answer": 0,
+          "explanation": "Without a call the code doesn't run."
+        }
+      ]
+    },
+    "14": {
+      "id": 14,
+      "title": "Parameters and Return Value",
+      "theory": "## Inputs and outputs\nParameters are what the function takes. Return is what it gives back.\n\n## Print vs Return\nPrint shows on screen. Return gives the value back into the code. With a return you can keep working.\n\n## Why return\nTo combine: `f(f(2))`.\n\n## Common mistake\nForgetting `return`. The function gives back \"nothing\".",
+      "questions": [
+        {
+          "text": "What does this output?\n```\nfunction f(a):\n    return a * 2\nprint f(3)\n```",
+          "options": ["3", "6", "Error", "Nothing"],
+          "answer": 1,
+          "explanation": "f(3) returns 6."
+        },
+        {
+          "text": "How is return different from print?",
+          "options": ["Nothing", "Return gives a value, print shows it", "Print faster", "Return only for numbers"],
+          "answer": 1,
+          "explanation": "Different mechanisms."
+        },
+        {
+          "text": "What is wrong?\n```\nfunction f(a):\n    a * 2\n```",
+          "options": ["Nothing", "No return", "Need print", "Error"],
+          "answer": 1,
+          "explanation": "The result is lost."
+        },
+        {
+          "text": "What does this output?\n```\nfunction f(a,b):\n    return a + b\nprint f(1, 2) + f(3, 4)\n```",
+          "options": ["3", "7", "10", "Error"],
+          "answer": 2,
+          "explanation": "3 + 7 = 10."
+        }
+      ]
+    },
+    "15": {
+      "id": 15,
+      "title": "Scope",
+      "theory": "## Local variables\nCreated inside a function, visible only there. Outside they don't exist.\n\n## Global\nOuter variables are visible inside (for reading). Changing them inside a function is bad practice.\n\n## Isolation\nA function should not break someone else's variables.\n\n## Common mistake\nThinking a function can return a variable by name. Only via `return`.",
+      "questions": [
+        {
+          "text": "What happens?\n```\nfunction f():\n    x = 5\nf()\nprint x\n```",
+          "options": ["5", "Error", "0", "Nothing"],
+          "answer": 1,
+          "explanation": "x is local."
+        },
+        {
+          "text": "What does this output?\n```\nx = 10\nfunction f():\n    print x\nf()\n```",
+          "options": ["10", "Error", "0", "Nothing"],
+          "answer": 0,
+          "explanation": "The global is readable."
+        },
+        {
+          "text": "How to pass a value outside?",
+          "options": ["Via global", "Via return", "Via print", "Nowhere"],
+          "answer": 1,
+          "explanation": "Return is the right way."
+        },
+        {
+          "text": "Parameters are...",
+          "options": ["Global", "Local names inside the function", "Constants", "Error"],
+          "answer": 1,
+          "explanation": "Exist only inside."
+        }
+      ]
+    },
+    "16": {
+      "id": 16,
+      "title": "Recursion",
+      "theory": "## A function calls itself\nRecursion is a function calling itself with a smaller argument.\n\n## Base case\nRequired exit condition. Without it — infinity and stack overflow.\n\n## How to read\nfactorial(3) = 3 * factorial(2) = ... = 6.\n\n## Common mistake\nForgetting the base case or not shrinking the argument.",
+      "questions": [
+        {
+          "text": "What does factorial(3) return?",
+          "options": ["3", "6", "1", "9"],
+          "answer": 1,
+          "explanation": "3 * 2 * 1 = 6."
+        },
+        {
+          "text": "What is required in recursion?",
+          "options": ["Loop", "Base case (exit condition)", "Array", "Print"],
+          "answer": 1,
+          "explanation": "Without base — infinity."
+        },
+        {
+          "text": "What happens without the base case?",
+          "options": ["0", "Stack overflow", "1", "Syntax error"],
+          "answer": 1,
+          "explanation": "Infinite calls."
+        },
+        {
+          "text": "What does factorial(1) return?",
+          "options": ["0", "1", "2", "Error"],
+          "answer": 1,
+          "explanation": "Base."
+        }
+      ]
+    },
+    "17": {
+      "id": 17,
+      "title": "What Is an Array and Indices",
+      "theory": "## Why an array\nOne variable — one value. An array — many values under one name.\n\n## Indices\nZero-based. `a[0]` — first.\n\n## Length\nLast index = length - 1.\n\n## Common mistake\nOut of bounds (a[3] with length 3).",
+      "questions": [
+        {
+          "text": "What does this output?\n```\na = [5, 10, 15]\nprint a[1]\n```",
+          "options": ["5", "10", "15", "Error"],
+          "answer": 1,
+          "explanation": "Zero-based."
+        },
+        {
+          "text": "Last index for length 4?",
+          "options": ["4", "3", "5", "0"],
+          "answer": 1,
+          "explanation": "Length - 1."
+        },
+        {
+          "text": "What happens on a[3] if length is 3?",
+          "options": ["0", "Last", "Out-of-bounds error", "Nothing"],
+          "answer": 2,
+          "explanation": "Indices 0, 1, 2."
+        },
+        {
+          "text": "How to replace the second element?",
+          "options": ["a[2] = 99", "a[1] = 99", "a = 99", "a[0] = 99"],
+          "answer": 1,
+          "explanation": "The second has index 1."
+        }
+      ]
+    },
+    "18": {
+      "id": 18,
+      "title": "Traversing an Array",
+      "theory": "## Iteration\nA loop by index or by element.\n\n## By elements\n`for x in a` — if you only need the element.\n\n## By indices\n`for i from 0 to length-1` — if you need the index.\n\n## Common mistake\n`i <= length(a)` instead of `<`. Out of bounds.",
+      "questions": [
+        {
+          "text": "What does this output?\n```\nfor x in [1, 2, 3]:\n    print x\n```",
+          "options": ["1 2 3", "0 1 2", "3", "Error"],
+          "answer": 0,
+          "explanation": "Iterating elements."
+        },
+        {
+          "text": "What is wrong?\n```\nfor i from 0 to length(a):\n    print a[i]\n```",
+          "options": ["Nothing", "Out of bounds", "Need from 1", "Need while"],
+          "answer": 1,
+          "explanation": "Last i = length(a) — error."
+        },
+        {
+          "text": "How to compute the sum?",
+          "options": ["print a", "Accumulator + iteration", "length(a)", "a[0] + a[1]"],
+          "answer": 1,
+          "explanation": "Needs a loop."
+        },
+        {
+          "text": "When is the index needed?",
+          "options": ["Always", "For swap or comparing neighbors", "Never", "For strings"],
+          "answer": 1,
+          "explanation": "When the position matters."
+        }
+      ]
+    },
+    "19": {
+      "id": 19,
+      "title": "Search, Filter, Maximum",
+      "theory": "## Filtering\nCollect matching items into a new array.\n\n## Search\nFind the first or establish existence (flag).\n\n## Maximum\nStart from the first element, not 0 (otherwise negatives won't be found).\n\n## Foundation\nIteration + condition.",
+      "questions": [
+        {
+          "text": "What does filtering do?",
+          "options": ["Changes the array", "Collects matching", "Sorts", "Finds one"],
+          "answer": 1,
+          "explanation": "Selection by condition."
+        },
+        {
+          "text": "Why not start the maximum at 0?",
+          "options": ["You can", "If all are negative, 0 will be greater", "0 is not a number", "Need from 1"],
+          "answer": 1,
+          "explanation": "0 distorts the result."
+        },
+        {
+          "text": "What does this output?\n```\na = [1, 2, 3, 4]\nmax = a[0]\nfor x in a:\n    if x > max:\n        max = x\nprint max\n```",
+          "options": ["1", "4", "10", "0"],
+          "answer": 1,
+          "explanation": "Maximum 4."
+        },
+        {
+          "text": "How to check whether 7 exists?",
+          "options": ["print a", "Flag: if x == 7: found = true", "length(a)", "a[7]"],
+          "answer": 1,
+          "explanation": "Iteration and flag."
+        }
+      ]
+    },
+    "20": {
+      "id": 20,
+      "title": "Sorting and Swap",
+      "theory": "## Swap\nExchange values. Needs a temporary variable.\n\n## Without temp\n`a = b; b = a` erases the old a. Both become b.\n\n## Find max and swap\nThe foundation of selection sort.\n\n## Common mistake\nSwap without a third variable.",
+      "questions": [
+        {
+          "text": "What happens without a temp?\n```\na = 1\nb = 2\na = b\nb = a\n```",
+          "options": ["a=2, b=1", "a=2, b=2", "a=1, b=1", "Error"],
+          "answer": 1,
+          "explanation": "a becomes 2, b also 2."
+        },
+        {
+          "text": "How to swap correctly?",
+          "options": ["a=b; b=a", "t=a; a=b; b=t", "a=a+b; b=a-b", "b=a; a=b"],
+          "answer": 1,
+          "explanation": "Need t."
+        },
+        {
+          "text": "Where to start the maximum search?",
+          "options": ["At 0", "At the first element", "At the last", "At length"],
+          "answer": 1,
+          "explanation": "So negatives don't distort."
+        },
+        {
+          "text": "Why find the index of the maximum?",
+          "options": ["Not needed", "To swap or use the position", "For speed", "Error"],
+          "answer": 1,
+          "explanation": "For further actions."
+        }
+      ]
+    },
+    "21": {
+      "id": 21,
+      "title": "How to Solve Problems Step by Step",
+      "theory": "## Decomposition\nBreak a big task into small ones.\n\n## Steps\n1. Understand inputs and outputs.\n2. Split into subtasks.\n3. Write pseudocode.\n4. Check at boundaries.\n\n## Debugging\nIf it doesn't work — walk through step by step manually.\n\n## Common mistake\nTrying to write all the code at once without thinking through the steps.",
+      "questions": [
+        {
+          "text": "Where to start solving a problem?",
+          "options": ["With code", "By understanding input and output", "By googling", "By creating an array"],
+          "answer": 1,
+          "explanation": "Understanding the data is the base."
+        },
+        {
+          "text": "Why decomposition?",
+          "options": ["To complicate", "To solve the task in parts", "For beauty", "Requirement"],
+          "answer": 1,
+          "explanation": "The big is broken into small."
+        },
+        {
+          "text": "How to test a solution?",
+          "options": ["Randomly", "On edge values", "Only at 0", "Not at all"],
+          "answer": 1,
+          "explanation": "Boundaries are the key."
+        },
+        {
+          "text": "What to do if it doesn't work?",
+          "options": ["Delete", "Walk through the steps manually", "Give up", "Rewrite"],
+          "answer": 1,
+          "explanation": "Tracing."
+        }
+      ]
+    },
+    "22": {
+      "id": 22,
+      "title": "What Any Program Consists Of",
+      "theory": "## Base\nAny program consists of:\n1. Input (read).\n2. Processing (logic, loops, functions).\n3. Output (result).\n\n## State\nThe program changes memory. Variables hold the state.\n\n## Algorithm\nA sequence of actions. Written in any language.\n\n## Next\nNow you know the base. The next step is the syntax of a specific language (Python).",
+      "questions": [
+        {
+          "text": "What does a program consist of?",
+          "options": ["Only loops", "Input, processing, output", "Only functions", "Variables"],
+          "answer": 1,
+          "explanation": "The classic scheme."
+        },
+        {
+          "text": "What holds state?",
+          "options": ["Functions", "Variables", "Loops", "Output"],
+          "answer": 1,
+          "explanation": "Memory/variables."
+        },
+        {
+          "text": "What is an algorithm?",
+          "options": ["Python syntax", "Solution logic", "Error", "Array"],
+          "answer": 1,
+          "explanation": "An algorithm is a sequence of steps."
+        },
+        {
+          "text": "What is next after understanding code?",
+          "options": ["Nothing", "Learning a language's syntax", "Only algorithms", "Only databases"],
+          "answer": 1,
+          "explanation": "Now you can move to Python."
+        }
+      ]
+    }
+  }
+}

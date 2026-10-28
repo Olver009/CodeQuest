@@ -1,0 +1,25 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Золотая орбита -->
+    <circle cx="12" cy="12" r="8" stroke="#FFD700" stroke-width="1.5" opacity="0.6" />
+
+    <!-- Земной шар в центре -->
+    <circle cx="12" cy="12" r="4.5" fill="#3B82F6" />
+    <path d="M 8.5 10 C 9.5 10 10 11 10.5 12 C 10.5 13 9.5 14 9 14 C 8 14 7.5 13 8 12 Z" fill="#10B981" />
+    <path d="M 13 8.5 C 14 8.5 15 9 15 10 C 15 11 14.5 11.5 13.5 11.5 C 12.5 11.5 12 10.5 12.5 9.5 Z" fill="#10B981" />
+    <path d="M 13 14.5 C 14 14.5 14.5 15.5 14 16.5 C 13.5 16.5 13 16 12.5 15.5 Z" fill="#10B981" />
+    <circle cx="12" cy="12" r="4.5" stroke="#2563EB" stroke-width="1" />
+    <ellipse cx="12" cy="12" rx="1.8" ry="4.5" stroke="#2563EB" stroke-width="0.8" />
+
+    <!-- 8 языков по кругу -->
+    <circle cx="12" cy="4" r="1.5" fill="#F7DF1E" /> <!-- JS -->
+    <circle cx="17.66" cy="6.34" r="1.5" fill="#3776AB" /> <!-- Python -->
+    <circle cx="20" cy="12" r="1.5" fill="#F89820" /> <!-- Java -->
+    <circle cx="17.66" cy="17.66" r="1.5" fill="#00599C" /> <!-- C++ -->
+    <circle cx="12" cy="20" r="1.5" fill="#E34F26" /> <!-- HTML -->
+    <circle cx="6.34" cy="17.66" r="1.5" fill="#264DE4" /> <!-- CSS -->
+    <circle cx="4" cy="12" r="1.5" fill="#CC342D" /> <!-- Ruby -->
+    <circle cx="6.34" cy="6.34" r="1.5" fill="#00ADD8" /> <!-- Go -->
+
+    <!-- Корона на макушке -->
+    <path d="M 9 2 L 10 4 L 12 1.5 L 14 4 L 15 2 L 14.5 5 H 9.5 Z" fill="#FFD700" stroke="#DAA520" stroke-width="0.5" stroke-linejoin="round"/>
+</svg>

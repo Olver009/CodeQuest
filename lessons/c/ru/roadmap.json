@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "title": "Введение",
+    "lessons": [
+      { "id": 1, "title": "Что такое C и зачем", "status": "current" },
+      { "id": 2, "title": "Компиляция: gcc", "status": "locked" },
+      { "id": 3, "title": "Первая программа", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Переменные и типы",
+    "lessons": [
+      { "id": 4, "title": "int, char, float, double", "status": "locked" },
+      { "id": 5, "title": "printf: форматирование", "status": "locked" },
+      { "id": 6, "title": "Приведение типов", "status": "locked" },
+      { "id": 7, "title": "const и размеры", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Ввод с клавиатуры",
+    "lessons": [
+      { "id": 8, "title": "scanf: чтение", "status": "locked" },
+      { "id": 9, "title": "Возврат scanf, ошибки", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Условия",
+    "lessons": [
+      { "id": 10, "title": "if / else, тернарный", "status": "locked" },
+      { "id": 11, "title": "switch", "status": "locked" },
+      { "id": 12, "title": "Логические операторы", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Циклы",
+    "lessons": [
+      { "id": 13, "title": "for", "status": "locked" },
+      { "id": 14, "title": "while, do-while", "status": "locked" },
+      { "id": 15, "title": "break, continue", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Функции",
+    "lessons": [
+      { "id": 16, "title": "Объявление, параметры, return", "status": "locked" },
+      { "id": 17, "title": "void, прототипы", "status": "locked" },
+      { "id": 18, "title": "Рекурсия", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Массивы и строки",
+    "lessons": [
+      { "id": 19, "title": "Массивы: создание, индексы", "status": "locked" },
+      { "id": 20, "title": "Обход массивов", "status": "locked" },
+      { "id": 21, "title": "Строки: char[], нуль-терминатор", "status": "locked" },
+      { "id": 22, "title": "string.h: strlen, strcpy, strcmp", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Указатели и память",
+    "lessons": [
+      { "id": 23, "title": "Указатели: адреса, &", "status": "locked" },
+      { "id": 24, "title": "Разыменование *", "status": "locked" },
+      { "id": 25, "title": "malloc / free", "status": "locked" },
+      { "id": 26, "title": "Указатели и массивы", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Структуры",
+    "lessons": [
+      { "id": 27, "title": "struct, typedef", "status": "locked" },
+      { "id": 28, "title": "Указатели на структуры, ->", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Файлы",
+    "lessons": [
+      { "id": 29, "title": "fopen / fclose, чтение, запись", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Практика",
+    "lessons": [
+      { "id": 30, "title": "Мини-проект: TODO-лист", "status": "locked" },
+      { "id": 31, "title": "Итоговая", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  }
+]

@@ -1,0 +1,702 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "title": "Что такое C++ и зачем",
+      "theory": "## Что такое C++\n\nC++ — надмножество C с добавлением ООП, шаблонов, исключений, STL. Создан Бьёрном Страуструпом в 1983. Применяется в: играх (Unreal Engine), высоконагруженных серверах (Yandex, Google), системном ПО (Windows частично), браузерах (Chrome, Firefox), БД (MySQL, MongoDB), embedded.\n\n## C++ vs C\n\n- **ООП**: классы, наследование, полиморфизм.\n- **Ссылки** (`int &r`).\n- **Стандартная библиотека**: `std::string`, `std::vector`, `std::map`, алгоритмы.\n- **Шаблоны** — обобщённое программирование.\n- **Исключения** — `try/catch`.\n- **RAII** — автоматическое освобождение через деструкторы.\n- **Умные указатели** — `unique_ptr`, `shared_ptr`.\n\n## C++ vs Java\n\n- Нет JVM: компилируется в машинный код, быстрее.\n- Нет сборщика мусора: RAII + умные указатели.\n- Перегрузка операторов.\n- Шаблоны вместо generics (мощнее и сложнее).\n- Множественное наследование (осторожно).\n\n## C++ vs Python\n\nPython — интерпретируемый, C++ — компилируемый. C++ в 10-100 раз быстрее. Python проще, C++ гибче, но и опаснее (UB).\n\n## Уровень входа\n\nC++ — **сложный** язык. Много деталей: управление памятью, UB, шаблоны, перегрузки. Но если выучил C++ — другие языки даются легче.\n\n## Стандарты\n\nC++11, C++14, C++17, C++20, C++23. В курсе — C++17 (современный и распространённый).\n\n## Что будет, если\n\n- Забыть `return 0;` — неявно 0 (стандарт). Но пиши явно.\n- Использовать UB — программа может работать сегодня и падать завтра.\n\n## Итог\n\n- C++ — надмножество C с ООП, шаблонами, STL\n- Компилируется в машинный код\n- Нет GC, RAII\n- Сложный, но мощный\n- C++17 — стандарт курса",
+      "questions": [
+        { "text": "Что такое C++?", "options": ["Интерпретируемый", "Надмножество C с ООП", "Чистый функциональный", "Скриптовый"], "answer": 1, "explanation": "C с ООП, шаблонами, STL." },
+        { "text": "Есть ли в C++ сборщик мусора?", "options": ["Да", "Нет, RAII + умные указатели", "Только в C++11", "Только в C++20"], "answer": 1, "explanation": "RAII и smart pointers вместо GC." },
+        { "text": "Что из этого есть в C++?", "options": ["Только struct", "Классы, шаблоны, STL", "Только ООП", "Только шаблоны"], "answer": 1, "explanation": "Всё вместе." },
+        { "text": "Каким компилятором пользоваться?", "options": ["gcc", "g++", "javac", "node"], "answer": 1, "explanation": "`g++` для C++." }
+      ],
+      "practice": {
+        "description": "Выведи через `std::cout` три строки:\n```\nC++\nУрок 1\nГотово\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "C++\nУрок 1\nГотово",
+        "must_contain": ["#include <iostream>", "std::cout", "return 0"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "title": "Компиляция: g++",
+      "theory": "## Как C++ становится программой\n\n`.cpp` → компилятор → `.o` → линкер → исполняемый файл.\n\n```bash\ng++ hello.cpp -o hello\n./hello\n```\n\n## g++\n\n`g++` — GNU C++ Compiler. Автоматически линкует стандартную библиотеку C++.\n\n```bash\ng++ -Wall -Wextra -std=c++17 hello.cpp -o hello\n```\n\n- `-Wall -Wextra` — предупреждения\n- `-std=c++17` — стандарт\n- `-o` — имя выходного\n- `-O2` — оптимизация\n- `-g` — отладка\n\n## Первая программа\n\n`hello.cpp`:\n\n```cpp\n#include <iostream>\n\nint main() {\n    std::cout << \"Hello, world!\\n\";\n    return 0;\n}\n```\n\n## Ошибки\n\n- **Компиляции** — синтаксис. Программа не создастся.\n- **Линковки** — `undefined reference`. Функция объявлена, но нет определения.\n- **Выполнения** — segfault, UB, исключения.\n\n## Отличие от C\n\n`gcc` для C, `g++` для C++. `g++` также компилирует `.c` как C++ — осторожно. Для смешанных проектов используют оба.\n\n## Что будет, если\n\n- `gcc hello.cpp` — может скомпилировать, но **не слинкует** stdlib C++ → `undefined reference` на `std::cout`.\n- Забыть `-std=c++17` — компилятор возьмёт свой дефолт (может быть старый).\n\n## Итог\n\n- `g++ -std=c++17 file.cpp -o name`\n- `-Wall -Wextra` — предупреждения\n- Ошибки: компиляции / линковки / выполнения",
+      "questions": [
+        { "text": "Какой компилятор для C++?", "options": ["gcc", "g++", "clang+", "javac"], "answer": 1, "explanation": "`g++`." },
+        { "text": "Что делает `-std=c++17`?", "options": ["Оптимизацию", "Стандарт", "Отладку", "Импорт"], "answer": 1, "explanation": "Стандарт." },
+        { "text": "Что при `gcc hello.cpp`?", "options": ["Работает", "Ошибка линковки с iostream", "Компилирует"], "answer": 1, "explanation": "`undefined reference`." },
+        { "text": "Что даёт `-Wall`?", "options": ["Все ошибки", "Все предупреждения", "Все файлы"], "answer": 1, "explanation": "Предупреждения." }
+      ],
+      "practice": {
+        "description": "Выведи:\n```\ng++\nКомпиляция\nOK\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "g++\nКомпиляция\nOK",
+        "must_contain": ["#include <iostream>", "std::cout"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "title": "Первая программа: iostream",
+      "theory": "## iostream\n\n`#include <iostream>` — заголовок для ввода-вывода. Содержит `std::cout` (вывод) и `std::cin` (ввод).\n\n```cpp\n#include <iostream>\n\nint main() {\n    std::cout << \"Hello\\n\";\n    return 0;\n}\n```\n\n## cout и <<\n\n`std::cout << x` — вывод значения `x`. `<<` — оператор потока.\n\n```cpp\nstd::cout << \"x = \";\nstd::cout << 42;\nstd::cout << \"\\n\";\n// x = 42\n```\n\nМожно цепочкой:\n\n```cpp\nstd::cout << \"x = \" << 42 << \"\\n\";\n```\n\n## std::endl vs \\n\n\n```cpp\nstd::cout << \"A\" << std::endl;   // перевод + сброс буфера\nstd::cout << \"B\\n\";              // перевод без сброса\n```\n\n`\\n` быстрее. `std::endl` — ещё и flush (нужно редко). В обычном коде — `\\n`.\n\n## using namespace std\n\nЧтобы не писать `std::` каждый раз:\n\n```cpp\nusing namespace std;\n\nint main() {\n    cout << \"Hello\\n\";\n    return 0;\n}\n```\n\n**Осторожно**: может конфликтовать с другими `using`. В учебном коде ок, в больших проектах — `std::` явно.\n\n## Что будет, если\n\n- Забыть `#include <iostream>` — `undefined reference` на `cout`.\n- Забыть `std::` без `using` — `'cout' was not declared`.\n- `<<` вместо `>>` — ошибка компиляции.\n\n## Частая ошибка\n\nПисать `cout << x << endl` без `std::` и без `using` — ошибка. Либо `std::cout`, либо `using namespace std;`.\n\n## Итог\n\n- `#include <iostream>` — обязательно\n- `std::cout << x << \"\\n\"` — вывод\n- `std::endl` — перевод + flush (медленнее)\n- `\\n` — просто перевод\n- `using namespace std;` — сокращает",
+      "questions": [
+        { "text": "Что делает `std::cout`?", "options": ["Ввод", "Вывод", "Ничего", "Ошибка"], "answer": 1, "explanation": "Вывод." },
+        { "text": "Какой оператор для вывода?", "options": ["<<", ">>", "=", "== "], "answer": 0, "explanation": "`<<`." },
+        { "text": "Что делает `std::endl`?", "options": ["Только перевод", "Перевод + flush", "Ничего", "Ввод"], "answer": 1, "explanation": "Перевод + flush." },
+        { "text": "Что быстрее: `\\n` или `endl`?", "options": ["endl", "\\n", "Одинаково", "Зависит от ОС"], "answer": 1, "explanation": "`\\n` — без flush." },
+        { "text": "Зачем `using namespace std;`?", "options": ["Подключить", "Сократить `std::`", "Удалить", "Ошибка"], "answer": 1, "explanation": "Сокращает префикс." }
+      ],
+      "practice": {
+        "description": "Выведи:\n```\nПервая\nПрограмма\nГотово\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Первая\nПрограмма\nГотово",
+        "must_contain": ["#include <iostream>", "std::cout", "\\n", "return 0"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "title": "Типы данных",
+      "theory": "## Основные типы\n\n```cpp\nint age = 25;\ndouble price = 99.5;\nchar letter = 'A';\nbool ok = true;\n```\n\n## Размеры\n\n- `char` — 1 байт\n- `int` — 4 байта\n- `double` — 8 байт\n- `bool` — 1 байт\n\nЧерез `sizeof(type)`.\n\n## Суффиксы\n\n```cpp\nfloat f = 3.14f;\nlong n = 100L;\nlong long big = 9000LL;\nunsigned int u = 5u;\n```\n\n## std::string\n\nВ C++ строки — это `std::string` (не `char[]` как в C):\n\n```cpp\n#include <string>\nstd::string name = \"Аня\";\nname += \"!\";  // конкатенация\n```\n\n## auto\n\n`auto` — компилятор сам определяет тип:\n\n```cpp\nauto x = 42;         // int\nauto y = 3.14;       // double\nauto s = std::string(\"hi\");\n```\n\n## Нули и инициализация\n\n```cpp\nint a = 0;          // явно\nint b{};            // C++11, 0\nint c = int();      // 0\nint d;              // мусор (как в C)\n```\n\n`{}` — лучший способ обнулить.\n\n## Что будет, если\n\n- Забыть инициализировать локальную — мусор.\n- `int x = 3.99` — обрезает до 3.\n- `bool` из int — `0` false, остальное true.\n\n## Итог\n\n- `int`, `double`, `char`, `bool`, `std::string`\n- `sizeof` — размер\n- Суффиксы `f`, `L`, `LL`\n- `auto` — вывод типа\n- `{}` — обнуление",
+      "questions": [
+        { "text": "Какой тип для строк?", "options": ["char[]", "std::string", "String", "str"], "answer": 1, "explanation": "`std::string`." },
+        { "text": "Что такое `auto`?", "options": ["Ключевое слово для пустого типа", "Автоматический вывод типа", "Ошибка", "Тип"], "answer": 1, "explanation": "Вывод типа компилятором." },
+        { "text": "Как обнулить `int`?", "options": ["int x;", "int x{};", "int x = undef;", "int x = null;"], "answer": 1, "explanation": "`{}` — 0." },
+        { "text": "Что при `int x = 3.99`?", "options": ["4", "3", "3.99", "Ошибка"], "answer": 1, "explanation": "Обрезание." }
+      ],
+      "practice": {
+        "description": "Создай:\n- `int age = 25;`\n- `double price = 99.5;`\n- `std::string name = \"Иван\";`\n\nВыведи:\n```\n25\n99.5\nИван\n```",
+        "starter": "#include <iostream>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n99.5\nИван",
+        "must_contain": ["int age", "double price", "std::string", "std::cout"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "title": "cin / cout, форматирование",
+      "theory": "## cin\n\n```cpp\nint x;\nstd::cin >> x;\n```\n\n`>>` — оператор потока ввода. Читает до пробела/Enter.\n\n## Несколько значений\n\n```cpp\nint a, b;\nstd::cin >> a >> b;   // два числа\n```\n\n## Строки\n\n`>>` для `std::string` — до пробела. Для всей строки — `std::getline`:\n\n```cpp\nstd::string name;\nstd::getline(std::cin, name);\n```\n\n**Ловушка**: после `cin >> x` остаётся `\\n` в буфере. `getline` прочитает пустую строку. Решение — `std::cin.ignore()` перед `getline`.\n\n```cpp\nint age;\nstd::cin >> age;\nstd::cin.ignore();     // съесть \\n\nstd::string name;\nstd::getline(std::cin, name);\n```\n\n## Форматирование\n\n`std::fixed` и `std::setprecision`:\n\n```cpp\n#include <iomanip>\n\ndouble pi = 3.14159;\nstd::cout << std::fixed << std::setprecision(2) << pi;   // 3.14\n```\n\n## Флаги\n\n- `std::fixed` — фиксированная точка\n- `std::setprecision(n)` — n знаков\n- `std::setw(n)` — ширина поля\n- `std::setfill('0')` — заполнитель\n\n## Что будет, если\n\n- `cin >> int` на `abc` — поток в fail-состоянии, `x` не меняется.\n- Забыть `ignore()` — `getline` читает пустую строку.\n\n## Частая ошибка\n\n`cin >> x` + `getline` без `ignore()` — пустая строка.\n\n## Итог\n\n- `cin >> x` — ввод\n- `getline(cin, s)` — вся строка\n- `ignore()` — съесть остаток\n- `fixed` + `setprecision` — форматирование\n- `#include <iomanip>` — для форматирования",
+      "questions": [
+        { "text": "Какой оператор для cin?", "options": ["<<", ">>", "=", "=="], "answer": 1, "explanation": "`>>`." },
+        { "text": "Что читает `cin >> s` для строк?", "options": ["Всю строку", "До пробела", "Один символ", "Ничего"], "answer": 1, "explanation": "До пробела." },
+        { "text": "Что делает `getline(cin, s)`?", "options": ["Одно слово", "Всю строку", "Число", "Ошибка"], "answer": 1, "explanation": "Всю строку." },
+        { "text": "Зачем `cin.ignore()`?", "options": ["Удалить cin", "Съесть остаток буфера", "Очистить экран", "Ничего"], "answer": 1, "explanation": "Удалить `\\n`." }
+      ],
+      "practice": {
+        "description": "Прочитай два числа, выведи:\n```\nСумма: 15\nПроизведение: 50\n```\n\n**stdin:**\n```\n5\n10\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    int a, b;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Сумма: 15\nПроизведение: 50",
+        "must_contain": ["std::cin", ">>", "std::cout", "a + b", "a * b"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "title": "Ссылки и указатели",
+      "theory": "## Ссылки\n\n`int &r` — **псевдоним** переменной. Не указатель — нельзя переприсвоить.\n\n```cpp\nint x = 10;\nint &r = x;   // r — другое имя x\nr = 20;\nstd::cout << x;   // 20\n```\n\nСсылка должна быть инициализирована при создании.\n\n## Ссылки в параметрах\n\n```cpp\nvoid incr(int &x) { x++; }\n\nint n = 5;\nincr(n);\nstd::cout << n;   // 6\n```\n\nБез `&` — копия.\n\n## Указатели\n\nКак в C: `int *p = &x`.\n\n```cpp\nint x = 10;\nint *p = &x;\nstd::cout << *p;   // 10\n```\n\n## Ссылки vs указатели\n\n| Ссылки | Указатели |\n|---|---|\n| Всегда инициализированы | Могут быть NULL |\n| Нельзя переприсвоить | Можно `p = &y` |\n| Синтаксис как переменной | Через `*`, `->` |\n| Не арифметика | Арифметика |\n\n## Когда что\n\n- Ссылки — для параметров функций, чтобы изменить переменную.\n- Указатели — для работы с памятью, NULL, массивов.\n- `const &` — для чтения больших объектов.\n\n## nullptr (C++11)\n\n```cpp\nint *p = nullptr;   // вместо NULL\n```\n\n`nullptr` типобезопаснее.\n\n## Что будет, если\n\n- `int &r;` без инициализации — ошибка.\n- Вернуть локальную ссылку — висячая ссылка (UB).\n- `p = nullptr; *p` — segfault.\n\n## Итог\n\n- `int &r = x` — ссылка\n- Ссылка — псевдоним, не переприсваивается\n- Параметр `int &x` — изменить снаружи\n- Указатели — как в C\n- `nullptr` вместо `NULL`",
+      "questions": [
+        { "text": "Что такое `int &r`?", "options": ["Указатель", "Ссылка (псевдоним)", "Копия", "Ошибка"], "answer": 1, "explanation": "Псевдоним." },
+        { "text": "Как изменить переменную из функции?", "options": ["Через `int x`", "Через `int &x`", "Через `int *x`", "Никак"], "answer": 1, "explanation": "`int &x` — ссылка." },
+        { "text": "Можно ли переприсвоить ссылку?", "options": ["Да", "Нет", "Иногда", "Через *"], "answer": 1, "explanation": "Нельзя, псевдоним." },
+        { "text": "Чем `nullptr` лучше `NULL`?", "options": ["Быстрее", "Типобезопаснее", "Короче", "Ничем"], "answer": 1, "explanation": "Тип `std::nullptr_t`." }
+      ],
+      "practice": {
+        "description": "Создай `int x = 10; int &r = x;`. Через `r` присвой 20, выведи `x` и `r`.\n\n```\nx = 20\nr = 20\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    int x = 10;\n    // TODO\n    return 0;\n}\n",
+        "expected": "x = 20\nr = 20",
+        "must_contain": ["int &r", "= x", "std::cout"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "title": "const и auto",
+      "theory": "## const\n\n`const` — значение нельзя менять.\n\n```cpp\nconst int MAX = 100;\n// MAX = 200; // ошибка\n\nconst double PI = 3.14159;\n```\n\n## const с ссылками\n\n```cpp\nvoid print(const std::string &s) {\n    std::cout << s;   // только читаем\n}\n```\n\n`const &` — не копирует, но и не даёт изменить. Идеально для больших объектов.\n\n## const методы\n\n```cpp\nclass Point {\n    int x, y;\npublic:\n    int getX() const { return x; }   // не меняет объект\n};\n```\n\n`const` после скобок — метод не модифицирует поля.\n\n## auto\n\n`auto` — компилятор выводит тип:\n\n```cpp\nauto x = 42;                 // int\nauto s = std::string(\"hi\");  // std::string\nauto it = v.begin();         // iterator\n```\n\n`auto` экономит время, особенно с длинными типами (`std::map<std::string, std::vector<int>>::iterator`).\n\n## const auto&\n\n```cpp\nfor (const auto &item : v) {\n    std::cout << item;\n}\n```\n\nНе копирует, не даёт изменить. Идеально для чтения элементов.\n\n## Осторожно с auto\n\n```cpp\nauto x = 5;         // int\nauto y = 5.0;       // double\nauto z = 'a';       // char\nauto bad = \"hi\";    // const char* (не std::string!)\n```\n\n`auto s = \"hi\"` — это `const char*`, не `std::string`. Пиши `auto s = std::string(\"hi\")`.\n\n## Что будет, если\n\n- Забыть `const` в параметре `const &` — функция может изменить объект.\n- `auto s = \"hi\"` — не строка, а указатель на C-строку.\n\n## Итог\n\n- `const` — нельзя изменить\n- `const &` — не копирует, только читает\n- `const` метод — не меняет объект\n- `auto` — вывод типа\n- `const auto &` — для чтения в цикле",
+      "questions": [
+        { "text": "Что делает `const`?", "options": ["Ускоряет", "Запрещает изменение", "Копирует", "Ничего"], "answer": 1, "explanation": "Запрет." },
+        { "text": "Зачем `const &` в параметре?", "options": ["Копирует", "Не копирует, только читает", "Ничего", "Ошибка"], "answer": 1, "explanation": "Чтение без копии." },
+        { "text": "Что такое `auto`?", "options": ["Тип", "Вывод типа", "Ошибка", "Псевдоним"], "answer": 1, "explanation": "Вывод." },
+        { "text": "Что даёт `auto s = \"hi\"`?", "options": ["std::string", "const char*", "char[]", "Ошибка"], "answer": 1, "explanation": "`const char*`, не строка." }
+      ],
+      "practice": {
+        "description": "Создай `const int MAX = 100;`, `auto pi = 3.14;`.\n\nВыведи:\n```\nMAX = 100\npi = 3.14\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "MAX = 100\npi = 3.14",
+        "must_contain": ["const int MAX", "auto pi", "std::cout"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "title": "if / switch",
+      "theory": "## if / else\n\n```cpp\nif (x > 0) {\n    std::cout << \"+\\n\";\n} else if (x < 0) {\n    std::cout << \"-\\n\";\n} else {\n    std::cout << \"0\\n\";\n}\n```\n\nУсловие в скобках, тело в фигурных. Как в C.\n\n## switch\n\n```cpp\nswitch (day) {\n    case 1:\n        std::cout << \"Пн\\n\";\n        break;\n    case 2:\n        std::cout << \"Вт\\n\";\n        break;\n    default:\n        std::cout << \"?\\n\";\n}\n```\n\n- `switch (int/char/enum)` — точное совпадение\n- `break` — иначе провал\n- `default` — запасной\n\n## Тернарный\n\n```cpp\nint x = 5;\nauto s = x > 0 ? \"positive\" : \"negative\";\n```\n\n## Логические\n\n`&&`, `||`, `!` — как в C. Короткое замыкание работает.\n\n## Что будет, если\n\n- `if (x = 5)` — присваивание, ошибка логики (компилятор с `-Wall` предупредит).\n- Забыть `break` — провал.\n- `switch` с `std::string` — ошибка компиляции (только целые и enum).\n\n## Частая ошибка\n\n`switch` с `std::string` — не работает. Только `int`, `char`, `enum`. Для строк — `if/else`.\n\n## Итог\n\n- `if/else` — как в C\n- `switch` — только целые и enum\n- `break` — иначе провал\n- Тернарный `? :`\n- `&&`, `||`, `!`",
+      "questions": [
+        { "text": "Что нельзя использовать в `switch`?", "options": ["int", "char", "enum", "std::string"], "answer": 3, "explanation": "Только целые и enum." },
+        { "text": "Что при отсутствии break?", "options": ["Ничего", "Провал в следующий case", "Ошибка", "Выход"], "answer": 1, "explanation": "Fall-through." },
+        { "text": "Что делает `?:`?", "options": ["Цикл", "Тернарный (компактный if/else)", "Функция", "Массив"], "answer": 1, "explanation": "`a ? b : c`." },
+        { "text": "Что будет без `break` в switch?", "options": ["Выход", "Провал", "Ошибка", "Ничего"], "answer": 1, "explanation": "Провал." }
+      ],
+      "practice": {
+        "description": "`int score = 78;`. Через `if / else if / else`:\n- `>= 90` → `Отлично`\n- `>= 75` → `Хорошо`\n- `>= 60` → `Удовлетворительно`\n- иначе → `Плохо`\n\n```\nХорошо\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    int score = 78;\n    // TODO\n    return 0;\n}\n",
+        "expected": "Хорошо",
+        "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "score >= 60", "std::cout"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "title": "Циклы: for, while, do-while",
+      "theory": "## for\n\n```cpp\nfor (int i = 0; i < 5; i++) {\n    std::cout << i << \"\\n\";\n}\n```\n\n## while\n\n```cpp\nint i = 0;\nwhile (i < 5) {\n    std::cout << i << \"\\n\";\n    i++;\n}\n```\n\n## do-while\n\n```cpp\nint i = 0;\ndo {\n    std::cout << i << \"\\n\";\n    i++;\n} while (i < 5);\n```\n\nМинимум один раз. `;` после `while`.\n\n## for C++11 (диапазонный)\n\n```cpp\nstd::vector<int> v = {1, 2, 3};\nfor (int x : v) {\n    std::cout << x << \"\\n\";\n}\n```\n\nДля контейнеров и массивов. По значению `int x` — копия, `int &x` — ссылка для изменения, `const auto &x` — чтение без копии.\n\n## Что будет, если\n\n- Забыть `i++` — бесконечный.\n- Модифицировать контейнер в диапазонном `for` — UB.\n- Забыть `;` в do-while — ошибка.\n\n## Частая ошибка\n\n`for (auto &x : v) x *= 2;` — меняет элементы. `for (auto x : v) x *= 2;` — копии, массив не изменился.\n\n## Итог\n\n- `for (init; cond; step)` — как в C\n- `while (cond)`\n- `do { } while (cond);`\n- `for (x : v)` — диапазонный\n- `for (auto &x : v)` — для изменения",
+      "questions": [
+        { "text": "Сколько раз `for (int i = 0; i < 3; i++)`?", "options": ["2", "3", "4", "Бесконечно"], "answer": 1, "explanation": "0, 1, 2." },
+        { "text": "Что делает `do-while`?", "options": ["Проверяет после", "Проверяет до", "Без условия", "Бесконечно"], "answer": 0, "explanation": "Проверка после." },
+        { "text": "Что даёт `for (int &x : v)`?", "options": ["Копию", "Ссылку на элемент", "Ошибку", "Индекс"], "answer": 1, "explanation": "Ссылка." },
+        { "text": "Что при `for (auto x : v) x *= 2`?", "options": ["Меняет элементы", "Ничего (копии)", "Ошибка", "UB"], "answer": 1, "explanation": "`x` — копия." }
+      ],
+      "practice": {
+        "description": "Через `for` выведи 1..5:\n```\n1\n2\n3\n4\n5\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3\n4\n5",
+        "must_contain": ["for", "std::cout"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "title": "break, continue, диапазонный for",
+      "theory": "## break\n\n```cpp\nfor (int i = 0; i < 10; i++) {\n    if (i == 3) break;\n    std::cout << i << \"\\n\";  // 0 1 2\n}\n```\n\n## continue\n\n```cpp\nfor (int i = 0; i < 5; i++) {\n    if (i == 2) continue;\n    std::cout << i << \"\\n\";  // 0 1 3 4\n}\n```\n\n## Диапазонный for\n\nC++11:\n\n```cpp\nstd::vector<int> v = {10, 20, 30};\nfor (int x : v) {\n    std::cout << x << \"\\n\";\n}\n```\n\n## Для изменения\n\n```cpp\nfor (int &x : v) {\n    x *= 2;\n}\n// все элементы удвоены\n```\n\n## Для чтения больших\n\n```cpp\nfor (const auto &x : v) {\n    std::cout << x << \"\\n\";\n}\n```\n\nНе копирует. Идеально для `std::string`, `std::vector<std::string>`.\n\n## Что будет, если\n\n- `continue` в while до `i++` — бесконечный.\n- Изменить размер контейнера в диапазонном `for` — UB.\n- `for (auto x : v)` и изменить `x` — не изменит массив.\n\n## Частая ошибка\n\nУдаление элемента из вектора внутри диапазонного `for` — UB (итераторы инвалидируются).\n\n## Итог\n\n- `break` — выйти\n- `continue` — пропустить\n- `for (x : v)` — значения\n- `for (auto &x : v)` — изменение\n- `for (const auto &x : v)` — чтение без копии",
+      "questions": [
+        { "text": "Что делает `break`?", "options": ["Пропускает", "Выходит", "Возвращает", "Ничего"], "answer": 1, "explanation": "Выходит." },
+        { "text": "Что делает `continue`?", "options": ["Выходит", "Пропускает итерацию", "Возвращает", "Ошибка"], "answer": 1, "explanation": "Пропускает." },
+        { "text": "Что нужно для изменения элементов в range-for?", "options": ["int x", "auto x", "auto &x", "auto *x"], "answer": 2, "explanation": "`auto &x`." },
+        { "text": "Почему нельзя удалять из вектора в range-for?", "options": ["Медленно", "Итераторы инвалидируются (UB)", "Ошибка компиляции", "Работает"], "answer": 1, "explanation": "UB." }
+      ],
+      "practice": {
+        "description": "Через `for` от 1 до 10 выведи только нечётные (`continue`):\n```\n1\n3\n5\n7\n9\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n3\n5\n7\n9",
+        "must_contain": ["for", "continue", "% 2", "std::cout"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "title": "Объявление и вызов",
+      "theory": "## Функция\n\n```cpp\nint sum(int a, int b) {\n    return a + b;\n}\n\nint main() {\n    int s = sum(2, 3);\n    std::cout << s << \"\\n\";   // 5\n    return 0;\n}\n```\n\n## Разбор\n\n- `int` — тип возврата\n- `sum` — имя\n- `(int a, int b)` — параметры\n- `return` — вернуть\n\n## Прототип\n\nДо использования:\n\n```cpp\nint sum(int a, int b);   // прототип\n\nint main() {\n    std::cout << sum(2, 3);\n}\n\nint sum(int a, int b) {\n    return a + b;\n}\n```\n\n## Параметры — копии\n\n```cpp\nvoid change(int x) { x = 100; }\nint a = 5;\nchange(a);\nstd::cout << a;   // 5\n```\n\nДля изменения — `int &x` (ссылка).\n\n## void\n\n```cpp\nvoid greet() {\n    std::cout << \"Привет\\n\";\n}\n```\n\nНичего не возвращает.\n\n## Перегрузка\n\nСм. урок 12.\n\n## Что будет, если\n\n- Забыть `return` — UB, мусор.\n- Возвращать не тот тип — приведение.\n- Вернуть ссылку на локальную — висячая (UB).\n\n## Частая ошибка\n\n`int& bad() { int x = 5; return x; }` — ссылка на локальную, UB после возврата.\n\n## Итог\n\n- `тип имя(параметры) { return ...; }`\n- `return` — вернуть\n- Параметры — копии\n- Для изменения — `&`\n- `void` — без возврата",
+      "questions": [
+        { "text": "Что возвращает `int sum(int a, int b)`?", "options": ["void", "int", "double", "char"], "answer": 1, "explanation": "`int` в сигнатуре." },
+        { "text": "Как передаются примитивы?", "options": ["По ссылке", "По значению (копия)", "По указателю", "По адресу"], "answer": 1, "explanation": "Копия." },
+        { "text": "Как изменить переменную из функции?", "options": ["int x", "int &x", "int *x", "Никак"], "answer": 1, "explanation": "`int &x`." },
+        { "text": "Что при возврате ссылки на локальную?", "options": ["Работает", "UB", "Ошибка компиляции", "Мусор"], "answer": 1, "explanation": "UB — висячая ссылка." }
+      ],
+      "practice": {
+        "description": "Создай `int square(int x)` — возвращает `x * x`.\n\nВыведи `square(5)` и `square(3)`:\n```\n25\n9\n```",
+        "starter": "#include <iostream>\n\n// TODO: square\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "25\n9",
+        "must_contain": ["int square", "return", "std::cout"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "title": "Перегрузка, значения по умолчанию",
+      "theory": "## Перегрузка\n\nОдно имя — разные параметры:\n\n```cpp\nint sum(int a, int b) { return a + b; }\ndouble sum(double a, double b) { return a + b; }\nint sum(int a, int b, int c) { return a + b + c; }\n```\n\nКомпилятор сам выбирает по типу/числу аргументов.\n\n## Неоднозначность\n\n```cpp\nint f(int a);\nint f(double a);\n\nf(5);    // int → f(int)\nf(5.0);  // double → f(double)\nf(5L);   // long → неоднозначно (int или double?)\n```\n\nПри неоднозначности — ошибка компиляции.\n\n## Значения по умолчанию\n\n```cpp\nint sum(int a, int b = 10) {\n    return a + b;\n}\n\nsum(5);       // 15 (b = 10)\nsum(5, 20);   // 25\n```\n\nПараметры с дефолтом — после без дефолта.\n\n```cpp\n// void f(int a = 1, int b); // ОШИБКА\nvoid f(int a, int b = 1);    // правильно\n```\n\n## Перегрузка vs дефолты\n\nМожет возникнуть неоднозначность:\n\n```cpp\nint f(int a);\nint f(int a, int b = 0);\n\nf(5);   // неоднозначно — оба подходят\n```\n\nТакое компилятор не пропустит.\n\n## Что будет, если\n\n- Дефолт не в конце — ошибка.\n- Перегрузка по возвращаемому типу — ошибка.\n- Неоднозначный вызов — ошибка.\n\n## Частая ошибка\n\n```cpp\nint f(int a);\ndouble f(int a);   // ошибка — по возврату не перегружают\n```\n\n## Итог\n\n- Перегрузка — одно имя, разные параметры\n- Дефолты — в конце\n- Неоднозначность — ошибка\n- Не перегружают по возвращаемому типу",
+      "questions": [
+        { "text": "Что такое перегрузка?", "options": ["Много циклов", "Одно имя, разные параметры", "Ошибка", "Возврат"], "answer": 1, "explanation": "Одно имя, разные параметры." },
+        { "text": "Где могут стоять дефолты?", "options": ["Где угодно", "В конце", "В начале", "Только в main"], "answer": 1, "explanation": "В конце списка." },
+        { "text": "Можно ли перегрузить по типу возврата?", "options": ["Да", "Нет", "Иногда", "Только для int"], "answer": 1, "explanation": "Нет." },
+        { "text": "Что при неоднозначном вызове?", "options": ["Работает", "Ошибка компиляции", "Выбирает случайный", "UB"], "answer": 1, "explanation": "Ошибка." }
+      ],
+      "practice": {
+        "description": "Создай две функции:\n- `int sum(int a, int b = 10)`\n- `int sum(int a, int b, int c)`\n\nВыведи `sum(5)` и `sum(1, 2, 3)`:\n```\n15\n6\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "15\n6",
+        "must_contain": ["int sum(int a, int b = 10)", "int sum(int a, int b, int c)", "std::cout"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "title": "Передача по ссылке и const-ссылке",
+      "theory": "## По значению\n\n```cpp\nvoid f(int x) { x = 100; }   // копия\n```\n\nИзменения не влияют на оригинал.\n\n## По ссылке\n\n```cpp\nvoid f(int &x) { x = 100; }  // изменения видны\nint a = 5;\nf(a);\nstd::cout << a;   // 100\n```\n\n## const-ссылка\n\n```cpp\nvoid print(const std::string &s) {\n    std::cout << s;\n}\n```\n\n- Не копирует (эффективно)\n- Нельзя изменить (безопасно)\n- Для больших объектов — стандарт\n\n## Когда что\n\n- **Примитив** (`int`, `double`, `bool`) — по значению (копия дешёвая).\n- **Большой объект** (`std::string`, `std::vector`, класс) — `const &` для чтения, `&` для изменения.\n- **Возврат** — по значению (RVO оптимизирует).\n\n## Пример\n\n```cpp\nint sum(const std::vector<int> &v) {\n    int total = 0;\n    for (int x : v) total += x;\n    return total;\n}\n```\n\nБез `const &` — копия всего вектора (медленно).\n\n## Что будет, если\n\n- Параметр `const &`, но пытаешься изменить — ошибка компиляции.\n- Передать rvalue (временное) в `&` (не `const &`) — ошибка.\n- Копия большого объекта — медленно.\n\n## Частая ошибка\n\n`void print(std::string s)` — копирует всю строку. Нужно `const std::string &s`.\n\n## Итог\n\n- Примитивы — по значению\n- Большие объекты — `const &` для чтения\n- Изменение — `&`\n- Возврат — по значению (RVO)\n- `const &` — эффективно и безопасно",
+      "questions": [
+        { "text": "Что эффективно для больших объектов?", "options": ["По значению", "const &", "int &", "Указатель"], "answer": 1, "explanation": "`const &`." },
+        { "text": "Что делает `int &x` в параметре?", "options": ["Копию", "Ссылку для изменения", "Ошибку", "Ничего"], "answer": 1, "explanation": "Изменение снаружи." },
+        { "text": "Что при попытке изменить `const &`?", "options": ["Работает", "Ошибка компиляции", "UB", "Ничего"], "answer": 1, "explanation": "Ошибка." },
+        { "text": "Можно ли передать rvalue в `int &`?", "options": ["Да", "Нет", "Иногда", "Через cast"], "answer": 1, "explanation": "Только в `const &` или `int &&`." }
+      ],
+      "practice": {
+        "description": "Создай `void addOne(int &x)` — увеличивает `x` на 1 через ссылку.\n\nВ `main`: `int n = 5; addOne(n);` — выведи n.\n\n```\n6\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    int n = 5;\n    // TODO\n    return 0;\n}\n",
+        "expected": "6",
+        "must_contain": ["void addOne", "int &x", "std::cout"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "title": "Массивы и std::array",
+      "theory": "## C-массив\n\n```cpp\nint arr[5] = {1, 2, 3, 4, 5};\nstd::cout << arr[0];   // 1\n```\n\nФиксированная длина, без проверок, `sizeof` для длины только в том же scope.\n\n## std::array (C++11)\n\n```cpp\n#include <array>\n\nstd::array<int, 5> arr = {1, 2, 3, 4, 5};\nstd::cout << arr[0];        // 1\nstd::cout << arr.size();    // 5\n```\n\n- `.size()` — длина всегда\n- `.at(i)` — с проверкой (исключение при выходе)\n- `for (int x : arr)` — диапазонный\n- Передаётся **по значению** (копия), не как указатель\n\n## Разница\n\n| C-массив | std::array |\n|---|---|\n| `sizeof` работает только в scope | `.size()` всегда |\n| Указатель при передаче | Копия |\n| Без проверок | `.at()` проверяет |\n| `int arr[5]` | `std::array<int, 5>` |\n\n## Инициализация\n\n```cpp\nstd::array<int, 5> a{};             // все 0\nstd::array<int, 3> b{1, 2, 3};      // 1, 2, 3\n```\n\n## Что будет, если\n\n- `arr[10]` — UB (без проверки).\n- `arr.at(10)` — `std::out_of_range` (исключение).\n- Передать C-массив в функцию — станет указателем.\n\n## Частая ошибка\n\n`sizeof(arr)` в функции для C-массива — размер указателя. Для std::array — `.size()`.\n\n## Итог\n\n- C-массив — быстрый, но без проверок\n- `std::array<T, N>` — размер, `.at()`, range-for\n- `.at()` — проверка\n- `[]` — без проверки",
+      "questions": [
+        { "text": "Чем std::array лучше C-массива?", "options": ["Быстрее", ".size() и .at()", "Красивее", "Ничем"], "answer": 1, "explanation": "Размер и проверки." },
+        { "text": "Что делает `.at(10)` при size 5?", "options": ["0", "UB", "std::out_of_range", "Мусор"], "answer": 2, "explanation": "Исключение." },
+        { "text": "Как объявить std::array из 5 int?", "options": ["std::array<int, 5> a;", "std::array a[5];", "int[5] a;", "array<int> a;"], "answer": 0, "explanation": "`std::array<int, 5>`." },
+        { "text": "Что при `arr[10]` в std::array?", "options": ["Исключение", "0", "UB", "Ошибка компиляции"], "answer": 2, "explanation": "UB без проверки." }
+      ],
+      "practice": {
+        "description": "Создай `std::array<int, 5> arr = {10, 20, 30, 40, 50};`.\n\nВыведи:\n```\nПервый: 10\nПоследний: 50\nДлина: 5\n```",
+        "starter": "#include <iostream>\n#include <array>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Первый: 10\nПоследний: 50\nДлина: 5",
+        "must_contain": ["std::array", "arr[0]", "arr[4]", ".size()", "std::cout"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "title": "std::string",
+      "theory": "## Что это\n\n`std::string` — динамическая строка. Автоматически управляет памятью, растёт при конкатенации.\n\n```cpp\n#include <string>\n\nstd::string s = \"Hello\";\ns += \", world\";\nstd::cout << s;   // Hello, world\n```\n\n## Методы\n\n```cpp\ns.size()          // длина\ns.empty()         // пустая?\ns[0]              // символ\ns.substr(0, 5)    // подстрока\ns.find(\"wor\")     // позиция или npos\ns.replace(...)    // замена\ns + \"!\";          // конкатенация\ns == \"Hello\";     // сравнение (работает!)\n```\n\n## Сравнение\n\n```cpp\nif (a == b) { }   // OK, std::string поддерживает ==\n```\n\nВ отличие от C, `==` сравнивает **содержимое**.\n\n## Конкатенация\n\n```cpp\nstd::string s = \"a\" + std::string(\"b\") + \"c\";   // OK\n// std::string s = \"a\" + \"b\";  // ошибка — два const char* не складываются\n```\n\nХотя бы один операнд — `std::string`.\n\n## getline\n\n```cpp\nstd::string line;\nstd::getline(std::cin, line);\n```\n\nВся строка до Enter.\n\n## Преобразование\n\n```cpp\nstd::string s = std::to_string(42);       // \"42\"\nint n = std::stoi(\"42\");                   // 42\ndouble d = std::stod(\"3.14\");              // 3.14\n```\n\n`stoi` бросает `std::invalid_argument`, если не число.\n\n## Что будет, если\n\n- `s.find(\"x\")` без проверки на `npos` — можно ошибиться.\n- `stoi(\"abc\")` — исключение.\n- `\"a\" + \"b\"` — ошибка компиляции.\n\n## Частая ошибка\n\n`s.find(...)` вернёт `std::string::npos` если не найдено. Проверять: `if (pos != std::string::npos)`.\n\n## Итог\n\n- `std::string` — динамическая строка\n- `==` работает\n- `.size()`, `.substr()`, `.find()`\n- `getline` — вся строка\n- `to_string`, `stoi` — конверсии",
+      "questions": [
+        { "text": "Что такое `std::string`?", "options": ["char*", "Динамическая строка", "Массив", "Указатель"], "answer": 1, "explanation": "Динамическая строка." },
+        { "text": "Сравнивает ли `==` содержимое std::string?", "options": ["Нет (адреса)", "Да", "Иногда", "Ошибка"], "answer": 1, "explanation": "Да." },
+        { "text": "Как прочитать всю строку?", "options": ["cin >> s", "getline(cin, s)", "cin.readline", "gets"], "answer": 1, "explanation": "`getline`." },
+        { "text": "Что при `stoi(\"abc\")`?", "options": ["0", "Исключение", "Мусор", "Ошибка компиляции"], "answer": 1, "explanation": "`std::invalid_argument`." }
+      ],
+      "practice": {
+        "description": "Создай `std::string s = \"Hello\";`.\n\nВыведи:\n```\nHello\nДлина: 5\n```",
+        "starter": "#include <iostream>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Hello\nДлина: 5",
+        "must_contain": ["std::string", ".size()", "std::cout"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "title": "std::vector",
+      "theory": "## Что это\n\n`std::vector` — динамический массив. Растёт по мере добавления.\n\n```cpp\n#include <vector>\n\nstd::vector<int> v;\nv.push_back(10);\nv.push_back(20);\nv.push_back(30);\nstd::cout << v[0];   // 10\nstd::cout << v.size();   // 3\n```\n\n## Инициализация\n\n```cpp\nstd::vector<int> v1 = {1, 2, 3};\nstd::vector<int> v2(5);           // 5 нулей\nstd::vector<int> v3(5, 100);      // 5 элементов по 100\n```\n\n## Методы\n\n```cpp\nv.push_back(x)    // в конец\nv.pop_back()      // из конца\nv.size()          // сколько\nv.empty()         // пустой?\nv[i]              // доступ (без проверки)\nv.at(i)           // с проверкой\nv.front()         // первый\nv.back()          // последний\nv.clear()         // очистить\n```\n\n## Обход\n\n```cpp\nfor (int x : v) std::cout << x;\nfor (const auto &x : v) std::cout << x;   // без копии\n```\n\n## Расширение\n\nПри `push_back` — амортизированно O(1). Внутри — резервирует с запасом. `reserve(n)` — заранее.\n\n## Что будет, если\n\n- `v[100]` при size 3 — UB (без проверки).\n- `v.at(100)` — `std::out_of_range`.\n- Много `push_back` без `reserve` — перевыделения, медленно.\n\n## Частая ошибка\n\n`v[i]` без проверки размера — UB. Если индекс неизвестен — `v.at(i)`.\n\n## Итог\n\n- `std::vector<T>` — динамический\n- `push_back`, `size()`, `[]`\n- `.at()` — с проверкой\n- `reserve` — заранее\n- Range-for — стандарт",
+      "questions": [
+        { "text": "Что добавляет в конец?", "options": ["v.add()", "v.push_back()", "v.append()", "v.insert()"], "answer": 1, "explanation": "`push_back`." },
+        { "text": "Что при `v[100]` (size 3)?", "options": ["Ошибка компиляции", "Исключение", "UB", "0"], "answer": 2, "explanation": "UB без проверки." },
+        { "text": "Что делает `v.at(100)`?", "options": ["0", "UB", "std::out_of_range", "Ничего"], "answer": 2, "explanation": "Исключение." },
+        { "text": "Зачем reserve?", "options": ["Удалить", "Заранее выделить память", "Сортировать", "Считать"], "answer": 1, "explanation": "Избежать перевыделений." }
+      ],
+      "practice": {
+        "description": "Создай `std::vector<int> v = {10, 20, 30};`.\n\nВыведи:\n```\nПервый: 10\nПоследний: 30\nРазмер: 3\n```",
+        "starter": "#include <iostream>\n#include <vector>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Первый: 10\nПоследний: 30\nРазмер: 3",
+        "must_contain": ["std::vector", "v.front", "v.back", ".size()", "std::cout"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "title": "Класс, конструктор, методы",
+      "theory": "## Класс\n\n```cpp\nclass Point {\npublic:\n    int x;\n    int y;\n\n    Point(int x, int y) : x(x), y(y) {}\n\n    void print() {\n        std::cout << \"(\" << x << \", \" << y << \")\\n\";\n    }\n};\n\nPoint p(3, 7);\np.print();   // (3, 7)\n```\n\n## Разбор\n\n- `class Point { ... }` — класс\n- `public:` — доступ\n- Конструктор `Point(int x, int y) : x(x), y(y) {}` — списковая инициализация\n- `.` — доступ к методам\n\n## Списковая инициализация\n\n`: x(x), y(y)` — эффективнее, чем присваивание в теле. Порядок — как объявлены поля.\n\n```cpp\n// Плохо\nPoint(int x, int y) { this->x = x; this->y = y; }\n\n// Хорошо\nPoint(int x, int y) : x(x), y(y) {}\n```\n\n## this\n\nУказатель на текущий объект:\n\n```cpp\nPoint& setX(int x) { this->x = x; return *this; }\n```\n\n## Методы\n\nОбъявлены внутри класса. Можно объявить внутри, определить снаружи:\n\n```cpp\nclass Point {\n    int x, y;\npublic:\n    Point(int x, int y);\n    void print() const;\n};\n\nPoint::Point(int x, int y) : x(x), y(y) {}\nvoid Point::print() const { std::cout << x << \",\" << y; }\n```\n\n## Что будет, если\n\n- Забыть `public:` — всё по умолчанию `private`, методы недоступны.\n- `Point p();` — объявление функции, а не объекта (most vexing parse).\n- `Point p{};` — пустой объект (если есть дефолтный конструктор).\n\n## Частая ошибка\n\n`Point p();` — это объявление функции, возвращающей Point. Нужно `Point p;`.\n\n## Итог\n\n- `class Name { ... };`\n- Конструктор `Name(params)`\n- `: поле(значение)` — списковая инициализация\n- `this->field` — доступ к полю\n- `public:` / `private:` — доступ",
+      "questions": [
+        { "text": "Что такое конструктор?", "options": ["Метод с типом", "Метод инициализации, имя = классу", "Ошибка", "Деструктор"], "answer": 1, "explanation": "Имя = класс, без возврата." },
+        { "text": "Что лучше в конструкторе?", "options": ["this->x = x", ": x(x)", "Оба плохи", "x = x"], "answer": 1, "explanation": "Списковая инициализация." },
+        { "text": "Что такое `Point p();`?", "options": ["Объект", "Объявление функции", "Ошибка", "nullptr"], "answer": 1, "explanation": "Объявление функции — most vexing parse." },
+        { "text": "Что даёт `this`?", "options": ["Ссылку на текущий объект", "Указатель на текущий объект", "Копию", "nullptr"], "answer": 1, "explanation": "Указатель `Point*`." }
+      ],
+      "practice": {
+        "description": "Класс `Book`:\n- `public std::string title`\n- `public int pages`\n- конструктор `Book(std::string t, int p)`\n- метод `print()` — выводит `title: pages`\n\nВ `main` `Book b(\"Java\", 500); b.print();`\n\n```\nJava: 500\n```",
+        "starter": "#include <iostream>\n#include <string>\n\n// TODO: class Book\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Java: 500",
+        "must_contain": ["class Book", "Book(std::string", "void print", "std::cout"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "title": "Инкапсуляция: private / public",
+      "theory": "## private / public\n\n```cpp\nclass Account {\nprivate:\n    double balance;\n\npublic:\n    Account(double initial) : balance(initial) {}\n\n    double getBalance() const { return balance; }\n\n    void deposit(double amount) {\n        if (amount > 0) balance += amount;\n    }\n};\n```\n\n## Правило\n\n- **private** — по умолчанию для `class`. Поля скрыты.\n- **public** — методы для работы.\n\n## Геттеры и сеттеры\n\n```cpp\nclass Person {\n    std::string name;\n    int age;\npublic:\n    std::string getName() const { return name; }\n    void setAge(int a) {\n        if (a >= 0) age = a;\n    }\n};\n```\n\nСеттер — **проверка**. Геттер — `const`, чтобы работал на константном объекте.\n\n## Константные методы\n\n```cpp\nclass Point {\n    int x;\npublic:\n    int getX() const { return x; }   // const — не меняет объект\n};\n```\n\n`const`-метод не может менять поля.\n\n## class vs struct\n\nВ C++:\n- `class` — по умолчанию `private`\n- `struct` — по умолчанию `public`\n\nДля простых DTO используют `struct`, для всего остального — `class`.\n\n## Что будет, если\n\n- Поле `private`, обратиться снаружи — ошибка.\n- `const`-метод меняет поле — ошибка компиляции.\n- Все поля `public` — нет инкапсуляции, но код работает.\n\n## Частая ошибка\n\nВсе поля `public` — плохо для больших классов (нельзя проверить, изменить логику без правок снаружи).\n\n## Итог\n\n- `private:` — поля\n- `public:` — методы\n- `const`-методы — для геттеров\n- Геттер/сеттер — контролируемый доступ\n- `class` vs `struct` — приватность по умолчанию",
+      "questions": [
+        { "text": "Что по умолчанию в class?", "options": ["public", "private", "protected", "static"], "answer": 1, "explanation": "`private` по умолчанию." },
+        { "text": "Зачем const у геттера?", "options": ["Красиво", "Метод не меняет объект", "Скорость", "Не нужно"], "answer": 1, "explanation": "Const-корректность." },
+        { "text": "Что если поле private и обратиться снаружи?", "options": ["Работает", "Ошибка компиляции", "UB", "Ничего"], "answer": 1, "explanation": "Ошибка." },
+        { "text": "Чем struct отличается от class?", "options": ["Ничем", "Приватностью по умолчанию", "Только памятью", "Только для данных"], "answer": 1, "explanation": "`struct` — public, `class` — private." }
+      ],
+      "practice": {
+        "description": "Класс `Account`:\n- `private double balance`\n- конструктор `Account(double initial)`\n- `getBalance()` — `const`\n- `deposit(double amount)` — только если > 0\n\nВ `main`: `Account a(100); a.deposit(50);` — выведи `Баланс: 150`.\n\n```\nБаланс: 150\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Баланс: 150",
+        "must_contain": ["class Account", "private", "double balance", "getBalance", "deposit", "std::cout"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "title": "static, this, инициализация полей",
+      "theory": "## static поля\n\nОдно на класс, не на объект:\n\n```cpp\nclass Counter {\npublic:\n    static int total;\n    Counter() { total++; }\n};\n\nint Counter::total = 0;   // определение снаружи\n\nCounter c1;\nCounter c2;\nstd::cout << Counter::total;   // 2\n```\n\n## static методы\n\nВызываются без объекта:\n\n```cpp\nclass Math {\npublic:\n    static int square(int x) { return x * x; }\n};\n\nMath::square(5);\n```\n\nНе имеют `this`. Не могут обращаться к нестатическим полям.\n\n## Инициализация в классе (C++11)\n\n```cpp\nclass Point {\n    int x = 0;     // дефолт\n    int y = 0;\npublic:\n    Point() = default;\n    Point(int x, int y) : x(x), y(y) {}\n};\n```\n\n## `= default` / `= delete`\n\n```cpp\nclass Point {\npublic:\n    Point() = default;              // сгенерировать\n    Point(const Point&) = delete;   // запретить копирование\n};\n```\n\n## Что будет, если\n\n- Обратиться к `static` полю через объект — работает, но лучше `Counter::total`.\n- Из `static`-метода к нестатическому полю — ошибка.\n- `Counter::total` без определения снаружи — ошибка линковки.\n\n## Частая ошибка\n\n`static int total;` в классе без `int Counter::total = 0;` снаружи — `undefined reference`.\n\n## Итог\n\n- `static` поле — одно на класс\n- Определяется снаружи\n- `static` метод — без объекта\n- Инициализация в классе — C++11\n- `= default` / `= delete`",
+      "questions": [
+        { "text": "Где объявляется static поле?", "options": ["В классе", "В классе + определение снаружи", "В main", "Только в конструкторе"], "answer": 1, "explanation": "Объявление + определение снаружи." },
+        { "text": "Что такое `static` метод?", "options": ["Принадлежит объекту", "Принадлежит классу, без объекта", "Ошибка", "Возвращает static"], "answer": 1, "explanation": "На класс." },
+        { "text": "Что даёт `= default`?", "options": ["Удалить", "Сгенерировать автоматически", "Ошибка", "Обнулить"], "answer": 1, "explanation": "Сгенерировать." },
+        { "text": "Что даёт `= delete`?", "options": ["Сгенерировать", "Запретить", "Удалить класс", "Ошибка"], "answer": 1, "explanation": "Запретить использование." }
+      ],
+      "practice": {
+        "description": "Класс `Counter`:\n- `static int total;`\n- конструктор увеличивает\n- `static int getTotal()`\n\nВ `main`: два `Counter`, выведи `2`.\n\n```\n2\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "2",
+        "must_contain": ["class Counter", "static int total", "Counter::total", "getTotal", "std::cout"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "title": "Деструктор и RAII",
+      "theory": "## Деструктор\n\nВызывается **автоматически** при уничтожении объекта (выход из scope, `delete`, конец программы для глобальных).\n\n```cpp\nclass File {\npublic:\n    File(const std::string& name) { f = std::fopen(name.c_str(), \"r\"); }\n    ~File() { if (f) std::fclose(f); }   // деструктор\nprivate:\n    std::FILE* f;\n};\n```\n\n`~ИмяКласса()` — синтаксис.\n\n## RAII\n\n**Resource Acquisition Is Initialization** — ресурс захватывается в конструкторе, освобождается в деструкторе.\n\n```cpp\nvoid process() {\n    File f(\"data.txt\");\n    // что угодно\n}  // f::~File() вызовется, файл закроется\n```\n\n**Даже если выбросится исключение** — деструктор вызовется. Это автоматическое управление ресурсами.\n\n## Примеры RAII\n\n- `std::string` — выделяет/освобождает память.\n- `std::vector` — то же.\n- `std::unique_ptr` — владеет объектом.\n- `std::fstream` — открывает/закрывает файл.\n\n## Без RAII (C-стиль)\n\n```c\nFILE *f = fopen(...);\ntry {\n    // работа\n} catch (...) {\n    fclose(f);\n    throw;\n}\nfclose(f);\n```\n\nМного кода. C++ с RAII — 1 строка.\n\n## Что будет, если\n\n- Забыть деструктор — утечка.\n- Деструктор бросает исключение — UB в C++11+.\n- Виртуальный деструктор нужен при наследовании (см. урок 24).\n\n## Частая ошибка\n\nРучное `new/delete` вместо RAII. Умные указатели — стандарт.\n\n## Итог\n\n- `~ClassName()` — деструктор\n- RAII — ресурс в конструкторе, освобождение в деструкторе\n- Гарантирует освобождение даже при исключении\n- `std::string`, `std::vector`, `unique_ptr` — RAII\n- Не бросать в деструкторе",
+      "questions": [
+        { "text": "Когда вызывается деструктор?", "options": ["При создании", "При уничтожении объекта", "Вручную", "Никогда"], "answer": 1, "explanation": "При уничтожении." },
+        { "text": "Что такое RAII?", "options": ["Тип", "Захват в конструкторе, освобождение в деструкторе", "Ошибка", "Паттерн"], "answer": 1, "explanation": "Паттерн управления ресурсами." },
+        { "text": "Вызывается ли деструктор при исключении?", "options": ["Нет", "Да", "Иногда", "Только с try"], "answer": 1, "explanation": "Да — при unwinding." },
+        { "text": "Можно ли бросать исключение из деструктора?", "options": ["Да", "Нет (UB)", "Иногда", "Только с noexcept"], "answer": 1, "explanation": "UB в C++11+." }
+      ],
+      "practice": {
+        "description": "Класс `Tracker`:\n- конструктор выводит `created`\n- деструктор выводит `destroyed`\n\nВ `main`:\n```\n{\n    Tracker t;\n    // что-то\n}\n```\n\nДолжно вывести:\n```\ncreated\ndestroyed\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "created\ndestroyed",
+        "must_contain": ["class Tracker", "~Tracker", "std::cout"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "title": "Наследование, protected",
+      "theory": "## Синтаксис\n\n```cpp\nclass Animal {\npublic:\n    std::string name;\n    Animal(std::string n) : name(n) {}\n    void speak() { std::cout << name << \" звук\\n\"; }\n};\n\nclass Dog : public Animal {\npublic:\n    Dog(std::string n) : Animal(n) {}\n    void wagTail() { std::cout << name << \" виляет\\n\"; }\n};\n\nDog d(\"Рекс\");\nd.speak();   // Рекс звук\nd.wagTail(); // Рекс виляет\n```\n\n## public, protected, private\n\n| Модификатор | Внутри класса | В наследнике | Снаружи |\n|---|---|---|---|\n| public | да | да | да |\n| protected | да | **да** | нет |\n| private | да | нет | нет |\n\n`protected` — доступно наследнику, но не снаружи.\n\n## Порядок конструкторов\n\n1. Сначала **родитель** (Animal).\n2. Потом поля наследника.\n3. Потом тело конструктора `Dog`.\n\nДеструкторы — в обратном порядке.\n\n## Что будет, если\n\n- `class Dog : Animal` (без `public`) — по умолчанию private-наследование. `Dog` не сможет использовать public-методы Animal снаружи.\n- Забыть `: Animal(n)` — попытка вызвать дефолтный (если нет — ошибка).\n- `private` поле — недоступно наследнику.\n\n## Частая ошибка\n\n`class Dog : Animal` вместо `class Dog : public Animal`. В первом случае — private-наследование.\n\n## Итог\n\n- `class B : public A` — наследование\n- `: A(args)` — конструктор родителя\n- `protected` — для наследников\n- Сначала родитель, потом наследник",
+      "questions": [
+        { "text": "Что означает `class Dog : public Animal`?", "options": ["Копирование", "Наследование", "Композиция", "Ошибка"], "answer": 1, "explanation": "Наследование." },
+        { "text": "Куда доступен protected?", "options": ["Только снаружи", "В классе и наследниках", "Только в классе", "Нигде"], "answer": 1, "explanation": "Класс + наследники." },
+        { "text": "В каком порядке конструкторы?", "options": ["Наследник → родитель", "Родитель → наследник", "Случайно", "Оба параллельно"], "answer": 1, "explanation": "Родитель первым." },
+        { "text": "Что при `class Dog : Animal`?", "options": ["Public-наследование", "Private-наследование", "Ошибка", "Композиция"], "answer": 1, "explanation": "Private по умолчанию." }
+      ],
+      "practice": {
+        "description": "Класс `Animal` с `std::string name` и методом `speak()` → `\"<name>: ...\"`.\n\n`Dog : public Animal` — добавляет `wag()` → `<name>: woof`.\n\nВ `main` `Dog d(\"Rex\"); d.speak(); d.wag();`\n\n```\nRex: ...\nRex: woof\n```",
+        "starter": "#include <iostream>\n#include <string>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Rex: ...\nRex: woof",
+        "must_contain": ["class Animal", "class Dog : public Animal", "speak", "wag", "std::cout"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "title": "Виртуальные функции",
+      "theory": "## Проблема\n\n```cpp\nclass Animal {\npublic:\n    void speak() { std::cout << \"...\\n\"; }\n};\n\nclass Dog : public Animal {\npublic:\n    void speak() { std::cout << \"woof\\n\"; }\n};\n\nAnimal* a = new Dog();\na->speak();   // ... — Animal, не Dog!\n```\n\nБез `virtual` — вызывается метод родителя.\n\n## virtual\n\n```cpp\nclass Animal {\npublic:\n    virtual void speak() { std::cout << \"...\\n\"; }\n};\n\nAnimal* a = new Dog();\na->speak();   // woof — Dog!\n```\n\n`virtual` — динамическое связывание: вызов по **фактическому** типу объекта.\n\n## override\n\n```cpp\nclass Dog : public Animal {\npublic:\n    void speak() override { std::cout << \"woof\\n\"; }\n};\n```\n\n`override` — проверка: точно переопределяет. Опечатка — ошибка компиляции.\n\n## Как работает\n\nПод капотом — vtable (таблица виртуальных функций). Каждый объект с виртуальными функциями хранит указатель на неё. При вызове — поиск по таблице.\n\nЦена: чуть медленнее и +8 байт на объект.\n\n## final\n\n```cpp\nclass Dog final : public Animal { ... };\nvoid speak() final { ... }\n```\n\nЗапрещает наследование/переопределение.\n\n## Что будет, если\n\n- Забыть `virtual` — вызов по типу ссылки/указателя, не объекта.\n- `override` без `virtual` в базе — ошибка.\n- Виртуальная функция с другими параметрами — это **не** override, а новая функция.\n\n## Частая ошибка\n\nЗабыть `virtual` в базовом классе. Тогда `Animal* a = new Dog(); a->speak();` вызовет `Animal::speak`.\n\n## Итог\n\n- `virtual` — динамическое связывание\n- `override` — проверка (C++11)\n- `final` — запретить\n- Цена: vtable\n- Без `virtual` — статическое",
+      "questions": [
+        { "text": "Что делает `virtual`?", "options": ["Ускоряет", "Динамическое связывание", "Ошибку", "Копирование"], "answer": 1, "explanation": "По фактическому типу." },
+        { "text": "Зачем override?", "options": ["Красиво", "Проверка, что переопределяет", "Ускорение", "Не нужно"], "answer": 1, "explanation": "Проверка." },
+        { "text": "Что при вызове `Animal* a = new Dog(); a->speak()` без virtual?", "options": ["Dog::speak", "Animal::speak", "Ошибка", "Оба"], "answer": 1, "explanation": "По типу указателя." },
+        { "text": "Что делает final?", "options": ["Завершает программу", "Запрещает наследование/override", "Создаёт", "Удаляет"], "answer": 1, "explanation": "Запрет." }
+      ],
+      "practice": {
+        "description": "`Animal` с `virtual void speak()` → `...`.\n`Dog : public Animal` — `speak() override` → `woof`.\n\n`Animal* a = new Dog(); a->speak(); delete a;`\n\n```\nwoof\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "woof",
+        "must_contain": ["virtual", "override", "class Animal", "class Dog : public Animal", "std::cout"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "Абстрактные классы, интерфейсы",
+      "theory": "## Чисто виртуальная функция\n\n```cpp\nclass Shape {\npublic:\n    virtual double area() const = 0;   // = 0 — чисто виртуальная\n};\n```\n\n`= 0` — тело отсутствует, наследники обязаны реализовать.\n\n## Абстрактный класс\n\nКласс хотя бы с одной чисто виртуальной функцией. **Нельзя создать объект**.\n\n```cpp\n// Shape s;  // ошибка\nShape* p = new Rectangle(2, 3);   // можно через указатель\n```\n\n## Наследники\n\n```cpp\nclass Rectangle : public Shape {\n    double w, h;\npublic:\n    Rectangle(double w, double h) : w(w), h(h) {}\n    double area() const override { return w * h; }\n};\n```\n\nНаследник **обязан** реализовать все чисто виртуальные. Иначе сам становится абстрактным.\n\n## Интерфейс\n\nКласс только с чисто виртуальными функциями и без полей — интерфейс:\n\n```cpp\nclass Drawable {\npublic:\n    virtual void draw() const = 0;\n    virtual ~Drawable() = default;   // виртуальный деструктор\n};\n```\n\n## Чисто виртуальная vs virtual\n\n- `virtual void f() {}` — есть реализация, можно переопределить.\n- `virtual void f() = 0;` — **обязательно** переопределить, объект не создать.\n\n## Что будет, если\n\n- Создать объект абстрактного класса — ошибка.\n- Наследник не реализовал метод — тоже абстрактный.\n- Нет виртуального деструктора — утечка при удалении через базовый указатель.\n\n## Частая ошибка\n\nЗабыть реализовать в наследнике. Компилятор скажет `abstract class`. Добавь `= 0` в наследника или реализуй.\n\n## Итог\n\n- `virtual T f() = 0;` — чисто виртуальная\n- Класс с ней — абстрактный\n- Нельзя `new Abstract()`\n- Наследник обязан реализовать\n- Интерфейс = все методы `= 0`",
+      "questions": [
+        { "text": "Что значит `= 0`?", "options": ["Возврат 0", "Чисто виртуальная", "Ошибка", "Дефолт"], "answer": 1, "explanation": "Чисто виртуальная." },
+        { "text": "Можно ли создать объект абстрактного класса?", "options": ["Да", "Нет", "Через new", "Через указатель"], "answer": 1, "explanation": "Нельзя." },
+        { "text": "Что обязан сделать наследник?", "options": ["Ничего", "Реализовать все чисто виртуальные", "Создать конструктор", "Удалить"], "answer": 1, "explanation": "Реализовать." },
+        { "text": "Что такое интерфейс?", "options": ["Тип", "Класс с чисто виртуальными", "Шаблон", "Ошибка"], "answer": 1, "explanation": "Класс с методами `= 0`." }
+      ],
+      "practice": {
+        "description": "Абстрактный `Shape` с `virtual double area() const = 0` и `virtual ~Shape() = default`.\n\n`Square : public Shape` — `side * side`.\n\n`Shape* s = new Square(4); s->area();` — выведи `16`.\n\n```\n16\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "16",
+        "must_contain": ["class Shape", "= 0", "virtual ~Shape", "class Square", "override", "std::cout"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "title": "Виртуальный деструктор",
+      "theory": "## Проблема\n\n```cpp\nclass Animal { public: ~Animal() {} };\nclass Dog : public Animal {\n    int* data;\npublic:\n    Dog() : data(new int[100]) {}\n    ~Dog() { delete[] data; }\n};\n\nAnimal* a = new Dog();\ndelete a;   // вызовется только ~Animal, не ~Dog → утечка\n```\n\n## Решение\n\n```cpp\nclass Animal {\npublic:\n    virtual ~Animal() = default;\n};\n```\n\n`virtual` деструктор — при `delete` через указатель родителя вызовется правильный деструктор наследника.\n\n## Правило\n\nЕсли класс предназначен для наследования (имеет хоть одну виртуальную функцию) — **виртуальный деструктор обязателен**.\n\n## Интерфейсы\n\n```cpp\nclass Drawable {\npublic:\n    virtual void draw() const = 0;\n    virtual ~Drawable() = default;\n};\n```\n\nВсе интерфейсы — с виртуальным деструктором.\n\n## Что будет, если\n\n- Нет виртуального деструктора, а удаляют через базовый указатель — утечка и UB.\n- Виртуальный деструктор у класса, который не наследуют — чуть медленнее, но не ошибка.\n\n## Частая ошибка\n\nЗабыть `virtual` в деструкторе при полиморфной иерархии — классическая утечка.\n\n## Итог\n\n- `virtual ~ClassName() = default;`\n- Обязателен при наследовании\n- Все интерфейсы — с виртуальным деструктором\n- Без него — утечка\n- Чуть медленнее, но безопаснее",
+      "questions": [
+        { "text": "Зачем виртуальный деструктор?", "options": ["Ускорение", "Правильный вызов при delete через базу", "Красиво", "Не нужен"], "answer": 1, "explanation": "Правильный деструктор." },
+        { "text": "Когда он обязателен?", "options": ["Всегда", "При наследовании с виртуальными методами", "Для int", "Никогда"], "answer": 1, "explanation": "При полиморфизме." },
+        { "text": "Что при delete через базу без virtual?", "options": ["Работает", "Утечка/UB", "Ошибка компиляции", "Медленно"], "answer": 1, "explanation": "UB." },
+        { "text": "Как объявить?", "options": ["virtual ~Name() {}", "~virtual Name()", "virtual ~Name() = default;", "Оба 1 и 3"], "answer": 3, "explanation": "`virtual ~Name()` или `= default`." }
+      ],
+      "practice": {
+        "description": "`Animal` с `virtual ~Animal() = default;`.\n`Dog : public Animal` с деструктором, печатающим `Dog destroyed`.\n\n`Animal* a = new Dog(); delete a;`\n\n```\nDog destroyed\n```",
+        "starter": "#include <iostream>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Dog destroyed",
+        "must_contain": ["virtual ~Animal", "class Dog", "~Dog", "delete", "std::cout"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "title": "vector: подробнее",
+      "theory": "## Методы\n\n```cpp\nstd::vector<int> v = {1, 2, 3};\nv.push_back(4);           // 1, 2, 3, 4\nv.pop_back();             // 1, 2, 3\nv.insert(v.begin() + 1, 99);  // 1, 99, 2, 3\nv.erase(v.begin() + 1);   // 1, 2, 3\nv.clear();                // пустой\nv.size();\nv.empty();\nv.front();\nv.back();\n```\n\n## capacity\n\n```cpp\nv.capacity();   // сколько памяти выделено (может быть больше size)\nv.reserve(100); // заранее выделить\n```\n\nПри росте — capacity увеличивается (обычно в 2 раза).\n\n## reserve\n\n```cpp\nv.reserve(1000);\nfor (int i = 0; i < 1000; i++) v.push_back(i);\n```\n\nБез `reserve` — несколько перевыделений и копирований.\n\n## Вложенные\n\n```cpp\nstd::vector<std::vector<int>> matrix = {{1, 2}, {3, 4}};\nmatrix[0][1];   // 2\n```\n\n## Инициализация\n\n```cpp\nstd::vector<int> a(5);       // 5 нулей\nstd::vector<int> b(5, 100);  // 5 по 100\nstd::vector<int> c = {1, 2, 3};\n```\n\n## Что будет, если\n\n- `insert` / `erase` в середину — O(n) (сдвиг).\n- Много `push_back` без `reserve` — перевыделения.\n- `v[i]` с индексом за границей — UB.\n\n## Частая ошибка\n\nМодификация `v` в цикле через `v.size()` с `pop_back` — счётчик уменьшается, половина обработана.\n\n## Итог\n\n- `push_back`, `pop_back`, `insert`, `erase`\n- `capacity` vs `size`\n- `reserve` — заранее\n- Вложенные — `vector<vector<int>>`\n- `insert`/`erase` — O(n)",
+      "questions": [
+        { "text": "Что делает `push_back`?", "options": ["В начало", "В конец", "Удаляет", "Сортирует"], "answer": 1, "explanation": "В конец." },
+        { "text": "Что такое `capacity`?", "options": ["= size", "Выделенная память", "Скорость", "Индекс"], "answer": 1, "explanation": "Выделенная память." },
+        { "text": "Зачем `reserve`?", "options": ["Удалить", "Выделить заранее", "Сортировать", "Считать"], "answer": 1, "explanation": "Заранее выделить." },
+        { "text": "Сложность `insert` в середину?", "options": ["O(1)", "O(n)", "O(log n)", "O(n²)"], "answer": 1, "explanation": "Сдвиг — O(n)." }
+      ],
+      "practice": {
+        "description": "Создай `std::vector<int> v = {1, 2, 3};`.\n\n`v.push_back(4); v.insert(v.begin() + 1, 99);`\n\nВыведи через пробел:\n```\n1 99 2 3 4\n```",
+        "starter": "#include <iostream>\n#include <vector>\n\nint main() {\n    std::vector<int> v = {1, 2, 3};\n    // TODO\n    return 0;\n}\n",
+        "expected": "1 99 2 3 4",
+        "must_contain": ["std::vector", "push_back", "insert", "std::cout"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "title": "map и unordered_map",
+      "theory": "## std::map\n\nОтсортированное дерево (красно-чёрное). Ключи упорядочены.\n\n```cpp\n#include <map>\n\nstd::map<std::string, int> ages;\nages[\"Аня\"] = 25;\nages[\"Ваня\"] = 30;\nstd::cout << ages[\"Аня\"];   // 25\n```\n\n## Операции\n\n```cpp\nages[key]            // доступ/создание (если нет — создаёт с 0)\nages.at(key)         // с проверкой\nages.count(key)      // 0 или 1\nages.find(key)       // iterator\nages.erase(key)      // удалить\nages.size()\n```\n\n## Обход\n\n```cpp\nfor (const auto &[key, value] : ages) {\n    std::cout << key << \": \" << value << \"\\n\";\n}\n```\n\n`[key, value]` — structured bindings (C++17).\n\n## unordered_map\n\n`std::unordered_map` — хэш-таблица. Быстрее в среднем (O(1) против O(log n) у map), но **без порядка**.\n\n```cpp\n#include <unordered_map>\nstd::unordered_map<std::string, int> m;\n```\n\n## Когда что\n\n- Нужен порядок ключей — `map`.\n- Нужна скорость — `unordered_map`.\n\n## Ловушка operator[]\n\n```cpp\nstd::map<std::string, int> m;\nif (m[\"missing\"] == 0) { }   // создаёт пару с 0!\n```\n\nЕсли ключа нет, `m[key]` **вставляет** пару с дефолтным значением. Для проверки — `find` или `count`.\n\n## Что будет, если\n\n- `m[\"new\"]` на отсутствующем ключе — создаёт.\n- Модифицировать ключ через итератор — запрещено (портит дерево).\n- unordered_map с плохим хэшем — O(n).\n\n## Частая ошибка\n\n`m[\"missing\"]` для проверки — создаёт пару. Используй `find` / `count`.\n\n## Итог\n\n- `std::map` — отсортированный\n- `std::unordered_map` — хэш, быстрее\n- `[key]` — доступ/создание\n- `.at(key)` — с проверкой\n- `find`, `count` — без создания",
+      "questions": [
+        { "text": "Чем map отличается от unordered_map?", "options": ["Ничем", "map отсортирован, unordered — хэш", "Быстрее", "Только для int"], "answer": 1, "explanation": "Порядок." },
+        { "text": "Что делает `m[\"new\"]` если ключа нет?", "options": ["Ошибку", "Создаёт пару с 0", "nullptr", "Ничего"], "answer": 1, "explanation": "Создаёт." },
+        { "text": "Как проверить наличие без создания?", "options": ["m[k]", "m.find(k) != m.end()", "m[k] == 0", "m[k].exists()"], "answer": 1, "explanation": "`find` или `count`." },
+        { "text": "Сложность поиска в map?", "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"], "answer": 1, "explanation": "Дерево — O(log n)." }
+      ],
+      "practice": {
+        "description": "`std::map<std::string, int> m; m[\"a\"] = 1; m[\"b\"] = 2;`\n\nВыведи:\n```\na: 1\nb: 2\nSize: 2\n```",
+        "starter": "#include <iostream>\n#include <map>\n#include <string>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "a: 1\nb: 2\nSize: 2",
+        "must_contain": ["std::map", "for", "std::cout"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "title": "set и unordered_set",
+      "theory": "## std::set\n\nМножество уникальных **отсортированных** элементов.\n\n```cpp\n#include <set>\n\nstd::set<int> s = {3, 1, 2, 2, 1};\n// {1, 2, 3} — отсортировано, дубликаты убраны\n```\n\n## Методы\n\n```cpp\ns.insert(5);\ns.erase(1);\ns.count(2);       // 0 или 1\ns.find(3);        // iterator\ns.size();\ns.empty();\n```\n\n## unordered_set\n\nХэш-таблица. Быстрее (O(1) vs O(log n)), но без порядка.\n\n```cpp\n#include <unordered_set>\nstd::unordered_set<int> us = {3, 1, 2};\n```\n\n## Применение\n\n- Убрать дубликаты: `std::set` или `unordered_set` из вектора.\n- Быстрая проверка «есть ли».\n- Сортировка + уникальность за один шаг.\n\n```cpp\nstd::vector<int> v = {3, 1, 2, 2};\nstd::set<int> unique_set(v.begin(), v.end());\n// {1, 2, 3}\n```\n\n## Когда что\n\n- Нужна сортировка + уникальность — `set`.\n- Только уникальность и скорость — `unordered_set`.\n\n## Что будет, если\n\n- Вставить дубликат — не добавится (set).\n- Искать через `[]` — у set нет `[]`.\n- Модифицировать элемент — нельзя (портит сортировку).\n\n## Частая ошибка\n\n`s[0]` — set не поддерживает индексацию. Только через итераторы или `find`.\n\n## Итог\n\n- `std::set` — уникальные, отсортированы\n- `std::unordered_set` — хэш\n- `insert`, `count`, `find`, `erase`\n- Нет `[]`\n- Быстрый `count`",
+      "questions": [
+        { "text": "Что особенного в std::set?", "options": ["Индексируется", "Уникальные, отсортированы", "Динамический", "Хэш"], "answer": 1, "explanation": "Уникальные и отсортированы." },
+        { "text": "Что при вставке дубликата?", "options": ["Добавится", "Не добавится", "Ошибка", "Заменит"], "answer": 1, "explanation": "Не добавится." },
+        { "text": "Есть ли `s[0]` у set?", "options": ["Да", "Нет", "Иногда", "Только для int"], "answer": 1, "explanation": "Нет индексации." },
+        { "text": "Чем unordered_set отличается от set?", "options": ["Ничем", "Быстрее, без порядка", "Медленнее", "Только для int"], "answer": 1, "explanation": "Хэш." }
+      ],
+      "practice": {
+        "description": "`std::set<int> s = {3, 1, 2, 2, 1, 3};`\n\nВыведи:\n```\n1 2 3\nSize: 3\n```",
+        "starter": "#include <iostream>\n#include <set>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1 2 3\nSize: 3",
+        "must_contain": ["std::set", "for", ".size()", "std::cout"]
+      }
+    },
+    "28": {
+      "id": 28,
+      "title": "Итераторы",
+      "theory": "## Что такое итератор\n\nИтератор — обобщённый указатель на элемент контейнера. `begin()` — первый, `end()` — **за последним**.\n\n```cpp\nstd::vector<int> v = {1, 2, 3};\nfor (auto it = v.begin(); it != v.end(); ++it) {\n    std::cout << *it << \"\\n\";\n}\n```\n\n## Операции\n\n- `*it` — значение\n- `++it` — следующий\n- `it == end()` — конец\n- `it != begin()` — не начало\n\n## Range-for — это итераторы\n\n```cpp\nfor (int x : v) { ... }\n```\n\nТо же, что `for (auto it = v.begin(); it != v.end(); ++it) { int x = *it; ... }`.\n\n## Инвалидация\n\nПри изменении контейнера итераторы могут **инвалидироваться** (стать невалидными):\n\n```cpp\nstd::vector<int> v = {1, 2, 3};\nauto it = v.begin();\nv.push_back(4);       // может перевыделить память\n*it;                  // UB — итератор инвалидирован\n```\n\n## std::map\n\n```cpp\nstd::map<std::string, int> m;\nfor (auto it = m.begin(); it != m.end(); ++it) {\n    std::cout << it->first << \": \" << it->second << \"\\n\";\n}\n```\n\n`it->first` — ключ, `it->second` — значение.\n\n## const_iterator\n\n```cpp\nfor (auto it = v.cbegin(); it != v.cend(); ++it) {\n    // *it нельзя изменить\n}\n```\n\n## Что будет, если\n\n- Использовать итератор после изменения контейнера — UB.\n- Разыменовать `end()` — UB.\n- Сравнивать итераторы из разных контейнеров — UB.\n\n## Частая ошибка\n\nУдаление во время итерации через `it` — инвалидация. Используй `it = v.erase(it)`.\n\n## Итог\n\n- `begin()` — первый, `end()` — за последним\n- `*it` — значение\n- `++it` — вперёд\n- Инвалидация при изменениях\n- Для map — `it->first`, `it->second`",
+      "questions": [
+        { "text": "Что такое `end()`?", "options": ["Последний", "За последним", "Первый", "Ошибка"], "answer": 1, "explanation": "За последним." },
+        { "text": "Что делает `*it`?", "options": ["Значение", "Следующий", "Удаление", "Адрес"], "answer": 0, "explanation": "Значение." },
+        { "text": "Что при использовании итератора после push_back?", "options": ["Работает", "UB (инвалидация)", "Ошибка", "Ничего"], "answer": 1, "explanation": "UB." },
+        { "text": "Что даёт `it->first` для map?", "options": ["Значение", "Ключ", "Индекс", "Ошибка"], "answer": 1, "explanation": "Ключ." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {1, 2, 3};`\n\nЧерез итератор выведи:\n```\n1\n2\n3\n```",
+        "starter": "#include <iostream>\n#include <vector>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1\n2\n3",
+        "must_contain": ["begin()", "end()", "++it", "*it", "std::cout"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "title": "sort, reverse, min/max",
+      "theory": "## std::sort\n\n```cpp\n#include <algorithm>\n\nstd::vector<int> v = {3, 1, 4, 1, 5};\nstd::sort(v.begin(), v.end());\n// 1, 1, 3, 4, 5\n```\n\nПо возрастанию.\n\n## По убыванию\n\n```cpp\nstd::sort(v.begin(), v.end(), std::greater<int>());\n// 5, 4, 3, 1, 1\n```\n\nИли лямбда:\n\n```cpp\nstd::sort(v.begin(), v.end(), [](int a, int b) { return a > b; });\n```\n\n## Свой компаратор\n\n```cpp\nstruct Point { int x, y; };\nstd::vector<Point> points = {{3, 1}, {1, 2}, {2, 3}};\n\nstd::sort(points.begin(), points.end(), [](const Point& a, const Point& b) {\n    return a.x < b.x;\n});\n```\n\n## std::reverse\n\n```cpp\nstd::reverse(v.begin(), v.end());\n```\n\n## min / max\n\n```cpp\nint a = 5, b = 10;\nstd::min(a, b);   // 5\nstd::max(a, b);   // 10\n```\n\n## min_element / max_element\n\n```cpp\nauto it = std::max_element(v.begin(), v.end());\nstd::cout << *it;   // максимум\n```\n\n## Что будет, если\n\n- `sort` с невалидным компаратором — UB.\n- `sort` на `std::list` — не работает (нет random access).\n- `max` без `<algorithm>` — ошибка.\n\n## Частая ошибка\n\nКомпаратор в `sort` должен возвращать `true`, если `a` идёт **до** `b`. Возврат `a <= b` — UB.\n\n## Итог\n\n- `std::sort(begin, end)` — по возрастанию\n- Компаратор — третий аргумент\n- `std::reverse`\n- `min`, `max`\n- `min_element`, `max_element`",
+      "questions": [
+        { "text": "Как сортировать по убыванию?", "options": ["sort(b, e)", "sort(b, e, greater<int>())", "sort_desc", "Ошибка"], "answer": 1, "explanation": "`greater<>`." },
+        { "text": "Что возвращает `max(5, 10)`?", "options": ["5", "10", "15", "Ошибка"], "answer": 1, "explanation": "10." },
+        { "text": "Что делает `std::reverse`?", "options": ["Сортирует", "Разворачивает", "Удаляет", "Копирует"], "answer": 1, "explanation": "Разворачивает." },
+        { "text": "Что должен возвращать компаратор?", "options": ["a == b", "a < b (a идёт до b)", "a > b всегда", "Ошибка"], "answer": 1, "explanation": "`a < b` — строго." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {5, 2, 8, 1, 9};`\n\nОтсортируй, выведи:\n```\n1 2 5 8 9\n```",
+        "starter": "#include <iostream>\n#include <vector>\n#include <algorithm>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "1 2 5 8 9",
+        "must_contain": ["std::sort", "std::cout"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "title": "find, count, accumulate",
+      "theory": "## std::find\n\n```cpp\n#include <algorithm>\n\nauto it = std::find(v.begin(), v.end(), 7);\nif (it != v.end()) {\n    std::cout << \"Found: \" << *it;\n}\n```\n\n## std::find_if\n\nС предикатом:\n\n```cpp\nauto it = std::find_if(v.begin(), v.end(), [](int x) { return x > 5; });\n```\n\nПервый элемент, для которого лямбда `true`.\n\n## std::count\n\n```cpp\nint n = std::count(v.begin(), v.end(), 7);   // сколько раз 7\n```\n\n## std::count_if\n\n```cpp\nint evens = std::count_if(v.begin(), v.end(), [](int x) { return x % 2 == 0; });\n```\n\n## std::accumulate\n\n```cpp\n#include <numeric>\n\nint sum = std::accumulate(v.begin(), v.end(), 0);\n```\n\nТретий аргумент — начальное значение. Тип этого значения определяет тип результата.\n\n```cpp\ndouble avg = std::accumulate(v.begin(), v.end(), 0.0) / v.size();\n// 0.0 — double, результат тоже double\n```\n\n## std::any_of / all_of / none_of\n\n```cpp\nbool anyEven = std::any_of(v.begin(), v.end(), [](int x) { return x % 2 == 0; });\nbool allPos  = std::all_of(v.begin(), v.end(), [](int x) { return x > 0; });\n```\n\n## Что будет, если\n\n- `find` не нашёл — вернёт `end()`.\n- Разыменовать `end()` — UB.\n- `accumulate` со стартом `0` для double-вектора — сумма как int.\n\n## Частая ошибка\n\n`std::accumulate(v.begin(), v.end(), 0)` для double — теряются дроби. Нужен `0.0`.\n\n## Итог\n\n- `find` — первый равный\n- `find_if` — первый по предикату\n- `count` — сколько\n- `accumulate` — сумма\n- Стартовое значение влияет на тип",
+      "questions": [
+        { "text": "Что возвращает `std::find` при отсутствии?", "options": ["nullptr", "end()", "-1", "Ошибка"], "answer": 1, "explanation": "`end()`." },
+        { "text": "Что делает `std::count`?", "options": ["Считает", "Сколько раз элемент", "Сортирует", "Удаляет"], "answer": 1, "explanation": "Частота." },
+        { "text": "Что делает `std::accumulate`?", "options": ["Сортирует", "Суммирует", "Ищет", "Удаляет"], "answer": 1, "explanation": "Сумма." },
+        { "text": "Что при `accumulate(v.begin(), v.end(), 0)` для double?", "options": ["Сумма как double", "Сумма как int (потеря дробей)", "Ошибка", "Пусто"], "answer": 1, "explanation": "0 — int." }
+      ],
+      "practice": {
+        "description": "`std::vector<int> v = {3, 7, 2, 9, 5};`\n\n1. `std::count` — сколько раз 7.\n2. `std::accumulate` — сумма.\n\n```\nCount 7: 1\nSum: 26\n```",
+        "starter": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Count 7: 1\nSum: 26",
+        "must_contain": ["std::count", "std::accumulate", "std::cout"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "title": "Лямбда-выражения",
+      "theory": "## Что такое лямбда\n\nАнонимная функция. Синтаксис:\n\n```cpp\n[capture](params) -> return_type { body }\n```\n\n`return_type` можно опустить — выведется.\n\n## Простая лямбда\n\n```cpp\nauto add = [](int a, int b) { return a + b; };\nstd::cout << add(2, 3);   // 5\n```\n\n## Захват\n\n`[capture]` — какие внешние переменные доступны внутри:\n\n```cpp\nint x = 10;\nauto f = [x](int y) { return x + y; };   // захват по значению\nstd::cout << f(5);   // 15\n```\n\n## Виды захвата\n\n- `[x]` — по значению (копия)\n- `[&x]` — по ссылке\n- `[=]` — все по значению\n- `[&]` — все по ссылке\n- `[this]` — указатель this (в методах)\n\n```cpp\nint a = 10, b = 20;\nauto f = [=]() { return a + b; };   // копии\nauto g = [&]() { return a + b; };   // по ссылке\n```\n\n## mutable\n\nПо умолчанию захваченные по значению — **const**. `mutable` разрешает менять копию:\n\n```cpp\nint x = 10;\nauto f = [x]() mutable { x++; return x; };\nf();   // 11\nf();   // 12\n```\n\nВнешний `x` не меняется — лямбда работает с копией.\n\n## В алгоритмах\n\n```cpp\nstd::sort(v.begin(), v.end(), [](int a, int b) { return a > b; });\nstd::for_each(v.begin(), v.end(), [](int x) { std::cout << x << \"\\n\"; });\n```\n\n## Что будет, если\n\n- Забыть `[]` — ошибка.\n- Захватить локальную по ссылке, а потом использовать лямбду после выхода из scope — UB.\n- Изменить `x` без `mutable` — ошибка.\n\n## Частая ошибка\n\n`[x]` без `mutable` + `x++` — ошибка. Нужно `[x]() mutable { x++; }`.\n\n## Итог\n\n- `[capture](params) { body }`\n- `[x]` — по значению\n- `[&x]` — по ссылке\n- `[=]`, `[&]` — все\n- `mutable` — менять копию",
+      "questions": [
+        { "text": "Что такое `[]` в лямбде?", "options": ["Параметры", "Захват", "Тело", "Возврат"], "answer": 1, "explanation": "Захват." },
+        { "text": "Что делает `[x]`?", "options": ["Захват по ссылке", "Захват по значению", "Удаляет", "Ошибка"], "answer": 1, "explanation": "По значению." },
+        { "text": "Что даёт `[&]`?", "options": ["Все по значению", "Все по ссылке", "Ошибка", "Ничего"], "answer": 1, "explanation": "Все по ссылке." },
+        { "text": "Зачем `mutable`?", "options": ["Захват", "Менять захваченную по значению", "Ускорение", "Ничего"], "answer": 1, "explanation": "Менять копию." }
+      ],
+      "practice": {
+        "description": "Создай `auto add = [](int a, int b) { return a + b; };`.\n\nВыведи `add(3, 4)`:\n```\n7\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "7",
+        "must_contain": ["[](", "auto add", "std::cout"]
+      }
+    },
+    "32": {
+      "id": 32,
+      "title": "Стек, куча, new / delete",
+      "theory": "## Стек\n\nЛокальные переменные — на стеке. Стек **автоматически очищается** при выходе из scope.\n\n```cpp\nvoid f() {\n    int x = 10;     // стек\n    // ...\n}   // x удалена\n```\n\nБыстро, но размер ограничен (~8 МБ). Большие массивы — не влезут.\n\n## Куча\n\nЧерез `new` — на куче. **Вручную** освобождать через `delete`.\n\n```cpp\nint* p = new int(42);   // куча\nstd::cout << *p;\ndelete p;\n```\n\nДля массивов — `new[]` / `delete[]`:\n\n```cpp\nint* arr = new int[10];\ndelete[] arr;\n```\n\n## Утечки\n\n```cpp\nint* p = new int(42);\n// забыли delete p\n```\n\nПамять не освобождается, куча кончается, программа падает.\n\n## new/delete vs new[]/delete[]\n\n- `new` → `delete`\n- `new[]` → `delete[]`\n\nПерепутал — UB.\n\n## Проблема\n\nРучное `new/delete` — источник ошибок. Современный C++ — **умные указатели** (следующие уроки).\n\n```cpp\n// Плохо\nint* p = new int(42);\n// риск забыть delete\n\n// Хорошо\nauto p = std::make_unique<int>(42);   // автоматически\n```\n\n## Что будет, если\n\n- Забыть `delete` — утечка.\n- `delete` дважды — UB.\n- `delete` вместо `delete[]` — UB.\n- Вернуть указатель на локальную — висячий.\n\n## Частая ошибка\n\nРучной `new/delete` — утечка. Используй `unique_ptr` / `shared_ptr`.\n\n## Итог\n\n- Стек — быстро, автоматически\n- Куча — `new`, вручную\n- `new` / `delete`, `new[]` / `delete[]`\n- Утечки — главная проблема\n- Современный C++ — умные указатели",
+      "questions": [
+        { "text": "Где живут локальные переменные?", "options": ["На куче", "На стеке", "В регистрах", "В файле"], "answer": 1, "explanation": "Стек." },
+        { "text": "Что делает `new`?", "options": ["Стек", "Куча", "Файл", "Удаляет"], "answer": 1, "explanation": "Куча." },
+        { "text": "Что при забытом `delete`?", "options": ["Ошибка компиляции", "Утечка", "Падение сразу", "Ничего"], "answer": 1, "explanation": "Утечка." },
+        { "text": "Что лучше современного?", "options": ["new/delete", "unique_ptr / shared_ptr", "malloc/free", "Только new"], "answer": 1, "explanation": "Умные указатели." }
+      ],
+      "practice": {
+        "description": "Выдели `int` через `new`, присвой 42, выведи, `delete`.\n\n```\n42\n```",
+        "starter": "#include <iostream>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "42",
+        "must_contain": ["new int", "delete", "std::cout"]
+      }
+    },
+    "33": {
+      "id": 33,
+      "title": "unique_ptr",
+      "theory": "## Что это\n\n`std::unique_ptr<T>` — **единственный** владелец объекта. Автоматически удаляет при выходе из scope. Не копируется, только **перемещается**.\n\n```cpp\n#include <memory>\n\nauto p = std::make_unique<int>(42);\nstd::cout << *p;   // 42\n// при выходе из scope p автоматически delete\n```\n\n## Для массивов (C++14)\n\n```cpp\nauto arr = std::make_unique<int[]>(10);\narr[0] = 5;\n```\n\n## Почему unique\n\n`unique_ptr` **нельзя скопировать** — только один владелец. Это предотвращает двойное удаление.\n\n```cpp\nauto p1 = std::make_unique<int>(42);\n// auto p2 = p1; // ошибка\nauto p2 = std::move(p1);   // OK — теперь владелец p2\n```\n\n## Передача в функцию\n\n```cpp\nvoid process(std::unique_ptr<int> p) {\n    std::cout << *p;\n}   // p удалится здесь\n\nprocess(std::move(p));\n```\n\nЕсли функция не забирает владение — `T*` или `T&`:\n\n```cpp\nvoid show(const int* p) { std::cout << *p; }\nshow(p.get());\n```\n\n`.get()` — получить сырой указатель без потери владения.\n\n## unique_ptr<T> vs T\n\n- **T** на стеке — быстро, но ограничен.\n- **unique_ptr<T>** — куча, но автоматическое удаление.\n- Для больших объектов — `unique_ptr`.\n\n## Что будет, если\n\n- Скопировать `unique_ptr` — ошибка компиляции.\n- Забыть `std::move` — ошибка.\n- Использовать `p.get()` после уничтожения `p` — висячий.\n\n## Частая ошибка\n\n`auto p2 = p1;` для `unique_ptr` — ошибка. Только `std::move(p1)`.\n\n## Итог\n\n- `std::unique_ptr<T>` — единственный владелец\n- `std::make_unique<T>(...)` — создать\n- Не копируется, только `std::move`\n- Автоматический `delete`\n- `.get()` — сырой указатель",
+      "questions": [
+        { "text": "Можно ли скопировать unique_ptr?", "options": ["Да", "Нет, только move", "Иногда", "Через get"], "answer": 1, "explanation": "Только move." },
+        { "text": "Что делает `make_unique<int>(42)`?", "options": ["Стек", "unique_ptr с 42", "Ошибку", "int"], "answer": 1, "explanation": "Создаёт unique_ptr." },
+        { "text": "Что даёт `.get()`?", "options": ["Владелец", "Сырой указатель", "Копию", "Удаляет"], "answer": 1, "explanation": "Сырой указатель." },
+        { "text": "Когда удаляется объект?", "options": ["Вручную", "При выходе из scope", "Всегда в конце", "По таймеру"], "answer": 1, "explanation": "RAII." }
+      ],
+      "practice": {
+        "description": "`auto p = std::make_unique<int>(42);`\n\nВыведи `*p`:\n```\n42\n```",
+        "starter": "#include <iostream>\n#include <memory>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "42",
+        "must_contain": ["std::unique_ptr", "std::make_unique", "*p", "std::cout"]
+      }
+    },
+    "34": {
+      "id": 34,
+      "title": "shared_ptr и weak_ptr",
+      "theory": "## shared_ptr\n\nНесколько владельцев. Объект удаляется, когда **последний** `shared_ptr` уничтожен.\n\n```cpp\n#include <memory>\n\nauto p1 = std::make_shared<int>(42);\nauto p2 = p1;   // копия — 2 владельца\nstd::cout << p1.use_count();   // 2\n```\n\nКогда `p1` и `p2` выйдут из scope — `use_count` до 0, объект удалится.\n\n## use_count\n\n```cpp\nstd::cout << p.use_count();   // сколько владельцев\n```\n\n## Проблема циклов\n\n```cpp\nclass A { std::shared_ptr<B> b; };\nclass B { std::shared_ptr<A> a; };\n\nauto a = std::make_shared<A>();\nauto b = std::make_shared<B>();\na->b = b;\nb->a = a;\n// при выходе a и b из scope use_count не дойдёт до 0 — утечка\n```\n\nВзаимные ссылки — утечка. Решение — `weak_ptr`.\n\n## weak_ptr\n\nНе владеет. Смотрит на объект через `shared_ptr`, но не продлевает жизнь.\n\n```cpp\nclass B {\n    std::weak_ptr<A> a;   // не владеет\n};\n\nauto sp = b->a.lock();   // получить shared_ptr (или nullptr)\nif (sp) { /* ... */ }\n```\n\n## Когда что\n\n- `unique_ptr` — единственный владелец.\n- `shared_ptr` — несколько владельцев.\n- `weak_ptr` — наблюдение без владения.\n- `T*` / `T&` — не владеет (только доступ).\n\n## Что будет, если\n\n- Циклы `shared_ptr` — утечка.\n- `weak_ptr.lock()` возвращает `nullptr`, если объект удалён.\n- `shared_ptr` на массив в C++17 — `shared_ptr<T[]>` (не идеально).\n\n## Частая ошибка\n\nВзаимные `shared_ptr` — утечка. Один из них — `weak_ptr`.\n\n## Итог\n\n- `shared_ptr` — общий владелец\n- `use_count` — счётчик\n- `weak_ptr` — без владения\n- Циклы — утечка\n- `lock()` — из weak получить shared",
+      "questions": [
+        { "text": "Когда удаляется объект с shared_ptr?", "options": ["Сразу", "Когда последний владелец уничтожен", "Через 1 секунду", "Вручную"], "answer": 1, "explanation": "Последний." },
+        { "text": "Что даёт `use_count`?", "options": ["Размер", "Число владельцев", "Адрес", "Тип"], "answer": 1, "explanation": "Число владельцев." },
+        { "text": "Зачем weak_ptr?", "options": ["Ускорение", "Наблюдение без владения", "Удаление", "Копия"], "answer": 1, "explanation": "Без владения." },
+        { "text": "Что при цикле shared_ptr?", "options": ["Работает", "Утечка", "Ошибка компиляции", "Быстрее"], "answer": 1, "explanation": "Утечка." }
+      ],
+      "practice": {
+        "description": "`auto p = std::make_shared<int>(42);`\n\nВыведи `*p` и `use_count`:\n```\n*p = 42\ncount = 1\n```",
+        "starter": "#include <iostream>\n#include <memory>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "*p = 42\ncount = 1",
+        "must_contain": ["std::shared_ptr", "std::make_shared", "use_count", "std::cout"]
+      }
+    },
+    "35": {
+      "id": 35,
+      "title": "try / catch / throw",
+      "theory": "## try / catch\n\n```cpp\ntry {\n    // код, который может бросить исключение\n} catch (const std::exception& e) {\n    std::cout << \"Ошибка: \" << e.what();\n}\n```\n\n## throw\n\n```cpp\nthrow std::runtime_error(\"Не удалось\");\nthrow 42;   // можно, но не рекомендую\n```\n\nЛучше бросать объекты, унаследованные от `std::exception`.\n\n## Стандартные\n\n- `std::runtime_error` — общая ошибка\n- `std::logic_error` — ошибка логики\n- `std::invalid_argument` — неверный аргумент\n- `std::out_of_range` — выход за границы (из `.at()`)\n- `std::bad_alloc` — не хватило памяти\n\nВсе имеют `.what()` — строку.\n\n## Множественные catch\n\n```cpp\ntry {\n    // ...\n} catch (const std::invalid_argument& e) {\n    // ...\n} catch (const std::exception& e) {\n    // ...\n}\n```\n\nБолее конкретный — первым.\n\n## Что будет, если\n\n- Не поймать исключение — `std::terminate`, программа падает.\n- `catch (...)` — ловит всё, теряет тип.\n- Бросить в деструкторе — UB при unwinding.\n\n## Частая ошибка\n\n`catch (const std::exception& e)` без `&` — копия + срезка (slicing) подклассов.\n\n## Итог\n\n- `try { } catch (const std::exception& e) { }`\n- `throw std::runtime_error(\"...\")`\n- `.what()` — текст ошибки\n- Множественные `catch`\n- Всегда `&` в catch",
+      "questions": [
+        { "text": "Что делает `throw`?", "options": ["Ловит", "Бросает исключение", "Возвращает", "Ничего"], "answer": 1, "explanation": "Бросает." },
+        { "text": "Что такое `.what()`?", "options": ["Тип", "Текст ошибки", "Стек", "Удаление"], "answer": 1, "explanation": "Текст." },
+        { "text": "Зачем `&` в catch?", "options": ["Копия", "Без копии и срезки", "Ускорение", "Не нужно"], "answer": 1, "explanation": "Без срезки." },
+        { "text": "Что при непойманном исключении?", "options": ["Игнор", "std::terminate (падение)", "Продолжение", "Возврат"], "answer": 1, "explanation": "Падение." }
+      ],
+      "practice": {
+        "description": "В `try` брось `std::runtime_error(\"bad\")`, в `catch` выведи `Ошибка: bad`.\n\n```\nОшибка: bad\n```",
+        "starter": "#include <iostream>\n#include <stdexcept>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Ошибка: bad",
+        "must_contain": ["try", "catch", "throw", "std::runtime_error", "what()", "std::cout"]
+      }
+    },
+    "36": {
+      "id": 36,
+      "title": "Свои исключения, noexcept",
+      "theory": "## Свой класс исключения\n\n```cpp\n#include <stdexcept>\n\nclass MyError : public std::runtime_error {\npublic:\n    using std::runtime_error::runtime_error;\n};\n```\n\n`using` — наследует конструкторы родителя. Теперь можно `throw MyError(\"msg\")`.\n\nИли явно:\n\n```cpp\nclass MyError : public std::runtime_error {\npublic:\n    MyError(const std::string& msg) : std::runtime_error(msg) {}\n};\n```\n\n## Ловить свой класс\n\n```cpp\ntry {\n    throw MyError(\"custom\");\n} catch (const MyError& e) {\n    std::cout << \"MyError: \" << e.what();\n}\n```\n\n## noexcept\n\n`noexcept` — обещание, что функция **не бросает** исключений:\n\n```cpp\nint safeDivide(int a, int b) noexcept {\n    if (b == 0) return 0;\n    return a / b;\n}\n```\n\nЕсли бросит — `std::terminate`.\n\n## Где важно\n\n- Конструктор перемещения (move) — должен быть `noexcept` для эффективности.\n- Деструкторы — по умолчанию `noexcept`.\n- Функции в STL ожидают `noexcept` от некоторых операций.\n\n## Что будет, если\n\n- Бросать в `noexcept` — `std::terminate`.\n- Не наследовать от `std::exception` — нет `.what()`.\n\n## Частая ошибка\n\nБросать исключение из деструктора (деструктор `noexcept` по умолчанию) — `std::terminate`.\n\n## Итог\n\n- `class MyError : public std::runtime_error`\n- `using std::runtime_error::runtime_error;`\n- Ловить по `const MyError&`\n- `noexcept` — не бросает\n- В деструкторе — не бросать",
+      "questions": [
+        { "text": "От чего наследовать?", "options": ["std::string", "std::runtime_error", "int", "Ошибка"], "answer": 1, "explanation": "`std::runtime_error`." },
+        { "text": "Что делает `noexcept`?", "options": ["Ускоряет", "Обещает не бросать", "Ошибка", "Ловит"], "answer": 1, "explanation": "Не бросает." },
+        { "text": "Что при броске в noexcept?", "options": ["Работает", "std::terminate", "Ошибка компиляции", "Игнор"], "answer": 1, "explanation": "Terminate." },
+        { "text": "Что делает `using std::runtime_error::runtime_error;`?", "options": ["Удаляет", "Наследует конструкторы", "Ошибка", "Копирует"], "answer": 1, "explanation": "Наследование конструкторов." }
+      ],
+      "practice": {
+        "description": "`class MyError : public std::runtime_error { using std::runtime_error::runtime_error; };`\n\nВ `try` брось `MyError(\"custom\")`, в `catch (const MyError& e)` выведи `MyError: custom`.\n\n```\nMyError: custom\n```",
+        "starter": "#include <iostream>\n#include <stdexcept>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "MyError: custom",
+        "must_contain": ["class MyError", "std::runtime_error", "throw", "try", "catch", "what()", "std::cout"]
+      }
+    },
+    "37": {
+      "id": 37,
+      "title": "Шаблоны функций",
+      "theory": "## Что такое шаблон\n\nФункция с параметром-типом, генерируется под каждый конкретный тип.\n\n```cpp\ntemplate <typename T>\nT maxOf(T a, T b) {\n    return a > b ? a : b;\n}\n\nstd::cout << maxOf(3, 7);      // int\nstd::cout << maxOf(3.5, 2.1);  // double\n```\n\nКомпилятор создаёт две версии — для `int` и `double`.\n\n## typename vs class\n\n```cpp\ntemplate <typename T>\ntemplate <class T>\n```\n\nОдно и то же.\n\n## Явное указание типа\n\n```cpp\nmaxOf<int>(3, 7);\nmaxOf<double>(3.5, 2.1);\n```\n\nОбычно компилятор выводит сам.\n\n## Несколько параметров\n\n```cpp\ntemplate <typename T, typename U>\nauto add(T a, U b) {\n    return a + b;\n}\n```\n\n`auto` — выведет тип результата (C++14).\n\n## Ограничения\n\nВнутри шаблона можно только то, что работает для всех используемых типов:\n\n```cpp\ntemplate <typename T>\nT sum(T a, T b) { return a + b; }\n\nsum(std::string(\"a\"), std::string(\"b\"));   // OK\n// sum(1, std::string(\"x\"));   // ошибка\n```\n\n## Что будет, если\n\n- Использовать операцию, которая не работает для типа — ошибка **при инстанцировании**.\n- `sum(1, 2.5)` — типы разные, T не выводится (нужен `template <typename T, typename U>`).\n\n## Частая ошибка\n\n`maxOf(3, 7.5)` — разные типы для `T`. Нужно `maxOf<double>(3, 7.5)` или два параметра.\n\n## Итог\n\n- `template <typename T>` — шаблон\n- Компилятор создаёт версии\n- `maxOf(3, 7)` — T=int\n- Явное: `maxOf<int>(...)`\n- Ошибки — при инстанцировании",
+      "questions": [
+        { "text": "Что такое `template <typename T>`?", "options": ["Цикл", "Шаблон с параметром типа", "Ошибка", "Функция"], "answer": 1, "explanation": "Параметр типа." },
+        { "text": "Что делает `maxOf(3, 7)`?", "options": ["Ошибку", "T=int", "T=double", "Ничего"], "answer": 1, "explanation": "T=int." },
+        { "text": "Что при `maxOf(3, 7.5)`?", "options": ["Работает", "Ошибка — T неоднозначен", "5", "7.5"], "answer": 1, "explanation": "T не выводится." },
+        { "text": "Когда ошибка в шаблоне?", "options": ["Всегда", "При инстанцировании", "Никогда", "В runtime"], "answer": 1, "explanation": "При инстанцировании." }
+      ],
+      "practice": {
+        "description": "`template <typename T> T maxOf(T a, T b)`\n\nВыведи `maxOf(3, 7)` и `maxOf(3.5, 2.1)`:\n```\n7\n3.5\n```",
+        "starter": "#include <iostream>\n\n// TODO: шаблон\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "7\n3.5",
+        "must_contain": ["template", "typename", "maxOf", "std::cout"]
+      }
+    },
+    "38": {
+      "id": 38,
+      "title": "Шаблоны классов",
+      "theory": "## Шаблонный класс\n\n```cpp\ntemplate <typename T>\nclass Box {\n    T value;\npublic:\n    Box(T v) : value(v) {}\n    T get() const { return value; }\n};\n\nBox<int> b1(42);\nBox<std::string> b2(\"hello\");\n```\n\n## STL построена на шаблонах\n\n- `std::vector<T>` — шаблон\n- `std::map<K, V>` — шаблон\n- `std::unique_ptr<T>` — шаблон\n\n## Пример: свой стек\n\n```cpp\ntemplate <typename T>\nclass Stack {\n    std::vector<T> data;\npublic:\n    void push(T v) { data.push_back(v); }\n    void pop() { data.pop_back(); }\n    T top() const { return data.back(); }\n    bool empty() const { return data.empty(); }\n    size_t size() const { return data.size(); }\n};\n```\n\n## Параметры не только типы\n\n```cpp\ntemplate <typename T, int N>\nclass Array {\n    T data[N];\npublic:\n    // ...\n};\n\nArray<int, 5> arr;\n```\n\n`N` — параметр-значение. Используется в `std::array<T, N>`.\n\n## Композиция шаблонов\n\n```cpp\ntemplate <typename T>\nT sum(const std::vector<T>& v) {\n    T total{};\n    for (const auto& x : v) total += x;\n    return total;\n}\n```\n\nРаботает с любым `T`, у которого есть `+`, `+=`, `{}`.\n\n## Что будет, если\n\n- Использовать операцию, которой нет у `T` — ошибка при создании.\n- Забыть `<int>` — ошибка (не выведется из конструктора).\n\n## Частая ошибка\n\n`Box b(42);` — ошибка, нужен `Box<int> b(42);` (или вывод через `Box(42)` в C++17 при определённых условиях).\n\n## Итог\n\n- `template <typename T> class Name { }`\n- `Name<int>`, `Name<std::string>`\n- Параметры-значения — `<T, int N>`\n- STL построена на шаблонах\n- Ошибки — при создании",
+      "questions": [
+        { "text": "Что такое `template <typename T> class Box`?", "options": ["Обычный класс", "Шаблон класса", "Функция", "Ошибка"], "answer": 1, "explanation": "Шаблон класса." },
+        { "text": "Как создать?", "options": ["Box b;", "Box<int> b;", "new Box;", "class Box<int>"], "answer": 1, "explanation": "`Box<int>`." },
+        { "text": "Есть ли шаблоны с параметром-значением?", "options": ["Нет", "Да, `<T, int N>`", "Только в C++20", "Ошибка"], "answer": 1, "explanation": "Да." },
+        { "text": "Где ошибка в шаблоне?", "options": ["Всегда", "При инстанцировании", "Никогда", "В runtime"], "answer": 1, "explanation": "При создании." }
+      ],
+      "practice": {
+        "description": "Шаблонный `Box<T>` с конструктором и `get()`.\n\n`Box<int> b(42); b.get();` — выведи `42`.\n\n```\n42\n```",
+        "starter": "#include <iostream>\n\n// TODO: template Box\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "42",
+        "must_contain": ["template", "class Box", "Box<int>", ".get()", "std::cout"]
+      }
+    },
+    "39": {
+      "id": 39,
+      "title": "move-семантика, rvalue",
+      "theory": "## Проблема копирования\n\n```cpp\nstd::vector<int> makeVector() {\n    std::vector<int> v(1000000);\n    return v;   // копирование? 1 000 000 элементов?\n}\n```\n\nRVO (Return Value Optimization) — компилятор часто оптимизирует. Но не всегда.\n\n## lvalue vs rvalue\n\n- **lvalue** — имеет адрес (`x`, `v[0]`)\n- **rvalue** — временное (`5`, `x + y`, `makeVector()`)\n\n## std::move\n\n`std::move(x)` — преобразует к rvalue-ссылке. Обещание «этот объект больше не нужен, можно забрать ресурсы».\n\n```cpp\nstd::vector<int> a = {1, 2, 3};\nstd::vector<int> b = std::move(a);   // b забрал данные a\n// a теперь пустой (в валидном, но unspecified состоянии)\n```\n\n## Move-конструктор\n\n```cpp\nclass Buffer {\n    int* data;\n    size_t size;\npublic:\n    Buffer(Buffer&& other) noexcept\n        : data(other.data), size(other.size) {\n        other.data = nullptr;\n        other.size = 0;\n    }\n};\n```\n\n`Buffer&&` — rvalue-ссылка. Забирает ресурсы, оставляет `other` в валидном, но пустом.\n\n## Когда move\n\n- Передача в функцию по значению — move вместо копии.\n- Возврат локальной — RVO или move.\n- `std::move` в контейнеры — избежать копии.\n\n## После move\n\nОбъект **валиден**, но состояние unspecified. Не используй содержимое — только присвой новое или уничтожь.\n\n## Что будет, если\n\n- Использовать объект после `std::move` — неопределённое, но валидное состояние.\n- Забыть `noexcept` в move-конструкторе — `vector` не будет его использовать при росте.\n\n## Частая ошибка\n\n`std::move` не перемещает сам по себе — он только кастует к rvalue. Реальное перемещение — в move-конструкторе/присваивании.\n\n## Итог\n\n- `std::move(x)` — каст к rvalue\n- Move-конструктор — забрать ресурсы\n- `noexcept` — для эффективности\n- После move — объект валиден, но пуст\n- `std::move` не перемещает — только разрешает",
+      "questions": [
+        { "text": "Что делает `std::move`?", "options": ["Перемещает", "Каст к rvalue", "Удаляет", "Копирует"], "answer": 1, "explanation": "Каст к rvalue." },
+        { "text": "Что после `std::move(a)`?", "options": ["a удалён", "a валиден, но состояние unspecified", "Ошибка", "a копия"], "answer": 1, "explanation": "Валиден, но пуст." },
+        { "text": "Зачем `noexcept` в move?", "options": ["Красиво", "vector использует его при росте", "Ускорение", "Ничего"], "answer": 1, "explanation": "Для роста vector." },
+        { "text": "Что такое rvalue?", "options": ["Имеет адрес", "Временное значение", "Указатель", "Константа"], "answer": 1, "explanation": "Временное." }
+      ],
+      "practice": {
+        "description": "`std::string a = \"hello\"; std::string b = std::move(a);`\n\nВыведи `b`:\n```\nhello\n```",
+        "starter": "#include <iostream>\n#include <string>\n#include <utility>\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "hello",
+        "must_contain": ["std::move", "std::string", "std::cout"]
+      }
+    },
+    "40": {
+      "id": 40,
+      "title": "Мини-проект: телефонная книга",
+      "theory": "## Что делаем\n\nТелефонная книга: `std::map<std::string, std::string>` (имя → телефон). Функции добавления, поиска, вывода. Файлы — сохранение и загрузка.\n\n## Модель\n\n```cpp\nclass PhoneBook {\n    std::map<std::string, std::string> data;\npublic:\n    void add(const std::string& name, const std::string& phone) {\n        data[name] = phone;\n    }\n\n    bool find(const std::string& name, std::string& out) const {\n        auto it = data.find(name);\n        if (it == data.end()) return false;\n        out = it->second;\n        return true;\n    }\n\n    void print() const {\n        for (const auto& [name, phone] : data) {\n            std::cout << name << \": \" << phone << \"\\n\";\n        }\n    }\n\n    void save(const std::string& file) const {\n        std::ofstream f(file);\n        for (const auto& [name, phone] : data) {\n            f << name << \",\" << phone << \"\\n\";\n        }\n    }\n\n    void load(const std::string& file) {\n        std::ifstream f(file);\n        std::string line;\n        while (std::getline(f, line)) {\n            auto pos = line.find(',');\n            if (pos == std::string::npos) continue;\n            data[line.substr(0, pos)] = line.substr(pos + 1);\n        }\n    }\n};\n```\n\n## Что использовали\n\n- `class` + `private`\n- `std::map`\n- `std::string` (find, substr)\n- `std::ofstream`, `std::ifstream`\n- Structured bindings `[name, phone]`\n\n## Что будет, если\n\n- Нет проверки `find` — создастся пустая запись через `[]`.\n- Забыть `#include <fstream>` — ошибка.\n- Не проверять `pos == npos` — UB на `substr`.\n\n## Итог\n\n- Класс + map\n- Файлы через ofstream/ifstream\n- Structured bindings\n- Проверка `find` и `npos`",
+      "questions": [
+        { "text": "Где хранить пары?", "options": ["vector", "map<string, string>", "set", "queue"], "answer": 1, "explanation": "`map`." },
+        { "text": "Что делает `data[name]` если нет?", "options": ["Ошибку", "Создаёт пустую пару", "Ничего", "nullptr"], "answer": 1, "explanation": "Создаёт." },
+        { "text": "Зачем проверять `pos == npos`?", "options": ["Красиво", "substr без него — UB", "Ускорение", "Не нужно"], "answer": 1, "explanation": "substr падает." },
+        { "text": "Как писать в файл?", "options": ["cout", "ofstream", "ifstream", "cin"], "answer": 1, "explanation": "`ofstream`." }
+      ],
+      "practice": {
+        "description": "`PhoneBook` с `add(name, phone)` и `print()`.\n\nДобавь `(\"Аня\", \"123\")` и `(\"Ваня\", \"456\")`, выведи:\n```\nАня: 123\nВаня: 456\n```",
+        "starter": "#include <iostream>\n#include <map>\n#include <string>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Аня: 123\nВаня: 456",
+        "must_contain": ["class PhoneBook", "std::map", "add", "print", "std::cout"]
+      }
+    },
+    "41": {
+      "id": 41,
+      "title": "Итоговая",
+      "theory": "## Собираем всё\n\nКурс охватил: синтаксис C++, ссылки, классы, наследование, полиморфизм, STL, лямбды, умные указатели, исключения, шаблоны.\n\n## Финальный пример\n\n```cpp\n#include <iostream>\n#include <memory>\n#include <vector>\n#include <algorithm>\n#include <numeric>\n\nclass Product {\n    std::string name_;\n    double price_;\npublic:\n    Product(std::string name, double price)\n        : name_(std::move(name)), price_(price) {}\n\n    const std::string& name() const { return name_; }\n    double price() const { return price_; }\n};\n\nint main() {\n    std::vector<Product> products = {\n        {\"A\", 100},\n        {\"B\", 200},\n        {\"C\", 50}\n    };\n\n    double total = std::accumulate(products.begin(), products.end(), 0.0,\n        [](double sum, const Product& p) {\n            return sum + p.price();\n        });\n    std::cout << \"Сумма: \" << total << \"\\n\";\n\n    auto it = std::find_if(products.begin(), products.end(),\n        [](const Product& p) { return p.price() > 150; });\n    if (it != products.end()) {\n        std::cout << \"Дорогой: \" << it->name() << \"\\n\";\n    }\n}\n```\n\n## Что проверяется\n\n- Класс с private-полями, конструктором, const-геттерами\n- `std::vector`, `std::accumulate`, `std::find_if`\n- Лямбды\n- Structured bindings\n- `std::move`\n\n## Что будет, если\n\n- Забыть `const` в геттере — не работает на `const` объекте.\n- Забыть `std::move` — лишняя копия (мелочь).\n- Лямбда с `= 0` — не работает.\n\n## Частая ошибка\n\n`products.end()` после `find_if` — проверять `it != products.end()`, иначе UB.\n\n## Итог\n\n- Класс + STL + алгоритмы + лямбды\n- Compose: sort → filter → accumulate\n- Умные указатели для полиморфизма\n- Проверять `end()`\n- Современный C++ — STL + RAII + auto",
+      "questions": [
+        { "text": "Как найти первый элемент по предикату?", "options": ["find", "find_if", "count", "sort"], "answer": 1, "explanation": "`find_if`." },
+        { "text": "Что если `find_if` не нашёл?", "options": ["nullptr", "end()", "0", "Ошибка"], "answer": 1, "explanation": "`end()`." },
+        { "text": "Что делает `accumulate`?", "options": ["Сумма", "Сортирует", "Ищет", "Копирует"], "answer": 0, "explanation": "Сумма." },
+        { "text": "Что даёт `const` геттер?", "options": ["Красиво", "Работает на const объекте", "Ускоряет", "Не нужно"], "answer": 1, "explanation": "Const-корректность." }
+      ],
+      "practice": {
+        "description": "Класс `Product` с `std::string name`, `double price`, геттерами.\n\n`std::vector<Product> products = {{ \"A\", 100 }, { \"B\", 200 }, { \"C\", 50 }};`\n\n1. Сумма через `std::accumulate` с лямбдой.\n2. Первый > 150 через `std::find_if`.\n\n```\nСумма: 350\nДорогой: B\n```",
+        "starter": "#include <iostream>\n#include <vector>\n#include <string>\n#include <algorithm>\n#include <numeric>\n\n// TODO\n\nint main() {\n    // TODO\n    return 0;\n}\n",
+        "expected": "Сумма: 350\nДорогой: B",
+        "must_contain": ["class Product", "std::accumulate", "std::find_if", "[](", "std::cout"]
+      }
+    }
+  }
+}

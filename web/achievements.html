@@ -25,6 +25,12 @@
         .ach-status { font-size: 12px; font-weight: bold; margin-top: 8px; padding: 6px 12px; border-radius: 12px; }
         .ach-card.unlocked .ach-status { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
         .ach-card.locked .ach-status { background: rgba(255,255,255,0.1); color: var(--text-secondary); }
+        .ach-section { margin-top: 32px; }
+        .ach-section-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+        .ach-section-title { font-size: 20px; font-weight: bold; margin: 0; color: var(--text-white); }
+        .ach-section-count { font-size: 13px; color: var(--text-secondary); background: var(--bg-code-secondary); padding: 4px 10px; border-radius: 10px; }
+        .ach-section-sub { margin: 0; font-size: 14px; color: var(--text-secondary); }
+        .ach-empty { color: var(--text-secondary); margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -72,69 +78,72 @@
 </div>
 
 <script>
-    window.addEventListener('pywebviewready', async () => {
-        await applyLanguage();
-
-        // Получаем текущий язык и данные
-        const activeLang = await pywebview.api.get_active_lang();
-        const data = await pywebview.api.load_data();
-        const roadmap = await pywebview.api.get_roadmap(); // Берет roadmap для активного языка
-
-        // Собираем ID уроков и КР именно для ЭТОГО языка
-        let currentLangLessonIds = [];
-        let currentLangTrophyIds = [];
-
-        if (roadmap && Array.isArray(roadmap)) {
-            roadmap.forEach(chapter => {
-                chapter.lessons.forEach(l => currentLangLessonIds.push(String(l.id)));
-                if (chapter.trophy) currentLangTrophyIds.push(String(chapter.id));
-            });
-        }
-
-        // Считаем прогресс только по урокам текущего языка
-        let doneLessons = 0;
-        let doneTrophies = 0;
-
-        currentLangLessonIds.forEach(id => {
-            if (data[`status_${id}`] === 'done') doneLessons++;
-        });
-        currentLangTrophyIds.forEach(id => {
-            if (data[`status_trophy_${id}`] === 'done') doneTrophies++;
-        });
-
-        // Настройки достижений для разных языков
-        const achievementsData = {
-            "python": [
-                { icon: 'ach-start.svg', titleKey: 'ach_py_start', descKey: 'ach_py_start_desc', unlocked: doneLessons >= 1 },
-                { icon: 'ach-learner.svg', titleKey: 'ach_py_ten', descKey: 'ach_py_ten_desc', unlocked: doneLessons >= 10 },
-                { icon: 'ach-master.svg', titleKey: 'ach_py_master', descKey: 'ach_py_master_desc', unlocked: doneLessons >= 50 },
-                { icon: 'ach-test.svg', titleKey: 'ach_first_trophy', descKey: 'ach_first_trophy_desc', unlocked: doneTrophies >= 1 },
-                { icon: 'ach-fire.svg', titleKey: 'ach_streak_3', descKey: 'ach_streak_3_desc', unlocked: (data.streak || 0) >= 3 },
-                { icon: 'ach-star.svg', titleKey: 'ach_py_collector', descKey: 'ach_py_collector_desc', unlocked: doneTrophies >= 5 }
-            ],
-            "java": [
-                { icon: 'ach-java.svg', titleKey: 'ach_java_start', descKey: 'ach_java_start_desc', unlocked: doneLessons >= 1 },
-                { icon: 'ach-coffee.svg', titleKey: 'ach_java_coffee', descKey: 'ach_java_coffee_desc', unlocked: doneLessons >= 10 },
-                { icon: 'ach-oop.svg', titleKey: 'ach_java_oop', descKey: 'ach_java_oop_desc', unlocked: doneLessons >= 30 },
-                { icon: 'ach-fire.svg', titleKey: 'ach_streak_3', descKey: 'ach_streak_3_desc', unlocked: (data.streak || 0) >= 3 }
-            ]
-        };
-
-        // Берем достижения для текущего языка, если нет — пустой массив
-        const currentAchievements = achievementsData[activeLang] || achievementsData["python"];
-
-        const container = document.getElementById('ach-container');
-        container.innerHTML = `<div class="ach-grid">${currentAchievements.map(a => `
-        <div class="ach-card ${a.unlocked ? 'unlocked' : 'locked'}">
+    function achCard(a, isUnlocked) {
+        return `
+        <div class="ach-card ${isUnlocked ? 'unlocked' : 'locked'}">
             <div class="ach-icon-box">
                 <img src="icons/${a.icon}" class="ach-icon" onerror="this.src='icons/lesson-all.svg'">
             </div>
-            <h3 class="ach-title" data-i18n="${a.titleKey}">${a.titleKey}</h3>
-            <p class="ach-desc" data-i18n="${a.descKey}">${a.descKey}</p>
-            <span class="ach-status" data-i18n="${a.unlocked ? 'ach_unlocked' : 'ach_locked'}">${a.unlocked ? 'Получено' : 'Не получено'}</span>
-        </div>`).join('')}</div>`;
+            <h3 class="ach-title" data-i18n="${a.id}">${a.id}</h3>
+            <p class="ach-desc" data-i18n="${a.id}_desc">${a.id}_desc</p>
+            <span class="ach-status" data-i18n="${isUnlocked ? 'ach_unlocked' : 'ach_locked'}">${isUnlocked ? 'Получено' : 'Не получено'}</span>
+        </div>`;
+    }
+
+    function section(titleKey, subtitle, items, unlocked, emptyKey) {
+        if (!items || items.length === 0) {
+            return `<section class="ach-section">
+                <div class="ach-section-head"><h2 class="ach-section-title" data-i18n="${titleKey}">${titleKey}</h2></div>
+                <p class="ach-empty" data-i18n="${emptyKey}">${emptyKey}</p>
+            </section>`;
+        }
+        const got = items.filter(a => unlocked.includes(a.id)).length;
+        return `<section class="ach-section">
+            <div class="ach-section-head">
+                <h2 class="ach-section-title" data-i18n="${titleKey}">${titleKey}</h2>
+                <span class="ach-section-count">${got} / ${items.length}</span>
+            </div>
+            <p class="ach-section-sub">${subtitle}</p>
+            <div class="ach-grid">${items.map(a => achCard(a, unlocked.includes(a.id))).join('')}</div>
+        </section>`;
+    }
+
+    window.addEventListener('pywebviewready', async () => {
+        await applyLanguage();
+
+        const data = await pywebview.api.load_data();
+        if (data.settings_app_theme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+
+        const activeLang = await pywebview.api.get_active_lang();
+        const langIcons = {
+            "python": "icons/python.svg", "java": "icons/java.svg", "cpp": "icons/cplusplus.svg",
+            "c": "icons/c.svg", "javascript": "icons/javascript.svg", "html": "icons/html.svg",
+            "css": "icons/css.svg", "prog": "icons/prog.svg"
+        };
+        document.querySelector('.titlebar-icon').src = langIcons[activeLang] || "icons/python.svg";
+
+        // Каталог и уже выданные награды приходят с бэкенда: списки не дублируются в JS.
+        const catalog = await pywebview.api.get_achievement_catalog();
+        const unlocked = await pywebview.api.get_unlocked_achievements();
+        const langStats = await pywebview.api.get_lang_stats();
+
+        const container = document.getElementById('ach-container');
+        const langTitle = `${t('ach_section_lang')}: ${catalog.lang_name}`;
+        const langSub = `${t('ach_progress_prefix')}: ${langStats.lessons_done} / ${langStats.lessons_total}` +
+            ` · ${t('stats_trophies')}: ${langStats.trophies_done} / ${langStats.trophies_total}`;
+
+        container.innerHTML =
+            section('ach_section_lang', langSub, catalog.lang_achievements, unlocked.lang || [], 'ach_empty_lang') +
+            section('ach_section_global', t('ach_section_global_sub'), catalog.global_achievements, unlocked.global || [], 'ach_empty_global');
+
+        // Название секции языка зависит от активного курса — подставляем вручную.
+        const langHeader = container.querySelector('.ach-section-title');
+        if (langHeader) langHeader.textContent = langTitle;
 
         await applyLanguage();
+        if (langHeader) langHeader.textContent = langTitle;
     });
 </script>
 </body>

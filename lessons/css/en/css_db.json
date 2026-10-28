@@ -1,0 +1,618 @@
+{
+  "lessons": {
+    "1": {
+      "id": 1,
+      "check_type": "dom",
+      "title": "What CSS Is and Why",
+      "theory": "## What CSS is\n\nCSS — **Cascading Style Sheets**. The **styling** language. HTML describes **structure**, CSS describes **appearance**: colors, fonts, spacing, layout.\n\n## Why not in HTML\n\nIn the past styles were written directly in HTML: `<font color=\"red\">`. That is bad:\n- Styles mix with structure.\n- Change appearance — edit every page.\n- Huge HTML.\n\nCSS is separate. One style file — the whole site.\n\n## Cascade\n\n**Cascade** — rules apply by priority. Multiple rules for one element — the \"stronger\" one wins (specificity, order, `!important`). Hence the name.\n\n## Example\n\n```html\n<p class=\"intro\">Text</p>\n<style>\n  .intro { color: blue; font-size: 20px; }\n</style>\n```\n\nWithout CSS — plain text. With CSS — blue, 20px.\n\n## What can be styled\n\n- Text and background colors\n- Size, font, weight\n- Spacing and borders\n- Layout (blocks, flexbox, grid)\n- Animations, transitions\n- And much more\n\n## CSS does not replace HTML or JS\n\n- HTML — structure\n- CSS — appearance\n- JS — behavior\n\nWithout HTML there is nothing to style. Without CSS the site works but looks like a 1995 document.\n\n## What if\n\n- Style a non-existent element — the rule simply does not apply.\n- Forget `;` after a property — the rule may not work.\n\n## Common mistake\n\nWriting styles directly in HTML via `style=\"...\"`. Works but does not scale. Styles go in `<style>` or a separate file.\n\n## Summary\n\n- CSS is styling\n- HTML — structure, CSS — look, JS — behavior\n- Cascade — rule priority\n- One style file for the whole site",
+      "questions": [
+        { "text": "What is CSS?", "options": ["Markup", "Styling language", "Programming language", "Database"], "answer": 1, "explanation": "CSS — styling. HTML — markup, JS — programming." },
+        { "text": "How is CSS different from HTML?", "options": ["Same", "HTML — structure, CSS — appearance", "HTML faster", "CSS only for text"], "answer": 1, "explanation": "Different purposes." },
+        { "text": "What is the cascade?", "options": ["Waterfall", "Rule priority in conflicts", "Loop", "Function"], "answer": 1, "explanation": "Cascade decides which rule wins." },
+        { "text": "Where NOT to write styles?", "options": ["In `<style>`", "In a separate `.css`", "Directly in HTML via `style=`", "All work"], "answer": 2, "explanation": "Inline does not scale." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<p class=\"intro\">Hello</p>\n```\n\nIn `<style>` set `.intro`:\n- `color: green;`\n- `font-size: 24px;`\n\nVisible text: `Hello`",
+        "starter": "<p class=\"intro\">Hello</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Hello",
+        "must_contain": [".intro", "color:", "green", "font-size:", "24px"]
+      }
+    },
+    "2": {
+      "id": 2,
+      "check_type": "dom",
+      "title": "Connecting CSS",
+      "theory": "## Three ways\n\n1. **External file** (best):\n```html\n<link rel=\"stylesheet\" href=\"style.css\">\n```\n\n2. **Inside `<style>`** (for one page):\n```html\n<style>\n  p { color: red; }\n</style>\n```\n\n3. **Inline** (last resort):\n```html\n<p style=\"color: red;\">Text</p>\n```\n\n## External file\n\nMost common. `<link>` in `<head>`:\n\n```html\n<head>\n  <link rel=\"stylesheet\" href=\"style.css\">\n</head>\n```\n\nOne `style.css` — for all pages. Change once — updated everywhere.\n\n## `<style>`\n\nInline in HTML. Fine for prototypes, bad for a project: HTML bloats, styles are not reused.\n\n## Inline\n\n`style=\"...\"` in the attribute. Highest priority, **worst** for maintenance. Use only for one-off cases (JS sets values dynamically).\n\n## Order\n\nIf several sources — all apply, by priority:\n1. Inline\n2. `<style>`\n3. `<link>`\n\nWithin one source — cascade.\n\n## What if\n\n- `<link>` without `rel=\"stylesheet\"` — file will not connect.\n- `href=\"style.css\"` but the file is `styles.css` — 404, no styles.\n- `<style>` in `<body>` — works but non-standard. Put in `<head>`.\n\n## Common mistake\n\n`<style>` after `</body>` — the browser may ignore it. `<style>` — in `<head>` or at the start of `<body>`.\n\n## Summary\n\n- External file — best\n- `<style>` — for prototypes\n- Inline — only dynamic\n- `<link rel=\"stylesheet\">` in `<head>`",
+      "questions": [
+        { "text": "How to connect external CSS?", "options": ["<style src=\"...\">", "<link rel=\"stylesheet\" href=\"...\">", "<css href=\"...\">", "<script href=\"...\">"], "answer": 1, "explanation": "`<link rel=\"stylesheet\">`." },
+        { "text": "Which is best for a project?", "options": ["Inline", "<style>", "External file", "All same"], "answer": 2, "explanation": "External — reuse, cache, clean HTML." },
+        { "text": "Where to put `<link>`?", "options": ["In `<body>`", "In `<head>`", "In `<footer>`", "Before DOCTYPE"], "answer": 1, "explanation": "In `<head>`." },
+        { "text": "Which has the highest priority?", "options": ["<link>", "<style>", "Inline `style=`", "Same"], "answer": 2, "explanation": "Inline — strongest." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<h1>Title</h1>\n```\n\nIn `<style>` set `h1`:\n- `color: navy;`\n- `text-align: center;`\n\nVisible text: `Title`",
+        "starter": "<h1>Title</h1>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Title",
+        "must_contain": ["<style", "h1", "color:", "navy", "text-align:", "center"]
+      }
+    },
+    "3": {
+      "id": 3,
+      "check_type": "dom",
+      "title": "Syntax: Rules, Selector, Property",
+      "theory": "## Rule structure\n\n```css\nselector {\n  property: value;\n  property: value;\n}\n```\n\nExample:\n\n```css\np {\n  color: red;\n  font-size: 16px;\n}\n```\n\n## Breakdown\n\n- `p` — **selector**, whom to style\n- `color: red;` — **declaration**: `property: value;`\n- `{ }` — rule block\n- `;` — end of declaration, **mandatory**\n\n## Multiple selectors\n\n```css\nh1, h2, h3 {\n  color: navy;\n}\n```\n\nOne rule — for three tags. Comma-separated.\n\n## Nested styles (do not work)\n\nCSS does not support nesting like SASS. `p { span { ... } }` — will not work. Only via combined selectors (lesson 5).\n\n## Comments\n\n```css\n/* This is a comment */\n```\n\n`//` **does not work** in CSS (unlike JS). Only `/* */`.\n\n## What if\n\n- Forget `;` after a declaration — CSS may skip the rule.\n- Forget `{ }` — rule not recognized.\n- `//` instead of `/* */` — error.\n\n## Common mistake\n\n`// comment` — habit from JS. In CSS — only `/* */`.\n\n## Summary\n\n- `selector { property: value; }`\n- Multiple selectors — comma-separated\n- `;` after each declaration\n- Comments — `/* */`",
+      "questions": [
+        { "text": "What does a CSS rule look like?", "options": ["selector => property", "selector { property: value; }", "selector: property=value", "property { selector }"], "answer": 1, "explanation": "`selector { property: value; }`." },
+        { "text": "Why `;` at the end?", "options": ["Pretty", "To separate declarations", "Mandatory in HTML", "Nothing"], "answer": 1, "explanation": "Syntax: without `;` the parser may skip the rule." },
+        { "text": "How to comment?", "options": ["// text", "# text", "<!-- text -->", "/* text */"], "answer": 3, "explanation": "In CSS — only `/* */`." },
+        { "text": "Can you style multiple tags with one rule?", "options": ["No", "Yes, comma-separated", "Only via class", "Only via id"], "answer": 1, "explanation": "`h1, h2, h3 { ... }`." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<h1>Title</h1>\n<p>Text</p>\n```\n\nIn `<style>` set:\n1. `h1, p` — `font-family: sans-serif;`\n2. `h1` — `color: #333;`\n3. `p` — `color: gray;`\n\nVisible text: `Title Text`",
+        "starter": "<h1>Title</h1>\n<p>Text</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Title Text",
+        "must_contain": ["h1, p", "font-family", "sans-serif", "color:", "#333", "gray"]
+      }
+    },
+    "4": {
+      "id": 4,
+      "check_type": "dom",
+      "title": "Selectors: Tag, Class, id",
+      "theory": "## By tag\n\n```css\np { color: red; }\n```\n\nStyles **all** `<p>`. Quick but coarse — every paragraph is the same.\n\n## By class\n\n```css\n.intro { color: blue; }\n```\n\n`.intro` — class selector. Styles elements with `class=\"intro\"`. **Class is the primary way of styling.** One class — for many elements.\n\n```html\n<p class=\"intro\">A</p>\n<p class=\"intro\">B</p>\n```\n\nBoth blue.\n\n## By id\n\n```css\n#header { background: black; }\n```\n\n`#header` — id selector. Styles the element with `id=\"header\"`. **One id — per page one element.** Rarely used for styling (high specificity, lesson 7).\n\n## Differences\n\n| Selector | Example | How many |\n|---|---|---|\n| tag | `p` | all `<p>` |\n| class | `.intro` | all with `class=\"intro\"` |\n| id | `#header` | one with `id=\"header\"` |\n\n## Naming classes\n\n- Lowercase, dash-separated: `card-title`, `nav-menu`\n- By meaning: `card`, `button`, not `red-text` (color may change)\n- Not starting with a digit\n\n## What if\n\n- `class=\"intro\"` but selector `intro { }` (no dot) — does not work.\n- `id=\"x\"` and `.x` (dot instead of hash) — does not work.\n\n## Common mistake\n\nForget `.` before a class: `intro { }` — looks for tag `<intro>`, which does not exist.\n\n## Summary\n\n- `p` — tag\n- `.class` — class, primary\n- `#id` — id, one\n- Dot and hash are mandatory",
+      "questions": [
+        { "text": "Which selector for a class?", "options": ["intro", ".intro", "#intro", "class=intro"], "answer": 1, "explanation": "Class — with a dot." },
+        { "text": "Which selector for an id?", "options": ["id", ".id", "#id", "$id"], "answer": 2, "explanation": "id — with `#`." },
+        { "text": "How many elements does a class style?", "options": ["One", "Any with that class", "Only the first", "None"], "answer": 1, "explanation": "Class is reusable." },
+        { "text": "What is `p`?", "options": ["Class", "id", "Tag", "Property"], "answer": 2, "explanation": "`p` is a tag." },
+        { "text": "What is wrong with `intro { color: red; }` for `<p class=\"intro\">`?", "options": ["All correct", "Need `.` — `.intro`", "Need `#`", "Need `class=`"], "answer": 1, "explanation": "Without a dot — looks for tag `<intro>`." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<h1 id=\"title\">Title</h1>\n<p class=\"text\">Paragraph</p>\n```\n\nIn `<style>`:\n1. `#title` — `color: red;`\n2. `.text` — `color: blue;`\n\nVisible text: `Title Paragraph`",
+        "starter": "<h1 id=\"title\">Title</h1>\n<p class=\"text\">Paragraph</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Title Paragraph",
+        "must_contain": ["#title", ".text", "color:", "red", "blue"]
+      }
+    },
+    "5": {
+      "id": 5,
+      "check_type": "dom",
+      "title": "Combined Selectors",
+      "theory": "## Descendant (space)\n\n```css\ndiv p { color: red; }\n```\n\nAll `<p>` **inside** `<div>` at any level:\n\n```html\n<div>\n  <p>A</p>\n  <section><p>B</p></section>\n</div>\n<p>C</p>\n```\n\nA and B — red. C — no (outside).\n\n## Child (>)\n\n```css\ndiv > p { color: red; }\n```\n\nOnly **direct** children, not deeper.\n\n## Group (,)\n\n```css\nh1, h2, p { color: navy; }\n```\n\nOne rule for three selectors.\n\n## Adjacent (+)\n\n```css\nh2 + p { margin-top: 0; }\n```\n\n`<p>` **right after** `<h2>`.\n\n## General sibling (~)\n\n```css\nh2 ~ p { color: gray; }\n```\n\nAll `<p>` **after** `<h2>` in the same parent.\n\n## Combination\n\n```css\n.card .title { font-size: 20px; }\n.card > .title { font-size: 20px; }\n```\n\n`.title` inside `.card`. First — any level, second — direct child only.\n\n## What if\n\n- `div p` vs `div>p` — different results.\n- Skip a space: `div p` is `div` and `p`. `divp` is not a tag.\n\n## Common mistake\n\n`div>p` without spaces around `>`. With spaces `div > p` — same, but more readable.\n\n## Summary\n\n- `a b` — descendant any level\n- `a > b` — direct child\n- `a + b` — adjacent\n- `a ~ b` — all following\n- `a, b` — group",
+      "questions": [
+        { "text": "What does `div p` mean?", "options": ["div and p", "p inside div", "p next to div", "p without div"], "answer": 1, "explanation": "Space — descendant." },
+        { "text": "What does `div > p` mean?", "options": ["All p inside", "Direct child of div", "p before div", "Nothing"], "answer": 1, "explanation": "`>` — direct only." },
+        { "text": "What does `,` do?", "options": ["Descendant", "Group", "Adjacent", "Nothing"], "answer": 1, "explanation": "`h1, h2` — both." },
+        { "text": "What does `+` do?", "options": ["Descendant", "Direct child", "Adjacent", "Group"], "answer": 2, "explanation": "`h2 + p` — p right after h2." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"card\">\n  <h2>Title</h2>\n  <p>Text</p>\n</div>\n```\n\nIn `<style>`:\n1. `.card h2` — `color: navy;`\n2. `.card > p` — `color: gray;`\n\nVisible text: `Title Text`",
+        "starter": "<div class=\"card\">\n  <h2>Title</h2>\n  <p>Text</p>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Title Text",
+        "must_contain": [".card h2", ".card > p", "color:", "navy", "gray"]
+      }
+    },
+    "6": {
+      "id": 6,
+      "check_type": "dom",
+      "title": "Pseudo-classes: :hover, :focus",
+      "theory": "## What a pseudo-class is\n\nA pseudo-class is a state of an element. `:hover` — cursor over, `:focus` — focused (after click / Tab).\n\n## :hover\n\n```css\nbutton:hover {\n  background: blue;\n}\n```\n\nApplies when the mouse is over the button.\n\n## :focus\n\n```css\ninput:focus {\n  border-color: blue;\n  outline: none;\n}\n```\n\nWhen the field receives focus (clicked or Tab).\n\n## :active\n\n```css\na:active {\n  color: red;\n}\n```\n\nAt the moment of pressing (between mousedown and mouseup).\n\n## :visited\n\n```css\na:visited {\n  color: purple;\n}\n```\n\nVisited link.\n\n## Order for links\n\n`LVHA`: `:link`, `:visited`, `:hover`, `:active`. Otherwise some states override.\n\n## What if\n\n- Forget `:` — `hover { }` does not work.\n- `:hover` on mobile — works on tap with a delay, not always.\n\n## Common mistake\n\n`:hover` without a base style. Without `button { ... }` and `button:hover { ... }` the transition is abrupt.\n\n## Summary\n\n- `:hover` — hover\n- `:focus` — focus\n- `:active` — press\n- `:visited` — visited\n- Order LVHA for links",
+      "questions": [
+        { "text": "What does `:hover` do?", "options": ["Focus", "Mouse hover", "Active press", "Visited"], "answer": 1, "explanation": "Hover — cursor over." },
+        { "text": "What does `:focus` do?", "options": ["Hover", "Focus (Tab, click)", "Nothing", "Disables"], "answer": 1, "explanation": "Focus." },
+        { "text": "How to write `:hover` for a button?", "options": ["button.hover", "button:hover", "button.hover()", "hover button"], "answer": 1, "explanation": "`button:hover`." },
+        { "text": "Order of link states?", "options": ["Hover, focus, active, visited", "LVHA", "Alphabetical", "Does not matter"], "answer": 1, "explanation": "LVHA — Link, Visited, Hover, Active." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<button class=\"btn\">Button</button>\n```\n\nIn `<style>`:\n1. `.btn` — `background: gray; color: white;`\n2. `.btn:hover` — `background: blue;`\n\nVisible text: `Button`",
+        "starter": "<button class=\"btn\">Button</button>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Button",
+        "must_contain": [".btn", ".btn:hover", "background:", "gray", "blue", "color:"]
+      }
+    },
+    "7": {
+      "id": 7,
+      "check_type": "dom",
+      "title": "Selector Specificity",
+      "theory": "## What specificity is\n\nIf two rules claim one element, the \"stronger\" applies. Strength — **specificity**.\n\n## Weights\n\n- Tag (`p`) — 1\n- Class (`.x`) — 10\n- id (`#x`) — 100\n- Inline (`style=`) — 1000\n\nThe bigger the sum — the stronger.\n\n## Example\n\n```css\np { color: red; }        /* 1 */\n.text { color: blue; }    /* 10 */\n#main { color: green; }   /* 100 */\n```\n\n`<p id=\"main\" class=\"text\">` — green, since id beats all.\n\n## Order\n\nIf specificity is equal — the **last** rule wins:\n\n```css\np { color: red; }\np { color: blue; }\n```\n\nBlue (second).\n\n## !important\n\n```css\np { color: red !important; }\n```\n\nBeats everything except another `!important`. **Avoid** — breaks the cascade.\n\n## Practice\n\n- Style via classes — predictable.\n- id for CSS — rarely, high specificity.\n- `!important` — almost never.\n\n## What if\n\n- `#x` beats `.x`. Confusing.\n- `!important` everywhere — cascade broken, cannot change.\n\n## Common mistake\n\n`!important` to \"just make it work\". Better — understand specificity.\n\n## Summary\n\n- id > class > tag > universal\n- Inline — strongest of all\n- On equal — last rule\n- `!important` — avoid",
+      "questions": [
+        { "text": "Which is stronger: class or id?", "options": ["Class", "id", "Same", "Depends"], "answer": 1, "explanation": "id (100) > class (10)." },
+        { "text": "Which is stronger: tag or class?", "options": ["Tag", "Class", "Same", "Depends"], "answer": 1, "explanation": "Class (10) > tag (1)." },
+        { "text": "On equal specificity?", "options": ["First", "Last", "Neither", "Error"], "answer": 1, "explanation": "Last rule." },
+        { "text": "What does `!important` do?", "options": ["Speeds up", "Beats everything except another !important", "Removes", "Nothing"], "answer": 1, "explanation": "Forces the rule." },
+        { "text": "Best for styling?", "options": ["id", "class", "tag", "inline"], "answer": 1, "explanation": "Classes — predictable specificity." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<p id=\"main\" class=\"text\">Text</p>\n```\n\nIn `<style>`:\n1. `p` — `color: red;`\n2. `.text` — `color: blue;`\n3. `#main` — `color: green;`\n\nVisible text: `Text` (should apply green due to id)",
+        "starter": "<p id=\"main\" class=\"text\">Text</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Text",
+        "must_contain": ["p {", ".text {", "#main {", "color:", "red", "blue", "green"]
+      }
+    },
+    "8": {
+      "id": 8,
+      "check_type": "dom",
+      "title": "Colors: color and background",
+      "theory": "## color — text color\n\n```css\np { color: red; }\n```\n\nChanges text color.\n\n## background — background\n\n```css\np { background: yellow; }\n```\n\nShorthand. Full — `background-color`, `background-image`, etc.\n\n## Ways to set color\n\n1. **Name**: `red`, `blue`, `navy`, `tomato` — 140+ names.\n2. **HEX**: `#ff0000`, `#333`, `#007bff`.\n3. **rgb / rgba**: `rgb(255, 0, 0)`, `rgba(0, 0, 0, 0.5)`.\n4. **hsl / hsla**: `hsl(0, 100%, 50%)`.\n\n## HEX\n\n`#RRGGBB`. `#f00` = `#ff0000` (short form if characters pair up).\n\n- `#000000` — black\n- `#ffffff` — white\n- `#808080` — gray\n\n## rgba and transparency\n\n```css\nbackground: rgba(0, 0, 0, 0.5);\n```\n\nBlack at 50% transparency.\n\n## What if\n\n- `#ff` — invalid, need 3 or 6.\n- `color: 255` — not a color, error.\n- Typo `backgroud` — rule ignored.\n\n## Common mistake\n\n`background-color: #fff` without `#` — `fff` is not a color. With `#`.\n\n## Summary\n\n- `color` — text, `background` — background\n- Name, HEX, rgb, hsl\n- `rgba` — with transparency\n- HEX — `#rrggbb` or `#rgb`",
+      "questions": [
+        { "text": "What does `color` change?", "options": ["Background", "Text color", "Size", "Margin"], "answer": 1, "explanation": "`color` — text." },
+        { "text": "What does `background` change?", "options": ["Background", "Text", "Border", "Font"], "answer": 0, "explanation": "Background." },
+        { "text": "What is `#ff0000`?", "options": ["Invalid", "Red in HEX", "Blue", "Black"], "answer": 1, "explanation": "`#f00` = `#ff0000` — red." },
+        { "text": "How to set a semi-transparent background?", "options": ["rgba(0,0,0,0.5)", "#000", "background=black", "opacity: bg"], "answer": 0, "explanation": "`rgba` with alpha." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"box\">Color</div>\n```\n\nIn `<style>`:\n1. `body` — `background: #f0f0f0;`\n2. `.box` — `background: navy; color: white;`\n\nVisible text: `Color`",
+        "starter": "<div class=\"box\">Color</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Color",
+        "must_contain": ["body", "background:", "#f0f0f0", ".box", "navy", "color:", "white"]
+      }
+    },
+    "9": {
+      "id": 9,
+      "check_type": "dom",
+      "title": "Fonts",
+      "theory": "## font-family\n\n```css\nbody {\n  font-family: Arial, sans-serif;\n}\n```\n\nComma-separated — list. Browser takes the first available. `sans-serif` — system \"without serifs\".\n\n## font-size\n\n```css\np { font-size: 16px; }\nh1 { font-size: 2rem; }\n```\n\nUnits: `px`, `rem` (from root), `em` (from parent), `%`. More in lesson 23.\n\n## font-weight\n\n```css\nb { font-weight: bold; }        /* 700 */\np { font-weight: normal; }      /* 400 */\nh1 { font-weight: 900; }        /* very bold */\n```\n\nNumbers 100–900, step 100.\n\n## font-style\n\n```css\nem { font-style: italic; }\n```\n\n`normal` / `italic` / `oblique`.\n\n## Loading a custom font\n\n```css\n@import url('https://fonts.googleapis.com/css2?family=Roboto');\nbody { font-family: 'Roboto', sans-serif; }\n```\n\nOr via `<link>` in HTML. Requires internet — does not work offline.\n\n## What if\n\n- `font-family: \"Roboto\"` without loading — browser uses fallback.\n- `font-size: 20` without units — error.\n- Wrong name — fallback.\n\n## Common mistake\n\nForgetting fallback: `font-family: \"MyFont\"` — if it does not load, serif by default. Always add `, sans-serif`.\n\n## Summary\n\n- `font-family` — list, comma-separated, with fallback\n- `font-size` — size (px, rem)\n- `font-weight` — 100–900\n- `font-style` — italic / normal",
+      "questions": [
+        { "text": "What does `font-family` do?", "options": ["Size", "Font family", "Color", "Margin"], "answer": 1, "explanation": "Family." },
+        { "text": "Why `sans-serif` at the end?", "options": ["Pretty", "Fallback if the first font is unavailable", "Error", "Speeds up"], "answer": 1, "explanation": "Reserve font." },
+        { "text": "What does `font-weight: bold` do?", "options": ["Italic", "Bold", "Size", "Color"], "answer": 1, "explanation": "Bold (700)." },
+        { "text": "What does `font-style: italic` do?", "options": ["Bold", "Italic", "Size", "Color"], "answer": 1, "explanation": "Italic." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<h1>Title</h1>\n<p>Text</p>\n```\n\nIn `<style>`:\n1. `body` — `font-family: Arial, sans-serif;`\n2. `h1` — `font-size: 32px; font-weight: bold;`\n3. `p` — `font-size: 16px;`\n\nVisible text: `Title Text`",
+        "starter": "<h1>Title</h1>\n<p>Text</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Title Text",
+        "must_contain": ["font-family", "Arial", "sans-serif", "font-size:", "32px", "font-weight:", "bold", "16px"]
+      }
+    },
+    "10": {
+      "id": 10,
+      "check_type": "dom",
+      "title": "Text Alignment and Spacing",
+      "theory": "## text-align\n\n```css\nh1 { text-align: center; }\np { text-align: justify; }\n```\n\n- `left` — left\n- `right` — right\n- `center` — center\n- `justify` — justified\n\nWorks for **block** elements (text inside them).\n\n## line-height\n\nLine spacing:\n\n```css\np { line-height: 1.5; }\n```\n\nUnitless — multiplier from `font-size`. `1.5` = 1.5 times the font. Standard for readability: 1.4–1.6.\n\n`line-height: 24px` — fixed pixels. Worse — does not scale.\n\n## letter-spacing\n\n```css\nh1 { letter-spacing: 2px; }\n```\n\n## text-indent\n\nParagraph indent:\n\n```css\np { text-indent: 2em; }\n```\n\n## Why\n\n- `text-align` — typography\n- `line-height` — readability\n- `letter-spacing` — accents\n\n## What if\n\n- `text-align: center` on inline (e.g. `<span>`) — does not work. Need a block parent.\n- `line-height` too small (<1) — lines stick together.\n\n## Common mistake\n\n`line-height: 1.5px` — units, got 1.5 pixels. No units — multiplier.\n\n## Summary\n\n- `text-align` — left / right / center / justify\n- `line-height` — 1.5 (no units)\n- `letter-spacing` — between letters\n- `text-indent` — paragraph indent",
+      "questions": [
+        { "text": "What does `text-align: center` do?", "options": ["Centers text", "Changes font", "Changes color", "Margin"], "answer": 0, "explanation": "Center." },
+        { "text": "What does `line-height: 1.5` do?", "options": ["Width", "Line spacing 1.5x the font", "Color", "Margin"], "answer": 1, "explanation": "Multiplier." },
+        { "text": "How to set paragraph indent?", "options": ["margin-top", "text-indent", "padding-left", "line-height"], "answer": 1, "explanation": "`text-indent`." },
+        { "text": "Best for `line-height`?", "options": ["px", "unitless multiplier", "%", "rem"], "answer": 1, "explanation": "Unitless — scales." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<h1>Title</h1>\n<p>Long text for reading.</p>\n```\n\nIn `<style>`:\n1. `h1` — `text-align: center;`\n2. `p` — `line-height: 1.6; text-align: justify;`\n\nVisible text: `Title Long text for reading.`",
+        "starter": "<h1>Title</h1>\n<p>Long text for reading.</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Title Long text for reading.",
+        "must_contain": ["text-align:", "center", "line-height:", "1.6", "justify"]
+      }
+    },
+    "11": {
+      "id": 11,
+      "check_type": "dom",
+      "title": "Text Styles",
+      "theory": "## text-decoration\n\n```css\na { text-decoration: none; }\n.underline { text-decoration: underline; }\n.strike { text-decoration: line-through; }\n```\n\nOften — to remove link underlines.\n\n## text-transform\n\n```css\nh1 { text-transform: uppercase; }\n```\n\n- `uppercase` — ALL CAPS\n- `lowercase` — all lowercase\n- `capitalize` — Every Word Capitalized\n- `none` — as-is\n\n## Fonts vs styles\n\nDo not confuse:\n- `font-weight: bold` — visual boldness\n- `<strong>` in HTML — **meaning** \"important\"\n- `text-transform` — visual case change (HTML stays as-is)\n\n## white-space\n\n```css\npre { white-space: pre; }\n.nowrap { white-space: nowrap; }\n```\n\n- `nowrap` — no wrap\n- `pre` — preserve spaces and newlines\n\n## text-shadow\n\n```css\nh1 { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); }\n```\n\nOffset X, Y, blur, color.\n\n## What if\n\n- `text-transform` changes only **visually**. Copied text — original.\n- `text-decoration: none` on `<a>` — link looks like plain text. Add `color`.\n\n## Common mistake\n\n`text-decoration: none` without a hover effect — links unrecognizable. Add `a:hover { text-decoration: underline; }`.\n\n## Summary\n\n- `text-decoration` — underline / none / line-through\n- `text-transform` — case visually\n- `white-space` — wrapping\n- `text-shadow` — shadow",
+      "questions": [
+        { "text": "What does `text-decoration: underline` do?", "options": ["Underlines", "Strikes", "Removes", "Italic"], "answer": 0, "explanation": "Underline." },
+        { "text": "What does `text-transform: uppercase` do?", "options": ["Uppercase visually", "Changes HTML", "Italic", "Underlines"], "answer": 0, "explanation": "Visually uppercase." },
+        { "text": "How to remove link underline?", "options": ["text-decoration: none", "text-decoration: no", "underline: none", "a.underline: 0"], "answer": 0, "explanation": "`none`." },
+        { "text": "What is `text-shadow`?", "options": ["Text shadow", "Size", "Color", "Margin"], "answer": 0, "explanation": "Shadow." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<a href=\"#\">Link</a>\n<h2 class=\"heading\">title</h2>\n```\n\nIn `<style>`:\n1. `a` — `text-decoration: none; color: #007bff;`\n2. `a:hover` — `text-decoration: underline;`\n3. `.heading` — `text-transform: uppercase;`\n\nVisible text: `Link title`",
+        "starter": "<a href=\"#\">Link</a>\n<h2 class=\"heading\">title</h2>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Link title",
+        "must_contain": ["a {", "text-decoration:", "none", "color:", "a:hover", "underline", "text-transform:", "uppercase"]
+      }
+    },
+    "12": {
+      "id": 12,
+      "check_type": "dom",
+      "title": "box-sizing and Sizes",
+      "theory": "## Box model\n\nEvery element is a rectangle made of layers:\n1. **content** — the content (text, image)\n2. **padding** — inner spacing\n3. **border** — border\n4. **margin** — outer spacing\n\nTogether — **box model**.\n\n## width and height\n\n```css\n.box {\n  width: 200px;\n  height: 100px;\n}\n```\n\nBy default — **content** size. Padding and border are added **on top**:\n\n```\nfinal width = width + padding*2 + border*2\n```\n\n## box-sizing\n\n```css\n* {\n  box-sizing: border-box;\n}\n```\n\nChanges logic: `width` includes padding and border. Final width = exactly `width`. **Best practice** — set for all elements.\n\nWith `border-box` — `width: 200px` means exactly 200px outside.\n\n## Difference\n\n```css\n.box {\n  width: 200px;\n  padding: 20px;\n  border: 2px solid black;\n}\n/* content-box: total 244px */\n/* border-box: total 200px */\n```\n\n## max-width and min-width\n\n```css\nimg {\n  max-width: 100%;\n  height: auto;\n}\n```\n\nImage no bigger than parent. `height: auto` — proportions preserved.\n\n## What if\n\n- Without `border-box` — `width: 100%` + `padding: 20px` = overflows parent.\n- `width` without units — error.\n\n## Common mistake\n\n`width: 100%; padding: 20px;` without `border-box` — element wider than 100%. Classic.\n\n## Summary\n\n- content + padding + border + margin\n- `box-sizing: border-box` — width includes all\n- `max-width: 100%` — do not overflow\n- `* { box-sizing: border-box }` — everywhere",
+      "questions": [
+        { "text": "What does the box model consist of?", "options": ["Only width", "content + padding + border + margin", "Only color", "Only font"], "answer": 1, "explanation": "Four layers." },
+        { "text": "What does `box-sizing: border-box` do?", "options": ["Nothing", "width includes padding and border", "Adds margin", "Removes border"], "answer": 1, "explanation": "Changes size logic." },
+        { "text": "Difference between `width` and `max-width`?", "options": ["Same", "max-width — upper limit, width — fixed", "max-width for img", "Error"], "answer": 1, "explanation": "max — limit." },
+        { "text": "What does `img { max-width: 100%; height: auto; }` do?", "options": ["Stretches", "Image no bigger than parent, proportions preserved", "Crops", "Nothing"], "answer": 1, "explanation": "Responsive." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"box\">Box</div>\n```\n\nIn `<style>`:\n1. `*` — `box-sizing: border-box;`\n2. `.box` — `width: 200px; padding: 20px; border: 1px solid black;`\n\nVisible text: `Box`",
+        "starter": "<div class=\"box\">Box</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Box",
+        "must_contain": ["box-sizing:", "border-box", ".box", "width:", "200px", "padding:", "border:", "solid"]
+      }
+    },
+    "13": {
+      "id": 13,
+      "check_type": "dom",
+      "title": "margin and padding",
+      "theory": "## padding — inner\n\nSpace between content and border:\n\n```css\n.card { padding: 20px; }\n```\n\nAll sides.\n\n## margin — outer\n\nSpace **outside** border, between elements:\n\n```css\n.card { margin: 16px; }\n```\n\n## Sides\n\n```css\n.box {\n  padding: 10px 20px;            /* top-bottom 10, sides 20 */\n  margin: 10px 20px 30px;        /* top 10, sides 20, bottom 30 */\n  padding: 10px 20px 30px 40px;  /* top 10, right 20, bottom 30, left 40 */\n}\n```\n\nOrder — clockwise from top.\n\n## Individual sides\n\n```css\nmargin-top: 10px;\nmargin-bottom: 20px;\npadding-left: 15px;\n```\n\n## Centering\n\n```css\n.box {\n  width: 300px;\n  margin: 0 auto;\n}\n```\n\n`auto` horizontally = **centering** in the parent.\n\n## Margin collapse\n\nVertical margins of neighbors **collapse** — the larger wins:\n\n```\n<div style=\"margin-bottom: 20px\">A</div>\n<div style=\"margin-top: 30px\">B</div>\n```\n\nGap — 30, not 50. Horizontal margins do not collapse.\n\n## What if\n\n- `margin: 0 auto` without `width` — does not center (width auto = full parent).\n- `padding` bigger than width — content overflows.\n\n## Common mistake\n\nExpecting `margin-bottom: 20px` + `margin-top: 20px` = 40. It will be 20 (collapse).\n\n## Summary\n\n- `padding` — inner, `margin` — outer\n- 1/2/3/4 values\n- `margin: 0 auto` — centering\n- Vertical margins collapse",
+      "questions": [
+        { "text": "What is `padding`?", "options": ["Outer margin", "Inner padding", "Border", "Size"], "answer": 1, "explanation": "Inside." },
+        { "text": "What is `margin`?", "options": ["Outer margin", "Inner", "Border", "Color"], "answer": 0, "explanation": "Outside." },
+        { "text": "What does `margin: 0 auto` do?", "options": ["Nothing", "Centers horizontally", "Removes margins", "Left-aligns"], "answer": 1, "explanation": "`auto` — centering." },
+        { "text": "What happens with margins 20 and 30 vertical?", "options": ["50", "30 (collapse)", "20", "0"], "answer": 1, "explanation": "Vertical margins collapse to the larger." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"card\">Card</div>\n```\n\nIn `<style>` for `.card`:\n- `padding: 20px;`\n- `margin: 16px auto;`\n- `width: 300px;`\n- `background: #f5f5f5;`\n\nVisible text: `Card`",
+        "starter": "<div class=\"card\">Card</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Card",
+        "must_contain": [".card", "padding:", "20px", "margin:", "auto", "width:", "300px", "background:"]
+      }
+    },
+    "14": {
+      "id": 14,
+      "check_type": "dom",
+      "title": "border and border-radius",
+      "theory": "## border\n\n```css\n.box {\n  border: 1px solid black;\n}\n```\n\nThree parts: **thickness** (px) + **style** + **color**.\n\n## Styles\n\n- `solid` — solid\n- `dashed` — dashed\n- `dotted` — dotted\n- `double` — double\n- `none` — remove\n\n## Sides\n\n```css\nborder-top: 2px solid red;\nborder-bottom: 1px dashed gray;\n```\n\n## border-radius\n\nRounding corners:\n\n```css\n.box { border-radius: 8px; }\n.pill { border-radius: 999px; }  /* pill */\n.circle { border-radius: 50%; }  /* circle if width == height */\n```\n\n## Individual corners\n\n```css\nborder-top-left-radius: 10px;\nborder-radius: 10px 0 0 0;   /* only top-left */\n```\n\nOrder: top-left, top-right, bottom-right, bottom-left.\n\n## Circle\n\n```css\n.avatar {\n  width: 80px;\n  height: 80px;\n  border-radius: 50%;\n}\n```\n\n`50%` with equal sides = perfect circle.\n\n## What if\n\n- `border: solid` without thickness — not displayed.\n- `border-radius: 50%` with different width/height — oval, not circle.\n\n## Common mistake\n\n`border: 1px black` without a style — does not work. Need style (`solid`).\n\n## Summary\n\n- `border: thickness style color`\n- Styles: solid / dashed / dotted\n- `border-radius` — rounding\n- `50%` = circle",
+      "questions": [
+        { "text": "What does `border` consist of?", "options": ["Only color", "Thickness, style, color", "Only thickness", "Size"], "answer": 1, "explanation": "Three parts." },
+        { "text": "Which style gives a dashed line?", "options": ["solid", "dashed", "dotted", "double"], "answer": 1, "explanation": "`dashed`." },
+        { "text": "How to make a circle?", "options": ["border-radius: 50%", "border-radius: 8px", "circle", "round"], "answer": 0, "explanation": "`50%` with equal width/height." },
+        { "text": "What is wrong with `border: 1px black`?", "options": ["All correct", "No style (solid etc.)", "No color", "No thickness"], "answer": 1, "explanation": "Style is mandatory." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"card\">Card</div>\n```\n\nIn `<style>` for `.card`:\n- `border: 1px solid #ccc;`\n- `border-radius: 8px;`\n- `padding: 20px;`\n- `width: 300px;`\n\nVisible text: `Card`",
+        "starter": "<div class=\"card\">Card</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Card",
+        "must_contain": [".card", "border:", "solid", "#ccc", "border-radius:", "8px", "padding:"]
+      }
+    },
+    "15": {
+      "id": 15,
+      "check_type": "dom",
+      "title": "Card as a Whole",
+      "theory": "## Assembling\n\nA card is a typical UI element: content with padding, rounded corners, and shadow.\n\n```css\n.card {\n  padding: 20px;\n  border: 1px solid #e0e0e0;\n  border-radius: 8px;\n  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\n  max-width: 320px;\n  background: white;\n}\n```\n\n## box-shadow\n\n```css\nbox-shadow: offset_x offset_y blur color;\n```\n\n`0 2px 4px rgba(0, 0, 0, 0.1)` — subtle downward shadow.\n\nMultiple shadows comma-separated.\n\n## Title and text\n\n```css\n.card h2 {\n  margin-top: 0;\n  color: #333;\n}\n.card p {\n  color: #666;\n  line-height: 1.5;\n}\n```\n\n## Button\n\n```css\n.card button {\n  padding: 8px 16px;\n  background: #007bff;\n  color: white;\n  border: none;\n  border-radius: 4px;\n  cursor: pointer;\n}\n```\n\n## cursor: pointer\n\nChanges cursor to a \"hand\". Standard for clickable elements.\n\n## What if\n\n- No `border: none` on the button — browser style \"sticks out\".\n- No `background: white` — card transparent, shadows look odd.\n\n## Common mistake\n\nForget `margin-top: 0` on `<h2>` — large top spacing. Or leave default `border` on `<button>` — ugly.\n\n## Summary\n\n- padding + border + radius + shadow = card\n- box-shadow — 4 parameters\n- `cursor: pointer` — for buttons\n- Resets for h2 and button",
+      "questions": [
+        { "text": "What does `box-shadow` consist of?", "options": ["Only color", "Offset X, Y, blur, color", "Only size", "Nothing"], "answer": 1, "explanation": "4 parameters." },
+        { "text": "What does `cursor: pointer` do?", "options": ["Hand cursor", "Removes", "Speeds up", "Nothing"], "answer": 0, "explanation": "Hand cursor." },
+        { "text": "Why `border: none` on a button?", "options": ["Pretty", "Reset default browser border", "Removes the button", "Error"], "answer": 1, "explanation": "Browser default is removed." },
+        { "text": "Why `margin-top: 0` on h2 inside a card?", "options": ["Pretty", "Remove default top margin", "Removes the heading", "Speeds up"], "answer": 1, "explanation": "Without it — large margin." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"card\">\n  <h2>Title</h2>\n  <p>Text</p>\n  <button>OK</button>\n</div>\n```\n\nIn `<style>`:\n1. `.card` — `padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; max-width: 320px;`\n2. `.card h2` — `margin-top: 0;`\n3. `.card button` — `background: #007bff; color: white; border: none; padding: 8px 16px; cursor: pointer;`\n\nVisible text: `Title Text OK`",
+        "starter": "<div class=\"card\">\n  <h2>Title</h2>\n  <p>Text</p>\n  <button>OK</button>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Title Text OK",
+        "must_contain": [".card", "padding:", "border:", "border-radius:", "max-width:", ".card h2", "margin-top: 0", ".card button", "background:", "cursor:", "pointer"]
+      }
+    },
+    "16": {
+      "id": 16,
+      "check_type": "dom",
+      "title": "display: block, inline, none",
+      "theory": "## display\n\nThe property defines how the element behaves in the flow.\n\n## block\n\nTakes the full width, starts on a new line:\n\n```css\n.box { display: block; }\n```\n\n`<div>`, `<p>`, `<h1>` — block by default.\n\n## inline\n\nContent-width, in a line with others:\n\n```css\n.tag { display: inline; }\n```\n\n`<span>`, `<a>` — inline.\n\nInline **does not work** with `width`, `height`, `margin-top/bottom`.\n\n## inline-block\n\nLike inline (in a line), but with `width` / `height`:\n\n```css\n.card { display: inline-block; width: 200px; }\n```\n\n## none\n\nRemoves from flow:\n\n```css\n.hidden { display: none; }\n```\n\nNot visible, takes no space.\n\n## visibility: hidden\n\nUnlike `display: none`, the element is hidden but **space remains**.\n\n## What if\n\n- `width` on inline — ignored.\n- `display: none` via JS — cannot transition later (element out of flow).\n\n## Common mistake\n\n`<div>` with `display: inline` — no longer full width. Do not confuse with `<span>`.\n\n## Summary\n\n- `block` — full width, new line\n- `inline` — content, no width\n- `inline-block` — in-line + width works\n- `none` — remove completely\n- `visibility: hidden` — hide, keep space",
+      "questions": [
+        { "text": "What does `display: block` do?", "options": ["New line, full width", "In-line", "Hides", "Nothing"], "answer": 0, "explanation": "Block." },
+        { "text": "What does `display: inline` do?", "options": ["In-line, content-width", "Full width", "Hides", "New line"], "answer": 0, "explanation": "Inline." },
+        { "text": "Does `width` work on `inline`?", "options": ["Yes", "No, ignored", "Only with !important", "Only with height"], "answer": 1, "explanation": "Does not work on inline." },
+        { "text": "What removes an element completely?", "options": ["visibility: hidden", "display: none", "opacity: 0", "position: absolute"], "answer": 1, "explanation": "`display: none` — out of flow." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"box\">A</div>\n<div class=\"box\">B</div>\n<span class=\"hidden\">X</span>\n```\n\nIn `<style>`:\n1. `.box` — `display: inline-block; width: 100px;`\n2. `.hidden` — `display: none;`\n\nVisible text: `A B` (X hidden)",
+        "starter": "<div class=\"box\">A</div>\n<div class=\"box\">B</div>\n<span class=\"hidden\">X</span>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B",
+        "must_contain": [".box", "display:", "inline-block", "width:", "100px", ".hidden", "none"]
+      }
+    },
+    "17": {
+      "id": 17,
+      "check_type": "dom",
+      "title": "Flexbox: Container and Axes",
+      "theory": "## What flexbox is\n\nA modern layout system. Lays out elements in a row/column with alignment.\n\n## display: flex\n\nOn the **parent**:\n\n```css\n.row {\n  display: flex;\n}\n```\n\nAll direct children become flex items, laid out in a row.\n\n## Main and cross axes\n\n- **main axis** — horizontal by default\n- **cross axis** — vertical\n\n## flex-direction\n\n```css\n.row { flex-direction: row; }          /* default: left to right */\n.col { flex-direction: column; }       /* top to bottom */\n.row-reverse { flex-direction: row-reverse; }\n```\n\n`column` — main axis is vertical.\n\n## gap\n\nSpacing between items:\n\n```css\n.row { gap: 10px; }\n```\n\nModern way. Before — margin.\n\n## What if\n\n- `display: flex` on a child — does not work as expected. Flex — on the parent.\n- `column` without `height` — container height by content.\n\n## Common mistake\n\n`gap` inside flex **does not work** in very old browsers. Now it is standard.\n\n## Summary\n\n- `display: flex` — on the parent\n- `flex-direction` — row / column\n- `gap` — spacing\n- Main axis — direction of items",
+      "questions": [
+        { "text": "Where to put `display: flex`?", "options": ["On children", "On the parent", "On both", "Anywhere"], "answer": 1, "explanation": "On the container." },
+        { "text": "What does `flex-direction: column` do?", "options": ["Row", "Column", "Nothing", "Hides"], "answer": 1, "explanation": "Column." },
+        { "text": "What does `gap` do?", "options": ["Spacing between", "Outer margin", "Inner padding", "Color"], "answer": 0, "explanation": "Spacing between items." },
+        { "text": "Default flex-direction?", "options": ["column", "row", "row-reverse", "none"], "answer": 1, "explanation": "`row` — default." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n```\n\nIn `<style>` for `.row`:\n- `display: flex;`\n- `gap: 10px;`\n- `padding: 10px;`\n- `background: #f5f5f5;`\n\nVisible text: `A B C`",
+        "starter": "<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C",
+        "must_contain": [".row", "display:", "flex", "gap:", "10px", "padding:", "background:"]
+      }
+    },
+    "18": {
+      "id": 18,
+      "check_type": "dom",
+      "title": "Flexbox: Alignment",
+      "theory": "## justify-content — main axis\n\n```css\n.row { justify-content: center; }\n```\n\nValues:\n- `flex-start` — at start\n- `flex-end` — at end\n- `center` — center\n- `space-between` — extremes at edges, gaps between\n- `space-around` — around each\n- `space-evenly` — equal gaps\n\n## align-items — cross axis\n\n```css\n.row { align-items: center; }\n```\n\n- `flex-start` — top\n- `flex-end` — bottom\n- `center` — center\n- `stretch` — stretch (default)\n- `baseline` — by text baseline\n\n## Example: center\n\n```css\n.center {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 200px;\n}\n```\n\nPerfect centering on both axes.\n\n## flex-wrap\n\nWrap to a new line:\n\n```css\n.row { flex-wrap: wrap; }\n```\n\nDefault — `nowrap` (all one line, squeezed).\n\n## What if\n\n- `align-items: center` without `height` — no visible effect, items of the same height.\n- `wrap` without gap — items stick together.\n\n## Common mistake\n\n`justify-content: center` for **column** — centers vertically (main axis is different).\n\n## Summary\n\n- `justify-content` — main axis\n- `align-items` — cross axis\n- `center` + `center` + `height` = perfect center\n- `flex-wrap: wrap` — wrap",
+      "questions": [
+        { "text": "What does `justify-content` align?", "options": ["Main axis", "Cross axis", "Text", "Size"], "answer": 0, "explanation": "Main axis." },
+        { "text": "What does `align-items` align?", "options": ["Main", "Cross", "Color", "Margins"], "answer": 1, "explanation": "Cross axis." },
+        { "text": "How to center on both axes?", "options": ["justify + align: center", "display: block", "margin auto", "text-align"], "answer": 0, "explanation": "Both `center`." },
+        { "text": "What does `flex-wrap: wrap` do?", "options": ["Wrap", "Hides", "Removes", "Stretches"], "answer": 0, "explanation": "New line." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n</div>\n```\n\nIn `<style>` for `.row`:\n- `display: flex;`\n- `justify-content: center;`\n- `align-items: center;`\n- `height: 200px;`\n- `gap: 20px;`\n\nVisible text: `A B`",
+        "starter": "<div class=\"row\">\n  <div>A</div>\n  <div>B</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B",
+        "must_contain": [".row", "display:", "flex", "justify-content:", "center", "align-items:", "height:", "200px"]
+      }
+    },
+    "19": {
+      "id": 19,
+      "check_type": "dom",
+      "title": "Grid Basics",
+      "theory": "## What Grid is\n\nCSS Grid — a two-dimensional grid. For layouts with both rows and columns.\n\n## display: grid\n\n```css\n.grid {\n  display: grid;\n  grid-template-columns: 1fr 1fr 1fr;\n  gap: 10px;\n}\n```\n\nThree equal columns. `1fr` = one \"fraction\" (share).\n\n## Repeat\n\n```css\n.grid {\n  grid-template-columns: repeat(3, 1fr);\n}\n```\n\nThree equal columns. Shorter.\n\n## What fr is\n\nFractional unit — a share of free space. `1fr 2fr` — second column twice as wide.\n\n## auto-fit\n\n```css\n.grid {\n  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));\n}\n```\n\nAdaptive grid: as many columns as fit (min 200px). Modern magic.\n\n## Grid vs Flexbox\n\n- **Flexbox** — one-dimensional (row **or** column).\n- **Grid** — two-dimensional (rows **and** columns).\n\nFor cards in a grid — Grid. For a menu — Flexbox.\n\n## What if\n\n- `display: grid` without `grid-template-columns` — one column.\n- `1fr` without `gap` — cards stick together.\n\n## Common mistake\n\n`grid` for one-dimensional layout (menu) — overkill. Flexbox is simpler.\n\n## Summary\n\n- `display: grid` — two-dimensional\n- `grid-template-columns: repeat(3, 1fr)` — three columns\n- `1fr` — fraction\n- `auto-fit` + `minmax` — adaptive\n- Grid — for grids, Flexbox — for lines",
+      "questions": [
+        { "text": "What is `fr`?", "options": ["Pixels", "Share of free space", "Percent", "Color"], "answer": 1, "explanation": "Fractional unit." },
+        { "text": "What does `repeat(3, 1fr)` do?", "options": ["3 times 1fr", "Creates 3 columns", "Both", "Nothing"], "answer": 2, "explanation": "Creates 3 equal columns." },
+        { "text": "When is Grid better than Flexbox?", "options": ["Always", "For two-dimensional grids", "For menus", "Never"], "answer": 1, "explanation": "Grid — 2D, Flex — 1D." },
+        { "text": "What does `auto-fit` do?", "options": ["Removes", "Adjusts number of columns", "Fixes", "Nothing"], "answer": 1, "explanation": "Adaptive." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"grid\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n```\n\nIn `<style>` for `.grid`:\n- `display: grid;`\n- `grid-template-columns: repeat(3, 1fr);`\n- `gap: 10px;`\n\nVisible text: `A B C`",
+        "starter": "<div class=\"grid\">\n  <div>A</div>\n  <div>B</div>\n  <div>C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C",
+        "must_contain": [".grid", "display:", "grid", "grid-template-columns:", "repeat", "1fr", "gap:"]
+      }
+    },
+    "20": {
+      "id": 20,
+      "check_type": "dom",
+      "title": "position: static, relative, absolute",
+      "theory": "## position\n\nThe property defines how an element is positioned relative to others.\n\n## static\n\nDefault. Normal flow. `top`, `left` etc. **do not work**.\n\n## relative\n\n```css\n.box { position: relative; top: 10px; left: 20px; }\n```\n\nOffset from **its own place** in the flow. Its place **is kept** — neighbors do not move.\n\n## absolute\n\n```css\n.parent { position: relative; }\n.child { position: absolute; top: 10px; right: 10px; }\n```\n\nPositioned relative to the **nearest parent with position ≠ static**.\n\nImportant: the parent must have `position: relative` (or absolute / fixed), otherwise `absolute` flies to `<html>`.\n\n## Out of flow\n\n`absolute` is removed from the flow. Neighbors do not \"see\" it and may take its place.\n\n## Example: badge in the corner\n\n```css\n.card { position: relative; }\n.badge { position: absolute; top: 8px; right: 8px; }\n```\n\n## What if\n\n- `absolute` without a `relative` parent — flies to the corner of `<body>`.\n- `top` without `position` — does not work.\n\n## Common mistake\n\n`absolute` without `position: relative` on the parent. Most common issue.\n\n## Summary\n\n- `static` — normal\n- `relative` — offset from own place\n- `absolute` — from the nearest `relative` parent\n- `absolute` — out of flow",
+      "questions": [
+        { "text": "What is `position: static`?", "options": ["Normal", "Relative", "Absolute", "Fixed"], "answer": 0, "explanation": "Normal, default." },
+        { "text": "From what does `relative` offset?", "options": ["From parent", "From its own place", "From window", "From neighbor"], "answer": 1, "explanation": "Own place." },
+        { "text": "From what does `absolute` position?", "options": ["From `<html>`", "From nearest parent with position ≠ static", "From self", "From neighbor"], "answer": 1, "explanation": "Need `relative` parent." },
+        { "text": "Is `absolute` removed from the flow?", "options": ["No", "Yes", "Depends", "Sometimes"], "answer": 1, "explanation": "Out of flow." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"card\">\n  <span class=\"badge\">X</span>\n  <p>Text</p>\n</div>\n```\n\nIn `<style>`:\n1. `.card` — `position: relative; padding: 20px;`\n2. `.badge` — `position: absolute; top: 10px; right: 10px; background: red; color: white; padding: 4px 8px;`\n\nVisible text: `X Text`",
+        "starter": "<div class=\"card\">\n  <span class=\"badge\">X</span>\n  <p>Text</p>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "X Text",
+        "must_contain": [".card", "position:", "relative", ".badge", "absolute", "top:", "right:", "background:", "red"]
+      }
+    },
+    "21": {
+      "id": 21,
+      "check_type": "dom",
+      "title": "position: fixed, sticky",
+      "theory": "## fixed\n\nPinned to the **browser window**:\n\n```css\n.nav { position: fixed; top: 0; left: 0; width: 100%; }\n```\n\nStays in place on scroll. Often — for navigation, back-to-top button.\n\nOut of flow — takes no space.\n\n## sticky\n\nA hybrid of `relative` and `fixed`:\n\n```css\n.header { position: sticky; top: 0; }\n```\n\nBehaves as `relative` until it reaches `top: 0`, then \"sticks\".\n\nHandy for table headers, page headers.\n\n## Sticky requirements\n\n- Parent does not have `overflow: hidden` / `auto`\n- Must have `top` (or other `top`/`bottom`/`left`/`right`)\n- Parent is taller than the element — otherwise nowhere to stick\n\n## fixed vs sticky\n\n- **fixed** — always pinned to the window\n- **sticky** — sticks on scroll up to the position\n\n## What if\n\n- `sticky` without `top` — does not work.\n- `sticky` inside an `overflow: hidden` parent — does not work.\n\n## Common mistake\n\n`sticky` without `top/bottom/left/right`. Nowhere to \"stick\".\n\n## Summary\n\n- `fixed` — to window\n- `sticky` — sticks on scroll\n- `sticky` requires `top`\n- fixed — out of flow / sticky — partially",
+      "questions": [
+        { "text": "To what is `fixed` pinned?", "options": ["To window", "To parent", "To self", "To neighbor"], "answer": 0, "explanation": "To window." },
+        { "text": "How does `sticky` behave?", "options": ["As `relative` always", "As `relative` → `fixed` on scroll", "As `absolute`", "Nothing"], "answer": 1, "explanation": "Hybrid." },
+        { "text": "What is required for `sticky`?", "options": ["width", "top/bottom/left/right", "height", "color"], "answer": 1, "explanation": "Position required." },
+        { "text": "Does `sticky` work inside an `overflow: hidden` parent?", "options": ["Yes", "No, breaks", "Sometimes", "Depends"], "answer": 1, "explanation": "`overflow: hidden` breaks sticky." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<header class=\"header\">Header</header>\n<main>Text</main>\n```\n\nIn `<style>` for `.header`:\n- `position: sticky;`\n- `top: 0;`\n- `background: white;`\n- `padding: 10px;`\n\nVisible text: `Header Text`",
+        "starter": "<header class=\"header\">Header</header>\n<main>Text</main>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Header Text",
+        "must_contain": [".header", "position:", "sticky", "top:", "0", "background:", "white"]
+      }
+    },
+    "22": {
+      "id": 22,
+      "check_type": "dom",
+      "title": "z-index and Stacking",
+      "theory": "## Stacking\n\nWhen elements overlap (via `absolute` or `fixed`), **z-index** decides — the \"layer\" along the Z axis.\n\n## z-index\n\n```css\n.a { position: absolute; z-index: 1; }\n.b { position: absolute; z-index: 10; }\n```\n\n`b` higher — larger number.\n\n## Works only with position\n\n`z-index` **does not work** for `position: static` (default). Need `relative`, `absolute`, `fixed` or `sticky`.\n\n## DOM order\n\nIf `z-index` is equal, the element **later in HTML** is on top.\n\n## Negative z-index\n\n```css\n.bg { position: absolute; z-index: -1; }\n```\n\nGoes under the parent. Careful — may go under the parent's background.\n\n## Stacking context\n\nA parent with `position: relative` + `z-index` creates its own context. Children cannot \"jump\" above elements **outside** this parent, even with a huge z-index.\n\n## What if\n\n- `z-index: 999` without `position` — does not work.\n- Nested stacking contexts — z-index does not break through.\n\n## Common mistake\n\n`z-index: 9999` without `position`. Most common \"does not work\".\n\n## Summary\n\n- `z-index` — layer order\n- Works only with `position ≠ static`\n- Larger number — on top\n- Stacking context limits",
+      "questions": [
+        { "text": "What does `z-index` do?", "options": ["Z position", "Size", "Margin", "Color"], "answer": 0, "explanation": "Stacking." },
+        { "text": "With which position does `z-index` work?", "options": ["static", "relative/absolute/fixed/sticky", "Only absolute", "Only fixed"], "answer": 1, "explanation": "Any except static." },
+        { "text": "Which is higher: z-index 1 or 10?", "options": ["1", "10", "Same", "Does not matter"], "answer": 1, "explanation": "10 is larger." },
+        { "text": "What happens with `z-index: 999` without position?", "options": ["Works", "Does not work", "Only in Chrome", "Error"], "answer": 1, "explanation": "Need position ≠ static." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"a\">A</div>\n<div class=\"b\">B</div>\n```\n\nIn `<style>`:\n1. `.a` — `position: absolute; z-index: 1;`\n2. `.b` — `position: absolute; z-index: 10; top: 20px;`\n\nVisible text: `A B`",
+        "starter": "<div class=\"a\">A</div>\n<div class=\"b\">B</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B",
+        "must_contain": [".a", "position:", "absolute", "z-index:", "1", ".b", "10"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "check_type": "dom",
+      "title": "Units: px, %, em, rem",
+      "theory": "## Absolute\n\n- `px` — pixels. Fixed. Independent of scale.\n\n```css\n.box { width: 200px; }\n```\n\n## Relative\n\n- `%` — from parent\n- `em` — from **parent** `font-size` (or current element)\n- `rem` — from **root** (`<html>`) `font-size`\n- `vw` / `vh` — % of window width / height\n\n## rem vs em\n\n```css\nhtml { font-size: 16px; }\n.a { font-size: 2rem; }   /* 32px (from html) */\n.b { font-size: 1em; }    /* depends on parent */\n```\n\n`rem` — predictable. `em` — nested, can be surprising.\n\n## vw / vh\n\n```css\n.hero { height: 100vh; }   /* full window height */\n```\n\nUseful for \"above the fold\". On mobile `vh` = height **with** the address bar (buggy). Modern solution — `dvh` (dynamic viewport).\n\n## When what\n\n- **px** — thin borders, shadows, exact sizes\n- **rem** — fonts, spacing (scales)\n- **%** — adaptive widths\n- **vw/vh** — full screen\n\n## What if\n\n- `font-size: 20` without units — error.\n- `%` for height without a parent `height` — 0.\n\n## Common mistake\n\n`font-size: 20` without units. In CSS explicitly `px` / `rem` / `em`.\n\n## Summary\n\n- `px` — fixed\n- `rem` — from `<html>`\n- `em` — from parent\n- `%` — from parent\n- `vw/vh` — window\n- Fonts — in `rem`",
+      "questions": [
+        { "text": "What is `rem`?", "options": ["From parent", "From `<html>`", "Pixels", "Percent"], "answer": 1, "explanation": "From root." },
+        { "text": "What is `em`?", "options": ["From parent/current", "From `<html>`", "Pixels", "Percent"], "answer": 0, "explanation": "From parent." },
+        { "text": "What is `100vh`?", "options": ["100 pixels", "Window height", "Half", "Error"], "answer": 1, "explanation": "100% of window height." },
+        { "text": "What is best for fonts?", "options": ["px", "rem", "%", "cm"], "answer": 1, "explanation": "`rem` — scales." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"box\">Text</div>\n```\n\nIn `<style>`:\n1. `html` — `font-size: 16px;`\n2. `.box` — `font-size: 1.5rem; padding: 1rem; width: 50%;`\n\nVisible text: `Text`",
+        "starter": "<div class=\"box\">Text</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Text",
+        "must_contain": ["html", "font-size:", "16px", ".box", "1.5rem", "padding:", "1rem", "width:", "50%"]
+      }
+    },
+    "24": {
+      "id": 24,
+      "check_type": "dom",
+      "title": "Media Queries",
+      "theory": "## What it is\n\nStyles for different conditions: screen width, orientation, theme.\n\n## Syntax\n\n```css\n@media (max-width: 600px) {\n  .box { font-size: 14px; }\n}\n```\n\nAt width **up to 600px** — rules apply.\n\n## min-width\n\n```css\n@media (min-width: 601px) {\n  .box { font-size: 18px; }\n}\n```\n\nAt width **from 601px**.\n\n## min vs max\n\n- **min-width** — \"from this size and up\". Mobile-first.\n- **max-width** — \"up to this size\". Desktop-first.\n\n## Multiple conditions\n\n```css\n@media (min-width: 600px) and (max-width: 900px) {\n  /* tablets */\n}\n```\n\n## Common\n\n- `max-width: 768px` — tablet\n- `max-width: 480px` — mobile\n- `orientation: portrait` / `landscape`\n- `prefers-color-scheme: dark` — dark mode\n\n## What if\n\n- Forget `@media` — rules apply always.\n- Wrong syntax `@media max-width: 600px` — does not work (need parentheses).\n\n## Common mistake\n\n`@media screen` without conditions — applies always. Either add a condition or do not write `@media` at all.\n\n## Summary\n\n- `@media (condition) { ... }`\n- `min-width` — from\n- `max-width` — up to\n- Combine via `and`",
+      "questions": [
+        { "text": "What does `@media` do?", "options": ["Styles for a condition", "Removes", "Speeds up", "Nothing"], "answer": 0, "explanation": "Conditional styles." },
+        { "text": "What does `max-width: 600px` mean?", "options": ["Up to 600", "From 600", "Exactly 600", "Error"], "answer": 0, "explanation": "Up to 600." },
+        { "text": "What does `min-width: 601px` mean?", "options": ["Up to 601", "From 601", "Exactly 601", "Nothing"], "answer": 1, "explanation": "From 601." },
+        { "text": "Can conditions be combined?", "options": ["No", "Yes, via `and`", "Only `or`", "Only one"], "answer": 1, "explanation": "`(min-width) and (max-width)`." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"box\">Adaptive</div>\n```\n\nIn `<style>`:\n1. `.box` — `font-size: 18px;`\n2. Media `(max-width: 600px)`: `.box { font-size: 14px; }`\n\nVisible text: `Adaptive`",
+        "starter": "<div class=\"box\">Adaptive</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Adaptive",
+        "must_contain": ["@media", "max-width:", "600px", ".box", "font-size:", "18px", "14px"]
+      }
+    },
+    "25": {
+      "id": 25,
+      "check_type": "dom",
+      "title": "Mobile-first",
+      "theory": "## What mobile-first is\n\nAn approach: first styles for mobile, then for larger screens.\n\n## Why\n\n- Most traffic is mobile.\n- Easier to add than remove.\n- Less CSS.\n\n## How\n\n```css\n/* Base styles — for mobile */\n.box { font-size: 14px; }\n\n/* For screens from 768px */\n@media (min-width: 768px) {\n  .box { font-size: 18px; }\n}\n\n/* For screens from 1200px */\n@media (min-width: 1200px) {\n  .box { font-size: 20px; }\n}\n```\n\nOnly `min-width`. Ascending.\n\n## Desktop-first (older)\n\n```css\n.box { font-size: 20px; }\n@media (max-width: 1200px) { .box { font-size: 18px; } }\n@media (max-width: 768px)  { .box { font-size: 14px; } }\n```\n\nOnly `max-width`. Descending.\n\n## viewport meta\n\nIn HTML **mandatory**:\n\n```html\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n```\n\nWithout it on phone the page renders as on desktop — tiny.\n\n## What if\n\n- Forget viewport — mobile-first does not work (page scales as desktop).\n- Mix `min-width` and `max-width` without order — confusion.\n\n## Common mistake\n\nForget `<meta name=\"viewport\">`. Most common responsiveness issue.\n\n## Summary\n\n- Mobile-first — base styles for mobile\n- Only `min-width`\n- Ascending order\n- `<meta name=\"viewport\">` — mandatory",
+      "questions": [
+        { "text": "What is mobile-first?", "options": ["Mobile first", "Desktop first", "Mobile only", "No matter"], "answer": 0, "explanation": "Mobile first." },
+        { "text": "Which media queries to use?", "options": ["max-width", "min-width", "Both", "None"], "answer": 1, "explanation": "`min-width` — ascending." },
+        { "text": "Is viewport meta required?", "options": ["Yes, mandatory", "No", "Sometimes", "Only for mobile"], "answer": 0, "explanation": "Without it — tiny on phone." },
+        { "text": "Order of media queries?", "options": ["Descending", "Ascending", "Any", "Random"], "answer": 1, "explanation": "From small to large." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"box\">Adaptive</div>\n```\n\nIn `<style>`:\n1. `.box` — `font-size: 14px;`\n2. `@media (min-width: 768px)` — `.box { font-size: 18px; }`\n3. `@media (min-width: 1200px)` — `.box { font-size: 20px; }`\n\nVisible text: `Adaptive`",
+        "starter": "<div class=\"box\">Adaptive</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Adaptive",
+        "must_contain": ["@media", "min-width:", "768px", "1200px", "14px", "18px", "20px"]
+      }
+    },
+    "26": {
+      "id": 26,
+      "check_type": "dom",
+      "title": "transition",
+      "theory": "## What transition is\n\nA smooth change of a property over time. Instead of an instant \"before/after\" — intermediate states.\n\n```css\n.btn {\n  background: gray;\n  transition: background 0.3s ease;\n}\n.btn:hover {\n  background: blue;\n}\n```\n\nOn hover — smooth gray to blue over 0.3 seconds.\n\n## Syntax\n\n```css\ntransition: property duration timing-function delay;\n```\n\n- `property` — what changes\n- `duration` — how long (0.3s, 300ms)\n- `timing-function` — ease, linear, ease-in, ease-out, ease-in-out\n- `delay` — delay before start\n\n## Multiple properties\n\n```css\n.btn {\n  transition: background 0.3s ease, color 0.2s linear;\n}\n```\n\nOr `all`:\n\n```css\n.btn { transition: all 0.3s ease; }\n```\n\n`all` — convenient but can be slower. Prefer explicit.\n\n## Timing functions\n\n- `ease` — slow-fast-slow (default)\n- `linear` — uniform\n- `ease-in` — slow at start\n- `ease-out` — slow at end\n- `ease-in-out` — slow at both ends\n- `cubic-bezier(...)` — custom curve\n\n## What animates\n\nNot everything. `background`, `color`, `opacity`, `transform`, `width`, `height` — yes. `display` — no (instant).\n\n`display: none` → `display: block` — no transition. Needs hacks.\n\n## What if\n\n- `transition: background` without `duration` — instant, useless.\n- `transition: all 0.3s` — all properties, including unwanted.\n- `transition` on `display` — does not work.\n\n## Common mistake\n\nForgetting `transition` on the **base** rule, not on `:hover`. Transition must be on base for both directions.\n\n## Summary\n\n- `transition: property duration timing delay`\n- Multiple — comma-separated\n- `all` — everything\n- Does not work on `display`\n- On the base rule, not `:hover`",
+      "questions": [
+        { "text": "What does `transition` do?", "options": ["Speeds up", "Smoothly animates a change", "Removes", "Nothing"], "answer": 1, "explanation": "Smooth transition." },
+        { "text": "What does `0.3s` do?", "options": ["Duration 0.3 seconds", "Delay", "Speed", "Error"], "answer": 0, "explanation": "Duration." },
+        { "text": "Where to put `transition`?", "options": ["On `:hover`", "On the base rule", "In HTML", "Anywhere"], "answer": 1, "explanation": "On base, otherwise no reverse." },
+        { "text": "Does `transition` work on `display`?", "options": ["Yes", "No", "Sometimes", "Only with !important"], "answer": 1, "explanation": "`display` — instant." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<a class=\"link\" href=\"#\">Link</a>\n```\n\nIn `<style>`:\n1. `.link` — `color: gray; text-decoration: none; transition: color 0.3s ease;`\n2. `.link:hover` — `color: blue;`\n\nVisible text: `Link`",
+        "starter": "<a class=\"link\" href=\"#\">Link</a>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Link",
+        "must_contain": [".link", "transition:", "color", "0.3s", "ease", ".link:hover", "color:", "blue"]
+      }
+    },
+    "27": {
+      "id": 27,
+      "check_type": "dom",
+      "title": "transform",
+      "theory": "## What transform is\n\nGeometric changes: translation, rotation, scaling. Does not affect flow — neighbors stay put.\n\n## Basic functions\n\n```css\n.box { transform: translateX(20px); }\n.box { transform: scale(1.2); }\n.box { transform: rotate(45deg); }\n.box { transform: skew(10deg); }\n```\n\n## translate\n\n```css\ntransform: translate(x, y);\ntransform: translateX(20px);\ntransform: translateY(-10px);\ntransform: translate(50%, 50%);\n```\n\n## scale\n\n```css\ntransform: scale(2);\ntransform: scale(1.5, 0.5);\n```\n\nScales **from center** by default.\n\n## rotate\n\n```css\ntransform: rotate(45deg);\n```\n\nClockwise. `-45deg` — counter-clockwise.\n\n## Multiple functions\n\n```css\ntransform: translate(10px, 20px) rotate(45deg) scale(1.2);\n```\n\nSpace-separated. Order **matters** — applied sequentially.\n\n## transform-origin\n\n```css\n.box { transform-origin: top left; }\n```\n\n`center` by default.\n\n## Transition + transform\n\n```css\nimg { transition: transform 0.3s ease; }\nimg:hover { transform: scale(1.05); }\n```\n\n## What if\n\n- `rotate` without `deg` — does not work.\n- Forget `transform-origin` — rotate from center, not corner.\n- Wrong order: `rotate(45) translate(20)` ≠ `translate(20) rotate(45)`.\n\n## Common mistake\n\n`transform: rotate(45)` without `deg`. Units are mandatory.\n\n## Summary\n\n- `translate` — shift\n- `scale` — scale\n- `rotate` — rotate\n- Space-separated, order matters\n- `transform-origin` — anchor\n- Smooth — via `transition`",
+      "questions": [
+        { "text": "What does `translateX(20px)` do?", "options": ["Shift on X", "Rotate", "Scale", "Remove"], "answer": 0, "explanation": "Shift." },
+        { "text": "What does `scale(2)` do?", "options": ["Rotate", "Scale 2x", "Shift", "Skew"], "answer": 1, "explanation": "Scale." },
+        { "text": "What does `rotate(45deg)` do?", "options": ["Shift", "Scale", "Rotate 45°", "Skew"], "answer": 2, "explanation": "Rotate." },
+        { "text": "What is needed for smooth transform?", "options": ["animation", "transition", "Nothing", "JS"], "answer": 1, "explanation": "Transition." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"box\">A</div>\n```\n\nIn `<style>`:\n1. `.box` — `transition: transform 0.3s ease;`\n2. `.box:hover` — `transform: scale(1.2) rotate(5deg);`\n\nVisible text: `A`",
+        "starter": "<div class=\"box\">A</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A",
+        "must_contain": ["transition:", "transform", "0.3s", ".box:hover", "scale(", "rotate("]
+      }
+    },
+    "28": {
+      "id": 28,
+      "check_type": "dom",
+      "title": "@keyframes and animation",
+      "theory": "## What animation is\n\nA more powerful alternative to transition — multi-step animation with full control.\n\n## @keyframes\n\n```css\n@keyframes fadeIn {\n  from { opacity: 0; }\n  to { opacity: 1; }\n}\n```\n\n`from` = 0%, `to` = 100%. Intermediate allowed:\n\n```css\n@keyframes bounce {\n  0% { transform: translateY(0); }\n  50% { transform: translateY(-20px); }\n  100% { transform: translateY(0); }\n}\n```\n\n## animation\n\n```css\n.box {\n  animation: fadeIn 0.5s ease;\n}\n```\n\nSyntax:\n```css\nanimation: name duration timing delay iteration direction fill-mode;\n```\n\n- `name` — `@keyframes` name\n- `duration` — duration\n- `timing` — ease, linear, ease-in...\n- `delay` — delay\n- `iteration-count` — count (`infinite` — endless)\n- `direction` — normal / reverse / alternate\n- `fill-mode` — forwards, backwards, both\n\n## Common values\n\n```css\nanimation: spin 2s linear infinite;\nanimation: fadeIn 0.3s ease forwards;\nanimation: pulse 1s ease-in-out infinite alternate;\n```\n\n## Shorthand vs full\n\n```css\n/* shorthand */\nanimation: spin 2s linear infinite;\n\n/* full */\nanimation-name: spin;\nanimation-duration: 2s;\nanimation-timing-function: linear;\nanimation-iteration-count: infinite;\n```\n\n## Difference from transition\n\n- **transition** — 2 states (A → B)\n- **animation** — many states, loops, directions\n\nTransition — on hover. Animation — permanent (loading, pulse, spin).\n\n## What if\n\n- `animation` without `@keyframes` — nothing happens.\n- Forget `infinite` — animates once.\n- `iteration-count: 0` — does not start.\n\n## Common mistake\n\n`animation: spin` without duration. `duration` is mandatory.\n\n## Summary\n\n- `@keyframes name { ... }`\n- `animation: name duration ...`\n- `infinite` — endless\n- `alternate` — back and forth\n- `forwards` — stay at end\n- Multi-step, unlike transition",
+      "questions": [
+        { "text": "What does `@keyframes` do?", "options": ["Creates an animation", "Defines a trajectory", "Removes", "Speeds up"], "answer": 1, "explanation": "Trajectory." },
+        { "text": "What does `infinite` do?", "options": ["Once", "Endless", "Never", "Error"], "answer": 1, "explanation": "Endless." },
+        { "text": "What does `forwards` do?", "options": ["Stay at end", "At start", "No effect", "Cancel"], "answer": 0, "explanation": "Freezes at final state." },
+        { "text": "How is animation different from transition?", "options": ["Same", "Animation — multi-step", "Transition faster", "Animation only for transform"], "answer": 1, "explanation": "Animation is more powerful." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"loader\">Loading</div>\n```\n\nIn `<style>`:\n1. `@keyframes pulse` — 0% opacity 1, 50% opacity 0.5, 100% opacity 1\n2. `.loader` — `animation: pulse 1.5s ease-in-out infinite;`\n\nVisible text: `Loading`",
+        "starter": "<div class=\"loader\">Loading</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Loading",
+        "must_contain": ["@keyframes", "pulse", "0%", "50%", "100%", "animation:", "1.5s", "infinite"]
+      }
+    },
+    "29": {
+      "id": 29,
+      "check_type": "dom",
+      "title": ":nth-child, :not(), :first-child",
+      "theory": "## Why\n\nWhen you need styles not for all elements, but for specific ones by position or excluding some.\n\n## :first-child and :last-child\n\n```css\nli:first-child { font-weight: bold; }\nli:last-child { border-bottom: none; }\n```\n\nFirst and last.\n\n## :nth-child(n)\n\n```css\nli:nth-child(2) { color: red; }\nli:nth-child(odd) { background: #eee; }\nli:nth-child(even) { background: #fff; }\nli:nth-child(3n) { color: blue; }\nli:nth-child(2n+1) { font-weight: bold; }\n```\n\n## :not(selector)\n\n```css\nli:not(:last-child) { border-bottom: 1px solid #ccc; }\nbutton:not(.primary) { background: gray; }\n```\n\nAll elements **except** the specified ones.\n\n## :first-of-type / :last-of-type\n\nSimilar to `:first-child`, but works within **type**:\n\n```css\np:first-of-type { font-size: 1.2em; }\n```\n\nFirst `<p>` in parent — even if `<h1>` is before.\n\n## :nth-of-type(n)\n\n```css\np:nth-of-type(2) { color: red; }\n```\n\nSecond `<p>`, regardless of other tags.\n\n## What if\n\n- `li:nth-child(2)` — not \"second `li`\", but \"element that is second child and `li`\". If second is `<h2>`, style does not apply.\n- `:not(.a.b)` — error, `:not` does not accept complex selectors in older browsers.\n\n## Common mistake\n\n`:nth-child(2)` on `<li>`, but with `<h2>` between `li` — the `li` that is second among all is not the second `li`. Need `:nth-of-type(2)`.\n\n## Summary\n\n- `:first-child`, `:last-child` — first/last\n- `:nth-child(n)` — by count\n- `odd` / `even` — odds/evens\n- `:not(sel)` — exclusion\n- `-of-type` — only own type",
+      "questions": [
+        { "text": "What does `li:nth-child(3)` select?", "options": ["Third li", "Third element if it is li", "All li", "Nothing"], "answer": 1, "explanation": "`:nth-child` — position among all children." },
+        { "text": "What does `:not(.primary)` do?", "options": ["Only .primary", "All except .primary", "Nothing", "Removes"], "answer": 1, "explanation": "Exclusion." },
+        { "text": "What does `:nth-child(odd)` select?", "options": ["Even", "Odd (1, 3, 5)", "All", "Nothing"], "answer": 1, "explanation": "Odd — odd." },
+        { "text": "What is `:first-of-type`?", "options": ["First child", "First of own type", "Error", "All"], "answer": 1, "explanation": "First of own type." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<ul class=\"list\">\n  <li>A</li>\n  <li>B</li>\n  <li>C</li>\n  <li>D</li>\n</ul>\n```\n\nIn `<style>`:\n1. `.list li:nth-child(2)` — `color: blue;`\n2. `.list li:not(:last-child)` — `border-bottom: 1px solid #ccc;`\n3. `.list li:first-child` — `font-weight: bold;`\n\nVisible text: `A B C D`",
+        "starter": "<ul class=\"list\">\n  <li>A</li>\n  <li>B</li>\n  <li>C</li>\n  <li>D</li>\n</ul>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C D",
+        "must_contain": ["nth-child", ":not(", "last-child", "first-child", "color:", "border-bottom:"]
+      }
+    },
+    "30": {
+      "id": 30,
+      "check_type": "dom",
+      "title": "CSS Variables and calc()",
+      "theory": "## Why\n\nOne color used in 20 rules. Change it — 20 edits. CSS variables fix that.\n\n## Syntax\n\n```css\n:root {\n  --primary: #007bff;\n  --text: #333;\n  --radius: 8px;\n}\n```\n\n`:root` — root element (`<html>`). Variables available everywhere.\n\n## Usage\n\n```css\n.button {\n  background: var(--primary);\n  color: white;\n  border-radius: var(--radius);\n}\n\n.title {\n  color: var(--text);\n}\n```\n\n`var(--name)` — substitutes the value.\n\n## Local variables\n\nCan be defined not only in `:root`:\n\n```css\n.card {\n  --card-padding: 16px;\n  padding: var(--card-padding);\n}\n```\n\nAvailable only inside `.card` and descendants.\n\n## Fallback\n\n```css\ncolor: var(--text, black);\n```\n\nIf `--text` is missing — `black`.\n\n## calc()\n\nMath in CSS:\n\n```css\n.box {\n  width: calc(100% - 40px);\n  padding: calc(8px + 0.5rem);\n  font-size: calc(1rem + 2px);\n}\n```\n\nSupports `+ - * /`. Spaces around operators are mandatory!\n\n## calc + variables\n\n```css\n:root { --gap: 16px; }\n.box {\n  padding: calc(var(--gap) * 2);\n}\n```\n\n## What if\n\n- `var(--undefined)` without fallback — property not applied.\n- `calc(100% - 40px)` without spaces → `calc(100%-40px)` — does not work.\n\n## Common mistake\n\n`calc()` without spaces: `calc(100%-40px)`. The parser does not understand. Need `calc(100% - 40px)`.\n\n## Summary\n\n- `:root { --name: value; }` — define\n- `var(--name)` — use\n- `var(--name, fallback)` — with default\n- `calc(a + b)` — math\n- Spaces in calc mandatory",
+      "questions": [
+        { "text": "How to declare a variable?", "options": ["--name: value", "var(--name)", "--name = value", "name: var"], "answer": 0, "explanation": "`--name: value`." },
+        { "text": "How to use a variable?", "options": ["--name", "var(--name)", "$name", "name()"], "answer": 1, "explanation": "`var(--name)`." },
+        { "text": "What does `calc(100% - 40px)` do?", "options": ["Nothing", "Subtracts 40px from 100%", "Multiplies", "Error"], "answer": 1, "explanation": "Math." },
+        { "text": "Are spaces required in `calc`?", "options": ["No", "Yes, around operators", "Only for *", "Doesn't matter"], "answer": 1, "explanation": "`calc(100% - 40px)`." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<button class=\"btn\">OK</button>\n```\n\nIn `<style>`:\n1. `:root` — `--primary: #007bff; --radius: 8px;`\n2. `.btn` — `background: var(--primary); padding: calc(8px + 0.5rem); border-radius: var(--radius);`\n\nVisible text: `OK`",
+        "starter": "<button class=\"btn\">OK</button>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "OK",
+        "must_contain": [":root", "--primary", "--radius", "var(--primary)", "var(--radius)", "calc(", "padding:"]
+      }
+    },
+    "31": {
+      "id": 31,
+      "check_type": "dom",
+      "title": "object-fit and aspect-ratio",
+      "theory": "## The image problem\n\nAn image 1200×800, container 200×200. If stretched — distortion. If fitted — empty space.\n\n## object-fit\n\n```css\nimg {\n  width: 200px;\n  height: 200px;\n  object-fit: cover;\n}\n```\n\n- `fill` — stretch (distorts)\n- `contain` — fit entirely, with gaps\n- `cover` — fill, crop\n- `none` — original size\n- `scale-down` — shrink if larger\n\n`cover` — ideal for previews and avatars. `contain` — for illustrations where integrity matters.\n\n## object-position\n\n```css\nimg {\n  object-fit: cover;\n  object-position: center;\n}\n```\n\nCenter by default. `top`, `bottom`, `left`, `right`, `center`.\n\n## aspect-ratio\n\n```css\n.card {\n  aspect-ratio: 16 / 9;\n  width: 100%;\n}\n```\n\nAspect ratio. Height automatic. 16/9 = width / height.\n\nOften with images:\n\n```css\nimg {\n  aspect-ratio: 1 / 1;\n  object-fit: cover;\n  width: 100%;\n}\n```\n\nSquare, but the image is cropped at center.\n\n## Why\n\n- Before — padding-top: 56.25% hack (for 16:9).\n- Now — `aspect-ratio`, supported everywhere.\n\n## What if\n\n- `object-fit` without `width`/`height` — does not work, size is auto.\n- `aspect-ratio` on `<img>` without `object-fit` — image shrinks, no crop.\n\n## Common mistake\n\n`object-fit` without fixed height. Need both `width` and `height` (or `aspect-ratio`).\n\n## Summary\n\n- `object-fit: cover` — fill with crop\n- `contain` — fit entirely\n- `object-position` — crop point\n- `aspect-ratio: 16/9` — proportions\n- Ideal for images and video",
+      "questions": [
+        { "text": "What does `object-fit: cover` do?", "options": ["Stretches", "Fills with crop", "Fits entirely", "Removes"], "answer": 1, "explanation": "Cover — with crop." },
+        { "text": "What does `object-fit: contain` do?", "options": ["Fits entirely", "Fills", "Removes", "Distorts"], "answer": 0, "explanation": "Contain — entirely." },
+        { "text": "What does `aspect-ratio: 16 / 9` do?", "options": ["Width", "Aspect ratio", "Color", "Error"], "answer": 1, "explanation": "Proportions." },
+        { "text": "What is needed for `object-fit`?", "options": ["Only width", "Width and height (or aspect-ratio)", "Only height", "Nothing"], "answer": 1, "explanation": "Dimensions needed." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<img class=\"avatar\" src=\"me.jpg\" alt=\"Avatar\">\n```\n\nIn `<style>`:\n- `.avatar` — `width: 80px; height: 80px; object-fit: cover; border-radius: 50%;`\n\nVisible text: `Avatar`",
+        "starter": "<img class=\"avatar\" src=\"me.jpg\" alt=\"Avatar\">\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Avatar",
+        "must_contain": [".avatar", "width:", "80px", "height:", "object-fit:", "cover", "border-radius:", "50%"]
+      }
+    },
+    "32": {
+      "id": 32,
+      "check_type": "dom",
+      "title": "filter and @font-face",
+      "theory": "## filter\n\nVisual effects:\n\n```css\nimg { filter: grayscale(100%); }\n.box { filter: blur(4px); }\n.btn { filter: brightness(1.2); }\n```\n\n- `blur(px)` — blur\n- `brightness(x)` — brightness (1 = normal)\n- `contrast(x)` — contrast\n- `grayscale(x)` — B&W (1 = fully)\n- `sepia(x)` — sepia\n- `saturate(x)` — saturation\n- `hue-rotate(deg)` — hue shift\n- `drop-shadow(...)` — shadow\n\n## Multiple filters\n\n```css\nimg {\n  filter: grayscale(0.5) brightness(1.1);\n}\n```\n\nSpace-separated.\n\n## Use cases\n\n- B&W image until hover, color on hover.\n- \"Loading\" effect via blur.\n- Shadow for PNG with transparency — `drop-shadow`.\n\n## @font-face\n\nLoading a custom font:\n\n```css\n@font-face {\n  font-family: 'MyFont';\n  src: url('font.woff2') format('woff2');\n  font-weight: normal;\n}\n\nbody {\n  font-family: 'MyFont', sans-serif;\n}\n```\n\n`src` — file path. `format` — type.\n\n## Formats\n\n- `woff2` — modern, compressed\n- `woff` — older, wider support\n- `ttf`, `otf` — large, for desktop\n\n`woff2` — priority.\n\n## Google Fonts\n\nAlternative — ready fonts via `<link>`:\n\n```html\n<link href=\"https://fonts.googleapis.com/css2?family=Roboto\" rel=\"stylesheet\">\n```\n\n```css\nbody { font-family: 'Roboto', sans-serif; }\n```\n\n## What if\n\n- `filter` on a huge image — lag\n- `@font-face` without `format` — browser may not load\n- Font not loaded — fallback\n\n## Common mistake\n\nForget `font-family` in `@font-face` — font not activated.\n\n## Summary\n\n- `filter: grayscale(1)` — effects\n- Multiple — space-separated\n- `@font-face` — own font\n- `woff2` — format\n- Fallback mandatory",
+      "questions": [
+        { "text": "What does `filter: blur(4px)` do?", "options": ["Blur", "Brightness", "Contrast", "Nothing"], "answer": 0, "explanation": "Blur." },
+        { "text": "What does `grayscale(1)` do?", "options": ["B&W", "Sepia", "Brightness", "Removal"], "answer": 0, "explanation": "Fully B&W." },
+        { "text": "How to load a custom font?", "options": ["@font-face", "@import", "font: url", "In HTML"], "answer": 0, "explanation": "`@font-face`." },
+        { "text": "Which font format is preferred?", "options": ["ttf", "woff2", "otf", "eot"], "answer": 1, "explanation": "`woff2` — modern." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<img class=\"pic\" src=\"photo.jpg\" alt=\"Photo\">\n<p class=\"custom\">Text</p>\n```\n\nIn `<style>`:\n1. `.pic` — `filter: grayscale(100%);`\n2. `.pic:hover` — `filter: grayscale(0);`\n3. `@font-face { font-family: 'Custom'; src: url('font.woff2') format('woff2'); }`\n4. `.custom` — `font-family: 'Custom', sans-serif;`\n\nVisible text: `Photo Text`",
+        "starter": "<img class=\"pic\" src=\"photo.jpg\" alt=\"Photo\">\n<p class=\"custom\">Text</p>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Photo Text",
+        "must_contain": ["filter:", "grayscale", ".pic:hover", "@font-face", "font-family:", "url(", "woff2", ".custom"]
+      }
+    },
+    "33": {
+      "id": 33,
+      "check_type": "dom",
+      "title": "Mini-project: Product Card",
+      "theory": "## What we build\n\nA product card — typical e-commerce unit. Assembles everything from the course: card, fonts, colors, flexbox, transition.\n\n## Contents\n\n- Title\n- Image (placeholder)\n- Price\n- Description\n- \"Buy\" button\n\n## CSS\n\n```css\n.product {\n  padding: 20px;\n  border: 1px solid #e0e0e0;\n  border-radius: 12px;\n  max-width: 320px;\n  font-family: sans-serif;\n  transition: box-shadow 0.3s ease;\n}\n\n.product:hover {\n  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);\n}\n\n.product h2 {\n  margin: 0 0 8px;\n  font-size: 1.25rem;\n  color: #222;\n}\n\n.product .price {\n  font-size: 1.5rem;\n  color: #007bff;\n  font-weight: bold;\n  margin: 8px 0;\n}\n\n.product p {\n  color: #666;\n  line-height: 1.5;\n}\n\n.product button {\n  width: 100%;\n  padding: 10px;\n  background: #007bff;\n  color: white;\n  border: none;\n  border-radius: 8px;\n  font-size: 1rem;\n  cursor: pointer;\n  transition: background 0.2s ease;\n}\n\n.product button:hover {\n  background: #0056b3;\n}\n```\n\n## Checks\n\n- Card: `border`, `padding`, `radius`\n- Price larger than description\n- Button full width\n- Hover effect\n- Transition on card and button\n\n## What if\n\n- No `border-radius` — sharp corners, looks cheap.\n- Button without `cursor: pointer` — unclear it is clickable.\n\n## Common mistake\n\nForget `box-sizing` — card grows from padding. Add `* { box-sizing: border-box; }`.\n\n## Summary\n\n- Card: padding + border + radius\n- Hierarchy: title > price > description\n- Button full width\n- Hover effect\n- Transition — mandatory\n- `box-sizing` — mandatory",
+      "questions": [
+        { "text": "What makes the card attractive?", "options": ["border-radius", "Only border", "Only color", "Only font"], "answer": 0, "explanation": "Rounded corners and shadow." },
+        { "text": "Why `width: 100%` on the button?", "options": ["Stretch", "Remove", "Shrink", "Hide"], "answer": 0, "explanation": "Full width." },
+        { "text": "Why hover?", "options": ["Pretty", "Feedback to the user", "Error", "Not needed"], "answer": 1, "explanation": "Feedback." },
+        { "text": "Why `box-sizing: border-box`?", "options": ["Pretty", "width includes padding", "Removes border", "Nothing"], "answer": 1, "explanation": "Size control." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"product\">\n  <h2>Book</h2>\n  <p class=\"price\">500 ₽</p>\n  <p>A good book to read.</p>\n  <button>Buy</button>\n</div>\n```\n\nIn `<style>`:\n1. `.product` — `padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px; max-width: 320px; transition: box-shadow 0.3s ease;`\n2. `.product:hover` — `box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);`\n3. `.product h2` — `margin: 0 0 8px;`\n4. `.product .price` — `color: #007bff; font-size: 1.5rem; font-weight: bold;`\n5. `.product button` — `width: 100%; padding: 10px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; transition: background 0.2s ease;`\n6. `.product button:hover` — `background: #0056b3;`\n\nVisible text: `Book 500 ₽ A good book to read. Buy`",
+        "starter": "<div class=\"product\">\n  <h2>Book</h2>\n  <p class=\"price\">500 ₽</p>\n  <p>A good book to read.</p>\n  <button>Buy</button>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "Book 500 ₽ A good book to read. Buy",
+        "must_contain": [".product", "padding:", "border:", "border-radius:", "max-width:", "transition:", ".product:hover", "box-shadow:", ".product h2", ".product .price", "color:", "#007bff", ".product button", "width:", "100%", "background:", "cursor:", "pointer"]
+      }
+    },
+    "34": {
+      "id": 34,
+      "check_type": "dom",
+      "title": "Final: Responsive Page",
+      "theory": "## Assembling everything\n\nA page with three cards. Narrow — column, wide — row. Plus typography, colors, hover, transition.\n\n## Base structure\n\n```html\n<div class=\"grid\">\n  <div class=\"card\">A</div>\n  <div class=\"card\">B</div>\n  <div class=\"card\">C</div>\n</div>\n```\n\n## CSS\n\n```css\n* { box-sizing: border-box; }\nbody { font-family: Arial, sans-serif; }\n\n.grid {\n  display: grid;\n  grid-template-columns: 1fr;\n  gap: 16px;\n  padding: 16px;\n}\n\n.card {\n  padding: 20px;\n  border: 1px solid #e0e0e0;\n  border-radius: 8px;\n  background: white;\n  transition: transform 0.2s ease, box-shadow 0.2s ease;\n}\n\n.card:hover {\n  transform: translateY(-2px);\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);\n}\n\n@media (min-width: 768px) {\n  .grid { grid-template-columns: repeat(3, 1fr); }\n}\n```\n\n## Checks\n\n- Base — one column\n- At ≥768 — three columns\n- `box-sizing: border-box`\n- Font\n- Cards with padding + border\n- Hover via transform + transition\n\n## What if\n\n- No `@media` — always three columns, cramped on phone.\n- No `box-sizing` — cards overflow.\n\n## Common mistake\n\nMedia not working — forgot `<meta name=\"viewport\">` in HTML.\n\n## Summary\n\n- Mobile: 1fr\n- Desktop: 3 columns\n- `@media (min-width: 768px)`\n- `box-sizing: border-box`\n- `<meta name=\"viewport\">` in HTML\n- Transition + transform for hover",
+      "questions": [
+        { "text": "How to switch from one column to three?", "options": ["@media (min-width: 768px)", "display: block", "margin auto", "flex-wrap"], "answer": 0, "explanation": "Media query." },
+        { "text": "What does `repeat(3, 1fr)` do?", "options": ["One column", "Three equal columns", "Removes", "Error"], "answer": 1, "explanation": "3 equal." },
+        { "text": "Why `box-sizing: border-box`?", "options": ["Pretty", "width includes padding and border", "Removes all", "Nothing"], "answer": 1, "explanation": "Size control." },
+        { "text": "What is mandatory in HTML for mobile?", "options": ["viewport meta", "script", "font", "table"], "answer": 0, "explanation": "`<meta name=\"viewport\">`." }
+      ],
+      "practice": {
+        "description": "Given HTML:\n```html\n<div class=\"grid\">\n  <div class=\"card\">A</div>\n  <div class=\"card\">B</div>\n  <div class=\"card\">C</div>\n</div>\n```\n\nIn `<style>`:\n1. `*` — `box-sizing: border-box;`\n2. `body` — `font-family: Arial, sans-serif;`\n3. `.grid` — `display: grid; grid-template-columns: 1fr; gap: 16px; padding: 16px;`\n4. `.card` — `padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px; transition: transform 0.2s ease, box-shadow 0.2s ease;`\n5. `.card:hover` — `transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);`\n6. `@media (min-width: 768px)` — `.grid { grid-template-columns: repeat(3, 1fr); }`\n\nVisible text: `A B C`",
+        "starter": "<div class=\"grid\">\n  <div class=\"card\">A</div>\n  <div class=\"card\">B</div>\n  <div class=\"card\">C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+        "expected": "A B C",
+        "must_contain": ["box-sizing:", "border-box", "font-family:", ".grid", "display:", "grid", "grid-template-columns:", "1fr", "gap:", ".card", "padding:", "border:", "border-radius:", "transition:", ".card:hover", "transform:", "box-shadow:", "@media", "min-width:", "768px", "repeat", "3"]
+      }
+    }
+  }
+}

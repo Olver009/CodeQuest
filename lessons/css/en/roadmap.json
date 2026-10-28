@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "title": "Introduction",
+    "lessons": [
+      { "id": 1, "title": "What CSS Is and Why", "status": "current" },
+      { "id": 2, "title": "Connecting CSS", "status": "locked" },
+      { "id": 3, "title": "Syntax: Rules, Selector, Property", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Selectors",
+    "lessons": [
+      { "id": 4, "title": "Selectors: Tag, Class, id", "status": "locked" },
+      { "id": 5, "title": "Combined Selectors", "status": "locked" },
+      { "id": 6, "title": "Pseudo-classes: :hover, :focus", "status": "locked" },
+      { "id": 7, "title": "Selector Specificity", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Colors and Text",
+    "lessons": [
+      { "id": 8, "title": "Colors: color and background", "status": "locked" },
+      { "id": 9, "title": "Fonts", "status": "locked" },
+      { "id": 10, "title": "Text Alignment and Spacing", "status": "locked" },
+      { "id": 11, "title": "Text Styles", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Box Model",
+    "lessons": [
+      { "id": 12, "title": "box-sizing and Sizes", "status": "locked" },
+      { "id": 13, "title": "margin and padding", "status": "locked" },
+      { "id": 14, "title": "border and border-radius", "status": "locked" },
+      { "id": 15, "title": "Card as a Whole", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Layout",
+    "lessons": [
+      { "id": 16, "title": "display: block, inline, none", "status": "locked" },
+      { "id": 17, "title": "Flexbox: Container and Axes", "status": "locked" },
+      { "id": 18, "title": "Flexbox: Alignment", "status": "locked" },
+      { "id": 19, "title": "Grid Basics", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Positioning",
+    "lessons": [
+      { "id": 20, "title": "position: static, relative, absolute", "status": "locked" },
+      { "id": 21, "title": "position: fixed, sticky", "status": "locked" },
+      { "id": 22, "title": "z-index and Stacking", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Responsiveness",
+    "lessons": [
+      { "id": 23, "title": "Units: px, %, em, rem", "status": "locked" },
+      { "id": 24, "title": "Media Queries", "status": "locked" },
+      { "id": 25, "title": "Mobile-first", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Transitions and Animations",
+    "lessons": [
+      { "id": 26, "title": "transition", "status": "locked" },
+      { "id": 27, "title": "transform", "status": "locked" },
+      { "id": 28, "title": "@keyframes and animation", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Advanced CSS",
+    "lessons": [
+      { "id": 29, "title": ":nth-child, :not(), :first-child", "status": "locked" },
+      { "id": 30, "title": "CSS Variables and calc()", "status": "locked" },
+      { "id": 31, "title": "object-fit and aspect-ratio", "status": "locked" },
+      { "id": 32, "title": "filter and @font-face", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Practice",
+    "lessons": [
+      { "id": 33, "title": "Mini-project: Product Card", "status": "locked" },
+      { "id": 34, "title": "Final: Responsive Page", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  }
+]

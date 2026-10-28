@@ -1,0 +1,122 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "check_type": "dom",
+    "title": "Контрольная: Введение в CSS",
+    "description": "Финальное задание главы 1. Проверяет: подключение, синтаксис, простые стили.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<h1 class=\"title\">Заголовок</h1>\n<p class=\"text\">Текст</p>\n```\n\nВ `<style>` задай:\n- `.title`: `color: red;`\n- `.text`: `color: blue;`\n\nВидимый текст: `Заголовок Текст`",
+      "starter": "<h1 class=\"title\">Заголовок</h1>\n<p class=\"text\">Текст</p>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Заголовок Текст",
+      "must_contain": ["<style", ".title", ".text", "color:", "red", "blue"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "check_type": "dom",
+    "title": "Контрольная: Селекторы",
+    "description": "Финальное задание главы 2. Проверяет: теги, классы, id, потомки.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<div id=\"main\">\n  <p class=\"note\">Один</p>\n  <p class=\"note\">Два</p>\n</div>\n```\n\nВ `<style>`:\n1. `#main` — `background: lightgray;`\n2. `.note` — `color: green;`\n3. `#main p` — `font-size: 20px;`\n\nВидимый текст: `Один Два`",
+      "starter": "<div id=\"main\">\n  <p class=\"note\">Один</p>\n  <p class=\"note\">Два</p>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Один Два",
+      "must_contain": ["#main", ".note", "#main p", "background:", "color:", "font-size:"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "check_type": "dom",
+    "title": "Контрольная: Цвета и текст",
+    "description": "Финальное задание главы 3. Проверяет: цвета, шрифты, выравнивание.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<h1>Заголовок</h1>\n<p>Абзац текста</p>\n```\n\nВ `<style>`:\n1. `body` — `font-family: Arial, sans-serif;`\n2. `h1` — `color: darkblue; text-align: center;`\n3. `p` — `font-size: 18px; line-height: 1.6;`\n\nВидимый текст: `Заголовок Абзац текста`",
+      "starter": "<h1>Заголовок</h1>\n<p>Абзац текста</p>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Заголовок Абзац текста",
+      "must_contain": ["font-family", "h1", "darkblue", "text-align", "center", "font-size", "line-height"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "check_type": "dom",
+    "title": "Контрольная: Блочная модель",
+    "description": "Финальное задание главы 4. Проверяет: padding, margin, border, border-radius.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<div class=\"card\">Карточка</div>\n```\n\nВ `<style>` для `.card`:\n- `padding: 20px;`\n- `margin: 10px auto;`\n- `border: 1px solid #ccc;`\n- `border-radius: 8px;`\n- `width: 300px;`\n\nВидимый текст: `Карточка`",
+      "starter": "<div class=\"card\">Карточка</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Карточка",
+      "must_contain": [".card", "padding:", "margin:", "auto", "border:", "solid", "border-radius:", "width:"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "check_type": "dom",
+    "title": "Контрольная: Раскладка",
+    "description": "Финальное задание главы 5. Проверяет: display, flexbox.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<div class=\"row\">\n  <div class=\"item\">A</div>\n  <div class=\"item\">B</div>\n  <div class=\"item\">C</div>\n</div>\n```\n\nВ `<style>`:\n1. `.row` — `display: flex; gap: 10px; justify-content: center;`\n2. `.item` — `padding: 10px; border: 1px solid black;`\n\nВидимый текст: `A B C`",
+      "starter": "<div class=\"row\">\n  <div class=\"item\">A</div>\n  <div class=\"item\">B</div>\n  <div class=\"item\">C</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "A B C",
+      "must_contain": ["display:", "flex", "gap:", "justify-content:", "center", ".item"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "check_type": "dom",
+    "title": "Контрольная: Позиционирование",
+    "description": "Финальное задание главы 6. Проверяет: position, z-index.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<div class=\"container\">\n  <div class=\"box\">X</div>\n</div>\n```\n\nВ `<style>`:\n1. `.container` — `position: relative; height: 200px;`\n2. `.box` — `position: absolute; top: 20px; right: 20px; z-index: 10;`\n\nВидимый текст: `X`",
+      "starter": "<div class=\"container\">\n  <div class=\"box\">X</div>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "X",
+      "must_contain": ["position:", "relative", "absolute", "top:", "right:", "z-index:"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "check_type": "dom",
+    "title": "Контрольная: Адаптивность",
+    "description": "Финальное задание главы 7. Проверяет: единицы, media queries.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<div class=\"box\">Адаптив</div>\n```\n\nВ `<style>`:\n1. `.box` — `font-size: 1rem; padding: 1rem;`\n2. Media query для `max-width: 600px`: `.box { font-size: 2rem; }`\n\nВидимый текст: `Адаптив`",
+      "starter": "<div class=\"box\">Адаптив</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Адаптив",
+      "must_contain": ["@media", "max-width", "600px", "rem", "font-size"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "check_type": "dom",
+    "title": "Контрольная: Переходы и анимации",
+    "description": "Финальное задание главы 8. Проверяет: transition, transform, animation.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<button class=\"btn\">Кнопка</button>\n<div class=\"spin\">X</div>\n```\n\nВ `<style>`:\n1. `.btn` — `background: gray; color: white; padding: 8px 16px; border: none; transition: background 0.3s ease;`\n2. `.btn:hover` — `background: blue;`\n3. `.spin` — `display: inline-block; animation: rotate 2s linear infinite;`\n4. `@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`\n\nВидимый текст: `Кнопка X`",
+      "starter": "<button class=\"btn\">Кнопка</button>\n<div class=\"spin\">X</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Кнопка X",
+      "must_contain": ["transition:", "0.3s", "ease", ".btn:hover", "@keyframes", "animation:", "transform:", "rotate"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "check_type": "dom",
+    "title": "Контрольная: Продвинутый CSS",
+    "description": "Финальное задание главы 9. Проверяет: :nth-child, CSS-переменные, calc, object-fit.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<ul class=\"list\">\n  <li>Один</li>\n  <li>Два</li>\n  <li>Три</li>\n</ul>\n<img class=\"photo\" src=\"pic.jpg\" alt=\"Фото\">\n```\n\nВ `<style>`:\n1. `:root` — `--accent: #007bff;`\n2. `.list li` — `padding: calc(8px + 0.5rem);`\n3. `.list li:nth-child(2)` — `color: var(--accent);`\n4. `.list li:not(:last-child)` — `border-bottom: 1px solid #ccc;`\n5. `.photo` — `width: 200px; height: 200px; object-fit: cover;`\n\nВидимый текст: `Один Два Три`",
+      "starter": "<ul class=\"list\">\n  <li>Один</li>\n  <li>Два</li>\n  <li>Три</li>\n</ul>\n<img class=\"photo\" src=\"pic.jpg\" alt=\"Фото\">\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Один Два Три",
+      "must_contain": ["--accent", "var(--accent)", ":root", "calc(", "nth-child", ":not(", "object-fit:", "cover"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "check_type": "dom",
+    "title": "Контрольная: Итоговая",
+    "description": "Финальное задание курса. Собери адаптивную карточку с flexbox и адаптивом.",
+    "practice": {
+      "description": "Дан HTML:\n```html\n<div class=\"card\">\n  <h2>Товар</h2>\n  <p>Описание</p>\n  <button>Купить</button>\n</div>\n```\n\nВ `<style>`:\n- `.card` — `padding: 20px; border: 1px solid #ccc; border-radius: 8px; max-width: 300px;`\n- `.card h2` — `color: #333;`\n- `button` — `padding: 8px 16px; background: #007bff; color: white; border: none; cursor: pointer;`\n\nВидимый текст: `Товар Описание Купить`",
+      "starter": "<div class=\"card\">\n  <h2>Товар</h2>\n  <p>Описание</p>\n  <button>Купить</button>\n</div>\n<style>\n  /* TODO */\n</style>\n",
+      "expected": "Товар Описание Купить",
+      "must_contain": [".card", "padding:", "border:", "border-radius:", "max-width:", ".card h2", "button", "background:", "color:", "cursor:"]
+    }
+  }
+}

@@ -1,0 +1,127 @@
+[
+  {
+    "id": 1,
+    "title": "What is HTML",
+    "lessons": [
+      { "id": 1, "title": "HTML is Markup, Not Programming", "status": "current" },
+      { "id": 2, "title": "First Document", "status": "locked" },
+      { "id": 3, "title": "Headings and Paragraphs", "status": "locked" },
+      { "id": 4, "title": "Comments", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Text and Links",
+    "lessons": [
+      { "id": 5, "title": "Lists: ul, ol, li", "status": "locked" },
+      { "id": 6, "title": "Links: a href", "status": "locked" },
+      { "id": 7, "title": "Images: img src alt", "status": "locked" },
+      { "id": 8, "title": "Text Formatting", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Semantics and Structure",
+    "lessons": [
+      { "id": 9, "title": "header, nav, main, footer", "status": "locked" },
+      { "id": 10, "title": "section, article, aside", "status": "locked" },
+      { "id": 11, "title": "div and span", "status": "locked" },
+      { "id": 12, "title": "Nesting and Readability", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Forms",
+    "lessons": [
+      { "id": 13, "title": "form, input, label", "status": "locked" },
+      { "id": 14, "title": "Input Types", "status": "locked" },
+      { "id": 15, "title": "textarea, select, option, button", "status": "locked" },
+      { "id": 16, "title": "HTML Validation", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Tables and Media",
+    "lessons": [
+      { "id": 17, "title": "Tables: table, tr, td, th", "status": "locked" },
+      { "id": 18, "title": "thead, tbody, caption", "status": "locked" },
+      { "id": 19, "title": "video, audio, iframe", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Accessibility",
+    "lessons": [
+      { "id": 20, "title": "alt and label", "status": "locked" },
+      { "id": 21, "title": "ARIA Basics", "status": "locked" },
+      { "id": 22, "title": "Semantics vs div", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "HTML5 and Advanced",
+    "lessons": [
+      { "id": 23, "title": "figure, figcaption, details, summary", "status": "locked" },
+      { "id": 24, "title": "meta: charset, viewport, description", "status": "locked" },
+      { "id": 25, "title": "Assembling a Page", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Practice",
+    "lessons": [
+      { "id": 26, "title": "Mini-project: Business Card", "status": "locked" },
+      { "id": 27, "title": "Final", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "Extended Forms",
+    "lessons": [
+      { "id": 28, "title": "fieldset, legend", "status": "locked" },
+      { "id": 29, "title": "datalist", "status": "locked" },
+      { "id": 30, "title": "More input types", "status": "locked" },
+      { "id": 31, "title": "output, progress, meter", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Responsive Media",
+    "lessons": [
+      { "id": 32, "title": "srcset, sizes", "status": "locked" },
+      { "id": 33, "title": "picture, source", "status": "locked" },
+      { "id": 34, "title": "loading=\"lazy\"", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Advanced HTML",
+    "lessons": [
+      { "id": 35, "title": "dialog", "status": "locked" },
+      { "id": 36, "title": "template", "status": "locked" },
+      { "id": 37, "title": "canvas", "status": "locked" },
+      { "id": 38, "title": "svg inline", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  },
+  {
+    "id": 12,
+    "title": "Practice",
+    "lessons": [
+      { "id": 39, "title": "Practice: Registration Form", "status": "locked" },
+      { "id": 40, "title": "Practice: Gallery with picture", "status": "locked" },
+      { "id": 41, "title": "Final", "status": "locked" }
+    ],
+    "trophy": { "title": "Chapter Trophy", "status": "locked" }
+  }
+]

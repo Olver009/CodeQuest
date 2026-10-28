@@ -6,13 +6,14 @@
   <link rel="stylesheet" href="style.css">
   <script src="i18n.js"></script>
   <script src="drag.js"></script>
+  <script src="toast.js"></script>
   <style>
     .node-top, .node-icon { transition: top 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .node:hover .node-top { top: 2px; }
     .node:hover .node-icon { top: 14px; }
     .node.pressed .node-top { top: 6px; }
     .node.pressed .node-icon { top: 18px; }
-    .node-container.active-tooltip { z-index: 9999 !important; }
+    .node-container.active-tooltip { z-index: 10 !important; }
     .node-tooltip {
       position: absolute; top: calc(100% + 12px); left: 50%;
       transform: translateX(-50%) translateY(-10px) scale(0.9);
@@ -64,19 +65,67 @@
     </aside>
 
     <main class="main">
-      <header class="main-header">
+      <header class="main-header" id="main-header">
         <div class="main-header-text">
-          <nav class="breadcrumbs"><a href="#" class="breadcrumbs-link" data-i18n="breadcrumb_program">Программа</a><span class="breadcrumbs-sep">›</span><span class="breadcrumbs-current" data-i18n="breadcrumb_section">Раздел 1 · Основы</span></nav>
-          <h1 class="main-title" data-i18n="title_main">Python Основы</h1>
+          <nav class="breadcrumbs"><a href="#" class="breadcrumbs-link" data-i18n="breadcrumb_program">Программа</a><span class="breadcrumbs-sep">›</span><span class="breadcrumbs-current" id="breadcrumb-chapter" data-i18n="breadcrumb_section">Раздел 1 · Основы</span></nav>
+          <h1 class="main-title" id="main-title" data-i18n="title_main">Python Основы</h1>
+          <div class="main-subtitle" id="header-lesson"></div>
         </div>
       </header>
       <div class="main-body" id="map-container" style="position: relative;"></div>
     </main>
 
     <aside class="right-panel">
-      <div class="stats-bar" style="justify-content: flex-start;">
-        <button class="stat-item stat-streak" id="streak-widget"><span class="stat-val" id="streak-count">0</span><span id="streak-icon" style="font-size: 18px;">🔥</span></button>
+      <div class="stats-bar" style="display: flex; align-items: center; gap: 12px;">
+        <!-- ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ -->
+        <div class="lang-selector" id="lang-selector">
+          <button class="lang-trigger" id="lang-trigger">
+            <img src="icons/python.svg" alt="Python" onerror="this.style.display='none'">
+          </button>
+
+          <div class="lang-menu" id="lang-menu">
+            <div class="lang-item" onclick="changeLanguage('python', 'icons/python.svg')">
+              <img src="icons/python.svg" alt="Python" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>Python</h4></div>
+            </div>
+            <div class="lang-item" onclick="changeLanguage('java', 'icons/java.svg')">
+              <img src="icons/java.svg" alt="Java" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>Java</h4></div>
+            </div>
+            <div class="lang-item" onclick="changeLanguage('cpp', 'icons/cplusplus.svg')">
+              <img src="icons/cplusplus.svg" alt="C++" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>C++</h4></div>
+            </div>
+            <div class="lang-item" onclick="changeLanguage('c', 'icons/c.svg')">
+              <img src="icons/c.svg" alt="C" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>C</h4></div>
+            </div>
+            <div class="lang-item" onclick="changeLanguage('javascript', 'icons/javascript.svg')">
+              <img src="icons/javascript.svg" alt="JavaScript" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>JavaScript</h4></div>
+            </div>
+            <div class="lang-item" onclick="changeLanguage('html', 'icons/html.svg')">
+              <img src="icons/html.svg" alt="HTML" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>HTML</h4></div>
+            </div>
+            <div class="lang-item" onclick="changeLanguage('css', 'icons/css.svg')">
+              <img src="icons/css.svg" alt="CSS" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>CSS</h4></div>
+            </div>
+            <div class="lang-item" onclick="changeLanguage('prog', 'icons/prog.svg')">
+              <img src="icons/prog.svg" alt="General Code" onerror="this.style.display='none'">
+              <div class="lang-bubble"><h4>General Code</h4></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Огонек -->
+        <button class="stat-item stat-streak" id="streak-widget">
+          <span class="stat-val" id="streak-count">0</span>
+          <span id="streak-icon" style="font-size: 18px;">🔥</span>
+        </button>
       </div>
+
       <div class="widget" style="display: flex; flex-direction: column; gap: 12px;">
         <h3 style="margin: 0; font-size: 16px; font-weight: bold;" data-i18n="progress_title">Ваш прогресс</h3>
         <div style="display: flex; justify-content: space-between; font-size: 14px; color: var(--text-secondary);">
@@ -95,13 +144,81 @@
 </div>
 
 <script>
+  // --- ЛОГИКА ВЫПАДАЮЩЕГО МЕНЮ ЯЗЫКОВ ---
+  document.addEventListener('DOMContentLoaded', () => {
+    const langTrigger = document.getElementById('lang-trigger');
+    const langMenu = document.getElementById('lang-menu');
+
+    if (langTrigger && langMenu) {
+      langTrigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langMenu.classList.toggle('open');
+      });
+
+      document.addEventListener('click', () => {
+        langMenu.classList.remove('open');
+      });
+    }
+  });
+
+  async function changeLanguage(langCode, iconSrc) {
+    const langTriggerImg = document.querySelector('#lang-trigger img');
+    if (langTriggerImg) langTriggerImg.src = iconSrc;
+
+    const titlebarIcon = document.querySelector('.titlebar-icon');
+    if (titlebarIcon) titlebarIcon.src = iconSrc;
+
+    const langMenu = document.getElementById('lang-menu');
+    if (langMenu) langMenu.classList.remove('open');
+
+    const res = await pywebview.api.set_active_lang(langCode);
+    if (res && res.success) {
+      // Карта другого курса имеет другую геометрию: сохранённый скролл
+      // предыдущего языка уводит в пустоту, поэтому сбрасываем его.
+      localStorage.removeItem('mapScrollY');
+      window.location.reload();
+    } else {
+      showToast("Ошибка при смене языка", "error");
+    }
+  }
+
+  // --- ОСНОВНАЯ ЛОГИКА ---
   let allNodes = [], mapDiv = document.getElementById('map-container'), currentLessonLink = null;
 
   window.addEventListener('pywebviewready', async () => {
     await applyLanguage();
 
-    // Загружаем прогресс ДО использования в Совете дня
     const savedProgress = await pywebview.api.load_data();
+
+    // Применяем тему (если выбрана светлая)
+    if (savedProgress.settings_app_theme === 'light') {
+      document.body.classList.add('light-theme');
+    }
+
+    const activeLang = await pywebview.api.get_active_lang();
+    const langIcons = {
+      "python": "icons/python.svg", "java": "icons/java.svg", "cpp": "icons/cplusplus.svg",
+      "c": "icons/c.svg", "javascript": "icons/javascript.svg", "html": "icons/html.svg",
+      "css": "icons/css.svg", "prog": "icons/prog.svg"
+    };
+    const activeIcon = langIcons[activeLang] || "icons/python.svg";
+    document.querySelector('#lang-trigger img').src = activeIcon;
+    document.querySelector('.titlebar-icon').src = activeIcon;
+
+
+    // Заголовок страницы показывал «Python Основы» даже для Java/C++.
+    const langNames = {
+      "python": "Python", "java": "Java", "cpp": "C++", "c": "C",
+      "javascript": "JavaScript", "html": "HTML", "css": "CSS", "prog": "General Code"
+    };
+    const mainTitle = document.getElementById('main-title');
+    if (mainTitle) {
+      const langName = langNames[activeLang] || "Python";
+      mainTitle.textContent = savedProgress.settings_lang === 'en'
+        ? `${langName} Basics`
+        : `${langName} Основы`;
+      mainTitle.removeAttribute('data-i18n');
+    }
 
     // --- Совет дня ---
     const tips = {
@@ -153,7 +270,6 @@
     const currentLang = savedProgress.settings_lang || 'ru';
     const tipsArray = tips[currentLang] || tips['ru'];
 
-    // Выбираем совет в зависимости от дня года (меняется раз в сутки)
     const now = new Date();
     const start = new Date(now.getFullYear(), 0, 0);
     const diff = now - start;
@@ -169,6 +285,7 @@
       document.documentElement.style.setProperty('--editor-font-size', fontSize + 'px');
       mapDiv.innerHTML = '';
       let lessonCounter = 1, sequence = [];
+      const lang = savedProgress.settings_lang || 'ru';
 
       chapters.forEach(ch => { ch.lessons.forEach(l => sequence.push({ type: 'lesson', data: l, chapterId: ch.id })); sequence.push({ type: 'trophy', data: ch.trophy, chapterId: ch.id }); });
       const isDevMode = await pywebview.api.get_dev_mode();
@@ -176,12 +293,12 @@
 
       sequence.forEach((item) => {
         let id = item.type === 'lesson' ? item.data.id : `trophy_${item.chapterId}`;
-        let savedStatus = savedProgress[`status_${id}`];
+        let savedStatus = savedProgress[`${activeLang}_status_${id}`];
 
         if (savedStatus === 'done') {
           item.data.status = 'done';
         } else if (isDevMode) {
-          item.data.status = 'current'; // В режиме разработчика разблокировано всё
+          item.data.status = 'current';
         } else if (!currentUnlocked) {
           item.data.status = 'current';
           currentUnlocked = true;
@@ -193,9 +310,10 @@
       chapters.forEach((chapter) => {
         const chapterDiv = document.createElement('div');
         chapterDiv.className = 'chapter';
-        const lang = savedProgress.settings_lang || 'ru';
         const chapterTitle = typeof chapter.title === 'object' ? (chapter.title[lang] || chapter.title['ru']) : chapter.title;
         chapterDiv.innerHTML = `<div class="chapter-title"><span class="chapter-title-line"></span><p>${chapterTitle}</p><span class="chapter-title-line"></span></div><div class="chapter-body"></div>`;
+        chapterDiv.dataset.chapterId = chapter.id;
+        chapterDiv.dataset.chapterTitle = chapterTitle;
         const bodyDiv = chapterDiv.querySelector('.chapter-body');
 
         chapter.lessons.forEach((lesson) => {
@@ -223,6 +341,10 @@
                   <p class="status-text">${statusText}</p>
                   <button class="btn-continue" onclick="window.location.href='${linkHref}'">${lang === 'en' ? 'Continue' : 'Продолжить'}</button>
               </div>`;
+          nodeContainer.dataset.lessonNumber = lessonCounter;
+          nodeContainer.dataset.lessonTitle = lTitle || '';
+          nodeContainer.dataset.status = lesson.status;
+          nodeContainer.dataset.kind = 'lesson';
           lessonCounter++; bodyDiv.appendChild(nodeContainer); allNodes.push(nodeContainer);
         });
 
@@ -248,13 +370,18 @@
                 <button class="btn-continue" onclick="window.location.href='trophy.html?id=${chapter.id}'">${lang === 'en' ? 'Continue' : 'Продолжить'}</button>
             </div>`;
         bodyDiv.appendChild(trophyContainer); allNodes.push(trophyContainer);
+        trophyContainer.dataset.kind = 'trophy';
+        trophyContainer.dataset.status = chapter.trophy.status;
+        trophyContainer.dataset.chapterTitle = chapterTitle;
         mapDiv.appendChild(chapterDiv);
       });
+
+      bindHeaderSync(lang);
 
       await updateStreakUI(); drawLines();
       let totalLessons = sequence.length, doneLessons = sequence.filter(s => s.data.status === 'done').length;
       document.getElementById('progress-text').textContent = `${doneLessons} / ${totalLessons}`;
-      document.getElementById('progress-bar').style.width = `${(doneLessons / totalLessons) * 100}%`;
+      document.getElementById('progress-bar').style.width = `${totalLessons ? (doneLessons / totalLessons) * 100 : 0}%`;
       const currentLessonNode = sequence.find(s => s.data.status === 'current');
       if (currentLessonNode) {
         currentLessonLink = currentLessonNode.type === 'trophy' ? `trophy.html?id=${currentLessonNode.chapterId}` : (currentLessonNode.data.type === 'book' ? `book.html?id=${currentLessonNode.data.id}` : `lesson.html?id=${currentLessonNode.data.id}`);
@@ -288,14 +415,78 @@
 
   function continueLearning() { if (currentLessonLink) window.location.href = currentLessonLink; }
 
+  // Шапка прилипает к верху и подсказывает, где мы: главу — по прокрутке,
+  // конкретный урок — по наведению/фокусу на узле.
+  function bindHeaderSync(lang) {
+    const mainEl = document.querySelector('.main');
+    const headerLesson = document.getElementById('header-lesson');
+    const chapterLabel = document.getElementById('breadcrumb-chapter');
+    const chapters = [...mapDiv.querySelectorAll('.chapter')];
+    if (!mainEl || !headerLesson || !chapters.length) return;
+
+    const t = (ru, en) => (lang === 'en' ? en : ru);
+
+    const showChapter = (chapterEl) => {
+      if (!chapterEl || !chapterLabel) return;
+      chapterLabel.textContent = chapterEl.dataset.chapterTitle || '';
+      chapterLabel.removeAttribute('data-i18n');
+    };
+
+    const lessonText = (node, note) => {
+      const status = node.dataset.status;
+      let iconName = 'status-locked.svg';
+      if (status === 'done') iconName = 'status-done.svg';
+      else if (status === 'current') iconName = 'status-current.svg';
+
+      const mark = `<img src="icons/${iconName}" class="status-icon" alt="">`;
+      let text;
+      if (node.dataset.kind === 'trophy') {
+        text = `${mark} ${t('Контрольная', 'Quiz')}: ${node.dataset.chapterTitle || ''}`;
+      } else {
+        const chapterName = node.closest('.chapter')?.dataset.chapterTitle;
+        const where = chapterName ? ` · ${chapterName}` : '';
+        text = `${mark} ${t('Урок', 'Lesson')} ${node.dataset.lessonNumber || ''}: ${node.dataset.lessonTitle || ''}${where}`;
+      }
+      const suffix = note ? ` · ${note}` : '';
+      return `<strong>${text}</strong>${suffix}`;
+    };
+
+    const showLesson = (node) => {
+      if (!node) return; // Больше не сбрасываем на "Вы здесь"
+      const chapterEl = node.closest('.chapter');
+      if (chapterEl) showChapter(chapterEl);
+      headerLesson.innerHTML = lessonText(node);
+    };
+
+    const updateChapterFromScroll = () => {
+      const headerBottom = (document.getElementById('main-header')?.offsetHeight || 0) + 24;
+      let active = chapters[0];
+      for (const ch of chapters) {
+        if (ch.getBoundingClientRect().top - headerBottom <= 0) active = ch;
+      }
+      showChapter(active);
+    };
+
+    mainEl.addEventListener('scroll', updateChapterFromScroll, { passive: true });
+    updateChapterFromScroll();
+
+    // Изначально шапка пустая, ничего не выводим
+    headerLesson.innerHTML = '';
+
+    mapDiv.querySelectorAll('.node-container').forEach(node => {
+      node.addEventListener('click', () => showLesson(node));
+      node.addEventListener('focusin', () => showLesson(node));
+    });
+  }
+
   async function updateStreakUI() {
     try {
       const status = await pywebview.api.get_streak_status();
       document.getElementById('streak-count').textContent = status.streak;
       const icon = document.getElementById('streak-icon'), widget = document.getElementById('streak-widget');
-      if (status.frozen) { icon.style.filter = 'hue-rotate(180deg)'; widget.style.opacity = '1'; }
-      else if (status.streak > 0) { icon.style.filter = 'none'; widget.style.opacity = '1'; }
-      else { icon.style.filter = 'grayscale(100%)'; widget.style.opacity = '0.5'; }
+      if (status.frozen) { icon.style.filter = 'hue-rotate(180deg)'; widget.style.opacity = '1'; widget.title = t('streak_frozen_hint'); }
+      else if (status.streak > 0) { icon.style.filter = 'none'; widget.style.opacity = '1'; widget.title = ''; }
+      else { icon.style.filter = 'grayscale(100%)'; widget.style.opacity = '0.5'; widget.title = ''; }
     } catch(e) {}
   }
 
@@ -304,13 +495,14 @@
     const svgNS = "http://www.w3.org/2000/svg", svg = document.createElementNS(svgNS, "svg");
     svg.setAttribute("style", "position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;");
     mapDiv.insertBefore(svg, mapDiv.firstChild);
-    const mapRect = mapDiv.getBoundingClientRect();
+    // offsetLeft/offsetTop считаются от padding-края mapDiv (position: relative)
+    // и не зависят от прокрутки .main, поэтому линии не «отстают» при скролле.
+    const center = (node) => ({ x: node.offsetLeft + node.offsetWidth / 2, y: node.offsetTop + node.offsetHeight / 2 });
     for (let i = 1; i < allNodes.length; i++) {
       const prevNode = allNodes[i - 1], currNode = allNodes[i], prevChapter = prevNode.closest('.chapter'), currChapter = currNode.closest('.chapter');
       if (prevChapter !== currChapter) continue;
-      const prevRect = prevNode.getBoundingClientRect(), currRect = currNode.getBoundingClientRect();
-      const x1 = prevRect.left - mapRect.left + prevRect.width / 2, y1 = prevRect.top - mapRect.top + prevRect.height / 2;
-      const x2 = currRect.left - mapRect.left + currRect.width / 2, y2 = currRect.top - mapRect.top + currRect.height / 2;
+      const p1 = center(prevNode), p2 = center(currNode);
+      const x1 = p1.x, y1 = p1.y, x2 = p2.x, y2 = p2.y;
       const yMid = (y1 + y2) / 2, path = document.createElementNS(svgNS, "path");
       path.setAttribute("d", `M ${x1} ${y1} C ${x1} ${yMid}, ${x2} ${yMid}, ${x2} ${y2}`);
       path.setAttribute("stroke-width", "6"); path.setAttribute("fill", "none");

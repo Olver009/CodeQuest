@@ -1,0 +1,123 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Контрольная: Введение",
+    "description": "Финальное задание главы 1. Проверяет: компиляцию, структуру main, printf.",
+    "practice": {
+      "description": "Напиши программу с `#include <stdio.h>`, `int main()`, выведи три строки через `printf`:\n```\nC\nУрок 1\nГотово\n```\nЗаверши `return 0;`.",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO: три printf\n    return 0;\n}\n",
+      "expected": "C\nУрок 1\nГотово",
+      "must_contain": ["#include <stdio.h>", "int main", "printf", "return 0"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Контрольная: Переменные и типы",
+    "description": "Финальное задание главы 2. Проверяет: типы, printf, приведение.",
+    "practice": {
+      "description": "Дано:\n```\nint a = 7;\nint b = 2;\ndouble c = 3.5;\n```\n\nВыведи через `printf`:\n```\na + b = 9\na / b = 3\na % b = 1\n(double) a / b = 3.500000\nc * 2 = 7.000000\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int a = 7;\n    int b = 2;\n    double c = 3.5;\n    // TODO\n    return 0;\n}\n",
+      "expected": "a + b = 9\na / b = 3\na % b = 1\n(double) a / b = 3.500000\nc * 2 = 7.000000",
+      "must_contain": ["int a", "double c", "(double)", "%d", "%f", "printf"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Контрольная: Ввод",
+    "description": "Финальное задание главы 3. Проверяет: scanf, арифметику с вводом.",
+    "practice": {
+      "description": "Прочитай два целых числа через `scanf`, выведи:\n```\nСумма: 15\nПроизведение: 50\n```\n\n**stdin:**\n```\n5\n10\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int a, b;\n    // TODO: scanf + printf\n    return 0;\n}\n",
+      "expected": "Сумма: 15\nПроизведение: 50",
+      "must_contain": ["scanf", "%d", "printf", "a + b", "a * b"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Контрольная: Условия",
+    "description": "Финальное задание главы 4. Проверяет: if/else, switch.",
+    "practice": {
+      "description": "Дано `int score = 78;`. Через `if / else if / else`:\n- `>= 90` → `Отлично`\n- `>= 75` → `Хорошо`\n- `>= 60` → `Удовлетворительно`\n- иначе → `Плохо`\n\nДля 78:\n```\nХорошо\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int score = 78;\n    // TODO\n    return 0;\n}\n",
+      "expected": "Хорошо",
+      "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "score >= 60", "printf"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Контрольная: Циклы",
+    "description": "Финальное задание главы 5. Проверяет: for, continue, накопитель.",
+    "practice": {
+      "description": "Через `for` от 1 до 10 найди сумму нечётных (пропуская чётные через `continue`). Выведи:\n```\nСумма нечётных: 25\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    int total = 0;\n    // TODO\n    return 0;\n}\n",
+      "expected": "Сумма нечётных: 25",
+      "must_contain": ["for", "continue", "% 2", "total", "printf"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Контрольная: Функции",
+    "description": "Финальное задание главы 6. Проверяет: функции, параметры, return, рекурсию.",
+    "practice": {
+      "description": "Создай две функции:\n- `int square(int x)` — возвращает `x * x`\n- `int fact(int n)` — рекурсивный факториал\n\nВ `main` выведи `square(5)` и `fact(5)`:\n```\nКвадрат: 25\nФакториал: 120\n```",
+      "starter": "#include <stdio.h>\n\n// TODO: square, fact\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Квадрат: 25\nФакториал: 120",
+      "must_contain": ["int square", "int fact", "return", "printf"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Контрольная: Массивы и строки",
+    "description": "Финальное задание главы 7. Проверяет: массивы, обход, string.h.",
+    "practice": {
+      "description": "Дан массив `int arr[] = {3, 7, 2, 9, 5};` (5 элементов).\n\nВыведи:\n```\nСумма: 26\nМаксимум: 9\nДлина строки 'hello': 5\n```",
+      "starter": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    int arr[] = {3, 7, 2, 9, 5};\n    // TODO\n    return 0;\n}\n",
+      "expected": "Сумма: 26\nМаксимум: 9\nДлина строки 'hello': 5",
+      "must_contain": ["for", "arr", "strlen", "printf", "sizeof"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Контрольная: Указатели",
+    "description": "Финальное задание главы 8. Проверяет: указатели, разыменование, malloc/free.",
+    "practice": {
+      "description": "1. Создай `int x = 10;`, указатель `int *p = &x;`. Выведи `*p` (разыменование).\n2. Через `p` измени `x` на 20, выведи `x`.\n3. `malloc` для массива из 3 int, заполни 10, 20, 30, выведи их. Освободи память.\n\n```\n*p = 10\nx = 20\n10 20 30\n```",
+      "starter": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "*p = 10\nx = 20\n10 20 30",
+      "must_contain": ["int *p", "&x", "*p", "malloc", "free", "printf"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Контрольная: Структуры",
+    "description": "Финальное задание главы 9. Проверяет: struct, typedef, доступ к полям.",
+    "practice": {
+      "description": "Создай `typedef struct { char name[20]; int age; } Person;`.\n\n1. Создай `Person p`, задай `name = \"Иван\"`, `age = 25`.\n2. Выведи через `.` — `Иван 25`.\n3. Указатель `Person *ptr = &p`, через `->` выведи `Иван 25`.\n\n```\nИван 25\nИван 25\n```",
+      "starter": "#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    // TODO\n} Person;\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Иван 25\nИван 25",
+      "must_contain": ["typedef struct", "Person", "strcpy", "->", "printf", "."]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Контрольная: Файлы",
+    "description": "Финальное задание главы 10. Проверяет: fopen, fprintf, fscanf, fclose.",
+    "practice": {
+      "description": "1. Открой `test.txt` на запись `\"w\"`, запиши `Привет`.\n2. Закрой.\n3. Открой на чтение `\"r\"`, прочитай через `fgets` в буфер, выведи `Прочитано: Привет`.\n\n```\nПрочитано: Привет\n```",
+      "starter": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Прочитано: Привет",
+      "must_contain": ["fopen", "fprintf", "fgets", "fclose", "printf"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Контрольная: Итоговая",
+    "description": "Финальное задание курса. Проверяет: структуры, массивы, функции, циклы.",
+    "practice": {
+      "description": "Структура `Book` — `char title[50]`, `int pages`.\n\nМассив из трёх книг:\n- `(\"Java\", 500)`, `(\"C\", 300)`, `(\"Python\", 400)`\n\nФункция `int totalPages(Book books[], int n)` — возвращает сумму страниц.\n\nВыведи:\n```\nВсего страниц: 1200\n```",
+      "starter": "#include <stdio.h>\n#include <string.h>\n\ntypedef struct {\n    // TODO\n} Book;\n\n// TODO: totalPages\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+      "expected": "Всего страниц: 1200",
+      "must_contain": ["typedef struct", "Book", "totalPages", "for", "printf"]
+    }
+  }
+}

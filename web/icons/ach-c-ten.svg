@@ -1,0 +1,9 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Блок памяти -->
+    <rect x="3" y="10" width="6" height="6" rx="1" fill="#659AD2"/>
+    <path d="M 6 12 V 14 M 6 12 H 8 M 6 14 H 8" stroke="#FFF" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Указатель (стрелка) -->
+    <path d="M 11 13 H 17 L 15 10 M 17 13 L 15 16" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Звездочка (разыменование) -->
+    <path d="M 19 8 L 21 10 M 21 8 L 19 10 M 20 7 V 11" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

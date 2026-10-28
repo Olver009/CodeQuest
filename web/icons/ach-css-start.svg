@@ -1,0 +1,13 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Палитра -->
+    <path d="M 12 4 C 5 4 2 9 2 14 C 2 19 7 21 12 20 C 14 19 14 17 13 16 C 12 15 13 14 15 14 C 19 14 22 11 22 8 C 22 5 17 4 12 4 Z" fill="#F5DEB3" stroke="#D2B48C" stroke-width="1"/>
+    <!-- Отверстие для пальца -->
+    <circle cx="8" cy="17" r="1.5" fill="#FFF"/>
+    <!-- Краски -->
+    <circle cx="7" cy="9" r="1.5" fill="#264DE4"/>
+    <circle cx="12" cy="7" r="1.5" fill="#E34F26"/>
+    <circle cx="17" cy="9" r="1.5" fill="#F7DF1E"/>
+    <circle cx="10" cy="12" r="1.5" fill="#3776AB"/>
+    <!-- Кисть -->
+    <path d="M 16 18 L 20 14 M 19 13 L 22 10 M 14 20 L 18 16" stroke="#8B4513" stroke-width="2" stroke-linecap="round"/>
+</svg>

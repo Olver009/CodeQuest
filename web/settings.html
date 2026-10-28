@@ -87,6 +87,33 @@
                     </div>
 
                     <div class="setting-row">
+                        <div class="setting-info"><h3 data-i18n="set_theme">Тема приложения</h3><p data-i18n="set_theme_desc">Светлая или темная</p></div>
+                        <div class="custom-select" id="theme-custom">
+                            <div class="custom-select-trigger">
+                                <span id="theme-label" data-i18n="theme_dark">Темная</span>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-option selected" data-value="dark" data-i18n="theme_dark">Темная</div>
+                                <div class="custom-option" data-value="light" data-i18n="theme_light">Светлая</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
+                        <div class="setting-info"><h3 data-i18n="set_editor_theme">Тема редактора</h3><p data-i18n="set_editor_theme_desc">Цветовая схема кода</p></div>
+                        <div class="custom-select" id="editor-theme-custom">
+                            <div class="custom-select-trigger">
+                                <span id="editor-theme-label" data-i18n="theme_dark_editor">Темная (Material)</span>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-option selected" data-value="material-darker" data-i18n="theme_dark_editor">Темная (Material)</div>
+                                <div class="custom-option" data-value="dracula" data-i18n="theme_dracula">Dracula</div>
+                                <div class="custom-option" data-value="monokai" data-i18n="theme_monokai">Monokai</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-row">
                         <div class="setting-info"><h3 data-i18n="set_font">Размер шрифта кода</h3><p data-i18n="set_font_desc">Для редактора и терминала</p></div>
                         <div class="custom-select" id="font-size-custom">
                             <div class="custom-select-trigger">
@@ -159,10 +186,18 @@
         currentData = await pywebview.api.load_data();
         document.getElementById('username-input').value = currentData.username || '';
 
+        // Применяем тему (если выбрана светлая)
+        // Применяем тему (если выбрана светлая)
+        if (currentData.settings_app_theme === 'light') {
+            document.body.classList.add('light-theme');
+        }
+
         // Инициализация кастомных селектов
         setSelected('font-size-custom', currentData.settings_font_size || "15");
         setSelected('sound-custom', currentData.settings_sound === false ? "false" : "true");
         setSelected('lang-custom', currentData.settings_lang || "ru");
+        setSelected('theme-custom', currentData.settings_app_theme || "dark");
+        setSelected('editor-theme-custom', currentData.settings_editor_theme || "material-darker");
         initCustomSelects();
     });
 
@@ -203,6 +238,8 @@
                     if (select.id === 'font-size-custom') saveSetting('settings_font_size', val);
                     if (select.id === 'sound-custom') saveSetting('settings_sound', val === 'true');
                     if (select.id === 'lang-custom') saveSetting('settings_lang', val);
+                    if (select.id === 'theme-custom') saveSetting('settings_app_theme', val);
+                    if (select.id === 'editor-theme-custom') saveSetting('settings_editor_theme', val);
                 });
             });
         });
@@ -226,23 +263,15 @@
     }
 
     async function saveSetting(key, value) {
-        try {
-            await pywebview.api.save_key(key, value);
-            currentData[key] = value;
-            if (key === 'settings_lang') {
-                window.location.reload();
-            } else if (key === 'username') {
-                showToast(t('toast_name_saved'), 'success');
-                // Перекидываем в профиль, чтобы имя обновилось
-                setTimeout(() => { window.location.href = 'profile.html'; }, 1000);
-            }
-        } catch (e) {
-            showToast(t('toast_save_error'), 'error');
+        await pywebview.api.save_key(key, value);
+        currentData[key] = value;
+        if (key === 'settings_lang' || key === 'settings_app_theme' || key === 'settings_editor_theme') {
+            window.location.reload();
         }
     }
 
     async function deleteAvatar() {
-        if (confirm(t('set_avatar') + '?')) {
+        if (confirm(t('msg_avatar_confirm'))) {
             await pywebview.api.save_key('user_avatar', '');
             showToast(t('toast_avatar_deleted'), 'success');
         }
@@ -273,7 +302,7 @@
     }
 
     async function resetProgress() {
-        if (confirm('ВНИМАНИЕ! Это удалит ВСЕ ваши достижения и настройки. Вы уверены?')) { await pywebview.api.reset_progress(); window.location.href = 'index.html'; }
+        if (confirm(t('msg_reset_confirm'))) { await pywebview.api.reset_progress(); window.location.href = 'index.html'; }
     }
 </script>
 </body>

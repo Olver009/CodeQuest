@@ -1,0 +1,134 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Chapter Test: What is HTML",
+    "description": "Final task of chapter 1. Checks: DOCTYPE, structure, headings, paragraphs, comments.",
+    "practice": {
+      "description": "Build a full HTML document:\n- `<!DOCTYPE html>` first line\n- `<html>`, `<head>` with `<title>` \"My Page\", `<body>`\n- `<h1>` \"Welcome\"\n- `<p>` \"This is my first page.\"\n- At least one HTML comment\n\nVisible text (in order): `Welcome This is my first page.`",
+      "starter": "<!-- TODO: full document -->\n",
+      "expected": "Welcome This is my first page.",
+      "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<title", "My Page", "<body", "<h1", "Welcome", "<p", "This is my first page.", "<!--"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Chapter Test: Text and Links",
+    "description": "Final task of chapter 2. Checks: lists, links, images, formatting.",
+    "practice": {
+      "description": "Build a page:\n- `<h2>` \"Resources\"\n- `<ul>` with three `<li>`: \"Books\", \"Videos\", \"Articles\"\n- `<a>` with `href=\"https://example.com\"` and text \"Example\"\n- `<img>` with `src` and `alt=\"Logo\"` (any URL)\n- `<p>` with `<strong>` and `<em>` inside\n\nVisible text (in order): `Resources Books Videos Articles Example Logo`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Resources Books Videos Articles Example Logo",
+      "must_contain": ["<h2", "<ul", "<li", "Books", "<a", "href=", "https://example.com", "Example", "<img", "src=", "alt=", "Logo", "<strong", "<em"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Chapter Test: Semantics",
+    "description": "Final task of chapter 3. Checks: header, nav, main, footer, section, article.",
+    "practice": {
+      "description": "Build a page with semantic structure:\n- `<header>` with `<h1>` \"Site\"\n- `<nav>` with two links: \"Home\", \"About\"\n- `<main>` with `<section>` (`<h2>` \"News\") and `<article>` (`<p>` \"News text.\")\n- `<footer>` with `<p>` \"© 2024\"\n\nVisible text (in order): `Site Home About News News text. © 2024`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Site Home About News News text. © 2024",
+      "must_contain": ["<header", "<h1", "Site", "<nav", "Home", "About", "<main", "<section", "<h2", "News", "<article", "<p", "News text.", "<footer", "© 2024"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Chapter Test: Forms",
+    "description": "Final task of chapter 4. Checks: form, input, label, select, button.",
+    "practice": {
+      "description": "Build a form:\n- `<form>`\n- `<label>` with `for` and `<input type=\"text\">` with `id` — \"Name\"\n- `<label>` \"Email\" and `<input type=\"email\">`\n- `<select>` with two `<option>`: \"One\", \"Two\"\n- `<button type=\"submit\">` with text \"Send\"\n\nVisible text (in order): `Name Email One Two Send`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Name Email One Two Send",
+      "must_contain": ["<form", "<label", "for=", "<input", "type=\"text\"", "type=\"email\"", "<select", "<option", "One", "Two", "<button", "type=\"submit\"", "Send"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Chapter Test: Tables and Media",
+    "description": "Final task of chapter 5. Checks: table, thead, tbody, caption, video.",
+    "practice": {
+      "description": "Build a page:\n- `<table>` with `<caption>` \"Scores\"\n- `<thead>` with `<tr>` and two `<th>`: \"Name\", \"Score\"\n- `<tbody>` with `<tr>`, `<td>` \"Anna\", `<td>` \"5\"\n- `<video>` with `controls` attribute and `<source>` (any URL)\n\nVisible text (in order): `Scores Name Score Anna 5`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Scores Name Score Anna 5",
+      "must_contain": ["<table", "<caption", "Scores", "<thead", "<tr", "<th", "Name", "Score", "<tbody", "<td", "Anna", "5", "<video", "controls", "<source"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Chapter Test: Accessibility",
+    "description": "Final task of chapter 6. Checks: alt, label, aria-label, role.",
+    "practice": {
+      "description": "Build an accessible page:\n- `<img>` with non-empty `alt=\"Cat photo\"`\n- `<label>` with `for` and `<input>` with `id`\n- `<button>` with `aria-label=\"Close\"` and visible text \"X\"\n- `<nav role=\"navigation\">` with one link \"Home\"\n\nVisible text (in order): `Cat photo Name X Home`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Cat photo Name X Home",
+      "must_contain": ["<img", "alt=\"Cat photo\"", "<label", "for=", "<input", "id=", "aria-label=", "Close", "<nav", "role=\"navigation\"", "Home"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Chapter Test: HTML5",
+    "description": "Final task of chapter 7. Checks: figure, details, meta tags.",
+    "practice": {
+      "description": "Build a page:\n- `<figure>` with `<img>` (with `alt`) and `<figcaption>` \"Caption\"\n- `<details>` with `<summary>` \"More\" and `<p>` \"Hidden text.\"\n- `<meta charset=\"UTF-8\">` and `<meta name=\"viewport\" ...>`\n\nVisible text (in order): `Caption More Hidden text.`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Caption More Hidden text.",
+      "must_contain": ["<figure", "<img", "alt=", "<figcaption", "Caption", "<details", "<summary", "More", "Hidden text.", "<meta charset=", "name=\"viewport\""]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Chapter Test: Practice",
+    "description": "Final task of chapter 8. Full page: semantics, forms, media, accessibility.",
+    "practice": {
+      "description": "Build a page:\n- `<!DOCTYPE html>`, `<html>`, `<head>` with `<title>` \"Portfolio\" and `<meta charset=\"UTF-8\">`\n- `<body>` with `<header>` (`<h1>` \"Ivan\"), `<nav>` with two links \"Portfolio\", \"Contact\"\n- `<main>` with `<section>` (`<h2>` \"About\") and `<p>` \"Developer.\"\n- `<form>` with `<label>` \"Email\", `<input type=\"email\">`, `<button>` \"Send\"\n- `<footer>` with `<p>` \"© 2024\"\n\nVisible text (in order): `Ivan Portfolio Contact About Developer. Email Send © 2024`",
+      "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+      "expected": "Ivan Portfolio Contact About Developer. Email Send © 2024",
+      "must_contain": ["<!DOCTYPE html>", "<html", "<head", "<title", "Portfolio", "<meta charset=", "<body", "<header", "<h1", "Ivan", "<nav", "Contact", "<main", "<section", "<h2", "About", "Developer.", "<form", "<label", "Email", "type=\"email\"", "<button", "Send", "<footer", "© 2024"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Chapter Test: Extended Forms",
+    "description": "Final task of chapter 9. Checks: fieldset, datalist, extended input types.",
+    "practice": {
+      "description": "Build a registration form:\n- `<form>` with `<fieldset>` (`<legend>` \"Personal\")\n- `<label for=\"n\">` \"Name\" + `<input type=\"text\" id=\"n\" required>`\n- `<label for=\"c\">` \"City\" + `<input list=\"cities\" id=\"c\">`\n- `<datalist id=\"cities\">` with `<option value=\"Moscow\">` and `<option value=\"Kazan\">`\n- `<label for=\"b\">` \"Birthday\" + `<input type=\"date\" id=\"b\">`\n- `<label for=\"g\">` \"Volume\" + `<input type=\"range\" id=\"g\" min=\"0\" max=\"100\">`\n\nVisible text: `Personal Name City Birthday Volume`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Personal Name City Birthday Volume",
+      "must_contain": ["<fieldset", "<legend", "Personal", "for=\"n\"", "required", "list=\"cities\"", "<datalist", "id=\"cities\"", "<option", "value=\"Moscow\"", "type=\"date\"", "type=\"range\"", "min=\"0\"", "max=\"100\""]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Chapter Test: Responsive Media",
+    "description": "Final task of chapter 10. Checks: srcset, sizes, picture, loading=lazy.",
+    "practice": {
+      "description": "Build a gallery:\n- `<figure>` with `<picture>`\n- `<source>` with `srcset=\"x.webp\" type=\"image/webp\"`\n- `<img>` with `src=\"x.jpg\"`, `alt=\"Photo\"`, `srcset` (400w, 800w), `sizes` and `loading=\"lazy\"`\n- `<figcaption>` \"Description\"\n\nVisible text: `Photo Description`",
+      "starter": "<!-- TODO -->\n",
+      "expected": "Photo Description",
+      "must_contain": ["<figure", "<picture", "<source", "type=\"image/webp\"", "<img", "src=", "alt=\"Photo\"", "srcset=", "400w", "800w", "sizes=", "loading=\"lazy\"", "<figcaption", "Description"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Chapter Test: Advanced HTML",
+    "description": "Final task of chapter 11. Checks: dialog, template, canvas, svg.",
+    "practice": {
+      "description": "Build a page:\n- `<dialog>` with `<p>` \"Hello\" and `<form method=\"dialog\">` with `<button>` \"OK\"\n- `<template id=\"tpl\">` with `<div>` and `<p>` \"X\"\n- `<canvas id=\"c\" width=\"100\" height=\"50\">`\n- `<svg>` with `<circle>` (r=10, fill=red)\n\nVisible text: (empty — all hidden or graphics)",
+      "starter": "<!-- TODO -->\n",
+      "expected": "",
+      "must_contain": ["<dialog", "Hello", "method=\"dialog\"", "<template", "id=\"tpl\"", "<canvas", "width=\"100\"", "<svg", "<circle", "r=\"10\"", "fill=\"red\""]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "title": "Chapter Test: Final",
+    "description": "Final task of the course. Full page: semantics, forms, media, accessibility.",
+    "practice": {
+      "description": "Build a page:\n- DOCTYPE, html, head (charset, viewport, title \"Portfolio\")\n- header (`<h1>` \"Ivan\", nav `<a>` \"About\", \"Contact\")\n- main: `<article>` (`<h2>` \"Project\", `<p>` \"Text.\"), `<section>` (`<h2>` \"Gallery\", `<picture>` with `<source>` and `<img alt=\"Photo\">`)\n- form with `<fieldset>` (`<legend>` \"Contact\"), `<label for=\"e\">` \"Email\", `<input type=\"email\" id=\"e\" required>`, `<button>` \"OK\"\n- footer (`<p>` \"© 2024\")\n\nVisible text: `Ivan About Contact Project Text. Gallery Photo Contact Email OK © 2024`",
+      "starter": "<!DOCTYPE html>\n<html>\n<head>\n  <!-- TODO -->\n</head>\n<body>\n  <!-- TODO -->\n</body>\n</html>\n",
+      "expected": "Ivan About Contact Project Text. Gallery Photo Contact Email OK © 2024",
+      "must_contain": ["<!DOCTYPE html>", "<meta charset=", "name=\"viewport\"", "<title", "Portfolio", "<header", "<h1", "Ivan", "<nav", "About", "Contact", "<main", "<article", "<h2", "Project", "Text.", "<section", "Gallery", "<picture", "<source", "<img", "alt=\"Photo\"", "<form", "<fieldset", "<legend", "<label", "type=\"email\"", "required", "<button", "<footer", "© 2024"]
+    }
+  }
+}

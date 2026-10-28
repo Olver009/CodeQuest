@@ -1,0 +1,134 @@
+{
+  "1": {
+    "chapter_id": 1,
+    "title": "Контрольная: Первые шаги",
+    "description": "Финальное задание главы 1. Проверяет: переменные, типы, арифметику, вывод.",
+    "practice": {
+      "description": "Дано:\n```\napples = 12\nboxes = 5\nprice = 45.5\nactive = true\n```\n\nВыведи четыре строки:\n```\nЯблок в коробке: 2\nОстаток: 2\nСтоимость всех: 546.0\nФлаг: true\n```",
+      "starter": "public class Main {\n    public static void main(String[] args) {\n        int apples = 12;\n        int boxes = 5;\n        double price = 45.5;\n        boolean active = true;\n        // TODO: четыре System.out.println\n    }\n}\n",
+      "expected": "Яблок в коробке: 2\nОстаток: 2\nСтоимость всех: 546.0\nФлаг: true",
+      "must_contain": ["int apples", "double price", "boolean active", "/", "%", "*", "System.out.println"]
+    }
+  },
+  "2": {
+    "chapter_id": 2,
+    "title": "Контрольная: Ввод и строки",
+    "description": "Финальное задание главы 2. Проверяет: Scanner, printf, строковые методы.",
+    "practice": {
+      "description": "Прочитай из stdin три значения (каждое на новой строке): цену (дробное), количество (целое), скидку в процентах (целое).\n\nВычисли сумму без скидки, размер скидки, итог.\n\nВыведи через `printf`:\n```\nЦена: 1500.50\nСумма: 4501.50\nИтого: 4051.35\n```\n\n**stdin для проверки:**\n```\n1500.50\n3\n10\n```",
+      "starter": "import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // TODO: nextDouble, nextInt, nextInt, вычисления, три printf\n    }\n}\n",
+      "expected": "Цена: 1500.50\nСумма: 4501.50\nИтого: 4051.35",
+      "must_contain": ["import java.util.Scanner", "new Scanner(System.in)", "nextDouble", "nextInt", "System.out.printf", "%.2f"]
+    }
+  },
+  "3": {
+    "chapter_id": 3,
+    "title": "Контрольная: Ветвления и циклы",
+    "description": "Финальное задание главы 3. Проверяет: for, switch, if/else, break.",
+    "practice": {
+      "description": "Для чисел от 1 до 7 выведи по строке:\n- день недели через `switch` (`1 = Пн`, `2 = Вт`, `3 = Ср`, `4 = Чт`, `5 = Пт`, `6 = Сб`, `7 = Вс`)\n- формат: `<n>: <день>`\n- для `n` равного 6 или 7 добавь `\" (выходной)\"` (через `if`)\n\n```\n1: Пн\n2: Вт\n3: Ср\n4: Чт\n5: Пт\n6: Сб (выходной)\n7: Вс (выходной)\n```",
+      "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: for 1..7, switch, if, println\n    }\n}\n",
+      "expected": "1: Пн\n2: Вт\n3: Ср\n4: Чт\n5: Пт\n6: Сб (выходной)\n7: Вс (выходной)",
+      "must_contain": ["for", "switch", "case", "break", "if", "System.out.println"]
+    }
+  },
+  "4": {
+    "chapter_id": 4,
+    "title": "Контрольная: Массивы и методы",
+    "description": "Финальное задание главы 4. Проверяет: массивы, обход, static-методы, printf.",
+    "practice": {
+      "description": "Создай три `static`-метода:\n- `int sumArray(int[] arr)` — сумма\n- `int maxArray(int[] arr)` — максимум\n- `double avgArray(int[] arr)` — среднее\n\nДан массив:\n```\nint[] data = {4, 8, 15, 16, 23, 42};\n```\n\nВыведи через `printf`:\n```\nСумма: 108\nМаксимум: 42\nСреднее: 18.00\n```",
+      "starter": "public class Main {\n    static int sumArray(int[] arr) { return 0; }\n    static int maxArray(int[] arr) { return 0; }\n    static double avgArray(int[] arr) { return 0; }\n\n    public static void main(String[] args) {\n        int[] data = {4, 8, 15, 16, 23, 42};\n        // TODO: три printf\n    }\n}\n",
+      "expected": "Сумма: 108\nМаксимум: 42\nСреднее: 18.00",
+      "must_contain": ["static int sumArray", "static int maxArray", "static double avgArray", "for", "arr.length", "(double)", "System.out.printf", "%.2f"]
+    }
+  },
+  "5": {
+    "chapter_id": 5,
+    "title": "Контрольная: Классы",
+    "description": "Финальное задание главы 5. Проверяет: конструктор, private, геттеры, static.",
+    "practice": {
+      "description": "Создай класс `Book`:\n- `private String title`\n- `private double price`\n- конструктор `Book(String title, double price)`\n- геттеры `getTitle()`, `getPrice()`\n- `private static int count` — увеличивается в конструкторе\n- `public static int getCount()`\n\nВ `main` создай три книги:\n- `(\"Book1\", 100.0)`, `(\"Book2\", 200.0)`, `(\"Book3\", 300.0)`\n\nВыведи через `printf` с `%.1f`:\n```\nBook1: 100.0\nBook2: 200.0\nBook3: 300.0\nВсего: 3\n```",
+      "starter": "class Book {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+      "expected": "Book1: 100.0\nBook2: 200.0\nBook3: 300.0\nВсего: 3",
+      "must_contain": ["class Book", "private String title", "private double price", "private static int count", "public Book(", "getTitle", "getPrice", "getCount", "System.out.printf"]
+    }
+  },
+  "6": {
+    "chapter_id": 6,
+    "title": "Контрольная: ООП",
+    "description": "Финальное задание главы 6. Проверяет: интерфейс, реализации, полиморфизм.",
+    "practice": {
+      "description": "Интерфейс `Shape` с двумя методами:\n- `double area()`\n- `String name()`\n\nРеализуй два класса:\n- `Rectangle` — поля `double width`, `double height`, `area = width * height`, `name = \"Rectangle\"`\n- `Circle` — поле `double r`, `area = 3.14 * r * r`, `name = \"Circle\"`\n\nВ `main`:\n```\nShape[] shapes = { new Rectangle(2, 3), new Circle(2) };\n```\n\nВ `for-each` выведи `System.out.println(name + \": \" + area)`.\n\n```\nRectangle: 6.0\nCircle: 12.56\n```",
+      "starter": "interface Shape {\n    // TODO\n}\n\nclass Rectangle implements Shape {\n    // TODO\n}\n\nclass Circle implements Shape {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+      "expected": "Rectangle: 6.0\nCircle: 12.56",
+      "must_contain": ["interface Shape", "double area", "String name", "implements Shape", "public double area", "public String name", "Shape[]", "for (Shape", "System.out.println"]
+    }
+  },
+  "7": {
+    "chapter_id": 7,
+    "title": "Контрольная: Коллекции и исключения",
+    "description": "Финальное задание главы 7. Проверяет: ArrayList, HashMap, try/catch.",
+    "practice": {
+      "description": "1. Создай `ArrayList<Integer>` с числами `1, 2, 1, 3`.\n2. Посчитай частоту каждого числа в `HashMap<Integer, Integer>`.\n3. Выведи для каждого уникального ключа `k: v` (порядок — по возрастанию ключа).\n4. Выведи `Всего: 4`.\n5. В блоке `try/catch` попробуй `Integer.parseInt(\"abc\")`. В `catch (NumberFormatException e)` выведи `Ошибка парсинга`.\n\n```\n1: 2\n2: 1\n3: 1\nВсего: 4\nОшибка парсинга\n```",
+      "starter": "import java.util.ArrayList;\nimport java.util.HashMap;\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<Integer> nums = new ArrayList<>();\n        HashMap<Integer, Integer> counts = new HashMap<>();\n        // TODO\n    }\n}\n",
+      "expected": "1: 2\n2: 1\n3: 1\nВсего: 4\nОшибка парсинга",
+      "must_contain": ["ArrayList", "HashMap", "put", "try", "catch", "NumberFormatException", "System.out.println"]
+    }
+  },
+  "8": {
+    "chapter_id": 8,
+    "title": "Контрольная: Практика",
+    "description": "Финальное задание главы 8. Проверяет: интерфейс, реализации, полиморфизм, ArrayList, printf.",
+    "practice": {
+      "description": "Интерфейс `Employee`:\n- `double salary()`\n- `String name()`\n\nРеализуй два класса:\n- `Manager` — поля `String name`, `double baseSalary`, `double bonus`; `salary = baseSalary + bonus`\n- `Developer` — поля `String name`, `double hourlyRate`, `int hours`; `salary = hourlyRate * hours`\n\nВ `main` создай `ArrayList<Employee>`:\n- `new Manager(\"Аня\", 100000, 20000)`\n- `new Developer(\"Ваня\", 1500, 80)`\n- `new Manager(\"Петя\", 90000, 10000)`\n\nВ `for-each` через `printf` с `%.2f` выведи `<name>: <salary>`. После — сумму `Всего: <sum>` с `%.2f`.\n\n```\nАня: 120000.00\nВаня: 120000.00\nПетя: 100000.00\nВсего: 340000.00\n```",
+      "starter": "import java.util.ArrayList;\n\ninterface Employee {\n    // TODO\n}\n\nclass Manager implements Employee {\n    // TODO\n}\n\nclass Developer implements Employee {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        ArrayList<Employee> staff = new ArrayList<>();\n        // TODO\n    }\n}\n",
+      "expected": "Аня: 120000.00\nВаня: 120000.00\nПетя: 100000.00\nВсего: 340000.00",
+      "must_contain": ["interface Employee", "double salary", "String name", "class Manager implements Employee", "class Developer implements Employee", "ArrayList", "for (Employee", "%.2f", "System.out.printf"]
+    }
+  },
+  "9": {
+    "chapter_id": 9,
+    "title": "Контрольная: Лямбды и Stream",
+    "description": "Финальное задание главы 9. Проверяет: лямбды, Stream, filter/map/collect.",
+    "practice": {
+      "description": "Дан список:\n```\nList<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\n```\n\nЧерез Stream:\n1. Оставь чётные (`filter`)\n2. Умножь на 10 (`map`)\n3. Собери в `List` (`collect(Collectors.toList())`)\n4. Выведи результат\n\n```\n[20, 40, 60]\n```",
+      "starter": "import java.util.List;\nimport java.util.stream.Collectors;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\n        // TODO: filter + map + collect + println\n    }\n}\n",
+      "expected": "[20, 40, 60]",
+      "must_contain": [".stream()", ".filter(", ".map(", ".collect(", "Collectors.toList", "System.out.println"]
+    }
+  },
+  "10": {
+    "chapter_id": 10,
+    "title": "Контрольная: Generics и Optional",
+    "description": "Финальное задание главы 10. Проверяет: generics, wildcards, Optional.",
+    "practice": {
+      "description": "1. Создай `class Box<T>` с конструктором `Box(T value)` и методом `T get()`.\n2. Создай `Box<String>(\"Привет\")`, выведи `get()`.\n3. Создай `Optional<String> empty = Optional.empty()`, выведи `empty.orElse(\"нет\")`.\n\n```\nПривет\nнет\n```",
+      "starter": "import java.util.Optional;\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO: Box + Optional\n    }\n}\n",
+      "expected": "Привет\nнет",
+      "must_contain": ["class Box<T>", "Optional.empty", ".orElse(", "System.out.println"]
+    }
+  },
+  "11": {
+    "chapter_id": 11,
+    "title": "Контрольная: enum, record, try-with-resources",
+    "description": "Финальное задание главы 11. Проверяет: enum, record, AutoCloseable.",
+    "practice": {
+      "description": "1. `enum Color { RED, GREEN, BLUE }` — выведи `Color.RED`.\n2. `record Point(int x, int y)` — создай `new Point(1, 2)` и выведи.\n3. Класс `Res implements AutoCloseable` с `close()` (печатает `closed`). Используй в `try-with-resources`, внутри выведи `used`.\n\n```\nRED\nPoint[x=1, y=2]\nused\nclosed\n```",
+      "starter": "public class Main {\n    public static void main(String[] args) {\n        // TODO: enum + record + try-with-resources\n    }\n}\n",
+      "expected": "RED\nPoint[x=1, y=2]\nused\nclosed",
+      "must_contain": ["enum Color", "record Point", "implements AutoCloseable", "try (", "System.out.println"]
+    }
+  },
+  "12": {
+    "chapter_id": 12,
+    "title": "Контрольная: Итоговая",
+    "description": "Финальное задание курса. Проверяет: классы, Stream, Optional.",
+    "practice": {
+      "description": "Класс `Product`:\n- поля `String name`, `double price`\n- конструктор\n\nДан список:\n```\nList<Product> products = List.of(\n    new Product(\"A\", 100),\n    new Product(\"B\", 200),\n    new Product(\"C\", 50)\n);\n```\n\n1. Через Stream посчитай сумму цен, выведи `Сумма: 350.0`.\n2. Найди первый продукт с ценой > 150 через `.filter().findFirst()` в `Optional`, выведи его имя через `ifPresentOrElse` → `B`.\n\n```\nСумма: 350.0\nB\n```",
+      "starter": "import java.util.List;\nimport java.util.Optional;\n\nclass Product {\n    // TODO\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        // TODO\n    }\n}\n",
+      "expected": "Сумма: 350.0\nB",
+      "must_contain": ["class Product", ".stream()", ".mapToDouble(", ".sum()", "Optional", ".findFirst()", "ifPresentOrElse", "System.out.printf"]
+    }
+  }
+}

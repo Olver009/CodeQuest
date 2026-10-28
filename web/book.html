@@ -62,10 +62,19 @@
 </div>
 
 <script>
-    let lessonId = null;
+    let lessonId = null, activeLang = "python";
 
     window.addEventListener('pywebviewready', async () => {
         await applyLanguage();
+
+        activeLang = await pywebview.api.get_active_lang();
+        const langIcons = {
+            "python": "icons/python.svg", "java": "icons/java.svg", "cpp": "icons/cplusplus.svg",
+            "c": "icons/c.svg", "javascript": "icons/javascript.svg", "html": "icons/html.svg",
+            "css": "icons/css.svg", "prog": "icons/prog.svg"
+        };
+        document.querySelector('.titlebar-icon').src = langIcons[activeLang] || "icons/python.svg";
+
         const urlParams = new URLSearchParams(window.location.search);
         lessonId = urlParams.get('id') || 1;
         localStorage.setItem('lastVisitedNode', `node-${lessonId}`);
@@ -93,7 +102,9 @@
     });
 
     async function finishBook() {
-        await pywebview.api.save_key(`status_${lessonId}`, 'done');
+        // Ключ с префиксом языка: книга Python не должна закрывать урок Java.
+        await pywebview.api.save_key(`${activeLang}_status_${lessonId}`, 'done');
+        await pywebview.api.check_achievements();
         window.location.href = 'index.html';
     }
 
@@ -102,9 +113,9 @@
             const status = await pywebview.api.get_streak_status();
             document.getElementById('topbar-streak-count').textContent = status.streak;
             const icon = document.getElementById('topbar-streak-icon'), widget = document.getElementById('topbar-streak-widget');
-            if (status.frozen) { icon.style.filter = 'hue-rotate(180deg)'; widget.style.opacity = '1'; }
-            else if (status.streak > 0) { icon.style.filter = 'none'; widget.style.opacity = '1'; }
-            else { icon.style.filter = 'grayscale(100%)'; widget.style.opacity = '0.5'; }
+            if (status.frozen) { icon.style.filter = 'hue-rotate(180deg)'; widget.style.opacity = '1'; widget.title = t('streak_frozen_hint'); }
+            else if (status.streak > 0) { icon.style.filter = 'none'; widget.style.opacity = '1'; widget.title = ''; }
+            else { icon.style.filter = 'grayscale(100%)'; widget.style.opacity = '0.5'; widget.title = ''; }
         } catch(e) {}
     }
 </script>

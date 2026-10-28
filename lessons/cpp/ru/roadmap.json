@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Введение",
+    "lessons": [
+      { "id": 1, "title": "Что такое C++ и зачем", "status": "current" },
+      { "id": 2, "title": "Компиляция: g++", "status": "locked" },
+      { "id": 3, "title": "Первая программа: iostream", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Основы",
+    "lessons": [
+      { "id": 4, "title": "Типы данных", "status": "locked" },
+      { "id": 5, "title": "cin / cout, форматирование", "status": "locked" },
+      { "id": 6, "title": "Ссылки и указатели", "status": "locked" },
+      { "id": 7, "title": "const и auto", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Управление",
+    "lessons": [
+      { "id": 8, "title": "if / switch", "status": "locked" },
+      { "id": 9, "title": "Циклы: for, while, do-while", "status": "locked" },
+      { "id": 10, "title": "break, continue, диапазонный for", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Функции",
+    "lessons": [
+      { "id": 11, "title": "Объявление и вызов", "status": "locked" },
+      { "id": 12, "title": "Перегрузка, значения по умолчанию", "status": "locked" },
+      { "id": 13, "title": "Передача по ссылке и const-ссылке", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Массивы и строки",
+    "lessons": [
+      { "id": 14, "title": "Массивы и std::array", "status": "locked" },
+      { "id": 15, "title": "std::string", "status": "locked" },
+      { "id": 16, "title": "std::vector", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Классы",
+    "lessons": [
+      { "id": 17, "title": "Класс, конструктор, методы", "status": "locked" },
+      { "id": 18, "title": "Инкапсуляция: private / public", "status": "locked" },
+      { "id": 19, "title": "static, this, инициализация полей", "status": "locked" },
+      { "id": 20, "title": "Деструктор и RAII", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Наследование и полиморфизм",
+    "lessons": [
+      { "id": 21, "title": "Наследование, protected", "status": "locked" },
+      { "id": 22, "title": "Виртуальные функции", "status": "locked" },
+      { "id": 23, "title": "Абстрактные классы, интерфейсы", "status": "locked" },
+      { "id": 24, "title": "Виртуальный деструктор", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "STL контейнеры",
+    "lessons": [
+      { "id": 25, "title": "vector: подробнее", "status": "locked" },
+      { "id": 26, "title": "map и unordered_map", "status": "locked" },
+      { "id": 27, "title": "set и unordered_set", "status": "locked" },
+      { "id": 28, "title": "Итераторы", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "STL алгоритмы и лямбды",
+    "lessons": [
+      { "id": 29, "title": "sort, reverse, min/max", "status": "locked" },
+      { "id": 30, "title": "find, count, accumulate", "status": "locked" },
+      { "id": 31, "title": "Лямбда-выражения", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "Умные указатели",
+    "lessons": [
+      { "id": 32, "title": "Стек, куча, new / delete", "status": "locked" },
+      { "id": 33, "title": "unique_ptr", "status": "locked" },
+      { "id": 34, "title": "shared_ptr и weak_ptr", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Исключения",
+    "lessons": [
+      { "id": 35, "title": "try / catch / throw", "status": "locked" },
+      { "id": 36, "title": "Свои исключения, noexception", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 12,
+    "title": "Шаблоны и move",
+    "lessons": [
+      { "id": 37, "title": "Шаблоны функций", "status": "locked" },
+      { "id": 38, "title": "Шаблоны классов", "status": "locked" },
+      { "id": 39, "title": "move-семантика, rvalue" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 13,
+    "title": "Практика",
+    "lessons": [
+      { "id": 40, "title": "Мини-проект: телефонная книга", "status": "locked" },
+      { "id": 41, "title": "Итоговая", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  }
+]

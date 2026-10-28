@@ -1,0 +1,11 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <path id="gear-small" d="M 12 4 L 14 5 L 16 5 L 17 7 L 17 9 L 18 10 L 17 11 L 17 13 L 16 15 L 14 15 L 12 16 L 10 15 L 8 15 L 7 13 L 7 11 L 6 10 L 7 9 L 7 7 L 8 5 L 10 5 Z" />
+    </defs>
+    <!-- Большая шестеренка -->
+    <use href="#gear-small" fill="#00599C" transform="translate(-2, 2) scale(1.2)"/>
+    <circle cx="12" cy="12" r="2" fill="#FFF" transform="translate(-2, 2) scale(1.2)"/>
+    <!-- Маленькая шестеренка -->
+    <use href="#gear-small" fill="#0077CC" transform="translate(12, 10) scale(0.8)"/>
+    <circle cx="12" cy="12" r="2" fill="#FFF" transform="translate(12, 10) scale(0.8)"/>
+</svg>

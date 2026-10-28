@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "title": "Введение",
+    "lessons": [
+      { "id": 1, "title": "JavaScript: что это и где работает", "status": "current" },
+      { "id": 2, "title": "Консоль, console.log", "status": "locked" },
+      { "id": 3, "title": "let и const", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 2,
+    "title": "Типы данных",
+    "lessons": [
+      { "id": 4, "title": "Типы и typeof", "status": "locked" },
+      { "id": 5, "title": "Строки", "status": "locked" },
+      { "id": 6, "title": "Числа", "status": "locked" },
+      { "id": 7, "title": "Приведение типов, == vs ===", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 3,
+    "title": "Условия и циклы",
+    "lessons": [
+      { "id": 8, "title": "if / else, тернарный", "status": "locked" },
+      { "id": 9, "title": "switch", "status": "locked" },
+      { "id": 10, "title": "for, while, do-while", "status": "locked" },
+      { "id": 11, "title": "break, continue", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 4,
+    "title": "Функции",
+    "lessons": [
+      { "id": 12, "title": "Function declaration", "status": "locked" },
+      { "id": 13, "title": "Arrow functions", "status": "locked" },
+      { "id": 14, "title": "Параметры и rest", "status": "locked" },
+      { "id": 15, "title": "Область видимости, замыкания", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 5,
+    "title": "Массивы и объекты",
+    "lessons": [
+      { "id": 16, "title": "Массивы", "status": "locked" },
+      { "id": 17, "title": "Методы массивов", "status": "locked" },
+      { "id": 18, "title": "map, filter, reduce", "status": "locked" },
+      { "id": 19, "title": "Объекты", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 6,
+    "title": "Деструктуризация, spread, ошибки",
+    "lessons": [
+      { "id": 20, "title": "Деструктуризация", "status": "locked" },
+      { "id": 21, "title": "Spread и rest для массивов и объектов", "status": "locked" },
+      { "id": 22, "title": "try / catch, ошибки", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 7,
+    "title": "Set, Map, регулярки",
+    "lessons": [
+      { "id": 23, "title": "Set и Map", "status": "locked" },
+      { "id": 24, "title": "Регулярные выражения", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 8,
+    "title": "Классы и this",
+    "lessons": [
+      { "id": 25, "title": "this и контекст", "status": "locked" },
+      { "id": 26, "title": "Классы: constructor, методы", "status": "locked" },
+      { "id": 27, "title": "Наследование, extends, super", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 9,
+    "title": "DOM",
+    "lessons": [
+      { "id": 28, "title": "DOM, querySelector", "status": "locked" },
+      { "id": 29, "title": "textContent, innerHTML", "status": "locked" },
+      { "id": 30, "title": "Стили и классы", "status": "locked" },
+      { "id": 31, "title": "createElement, appendChild", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 10,
+    "title": "События",
+    "lessons": [
+      { "id": 32, "title": "addEventListener, click", "status": "locked" },
+      { "id": 33, "title": "Формы, submit, preventDefault", "status": "locked" },
+      { "id": 34, "title": "Клавиатура", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 11,
+    "title": "Асинхронность",
+    "lessons": [
+      { "id": 35, "title": "Event loop и setTimeout", "status": "locked" },
+      { "id": 36, "title": "Promise", "status": "locked" },
+      { "id": 37, "title": "async / await", "status": "locked" },
+      { "id": 38, "title": "fetch и API", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 12,
+    "title": "Модули",
+    "lessons": [
+      { "id": 39, "title": "import / export", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  },
+  {
+    "id": 13,
+    "title": "Практика",
+    "lessons": [
+      { "id": 40, "title": "Проект: счётчик", "status": "locked" },
+      { "id": 41, "title": "Итоговая: TODO-лист", "status": "locked" }
+    ],
+    "trophy": { "title": "Трофей главы", "status": "locked" }
+  }
+]
