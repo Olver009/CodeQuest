@@ -44,7 +44,7 @@ LANG_NAMES = {
     "python": "Python", "java": "Java", "cpp": "C++", "c": "C",
     "javascript": "JavaScript", "html": "HTML", "css": "CSS", "prog": "General Code",
 }
-DEFAULT_LANG = "python"
+DEFAULT_LANG = "prog"
 QUIZ_ONLY_LANGS = {"prog"}
 
 active_pty = None
