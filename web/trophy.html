@@ -163,7 +163,8 @@
 
 <script>
     let trophyData = null, chapterId = null, editor = null, userData = {}, term = null, terminalOutput = "", lessonPassed = false, activeLang = "python", currentQuestionIndex = 0;
-
+    let originalTrophyQuestions = [];
+    let quizErrorCount = 0;
     window.addEventListener('pywebviewready', async () => {
         await applyLanguage();
         userData = await pywebview.api.load_data();
@@ -186,6 +187,7 @@
             updateStreakUI();
             trophyData = await pywebview.api.get_trophy_test(chapterId);
             if (trophyData.error) throw new Error(trophyData.error);
+            originalTrophyQuestions = JSON.parse(JSON.stringify(trophyData.questions || []));
 
             const fontSize = userData.settings_font_size || 15;
             document.documentElement.style.setProperty('--editor-font-size', fontSize + 'px');
@@ -351,13 +353,18 @@
     }
 
     function startQuiz() {
-        if (!trophyData.questions || trophyData.questions.length === 0) {
+        const oldBtn = document.getElementById('retry-quiz-btn');
+        if (oldBtn) oldBtn.remove();
+
+        if (!originalTrophyQuestions || originalTrophyQuestions.length === 0) {
             showQuizComplete();
             return;
         }
+        shuffleAndResetQuestions();
+        currentQuestionIndex = 0;
+        quizErrorCount = 0;
         document.getElementById('quiz-container').style.display = 'flex';
         document.getElementById('editor-container').style.display = 'none';
-        currentQuestionIndex = 0;
         renderQuestion();
     }
 
@@ -388,8 +395,11 @@
         const q = trophyData.questions[currentQuestionIndex]; const feedback = document.getElementById('quiz-feedback');
         document.querySelectorAll('.quiz-option').forEach(b => b.disabled = true);
         if (selectedIndex === q.answer) { btnElement.classList.add('correct'); feedback.innerHTML = `<div style="color: #22c55e; margin-bottom: 10px;">✅ ${t('quiz_correct')}</div><p>${q.explanation}</p>`; }
-        else { btnElement.classList.add('wrong'); feedback.innerHTML = `<div style="color: #ff6b6b; margin-bottom: 10px;">❌ ${t('quiz_wrong')}</div><p>${q.explanation}</p>`; }
-        feedback.style.display = 'block';
+        else {
+            quizErrorCount++;
+            btnElement.classList.add('wrong');
+            feedback.innerHTML = `<div style="color: #ff6b6b; margin-bottom: 10px;">❌ ${t('quiz_wrong')}</div><p>${q.explanation}</p>`;
+        }       feedback.style.display = 'block';
         const nextBtn = document.getElementById('next-question-btn');
         nextBtn.style.display = 'block';
         const total = trophyData.questions.length, remaining = total - currentQuestionIndex - 1;
@@ -400,13 +410,74 @@
 
     document.getElementById('next-question-btn').onclick = () => {
         currentQuestionIndex++;
-        if (currentQuestionIndex < trophyData.questions.length) renderQuestion();
-        else completeQuiz();
+        if (currentQuestionIndex < trophyData.questions.length) {
+            renderQuestion();
+        } else {
+            const total = trophyData.questions.length;
+            if (quizErrorCount * 2 >= total) {
+                failQuiz();
+                return;
+            }
+            completeQuiz();
+        }
     };
+
+    function shuffleArray(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+    }
+
+    function shuffleAndResetQuestions() {
+        if (!originalTrophyQuestions || originalTrophyQuestions.length === 0) return;
+        const shuffled = JSON.parse(JSON.stringify(originalTrophyQuestions));
+        shuffleArray(shuffled);
+        for (const q of shuffled) {
+            if (Array.isArray(q.options)) {
+                const correctOption = q.options[q.answer];
+                shuffleArray(q.options);
+                q.answer = q.options.indexOf(correctOption);
+            }
+        }
+        trophyData.questions = shuffled;
+    }
+
+    function failQuiz() {
+        quizErrorCount = 0;
+        currentQuestionIndex = 0;
+        document.getElementById('quiz-container').style.display = 'none';
+
+        // Показываем теорию (без "Завершить чтение")
+        document.getElementById('theory-title').textContent = trophyData.title;
+        const infoDiv = document.getElementById('theory-content');
+        infoDiv.innerHTML = marked.parse(trophyData.theory || trophyData.description || '');
+        infoDiv.querySelectorAll('pre code').forEach((block) => { hljs.highlightElement(block); });
+
+        showToast(t('msg_quiz_failed'), 'error');
+
+        let retryBtn = document.getElementById('retry-quiz-btn');
+        if (!retryBtn) {
+            retryBtn = document.createElement('button');
+            retryBtn.id = 'retry-quiz-btn';
+            retryBtn.className = 'btn btn-run';
+            retryBtn.style.marginTop = '30px';
+            infoDiv.appendChild(retryBtn);
+        }
+        retryBtn.textContent = t('btn_retry_test');
+        retryBtn.onclick = () => {
+            retryBtn.remove();
+            startQuiz();
+        };
+    }
 
     async function completeQuiz() {
         if (userData[`${activeLang}_status_trophy_${chapterId}`] !== 'done') {
             await pywebview.api.save_key(`${activeLang}_status_trophy_${chapterId}`, 'done');
+            // Сохраняем флаг, если не было ни одной ошибки (для ачивки «Перфекционист»)
+            if (quizErrorCount === 0) {
+                await pywebview.api.save_key(`perfect_quiz_${activeLang}_${chapterId}`, true);
+            }
             userData[`${activeLang}_status_trophy_${chapterId}`] = 'done';
             updateStreakUI();
             playSuccessSound();

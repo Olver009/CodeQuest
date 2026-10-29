@@ -1,15 +1,13 @@
 {
   "lessons": {
     "1": {
-      "id": 1,
-      "check_type": "console",
-      "title": "JavaScript: What It Is and Where It Runs",
-      "theory": "## What JavaScript is\n\nJavaScript is a **programming language**. HTML — markup, CSS — styling, JS — **logic**. It makes pages interactive.\n\n## Where it runs\n\n- **In the browser** — Chrome, Firefox, Safari each have an engine (V8, SpiderMonkey).\n- **On the server** — Node.js.\n- **In mobile/desktop** — React Native, Electron (VS Code, Slack).\n\n## How to connect to HTML\n\n```html\n<script>\n  console.log(\"Hi\");\n</script>\n```\n\nOr as a file: `<script src=\"script.js\"></script>`.\n\nPut `<script>` **at the end** of `<body>` so the DOM is built before JS runs.\n\n## JS is not HTML or CSS\n\n- HTML — **structure**\n- CSS — **appearance**\n- JS — **behavior**\n\nIf `<button>` is a button and `background: red` makes it red, then `button.addEventListener(\"click\", ...)` defines what happens on click.\n\n## First program\n\n```js\nconsole.log(\"Hello, world!\");\n```\n\n`console.log` is the closest analog of `print` (Python) and `System.out.println` (Java).\n\n## What if\n\n- Forget `;` — JS usually forgives (ASI), but add it.\n- `<script>` before `<body>` — `querySelector` returns `null`.\n\n## Common mistake\n\n`<script>` in `<head>` without `defer` — runs before the DOM is built.\n\n## Summary\n\n- JS is a programming language\n- Runs in the browser and Node.js\n- Connected via `<script>`\n- `console.log` — output",
+      "id": 1, "check_type": "console", "title": "What JavaScript Is and Where It Runs",
+      "theory": "## What JavaScript is\n\nJavaScript is a **programming language**. HTML is markup, CSS is styling, JS is **logic** — it makes sites interactive.\n\n## Where it runs\n\n- **In the browser** — Chrome, Firefox, Safari have engines (V8, SpiderMonkey).\n- **On the server** — Node.js.\n- **In mobile/desktop** — React Native, Electron (VS Code, Slack).\n\n## How to connect to HTML\n\n```html\n<script>\n  console.log(\"Hello\");\n</script>\n```\n\nOr via file: `<script src=\"script.js\"></script>`.\n\nPlace `<script>` **at the end** of `<body>` so the DOM has time to build.\n\n## JS is not HTML and not CSS\n\n- HTML — **structure**\n- CSS — **appearance**\n- JS — **behavior**\n\nIf `<button>` is a button and `background: red` makes it red, then `button.addEventListener(\"click\", ...)` is what happens on click.\n\n## First program\n\n```js\nconsole.log(\"Hello, world!\");\n```\n\n`console.log` — like `print` in Python or `System.out.println` in Java.\n\n## What goes wrong\n\n- Forgetting `;` — JS forgives (ASI), but better to use them.\n- `<script>` before `<body>` — `querySelector` returns `null`.\n\n## Common mistake\n\n`<script>` in `<head>` without `defer` — runs before the DOM is built.\n\n## Summary\n\n- JS is a programming language\n- Runs in browser and Node.js\n- Connected via `<script>`\n- `console.log` — output",
       "questions": [
-        { "text": "What is JavaScript?", "options": ["Markup", "Programming language", "Styling", "Database"], "answer": 1, "explanation": "JS is a programming language. HTML — markup, CSS — styling." },
-        { "text": "Where does JS run?", "options": ["Browser only", "Server only", "Browser and Node.js", "Mobile only"], "answer": 2, "explanation": "Browser + Node.js." },
-        { "text": "Where to put `<script>`?", "options": ["In `<head>`", "At the end of `<body>` or with `defer`", "Before `<!DOCTYPE>`", "In `<title>`"], "answer": 1, "explanation": "So the DOM is ready." },
-        { "text": "What does `console.log` do?", "options": ["Prints to console", "Creates a variable", "Changes styles", "Opens a window"], "answer": 0, "explanation": "Analog of `print`." }
+        {"text": "What is JavaScript?", "options": ["Markup", "Programming language", "Styles", "Database"], "answer": 1, "explanation": "JS is a programming language. HTML — markup, CSS — styles."},
+        {"text": "Where does JS run?", "options": ["Only in browser", "Only on server", "In browser and Node.js", "Only in mobile"], "answer": 2, "explanation": "Browser + Node.js."},
+        {"text": "Where to place `<script>`?", "options": ["In `<head>`", "At end of `<body>` or with `defer`", "Before `<!DOCTYPE>`", "In `<title>`"], "answer": 1, "explanation": "So the DOM is built."},
+        {"text": "What does `console.log` do?", "options": ["Prints to console", "Creates a variable", "Changes style", "Opens a window"], "answer": 0, "explanation": "Analog of `print`."}
       ],
       "practice": {
         "description": "Output three lines via `console.log`:\n```\nJavaScript\nLesson 1\nDone\n```",
@@ -19,53 +17,64 @@
       }
     },
     "2": {
-      "id": 2,
-      "check_type": "console",
-      "title": "Console, console.log",
-      "theory": "## Why console\n\nBefore DOM, all output goes to the **developer console**. F12 → Console. There you see `console.log`, errors, warnings.\n\n## console.log\n\n```js\nconsole.log(\"Hi\");\nconsole.log(42);\nconsole.log(3 + 4);\n```\n\nOutputs `Hi`, `42`, `7`.\n\nAccepts **any** number of arguments:\n\n```js\nconsole.log(\"Age:\", 25);  // Age: 25\n```\n\nJS puts a space between arguments.\n\n## Quotes\n\n`\"Hi\"`, `'Hi'`, `` `Hi` `` — equivalent. Template literals use backticks (lesson 5).\n\n## Without quotes — variable\n\n```js\nconsole.log(Hi); // ReferenceError: Hi is not defined\n```\n\n## console.warn and console.error\n\n```js\nconsole.warn(\"warning\");\nconsole.error(\"error\");\n```\n\nPrint with a label.\n\n## Browser vs Node.js\n\n- Browser — F12 → Console.\n- Node.js — terminal (`node script.js`).\n\nSame syntax.\n\n## What if\n\n- `console.log()` without arguments — empty line.\n- `console.log(\"a\", \"b\")` — `a b`.\n\n## Common mistake\n\n`print(\"x\")` from Python habit. In JS — `console.log`.\n\n## Summary\n\n- `console.log(...)` — output\n- Any number of arguments\n- `console.warn`, `console.error`\n- Without quotes — variable lookup",
+      "id": 2, "check_type": "console", "title": "Console, console.log",
+      "theory": "## Why console\n\nUntil we get to the DOM — all output goes to the **developer console**. F12 → Console. There: `console.log`, errors, warnings.\n\n## console.log\n\n```js\nconsole.log(\"Hello\");\nconsole.log(42);\nconsole.log(3 + 4);\n```\n\nOutputs `Hello`, `42`, `7`.\n\nAccepts **any** number of arguments:\n\n```js\nconsole.log(\"Age:\", 25);  // Age: 25\n```\n\nJS inserts a space between arguments.\n\n## Quotes\n\n`\"Hello\"`, `'Hello'`, `` `Hello` `` — equivalent. Template strings use backticks (lesson 6).\n\n## Without quotes — variable\n\n```js\nconsole.log(Hello); // ReferenceError: Hello is not defined\n```\n\n## console.warn and console.error\n\n```js\nconsole.warn(\"warning\");\nconsole.error(\"error\");\n```\n\nOutput with markup.\n\n## In browser vs Node.js\n\n- Browser — F12 → Console.\n- Node.js — terminal (`node script.js`).\n\nSyntax is the same.\n\n## What goes wrong\n\n- `console.log()` without arguments — empty line.\n- `console.log(\"a\", \"b\")` — `a b`.\n\n## Common mistake\n\n`print(\"x\")` from Python habit. In JS — `console.log`.\n\n## Summary\n\n- `console.log(...)` — output\n- Any number of arguments\n- `console.warn`, `console.error`\n- Without quotes — variable access",
       "questions": [
-        { "text": "What does `console.log(\"Hello\")` output?", "options": ["Hello", "\"Hello\"", "'Hello'", "console"], "answer": 0, "explanation": "Without quotes." },
-        { "text": "What happens on `console.log(Hello)` without quotes?", "options": ["Hello", "ReferenceError", "null", "Empty"], "answer": 1, "explanation": "`Hello` — variable, not defined." },
-        { "text": "What does `console.log(\"x\", 5)` output?", "options": ["x5", "x 5", "\"x\" 5", "Error"], "answer": 1, "explanation": "Space between arguments." },
-        { "text": "Which quotes are valid?", "options": ["Only \"", "Only '", "Only `", "All three"], "answer": 3, "explanation": "All valid." }
+        {"text": "What does `console.log(\"Hello\")` output?", "options": ["Hello", "\"Hello\"", "'Hello'", "console"], "answer": 0, "explanation": "Without quotes."},
+        {"text": "What about `console.log(Hello)` without quotes?", "options": ["Hello", "ReferenceError", "null", "Empty line"], "answer": 1, "explanation": "Hello is a variable, not defined — error."},
+        {"text": "What does `console.log(\"x\", 5)` output?", "options": ["x5", "x 5", "\"x\" 5", "Error"], "answer": 1, "explanation": "JS inserts a space."},
+        {"text": "Which quotes are valid?", "options": ["Only \"", "Only '", "Only `", "All three"], "answer": 3, "explanation": "All valid."}
       ],
       "practice": {
-        "description": "Output five lines via `console.log`:\n```\nJS\n3\nHello\n42\nDone\n```",
+        "description": "Output via `console.log` five lines:\n```\nJS\n3\nHello\n42\nDone\n```",
         "starter": "// TODO\n",
         "expected": "JS\n3\nHello\n42\nDone",
         "must_contain": ["console.log", "JS", "Hello", "Done"]
       }
     },
     "3": {
-      "id": 3,
-      "check_type": "console",
-      "title": "let and const",
-      "theory": "## Two ways\n\n`let` — variable. `const` — constant. `var` — **legacy**, do not use.\n\n```js\nlet age = 25;\nconst PI = 3.14;\n```\n\n## let can change\n\n```js\nlet x = 10;\nx = 20;          // ok\nconsole.log(x);  // 20\n```\n\n## const cannot\n\n```js\nconst y = 10;\ny = 20;          // TypeError\n```\n\n## Rule\n\nDefault — `const`. Changing — `let`.\n\n## Why not var\n\n`var` has two bugs:\n1. **Function** scope (leaks out of `if`)\n2. **Hoisting** (usable before declaration)\n\n```js\nif (true) { var a = 1; }\nconsole.log(a); // 1 — leaked\n\nif (true) { let b = 1; }\nconsole.log(b); // ReferenceError\n```\n\n## const and objects\n\n`const` forbids **reassignment**, not mutation:\n\n```js\nconst obj = { a: 1 };\nobj.a = 2;         // ok\nobj = { b: 3 };    // TypeError\n```\n\n## Names\n\ncamelCase: `userName`, `totalPrice`.\n\n## What if\n\n- `let x = 1; let x = 2;` — SyntaxError.\n- `const x;` — SyntaxError, initialization required.\n\n## Common mistake\n\n`var` from old tutorials.\n\n## Summary\n\n- `let` — changeable\n- `const` — not\n- `var` — legacy\n- Default — `const`",
+      "id": 3, "check_type": "console", "title": "Debugging in the Browser",
+      "theory": "## Why debugging\n\nCode will break. **Debugging** — finding why. Without it, you're stuck staring at broken output.\n\n## F12 → Console\n\nOpens the developer tools. **Console** tab shows errors and `console.log` output. When something breaks — check here **first**.\n\n## Reading errors\n\n```\nUncaught ReferenceError: foo is not defined\n    at script.js:5\n```\n\n- `ReferenceError` — error type\n- `foo is not defined` — what went wrong\n- `script.js:5` — file and line number\n\n## Common error types\n\n- **ReferenceError** — variable not defined\n- **TypeError** — wrong type (calling a number as function, `null.foo`)\n- **SyntaxError** — code structure is broken, nothing runs\n- **RangeError** — number out of allowed range\n\n## console.table / console.dir\n\n```js\nconsole.table([{a: 1}, {a: 2}]);   // pretty table\nconsole.dir(obj);                   // expandable object\n```\n\n## Breakpoints\n\nF12 → **Sources** tab → click on a line number. Code pauses there on next run. Hover over variables to see values. Step through with F10 / F11.\n\nThis is more powerful than `console.log` — you see everything at the pause point.\n\n## debugger statement\n\n```js\ndebugger;   // pauses here if DevTools is open\n```\n\nCheap way to breakpoint.\n\n## What goes wrong\n\n- Ignoring the error message — 90% of the answer is there.\n- `console.log` everywhere instead of a breakpoint.\n\n## Common mistake\n\nGuessing instead of reading. The browser tells you exactly what and where. Read it.\n\n## Summary\n\n- F12 → Console — read errors\n- ReferenceError, TypeError, SyntaxError\n- Breakpoints in Sources tab\n- `debugger;` — pause inline\n- Error message tells you where",
       "questions": [
-        { "text": "Which variable cannot be reassigned?", "options": ["let", "const", "var", "all can"], "answer": 1, "explanation": "`const` — constant." },
-        { "text": "What happens on `const x = 5; x = 10;`?", "options": ["x = 10", "TypeError", "SyntaxError", "Nothing"], "answer": 1, "explanation": "`const` forbids." },
-        { "text": "Which to use by default?", "options": ["var", "let", "const", "any"], "answer": 2, "explanation": "`const` if unchanged." },
-        { "text": "Can you mutate fields of a `const` object?", "options": ["No", "Yes, but no reassignment", "Only with let", "Only with var"], "answer": 1, "explanation": "Reassignment forbidden, mutation ok." },
-        { "text": "Why not `var`?", "options": ["Slow", "Function scope + hoisting", "Broken", "Forbidden"], "answer": 1, "explanation": "`var` leaks out of blocks." }
+        {"text": "Where do you see JS errors in the browser?", "options": ["In the address bar", "F12 → Console", "In Settings", "In CSS panel"], "answer": 1, "explanation": "Console shows errors."},
+        {"text": "What does `ReferenceError` mean?", "options": ["Wrong type", "Variable not defined", "Syntax broken", "Range exceeded"], "answer": 1, "explanation": "Variable doesn't exist."},
+        {"text": "What is a breakpoint?", "options": ["Error", "Pause point in debugger", "Variable", "CSS rule"], "answer": 1, "explanation": "Code pauses there."},
+        {"text": "What does `debugger;` do?", "options": ["Nothing", "Pauses if DevTools open", "Throws error", "Logs"], "answer": 1, "explanation": "Inline breakpoint."},
+        {"text": "Which error means code can't run at all?", "options": ["TypeError", "ReferenceError", "SyntaxError", "RangeError"], "answer": 2, "explanation": "SyntaxError — parse fails."}
       ],
       "practice": {
-        "description": "Create:\n- `const name = \"Anna\"`\n- `let age = 25`\n- add 1: `age = age + 1`\n- output `Anna` and `26`\n\nVisible text: `Anna` and `26` on separate lines.",
+        "description": "Given code with an error:\n```js\nlet x = 5;\nconsole.log(xx);\n```\n\n1. Run it — you'll see `ReferenceError`.\n2. **Fix** the typo so it works.\n\nOutput `5`.",
+        "starter": "let x = 5;\nconsole.log(xx);\n",
+        "expected": "5",
+        "must_contain": ["console.log", "x"]
+      }
+    },
+    "4": {
+      "id": 4, "check_type": "console", "title": "let and const",
+      "theory": "## Two ways\n\n`let` — variable. `const` — constant. `var` — **outdated**, don't use.\n\n```js\nlet age = 25;\nconst PI = 3.14;\n```\n\n## let is mutable\n\n```js\nlet x = 10;\nx = 20;          // ok\nconsole.log(x);  // 20\n```\n\n## const is not\n\n```js\nconst y = 10;\ny = 20;          // TypeError\n```\n\n## Rule\n\nBy default — `const`. Only when you change it — `let`.\n\n## Why not var\n\n`var` — old way with bugs:\n1. **Function** scope (leaks out of `if`)\n2. **Hoisting** (usable before declaration)\n\n```js\nif (true) { var a = 1; }\nconsole.log(a); // 1 — leaked out\n\nif (true) { let b = 1; }\nconsole.log(b); // ReferenceError\n```\n\n## const and objects\n\n`const` forbids **reassignment**, not content change:\n\n```js\nconst obj = { a: 1 };\nobj.a = 2;         // ok\nobj = { b: 3 };    // TypeError\n```\n\n## Naming\n\ncamelCase: `userName`, `totalPrice`.\n\n## What goes wrong\n\n- `let x = 1; let x = 2;` — SyntaxError.\n- `const x;` — SyntaxError, needs initialization.\n\n## Common mistake\n\nHabit of `var` from old tutorials.\n\n## Summary\n\n- `let` — mutable\n- `const` — not\n- `var` — outdated\n- Default — `const`",
+      "questions": [
+        {"text": "Which variable cannot be reassigned?", "options": ["let", "const", "var", "all can"], "answer": 1, "explanation": "`const` — constant."},
+        {"text": "What happens with `const x = 5; x = 10;`?", "options": ["x = 10", "TypeError", "SyntaxError", "Nothing"], "answer": 1, "explanation": "`const` forbids."},
+        {"text": "What to choose by default?", "options": ["var", "let", "const", "doesn't matter"], "answer": 2, "explanation": "`const` unless mutable."},
+        {"text": "Can you modify fields of a `const` object?", "options": ["No", "Yes, but not reassign", "Only with let", "Only with var"], "answer": 1, "explanation": "Reassignment forbidden, fields ok."},
+        {"text": "Why not `var`?", "options": ["Slow", "Function scope + hoisting", "Doesn't work", "Forbidden"], "answer": 1, "explanation": "`var` leaks out of blocks."}
+      ],
+      "practice": {
+        "description": "Create:\n- `const name = \"Anna\"`\n- `let age = 25`\n- increment: `age = age + 1`\n- output `Anna` and `26`\n\nExpected: `Anna` and `26` on separate lines.",
         "starter": "// TODO\n",
         "expected": "Anna\n26",
         "must_contain": ["const name", "let age", "age = age + 1", "console.log"]
       }
     },
-    "4": {
-      "id": 4,
-      "check_type": "console",
-      "title": "Types and typeof",
-      "theory": "## Basic types\n\n| Type | Example |\n|---|---|\n| `number` | `42`, `3.14` |\n| `string` | `\"hi\"` |\n| `boolean` | `true`, `false` |\n| `undefined` | \"not set\" |\n| `null` | \"empty\" |\n| `object` | `{}`, `[]` |\n\n## number\n\nAll numbers — one type:\n\n```js\nconsole.log(typeof 42);     // number\nconsole.log(typeof 3.14);   // number\n```\n\n## boolean\n\n`true`/`false`, lowercase:\n\n```js\nconsole.log(typeof true);   // boolean\n```\n\n## undefined vs null\n\n- `undefined` — variable without value\n- `null` — explicitly empty\n\n```js\nlet x;\nconsole.log(x);          // undefined\n\nlet y = null;\nconsole.log(y);          // null\n```\n\n## typeof\n\n```js\ntypeof 42          // \"number\"\ntypeof \"hi\"        // \"string\"\ntypeof true        // \"boolean\"\ntypeof undefined   // \"undefined\"\ntypeof null        // \"object\"  ← JS bug\ntypeof {}          // \"object\"\n```\n\n`typeof null` — `\"object\"`, historical bug.\n\n## What if\n\n- `typeof someVar` where `someVar` not declared — `\"undefined\"` (not an error).\n\n## Common mistake\n\n`True`/`False` with a capital letter. In JS only `true`/`false`.\n\n## Summary\n\n- `number`, `string`, `boolean`, `undefined`, `null`, `object`\n- `typeof x` — type\n- `typeof null` = `\"object\"`\n- `undefined` — not set, `null` — explicitly empty",
+    "5": {
+      "id": 5, "check_type": "console", "title": "Types and typeof",
+      "theory": "## Main types\n\n| Type | Example |\n|---|---|\n| `number` | `42`, `3.14` |\n| `string` | `\"hello\"` |\n| `boolean` | `true`, `false` |\n| `undefined` | \"not set\" |\n| `null` | \"empty\" |\n| `object` | `{}`, `[]` |\n\n## number\n\nAll numbers — one type:\n\n```js\nconsole.log(typeof 42);     // number\nconsole.log(typeof 3.14);   // number\n```\n\n## boolean\n\n`true`/`false`, lowercase:\n\n```js\nconsole.log(typeof true);   // boolean\n```\n\n## undefined vs null\n\n- `undefined` — variable with no value\n- `null` — explicitly \"empty\"\n\n```js\nlet x;\nconsole.log(x);          // undefined\n\nlet y = null;\nconsole.log(y);          // null\n```\n\n## typeof\n\n```js\ntypeof 42          // \"number\"\ntypeof \"hi\"        // \"string\"\ntypeof true        // \"boolean\"\ntypeof undefined   // \"undefined\"\ntypeof null        // \"object\"  ← JS bug\ntypeof {}          // \"object\"\n```\n\n`typeof null` — `\"object\"`, historical bug.\n\n## What goes wrong\n\n- `typeof someVar` where `someVar` not declared — `\"undefined\"` (not an error).\n\n## Common mistake\n\n`True`/`False` capitalized. In JS only `true`/`false`.\n\n## Summary\n\n- `number`, `string`, `boolean`, `undefined`, `null`, `object`\n- `typeof x` — type\n- `typeof null` = `\"object\"`\n- `undefined` — not set, `null` — explicitly empty",
       "questions": [
-        { "text": "What does `typeof 3.14` return?", "options": ["float", "number", "double", "int"], "answer": 1, "explanation": "All numbers — `number`." },
-        { "text": "What does `typeof \"5\"` return?", "options": ["number", "string", "int", "boolean"], "answer": 1, "explanation": "In quotes — string." },
-        { "text": "What does `typeof null` return?", "options": ["null", "object", "undefined", "boolean"], "answer": 1, "explanation": "JS bug — `object`." },
-        { "text": "Difference `undefined` and `null`?", "options": ["Same", "undefined — not set, null — explicitly empty", "null — error", "undefined — numbers only"], "answer": 1, "explanation": "`undefined` — system, `null` — programmer." },
-        { "text": "What happens on `let x; console.log(x)`?", "options": ["null", "undefined", "0", "Error"], "answer": 1, "explanation": "No value — `undefined`." }
+        {"text": "What does `typeof 3.14` return?", "options": ["float", "number", "double", "int"], "answer": 1, "explanation": "All numbers are `number`."},
+        {"text": "What does `typeof \"5\"` return?", "options": ["number", "string", "int", "boolean"], "answer": 1, "explanation": "In quotes — string."},
+        {"text": "What does `typeof null` return?", "options": ["null", "object", "undefined", "boolean"], "answer": 1, "explanation": "JS bug — `object`."},
+        {"text": "Difference between `undefined` and `null`?", "options": ["Same", "undefined — not set, null — explicitly empty", "null — error", "undefined — only numbers"], "answer": 1, "explanation": "`undefined` — system, `null` — programmer."},
+        {"text": "What about `let x; console.log(x)`?", "options": ["null", "undefined", "0", "Error"], "answer": 1, "explanation": "No value — `undefined`."}
       ],
       "practice": {
         "description": "Output types of five values via `typeof`:\n```\nnumber\nstring\nboolean\nundefined\nobject\n```\n\nValues: `42`, `\"hi\"`, `true`, `undefined`, `null`.",
@@ -74,36 +83,32 @@
         "must_contain": ["typeof", "console.log", "undefined", "null"]
       }
     },
-    "5": {
-      "id": 5,
-      "check_type": "console",
-      "title": "Strings",
-      "theory": "## Quotes\n\n```js\n\"double\"\n'single'\n`backtick`\n```\n\nInside `\"...\"` you can use `'`, inside `'...'` — `\"`.\n\n## Template literals\n\nBackticks + `${...}`:\n\n```js\nconst name = \"Anna\";\nconst age = 25;\nconsole.log(`Hi, ${name}! You are ${age}.`);\n```\n\nInside `${}` — any expression: `` `${2 + 3}` `` → `5`.\n\n## length\n\n```js\nconsole.log(\"Hello\".length);   // 5\n```\n\nProperty, not a method.\n\n## Methods\n\n```js\ns.toUpperCase()     // uppercase\ns.toLowerCase()     // lowercase\ns.trim()            // trim edges\ns.includes(\"sub\")   // contains\ns.indexOf(\"sub\")    // index or -1\ns.slice(0, 3)       // 0 to 3 exclusive\ns.replace(\"a\", \"b\") // replace\ns.split(\",\")        // to array\n```\n\nStrings are immutable — methods return a new one:\n\n```js\nlet s = \"Java\";\ns.toUpperCase();\nconsole.log(s);   // \"Java\"\n```\n\n## What if\n\n- `s.length()` — error, `length` is a property.\n- `s[0] = \"X\"` — silently fails.\n\n## Common mistake\n\n`\"a\" + 5 + 6` → `\"a56\"`, not `\"a11\"`. Left-to-right.\n\n## Summary\n\n- Three quote types, interpolation with backticks\n- `` `${expr}` ``\n- `length` — property\n- Methods return a new string",
+    "6": {
+      "id": 6, "check_type": "console", "title": "Strings",
+      "theory": "## Quotes\n\n```js\n\"double\"\n'single'\n`backtick`\n```\n\nInside `\"...\"` you can use `'`, inside `'...'` you can use `\"`.\n\n## Template strings\n\nBackticks + `${...}`:\n\n```js\nconst name = \"Anna\";\nconst age = 25;\nconsole.log(`Hi, ${name}! You are ${age}.`);\n```\n\nInside `${}` — any expression: `` `${2 + 3}` `` → `5`.\n\n## length\n\n```js\nconsole.log(\"Hello\".length);   // 5\n```\n\nProperty, not method.\n\n## Methods\n\n```js\ns.toUpperCase()     // upper\ns.toLowerCase()     // lower\ns.trim()            // trim whitespace\ns.includes(\"sub\")   // contains\ns.indexOf(\"sub\")    // index or -1\ns.slice(0, 3)       // from 0 to 3 (exclusive)\ns.replace(\"a\", \"b\") // replace\ns.split(\",\")        // to array\n```\n\nStrings are immutable — methods return new:\n\n```js\nlet s = \"Java\";\ns.toUpperCase();\nconsole.log(s);   // \"Java\"\n```\n\n## What goes wrong\n\n- `s.length()` — error, `length` is a property.\n- `s[0] = \"X\"` — silently no-op.\n\n## Common mistake\n\n`\"a\" + 5 + 6` → `\"a56\"`, not `\"a11\"`. Left to right.\n\n## Summary\n\n- Three quote types, backticks for interpolation\n- `` `${expr}` ``\n- `length` — property\n- Methods return new string",
       "questions": [
-        { "text": "What does `` console.log(`Hi, ${name}`) `` output when `name = \"Anna\"`?", "options": ["Hi, name", "Hi, Anna", "Hi, ${name}", "Error"], "answer": 1, "explanation": "Inside `${}` — variable." },
-        { "text": "What does `console.log(\"a\" + 5 + 6)` output?", "options": ["a11", "a56", "56a", "Error"], "answer": 1, "explanation": "Left-to-right." },
-        { "text": "What does `\"Hello\".length` return?", "options": ["5", "6", "4", "Error"], "answer": 0, "explanation": "5 characters." },
-        { "text": "What does `\"abc\".toUpperCase()` return?", "options": ["abc", "ABC", "error", "undefined"], "answer": 1, "explanation": "Uppercase." },
-        { "text": "Does `s.toUpperCase()` modify the variable?", "options": ["Yes", "No, strings are immutable", "Only if const", "Only if let"], "answer": 1, "explanation": "Returns new string." }
+        {"text": "What does `` console.log(`Hi, ${name}`) `` output for `name = \"Anna\"`?", "options": ["Hi, name", "Hi, Anna", "Hi, ${name}", "Error"], "answer": 1, "explanation": "`${}` — variable."},
+        {"text": "What does `console.log(\"a\" + 5 + 6)` output?", "options": ["a11", "a56", "56a", "Error"], "answer": 1, "explanation": "Left to right."},
+        {"text": "What does `\"Hello\".length` return?", "options": ["5", "6", "4", "Error"], "answer": 0, "explanation": "5 chars."},
+        {"text": "What does `\"abc\".toUpperCase()` return?", "options": ["abc", "ABC", "error", "undefined"], "answer": 1, "explanation": "Uppercase."},
+        {"text": "Does `s.toUpperCase()` change the variable?", "options": ["Yes", "No, strings immutable", "Only if const", "Only if let"], "answer": 1, "explanation": "Returns new string."}
       ],
       "practice": {
-        "description": "Given:\n```\nconst name = \"Anna\";\nconst age = 25;\n```\n\nOutput via template literals:\n```\nHi, Anna!\nYou are 25.\nAnna uppercase: ANNA\n```",
+        "description": "Given:\n```\nconst name = \"Anna\";\nconst age = 25;\n```\n\nOutput via template strings:\n```\nHi, Anna!\nYou are 25.\nAnna upper: ANNA\n```",
         "starter": "const name = \"Anna\";\nconst age = 25;\n// TODO\n",
-        "expected": "Hi, Anna!\nYou are 25.\nAnna uppercase: ANNA",
+        "expected": "Hi, Anna!\nYou are 25.\nAnna upper: ANNA",
         "must_contain": ["`", "${", "toUpperCase", "console.log"]
       }
     },
-    "6": {
-      "id": 6,
-      "check_type": "console",
-      "title": "Numbers",
-      "theory": "## One type number\n\n`5` and `5.0` — same. No `int`/`float`.\n\n## Operators\n\n```js\nconsole.log(7 + 3);   // 10\nconsole.log(7 - 3);   // 4\nconsole.log(7 * 3);   // 21\nconsole.log(7 / 3);   // 2.333...\nconsole.log(7 % 3);   // 1\nconsole.log(2 ** 10); // 1024\n```\n\n## Division by zero\n\n```js\nconsole.log(10 / 0);    // Infinity\nconsole.log(0 / 0);     // NaN\n```\n\n## NaN\n\n**Not a Number** — result of a bad operation:\n\n```js\nconsole.log(\"abc\" * 2);  // NaN\n```\n\nCheck: `Number.isNaN(x)`.\n\n## Math\n\n```js\nMath.round(3.7)    // 4\nMath.floor(3.9)    // 3\nMath.ceil(3.1)     // 4\nMath.abs(-5)       // 5\nMath.max(1, 5, 3)  // 5\nMath.min(1, 5, 3)  // 1\nMath.sqrt(16)      // 4\nMath.random()      // 0 ≤ x < 1\n```\n\n## toFixed\n\n```js\n(3.14159).toFixed(2)   // \"3.14\" — string!\n```\n\n## Conversion\n\n```js\nNumber(\"42\")    // 42\nNumber(\"abc\")   // NaN\nparseInt(\"42\")  // 42\nparseFloat(\"3.14\") // 3.14\n```\n\n## What if\n\n- `0.1 + 0.2` → `0.30000000000000004` — floating point.\n- `\"5\" - 3` → `2`, but `\"5\" + 3` → `\"53\"`.\n\n## Common mistake\n\n`toFixed` returns a string, not a number.\n\n## Summary\n\n- One `number`\n- `Infinity`, `NaN`\n- `Math.*`\n- `toFixed(n)` — string\n- `parseInt`, `parseFloat`, `Number`",
+    "7": {
+      "id": 7, "check_type": "console", "title": "Numbers",
+      "theory": "## One type number\n\n`5` and `5.0` are one type. No `int`/`float`.\n\n## Operators\n\n```js\nconsole.log(7 + 3);   // 10\nconsole.log(7 - 3);   // 4\nconsole.log(7 * 3);   // 21\nconsole.log(7 / 3);   // 2.333...\nconsole.log(7 % 3);   // 1\nconsole.log(2 ** 10); // 1024\n```\n\n## Division by zero\n\n```js\nconsole.log(10 / 0);    // Infinity\nconsole.log(0 / 0);     // NaN\n```\n\n## NaN\n\n**Not a Number** — bad operation:\n\n```js\nconsole.log(\"abc\" * 2);  // NaN\n```\n\nCheck: `Number.isNaN(x)`.\n\n## Math\n\n```js\nMath.round(3.7)    // 4\nMath.floor(3.9)    // 3\nMath.ceil(3.1)     // 4\nMath.abs(-5)       // 5\nMath.max(1, 5, 3)  // 5\nMath.min(1, 5, 3)  // 1\nMath.sqrt(16)      // 4\nMath.random()      // 0 ≤ x < 1\n```\n\n## toFixed\n\n```js\n(3.14159).toFixed(2)   // \"3.14\" — string!\n```\n\n## Conversion\n\n```js\nNumber(\"42\")    // 42\nNumber(\"abc\")   // NaN\nparseInt(\"42\")  // 42\nparseFloat(\"3.14\") // 3.14\n```\n\n## What goes wrong\n\n- `0.1 + 0.2` → `0.30000000000000004` — floating point.\n- `\"5\" - 3` → `2`, but `\"5\" + 3` → `\"53\"`.\n\n## Common mistake\n\n`toFixed` returns a string, not a number.\n\n## Summary\n\n- One `number`\n- `Infinity`, `NaN`\n- `Math.*`\n- `toFixed(n)` — string\n- `parseInt`, `parseFloat`, `Number`",
       "questions": [
-        { "text": "What does `console.log(10 / 0)` output?", "options": ["0", "NaN", "Infinity", "Error"], "answer": 2, "explanation": "`Infinity`." },
-        { "text": "What does `console.log(0 / 0)` output?", "options": ["0", "NaN", "Infinity", "Error"], "answer": 1, "explanation": "`NaN`." },
-        { "text": "What does `Math.floor(3.9)` do?", "options": ["4", "3", "3.9", "Error"], "answer": 1, "explanation": "Down — 3." },
-        { "text": "What does `(3.14).toFixed(1)` return?", "options": ["3.1 (number)", "\"3.1\" (string)", "3", "3.14"], "answer": 1, "explanation": "`toFixed` — string." },
-        { "text": "What does `console.log(\"5\" - 3)` output?", "options": ["\"53\"", "2", "NaN", "Error"], "answer": 1, "explanation": "`-` coerces to number." }
+        {"text": "What does `console.log(10 / 0)` output?", "options": ["0", "NaN", "Infinity", "Error"], "answer": 2, "explanation": "`Infinity`."},
+        {"text": "What does `console.log(0 / 0)` output?", "options": ["0", "NaN", "Infinity", "Error"], "answer": 1, "explanation": "`NaN`."},
+        {"text": "What does `Math.floor(3.9)` do?", "options": ["4", "3", "3.9", "Error"], "answer": 1, "explanation": "Down — 3."},
+        {"text": "What does `(3.14).toFixed(1)` return?", "options": ["3.1 (number)", "\"3.1\" (string)", "3", "3.14"], "answer": 1, "explanation": "`toFixed` — string."},
+        {"text": "What does `console.log(\"5\" - 3)` output?", "options": ["\"53\"", "2", "NaN", "Error"], "answer": 1, "explanation": "`-` coerces to number."}
       ],
       "practice": {
         "description": "Given `let x = 3.14159;`. Output:\n```\n7\n3.14\n4\n1024\n```\n\n- `Math.round(3.7)`\n- `x.toFixed(2)` (as string)\n- `Math.ceil(3.1)`\n- `2 ** 10`",
@@ -112,17 +117,15 @@
         "must_contain": ["Math.round", "toFixed", "Math.ceil", "**", "console.log"]
       }
     },
-    "7": {
-      "id": 7,
-      "check_type": "console",
-      "title": "Type Coercion, == vs ===",
-      "theory": "## == vs ===\n\n- `==` — **loose**, with coercion\n- `===` — **strict**, no coercion\n\n**Always use `===`.**\n\n## Example\n\n```js\nconsole.log(5 == \"5\");    // true  — \"5\" becomes 5\nconsole.log(5 === \"5\");   // false — different types\nconsole.log(null == undefined);  // true\nconsole.log(null === undefined); // false\n```\n\n`==` is a source of weird bugs.\n\n## `!=` and `!==`\n\nSimilarly: `!==` is strict \"not equal\".\n\n## Explicit conversion\n\n```js\nNumber(\"42\")    // 42\nNumber(\"abc\")   // NaN\nString(42)      // \"42\"\nBoolean(0)      // false\nBoolean(1)      // true\nBoolean(\"\")     // false\nBoolean(\"hi\")   // true\n```\n\n## Truthy/falsy\n\nIn conditions, **coerced to boolean**:\n\n**Falsy:** `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`.\n\n**Truthy** — everything else, including `\"0\"`, `[]`, `{}`.\n\n```js\nif (\"\") console.log(\"won't run\");\nif (\"0\") console.log(\"runs — non-empty string\");\nif ([]) console.log(\"runs — empty array is truthy\");\n```\n\n## `+` and coercion\n\n`+` is **stringy** if any operand is a string:\n\n```js\nconsole.log(\"5\" + 3);   // \"53\"\nconsole.log(5 + 3);     // 8\n```\n\n`- * /` — numeric, coerce:\n\n```js\nconsole.log(\"5\" - 3);   // 2\nconsole.log(\"5\" * \"2\"); // 10\n```\n\n## What if\n\n- `if (x == null)` — true for `null` and `undefined`.\n- `if (x === null)` — only `null`.\n\n## Common mistake\n\n`if (x == 0)` — `\"\"`, `false`, `0` all true. Strict `=== 0` only `0`.\n\n## Summary\n\n- `===` and `!==` — strict, always use them\n- `==` coerces, source of bugs\n- `Number/String/Boolean` — explicit\n- Falsy: `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`\n- `+` stringy, `- * /` numeric",
+    "8": {
+      "id": 8, "check_type": "console", "title": "Type Coercion, == vs ===",
+      "theory": "## == vs ===\n\nTwo comparison operators:\n\n- `==` — **loose**, with type coercion\n- `===` — **strict**, no coercion\n\n**Always use `===`.**\n\n## Example\n\n```js\nconsole.log(5 == \"5\");    // true  — \"5\" became 5\nconsole.log(5 === \"5\");   // false — different types\nconsole.log(null == undefined);  // true\nconsole.log(null === undefined); // false\n```\n\n`==` — source of weird bugs.\n\n## `!=` and `!==`\n\nSame: `!==` — strict \"not equal\".\n\n## Explicit coercion\n\n```js\nNumber(\"42\")    // 42\nNumber(\"abc\")   // NaN\nString(42)      // \"42\"\nBoolean(0)      // false\nBoolean(1)      // true\nBoolean(\"\")     // false\nBoolean(\"hi\")   // true\n```\n\n## Truthy/falsy\n\nIn conditions **coerced to boolean**:\n\n**Falsy**: `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`.\n\n**Truthy** — everything else, including `\"0\"`, `[]`, `{}`.\n\n```js\nif (\"\") console.log(\"won't fire\");\nif (\"0\") console.log(\"fires — non-empty string\");\nif ([]) console.log(\"fires — empty array truthy\");\n```\n\n## `+` and coercion\n\n`+` is **string**, if any operand is string:\n\n```js\nconsole.log(\"5\" + 3);   // \"53\"\nconsole.log(5 + 3);     // 8\n```\n\n`- * /` — numeric, coerce:\n\n```js\nconsole.log(\"5\" - 3);   // 2\nconsole.log(\"5\" * \"2\"); // 10\n```\n\n## What goes wrong\n\n- `if (x == null)` — true for `null` and `undefined`.\n- `if (x === null)` — only `null`.\n\n## Common mistake\n\n`if (x == 0)` — `\"\"`, `false`, `0` all true. Strict `=== 0` only `0`.\n\n## Summary\n\n- `===` and `!==` — strict, always them\n- `==` coerces — bug source\n- `Number/String/Boolean` — explicit\n- Falsy: `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`\n- `+` string, `- * /` numeric",
       "questions": [
-        { "text": "What does `console.log(5 == \"5\")` output?", "options": ["true", "false", "Error", "5"], "answer": 0, "explanation": "`==` coerces to number." },
-        { "text": "What does `console.log(5 === \"5\")` output?", "options": ["true", "false", "Error", "5"], "answer": 1, "explanation": "`===` strict — different types." },
-        { "text": "Which is falsy?", "options": ["\"0\"", "[]", "0", "{}"], "answer": 2, "explanation": "`0` falsy. `\"0\"`, `[]`, `{}` truthy." },
-        { "text": "What does `console.log(\"5\" + 3)` output?", "options": ["8", "\"53\"", "NaN", "Error"], "answer": 1, "explanation": "`+` with string — concat." },
-        { "text": "Which comparison to use?", "options": ["==", "===", "=", "!="], "answer": 1, "explanation": "`===` — strict, always." }
+        {"text": "What does `console.log(5 == \"5\")` output?", "options": ["true", "false", "Error", "5"], "answer": 0, "explanation": "`==` coerces to number."},
+        {"text": "What does `console.log(5 === \"5\")` output?", "options": ["true", "false", "Error", "5"], "answer": 1, "explanation": "`===` no coercion."},
+        {"text": "Which is falsy?", "options": ["\"0\"", "[]", "0", "{}"], "answer": 2, "explanation": "`0` is falsy. `\"0\"`, `[]`, `{}` are truthy."},
+        {"text": "What does `console.log(\"5\" + 3)` output?", "options": ["8", "\"53\"", "NaN", "Error"], "answer": 1, "explanation": "`+` with string concatenates."},
+        {"text": "Which comparison to use?", "options": ["==", "===", "=", "!="], "answer": 1, "explanation": "`===` strict, always."}
       ],
       "practice": {
         "description": "Given:\n```\nlet a = \"5\";\nlet b = 5;\n```\n\nOutput:\n```\na == b: true\na === b: false\nNumber(a) + b: 10\n```",
@@ -131,53 +134,47 @@
         "must_contain": ["a == b", "a === b", "Number(a)", "console.log"]
       }
     },
-    "8": {
-      "id": 8,
-      "check_type": "console",
-      "title": "if / else, Ternary",
-      "theory": "## Syntax\n\n```js\nif (x > 0) {\n  console.log(\"+\");\n} else if (x < 0) {\n  console.log(\"-\");\n} else {\n  console.log(\"0\");\n}\n```\n\nCondition in `()`, body in `{}`. Like Java.\n\n## Operators\n\n`==` (avoid), `===`, `!==`, `<`, `>`, `<=`, `>=`.\n\n## Logical\n\n`&&` — and, `||` — or, `!` — not.\n\n```js\nif (age >= 18 && hasPassport) { }\nif (name === \"Anna\" || name === \"Ivan\") { }\n```\n\n## Ternary\n\n```js\nlet s = x > 0 ? \"positive\" : \"negative\";\n```\n\n`condition ? if_true : if_false`.\n\n## Truthy/falsy in conditions\n\n```js\nif (name) { }\n```\n\n`name = \"\"` — false, `name = \"Anna\"` — true. Not always obvious — sometimes `if (name !== \"\")` is clearer.\n\n## What if\n\n- `if (x = 5)` — assignment, not an error. `x` becomes `5`, condition truthy. Use `===`.\n- `if (x > 0);` — `;` cuts off the body.\n\n## Common mistake\n\n`if (name == \"Anna\")` — `==`. Use `===`.\n\n## Summary\n\n- `if (condition) { }` — parens and braces\n- `&&`, `||`, `!`\n- `a ? b : c` — ternary\n- `===` not `==`\n- Truthy/falsy in conditions",
+    "9": {
+      "id": 9, "check_type": "console", "title": "if / else, Ternary",
+      "theory": "## Syntax\n\n```js\nif (x > 0) {\n  console.log(\"+\");\n} else if (x < 0) {\n  console.log(\"-\");\n} else {\n  console.log(\"0\");\n}\n```\n\nCondition in `()`, body in `{}`. Like Java.\n\n## Operators\n\n`==` (don't), `===`, `!==`, `<`, `>`, `<=`, `>=`.\n\n## Logical\n\n`&&` — and, `||` — or, `!` — not.\n\n```js\nif (age >= 18 && hasPassport) { }\nif (name === \"Anna\" || name === \"Ivan\") { }\n```\n\n## Ternary\n\n```js\nlet s = x > 0 ? \"positive\" : \"negative\";\n```\n\n`condition ? if_true : if_false`.\n\n## Truthy/falsy in condition\n\n```js\nif (name) { }\n```\n\n`name = \"\"` — false, `name = \"Anna\"` — true. Not always obvious — sometimes better `if (name !== \"\")`.\n\n## What goes wrong\n\n- `if (x = 5)` — `=` assignment, not error. `x` becomes `5`, condition truthy. Use `===`.\n- `if (x > 0);` — `;` cuts the body.\n\n## Common mistake\n\n`if (name == \"Anna\")` — `==`. Use `===`.\n\n## Summary\n\n- `if (condition) { }` — parens and braces\n- `&&`, `||`, `!`\n- `a ? b : c` — ternary\n- `===` instead of `==`\n- Truthy/falsy in condition",
       "questions": [
-        { "text": "What does `console.log(5 > 3)` output?", "options": ["5", "true", "false", "Error"], "answer": 1, "explanation": "5 > 3 — true." },
-        { "text": "How to write `if a and b`?", "options": ["if (a and b)", "if (a && b)", "if (a & b)", "if a && b"], "answer": 1, "explanation": "`&&` — and." },
-        { "text": "What does `let x = -3; let s = x > 0 ? \"positive\" : \"negative\"; console.log(s)` output?", "options": ["positive", "negative", "-3", "Error"], "answer": 1, "explanation": "Condition false — second branch." },
-        { "text": "What is wrong with `if (x = 5)`?", "options": ["Error", "`=` instead of `===`, assignment", "Braces needed", "Works"], "answer": 1, "explanation": "`=` assigns, not compares." },
-        { "text": "Which value is falsy in a condition?", "options": ["\"0\"", "[]", "\"\"", "{}"], "answer": 2, "explanation": "Empty string — false." }
+        {"text": "What does `console.log(5 > 3)` output?", "options": ["5", "true", "false", "Error"], "answer": 1, "explanation": "5 > 3 — true."},
+        {"text": "How to write `if a and b`?", "options": ["if (a and b)", "if (a && b)", "if (a & b)", "if a && b"], "answer": 1, "explanation": "`&&` — and."},
+        {"text": "What does `let x = -3; let s = x > 0 ? \"plus\" : \"minus\"; console.log(s)` output?", "options": ["plus", "minus", "-3", "Error"], "answer": 1, "explanation": "Condition false — second branch."},
+        {"text": "What's wrong with `if (x = 5)`?", "options": ["Error", "`=` instead of `===`, assignment", "Needs braces", "Works"], "answer": 1, "explanation": "`=` assigns, not compares."},
+        {"text": "Which value is falsy?", "options": ["\"0\"", "[]", "\"\"", "{}"], "answer": 2, "explanation": "Empty string — false."}
       ],
       "practice": {
-        "description": "Given `let score = 78;`. Output grade:\n- `>= 90` → `Excellent`\n- `>= 75` → `Good`\n- `>= 60` → `Satisfactory`\n- otherwise → `Fail`\n\nFor `78` expected:\n```\nGood\n```",
+        "description": "Given `let score = 78;`. Output grade:\n- `>= 90` → `Excellent`\n- `>= 75` → `Good`\n- `>= 60` → `Satisfactory`\n- otherwise → `Bad`\n\nFor `78`:\n```\nGood\n```",
         "starter": "let score = 78;\n// TODO\n",
         "expected": "Good",
         "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "score >= 60", "console.log"]
       }
     },
-    "9": {
-      "id": 9,
-      "check_type": "console",
-      "title": "switch",
-      "theory": "## Syntax\n\n```js\nswitch (day) {\n  case 1:\n    console.log(\"Mon\");\n    break;\n  case 2:\n    console.log(\"Tue\");\n    break;\n  default:\n    console.log(\"Other\");\n}\n```\n\n- `switch (expression)` — any value\n- `break` mandatory, otherwise **fall-through**\n- `default` — if no `case` matched\n\n## Fall-through\n\n```js\nswitch (x) {\n  case 1:\n  case 2:\n    console.log(\"1 or 2\");\n    break;\n}\n```\n\nEmpty `case` group together.\n\n## switch vs if\n\n`switch` — exact match. `if` — ranges.\n\n## What if\n\n- Forget `break` — falls into following `case`.\n- No `default` and no match — nothing runs.\n\n## Common mistake\n\nForget `break` — extra `case` run.\n\n## Summary\n\n- `switch (value) { case X: ... break; }`\n- `break` — otherwise fall-through\n- `default` — otherwise nothing\n- Grouping: empty `case`",
+    "10": {
+      "id": 10, "check_type": "console", "title": "switch",
+      "theory": "## Syntax\n\n```js\nswitch (day) {\n  case 1:\n    console.log(\"Mon\");\n    break;\n  case 2:\n    console.log(\"Tue\");\n    break;\n  default:\n    console.log(\"Other\");\n}\n```\n\n- `switch (value)` — any value\n- `break` required, else **fall-through**\n- `default` — if no case matched\n\n## Fall-through\n\n```js\nswitch (x) {\n  case 1:\n  case 2:\n    console.log(\"1 or 2\");\n    break;\n}\n```\n\nEmpty cases group.\n\n## switch vs if\n\n`switch` — exact match. `if` — ranges.\n\n## What goes wrong\n\n- Forget `break` — falls into next `case`.\n- No `default` and no match — nothing runs.\n\n## Common mistake\n\nForget `break` — extra cases execute.\n\n## Summary\n\n- `switch (value) { case X: ... break; }`\n- `break` — otherwise fall-through\n- `default` — otherwise nothing\n- Grouping: empty cases",
       "questions": [
-        { "text": "What output?\n```\nlet x = 2;\nswitch (x) {\n  case 1: console.log(\"one\");\n  case 2: console.log(\"two\");\n  case 3: console.log(\"three\");\n}\n```", "options": ["two", "two\\nthree", "one\\ntwo\\nthree", "Error"], "answer": 1, "explanation": "No `break` — fall-through." },
-        { "text": "Why `default`?", "options": ["Mandatory", "If nothing matched", "Ends", "Error"], "answer": 1, "explanation": "Analog of `else`." },
-        { "text": "What does `break` do?", "options": ["Ends program", "Exits switch", "Skips", "default"], "answer": 1, "explanation": "Stops fall-through." },
-        { "text": "What is switch for?", "options": ["Ranges", "Exact match", "Loops", "Errors"], "answer": 1, "explanation": "Ranges — `if`." }
+        {"text": "What does this output?\n```\nlet x = 2;\nswitch (x) {\n  case 1: console.log(\"one\");\n  case 2: console.log(\"two\");\n  case 3: console.log(\"three\");\n}\n```", "options": ["two", "two\\nthree", "one\\ntwo\\nthree", "Error"], "answer": 1, "explanation": "No `break` — fall-through."},
+        {"text": "Why `default`?", "options": ["Required", "If nothing matched", "Ends", "Error"], "answer": 1, "explanation": "Like `else`."},
+        {"text": "What does `break` do?", "options": ["Ends program", "Exits switch", "Skips", "default"], "answer": 1, "explanation": "Stops fall-through."},
+        {"text": "What's switch good for?", "options": ["Ranges", "Exact match", "Loops", "Errors"], "answer": 1, "explanation": "Ranges — `if`."}
       ],
       "practice": {
-        "description": "Given `let grade = \"B\";`. Via `switch`:\n- `\"A\"` → `Excellent`\n- `\"B\"` → `Good`\n- `\"C\"` → `Satisfactory`\n- otherwise → `Unknown`\n\nFor `B` expected:\n```\nGood\n```",
+        "description": "Given `let grade = \"B\";`. Via `switch`:\n- `\"A\"` → `Excellent`\n- `\"B\"` → `Good`\n- `\"C\"` → `Satisfactory`\n- otherwise → `Unknown`\n\nFor `B`:\n```\nGood\n```",
         "starter": "let grade = \"B\";\n// TODO\n",
         "expected": "Good",
         "must_contain": ["switch", "case \"A\"", "case \"B\"", "case \"C\"", "default", "break", "console.log"]
       }
     },
-    "10": {
-      "id": 10,
-      "check_type": "console",
-      "title": "for, while, do-while",
-      "theory": "## for\n\n```js\nfor (let i = 1; i <= 5; i++) {\n  console.log(i);\n}\n```\n\nThree parts via `;`: init, condition, step.\n\n## while\n\n```js\nlet i = 1;\nwhile (i <= 5) {\n  console.log(i);\n  i++;\n}\n```\n\nCheck **before** body.\n\n## do-while\n\n```js\nlet i = 1;\ndo {\n  console.log(i);\n  i++;\n} while (i <= 5);\n```\n\nCheck **after** — at least once.\n\n## Nested\n\n```js\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 2; j++) {\n    console.log(i, j);\n  }\n}\n```\n\n## What if\n\n- Forget `i++` — infinite loop.\n- `let i` in `for` — scope **inside the loop**.\n\n## Common mistake\n\n`for (var i = ...)` — `i` leaks out. Use `let`.\n\n## Summary\n\n- `for (init; cond; step)`\n- `while (cond)`\n- `do { } while (cond);`\n- No step — infinite\n- `let i` in `for` — block scope",
+    "11": {
+      "id": 11, "check_type": "console", "title": "for, while, do-while",
+      "theory": "## for\n\n```js\nfor (let i = 1; i <= 5; i++) {\n  console.log(i);\n}\n```\n\nThree parts via `;`: init, condition, step.\n\n## while\n\n```js\nlet i = 1;\nwhile (i <= 5) {\n  console.log(i);\n  i++;\n}\n```\n\nChecks **before** body.\n\n## do-while\n\n```js\nlet i = 1;\ndo {\n  console.log(i);\n  i++;\n} while (i <= 5);\n```\n\nChecks **after** — runs at least once.\n\n## Nested\n\n```js\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 2; j++) {\n    console.log(i, j);\n  }\n}\n```\n\n## What goes wrong\n\n- Forget `i++` — infinite loop.\n- `let i` in `for` — scope **inside the loop**.\n\n## Common mistake\n\n`for (var i = ...)` — `i` leaks out. Use `let`.\n\n## Summary\n\n- `for (init; cond; step)`\n- `while (cond)`\n- `do { } while (cond);`\n- Without step — infinite\n- `let i` in `for` — block scope",
       "questions": [
-        { "text": "How many times?\n```\nfor (let i = 0; i < 3; i++) { }\n```", "options": ["2", "3", "4", "Infinite"], "answer": 1, "explanation": "i = 0, 1, 2." },
-        { "text": "How is `do-while` different from `while`?", "options": ["Same", "`do-while` checks after", "`do-while` no condition", "`while` faster"], "answer": 1, "explanation": "At least once." },
-        { "text": "What if `i++` is missing?", "options": ["No run", "Syntax", "Infinite loop", "Once"], "answer": 2, "explanation": "Condition always true." },
-        { "text": "In `for`, prefer `let` or `var`?", "options": ["var", "let", "both", "any"], "answer": 1, "explanation": "`let` — block scope." }
+        {"text": "How many times?\n```\nfor (let i = 0; i < 3; i++) { }\n```", "options": ["2", "3", "4", "Infinite"], "answer": 1, "explanation": "i = 0, 1, 2."},
+        {"text": "How does `do-while` differ from `while`?", "options": ["Same", "`do-while` checks after", "`do-while` no condition", "`while` faster"], "answer": 1, "explanation": "At least once."},
+        {"text": "What if `i++` forgotten?", "options": ["Won't start", "Syntax", "Infinite loop", "Once"], "answer": 2, "explanation": "Condition always true."},
+        {"text": "Preferred in `for`: `let` or `var`?", "options": ["var", "let", "both", "doesn't matter"], "answer": 1, "explanation": "`let` — block scope."}
       ],
       "practice": {
         "description": "Output numbers `1..5` via `for`:\n```\n1\n2\n3\n4\n5\n```",
@@ -186,34 +183,30 @@
         "must_contain": ["for", "console.log"]
       }
     },
-    "11": {
-      "id": 11,
-      "check_type": "console",
-      "title": "break, continue",
-      "theory": "## break — exit\n\n```js\nfor (let i = 0; i < 10; i++) {\n  if (i === 3) break;\n  console.log(i);\n}\n```\n\nOutput: `0 1 2`.\n\n## continue — skip iteration\n\n```js\nfor (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}\n```\n\nOutput: `0 1 3 4`.\n\n## Difference\n\n| `break` | `continue` |\n|---|---|\n| Exits **completely** | Skips **one** iteration |\n\n## break in nested loops\n\n```js\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 3; j++) {\n    if (j === 1) break;\n    console.log(i, j);\n  }\n}\n```\n\nExits only the **inner** loop.\n\n## while True + break\n\n```js\nwhile (true) {\n  let cmd = \"exit\";\n  if (cmd === \"exit\") break;\n}\n```\n\nClassic pattern.\n\n## What if\n\n- `break` outside loop — SyntaxError.\n- `continue` in `switch` — works but confusing.\n\n## Common mistake\n\nExpecting `break` to exit all loops. Only current.\n\n## Summary\n\n- `break` — exit\n- `continue` — skip iteration\n- `break` in nested — only inner\n- `while (true) + break` — standard",
+    "12": {
+      "id": 12, "check_type": "console", "title": "break, continue",
+      "theory": "## break — exit\n\n```js\nfor (let i = 0; i < 10; i++) {\n  if (i === 3) break;\n  console.log(i);\n}\n```\n\nOutput: `0 1 2`.\n\n## continue — skip iteration\n\n```js\nfor (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}\n```\n\nOutput: `0 1 3 4`.\n\n## Difference\n\n| `break` | `continue` |\n|---|---|\n| Exits **entirely** | Skips **one** iteration |\n\n## break in nested\n\n```js\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 3; j++) {\n    if (j === 1) break;\n    console.log(i, j);\n  }\n}\n```\n\nExits only **inner**.\n\n## while True + break\n\n```js\nwhile (true) {\n  let cmd = \"exit\";\n  if (cmd === \"exit\") break;\n}\n```\n\nClassic pattern.\n\n## What goes wrong\n\n- `break` outside loop — SyntaxError.\n- `continue` in `switch` — works but confusing.\n\n## Common mistake\n\nThinking `break` exits all loops. Only current.\n\n## Summary\n\n- `break` — exit\n- `continue` — skip iteration\n- `break` in nested — only inner\n- `while (true) + break` — standard",
       "questions": [
-        { "text": "What output?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 3) break;\n  console.log(i);\n}\n```", "options": ["0 1 2", "0 1 2 3", "0 1 2 4", "3 4"], "answer": 0, "explanation": "At i=3 break before output." },
-        { "text": "What output?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}\n```", "options": ["0 1", "0 1 2", "0 1 3 4", "0 1 2 3 4"], "answer": 2, "explanation": "Skip i=2." },
-        { "text": "Difference break and continue?", "options": ["Same", "break — exit, continue — skip", "break faster", "continue only in while"], "answer": 1, "explanation": "Whole loop vs one iteration." },
-        { "text": "break in nested — from which?", "options": ["Both", "Only inner", "Only outer", "Error"], "answer": 1, "explanation": "Only current." }
+        {"text": "What does this output?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 3) break;\n  console.log(i);\n}\n```", "options": ["0 1 2", "0 1 2 3", "0 1 2 4", "3 4"], "answer": 0, "explanation": "At i=3 break before output."},
+        {"text": "What does this output?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}\n```", "options": ["0 1", "0 1 2", "0 1 3 4", "0 1 2 3 4"], "answer": 2, "explanation": "Skip i=2."},
+        {"text": "Difference break vs continue?", "options": ["Same", "break — exit, continue — skip", "break faster", "continue only in while"], "answer": 1, "explanation": "break — whole loop, continue — one iteration."},
+        {"text": "break in nested — from which?", "options": ["From both", "Only inner", "Only outer", "Error"], "answer": 1, "explanation": "Only current."}
       ],
       "practice": {
-        "description": "Output numbers `1..10` via `for`, skipping evens (`continue`):\n```\n1\n3\n5\n7\n9\n```",
+        "description": "Output numbers `1..10`, skipping even (`continue`):\n```\n1\n3\n5\n7\n9\n```",
         "starter": "// TODO\n",
         "expected": "1\n3\n5\n7\n9",
         "must_contain": ["for", "continue", "% 2", "console.log"]
       }
     },
-    "12": {
-      "id": 12,
-      "check_type": "console",
-      "title": "Function Declaration",
-      "theory": "## Why functions\n\nBreak the program into pieces: reuse, readability. One function — one task.\n\n## Declaration\n\n```js\nfunction sum(a, b) {\n  return a + b;\n}\n\nconsole.log(sum(2, 3)); // 5\n```\n\n- `function` — keyword\n- `sum` — name\n- `(a, b)` — parameters\n- `return` — return value\n\n## Call\n\n`sum(2, 3)` — arguments. Order matters.\n\n## Without return — undefined\n\n```js\nfunction f() {\n  let x = 10;\n}\nconsole.log(f());  // undefined\n```\n\nA function without `return` returns `undefined`.\n\n## return ends\n\n```js\nfunction check(x) {\n  if (x > 0) return \"positive\";\n  return \"not positive\";\n  console.log(\"never\");\n}\n```\n\n## Parameters are copies\n\n```js\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);  // 5\n```\n\nPrimitives — by value. Objects/arrays — by reference.\n\n## What if\n\n- Call before declaration — works, `function` hoists.\n- Forget `return` — `undefined`.\n\n## Common mistake\n\n`function f() { return 5; }` — fine. `function f() { return 5 };` — `;` after `}` not needed.\n\n## Summary\n\n- `function name(params) { return ...; }`\n- Without `return` — `undefined`\n- `return` ends\n- Primitives — copies",
+    "13": {
+      "id": 13, "check_type": "console", "title": "Function Declaration",
+      "theory": "## Why functions\n\nBreak program into pieces: reuse, readability. One function — one task.\n\n## Declaration\n\n```js\nfunction sum(a, b) {\n  return a + b;\n}\n\nconsole.log(sum(2, 3)); // 5\n```\n\n- `function` — keyword\n- `sum` — name\n- `(a, b)` — parameters\n- `return` — return value\n\n## Call\n\n`sum(2, 3)` — arguments. Order matters.\n\n## Without return — undefined\n\n```js\nfunction f() {\n  let x = 10;\n}\nconsole.log(f());  // undefined\n```\n\n## return ends function\n\n```js\nfunction check(x) {\n  if (x > 0) return \"plus\";\n  return \"not plus\";\n  console.log(\"never\");\n}\n```\n\n## Parameters are copies\n\n```js\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);  // 5\n```\n\nPrimitives by value. Objects/arrays by reference.\n\n## What goes wrong\n\n- Call before declaration — works, `function` is hoisted.\n- Forget `return` — `undefined`.\n\n## Common mistake\n\n`function f() { return 5; }` — fine. `function f() { return 5 };` — `;` after `}` not needed.\n\n## Summary\n\n- `function name(params) { return ...; }`\n- Without `return` — `undefined`\n- `return` ends function\n- Primitives — copies",
       "questions": [
-        { "text": "What returns?\n```\nfunction f(x) { return x * 2; }\nf(5);\n```", "options": ["5", "10", "Error", "0"], "answer": 1, "explanation": "5 * 2 = 10." },
-        { "text": "What does a function without `return` return?", "options": ["0", "null", "undefined", "Error"], "answer": 2, "explanation": "`undefined`." },
-        { "text": "What output?\n```\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);\n```", "options": ["100", "5", "0", "Error"], "answer": 1, "explanation": "Primitives are copies." },
-        { "text": "Where can you call a declaration?", "options": ["After only", "Before only", "Before or after — hoisted", "Never"], "answer": 2, "explanation": "`function` hoists." }
+        {"text": "What does this return?\n```\nfunction f(x) { return x * 2; }\nf(5);\n```", "options": ["5", "10", "Error", "0"], "answer": 1, "explanation": "5 * 2 = 10."},
+        {"text": "What does a function without `return` return?", "options": ["0", "null", "undefined", "Error"], "answer": 2, "explanation": "Without `return` — `undefined`."},
+        {"text": "What does this output?\n```\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);\n```", "options": ["100", "5", "0", "Error"], "answer": 1, "explanation": "Primitives — copies."},
+        {"text": "Where can you call a function declaration?", "options": ["Only after", "Only before", "Before or after — hoisted", "Never"], "answer": 2, "explanation": "`function` is hoisted."}
       ],
       "practice": {
         "description": "Create two functions:\n- `square(x)` — returns `x * x`\n- `isEven(x)` — `true` if even\n\nOutput:\n```\n49\nfalse\ntrue\n```\n\nVia `square(7)`, `isEven(7)`, `isEven(8)`.",
@@ -222,16 +215,14 @@
         "must_contain": ["function square", "function isEven", "return", "% 2 === 0", "console.log"]
       }
     },
-    "13": {
-      "id": 13,
-      "check_type": "console",
-      "title": "Arrow Functions",
-      "theory": "## Function expression\n\nA function as a value:\n\n```js\nconst sum = function(a, b) {\n  return a + b;\n};\n```\n\n`sum` — variable holding a function.\n\n## Arrows\n\nShorter:\n\n```js\nconst sum = (a, b) => a + b;\nconsole.log(sum(2, 3)); // 5\n```\n\n- `=>` instead of `function`\n- Single expression — implicit `return`\n- One parameter — can drop `()`: `x => x * 2`\n\n## With a block\n\n```js\nconst sum = (a, b) => {\n  const result = a + b;\n  return result;\n};\n```\n\nWith `{}` — `return` is required.\n\n## No parameters\n\n```js\nconst hi = () => console.log(\"hi\");\n```\n\n## Difference from function\n\n- No own `this` (important in DOM, lesson 24)\n- Cannot be used as constructor\n- No hoisting — declare **before** use\n\n## What if\n\n- `const f = x => x * 2; f(3);` — 6.\n- `const f = () => 5;` — returns 5.\n- `const f = () => { 5 };` — `undefined` (no `return`).\n\n## Common mistake\n\n`() => { 5 }` — braces with an expression but no `return` — returns `undefined`.\n\n## Summary\n\n- `(a, b) => a + b` — concise\n- `() => { ...; return ...; }` — block\n- One parameter — no `()`\n- No hoisting",
+    "14": {
+      "id": 14, "check_type": "console", "title": "Arrow Functions",
+      "theory": "## Function expression\n\nFunction as a value:\n\n```js\nconst sum = function(a, b) {\n  return a + b;\n};\n```\n\n`sum` — variable holding a function.\n\n## Arrow\n\nShorter:\n\n```js\nconst sum = (a, b) => a + b;\nconsole.log(sum(2, 3)); // 5\n```\n\n- `=>` instead of `function`\n- One expression — implicit `return`\n- One param — can drop `()`: `x => x * 2`\n\n## With block\n\n```js\nconst sum = (a, b) => {\n  const result = a + b;\n  return result;\n};\n```\n\n`{}` present — `return` needed explicitly.\n\n## No params\n\n```js\nconst hi = () => console.log(\"hi\");\n```\n\n## Difference from function\n\n- No own `this` (matters in DOM, lesson 24)\n- Can't use as constructor\n- No hoisting — declare **before** use\n\n## What goes wrong\n\n- `const f = x => x * 2; f(3);` — 6.\n- `const f = () => 5;` — returns 5.\n- `const f = () => { 5 };` — `undefined` (no `return`).\n\n## Common mistake\n\n`() => { 5 }` — braces with expression, no `return` — returns `undefined`.\n\n## Summary\n\n- `(a, b) => a + b` — shorthand\n- `() => { ...; return ...; }` — block\n- One param — no `()`\n- No hoisting",
       "questions": [
-        { "text": "What does `const f = x => x * 2; f(5)` return?", "options": ["5", "10", "Error", "undefined"], "answer": 1, "explanation": "5 * 2 = 10." },
-        { "text": "What does `const f = () => { 5 }; f()` return?", "options": ["5", "undefined", "Error", "null"], "answer": 1, "explanation": "With `{}` — need `return`, otherwise `undefined`." },
-        { "text": "What does `const f = () => 5; f()` return?", "options": ["5", "undefined", "Error", "null"], "answer": 0, "explanation": "No `{}` — implicit return." },
-        { "text": "Can you call an arrow before declaration?", "options": ["Yes", "No, no hoisting", "Only in strict", "Only in main"], "answer": 1, "explanation": "Hoisting only for `function`." }
+        {"text": "What does `const f = x => x * 2; f(5)` return?", "options": ["5", "10", "Error", "undefined"], "answer": 1, "explanation": "5 * 2 = 10."},
+        {"text": "What does `const f = () => { 5 }; f()` return?", "options": ["5", "undefined", "Error", "null"], "answer": 1, "explanation": "With `{}` — needs `return`."},
+        {"text": "What does `const f = () => 5; f()` return?", "options": ["5", "undefined", "Error", "null"], "answer": 0, "explanation": "Without `{}` — implicit return."},
+        {"text": "Can you call arrow before declaration?", "options": ["Yes", "No, no hoisting", "Only in strict", "Only in main"], "answer": 1, "explanation": "Hoisting only for `function`."}
       ],
       "practice": {
         "description": "Create three arrow functions:\n- `square` — `x => x * x`\n- `double` — `x => x * 2`\n- `isPositive` — `x => x > 0`\n\nOutput:\n```\n9\n6\ntrue\n```",
@@ -240,16 +231,14 @@
         "must_contain": ["=>", "square", "double", "isPositive", "console.log"]
       }
     },
-    "14": {
-      "id": 14,
-      "check_type": "console",
-      "title": "Parameters and Rest",
-      "theory": "## Default values\n\n```js\nfunction greet(name = \"guest\") {\n  return `Hello, ${name}!`;\n}\nconsole.log(greet(\"Anna\"));  // Hello, Anna!\nconsole.log(greet());        // Hello, guest!\n```\n\n## Rest (...)\n\nCollect all arguments into an array:\n\n```js\nfunction sumAll(...nums) {\n  let total = 0;\n  for (const n of nums) total += n;\n  return total;\n}\nconsole.log(sumAll(1, 2, 3, 4));  // 10\n```\n\n`...nums` — array of all arguments.\n\n## Regular + rest\n\n```js\nfunction log(prefix, ...items) {\n  console.log(prefix, ...items);\n}\nlog(\"A\", 1, 2, 3);  // A 1 2 3\n```\n\n`...items` — after regular params.\n\n## Spread\n\n`...` works in reverse:\n\n```js\nconst arr = [1, 2, 3];\nconsole.log(Math.max(...arr));  // 3\nconsole.log([0, ...arr, 4]);    // [0, 1, 2, 3, 4]\n```\n\n## What if\n\n- `function f(a, ...rest, b)` — SyntaxError, rest must be last.\n- `greet(null)` — `null`, not the default.\n\n## Common mistake\n\n`greet()` without argument with `function greet(name)` — `undefined`, not an empty string.\n\n## Summary\n\n- `param = default` — default\n- `...rest` — all extra into an array\n- Rest — last\n- Spread — expand array",
+    "15": {
+      "id": 15, "check_type": "console", "title": "Parameters and Rest",
+      "theory": "## Default values\n\n```js\nfunction greet(name = \"guest\") {\n  return `Hello, ${name}!`;\n}\nconsole.log(greet(\"Anna\"));  // Hello, Anna!\nconsole.log(greet());        // Hello, guest!\n```\n\n## Rest (...)\n\nCollect all arguments into array:\n\n```js\nfunction sumAll(...nums) {\n  let total = 0;\n  for (const n of nums) total += n;\n  return total;\n}\nconsole.log(sumAll(1, 2, 3, 4));  // 10\n```\n\n`...nums` — array of all passed.\n\n## Regular + rest\n\n```js\nfunction log(prefix, ...items) {\n  console.log(prefix, ...items);\n}\nlog(\"A\", 1, 2, 3);  // A 1 2 3\n```\n\n`...items` — after regular.\n\n## Spread\n\n`...` in reverse:\n\n```js\nconst arr = [1, 2, 3];\nconsole.log(Math.max(...arr));  // 3\nconsole.log([0, ...arr, 4]);    // [0, 1, 2, 3, 4]\n```\n\n## What goes wrong\n\n- `function f(a, ...rest, b)` — SyntaxError, rest must be last.\n- `greet(null)` — `null`, not default.\n\n## Common mistake\n\n`greet()` with `function greet(name)` — `undefined`, not empty string.\n\n## Summary\n\n- `param = default` — default\n- `...rest` — all extras in array\n- Rest — last\n- Spread — expand array",
       "questions": [
-        { "text": "What does `function g(name = \"guest\") { return name; } g()` output?", "options": ["undefined", "guest", "null", "Error"], "answer": 1, "explanation": "Default triggered." },
-        { "text": "What does `...nums` do?", "options": ["Multiplies", "Collects args into array", "Expands array", "Error"], "answer": 1, "explanation": "Rest — into array." },
-        { "text": "Where must rest be?", "options": ["First", "Last", "Middle", "Anywhere"], "answer": 1, "explanation": "Last only." },
-        { "text": "What does `Math.max(...arr)` do?", "options": ["Error", "Expands array into args", "Sum", "Average"], "answer": 1, "explanation": "Spread — expands." }
+        {"text": "What does `function g(name = \"guest\") { return name; } g()` output?", "options": ["undefined", "guest", "null", "Error"], "answer": 1, "explanation": "Default fires."},
+        {"text": "What does `...nums` do?", "options": ["Multiplies", "Collects arguments into array", "Expands array", "Error"], "answer": 1, "explanation": "Rest — to array."},
+        {"text": "Where should rest be?", "options": ["First", "Last", "Middle", "Anywhere"], "answer": 1, "explanation": "Last only."},
+        {"text": "What does `Math.max(...arr)` do?", "options": ["Error", "Expands array into arguments", "Sum", "Average"], "answer": 1, "explanation": "Spread — expands."}
       ],
       "practice": {
         "description": "Create:\n- `sumAll(...nums)` — sum of all arguments\n- `greet(name = \"guest\")` — `\"Hello, <name>!\"`\n\nOutput:\n```\n10\nHello, Anna!\nHello, guest!\n```",
@@ -258,293 +247,164 @@
         "must_contain": ["...nums", "name =", "console.log"]
       }
     },
-    "15": {
-      "id": 15,
-      "check_type": "console",
-      "title": "Scope, Closures",
-      "theory": "## Scope\n\nA variable lives in the **block** where it is declared (`{}`):\n\n```js\nif (true) {\n  let x = 10;\n}\nconsole.log(x); // ReferenceError\n```\n\n## Global vs local\n\nA variable outside a function is global, visible everywhere. Inside — only there:\n\n```js\nlet x = 100;\nfunction f() {\n  console.log(x); // 100 — sees the global\n}\n```\n\n## Shadowing\n\nLocal overrides global:\n\n```js\nlet x = 100;\nfunction f() {\n  let x = 200;\n  console.log(x); // 200\n}\nf();\nconsole.log(x); // 100 — global untouched\n```\n\n## Closure\n\nA function \"remembers\" variables from where it was created:\n\n```js\nfunction makeCounter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = makeCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n\n`count` lives between calls. This is a **closure**.\n\n## Practical use\n\nHide state, create a factory:\n\n```js\nfunction greet(greeting) {\n  return (name) => `${greeting}, ${name}!`;\n}\nconst hi = greet(\"Hello\");\nconsole.log(hi(\"Anna\"));  // Hello, Anna!\n```\n\n## What if\n\n- Access local from outside — ReferenceError.\n- `var` in function — leaks out of `if` but not function.\n\n## Common mistake\n\nThinking a function without `let` inside changes the global. No — it creates a local (in strict mode — error).\n\n## Summary\n\n- Variable lives in the block\n- Local overrides global\n- Closure — function remembers environment\n- Counter via closure — classic",
+    "16": {
+      "id": 16, "check_type": "console", "title": "Scope, Closures",
+      "theory": "## Scope\n\nVariable lives in the **block** where declared (`{}`):\n\n```js\nif (true) {\n  let x = 10;\n}\nconsole.log(x); // ReferenceError\n```\n\n## Global vs local\n\nOutside function — global, visible everywhere. Inside — only there:\n\n```js\nlet x = 100;\nfunction f() {\n  console.log(x); // 100 — sees global\n}\n```\n\n## Shadowing\n\nLocal overrides global:\n\n```js\nlet x = 100;\nfunction f() {\n  let x = 200;\n  console.log(x); // 200\n}\nf();\nconsole.log(x); // 100 — global untouched\n```\n\n## Closure\n\nFunction \"remembers\" variables from where it was created:\n\n```js\nfunction makeCounter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = makeCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n\n`count` lives between calls. This is a **closure**.\n\n## Practical use\n\nHide state, factory:\n\n```js\nfunction greet(greeting) {\n  return (name) => `${greeting}, ${name}!`;\n}\nconst hi = greet(\"Hello\");\nconsole.log(hi(\"Anna\"));  // Hello, Anna!\n```\n\n## What goes wrong\n\n- Access local outside — ReferenceError.\n- `var` in function — leaks from `if`, not from function.\n\n## Common mistake\n\nThinking function without `let` inside changes global. No, it creates local (in strict mode — error).\n\n## Summary\n\n- Variable lives in block\n- Local overrides global\n- Closure — function remembers environment\n- Counter via closure — classic",
       "questions": [
-        { "text": "What output?\n```\nfunction f() { let x = 10; }\nf();\nconsole.log(x);\n```", "options": ["10", "undefined", "ReferenceError", "0"], "answer": 2, "explanation": "`x` local, not visible outside." },
-        { "text": "What output?\n```\nlet x = 100;\nfunction f() { let x = 200; console.log(x); }\nf();\n```", "options": ["100", "200", "Error", "undefined"], "answer": 1, "explanation": "Local overrides." },
-        { "text": "What is a closure?", "options": ["Loop", "Function remembers environment", "Error", "Object"], "answer": 1, "explanation": "Closure — remembers variables." },
-        { "text": "What does the second call of counter() return?", "options": ["1", "2", "0", "undefined"], "answer": 1, "explanation": "`count` lives between calls." }
+        {"text": "What does this output?\n```\nfunction f() { let x = 10; }\nf();\nconsole.log(x);\n```", "options": ["10", "undefined", "ReferenceError", "0"], "answer": 2, "explanation": "`x` local, not visible."},
+        {"text": "What does this output?\n```\nlet x = 100;\nfunction f() { let x = 200; console.log(x); }\nf();\n```", "options": ["100", "200", "Error", "undefined"], "answer": 1, "explanation": "Local overrides."},
+        {"text": "What is a closure?", "options": ["A loop", "Function remembers environment", "Error", "Object"], "answer": 1, "explanation": "Closure — preserved variables."},
+        {"text": "What does the second counter() output?", "options": ["1", "2", "0", "undefined"], "answer": 1, "explanation": "`count` lives between calls."}
       ],
       "practice": {
-        "description": "Create `makeCounter()` — returns a function that increments a counter and returns it. Output `1`, `2`, `3` (three calls).\n\nVisible text: `1`, `2`, `3` on separate lines.",
+        "description": "Create `makeCounter()` — returns function that increments and returns the counter. Output `1`, `2`, `3` (three calls).\n\nExpected: `1`, `2`, `3` on separate lines.",
         "starter": "// TODO: makeCounter\n",
         "expected": "1\n2\n3",
         "must_contain": ["function", "let count = 0", "return function", "console.log"]
       }
     },
-    "16": {
-      "id": 16,
-      "check_type": "console",
-      "title": "Arrays",
-      "theory": "## What is an array\n\n```js\nconst fruits = [\"apple\", \"banana\", \"cherry\"];\nconst nums = [3, 7, 1, 9, 4];\nconst empty = [];\n```\n\n## Indices\n\nZero-based: `arr[0]` — first, `arr[arr.length - 1]` — last.\n\n```js\nconsole.log(fruits[0]);  // apple\nconsole.log(fruits[2]);  // cherry\nconsole.log(fruits[-1]); // undefined — negatives don't work\n```\n\n## length\n\nProperty, not method:\n\n```js\nconsole.log(fruits.length);  // 3\n```\n\n## Mutation\n\nArrays **are mutable**:\n\n```js\nfruits[1] = \"pear\";\nconsole.log(fruits);  // [\"apple\", \"pear\", \"cherry\"]\n```\n\n## Iteration\n\n```js\nfor (const f of fruits) {\n  console.log(f);\n}\n```\n\n`for...of` — values.\n\n```js\nfor (let i = 0; i < fruits.length; i++) {\n  console.log(fruits[i]);\n}\n```\n\n## Nested\n\n```js\nconst matrix = [\n  [1, 2, 3],\n  [4, 5, 6]\n];\nconsole.log(matrix[1][2]); // 6\n```\n\n## What if\n\n- `arr[10]` — `undefined`, not an error.\n- `arr.length = 2` — truncates the array.\n\n## Common mistake\n\n`arr[-1]` — `undefined`, not last. For last — `arr[arr.length - 1]`.\n\n## Summary\n\n- `[a, b, c]` — array\n- Indices from 0\n- `length` — property\n- `arr[i] = x` — mutation\n- `for...of` — iteration",
+    "17": {
+      "id": 17, "check_type": "console", "title": "Arrays",
+      "theory": "## What an array is\n\n```js\nconst fruits = [\"apple\", \"banana\", \"cherry\"];\nconst nums = [3, 7, 1, 9, 4];\nconst empty = [];\n```\n\n## Indices\n\nFrom 0: `arr[0]` — first, `arr[arr.length - 1]` — last.\n\n```js\nconsole.log(fruits[0]);  // apple\nconsole.log(fruits[2]);  // cherry\nconsole.log(fruits[-1]); // undefined — negatives don't work\n```\n\n## length\n\nProperty, not method:\n\n```js\nconsole.log(fruits.length);  // 3\n```\n\n## Mutation\n\nArrays are **mutable**:\n\n```js\nfruits[1] = \"pear\";\nconsole.log(fruits);  // [\"apple\", \"pear\", \"cherry\"]\n```\n\n## Iteration\n\n```js\nfor (const f of fruits) {\n  console.log(f);\n}\n```\n\n`for...of` — values.\n\n```js\nfor (let i = 0; i < fruits.length; i++) {\n  console.log(fruits[i]);\n}\n```\n\n## Nested\n\n```js\nconst matrix = [\n  [1, 2, 3],\n  [4, 5, 6]\n];\nconsole.log(matrix[1][2]); // 6\n```\n\n## What goes wrong\n\n- `arr[10]` — `undefined`, not error.\n- `arr.length = 2` — truncates array.\n\n## Common mistake\n\n`arr[-1]` — `undefined`, not last. For last — `arr[arr.length - 1]`.\n\n## Summary\n\n- `[a, b, c]` — array\n- Indices from 0\n- `length` — property\n- `arr[i] = x` — mutation\n- `for...of` — traversal",
       "questions": [
-        { "text": "What does `[10, 20, 30][1]` return?", "options": ["10", "20", "30", "Error"], "answer": 1, "explanation": "Index 1 — second." },
-        { "text": "What does `[1, 2, 3].length` return?", "options": ["2", "3", "4", "Error"], "answer": 1, "explanation": "3 elements." },
-        { "text": "What happens on `[1, 2, 3][10]`?", "options": ["0", "null", "undefined", "Error"], "answer": 2, "explanation": "Out of range — `undefined`." },
-        { "text": "What happens on `[1, 2, 3][-1]`?", "options": ["3", "1", "undefined", "Error"], "answer": 2, "explanation": "Negatives don't work." },
-        { "text": "How to get the last element?", "options": ["arr[-1]", "arr[arr.length]", "arr[arr.length - 1]", "arr.last()"], "answer": 2, "explanation": "`length - 1`." }
+        {"text": "What does `[10, 20, 30][1]` output?", "options": ["10", "20", "30", "Error"], "answer": 1, "explanation": "Index 1 — second."},
+        {"text": "What does `[1, 2, 3].length` return?", "options": ["2", "3", "4", "Error"], "answer": 1, "explanation": "3 elements."},
+        {"text": "What about `[1, 2, 3][10]`?", "options": ["0", "null", "undefined", "Error"], "answer": 2, "explanation": "Out of bounds — `undefined`."},
+        {"text": "What about `[1, 2, 3][-1]`?", "options": ["3", "1", "undefined", "Error"], "answer": 2, "explanation": "Negative indices don't work."},
+        {"text": "How to get last element?", "options": ["arr[-1]", "arr[arr.length]", "arr[arr.length - 1]", "arr.last()"], "answer": 2, "explanation": "`length - 1`."}
       ],
       "practice": {
-        "description": "Given array `const nums = [4, 8, 15, 16, 23, 42];`. Output:\n```\n4\n42\n6\n```",
+        "description": "Given `const nums = [4, 8, 15, 16, 23, 42];`. Output:\n```\n4\n42\n6\n```",
         "starter": "const nums = [4, 8, 15, 16, 23, 42];\n// TODO\n",
         "expected": "4\n42\n6",
         "must_contain": ["nums[0]", "nums[nums.length - 1]", "nums.length", "console.log"]
       }
     },
-    "17": {
-      "id": 17,
-      "check_type": "console",
-      "title": "Array Methods",
-      "theory": "## push / pop\n\n```js\narr.push(x)   // append, returns new length\narr.pop()     // remove from end, returns element\n```\n\n## shift / unshift\n\n```js\narr.unshift(x)  // prepend\narr.shift()     // remove from start\n```\n\n## slice — copy\n\n```js\n[1, 2, 3, 4].slice(1, 3)   // [2, 3]\n[1, 2, 3, 4].slice(-2)     // [3, 4]\n```\n\nDoes not mutate.\n\n## splice — modify\n\n```js\nlet arr = [1, 2, 3, 4];\narr.splice(1, 2);        // remove 2 from index 1 → [3, 4]\narr.splice(1, 0, 99);    // insert 99 at index 1\n```\n\nMutates **in place**.\n\n## includes / indexOf\n\n```js\n[1, 2, 3].includes(2)      // true\n[1, 2, 3].indexOf(2)       // 1\n[1, 2, 3].indexOf(99)      // -1\n```\n\n## forEach — iterate\n\n```js\n[1, 2, 3].forEach(n => console.log(n * 2));\n// 2 4 6\n```\n\n## join\n\n```js\n[1, 2, 3].join(\"-\")   // \"1-2-3\"\n```\n\n## reverse\n\n```js\n[1, 2, 3].reverse()   // [3, 2, 1] — mutates in place\n```\n\n## What if\n\n- `push` returns the new length, not the array.\n- `slice` — copy, `splice` — mutation.\n\n## Common mistake\n\n`arr = arr.push(x)` — `arr` becomes a number (new length). Just `arr.push(x)`.\n\n## Summary\n\n- `push/pop/shift/unshift` — ends\n- `slice` — copy, `splice` — modify\n- `forEach` — iterate\n- `join` — into string\n- `reverse` — in place",
+    "18": {
+      "id": 18, "check_type": "console", "title": "Array Methods",
+      "theory": "## push / pop\n\n```js\narr.push(x)   // to end, returns new length\narr.pop()     // from end, returns removed\n```\n\n## shift / unshift\n\n```js\narr.unshift(x)  // to start\narr.shift()     // from start\n```\n\n## slice — copy\n\n```js\n[1, 2, 3, 4].slice(1, 3)   // [2, 3]\n[1, 2, 3, 4].slice(-2)     // [3, 4]\n```\n\nDoesn't mutate original.\n\n## splice — mutate\n\n```js\nlet arr = [1, 2, 3, 4];\narr.splice(1, 2);        // remove 2 from index 1 → [3, 4]\narr.splice(1, 0, 99);    // insert 99 at position 1\n```\n\nMutates **in place**.\n\n## includes / indexOf\n\n```js\n[1, 2, 3].includes(2)      // true\n[1, 2, 3].indexOf(2)       // 1\n[1, 2, 3].indexOf(99)      // -1\n```\n\n## forEach — iterate\n\n```js\n[1, 2, 3].forEach(n => console.log(n * 2));\n// 2 4 6\n```\n\n## join\n\n```js\n[1, 2, 3].join(\"-\")   // \"1-2-3\"\n```\n\n## reverse\n\n```js\n[1, 2, 3].reverse()   // [3, 2, 1] — mutates in place\n```\n\n## What goes wrong\n\n- `push` returns new length, not array.\n- `slice` — copy, `splice` — mutate.\n\n## Common mistake\n\n`arr = arr.push(x)` — `arr` becomes a number (new length). Just `arr.push(x)`.\n\n## Summary\n\n- `push/pop/shift/unshift` — ends\n- `slice` — copy, `splice` — mutate\n- `forEach` — iterate\n- `join` — to string\n- `reverse` — in place",
       "questions": [
-        { "text": "What does `arr.push(5)` do?", "options": ["Remove", "Append", "Prepend", "Sort"], "answer": 1, "explanation": "To end." },
-        { "text": "Difference `slice` and `splice`?", "options": ["Same", "slice — copy, splice — mutate", "splice faster", "slice only for strings"], "answer": 1, "explanation": "slice — copy, splice — mutation." },
-        { "text": "What does `[1, 2, 3].includes(2)` return?", "options": ["1", "true", "2", "false"], "answer": 1, "explanation": "true — has 2." },
-        { "text": "What does `[1, 2, 3].join(\"-\")` return?", "options": ["[1, 2, 3]", "\"1-2-3\"", "\"123\"", "Error"], "answer": 1, "explanation": "With dash." },
-        { "text": "What does `[1, 2, 3].pop()` return?", "options": ["[1, 2]", "3", "1", "Error"], "answer": 1, "explanation": "Removed — 3." }
+        {"text": "What does `arr.push(5)` do?", "options": ["Removes", "Adds to end", "Adds to start", "Sorts"], "answer": 1, "explanation": "To end."},
+        {"text": "Difference `slice` vs `splice`?", "options": ["Same", "slice — copy, splice — mutate", "splice faster", "slice only for strings"], "answer": 1, "explanation": "slice — copy, splice — mutate."},
+        {"text": "What does `[1, 2, 3].includes(2)` return?", "options": ["1", "true", "2", "false"], "answer": 1, "explanation": "true — has 2."},
+        {"text": "What does `[1, 2, 3].join(\"-\")` return?", "options": ["[1, 2, 3]", "\"1-2-3\"", "\"123\"", "Error"], "answer": 1, "explanation": "Hyphen-separated."},
+        {"text": "What does `[1, 2, 3].pop()` return?", "options": ["[1, 2]", "3", "1", "Error"], "answer": 1, "explanation": "Removed — 3."}
       ],
       "practice": {
-        "description": "Given array `const nums = [1, 2, 3];`. Do:\n- `nums.push(4)`\n- `nums.unshift(0)`\n- output `nums.join(\",\")`\n- output `nums.length`\n\nVisible text:\n```\n0,1,2,3,4\n5\n```",
+        "description": "Given `const nums = [1, 2, 3];`. Do:\n- `nums.push(4)`\n- `nums.unshift(0)`\n- output `nums.join(\",\")`\n- output `nums.length`\n\nExpected:\n```\n0,1,2,3,4\n5\n```",
         "starter": "const nums = [1, 2, 3];\n// TODO\n",
         "expected": "0,1,2,3,4\n5",
         "must_contain": [".push(", ".unshift(", ".join(", ".length", "console.log"]
       }
     },
-    "18": {
-      "id": 18,
-      "check_type": "console",
-      "title": "map, filter, reduce",
-      "theory": "## map — transform each\n\n```js\nconst nums = [1, 2, 3];\nconst doubled = nums.map(n => n * 2);\nconsole.log(doubled); // [2, 4, 6]\n```\n\nReturns **new** array of the same length.\n\n## filter — keep matching\n\n```js\nconst evens = nums.filter(n => n % 2 === 0);\nconsole.log(evens); // [2]\n```\n\nReturns new array of matching elements.\n\n## reduce — collapse to one\n\n```js\nconst sum = nums.reduce((acc, n) => acc + n, 0);\nconsole.log(sum); // 6\n```\n\n`(acc, n) => ..., initial_value`.\n\n- `acc` — accumulator\n- `n` — current element\n- `0` — start\n\n## Example: sum\n\n```js\n[1, 2, 3, 4].reduce((acc, n) => acc + n, 0);  // 10\n```\n\nStep by step: 0 + 1 = 1, 1 + 2 = 3, 3 + 3 = 6, 6 + 4 = 10.\n\n## Chain\n\n```js\nconst result = nums\n  .filter(n => n > 1)\n  .map(n => n * 10);\nconsole.log(result); // [20, 30]\n```\n\n## What if\n\n- Without initial value in `reduce` — first acc is `[0]`.\n- `map` without `return` in arrow with `{}` — array of `undefined`.\n\n## Common mistake\n\n`map(n => { n * 2 })` — without `return` — array of `undefined`. Either no `{}` or with `return`.\n\n## Summary\n\n- `map` — transform\n- `filter` — keep\n- `reduce` — collapse\n- Chains — power of JS",
+    "19": {
+      "id": 19, "check_type": "console", "title": "map, filter, reduce",
+      "theory": "## map — transform each\n\n```js\nconst nums = [1, 2, 3];\nconst doubled = nums.map(n => n * 2);\nconsole.log(doubled); // [2, 4, 6]\n```\n\nReturns **new** array of same length.\n\n## filter — keep matching\n\n```js\nconst evens = nums.filter(n => n % 2 === 0);\nconsole.log(evens); // [2]\n```\n\nReturns new array subset.\n\n## reduce — to single value\n\n```js\nconst sum = nums.reduce((acc, n) => acc + n, 0);\nconsole.log(sum); // 6\n```\n\n`(acc, n) => ..., initial_value`.\n\n- `acc` — accumulator\n- `n` — current element\n- `0` — start\n\n## Example: sum\n\n```js\n[1, 2, 3, 4].reduce((acc, n) => acc + n, 0);  // 10\n```\n\nStep by step: 0 + 1 = 1, 1 + 2 = 3, 3 + 3 = 6, 6 + 4 = 10.\n\n## Chaining\n\n```js\nconst result = nums\n  .filter(n => n > 1)\n  .map(n => n * 10);\nconsole.log(result); // [20, 30]\n```\n\n## What goes wrong\n\n- Without initial value in `reduce` — first acc becomes `[0]`.\n- `map` without `return` in arrow with `{}` — array of `undefined`.\n\n## Common mistake\n\n`map(n => { n * 2 })` — without `return` returns array of `undefined`. Either drop `{}`, or add `return`.\n\n## Summary\n\n- `map` — transform\n- `filter` — keep\n- `reduce` — fold\n- Chains — JS power",
       "questions": [
-        { "text": "What does `[1, 2, 3].map(n => n * 2)` return?", "options": ["[1, 2, 3]", "[2, 4, 6]", "[1, 4, 9]", "6"], "answer": 1, "explanation": "Multiplies each." },
-        { "text": "What does `[1, 2, 3, 4].filter(n => n % 2 === 0)` return?", "options": ["[1, 3]", "[2, 4]", "[1, 2, 3, 4]", "2"], "answer": 1, "explanation": "Evens only." },
-        { "text": "What does `[1, 2, 3].reduce((a, n) => a + n, 0)` return?", "options": ["[1, 2, 3]", "6", "3", "0"], "answer": 1, "explanation": "1+2+3 = 6." },
-        { "text": "What is wrong with `[1, 2].map(n => { n * 2 })`?", "options": ["Syntax", "No return — array of undefined", "Works", "Need filter"], "answer": 1, "explanation": "`{}` + arrow — needs `return`." },
-        { "text": "What does `reduce` do?", "options": ["Transforms each", "Filters", "Collapses to one", "Copies"], "answer": 2, "explanation": "To one value." }
+        {"text": "What does `[1, 2, 3].map(n => n * 2)` return?", "options": ["[1, 2, 3]", "[2, 4, 6]", "[1, 4, 9]", "6"], "answer": 1, "explanation": "Multiplies each."},
+        {"text": "What does `[1, 2, 3, 4].filter(n => n % 2 === 0)` return?", "options": ["[1, 3]", "[2, 4]", "[1, 2, 3, 4]", "2"], "answer": 1, "explanation": "Only even."},
+        {"text": "What does `[1, 2, 3].reduce((a, n) => a + n, 0)` return?", "options": ["[1, 2, 3]", "6", "3", "0"], "answer": 1, "explanation": "1+2+3 = 6."},
+        {"text": "What's wrong with `[1, 2].map(n => { n * 2 })`?", "options": ["Syntax", "No return — array of undefined", "Works", "Needs filter"], "answer": 1, "explanation": "`{}` + arrow — needs `return`."},
+        {"text": "What does `reduce` do?", "options": ["Transforms each", "Filters", "Folds to one value", "Copies"], "answer": 2, "explanation": "ToOne."}
       ],
       "practice": {
-        "description": "Given array `const nums = [1, 2, 3, 4, 5];`. Obtain:\n- `doubled` — doubled (`map`)\n- `evens` — evens (`filter`)\n- `sum` — sum (`reduce`)\n\nOutput:\n```\n2,4,6,8,10\n2,4\n15\n```\n\nAll arrays via `.join(\",\")`.",
+        "description": "Given `const nums = [1, 2, 3, 4, 5];`. Get:\n- `doubled` — doubled (`map`)\n- `evens` — even (`filter`)\n- `sum` — sum (`reduce`)\n\nOutput:\n```\n2,4,6,8,10\n2,4\n15\n```\n\nAll arrays via `.join(\",\")`.",
         "starter": "const nums = [1, 2, 3, 4, 5];\n// TODO\n",
         "expected": "2,4,6,8,10\n2,4\n15",
         "must_contain": [".map(", ".filter(", ".reduce(", ".join(", "console.log"]
       }
     },
-    "19": {
-      "id": 19,
-      "check_type": "console",
-      "title": "Objects",
-      "theory": "## What is an object\n\n`{ key: value }` — a set of pairs. Like `dict` in Python.\n\n```js\nconst user = {\n  name: \"Anna\",\n  age: 25,\n  city: \"Moscow\"\n};\n```\n\n## Access\n\nTwo ways:\n\n```js\nconsole.log(user.name);       // Anna\nconsole.log(user[\"age\"]);     // 25\n```\n\nBrackets — for dynamic keys.\n\n## Mutation\n\n```js\nuser.age = 26;              // change\nuser.email = \"a@mail.com\";  // add\ndelete user.city;           // delete\n```\n\n## in\n\n```js\nconsole.log(\"name\" in user);  // true\nconsole.log(\"email\" in user); // false\n```\n\n## Object.keys / values / entries\n\n```js\nObject.keys(user)     // [\"name\", \"age\", \"city\"]\nObject.values(user)   // [\"Anna\", 25, \"Moscow\"]\nObject.entries(user)  // [[\"name\", \"Anna\"], ...]\n```\n\n## Iteration\n\n```js\nfor (const key in user) {\n  console.log(key, user[key]);\n}\n```\n\n`for...in` — keys.\n\n## Nested\n\n```js\nconst data = {\n  user: { name: \"Anna\" },\n  scores: [1, 2, 3]\n};\nconsole.log(data.user.name);  // Anna\nconsole.log(data.scores[1]);  // 2\n```\n\n## What if\n\n- `user.name` for missing — `undefined`.\n- `user[\"age\"]` — works, `user[age]` — looks for a variable `age`.\n\n## Common mistake\n\n`user.name` (dot) for a key with a space — only `user[\"first name\"]`.\n\n## Summary\n\n- `{ k: v }` — object\n- `obj.key` / `obj[\"key\"]`\n- `delete`, `in`\n- `Object.keys/values/entries`\n- `for...in` — keys",
+    "20": {
+      "id": 20, "check_type": "console", "title": "Objects",
+      "theory": "## What an object is\n\n`{ key: value }` — set of pairs. Like `dict` in Python.\n\n```js\nconst user = {\n  name: \"Anna\",\n  age: 25,\n  city: \"Moscow\"\n};\n```\n\n## Access\n\nTwo ways:\n\n```js\nconsole.log(user.name);       // Anna\nconsole.log(user[\"age\"]);     // 25\n```\n\nBrackets — for dynamic keys.\n\n## Modification\n\n```js\nuser.age = 26;              // modify\nuser.email = \"a@mail.com\";  // add\ndelete user.city;           // delete\n```\n\n## in\n\n```js\nconsole.log(\"name\" in user);  // true\nconsole.log(\"email\" in user); // false\n```\n\n## Object.keys / values / entries\n\n```js\nObject.keys(user)     // [\"name\", \"age\", \"city\"]\nObject.values(user)   // [\"Anna\", 25, \"Moscow\"]\nObject.entries(user)  // [[\"name\", \"Anna\"], ...]\n```\n\n## Iteration\n\n```js\nfor (const key in user) {\n  console.log(key, user[key]);\n}\n```\n\n`for...in` — keys.\n\n## Nested\n\n```js\nconst data = {\n  user: { name: \"Anna\" },\n  scores: [1, 2, 3]\n};\nconsole.log(data.user.name);  // Anna\nconsole.log(data.scores[1]);  // 2\n```\n\n## What goes wrong\n\n- `user.name` for missing — `undefined`.\n- `user[\"age\"]` — works, `user[age]` — tries to find variable `age`.\n\n## Common mistake\n\n`user.name` (dot) for key with space — only `user[\"first name\"]`.\n\n## Summary\n\n- `{ k: v }` — object\n- `obj.key` / `obj[\"key\"]`\n- `delete`, `in`\n- `Object.keys/values/entries`\n- `for...in` — keys",
       "questions": [
-        { "text": "What does `({ name: \"Anna\" }).name` output?", "options": ["name", "Anna", "undefined", "Error"], "answer": 1, "explanation": "Key access." },
-        { "text": "What on `obj.missing`?", "options": ["Error", "null", "undefined", "0"], "answer": 2, "explanation": "No key — `undefined`." },
-        { "text": "How to check key existence?", "options": ["\"key\" in obj", "obj.has(\"key\")", "obj.key === true", "len(obj)"], "answer": 0, "explanation": "`in`." },
-        { "text": "What does `Object.keys(obj)` return?", "options": ["Values", "Array of keys", "Pairs", "Size"], "answer": 1, "explanation": "Keys." },
-        { "text": "How to delete a key?", "options": ["delete obj.key", "obj.remove(\"key\")", "obj.key = null", "pop"], "answer": 0, "explanation": "`delete`." }
+        {"text": "What does `({ name: \"Anna\" }).name` output?", "options": ["name", "Anna", "undefined", "Error"], "answer": 1, "explanation": "Key access."},
+        {"text": "What about `obj.missing`?", "options": ["Error", "null", "undefined", "0"], "answer": 2, "explanation": "No key — `undefined`."},
+        {"text": "How to check if a key exists?", "options": ["\"key\" in obj", "obj.has(\"key\")", "obj.key === true", "len(obj)"], "answer": 0, "explanation": "`in`."},
+        {"text": "What does `Object.keys(obj)` return?", "options": ["Values", "Array of keys", "Pairs", "Size"], "answer": 1, "explanation": "Keys."},
+        {"text": "How to delete a key?", "options": ["delete obj.key", "obj.remove(\"key\")", "obj.key = null", "pop"], "answer": 0, "explanation": "`delete`."}
       ],
       "practice": {
-        "description": "Create `const user = { name: \"Ivan\", age: 30 }`. Do:\n1. `user.city = \"Moscow\"`\n2. `user.age = 31`\n3. output `Object.keys(user).join(\",\")`\n4. output `user.age`\n\nVisible text:\n```\nname,age,city\n31\n```",
+        "description": "Create `const user = { name: \"Ivan\", age: 30 }`. Do:\n1. `user.city = \"Moscow\"`\n2. `user.age = 31`\n3. output `Object.keys(user).join(\",\")`\n4. output `user.age`\n\nExpected:\n```\nname,age,city\n31\n```",
         "starter": "const user = { name: \"Ivan\", age: 30 };\n// TODO\n",
         "expected": "name,age,city\n31",
         "must_contain": ["Object.keys", ".join(", "user.age", "console.log"]
       }
     },
-    "20": {
-      "id": 20,
-      "check_type": "dom",
-      "title": "DOM, querySelector",
-      "theory": "## What is DOM\n\nDOM — **Document Object Model**. The browser parses HTML into a tree of objects. JS reads and mutates this tree.\n\n`document` — the root object.\n\n## querySelector\n\nFind the **first** element by CSS selector:\n\n```js\nconst title = document.querySelector(\"h1\");\nconst byId = document.querySelector(\"#title\");\nconst byClass = document.querySelector(\".card\");\n```\n\nSelectors like CSS: `#id`, `.class`, `tag`, `[attr]`.\n\n## querySelectorAll\n\nFind **all**:\n\n```js\nconst items = document.querySelectorAll(\"li\");\nconsole.log(items.length);  // count\nitems.forEach(el => console.log(el.textContent));\n```\n\nReturns `NodeList` (array-like).\n\n## If the element is missing\n\n```js\nconst x = document.querySelector(\"#nope\");\nconsole.log(x);  // null\n```\n\nCheck for `null` before use.\n\n## When DOM is ready\n\n`<script>` must go **after** elements or with `defer`. Otherwise `querySelector` returns `null`.\n\n## textContent and innerHTML\n\n- `el.textContent` — text only\n- `el.innerHTML` — HTML inside\n\n## What if\n\n- `querySelector(null)` — TypeError.\n- Invalid selector — `null`.\n\n## Common mistake\n\nScript in `<head>` without `defer` — DOM not built yet.\n\n## Summary\n\n- DOM — a tree of objects\n- `document.querySelector` — first\n- `querySelectorAll` — all\n- CSS selectors\n- No element — `null`",
-      "questions": [
-        { "text": "What does `querySelector` do?", "options": ["All", "First by selector", "Removes", "Creates"], "answer": 1, "explanation": "First." },
-        { "text": "What if no element?", "options": ["Error", "null", "undefined", "Empty object"], "answer": 1, "explanation": "`null`." },
-        { "text": "Which selector for id `title`?", "options": ["title", "#title", ".title", "id=title"], "answer": 1, "explanation": "`#id`." },
-        { "text": "What is DOM?", "options": ["Styles", "Tree of objects", "Database", "File"], "answer": 1, "explanation": "DOM — a tree." },
-        { "text": "Where to put `<script>` for DOM work?", "options": ["In `<head>`", "After elements or with `defer`", "Before DOCTYPE", "In `<title>`"], "answer": 1, "explanation": "After DOM or `defer`." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<h1 id=\"title\">Title</h1>\n```\n\nVia JS in `<script>` get `#title` with `querySelector` and set `textContent` to \"New title\".\n\nVisible text: `New title`",
-        "starter": "<h1 id=\"title\">Title</h1>\n<script>\n  // TODO\n</script>\n",
-        "expected": "New title",
-        "must_contain": ["querySelector", "textContent"]
-      }
-    },
     "21": {
-      "id": 21,
-      "check_type": "dom",
-      "title": "textContent, innerHTML",
-      "theory": "## textContent\n\n**Text** of an element, no HTML:\n\n```js\nconst el = document.querySelector(\"#box\");\nel.textContent = \"Hi\";\n```\n\nIf it was `<b>old</b>` — becomes plain `Hi`, tags are not rendered.\n\n## innerHTML\n\n**HTML** inside an element:\n\n```js\nel.innerHTML = \"<b>Bold</b>\";\n```\n\nThe `<b>` tag renders as bold.\n\n## Read\n\n```js\nel.textContent   // text\nel.innerHTML    // HTML\n```\n\n## textContent vs innerHTML\n\n- `textContent` — text only, **safe**.\n- `innerHTML` — renders HTML, **dangerous** with user data (XSS).\n\nXSS example:\n\n```js\nel.innerHTML = \"<script>alert('xss')</script>\";\n```\n\nInjects the script.\n\n## When what\n\n- Text from user — `textContent`\n- Your own markup — `innerHTML` (if trusted)\n- Formatting — `createElement` (lesson 23)\n\n## What if\n\n- `el.textContent = \"<b>x</b>\"` — shows `<b>x</b>` literally.\n- `el.innerHTML = \"<b>x</b>\"` — shows bold x.\n\n## Common mistake\n\n`innerHTML` for user input — XSS. Always `textContent`.\n\n## Summary\n\n- `textContent` — text\n- `innerHTML` — HTML\n- `textContent` — safe\n- `innerHTML` — XSS risk",
+      "id": 21, "check_type": "console", "title": "Destructuring",
+      "theory": "## Object destructuring\n\n```js\nconst user = { name: \"Anna\", age: 25 };\nconst { name, age } = user;\nconsole.log(name);   // Anna\nconsole.log(age);    // 25\n```\n\nPull fields into variables.\n\n## Rename\n\n```js\nconst { name: userName } = user;\nconsole.log(userName);   // Anna\n```\n\n## Default\n\n```js\nconst { name, city = \"unknown\" } = user;\nconsole.log(city);   // unknown\n```\n\n## Array destructuring\n\n```js\nconst [first, second] = [10, 20, 30];\nconsole.log(first);   // 10\nconsole.log(second);  // 20\n```\n\n## Skip elements\n\n```js\nconst [, second] = [10, 20, 30];\nconsole.log(second);  // 20\n```\n\n## Rest\n\n```js\nconst [head, ...tail] = [1, 2, 3, 4];\nconsole.log(head);  // 1\nconsole.log(tail);  // [2, 3, 4]\n```\n\n## Function params\n\n```js\nfunction greet({ name, age }) {\n  console.log(`${name}, ${age}`);\n}\ngreet({ name: \"Anna\", age: 25 });\n```\n\nCommon in React and modern code.\n\n## Swap\n\n```js\nlet a = 1, b = 2;\n[a, b] = [b, a];\nconsole.log(a, b);   // 2 1\n```\n\n## Nested\n\n```js\nconst { user: { name } } = { user: { name: \"Anna\" } };\nconsole.log(name);   // Anna\n```\n\n## What goes wrong\n\n- `const { foo } = user` where no `foo` — `undefined`, not error.\n- Accessing nested when parent missing — `TypeError`.\n\n## Summary\n\n- `const { a, b } = obj` — pull fields\n- `{ a: newA }` — rename\n- `{ a = 5 }` — default\n- `[x, y] = arr` — array\n- `[x, ...rest]` — rest\n- Function params: `function f({ a, b })`",
       "questions": [
-        { "text": "What does `el.textContent = \"<b>hi</b>\"` show?", "options": ["bold hi", "<b>hi</b>", "hi", "Error"], "answer": 1, "explanation": "`textContent` — text, tags not rendered." },
-        { "text": "What does `el.innerHTML = \"<b>hi</b>\"` show?", "options": ["bold hi", "<b>hi</b>", "hi", "Error"], "answer": 0, "explanation": "HTML renders." },
-        { "text": "Which is safer with user input?", "options": ["innerHTML", "textContent", "same", "both dangerous"], "answer": 1, "explanation": "`textContent` doesn't render HTML." },
-        { "text": "What is XSS?", "options": ["Error", "Injection of foreign script via HTML", "Style", "Animation"], "answer": 1, "explanation": "Cross-Site Scripting." }
+        {"text": "What does `const { a } = { a: 1, b: 2 }` set `a` to?", "options": ["1", "2", "{a: 1}", "undefined"], "answer": 0, "explanation": "Field `a`."},
+        {"text": "How to rename `a` to `x`?", "options": ["const { a: x }", "const { x: a }", "const { a as x }", "const { a } = x"], "answer": 0, "explanation": "`a: x`."},
+        {"text": "What does `const [first, ...rest] = [1, 2, 3]` set?", "options": ["first=1, rest=[2,3]", "first=[1], rest=[2,3]", "first=1, rest=2", "Error"], "answer": 0, "explanation": "First + rest."},
+        {"text": "How to swap `a` and `b`?", "options": ["[a, b] = [b, a]", "a, b = b, a", "swap(a, b)", "temp"], "answer": 0, "explanation": "Destructuring swap."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<div id=\"box\"></div>\n```\n\nVia JS:\n1. `#box`.textContent = \"Plain text\"\n2. Then via `innerHTML` = \"<p>Paragraph</p>\" — but **after** that set `textContent` to \"Result\"\n\nVisible text: `Result`",
-        "starter": "<div id=\"box\"></div>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Result",
-        "must_contain": ["querySelector", "textContent"]
+        "description": "Given `const user = { name: \"Ivan\", age: 30, city: \"Moscow\" };`.\n\n1. Destructure `name` and `age`\n2. Destructure with default `country = \"RU\"`\n3. From `[10, 20, 30, 40]`, destructure `first` and rest\n\nOutput:\n```\nIvan 30\nIvan, RU\n10, [20, 30, 40]\n```",
+        "starter": "const user = { name: \"Ivan\", age: 30, city: \"Moscow\" };\n// TODO\n",
+        "expected": "Ivan 30\nIvan, RU\n10, [20, 30, 40]",
+        "must_contain": ["const {", "const [", "...", "console.log"]
       }
     },
     "22": {
-      "id": 22,
-      "check_type": "dom",
-      "title": "Styles and Classes",
-      "theory": "## style\n\nDirect CSS change via JS:\n\n```js\nel.style.color = \"red\";\nel.style.fontSize = \"20px\";\nel.style.backgroundColor = \"yellow\";\n```\n\nIn JS — camelCase: `background-color` → `backgroundColor`.\n\n## classList\n\nWork with classes:\n\n```js\nel.classList.add(\"active\");       // add\nel.classList.remove(\"active\");    // remove\nel.classList.toggle(\"active\");    // toggle\nel.classList.contains(\"active\");  // check\n```\n\n`classList` is safer than `el.className`.\n\n## className\n\n```js\nel.className = \"card active\";     // overwrites all classes\n```\n\nUse `classList` to avoid wiping.\n\n## Style vs class\n\n- `el.style.color = \"red\"` — **inline** style\n- `classList.add(\"red\")` + CSS `.red { color: red }` — via class\n\nClass is preferable — separates HTML and CSS.\n\n## What if\n\n- `el.style.background-color` — SyntaxError (dash is minus). Use `backgroundColor`.\n- `el.className = \"new\"` — wipes old classes.\n\n## Common mistake\n\nDash in JS styles. Always camelCase.\n\n## Summary\n\n- `el.style.color = \"...\"` — inline\n- `el.classList.add/remove/toggle` — via classes\n- `classList` better than `className`\n- In JS — camelCase",
+      "id": 22, "check_type": "console", "title": "ES6 Classes",
+      "theory": "## Class\n\n```js\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n\n  speak() {\n    console.log(`${this.name} makes a sound`);\n  }\n}\n\nconst a = new Animal(\"Rex\");\na.speak();   // Rex makes a sound\n```\n\n- `class` — keyword\n- `constructor` — called on `new`\n- `this.name = name` — store field\n- Method — just a function inside, no `function` keyword\n\n## Inheritance\n\n```js\nclass Dog extends Animal {\n  speak() {\n    console.log(`${this.name}: Woof!`);\n  }\n}\n\nconst d = new Dog(\"Rex\");\nd.speak();   // Rex: Woof!\n```\n\n`extends` — inherits fields and methods. Override — just redeclare.\n\n## super\n\n```js\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);          // parent constructor\n    this.breed = breed;\n  }\n}\n```\n\n`super(...)` — call parent constructor. Must be **first line** in child constructor.\n\n## Getters / setters\n\n```js\nclass Circle {\n  constructor(r) { this.r = r; }\n  get area() { return Math.PI * this.r ** 2; }\n}\nconst c = new Circle(2);\nconsole.log(c.area);   // 12.566\n```\n\n`get` — property-like method.\n\n## Static\n\n```js\nclass Math2 {\n  static square(x) { return x * x; }\n}\nconsole.log(Math2.square(4));   // 16\n```\n\n`static` — on class, not instance.\n\n## Under the hood\n\nClasses are syntactic sugar over prototypes. But use `class` — clearer and safer.\n\n## What goes wrong\n\n- Forgetting `new` — `TypeError: cannot call class without new`.\n- `this` lost when method passed — use `bind` or arrow field.\n- Forget `super()` in child with constructor — `ReferenceError`.\n\n## Common mistake\n\n`const a = Animal(\"Rex\")` without `new`. Always `new Animal(...)`.\n\n## Summary\n\n- `class Name { constructor() {} method() {} }`\n- `new Name(...)`\n- `extends` — inherit\n- `super(...)` — call parent\n- `get` / `set` — properties\n- `static` — on class",
       "questions": [
-        { "text": "How to set red color via JS?", "options": ["el.style.color = \"red\"", "el.style.background-color = \"red\"", "el.color = \"red\"", "el.style[\"color\"] = red"], "answer": 0, "explanation": "`el.style.color`." },
-        { "text": "How to add class `active`?", "options": ["el.className += active", "el.classList.add(\"active\")", "el.addClass(\"active\")", "el.class += active"], "answer": 1, "explanation": "`classList.add`." },
-        { "text": "What does `classList.toggle(\"x\")` do?", "options": ["Adds", "Removes", "Toggles", "Checks"], "answer": 2, "explanation": "Toggle — switch." },
-        { "text": "Which is better: `style` or `classList`?", "options": ["style", "classList", "same", "depends"], "answer": 1, "explanation": "`classList` separates CSS." },
-        { "text": "How is `background-color` in JS?", "options": ["background-color", "backgroundColor", "background_color", "bg-color"], "answer": 1, "explanation": "camelCase." }
+        {"text": "What is a class in JS?", "options": ["Object", "Template for objects", "Function only", "Module"], "answer": 1, "explanation": "Template."},
+        {"text": "What does `extends` do?", "options": ["Copies", "Inherits from parent", "Extends array", "Deletes"], "answer": 1, "explanation": "Inheritance."},
+        {"text": "When is `constructor` called?", "options": ["On method call", "On `new`", "On import", "Never"], "answer": 1, "explanation": "`new` triggers it."},
+        {"text": "What does `super()` do?", "options": ["Creates object", "Calls parent constructor", "Ends class", "Error"], "answer": 1, "explanation": "Parent constructor."},
+        {"text": "Where is `static` method?", "options": ["On instance", "On class", "On prototype", "On field"], "answer": 1, "explanation": "On class itself."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<div id=\"box\">Text</div>\n```\n\nVia JS:\n1. Add class `active`\n2. Set inline style `color` = `\"red\"`\n\nExpected: `<div>` with class `active` and `color: red` style.\n\nVisible text: `Text`",
-        "starter": "<div id=\"box\">Text</div>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Text",
-        "must_contain": ["classList.add", ".style.color", "querySelector"]
+        "description": "Create `class Animal` with `constructor(name)` and `speak()` → `\"<name> makes a sound\"`.\n\n`class Dog extends Animal` — overrides `speak` → `\"<name>: Woof!\"`.\n\nCreate `new Animal(\"Rex\")` and `new Dog(\"Bim\")`, call `speak()` on both.\n\nExpected:\n```\nRex makes a sound\nBim: Woof!\n```",
+        "starter": "// TODO\n",
+        "expected": "Rex makes a sound\nBim: Woof!",
+        "must_contain": ["class Animal", "class Dog extends Animal", "constructor", "speak", "console.log"]
       }
     },
     "23": {
-      "id": 23,
-      "check_type": "dom",
-      "title": "createElement, appendChild",
-      "theory": "## Create\n\n```js\nconst p = document.createElement(\"p\");\np.textContent = \"New paragraph\";\n```\n\n`p` — new element, not in DOM yet.\n\n## Insert\n\n```js\nparent.appendChild(p);\n```\n\n`parent` — parent. `appendChild` — append.\n\n## Other methods\n\n```js\nparent.append(p, text);   // several\nparent.prepend(p);        // to start\nparent.before(p);         // before parent\nparent.after(p);          // after\n```\n\n## Remove\n\n```js\nel.remove();           // remove self\nparent.removeChild(el); // via parent\n```\n\n## Building a list\n\n```js\nconst ul = document.querySelector(\"#list\");\n[\"Milk\", \"Bread\", \"Eggs\"].forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  ul.appendChild(li);\n});\n```\n\n## Why not innerHTML\n\n`innerHTML +=` recreates everything, loses listeners. `createElement` + `append` is precise.\n\n## What if\n\n- Insert an element twice — moved, not copied.\n- `appendChild(null)` — TypeError.\n\n## Common mistake\n\n`parent.appendChild(\"<p>x</p>\")` — `appendChild` accepts **an element**, not a string. A string — via `innerHTML` or `textContent`.\n\n## Summary\n\n- `createElement(\"p\")` — create\n- `parent.appendChild(el)` — insert\n- `el.remove()` — remove\n- Don't confuse with `innerHTML`",
+      "id": 23, "check_type": "dom", "title": "DOM, querySelector",
+      "theory": "## What DOM is\n\nDOM — **Document Object Model**. Browser parses HTML into an object tree. JS reads and changes this tree.\n\n`document` — root object.\n\n## querySelector\n\nFind **first** element by CSS selector:\n\n```js\nconst title = document.querySelector(\"h1\");\nconst byId = document.querySelector(\"#title\");\nconst byClass = document.querySelector(\".card\");\n```\n\nSelectors like in CSS: `#id`, `.class`, `tag`, `[attr]`.\n\n## querySelectorAll\n\nFind **all**:\n\n```js\nconst items = document.querySelectorAll(\"li\");\nconsole.log(items.length);\nitems.forEach(el => console.log(el.textContent));\n```\n\nReturns `NodeList` (array-like).\n\n## If element not found\n\n```js\nconst x = document.querySelector(\"#nope\");\nconsole.log(x); // null\n```\n\nCheck for `null`.\n\n## When DOM is available\n\n`<script>` — after elements or with `defer`. Otherwise `querySelector` returns `null`.\n\n## What goes wrong\n\n- `querySelector(null)` — TypeError.\n- Wrong selector — `null`.\n\n## Common mistake\n\nScript in `<head>` without `defer` — DOM not built yet.\n\n## Summary\n\n- DOM — object tree\n- `querySelector` — first\n- `querySelectorAll` — all\n- CSS selectors\n- Not found — `null`",
       "questions": [
-        { "text": "What does `createElement` do?", "options": ["Finds", "Creates an element", "Removes", "Changes"], "answer": 1, "explanation": "Creates new." },
-        { "text": "What does `appendChild` do?", "options": ["Removes", "Appends to parent end", "Finds", "Copies"], "answer": 1, "explanation": "To end." },
-        { "text": "Does `appendChild` accept a string?", "options": ["Yes", "No, only an element", "Only HTML", "Only with textContent"], "answer": 1, "explanation": "Only element." },
-        { "text": "How to remove an element?", "options": ["el.delete()", "el.remove()", "delete el", "el = null"], "answer": 1, "explanation": "`el.remove()`." }
+        {"text": "What does `querySelector` do?", "options": ["All", "First by selector", "Removes", "Creates"], "answer": 1, "explanation": "First."},
+        {"text": "What if element missing?", "options": ["Error", "null", "undefined", "Empty object"], "answer": 1, "explanation": "`null`."},
+        {"text": "Selector for id `title`?", "options": ["title", "#title", ".title", "id=title"], "answer": 1, "explanation": "`#id`."},
+        {"text": "Where to put `<script>` for DOM?", "options": ["In `<head>`", "After elements or with `defer`", "Before DOCTYPE", "In `<title>`"], "answer": 1, "explanation": "After DOM or `defer`."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<ul id=\"list\"></ul>\n```\n\nVia JS create three `<li>` with texts \"Milk\", \"Bread\", \"Eggs\" and append to `#list`.\n\nVisible text: `Milk Bread Eggs`",
-        "starter": "<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Milk Bread Eggs",
-        "must_contain": ["createElement", "appendChild", "textContent", "querySelector"]
-      }
-    },
-    "24": {
-      "id": 24,
-      "check_type": "dom",
-      "title": "addEventListener, click",
-      "theory": "## What is an event\n\nUser clicked — an **event**. JS can **listen** for events and react.\n\n## addEventListener\n\n```js\nbutton.addEventListener(\"click\", () => {\n  console.log(\"clicked\");\n});\n```\n\nFirst argument — event type, second — handler (function).\n\n## Common events\n\n- `click` — click\n- `submit` — form submit\n- `input` — input change\n- `keydown` — key press\n- `mouseover` / `mouseout` — hover\n\n## Multiple listeners\n\n```js\nbtn.addEventListener(\"click\", () => console.log(\"A\"));\nbtn.addEventListener(\"click\", () => console.log(\"B\"));\n```\n\nBoth fire.\n\n## Remove\n\n```js\nfunction onClick() { console.log(\"once\"); }\nbtn.addEventListener(\"click\", onClick);\nbtn.removeEventListener(\"click\", onClick);\n```\n\nNeed **the same** function reference.\n\n## Anonymous vs named\n\nAnonymous cannot be removed. For complex logic — named.\n\n## onclick vs addEventListener\n\n`el.onclick = fn` — works but overwritten. `addEventListener` — multiple. Prefer `addEventListener`.\n\n## What if\n\n- Typo in `\"clikc\"` — listener added but never fires.\n- `btn.addEventListener(\"click\", alert)` — `alert` without `()` fires on click, `alert()` — immediately.\n\n## Common mistake\n\n`addEventListener(\"click\", fn())` — called the function immediately. Need `fn` without parens.\n\n## Summary\n\n- `addEventListener(\"click\", fn)`\n- `fn` without `()`\n- Common: `click`, `submit`, `input`, `keydown`\n- `removeEventListener` — same reference\n- Prefer `addEventListener`, not `onclick`",
-      "questions": [
-        { "text": "What does `addEventListener` do?", "options": ["Removes", "Listens for event", "Creates", "Changes"], "answer": 1, "explanation": "Adds listener." },
-        { "text": "How to pass handler?", "options": ["fn()", "fn", "fn = () =>", "call(fn)"], "answer": 1, "explanation": "Without `()` — otherwise called immediately." },
-        { "text": "How many listeners per event?", "options": ["1", "2", "any", "none"], "answer": 2, "explanation": "`addEventListener` — multiple." },
-        { "text": "Which event is click?", "options": ["press", "click", "tap", "touch"], "answer": 1, "explanation": "`click`." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<button id=\"btn\">Click</button>\n<p id=\"out\"></p>\n```\n\nVia JS: on click of `#btn` set `#out` text to \"Clicked\".\n\nInitial visible text: `Click` (after click `Clicked` appears, only structure checked).",
-        "starter": "<button id=\"btn\">Click</button>\n<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Click",
-        "must_contain": ["addEventListener", "click", "textContent", "querySelector"]
-      }
-    },
-    "25": {
-      "id": 25,
-      "check_type": "dom",
-      "title": "Forms, submit, preventDefault",
-      "theory": "## submit\n\nForm submission event:\n\n```js\nconst form = document.querySelector(\"form\");\nform.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n  console.log(\"submission intercepted\");\n});\n```\n\nBy default submit **reloads** the page. `preventDefault()` cancels the default behavior.\n\n## preventDefault\n\n```js\nevent.preventDefault();\n```\n\nStops the default action. For clicks — link navigation, for forms — submission.\n\n## Field value\n\n```js\nconst input = document.querySelector(\"#name\");\nconst value = input.value;\n```\n\n`value` — what is typed.\n\n## Example\n\n```js\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  const text = input.value;\n  output.textContent = text;\n});\n```\n\n## reset\n\n```js\nform.reset();  // clear fields\ninput.value = \"\";  // clear one\n```\n\n## input\n\n`input` event — on each change:\n\n```js\ninput.addEventListener(\"input\", () => {\n  console.log(input.value);\n});\n```\n\n## What if\n\n- Forget `preventDefault` — page reloads, JS won't finish.\n- `e.preventDefault` without `()` — not called.\n\n## Common mistake\n\n`submit` without `preventDefault` — reload. Always prevent.\n\n## Summary\n\n- `submit` — on form\n- `preventDefault()` — cancel\n- `input.value` — value\n- `form.reset()` — clear\n- `input` — on each change",
-      "questions": [
-        { "text": "What does `preventDefault` do?", "options": ["Cancels the default", "Submits", "Changes style", "Removes"], "answer": 0, "explanation": "Cancels default behavior." },
-        { "text": "What happens on `submit` without `preventDefault`?", "options": ["Nothing", "Page reloads", "Error", "Sends"], "answer": 1, "explanation": "By default form reloads." },
-        { "text": "How to get field value?", "options": ["input.text", "input.value", "input.get()", "input.content"], "answer": 1, "explanation": "`value`." },
-        { "text": "How to reset a form?", "options": ["form.clear()", "form.reset()", "form.empty()", "form.delete()"], "answer": 1, "explanation": "`reset`." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Send</button>\n</form>\n<p id=\"out\"></p>\n```\n\nVia JS: on `submit` of `#f` — `preventDefault`, set `#out.textContent` to `#inp.value`.\n\nInitial visible text: `Send`",
-        "starter": "<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Send</button>\n</form>\n<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Send",
-        "must_contain": ["addEventListener", "submit", "preventDefault", ".value", "textContent"]
-      }
-    },
-    "26": {
-      "id": 26,
-      "check_type": "dom",
-      "title": "Keyboard Events",
-      "theory": "## keydown\n\n```js\ndocument.addEventListener(\"keydown\", (event) => {\n  console.log(event.key);\n});\n```\n\nFires on key press.\n\n## event.key\n\n`event.key` — character or name:\n\n- `\"a\"` — letter\n- `\"Enter\"` — Enter\n- `\"Escape\"` — Esc\n- `\"ArrowUp\"` / `\"ArrowDown\"` — arrows\n- `\" \"` — space\n\n## Other properties\n\n- `event.code` — physical code (`\"KeyA\"`, `\"Space\"`)\n- `event.ctrlKey` / `shiftKey` / `altKey` — modifiers (true/false)\n\n```js\ndocument.addEventListener(\"keydown\", (e) => {\n  if (e.ctrlKey && e.key === \"s\") {\n    e.preventDefault();\n    console.log(\"save intercepted\");\n  }\n});\n```\n\n## keyup\n\n```js\ndocument.addEventListener(\"keyup\", (e) => {\n  console.log(\"released\", e.key);\n});\n```\n\nFires on release.\n\n## What if\n\n- `event.key` for dead keys (Shift) — `\"Shift\"`.\n- `preventDefault` on all keydown — breaks Tab, arrows.\n\n## Common mistake\n\n`event.keyCode` — legacy. Use `event.key`.\n\n## Summary\n\n- `keydown` — press\n- `event.key` — character or name\n- `ctrlKey` / `shiftKey` — modifiers\n- `keyCode` — legacy",
-      "questions": [
-        { "text": "What is `event.key` for Enter?", "options": ["\"13\"", "\"Enter\"", "\"return\"", "13"], "answer": 1, "explanation": "Name — `\"Enter\"`." },
-        { "text": "What does `keydown` do?", "options": ["Press", "Release", "Click", "Input"], "answer": 0, "explanation": "Press." },
-        { "text": "How to check Ctrl?", "options": ["event.ctrl", "event.ctrlKey", "event.Ctrl", "event.key === \"Ctrl\""], "answer": 1, "explanation": "`ctrlKey`." },
-        { "text": "What is legacy?", "options": ["event.key", "event.code", "event.keyCode", "event.ctrlKey"], "answer": 2, "explanation": "`keyCode` — legacy." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<p id=\"out\"></p>\n```\n\nVia JS: listen to `keydown` on `document`, set `#out.textContent` to `event.key`.\n\nInitially empty.",
-        "starter": "<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
-        "expected": "",
-        "must_contain": ["addEventListener", "keydown", "event.key", "textContent"]
-      }
-    },
-    "27": {
-      "id": 27,
-      "check_type": "dom",
-      "title": "Project: Counter",
-      "theory": "## What we build\n\nCounter with + and − buttons. Uses: DOM, events, text update.\n\n## HTML\n\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\n## JS\n\n```js\nlet count = 0;\nconst value = document.querySelector(\"#value\");\nconst inc = document.querySelector(\"#inc\");\nconst dec = document.querySelector(\"#dec\");\n\ninc.addEventListener(\"click\", () => {\n  count++;\n  value.textContent = count;\n});\n\ndec.addEventListener(\"click\", () => {\n  count--;\n  value.textContent = count;\n});\n```\n\n## Checks\n\n- `count` — variable holding current\n- `textContent` — updated\n- `addEventListener` on two buttons\n- `++` / `--`\n\n## What if\n\n- `value.textContent = count++` — shows old, then ++.\n- Forget `textContent` update — number doesn't change.\n\n## Common mistake\n\n`count = value.textContent + 1` — string concat. Use `Number(...)` or keep `count` numeric.\n\n## Summary\n\n- `let count` — state\n- `addEventListener` on buttons\n- `textContent` — update\n- `count++` / `count--`",
-      "questions": [
-        { "text": "What does `textContent = count` do?", "options": ["Changes", "Shows value", "Removes", "Creates"], "answer": 1, "explanation": "Updates the element text." },
-        { "text": "Where is the counter state?", "options": ["In DOM", "In a variable", "In HTML", "In CSS"], "answer": 1, "explanation": "In `count` variable." },
-        { "text": "What on `value.textContent = count++`?", "options": ["New immediately", "Old, then ++", "Error", "undefined"], "answer": 1, "explanation": "Postfix returns old." },
-        { "text": "How to add 1 to the number?", "options": ["count = count + 1", "count++", "count += 1", "all"], "answer": 3, "explanation": "All three work." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\nVia JS make a counter: `#inc` adds 1, `#dec` subtracts 1, `#value` shows the number.\n\nInitial visible text: `− 0 +`",
-        "starter": "<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n<script>\n  // TODO\n</script>\n",
-        "expected": "− 0 +",
-        "must_contain": ["addEventListener", "click", "textContent", "count++", "count--"]
-      }
-    },
-    "28": {
-      "id": 28,
-      "check_type": "dom",
-      "title": "DOM, querySelector",
-      "theory": "## What is DOM\n\nDOM — **Document Object Model**. The browser parses HTML into a tree of objects. JS reads and mutates this tree.\n\n`document` — the root object.\n\n## querySelector\n\nFind the **first** element by CSS selector:\n\n```js\nconst title = document.querySelector(\"h1\");\nconst byId = document.querySelector(\"#title\");\nconst byClass = document.querySelector(\".card\");\n```\n\nSelectors like in CSS: `#id`, `.class`, `tag`, `[attr]`.\n\n## querySelectorAll\n\nFind **all**:\n\n```js\nconst items = document.querySelectorAll(\"li\");\nconsole.log(items.length);\nitems.forEach(el => console.log(el.textContent));\n```\n\nReturns `NodeList` (array-like).\n\n## If element missing\n\n```js\nconst x = document.querySelector(\"#nope\");\nconsole.log(x); // null\n```\n\nCheck for `null`.\n\n## When DOM is ready\n\n`<script>` — after elements or with `defer`. Otherwise `querySelector` returns `null`.\n\n## What if\n\n- `querySelector(null)` — TypeError.\n- Invalid selector — `null`.\n\n## Common mistake\n\nScript in `<head>` without `defer` — DOM not built yet.\n\n## Summary\n\n- DOM — tree of objects\n- `querySelector` — first\n- `querySelectorAll` — all\n- CSS selectors\n- No element — `null`",
-      "questions": [
-        { "text": "What does `querySelector` do?", "options": ["All", "First by selector", "Removes", "Creates"], "answer": 1, "explanation": "First." },
-        { "text": "What if no element?", "options": ["Error", "null", "undefined", "Empty object"], "answer": 1, "explanation": "`null`." },
-        { "text": "Selector for id `title`?", "options": ["title", "#title", ".title", "id=title"], "answer": 1, "explanation": "`#id`." },
-        { "text": "Where to put `<script>` for DOM work?", "options": ["In `<head>`", "After elements or with `defer`", "Before DOCTYPE", "In `<title>`"], "answer": 1, "explanation": "After DOM or `defer`." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<h1 id=\"title\">Title</h1>\n```\n\nVia JS: get `#title` with `querySelector`, set `textContent` = \"New title\".\n\nVisible text: `New title`",
+        "description": "HTML:\n```html\n<h1 id=\"title\">Title</h1>\n```\n\nVia JS in `<script>`: get `#title` via `querySelector` and set `textContent` to \"New title\".\n\nVisible text: `New title`",
         "starter": "<h1 id=\"title\">Title</h1>\n<script>\n  // TODO\n</script>\n",
         "expected": "New title",
         "must_contain": ["querySelector", "textContent"]
       }
     },
-    "29": {
-      "id": 29,
-      "check_type": "dom",
-      "title": "textContent, innerHTML",
-      "theory": "## textContent\n\n**Text** of an element, no HTML:\n\n```js\nconst el = document.querySelector(\"#box\");\nel.textContent = \"Hi\";\n```\n\nIf it was `<b>old</b>` — becomes plain `Hi`, tags not rendered.\n\n## innerHTML\n\n**HTML** inside an element:\n\n```js\nel.innerHTML = \"<b>Bold</b>\";\n```\n\nThe `<b>` tag renders as bold.\n\n## textContent vs innerHTML\n\n- `textContent` — text only, **safe**.\n- `innerHTML` — renders HTML, **dangerous** with user data (XSS).\n\nXSS example:\n\n```js\nel.innerHTML = \"<script>alert('xss')</script>\";\n```\n\n## When what\n\n- User text — `textContent`\n- Own markup — `innerHTML` (if trusted)\n- Formatting — `createElement` (lesson 31)\n\n## What if\n\n- `el.textContent = \"<b>x</b>\"` — shows `<b>x</b>` literally.\n- `el.innerHTML = \"<b>x</b>\"` — shows bold x.\n\n## Common mistake\n\n`innerHTML` with user input — XSS. Always `textContent`.\n\n## Summary\n\n- `textContent` — text\n- `innerHTML` — HTML\n- `textContent` — safe\n- `innerHTML` — XSS risk",
+    "24": {
+      "id": 24, "check_type": "dom", "title": "textContent, innerHTML",
+      "theory": "## textContent\n\n**Text** of element, no HTML:\n\n```js\nconst el = document.querySelector(\"#box\");\nel.textContent = \"Hello\";\n```\n\nIf it was `<b>old</b>` — becomes just `Hello`, tags not rendered.\n\n## innerHTML\n\n**HTML** inside element:\n\n```js\nel.innerHTML = \"<b>Bold</b>\";\n```\n\n`<b>` renders bold.\n\n## textContent vs innerHTML\n\n- `textContent` — text only, **safe**.\n- `innerHTML` — renders HTML, **dangerous** with user data (XSS).\n\nXSS example:\n\n```js\nel.innerHTML = \"<script>alert('xss')</script>\";\n```\n\nInjects script.\n\n## When which\n\n- User text — `textContent`\n- Own markup — `innerHTML` (if sure)\n- Formatting — `createElement` (lesson 26)\n\n## What goes wrong\n\n- `el.textContent = \"<b>x</b>\"` — shows `<b>x</b>` literally.\n- `el.innerHTML = \"<b>x</b>\"` — shows bold x.\n\n## Common mistake\n\n`innerHTML` with user input — XSS. Always `textContent`.\n\n## Summary\n\n- `textContent` — text\n- `innerHTML` — HTML\n- `textContent` — safe\n- `innerHTML` — XSS risk",
       "questions": [
-        { "text": "What does `el.textContent = \"<b>hi</b>\"` show?", "options": ["bold hi", "<b>hi</b>", "hi", "Error"], "answer": 1, "explanation": "`textContent` — tags not rendered." },
-        { "text": "What does `el.innerHTML = \"<b>hi</b>\"` show?", "options": ["bold hi", "<b>hi</b>", "hi", "Error"], "answer": 0, "explanation": "HTML renders." },
-        { "text": "Which is safer with user input?", "options": ["innerHTML", "textContent", "same", "both dangerous"], "answer": 1, "explanation": "`textContent` doesn't render HTML." },
-        { "text": "What is XSS?", "options": ["Error", "Foreign script injected via HTML", "Style", "Animation"], "answer": 1, "explanation": "Cross-Site Scripting." }
+        {"text": "What does `el.textContent = \"<b>hi</b>\"` show?", "options": ["bold hi", "<b>hi</b>", "hi", "Error"], "answer": 1, "explanation": "`textContent` — tags not rendered."},
+        {"text": "What does `el.innerHTML = \"<b>hi</b>\"` show?", "options": ["bold hi", "<b>hi</b>", "hi", "Error"], "answer": 0, "explanation": "HTML renders."},
+        {"text": "Which is safer with user input?", "options": ["innerHTML", "textContent", "same", "both dangerous"], "answer": 1, "explanation": "`textContent` doesn't render HTML."},
+        {"text": "What is XSS?", "options": ["Error", "Script injection through HTML", "Style", "Animation"], "answer": 1, "explanation": "Cross-Site Scripting."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<div id=\"box\"></div>\n```\n\nVia JS:\n1. `textContent` = \"Plain text\"\n2. `innerHTML` = \"<p>Paragraph</p>\" — **after** that set `textContent` to \"Result\"\n\nVisible text: `Result`",
+        "description": "HTML:\n```html\n<div id=\"box\"></div>\n```\n\nVia JS:\n1. `textContent` = \"Just text\"\n2. `innerHTML` = \"<p>Para</p>\" — **after** that set `textContent` to \"Final\"\n\nVisible text: `Final`",
         "starter": "<div id=\"box\"></div>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Result",
+        "expected": "Final",
         "must_contain": ["querySelector", "textContent"]
       }
     },
-    "30": {
-      "id": 30,
-      "check_type": "dom",
-      "title": "Styles and Classes",
-      "theory": "## style\n\nDirect CSS change via JS:\n\n```js\nel.style.color = \"red\";\nel.style.fontSize = \"20px\";\nel.style.backgroundColor = \"yellow\";\n```\n\nIn JS — camelCase: `background-color` → `backgroundColor`.\n\n## classList\n\nWork with classes:\n\n```js\nel.classList.add(\"active\");\nel.classList.remove(\"active\");\nel.classList.toggle(\"active\");\nel.classList.contains(\"active\");\n```\n\n`classList` — safer than `el.className`.\n\n## className\n\n```js\nel.className = \"card active\";  // overwrites all classes\n```\n\nUse `classList` to avoid wiping.\n\n## Style vs class\n\n- `el.style.color = \"red\"` — **inline**\n- `classList.add(\"red\")` + CSS `.red { color: red }` — via class\n\nClass is preferable — separates HTML and CSS.\n\n## What if\n\n- `el.style.background-color` — SyntaxError (dash). Need `backgroundColor`.\n- `el.className = \"new\"` — wipes old classes.\n\n## Common mistake\n\nDash in JS styles. Always camelCase.\n\n## Summary\n\n- `el.style.color = \"...\"` — inline\n- `el.classList.add/remove/toggle` — via classes\n- `classList` better than `className`\n- In JS — camelCase",
+    "25": {
+      "id": 25, "check_type": "dom", "title": "Styles and Classes",
+      "theory": "## style\n\nDirect CSS via JS:\n\n```js\nel.style.color = \"red\";\nel.style.fontSize = \"20px\";\nel.style.backgroundColor = \"yellow\";\n```\n\nIn JS — camelCase: `background-color` → `backgroundColor`.\n\n## classList\n\nWork with classes:\n\n```js\nel.classList.add(\"active\");\nel.classList.remove(\"active\");\nel.classList.toggle(\"active\");\nel.classList.contains(\"active\");\n```\n\n`classList` — better than `el.className` string.\n\n## className\n\n```js\nel.className = \"card active\";  // overwrites all classes\n```\n\nUse `classList` to avoid wiping others.\n\n## Style vs class\n\n- `el.style.color = \"red\"` — **inline** style\n- `classList.add(\"red\")` + CSS `.red { color: red }` — via class\n\nClass preferred — separates HTML and CSS.\n\n## What goes wrong\n\n- `el.style.background-color` — SyntaxError (hyphen). Use `backgroundColor`.\n- `el.className = \"new\"` — wipes old classes.\n\n## Common mistake\n\nHyphen in JS styles. Always camelCase.\n\n## Summary\n\n- `el.style.color = \"...\"` — inline\n- `el.classList.add/remove/toggle` — via classes\n- `classList` better than `className`\n- In JS — camelCase",
       "questions": [
-        { "text": "How to set red color via JS?", "options": ["el.style.color = \"red\"", "el.style.background-color = \"red\"", "el.color = \"red\"", "el.style[\"color\"] = red"], "answer": 0, "explanation": "`el.style.color`." },
-        { "text": "How to add class `active`?", "options": ["el.className += active", "el.classList.add(\"active\")", "el.addClass(\"active\")", "el.class += active"], "answer": 1, "explanation": "`classList.add`." },
-        { "text": "What does `classList.toggle(\"x\")` do?", "options": ["Adds", "Removes", "Toggles", "Checks"], "answer": 2, "explanation": "Toggle." },
-        { "text": "Which is better: `style` or `classList`?", "options": ["style", "classList", "same", "depends"], "answer": 1, "explanation": "`classList` separates CSS." },
-        { "text": "How is `background-color` written in JS?", "options": ["background-color", "backgroundColor", "background_color", "bg-color"], "answer": 1, "explanation": "camelCase." }
+        {"text": "How to set red via JS?", "options": ["el.style.color = \"red\"", "el.style.background-color = \"red\"", "el.color = \"red\"", "el.style[\"color\"] = red"], "answer": 0, "explanation": "`el.style.color`."},
+        {"text": "How to add class `active`?", "options": ["el.className += active", "el.classList.add(\"active\")", "el.addClass(\"active\")", "el.class += active"], "answer": 1, "explanation": "`classList.add`."},
+        {"text": "What does `classList.toggle(\"x\")` do?", "options": ["Adds", "Removes", "Toggles", "Checks"], "answer": 2, "explanation": "Toggle — switch."},
+        {"text": "Better: `style` or `classList`?", "options": ["style", "classList", "same", "depends"], "answer": 1, "explanation": "`classList` — separates CSS."},
+        {"text": "How `background-color` in JS?", "options": ["background-color", "backgroundColor", "background_color", "bg-color"], "answer": 1, "explanation": "camelCase."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<div id=\"box\">Text</div>\n```\n\nVia JS:\n1. Add class `active`\n2. Set inline style `color` = `\"red\"`\n\nVisible text: `Text`",
@@ -553,16 +413,14 @@
         "must_contain": ["classList.add", ".style.color", "querySelector"]
       }
     },
-    "31": {
-      "id": 31,
-      "check_type": "dom",
-      "title": "createElement, appendChild",
-      "theory": "## Create\n\n```js\nconst p = document.createElement(\"p\");\np.textContent = \"New paragraph\";\n```\n\n`p` — new element, not in DOM yet.\n\n## Insert\n\n```js\nparent.appendChild(p);\n```\n\n`appendChild` — to end.\n\n## Other methods\n\n```js\nparent.append(p, text);\nparent.prepend(p);\nparent.before(p);\nparent.after(p);\n```\n\n## Remove\n\n```js\nel.remove();\nparent.removeChild(el);\n```\n\n## Building a list\n\n```js\nconst ul = document.querySelector(\"#list\");\n[\"Milk\", \"Bread\", \"Eggs\"].forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  ul.appendChild(li);\n});\n```\n\n## Why not innerHTML\n\n`innerHTML +=` recreates everything, loses listeners. `createElement` + `append` — precise.\n\n## What if\n\n- Insert element twice — moved, not copied.\n- `appendChild(null)` — TypeError.\n\n## Common mistake\n\n`parent.appendChild(\"<p>x</p>\")` — `appendChild` takes **an element**, not a string. String — via `innerHTML`.\n\n## Summary\n\n- `createElement(\"p\")` — create\n- `parent.appendChild(el)` — append\n- `el.remove()` — remove\n- Not the same as `innerHTML`",
+    "26": {
+      "id": 26, "check_type": "dom", "title": "createElement, appendChild",
+      "theory": "## Creation\n\n```js\nconst p = document.createElement(\"p\");\np.textContent = \"New paragraph\";\n```\n\n`p` — new element, not in DOM yet.\n\n## Insertion\n\n```js\nparent.appendChild(p);\n```\n\n`appendChild` — at end.\n\n## Others\n\n```js\nparent.append(p, text);\nparent.prepend(p);\nparent.before(p);\nparent.after(p);\n```\n\n## Removal\n\n```js\nel.remove();\nparent.removeChild(el);\n```\n\n## Build list\n\n```js\nconst ul = document.querySelector(\"#list\");\n[\"Milk\", \"Bread\", \"Eggs\"].forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  ul.appendChild(li);\n});\n```\n\n## Why not innerHTML\n\n`innerHTML +=` recreates everything, loses listeners. `createElement` + `append` — targeted.\n\n## What goes wrong\n\n- Insert element twice — moves, not copies.\n- `appendChild(null)` — TypeError.\n\n## Common mistake\n\n`parent.appendChild(\"<p>x</p>\")` — `appendChild` takes **element**, not string. String — via `innerHTML`.\n\n## Summary\n\n- `createElement(\"p\")` — create\n- `parent.appendChild(el)` — insert\n- `el.remove()` — delete\n- Don't confuse with `innerHTML`",
       "questions": [
-        { "text": "What does `createElement` do?", "options": ["Finds", "Creates element", "Removes", "Changes"], "answer": 1, "explanation": "Creates new." },
-        { "text": "What does `appendChild` do?", "options": ["Removes", "Appends to parent end", "Finds", "Copies"], "answer": 1, "explanation": "To end." },
-        { "text": "Does `appendChild` accept a string?", "options": ["Yes", "No, only an element", "Only HTML", "Only with textContent"], "answer": 1, "explanation": "Only element." },
-        { "text": "How to remove an element?", "options": ["el.delete()", "el.remove()", "delete el", "el = null"], "answer": 1, "explanation": "`el.remove()`." }
+        {"text": "What does `createElement` do?", "options": ["Finds", "Creates element", "Removes", "Changes"], "answer": 1, "explanation": "Creates new."},
+        {"text": "What does `appendChild` do?", "options": ["Removes", "Appends to end of parent", "Finds", "Copies"], "answer": 1, "explanation": "To end."},
+        {"text": "Does `appendChild` take a string?", "options": ["Yes", "No, only element", "Only HTML", "Only with textContent"], "answer": 1, "explanation": "Only element."},
+        {"text": "How to remove element?", "options": ["el.delete()", "el.remove()", "delete el", "el = null"], "answer": 1, "explanation": "`el.remove()`."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<ul id=\"list\"></ul>\n```\n\nVia JS create three `<li>` with texts \"Milk\", \"Bread\", \"Eggs\" and append to `#list`.\n\nVisible text: `Milk Bread Eggs`",
@@ -571,106 +429,126 @@
         "must_contain": ["createElement", "appendChild", "textContent", "querySelector"]
       }
     },
-    "32": {
-      "id": 32,
-      "check_type": "dom",
-      "title": "addEventListener, click",
-      "theory": "## What is an event\n\nUser clicked — an **event**. JS can **listen** for events and react.\n\n## addEventListener\n\n```js\nbutton.addEventListener(\"click\", () => {\n  console.log(\"clicked\");\n});\n```\n\nFirst argument — event type, second — handler.\n\n## Common events\n\n- `click` — click\n- `submit` — form submit\n- `input` — input change\n- `keydown` — key press\n- `mouseover` / `mouseout` — hover\n\n## Multiple listeners\n\n```js\nbtn.addEventListener(\"click\", () => console.log(\"A\"));\nbtn.addEventListener(\"click\", () => console.log(\"B\"));\n```\n\nBoth fire.\n\n## Remove\n\n```js\nfunction onClick() { console.log(\"once\"); }\nbtn.addEventListener(\"click\", onClick);\nbtn.removeEventListener(\"click\", onClick);\n```\n\nNeed **the same** function reference.\n\n## onclick vs addEventListener\n\n`el.onclick = fn` — works, but overwritten. `addEventListener` — multiple. Prefer `addEventListener`.\n\n## What if\n\n- Typo `\"clikc\"` — listener added but never fires.\n- `btn.addEventListener(\"click\", alert)` — `alert` without `()` fires on click, `alert()` — immediately.\n\n## Common mistake\n\n`addEventListener(\"click\", fn())` — called function immediately. Need `fn` without parens.\n\n## Summary\n\n- `addEventListener(\"click\", fn)`\n- `fn` without `()`\n- Common: `click`, `submit`, `input`, `keydown`\n- `removeEventListener` — same reference\n- Prefer `addEventListener`",
+    "27": {
+      "id": 27, "check_type": "dom", "title": "addEventListener, click",
+      "theory": "## What an event is\n\nUser clicked — **event**. JS can **listen** to events and react.\n\n## addEventListener\n\n```js\nbutton.addEventListener(\"click\", () => {\n  console.log(\"clicked\");\n});\n```\n\nFirst arg — event type, second — handler.\n\n## Common events\n\n- `click` — click\n- `submit` — form submit\n- `input` — field input\n- `keydown` — key press\n- `mouseover` / `mouseout` — hover\n\n## Multiple listeners\n\n```js\nbtn.addEventListener(\"click\", () => console.log(\"A\"));\nbtn.addEventListener(\"click\", () => console.log(\"B\"));\n```\n\nBoth fire.\n\n## Removal\n\n```js\nfunction onClick() { console.log(\"once\"); }\nbtn.addEventListener(\"click\", onClick);\nbtn.removeEventListener(\"click\", onClick);\n```\n\nNeeds **same** function reference.\n\n## onclick vs addEventListener\n\n`el.onclick = fn` — works, but overwrites. `addEventListener` — multiple. Prefer `addEventListener`.\n\n## What goes wrong\n\n- Typo `\"clikc\"` — listener adds, never fires.\n- `btn.addEventListener(\"click\", alert)` — `alert` without `()` fires on click, `alert()` fires immediately.\n\n## Common mistake\n\n`addEventListener(\"click\", fn())` — called immediately. Need `fn` without parens.\n\n## Summary\n\n- `addEventListener(\"click\", fn)`\n- `fn` without `()`\n- Common: `click`, `submit`, `input`, `keydown`\n- `removeEventListener` — same reference\n- Prefer `addEventListener` over `onclick`",
       "questions": [
-        { "text": "What does `addEventListener` do?", "options": ["Removes", "Listens for event", "Creates", "Changes"], "answer": 1, "explanation": "Adds listener." },
-        { "text": "How to pass the handler?", "options": ["fn()", "fn", "fn = () =>", "call(fn)"], "answer": 1, "explanation": "Without `()` — otherwise called immediately." },
-        { "text": "How many listeners per event?", "options": ["1", "2", "any", "none"], "answer": 2, "explanation": "Multiple." },
-        { "text": "Which event is click?", "options": ["press", "click", "tap", "touch"], "answer": 1, "explanation": "`click`." }
+        {"text": "What does `addEventListener` do?", "options": ["Removes", "Listens for event", "Creates", "Changes"], "answer": 1, "explanation": "Adds listener."},
+        {"text": "How to pass handler?", "options": ["fn()", "fn", "fn = () =>", "call(fn)"], "answer": 1, "explanation": "Without `()` — else immediate call."},
+        {"text": "How many listeners per event?", "options": ["1", "2", "any", "impossible"], "answer": 2, "explanation": "`addEventListener` — multiple."},
+        {"text": "Which event is a click?", "options": ["press", "click", "tap", "touch"], "answer": 1, "explanation": "`click`."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<button id=\"btn\">Click</button>\n<p id=\"out\"></p>\n```\n\nVia JS: on click of `#btn` — `#out` text \"Clicked\".\n\nInitial visible text: `Click`",
+        "description": "HTML:\n```html\n<button id=\"btn\">Click</button>\n<p id=\"out\"></p>\n```\n\nVia JS: on `#btn` click — set `#out` text to \"Clicked\".\n\nInitial visible text: `Click`",
         "starter": "<button id=\"btn\">Click</button>\n<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
         "expected": "Click",
         "must_contain": ["addEventListener", "click", "textContent", "querySelector"]
       }
     },
-    "33": {
-      "id": 33,
-      "check_type": "dom",
-      "title": "Forms, submit, preventDefault",
-      "theory": "## submit\n\nForm submission event:\n\n```js\nconst form = document.querySelector(\"form\");\nform.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n  console.log(\"submission intercepted\");\n});\n```\n\nBy default submit **reloads** the page. `preventDefault()` cancels.\n\n## preventDefault\n\n```js\nevent.preventDefault();\n```\n\nStops the default action. For clicks — link navigation, for forms — submission.\n\n## Field value\n\n```js\nconst input = document.querySelector(\"#name\");\nconst value = input.value;\n```\n\n`value` — what is typed.\n\n## Example\n\n```js\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  const text = input.value;\n  output.textContent = text;\n});\n```\n\n## reset\n\n```js\nform.reset();\ninput.value = \"\";\n```\n\n## input\n\n`input` event — on each change:\n\n```js\ninput.addEventListener(\"input\", () => {\n  console.log(input.value);\n});\n```\n\n## What if\n\n- Forget `preventDefault` — page reloads.\n- `e.preventDefault` without `()` — not called.\n\n## Common mistake\n\n`submit` without `preventDefault` — reload. Always prevent.\n\n## Summary\n\n- `submit` — on form\n- `preventDefault()` — cancel\n- `input.value` — value\n- `form.reset()` — clear\n- `input` — on each change",
+    "28": {
+      "id": 28, "check_type": "dom", "title": "Forms, submit, preventDefault",
+      "theory": "## submit\n\nForm submission event:\n\n```js\nconst form = document.querySelector(\"form\");\nform.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n  console.log(\"submit intercepted\");\n});\n```\n\nBy default submit **reloads** page. `preventDefault()` cancels.\n\n## preventDefault\n\n```js\nevent.preventDefault();\n```\n\nStops default action. For clicks — link navigation, for forms — submission.\n\n## Field value\n\n```js\nconst input = document.querySelector(\"#name\");\nconst value = input.value;\n```\n\n`value` — what's typed.\n\n## Example\n\n```js\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  const text = input.value;\n  output.textContent = text;\n});\n```\n\n## reset\n\n```js\nform.reset();\ninput.value = \"\";\n```\n\n## input\n\nEvent `input` — on every change:\n\n```js\ninput.addEventListener(\"input\", () => {\n  console.log(input.value);\n});\n```\n\n## What goes wrong\n\n- Forget `preventDefault` — page reloads.\n- `e.preventDefault` without `()` — not called.\n\n## Common mistake\n\n`submit` without `preventDefault` — reload. Always cancel.\n\n## Summary\n\n- `submit` — on form\n- `preventDefault()` — cancel\n- `input.value` — value\n- `form.reset()` — clear\n- `input` — on every change",
       "questions": [
-        { "text": "What does `preventDefault` do?", "options": ["Cancels default", "Submits", "Changes style", "Removes"], "answer": 0, "explanation": "Cancels default behavior." },
-        { "text": "What happens on `submit` without `preventDefault`?", "options": ["Nothing", "Page reload", "Error", "Sends"], "answer": 1, "explanation": "Form reloads." },
-        { "text": "How to get field value?", "options": ["input.text", "input.value", "input.get()", "input.content"], "answer": 1, "explanation": "`value`." },
-        { "text": "How to reset a form?", "options": ["form.clear()", "form.reset()", "form.empty()", "form.delete()"], "answer": 1, "explanation": "`reset`." }
+        {"text": "What does `preventDefault` do?", "options": ["Cancels default", "Submits", "Changes style", "Removes"], "answer": 0, "explanation": "Default canceled."},
+        {"text": "What happens on `submit` without `preventDefault`?", "options": ["Nothing", "Page reload", "Error", "Submits"], "answer": 1, "explanation": "Form reloads."},
+        {"text": "How to get field value?", "options": ["input.text", "input.value", "input.get()", "input.content"], "answer": 1, "explanation": "`value`."},
+        {"text": "How to clear form?", "options": ["form.clear()", "form.reset()", "form.empty()", "form.delete()"], "answer": 1, "explanation": "`reset`."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Send</button>\n</form>\n<p id=\"out\"></p>\n```\n\nVia JS: on `submit` of `#f` — `preventDefault`, set `#out.textContent` to `#inp.value`.\n\nInitial visible text: `Send`",
+        "description": "HTML:\n```html\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Send</button>\n</form>\n<p id=\"out\"></p>\n```\n\nVia JS: on `#f` submit — `preventDefault`, set `#inp.value` to `#out.textContent`.\n\nInitial visible text: `Send`",
         "starter": "<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Send</button>\n</form>\n<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
         "expected": "Send",
         "must_contain": ["addEventListener", "submit", "preventDefault", ".value", "textContent"]
       }
     },
-    "34": {
-      "id": 34,
-      "check_type": "dom",
-      "title": "Keyboard Events",
-      "theory": "## keydown\n\n```js\ndocument.addEventListener(\"keydown\", (event) => {\n  console.log(event.key);\n});\n```\n\nFires on key press.\n\n## event.key\n\n- `\"a\"` — letter\n- `\"Enter\"` — Enter\n- `\"Escape\"` — Esc\n- `\"ArrowUp\"` / `\"ArrowDown\"` — arrows\n- `\" \"` — space\n\n## Modifiers\n\n- `event.code` — physical code (`\"KeyA\"`, `\"Space\"`)\n- `event.ctrlKey` / `shiftKey` / `altKey` — true/false\n\n```js\ndocument.addEventListener(\"keydown\", (e) => {\n  if (e.ctrlKey && e.key === \"s\") {\n    e.preventDefault();\n    console.log(\"save intercepted\");\n  }\n});\n```\n\n## keyup\n\n```js\ndocument.addEventListener(\"keyup\", (e) => {\n  console.log(\"released\", e.key);\n});\n```\n\n## What if\n\n- `event.key` for Shift — `\"Shift\"`.\n- `preventDefault` on all keydown — breaks Tab, arrows.\n\n## Common mistake\n\n`event.keyCode` — legacy. Use `event.key`.\n\n## Summary\n\n- `keydown` — press\n- `event.key` — char or name\n- `ctrlKey` / `shiftKey` — modifiers\n- `keyCode` — legacy",
+    "29": {
+      "id": 29, "check_type": "dom", "title": "Keyboard",
+      "theory": "## keydown\n\n```js\ndocument.addEventListener(\"keydown\", (event) => {\n  console.log(event.key);\n});\n```\n\nFires on key press.\n\n## event.key\n\n- `\"a\"` — letter\n- `\"Enter\"` — Enter\n- `\"Escape\"` — Esc\n- `\"ArrowUp\"` / `\"ArrowDown\"` — arrows\n- `\" \"` — space\n\n## Modifiers\n\n- `event.code` — physical code (`\"KeyA\"`, `\"Space\"`)\n- `event.ctrlKey` / `shiftKey` / `altKey` — true/false\n\n```js\ndocument.addEventListener(\"keydown\", (e) => {\n  if (e.ctrlKey && e.key === \"s\") {\n    e.preventDefault();\n    console.log(\"save intercepted\");\n  }\n});\n```\n\n## keyup\n\n```js\ndocument.addEventListener(\"keyup\", (e) => {\n  console.log(\"released\", e.key);\n});\n```\n\n## What goes wrong\n\n- `event.key` for Shift — `\"Shift\"`.\n- `preventDefault` on all keydown — breaks Tab, arrows.\n\n## Common mistake\n\n`event.keyCode` — deprecated. Use `event.key`.\n\n## Summary\n\n- `keydown` — press\n- `event.key` — char or name\n- `ctrlKey` / `shiftKey` — modifiers\n- `keyCode` — deprecated",
       "questions": [
-        { "text": "What is `event.key` for Enter?", "options": ["\"13\"", "\"Enter\"", "\"return\"", "13"], "answer": 1, "explanation": "Name — `\"Enter\"`." },
-        { "text": "What does `keydown` do?", "options": ["Press", "Release", "Click", "Input"], "answer": 0, "explanation": "Press." },
-        { "text": "How to check Ctrl?", "options": ["event.ctrl", "event.ctrlKey", "event.Ctrl", "event.key === \"Ctrl\""], "answer": 1, "explanation": "`ctrlKey`." },
-        { "text": "What is legacy?", "options": ["event.key", "event.code", "event.keyCode", "event.ctrlKey"], "answer": 2, "explanation": "`keyCode`." }
+        {"text": "What's in `event.key` for Enter?", "options": ["\"13\"", "\"Enter\"", "\"return\"", "13"], "answer": 1, "explanation": "Name — `\"Enter\"`."},
+        {"text": "What does `keydown` mean?", "options": ["Press", "Release", "Click", "Input"], "answer": 0, "explanation": "Press."},
+        {"text": "How to check Ctrl?", "options": ["event.ctrl", "event.ctrlKey", "event.Ctrl", "event.key === \"Ctrl\""], "answer": 1, "explanation": "`ctrlKey`."},
+        {"text": "What is deprecated?", "options": ["event.key", "event.code", "event.keyCode", "event.ctrlKey"], "answer": 2, "explanation": "`keyCode`."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<p id=\"out\"></p>\n```\n\nVia JS: listen to `keydown` on `document`, set `#out.textContent` to `event.key`.\n\nInitially empty.",
+        "description": "HTML:\n```html\n<p id=\"out\"></p>\n```\n\nVia JS: listen `keydown` on `document`, write `event.key` to `#out.textContent`.\n\nInitially empty.",
         "starter": "<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
         "expected": "",
         "must_contain": ["addEventListener", "keydown", "event.key", "textContent"]
       }
     },
-    "35": {
-      "id": 35,
-      "check_type": "console",
-      "title": "Event Loop and setTimeout",
-      "theory": "## What is event loop\n\nJS is **single-threaded**, but does several things \"simultaneously\" via event loop. Sync code runs immediately, async — queued.\n\n## setTimeout\n\n```js\nsetTimeout(() => {\n  console.log(\"After 2 sec\");\n}, 2000);\n```\n\nFirst arg — function, second — delay (ms).\n\n## Order\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nconsole.log(\"2\");\n// 1, 2, 3 — not 1, 3, 2\n```\n\nsetTimeout with 0 still deferred: sync code runs first.\n\n## clearTimeout\n\n```js\nconst id = setTimeout(() => console.log(\"will not fire\"), 1000);\nclearTimeout(id);\n```\n\n## setInterval\n\n```js\nconst id = setInterval(() => console.log(\"tick\"), 1000);\n// clearInterval(id); — stop\n```\n\nEvery N ms.\n\n## How event loop works\n\n1. Sync code to completion.\n2. Then microtasks (Promise, queueMicrotask).\n3. Then macrotasks (setTimeout, setInterval, events).\n4. Repeat from step 2.\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nPromise.resolve().then(() => console.log(\"2\"));\n// 1, 2, 3 — microtasks before macrotasks\n```\n\n## What if\n\n- `setTimeout` with 0 — still async.\n- Forget `clearInterval` — leak (timer runs forever).\n\n## Common mistake\n\nExpecting `setTimeout(fn, 0)` to run before the next line. No, only after sync code.\n\n## Summary\n\n- JS single-threaded, with event loop\n- `setTimeout(fn, ms)` — after N ms\n- `setInterval(fn, ms)` — every N ms\n- Sync first, then micro, then macro\n- `clearTimeout` / `clearInterval`",
+    "30": {
+      "id": 30, "check_type": "dom", "title": "Project: Counter",
+      "theory": "## What we build\n\nCounter with + and − buttons. We apply: DOM, events, text update.\n\n## HTML\n\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\n## JS\n\n```js\nlet count = 0;\nconst value = document.querySelector(\"#value\");\nconst inc = document.querySelector(\"#inc\");\nconst dec = document.querySelector(\"#dec\");\n\ninc.addEventListener(\"click\", () => {\n  count++;\n  value.textContent = count;\n});\n\ndec.addEventListener(\"click\", () => {\n  count--;\n  value.textContent = count;\n});\n```\n\n## Checks\n\n- `count` — variable\n- `textContent` — updated\n- `addEventListener` on both buttons\n- `++` / `--`\n\n## What goes wrong\n\n- `value.textContent = count++` — shows old, then ++.\n- Forget to update `textContent` — number doesn't change.\n\n## Common mistake\n\n`count = value.textContent + 1` — string concat. Use `Number(...)` or numeric `count`.\n\n## Summary\n\n- `let count` — state\n- `addEventListener` on buttons\n- `textContent` — update\n- `count++` / `count--`",
       "questions": [
-        { "text": "What does `setTimeout(fn, 1000)` do?", "options": ["Immediately", "After 1000 ms", "Every 1000 ms", "Error"], "answer": 1, "explanation": "After 1 second, once." },
-        { "text": "Output: log 1, setTimeout 0, log 2?", "options": ["1, 3, 2", "1, 2, 3", "2, 1, 3", "3, 1, 2"], "answer": 1, "explanation": "Sync first — 1, 2, then deferred — 3." },
-        { "text": "What does `clearInterval(id)` do?", "options": ["Starts", "Stops interval", "Creates", "Nothing"], "answer": 1, "explanation": "Stops." },
-        { "text": "What runs first: microtasks or macrotasks?", "options": ["Macro", "Micro", "Simultaneously", "Depends on OS"], "answer": 1, "explanation": "Micro (Promise) before macro (setTimeout)." }
+        {"text": "What does `textContent = count` do?", "options": ["Changes", "Shows value", "Removes", "Creates"], "answer": 1, "explanation": "Updates text."},
+        {"text": "Where is the counter state?", "options": ["In DOM", "In variable", "In HTML", "In CSS"], "answer": 1, "explanation": "In `count`."},
+        {"text": "What does `value.textContent = count++` do?", "options": ["New immediately", "Old, then ++", "Error", "undefined"], "answer": 1, "explanation": "Postfix returns old."},
+        {"text": "How to change number by 1?", "options": ["count = count + 1", "count++", "count += 1", "all work"], "answer": 3, "explanation": "All three work."}
       ],
       "practice": {
-        "description": "Output `1`, `2`, `3` in correct order via `setTimeout`:\n- synchronously `1`\n- `setTimeout` with `2`\n- synchronously `3`\n\nOutput order must be `1, 3, 2` — demonstrates setTimeout is async.",
+        "description": "HTML:\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\nVia JS: `#inc` +1, `#dec` −1, `#value` shows number.\n\nInitial visible text: `− 0 +`",
+        "starter": "<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n<script>\n  // TODO\n</script>\n",
+        "expected": "− 0 +",
+        "must_contain": ["addEventListener", "click", "textContent", "count++", "count--"]
+      }
+    },
+    "31": {
+      "id": 31, "check_type": "dom", "title": "localStorage",
+      "theory": "## What it is\n\n`localStorage` — key-value storage in the browser. Persists between page reloads and sessions. ~5 MB limit.\n\n## API\n\n```js\nlocalStorage.setItem(\"key\", \"value\");\nlocalStorage.getItem(\"key\");     // value or null\nlocalStorage.removeItem(\"key\");\nlocalStorage.clear();            // wipe all\n```\n\n## Always strings\n\n`localStorage` stores **strings only**. Numbers and objects must be serialized:\n\n```js\nlocalStorage.setItem(\"count\", \"5\");\nlet n = Number(localStorage.getItem(\"count\"));\n```\n\n## Objects and arrays\n\nUse JSON:\n\n```js\nconst user = { name: \"Anna\", age: 25 };\nlocalStorage.setItem(\"user\", JSON.stringify(user));\n\nconst raw = localStorage.getItem(\"user\");\nconst parsed = raw ? JSON.parse(raw) : null;\nconsole.log(parsed.name);   // Anna\n```\n\n## Persisting counter\n\n```js\nlet count = Number(localStorage.getItem(\"count\")) || 0;\nvalue.textContent = count;\n\ninc.addEventListener(\"click\", () => {\n  count++;\n  value.textContent = count;\n  localStorage.setItem(\"count\", count);\n});\n```\n\n`|| 0` — fallback if `null`.\n\n## sessionStorage\n\nSame API, but cleared when the tab closes.\n\n## What goes wrong\n\n- `localStorage.setItem(\"x\", 42)` — stored as `\"42\"`.\n- `JSON.parse(null)` — throws. Guard with `?`.\n- Storing large objects — quota exceeded.\n\n## Common mistake\n\nForgetting `JSON.stringify` — objects become `\"[object Object]\"`.\n\n## Summary\n\n- `setItem/getItem/removeItem/clear`\n- Strings only\n- `JSON.stringify` / `JSON.parse` for objects\n- `sessionStorage` — per tab",
+      "questions": [
+        {"text": "What does `localStorage.setItem(\"x\", 42)` store?", "options": ["Number 42", "String \"42\"", "Error", "null"], "answer": 1, "explanation": "Always strings."},
+        {"text": "What returns `localStorage.getItem(\"missing\")`?", "options": ["\"\"", "undefined", "null", "Error"], "answer": 2, "explanation": "`null`."},
+        {"text": "How to store an object?", "options": ["setItem(\"k\", obj)", "setItem(\"k\", JSON.stringify(obj))", "setItem(\"k\", String(obj))", "setItem obj"], "answer": 1, "explanation": "JSON stringify."},
+        {"text": "Difference from sessionStorage?", "options": ["Same", "sessionStorage cleared on tab close", "localStorage smaller", "sessionStorage not persistent at all"], "answer": 1, "explanation": "Session — per tab."}
+      ],
+      "practice": {
+        "description": "Create `const user = { name: \"Anna\", age: 25 };`.\n\n1. `localStorage.setItem(\"user\", JSON.stringify(user))`\n2. read back with `JSON.parse`, output name\n\nFor the check (browser sandbox): output `Anna`.\n\nIf `localStorage` unavailable — use a temp object to simulate:\n```\nconst store = {};\nstore.user = JSON.stringify(user);\nconsole.log(JSON.parse(store.user).name);\n```",
+        "starter": "const user = { name: \"Anna\", age: 25 };\n// TODO\n",
+        "expected": "Anna",
+        "must_contain": ["JSON.stringify", "JSON.parse", "console.log"]
+      }
+    },
+    "32": {
+      "id": 32, "check_type": "console", "title": "Event Loop and setTimeout",
+      "theory": "## What event loop is\n\nJS is **single-threaded**, but handles multiple things \"at once\" via event loop. Sync code runs immediately, async code is queued.\n\n## setTimeout\n\n```js\nsetTimeout(() => {\n  console.log(\"After 2 seconds\");\n}, 2000);\n```\n\nFirst arg — function, second — delay (ms).\n\n## Order\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nconsole.log(\"2\");\n// 1, 2, 3 — not 1, 3, 2\n```\n\nEven setTimeout with 0 is deferred: sync code first.\n\n## clearTimeout\n\n```js\nconst id = setTimeout(() => console.log(\"won't fire\"), 1000);\nclearTimeout(id);\n```\n\n## setInterval\n\n```js\nconst id = setInterval(() => console.log(\"tick\"), 1000);\n// clearInterval(id); — stop\n```\n\nEvery N ms.\n\n## How event loop works\n\n1. Sync code runs to completion.\n2. Then microtasks (Promise, queueMicrotask).\n3. Then macrotasks (setTimeout, setInterval, events).\n4. Repeat from step 2.\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nPromise.resolve().then(() => console.log(\"2\"));\n// 1, 2, 3 — microtasks before macrotasks\n```\n\n## What goes wrong\n\n- `setTimeout` with 0 — still async.\n- Forget `clearInterval` — leak (timer runs forever).\n\n## Common mistake\n\nExpect `setTimeout(fn, 0)` to run before next line. No, only after sync code.\n\n## Summary\n\n- JS single-threaded, but has event loop\n- `setTimeout(fn, ms)` — after N ms\n- `setInterval(fn, ms)` — every N ms\n- Sync first, then micro, then macro\n- `clearTimeout` / `clearInterval`",
+      "questions": [
+        {"text": "What does `setTimeout(fn, 1000)` do?", "options": ["Immediately", "After 1000 ms", "Every 1000 ms", "Error"], "answer": 1, "explanation": "After 1 second, once."},
+        {"text": "What outputs: log 1, setTimeout 0, log 2?", "options": ["1, 3, 2", "1, 2, 3", "2, 1, 3", "3, 1, 2"], "answer": 1, "explanation": "Sync first — 1, 2, then deferred — 3."},
+        {"text": "What does `clearInterval(id)` do?", "options": ["Starts", "Stops interval", "Creates", "Nothing"], "answer": 1, "explanation": "Stops."},
+        {"text": "What runs first: micro or macro?", "options": ["Macro", "Micro", "Simultaneously", "Depends on OS"], "answer": 1, "explanation": "Micro (Promise) before macro (setTimeout)."}
+      ],
+      "practice": {
+        "description": "Output `1`, `2`, `3` in correct order via `setTimeout`:\n- sync `1`\n- `setTimeout` with `2`\n- sync `3`\n\nOrder must be `1, 3, 2`. Demonstrates that `setTimeout` is async.",
         "starter": "// TODO\n",
         "expected": "1\n3\n2",
         "must_contain": ["setTimeout", "console.log"]
       }
     },
-    "36": {
-      "id": 36,
-      "check_type": "console",
-      "title": "Promise",
-      "theory": "## What Promise is\n\nPromise — an object representing a **future value**. Three states:\n- **pending** — waiting\n- **fulfilled** — success (resolve)\n- **rejected** — error (reject)\n\n## Creating\n\n```js\nconst p = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"done\"), 1000);\n});\n```\n\n## Using\n\n```js\np.then(result => console.log(result));  // \"done\"\np.catch(error => console.log(error));\n```\n\n## reject\n\n```js\nconst p = new Promise((resolve, reject) => {\n  reject(new Error(\"something failed\"));\n});\np.catch(err => console.log(err.message));\n```\n\n## Chains\n\n```js\nfetchData()\n  .then(a => doSomething(a))\n  .then(b => doAnother(b))\n  .catch(err => console.log(err));\n```\n\n## Promise.all\n\nAll parallel, waits for all:\n\n```js\nPromise.all([p1, p2, p3]).then(results => {\n  console.log(results);  // array of results\n});\n```\n\nIf any is rejected — whole Promise.all rejects.\n\n## Promise.race\n\nFirst to settle:\n\n```js\nPromise.race([slow, fast]).then(result => console.log(result));\n```\n\n## Error handling\n\n`.catch` at the end of a chain catches any error above.\n\n## What if\n\n- Forget `.catch` — unhandled rejection.\n- `resolve()` twice — second call ignored.\n\n## Common mistake\n\nConfusing `Promise` with the function. Promise — the return value.\n\n## Summary\n\n- `new Promise((resolve, reject) => {})`\n- `.then` — success, `.catch` — error\n- `Promise.all` — all parallel\n- `Promise.race` — first\n- Always add `.catch`",
+    "33": {
+      "id": 33, "check_type": "console", "title": "Promise",
+      "theory": "## What Promise is\n\nPromise — object representing a **future value**. Three states:\n- **pending** — waiting\n- **fulfilled** — success (resolve)\n- **rejected** — error (reject)\n\n## Creation\n\n```js\nconst p = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"done\"), 1000);\n});\n```\n\n## Usage\n\n```js\np.then(result => console.log(result));  // \"done\"\np.catch(error => console.log(error));\n```\n\n## reject\n\n```js\nconst p = new Promise((resolve, reject) => {\n  reject(new Error(\"something broke\"));\n});\np.catch(err => console.log(err.message));\n```\n\n## Chains\n\n```js\nfetchData()\n  .then(a => doSomething(a))\n  .then(b => doAnother(b))\n  .catch(err => console.log(err));\n```\n\n## Promise.all\n\nAll parallel, wait for all:\n\n```js\nPromise.all([p1, p2, p3]).then(results => {\n  console.log(results);  // array of results\n});\n```\n\nIf any rejected — whole Promise.all rejected.\n\n## Promise.race\n\nFirst to finish:\n\n```js\nPromise.race([slow, fast]).then(result => console.log(result));\n```\n\n## Swallowing errors\n\n`.catch` at end of chain catches any error above.\n\n## What goes wrong\n\n- Forget `.catch` — unhandled rejection.\n- `resolve()` twice — second ignored.\n\n## Common mistake\n\nConfusing `Promise` with the function itself. `Promise` — returned value.\n\n## Summary\n\n- `new Promise((resolve, reject) => {})`\n- `.then` — success, `.catch` — error\n- `Promise.all` — all in parallel\n- `Promise.race` — first\n- Always add `.catch`",
       "questions": [
-        { "text": "How many states does a Promise have?", "options": ["1", "2", "3", "4"], "answer": 2, "explanation": "pending, fulfilled, rejected." },
-        { "text": "What does `.then(fn)` do?", "options": ["Error", "Success", "Nothing", "Cancels"], "answer": 1, "explanation": "Success." },
-        { "text": "What does `.catch(fn)` do?", "options": ["Error", "Success", "Creates", "Removes"], "answer": 0, "explanation": "Error." },
-        { "text": "What does `Promise.all([p1, p2])` do?", "options": ["First", "All parallel, wait for all", "Error", "Cancels"], "answer": 1, "explanation": "All." }
+        {"text": "How many states does a Promise have?", "options": ["1", "2", "3", "4"], "answer": 2, "explanation": "pending, fulfilled, rejected."},
+        {"text": "What does `.then(fn)` do?", "options": ["Error", "Success", "Nothing", "Cancels"], "answer": 1, "explanation": "Success."},
+        {"text": "What does `.catch(fn)` do?", "options": ["Error", "Success", "Creates", "Removes"], "answer": 0, "explanation": "Error."},
+        {"text": "What does `Promise.all([p1, p2])` do?", "options": ["First", "All parallel, waits for all", "Error", "Cancels"], "answer": 1, "explanation": "All."}
       ],
       "practice": {
-        "description": "Create a Promise that resolves to `\"done\"` without delay. Via `.then` output it.\n\nVisible text: `done`",
+        "description": "Create a Promise that resolves with `\"done\"` immediately. Output via `.then`.\n\nVisible text: `done`",
         "starter": "// TODO\n",
         "expected": "done",
         "must_contain": ["new Promise", "resolve", ".then", "console.log"]
       }
     },
-    "37": {
-      "id": 37,
-      "check_type": "console",
-      "title": "async / await",
-      "theory": "## What async is\n\n`async` makes a function asynchronous — it always returns a Promise:\n\n```js\nasync function greet() {\n  return \"Hi\";\n}\ngreet().then(r => console.log(r));  // Hi\n```\n\n## await\n\nInside `async`, `await` waits for a Promise:\n\n```js\nasync function main() {\n  const result = await fetchData();\n  console.log(result);\n}\n```\n\nCode after `await` runs when the Promise resolves.\n\n## try / catch\n\n```js\nasync function main() {\n  try {\n    const data = await fetchData();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Error:\", err.message);\n  }\n}\n```\n\n`await` on a rejected Promise throws.\n\n## Sequential await\n\n```js\nconst a = await fetchA();  // wait\nconst b = await fetchB();  // wait\n```\n\nOne by one. If independent — use `Promise.all`:\n\n```js\nconst [a, b] = await Promise.all([fetchA(), fetchB()]);\n```\n\nParallel — faster.\n\n## await outside async\n\nOnly in top-level modules (ES2022). In a regular script — syntax error.\n\n## Difference from .then\n\n- `.then` — chains, `.catch`\n- `async/await` — looks like sync code, more readable\n\nSame thing under the hood.\n\n## What if\n\n- `await` without `async` — SyntaxError.\n- Forget try/catch around await — error propagates.\n\n## Common mistake\n\n`await` in a `for...of` loop — each waits. In `Promise.all` — parallel. Choice depends on task.\n\n## Summary\n\n- `async function` — returns Promise\n- `await` — waits for Promise\n- `try / catch` — handles errors\n- `Promise.all` for parallelism\n- Syntax simpler than `.then`",
+    "34": {
+      "id": 34, "check_type": "console", "title": "async / await",
+      "theory": "## What async is\n\n`async` makes a function asynchronous — always returns a Promise:\n\n```js\nasync function greet() {\n  return \"Hello\";\n}\ngreet().then(r => console.log(r));  // Hello\n```\n\n## await\n\nInside `async` — `await` waits for a Promise:\n\n```js\nasync function main() {\n  const result = await fetchData();\n  console.log(result);\n}\n```\n\nCode after `await` runs when Promise resolves.\n\n## try / catch\n\n```js\nasync function main() {\n  try {\n    const data = await fetchData();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Error:\", err.message);\n  }\n}\n```\n\n`await` on rejected Promise throws.\n\n## Sequential await\n\n```js\nconst a = await fetchA();  // wait\nconst b = await fetchB();  // wait\n```\n\nOne after another. If independent — use `Promise.all`:\n\n```js\nconst [a, b] = await Promise.all([fetchA(), fetchB()]);\n```\n\nParallel — faster.\n\n## await outside async\n\nOnly in top-level modules (ES2022). In regular script — syntax error.\n\n## Difference from .then\n\n- `.then` — chains, `.catch`\n- `async/await` — looks like sync code, easier to read\n\nSame under the hood.\n\n## What goes wrong\n\n- `await` without `async` — SyntaxError.\n- Forget try/catch around await — error bubbles up.\n\n## Common mistake\n\n`await` in `for...of` loop — waits each. In `Promise.all` — parallel. Choose by task.\n\n## Summary\n\n- `async function` — returns Promise\n- `await` — waits\n- `try / catch` — catches\n- `Promise.all` — parallel\n- Simpler than `.then`",
       "questions": [
-        { "text": "What does `async` do?", "options": ["Nothing", "Function returns Promise", "Speeds up", "Error"], "answer": 1, "explanation": "Always a Promise." },
-        { "text": "What does `await` do?", "options": ["Waits for Promise", "Creates", "Removes", "Nothing"], "answer": 0, "explanation": "Waits." },
-        { "text": "How to catch errors on `await`?", "options": ["try/catch", "if/else", "for", "Promise"], "answer": 0, "explanation": "try/catch." },
-        { "text": "How to do things in parallel?", "options": ["await one by one", "Promise.all", "for", "setTimeout"], "answer": 1, "explanation": "`Promise.all`." }
+        {"text": "What does `async` do?", "options": ["Nothing", "Function returns Promise", "Speeds up", "Error"], "answer": 1, "explanation": "Always Promise."},
+        {"text": "What does `await` do?", "options": ["Waits for Promise", "Creates", "Removes", "Nothing"], "answer": 0, "explanation": "Waits."},
+        {"text": "How to catch error on `await`?", "options": ["try/catch", "if/else", "for", "Promise"], "answer": 0, "explanation": "try/catch."},
+        {"text": "How to parallel?", "options": ["await sequentially", "Promise.all", "for", "setTimeout"], "answer": 1, "explanation": "`Promise.all`."}
       ],
       "practice": {
         "description": "Create `async function main()`, inside `const result = await Promise.resolve(\"done\")`, output `result`.\n\nVisible text: `done`",
@@ -679,16 +557,14 @@
         "must_contain": ["async", "await", "console.log"]
       }
     },
-    "38": {
-      "id": 38,
-      "check_type": "console",
-      "title": "fetch and APIs",
-      "theory": "## What fetch is\n\n`fetch` — built-in function for HTTP requests. Returns a Promise.\n\n```js\nfetch(\"https://api.example.com/data\")\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(err => console.log(err));\n```\n\n## Response\n\n`fetch` returns a `Response` object:\n\n- `response.ok` — `true` if 200–299\n- `response.status` — code (200, 404, 500)\n- `response.json()` — parses JSON, returns Promise\n- `response.text()` — text\n\n## Checking status\n\n```js\nfetch(url).then(res => {\n  if (!res.ok) throw new Error(\"HTTP \" + res.status);\n  return res.json();\n});\n```\n\n`fetch` **does not throw** on 404/500 — only on network errors. Check `res.ok`.\n\n## async / await\n\n```js\nasync function loadData() {\n  try {\n    const response = await fetch(url);\n    if (!response.ok) throw new Error(\"HTTP \" + response.status);\n    const data = await response.json();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Error:\", err.message);\n  }\n}\n```\n\n## POST\n\n```js\nfetch(url, {\n  method: \"POST\",\n  headers: { \"Content-Type\": \"application/json\" },\n  body: JSON.stringify({ name: \"Anna\" })\n});\n```\n\n## What if\n\n- Forget `response.json()` — you get Response, not data.\n- Only `.catch` without `res.ok` — 404 goes as success.\n- CORS policy may block.\n\n## Common mistake\n\nThinking `fetch` throws on 404. It does not. Check `res.ok`.\n\n## Summary\n\n- `fetch(url)` — Promise\n- `res.json()` / `res.text()`\n- `res.ok` — status check\n- `fetch` does not throw on 4xx/5xx\n- POST — `method`, `headers`, `body`",
+    "35": {
+      "id": 35, "check_type": "console", "title": "fetch and API",
+      "theory": "## What fetch is\n\n`fetch` — built-in for HTTP requests. Returns a Promise.\n\n```js\nfetch(\"https://api.example.com/data\")\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(err => console.log(err));\n```\n\n## Response\n\n`fetch` returns `Response` object:\n\n- `response.ok` — `true` if 200–299\n- `response.status` — code (200, 404, 500)\n- `response.json()` — parse JSON, returns Promise\n- `response.text()` — text\n\n## Status check\n\n```js\nfetch(url).then(res => {\n  if (!res.ok) throw new Error(\"HTTP \" + res.status);\n  return res.json();\n});\n```\n\n`fetch` **does not throw** on 404/500 — only on network errors. Check `res.ok`.\n\n## async / await\n\n```js\nasync function loadData() {\n  try {\n    const response = await fetch(url);\n    if (!response.ok) throw new Error(\"HTTP \" + response.status);\n    const data = await response.json();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Error:\", err.message);\n  }\n}\n```\n\n## POST\n\n```js\nfetch(url, {\n  method: \"POST\",\n  headers: { \"Content-Type\": \"application/json\" },\n  body: JSON.stringify({ name: \"Anna\" })\n});\n```\n\n## What goes wrong\n\n- Forget `response.json()` — get Response, not data.\n- Only `.catch` without `res.ok` — 404 passes as success.\n- CORS policy may block.\n\n## Common mistake\n\nThinking `fetch` throws on 404. It doesn't. Check `res.ok`.\n\n## Summary\n\n- `fetch(url)` — Promise\n- `res.json()` / `res.text()`\n- `res.ok` — status check\n- `fetch` doesn't throw on 4xx/5xx\n- POST — `method`, `headers`, `body`",
       "questions": [
-        { "text": "What does `fetch` return?", "options": ["Data", "Response Promise", "String", "Array"], "answer": 1, "explanation": "Promise of Response." },
-        { "text": "How to get JSON from Response?", "options": ["res.text()", "res.json()", "res.data", "res.parse()"], "answer": 1, "explanation": "`res.json()`." },
-        { "text": "Does `fetch` throw on 404?", "options": ["Yes", "No, check res.ok", "Sometimes", "Only on 500"], "answer": 1, "explanation": "Only on network errors." },
-        { "text": "What does `res.ok` do?", "options": ["True if 200-299", "Always true", "Always false", "Error"], "answer": 0, "explanation": "Status check." }
+        {"text": "What does `fetch` return?", "options": ["Data", "Response Promise", "String", "Array"], "answer": 1, "explanation": "Promise with Response."},
+        {"text": "How to get JSON from Response?", "options": ["res.text()", "res.json()", "res.data", "res.parse()"], "answer": 1, "explanation": "`res.json()`."},
+        {"text": "Does `fetch` throw on 404?", "options": ["Yes", "No, check res.ok", "Sometimes", "Only on 500"], "answer": 1, "explanation": "Only network errors."},
+        {"text": "What does `res.ok` do?", "options": ["True if 200-299", "Always true", "Always false", "Error"], "answer": 0, "explanation": "Status check."}
       ],
       "practice": {
         "description": "Create `async` function that:\n1. Simulates fetch: `const res = await Promise.resolve({ ok: true })`\n2. If `res.ok` — output `Success`\n\nVisible text: `Success`",
@@ -697,55 +573,33 @@
         "must_contain": ["async", "await", "res.ok", "console.log"]
       }
     },
-    "39": {
-      "id": 39,
-      "check_type": "console",
-      "title": "import / export",
-      "theory": "## Why modules\n\nOne 1000-line file is hell. Modules break code into files with clear boundaries.\n\n## export\n\n```js\n// utils.js\nexport function add(a, b) {\n  return a + b;\n}\nexport const PI = 3.14;\nexport default function multiply(a, b) {\n  return a * b;\n}\n```\n\n- `export` — **named** exports (any number)\n- `export default` — **one** default\n\n## import\n\n```js\n// main.js\nimport { add, PI } from \"./utils.js\";\nimport multiply from \"./utils.js\";  // default\n```\n\n## Rename\n\n```js\nimport { add as sum } from \"./utils.js\";\n```\n\n## import *\n\n```js\nimport * as utils from \"./utils.js\";\nconsole.log(utils.add(1, 2));\n```\n\n## In browser\n\n`<script type=\"module\" src=\"main.js\"></script>` — `type=\"module\"` mandatory.\n\n## In Node.js\n\n- `.mjs` — module\n- `.js` with `\"type\": \"module\"` in `package.json`\n\n## Dynamic import\n\n```js\nconst module = await import(\"./utils.js\");\n```\n\nLazy loading.\n\n## What if\n\n- Forget `type=\"module\"` — `import` does not work in browser.\n- Typo in path — `Module not found`.\n- Import named as default — `undefined`.\n\n## Common mistake\n\nConfusing named and default import. `import { add }` — for `export function add`. `import multiply` — for `export default`.\n\n## Summary\n\n- `export` — named\n- `export default` — one\n- `import { x }` / `import x`\n- In browser — `type=\"module\"`\n- `as` — rename",
+    "36": {
+      "id": 36, "check_type": "console", "title": "import / export",
+      "theory": "## Why modules\n\nOne file of 1000 lines — nightmare. Modules split code into files with clear boundaries.\n\n## export\n\n```js\n// utils.js\nexport function add(a, b) {\n  return a + b;\n}\nexport const PI = 3.14;\nexport default function multiply(a, b) {\n  return a * b;\n}\n```\n\n- `export` — **named** exports (any number)\n- `export default` — **one** default\n\n## import\n\n```js\n// main.js\nimport { add, PI } from \"./utils.js\";\nimport multiply from \"./utils.js\";  // default\n```\n\n## Rename\n\n```js\nimport { add as sum } from \"./utils.js\";\n```\n\n## import *\n\n```js\nimport * as utils from \"./utils.js\";\nconsole.log(utils.add(1, 2));\n```\n\n## In browser\n\n`<script type=\"module\" src=\"main.js\"></script>` — `type=\"module\"` required.\n\n## In Node.js\n\n- `.mjs` — module\n- `.js` with `\"type\": \"module\"` in `package.json`\n\n## Dynamic import\n\n```js\nconst module = await import(\"./utils.js\");\n```\n\nLazy load.\n\n## What goes wrong\n\n- Forget `type=\"module\"` — `import` won't work in browser.\n- Typo in path — `Module not found`.\n- Import named as default — `undefined`.\n\n## Common mistake\n\nConfuse named and default import. `import { add }` — for `export function add`. `import multiply` — for `export default`.\n\n## Summary\n\n- `export` — named\n- `export default` — one\n- `import { x }` / `import x`\n- In browser — `type=\"module\"`\n- `as` — rename",
       "questions": [
-        { "text": "How many default exports per file?", "options": ["1", "2", "any", "0"], "answer": 0, "explanation": "One." },
-        { "text": "How to import named `add`?", "options": ["import add from", "import { add } from", "import * as add", "require"], "answer": 1, "explanation": "`import { add }`." },
-        { "text": "What is needed in browser for modules?", "options": ["type=\"module\"", "type=\"js\"", "async", "Nothing"], "answer": 0, "explanation": "`type=\"module\"`." },
-        { "text": "What does `as` do?", "options": ["Removes", "Renames", "Creates", "Error"], "answer": 1, "explanation": "`add as sum`." }
+        {"text": "How many default exports per file?", "options": ["1", "2", "any", "0"], "answer": 0, "explanation": "One."},
+        {"text": "How to import named `add`?", "options": ["import add from", "import { add } from", "import * as add", "require"], "answer": 1, "explanation": "`import { add }`."},
+        {"text": "What's needed in browser for modules?", "options": ["type=\"module\"", "type=\"js\"", "async", "Nothing"], "answer": 0, "explanation": "`type=\"module\"`."},
+        {"text": "What does `as` do?", "options": ["Deletes", "Renames", "Creates", "Error"], "answer": 1, "explanation": "`add as sum`."}
       ],
       "practice": {
-        "description": "In one file (simulating modules):\n1. Function `add(a, b)`\n2. `const PI = 3.14`\n3. Output `add(2, 3)` and `PI`\n\n```\n5\n3.14\n```",
+        "description": "In one file (simulate modules):\n1. Function `add(a, b)`\n2. `const PI = 3.14`\n3. Output `add(2, 3)` and `PI`\n\n```\n5\n3.14\n```",
         "starter": "// TODO\n",
         "expected": "5\n3.14",
         "must_contain": ["function add", "const PI", "console.log"]
       }
     },
-    "40": {
-      "id": 40,
-      "check_type": "dom",
-      "title": "Project: Counter",
-      "theory": "## What we build\n\nCounter with + and − buttons. Uses: DOM, events, text update.\n\n## HTML\n\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\n## JS\n\n```js\nlet count = 0;\nconst value = document.querySelector(\"#value\");\nconst inc = document.querySelector(\"#inc\");\nconst dec = document.querySelector(\"#dec\");\n\ninc.addEventListener(\"click\", () => {\n  count++;\n  value.textContent = count;\n});\n\ndec.addEventListener(\"click\", () => {\n  count--;\n  value.textContent = count;\n});\n```\n\n## Checks\n\n- `count` — variable\n- `textContent` — updated\n- `addEventListener` on two buttons\n- `++` / `--`\n\n## What if\n\n- `value.textContent = count++` — shows old.\n- Forget `textContent` — number does not change.\n\n## Common mistake\n\n`count = value.textContent + 1` — string concatenation.\n\n## Summary\n\n- `let count` — state\n- `addEventListener` on buttons\n- `textContent` — update\n- `count++` / `count--`",
+    "37": {
+      "id": 37, "check_type": "dom", "title": "Final: TODO List",
+      "theory": "## What we build\n\nAdding tasks via input + button. Everything together: DOM, createElement, appendChild, events, forms, localStorage.\n\n## HTML\n\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Add</button>\n<ul id=\"list\"></ul>\n```\n\n## JS\n\n```js\nconst inp = document.querySelector(\"#inp\");\nconst add = document.querySelector(\"#add\");\nconst list = document.querySelector(\"#list\");\n\nadd.addEventListener(\"click\", () => {\n  const text = inp.value.trim();\n  if (!text) return;\n\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n\n  inp.value = \"\";\n});\n```\n\n## Breakdown\n\n- `querySelector` — find\n- `addEventListener` — on button\n- `inp.value.trim()` — value without spaces\n- `if (!text) return` — skip empty\n- `createElement(\"li\")` — create\n- `appendChild` — append\n- `inp.value = \"\"` — clear\n\n## Persisting with localStorage\n\n```js\nconst saved = JSON.parse(localStorage.getItem(\"tasks\") || \"[]\");\nsaved.forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n});\n\nadd.addEventListener(\"click\", () => {\n  const text = inp.value.trim();\n  if (!text) return;\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n  const all = [...list.children].map(c => c.textContent);\n  localStorage.setItem(\"tasks\", JSON.stringify(all));\n  inp.value = \"\";\n});\n```\n\n## Checks\n\n- Event on button\n- Create + insert\n- Clear input\n- Skip empty\n- Persist via localStorage\n\n## What goes wrong\n\n- Don't clear `inp.value` — can add same thing many times.\n- Don't check empty — empty `<li>`.\n- Forget `JSON.stringify` — saves `[object Object]`.\n\n## Common mistake\n\n`inp.value += \" \"` — accumulates text. Need `inp.value = \"\"`.\n\n## Summary\n\n- `querySelector` + `addEventListener` + `createElement`\n- `trim()` — remove spaces\n- `if (!text) return` — skip\n- Clear after add\n- `localStorage` for persistence",
       "questions": [
-        { "text": "What does `textContent = count` do?", "options": ["Changes", "Shows value", "Removes", "Creates"], "answer": 1, "explanation": "Updates text." },
-        { "text": "Where is state stored?", "options": ["In DOM", "In variable", "In HTML", "In CSS"], "answer": 1, "explanation": "In `count`." },
-        { "text": "What on `value.textContent = count++`?", "options": ["New immediately", "Old, then ++", "Error", "undefined"], "answer": 1, "explanation": "Postfix ++ returns old." },
-        { "text": "How to change number by 1?", "options": ["count = count + 1", "count++", "count += 1", "all"], "answer": 3, "explanation": "All three work." }
+        {"text": "What does `inp.value.trim()` do?", "options": ["Clears", "Removes edge spaces", "Changes", "Error"], "answer": 1, "explanation": "`trim` — trim edges."},
+        {"text": "What does `if (!text) return` do?", "options": ["Error", "Skips empty", "Adds", "Removes"], "answer": 1, "explanation": "Empty string falsy, exit."},
+        {"text": "How to clear field?", "options": ["inp.clear()", "inp.value = \"\"", "inp.textContent = \"\"", "delete inp.value"], "answer": 1, "explanation": "`value = \"\"`."},
+        {"text": "What does `appendChild` do?", "options": ["Removes", "Appends to end", "Finds", "Copies"], "answer": 1, "explanation": "To end."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\nVia JS: `#inc` adds 1, `#dec` subtracts 1, `#value` shows number.\n\nInitial visible text: `− 0 +`",
-        "starter": "<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n<script>\n  // TODO\n</script>\n",
-        "expected": "− 0 +",
-        "must_contain": ["addEventListener", "click", "textContent", "count++", "count--"]
-      }
-    },
-    "41": {
-      "id": 41,
-      "check_type": "dom",
-      "title": "Final: TODO List",
-      "theory": "## What we build\n\nAdd tasks via input + button. All together: DOM, createElement, appendChild, events, forms.\n\n## HTML\n\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Add</button>\n<ul id=\"list\"></ul>\n```\n\n## JS\n\n```js\nconst inp = document.querySelector(\"#inp\");\nconst add = document.querySelector(\"#add\");\nconst list = document.querySelector(\"#list\");\n\nadd.addEventListener(\"click\", () => {\n  const text = inp.value.trim();\n  if (!text) return;\n\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n\n  inp.value = \"\";\n});\n```\n\n## Breakdown\n\n- `querySelector` — find\n- `addEventListener` — on button\n- `inp.value.trim()` — value without spaces\n- `if (!text) return` — skip empty\n- `createElement(\"li\")` — create\n- `appendChild` — append\n- `inp.value = \"\"` — clear\n\n## Checks\n\n- Event on button\n- Create + append\n- Clear field\n- Skip empty input\n\n## What if\n\n- Do not clear `inp.value` — can add same many times.\n- Do not check empty — empty `<li>`.\n\n## Common mistake\n\n`inp.value += \" \"` — accumulates. Use `inp.value = \"\"`.\n\n## Summary\n\n- `querySelector` + `addEventListener` + `createElement`\n- `trim()` — trim spaces\n- `if (!text) return` — skip\n- Clear field after adding",
-      "questions": [
-        { "text": "What does `inp.value.trim()` do?", "options": ["Clears", "Trims edges", "Changes", "Error"], "answer": 1, "explanation": "`trim` — edges." },
-        { "text": "What does `if (!text) return` do?", "options": ["Error", "Skips empty", "Adds", "Removes"], "answer": 1, "explanation": "Empty string — falsy, exit." },
-        { "text": "How to clear field?", "options": ["inp.clear()", "inp.value = \"\"", "inp.textContent = \"\"", "delete inp.value"], "answer": 1, "explanation": "`value = \"\"`." },
-        { "text": "What does `appendChild` do?", "options": ["Removes", "Appends to end", "Finds", "Copies"], "answer": 1, "explanation": "To end." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Add</button>\n<ul id=\"list\"></ul>\n```\n\nVia JS:\n1. Click on `#add`\n2. Take `#inp.value`, `trim()`\n3. If empty — exit\n4. Create `<li>` with text, append to `#list`\n5. Clear `#inp.value`\n\nInitial visible text: `Add`",
+        "description": "HTML:\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Add</button>\n<ul id=\"list\"></ul>\n```\n\nVia JS:\n1. Click on `#add`\n2. Take `#inp.value`, `trim()`\n3. If empty — return\n4. Create `<li>` with text, append to `#list`\n5. Clear `#inp.value`\n\nInitial visible text: `Add`",
         "starter": "<input id=\"inp\" type=\"text\">\n<button id=\"add\">Add</button>\n<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
         "expected": "Add",
         "must_contain": ["addEventListener", "click", "createElement", "appendChild", ".value", "trim"]

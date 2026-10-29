@@ -3,7 +3,7 @@
     "chapter_id": 1,
     "check_type": "console",
     "title": "Контрольная: Введение",
-    "description": "Финальное задание главы 1. Проверяет: console.log, let, const.",
+    "description": "Финальное задание главы 1. Проверяет: console.log, const, базовый вывод.",
     "practice": {
       "description": "Создай три `const`:\n- `name` = `\"Иван\"`\n- `age` = `25`\n- `city` = `\"Москва\"`\n\nВыведи пять строк:\n```\nИмя: Иван\nВозраст: 25\nГород: Москва\nИван, 25, Москва\nГотово\n```",
       "starter": "// TODO: 3 переменные + 5 console.log\n",
@@ -14,120 +14,120 @@
   "2": {
     "chapter_id": 2,
     "check_type": "console",
-    "title": "Контрольная: Типы данных",
-    "description": "Финальное задание главы 2. Проверяет: типы, приведение, == vs ===.",
+    "title": "Контрольная: Переменные и типы",
+    "description": "Финальное задание главы 2. Проверяет: const/let, typeof, разные типы.",
     "practice": {
-      "description": "Дано:\n```\nlet a = \"5\";\nlet b = 5;\nlet c = 3.14;\n```\n\nВыведи:\n```\ntypeof a: string\ntypeof b: number\ntypeof c: number\na == b: true\na === b: false\nNumber(a) + b: 10\n```",
-      "starter": "let a = \"5\";\nlet b = 5;\nlet c = 3.14;\n// TODO\n",
-      "expected": "typeof a: string\ntypeof b: number\ntypeof c: number\na == b: true\na === b: false\nNumber(a) + b: 10",
-      "must_contain": ["typeof a", "typeof b", "typeof c", "a == b", "a === b", "Number(a)", "console.log"]
+      "description": "Создай четыре переменные разных типов:\n- `const name = \"Аня\"`\n- `let age = 25`\n- `const pi = 3.14`\n- `const ok = true`\n\nВыведи шесть строк:\n```\nАня\n25\n3.14\ntrue\nstring\nnumber\n```\n\nПоследние две — `typeof name` и `typeof age`.",
+      "starter": "// TODO\n",
+      "expected": "Аня\n25\n3.14\ntrue\nstring\nnumber",
+      "must_contain": ["const name", "let age", "const pi", "const ok", "typeof name", "typeof age", "console.log"]
     }
   },
   "3": {
     "chapter_id": 3,
     "check_type": "console",
-    "title": "Контрольная: Условия и циклы",
-    "description": "Финальное задание главы 3. Проверяет: if/else, switch, for, break.",
+    "title": "Контрольная: Строки, числа, приведение",
+    "description": "Финальное задание главы 3. Проверяет: строки, числа, == vs ===, toFixed.",
     "practice": {
-      "description": "Для чисел 1..7 выведи:\n- день через `switch` (`1 = Пн`, `2 = Вт`, `3 = Ср`, `4 = Чт`, `5 = Пт`, `6 = Сб`, `7 = Вс`)\n- формат: `<n>: <день>`\n- для `n` = 6 или 7 добавь `\" (выходной)\"`\n\n```\n1: Пн\n2: Вт\n3: Ср\n4: Чт\n5: Пт\n6: Сб (выходной)\n7: Вс (выходной)\n```",
-      "starter": "// TODO: for 1..7, switch, if, console.log\n",
-      "expected": "1: Пн\n2: Вт\n3: Ср\n4: Чт\n5: Пт\n6: Сб (выходной)\n7: Вс (выходной)",
-      "must_contain": ["for", "switch", "case", "break", "if", "console.log"]
+      "description": "Дано:\n```\nlet a = \"5\";\nlet b = 5;\nlet c = 3.14;\n```\n\nВыведи:\n```\ntypeof a: string\ntypeof b: number\ntypeof c: number\na == b: true\na === b: false\nNumber(a) + b: 10\nc.toFixed(1): 3.1\n```",
+      "starter": "let a = \"5\";\nlet b = 5;\nlet c = 3.14;\n// TODO\n",
+      "expected": "typeof a: string\ntypeof b: number\ntypeof c: number\na == b: true\na === b: false\nNumber(a) + b: 10\nc.toFixed(1): 3.1",
+      "must_contain": ["typeof a", "typeof b", "typeof c", "a == b", "a === b", "Number(a)", "toFixed", "console.log"]
     }
   },
   "4": {
     "chapter_id": 4,
     "check_type": "console",
-    "title": "Контрольная: Функции",
-    "description": "Финальное задание главы 4. Проверяет: функции, стрелочные, rest, return.",
+    "title": "Контрольная: Условия и циклы",
+    "description": "Финальное задание главы 4. Проверяет: for, switch, if, break.",
     "practice": {
-      "description": "Создай три функции:\n- `square(n)` — стрелочная, возвращает `n²`\n- `sumAll(...nums)` — с rest, возвращает сумму\n- `greet(name = \"гость\")` — с дефолтом, `\"Привет, <name>!\"`\n\nВыведи:\n```\n16\n10\nПривет, Аня!\nПривет, гость!\n```",
-      "starter": "// TODO\n",
-      "expected": "16\n10\nПривет, Аня!\nПривет, гость!",
-      "must_contain": ["=>", "...nums", "name =", "console.log"]
+      "description": "Для чисел 1..7 через `switch` выведи:\n- 1 → `Пн`, 2 → `Вт`, 3 → `Ср`, 4 → `Чт`, 5 → `Пт`, 6 → `Сб`, 7 → `Вс`\n- формат: `<n>: <день>`\n- для `n` = 6 или 7 допиши `\" (выходной)\"`\n\n```\n1: Пн\n2: Вт\n3: Ср\n4: Чт\n5: Пт\n6: Сб (выходной)\n7: Вс (выходной)\n```",
+      "starter": "// TODO: for 1..7, switch, if, console.log\n",
+      "expected": "1: Пн\n2: Вт\n3: Ср\n4: Чт\n5: Пт\n6: Сб (выходной)\n7: Вс (выходной)",
+      "must_contain": ["for", "switch", "case", "break", "if", "console.log"]
     }
   },
   "5": {
     "chapter_id": 5,
     "check_type": "console",
-    "title": "Контрольная: Массивы и объекты",
-    "description": "Финальное задание главы 5. Проверяет: методы, map/filter/reduce, объекты.",
+    "title": "Контрольная: Функции",
+    "description": "Финальное задание главы 5. Проверяет: функции, стрелочные, rest, дефолты.",
     "practice": {
-      "description": "Дан массив `const nums = [3, 7, 2, 8, 5];`.\n\nВыведи:\n```\nSquares: 9,49,4,64,25\nEvens: 2,8\nSum: 25\n```\n\n- `squares` — через `map`\n- `evens` — через `filter`\n- `sum` — через `reduce`",
-      "starter": "const nums = [3, 7, 2, 8, 5];\n// TODO\n",
-      "expected": "Squares: 9,49,4,64,25\nEvens: 2,8\nSum: 25",
-      "must_contain": [".map(", ".filter(", ".reduce(", "join", "console.log"]
+      "description": "Создай три функции:\n- `square(n)` — стрелочная, возвращает `n²`\n- `sumAll(...nums)` — с rest, возвращает сумму\n- `greet(name = \"гость\")` — с дефолтом, возвращает `\"Привет, <name>!\"`\n\nВыведи:\n```\n16\n10\nПривет, Аня!\nПривет, гость!\n```",
+      "starter": "// TODO\n",
+      "expected": "16\n10\nПривет, Аня!\nПривет, гость!",
+      "must_contain": ["=>", "...nums", "name =", "console.log"]
     }
   },
   "6": {
     "chapter_id": 6,
     "check_type": "console",
-    "title": "Контрольная: Деструктуризация, spread, ошибки",
-    "description": "Финальное задание главы 6. Проверяет: деструктуризацию, spread, try/catch.",
+    "title": "Контрольная: Массивы и объекты",
+    "description": "Финальное задание главы 6. Проверяет: методы массивов, map/filter/reduce, объекты.",
     "practice": {
-      "description": "Дан объект:\n```\nconst user = { name: \"Аня\", age: 25, city: \"Москва\" };\n```\n\n1. Деструктурируй `name` и `age`, выведи `Аня 25`.\n2. Через spread создай `{ ...user, age: 26 }`, выведи `age: 26`.\n3. В `try/catch` попробуй `JSON.parse(\"not json\")`, в `catch` выведи `Ошибка парсинга`.\n\n```\nАня 25\nage: 26\nОшибка парсинга\n```",
-      "starter": "const user = { name: \"Аня\", age: 25, city: \"Москва\" };\n// TODO\n",
-      "expected": "Аня 25\nage: 26\nОшибка парсинга",
-      "must_contain": ["const { name", "= user", "...user", "try", "catch", "console.log"]
+      "description": "Дан массив `const nums = [3, 7, 2, 8, 5];`.\n\nВыведи:\n```\nКвадраты: 9,49,4,64,25\nЧётные: 2,8\nСумма: 25\n```\n\n- `squares` — через `map`\n- `evens` — через `filter`\n- `sum` — через `reduce`",
+      "starter": "const nums = [3, 7, 2, 8, 5];\n// TODO\n",
+      "expected": "Квадраты: 9,49,4,64,25\nЧётные: 2,8\nСумма: 25",
+      "must_contain": [".map(", ".filter(", ".reduce(", "join", "console.log"]
     }
   },
   "7": {
     "chapter_id": 7,
     "check_type": "console",
-    "title": "Контрольная: Set, Map, регулярки",
-    "description": "Финальное задание главы 7. Проверяет: Set, Map, регулярные выражения.",
+    "title": "Контрольная: Деструктуризация и классы",
+    "description": "Финальное задание главы 7. Проверяет: деструктуризация, class, extends, super.",
     "practice": {
-      "description": "1. Создай `new Set([1, 2, 2, 3, 3, 3])`, выведи размер через `size`.\n2. Создай `new Map([[\"a\", 1], [\"b\", 2]])`, выведи `map.get(\"a\")`.\n3. Через регулярку найди все цифры в `\"a1b22c333\"` и выведи их количество.\n\n```\nУникальных: 3\nMap a: 1\nЦифр: 6\n```",
-      "starter": "// TODO\n",
-      "expected": "Уникальных: 3\nMap a: 1\nЦифр: 6",
-      "must_contain": ["new Set(", "new Map(", ".get(", "match", "console.log"]
+      "description": "**Часть 1.** Дано `const user = { name: \"Аня\", age: 25 };` — деструктурируй `name` и `age`, выведи `Аня 25`.\n\n**Часть 2.** Класс `Animal`:\n- `constructor(name)` — сохраняет `this.name`\n- `speak()` — `\"<name> издаёт звук\"`\n\nКласс `Dog extends Animal` — переопределяет `speak` — `\"<name>: Гав!\"`.\n\nСоздай `new Animal(\"Загадка\")`, `new Dog(\"Рекс\")`, вызови `speak()`.\n\n```\nАня 25\nЗагадка издаёт звук\nРекс: Гав!\n```",
+      "starter": "const user = { name: \"Аня\", age: 25 };\n// TODO\n",
+      "expected": "Аня 25\nЗагадка издаёт звук\nРекс: Гав!",
+      "must_contain": ["const {", "class Animal", "class Dog extends Animal", "super(", "speak", "console.log"]
     }
   },
   "8": {
     "chapter_id": 8,
-    "check_type": "console",
-    "title": "Контрольная: Классы и this",
-    "description": "Финальное задание главы 8. Проверяет: классы, конструктор, методы, наследование.",
+    "check_type": "dom",
+    "title": "Контрольная: DOM",
+    "description": "Финальное задание главы 8. Проверяет: querySelector, textContent, createElement, classList.",
     "practice": {
-      "description": "Класс `Animal`:\n- `constructor(name)` — сохраняет `this.name`\n- `speak()` — `\"<name> издаёт звук\"`\n\nКласс `Dog extends Animal`:\n- переопределяет `speak()` — `\"<name>: гав\"`\n\nСоздай `new Animal(\"Загадка\")`, `new Dog(\"Рекс\")`, вызови `speak()` у обоих.\n\n```\nЗагадка издаёт звук\nРекс: гав\n```",
-      "starter": "// TODO\n",
-      "expected": "Загадка издаёт звук\nРекс: гав",
-      "must_contain": ["class Animal", "constructor", "class Dog extends Animal", "super(", "speak()", "console.log"]
+      "description": "HTML:\n```html\n<h1 id=\"title\"></h1>\n<ul id=\"list\"></ul>\n```\n\nЧерез JS:\n1. Установи `#title` текст \"Список задач\"\n2. Три `<li>`: \"Молоко\", \"Хлеб\", \"Яйца\" — добавь в `#list`\n3. Добавь класс `active` к `#list`\n\nВидимый текст: `Список задач Молоко Хлеб Яйца`",
+      "starter": "<h1 id=\"title\"></h1>\n<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
+      "expected": "Список задач Молоко Хлеб Яйца",
+      "must_contain": ["querySelector", "textContent", "createElement", "appendChild", "classList.add"]
     }
   },
   "9": {
     "chapter_id": 9,
     "check_type": "dom",
-    "title": "Контрольная: DOM",
-    "description": "Финальное задание главы 9. Проверяет: querySelector, textContent, classList, createElement.",
+    "title": "Контрольная: События",
+    "description": "Финальное задание главы 9. Проверяет: addEventListener, click, submit, preventDefault.",
     "practice": {
-      "description": "HTML:\n```html\n<h1 id=\"title\"></h1>\n<ul id=\"list\"></ul>\n```\n\nЧерез JS:\n1. В `#title` текст \"Список дел\"\n2. Три `<li>`: \"Молоко\", \"Хлеб\", \"Яйца\" — добавить в `#list`\n3. Добавить `#list` класс `active`\n\nВидимый текст: `Список дел Молоко Хлеб Яйца`",
-      "starter": "<h1 id=\"title\"></h1>\n<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
-      "expected": "Список дел Молоко Хлеб Яйца",
-      "must_contain": ["querySelector", "textContent", "createElement", "appendChild", "classList.add"]
+      "description": "HTML:\n```html\n<button id=\"btn\">Клик</button>\n<p id=\"out\"></p>\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Отправить</button>\n</form>\n```\n\nЧерез JS:\n1. Клик на `#btn` → `#out` текст \"Кликнули\"\n2. `#f` — `submit` с `preventDefault`, значение `#inp` в `#out`\n\nВидимый текст: `Клик Отправить`",
+      "starter": "<button id=\"btn\">Клик</button>\n<p id=\"out\"></p>\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Отправить</button>\n</form>\n<script>\n  // TODO\n</script>\n",
+      "expected": "Клик Отправить",
+      "must_contain": ["addEventListener", "click", "submit", "preventDefault", "querySelector"]
     }
   },
   "10": {
     "chapter_id": 10,
     "check_type": "dom",
-    "title": "Контрольная: События",
-    "description": "Финальное задание главы 10. Проверяет: addEventListener, click, submit.",
+    "title": "Контрольная: Практика",
+    "description": "Финальное задание главы 10. Проверяет: счётчик через события + localStorage.",
     "practice": {
-      "description": "HTML:\n```html\n<button id=\"btn\">Нажми</button>\n<p id=\"out\"></p>\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Отправить</button>\n</form>\n```\n\nЧерез JS:\n1. Клик на `#btn` → `#out` текст \"Кликнули\"\n2. `#f` — `submit` с `preventDefault`, значение `#inp` в `#out`\n\nВидимый текст: `Нажми Отправить`",
-      "starter": "<button id=\"btn\">Нажми</button>\n<p id=\"out\"></p>\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Отправить</button>\n</form>\n<script>\n  // TODO\n</script>\n",
-      "expected": "Нажми Отправить",
-      "must_contain": ["addEventListener", "click", "submit", "preventDefault", "querySelector"]
+      "description": "HTML:\n```html\n<button id=\"inc\">+</button>\n<span id=\"value\">0</span>\n```\n\nЧерез JS:\n1. Прочитай `count` из `localStorage` или 0\n2. Клик на `#inc` → `count++`, обнови `#value`, сохрани в `localStorage`\n\nИзначальный видимый текст: `+ 0`",
+      "starter": "<button id=\"inc\">+</button>\n<span id=\"value\">0</span>\n<script>\n  // TODO\n</script>\n",
+      "expected": "+ 0",
+      "must_contain": ["addEventListener", "click", "textContent", "localStorage", "setItem", "count"]
     }
   },
   "11": {
     "chapter_id": 11,
     "check_type": "console",
     "title": "Контрольная: Асинхронность",
-    "description": "Финальное задание главы 11. Проверяет: Promise, async/await.",
+    "description": "Финальное задание главы 11. Проверяет: Promise, async/await, обработка ошибок.",
     "practice": {
-      "description": "1. Создай `delay(ms)` — возвращает `Promise`, который через `setTimeout` вызывает `resolve()`.\n2. В `async`-функции `main` через `await` подожди `delay(10)` и выведи `Готово`.\n3. Поймай ошибку: `Promise.reject(new Error(\"fail\"))` через `.catch`, выведи `Поймана: fail`.\n\n```\nГотово\nПоймана: fail\n```",
+      "description": "1. Создай `delay(ms)` — возвращает `Promise`, который резолвится через `setTimeout`.\n2. В `async`-функции `main` — `await delay(10)` и вывод `Готово`.\n3. Обработай rejection: `Promise.reject(new Error(\"fail\"))` через `.catch`, вывод `Поймано: fail`.\n\n```\nГотово\nПоймано: fail\n```",
       "starter": "// TODO\n",
-      "expected": "Готово\nПоймана: fail",
+      "expected": "Готово\nПоймано: fail",
       "must_contain": ["new Promise", "resolve", "async", "await", ".catch", "console.log"]
     }
   },
@@ -135,9 +135,9 @@
     "chapter_id": 12,
     "check_type": "console",
     "title": "Контрольная: Модули",
-    "description": "Финальное задание главы 12. Проверяет: import/export.",
+    "description": "Финальное задание главы 12. Проверяет: понимание import/export.",
     "practice": {
-      "description": "Модули имитируем в одном файле (в реальном проекте — отдельные файлы).\n\n1. Объяви функцию `add(a, b)`.\n2. Объяви `const PI = 3.14`.\n3. Выведи `add(2, 3)` и `PI`.\n\n```\n5\n3.14\n```\n\nПросто проверяем, что ты понимаешь смысл экспорта — синтаксис `export` в одном файле не нужен.",
+      "description": "Симулируй модули в одном файле (в реальном проекте — разные файлы).\n\n1. Объяви `add(a, b)`.\n2. Объяви `const PI = 3.14`.\n3. Выведи `add(2, 3)` и `PI`.\n\n```\n5\n3.14\n```\n\nСинтаксис `export` в одном файле не требуется — проверяем понимание концепции.",
       "starter": "// TODO\n",
       "expected": "5\n3.14",
       "must_contain": ["function add", "const PI", "console.log"]
@@ -146,13 +146,13 @@
   "13": {
     "chapter_id": 13,
     "check_type": "dom",
-    "title": "Контрольная: Итоговая",
-    "description": "Финальное задание курса. Проверяет: DOM + события + массивы.",
+    "title": "Контрольная: Финал",
+    "description": "Финальное задание курса. Проверяет: DOM + события + localStorage + динамический список.",
     "practice": {
-      "description": "HTML:\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Добавить</button>\n<ul id=\"list\"></ul>\n```\n\nЧерез JS:\n1. Клик на `#add` — создать `<li>` с текстом из `#inp`\n2. Добавить в `#list`\n3. Очистить `#inp` после добавления\n\nВидимый текст: `Добавить`",
+      "description": "HTML:\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Добавить</button>\n<ul id=\"list\"></ul>\n```\n\nЧерез JS:\n1. По клику `#add` — создай `<li>` с текстом из `#inp` (обрезанным)\n2. Добавь в `#list`\n3. Сохрани в `localStorage` (массив строк через `JSON.stringify`)\n4. Очисти `#inp`\n5. При загрузке страницы — восстанови из `localStorage`\n\nВидимый текст: `Добавить`",
       "starter": "<input id=\"inp\" type=\"text\">\n<button id=\"add\">Добавить</button>\n<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
       "expected": "Добавить",
-      "must_contain": ["addEventListener", "click", "createElement", "appendChild", "value", "querySelector"]
+      "must_contain": ["addEventListener", "click", "createElement", "appendChild", "value", "JSON.stringify", "JSON.parse", "localStorage"]
     }
   }
 }

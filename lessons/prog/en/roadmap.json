@@ -1,65 +1,66 @@
 [
   {
     "id": 1,
-    "title": "Chapter 1. How a Computer Executes Code",
+    "title": "Chapter 1. How the Computer Executes Code",
     "lessons": [
-      { "id": 1, "title": "What Is an Algorithm and a Program", "status": "current" },
-      { "id": 2, "title": "Memory and Variables: Where Data Comes From", "status": "locked" },
-      { "id": 3, "title": "Expressions: How a Computer Computes", "status": "locked" },
-      { "id": 4, "title": "Input and Output: Dialogue with a Program", "status": "locked" }
+      { "id": 1, "title": "What Is an Algorithm. Program = Input → Processing → Output", "status": "current" },
+      { "id": 2, "title": "Program State. Memory and Variables", "status": "locked" },
+      { "id": 3, "title": "Expressions: How the Computer Calculates", "status": "locked" },
+      { "id": 4, "title": "Logic: Comparisons and AND/OR/NOT", "status": "locked" }
     ],
     "trophy": { "title": "Chapter 1 Trophy", "status": "locked" }
   },
   {
     "id": 2,
-    "title": "Chapter 2. Logic and Control Flow",
+    "title": "Chapter 2. Branching and Loops",
     "lessons": [
-      { "id": 5, "title": "Branching: How a Program Makes Decisions", "status": "locked" },
-      { "id": 6, "title": "Logical Operators: AND, OR, NOT", "status": "locked" },
-      { "id": 7, "title": "Nesting and Order of Checks", "status": "locked" },
-      { "id": 8, "title": "Data Types and Conversion", "status": "locked" }
+      { "id": 5, "title": "Branching. Nesting and Order of Checks", "status": "locked" },
+      { "id": 6, "title": "Loops. while and for", "status": "locked" },
+      { "id": 7, "title": "Patterns: Accumulator, Counter, Flag", "status": "locked" },
+      { "id": 8, "title": "Nested Loops", "status": "locked" }
     ],
     "trophy": { "title": "Chapter 2 Trophy", "status": "locked" }
   },
   {
     "id": 3,
-    "title": "Chapter 3. Loops and Repetition",
+    "title": "Chapter 3. Arrays and Functions",
     "lessons": [
-      { "id": 9, "title": "Why Loops Are Needed. Types of Loops", "status": "locked" },
-      { "id": 10, "title": "Pattern: Accumulator", "status": "locked" },
-      { "id": 11, "title": "Pattern: Counter and Flag", "status": "locked" },
-      { "id": 12, "title": "Nested Loops", "status": "locked" }
+      { "id": 9, "title": "Arrays and Indices", "status": "locked" },
+      { "id": 10, "title": "Array Traversal. Search, Filter, Maximum", "status": "locked" },
+      { "id": 11, "title": "Swap and Simple Sorting", "status": "locked" },
+      { "id": 12, "title": "Functions. Parameters, Return, Scope", "status": "locked" }
     ],
     "trophy": { "title": "Chapter 3 Trophy", "status": "locked" }
   },
   {
     "id": 4,
-    "title": "Chapter 4. Functions and Decomposition",
+    "title": "Chapter 4. Tracing and Complexity",
     "lessons": [
-      { "id": 13, "title": "Why Functions Are Needed. The Black Box", "status": "locked" },
-      { "id": 14, "title": "Parameters and Return Value", "status": "locked" },
-      { "id": 15, "title": "Scope", "status": "locked" },
-      { "id": 16, "title": "Recursion", "status": "locked" }
+      { "id": 13, "title": "Tracing and Debugging", "status": "locked" },
+      { "id": 14, "title": "Complexity: Big O", "status": "locked" },
+      { "id": 15, "title": "Binary Search", "status": "locked" },
+      { "id": 16, "title": "Selection Sort", "status": "locked" }
     ],
     "trophy": { "title": "Chapter 4 Trophy", "status": "locked" }
   },
   {
     "id": 5,
-    "title": "Chapter 5. Arrays and Data Structures",
+    "title": "Chapter 5. Recursion and Data Structures",
     "lessons": [
-      { "id": 17, "title": "What Is an Array and Indices", "status": "locked" },
-      { "id": 18, "title": "Traversing an Array", "status": "locked" },
-      { "id": 19, "title": "Search, Filter, Maximum", "status": "locked" },
-      { "id": 20, "title": "Sorting and Swap", "status": "locked" }
+      { "id": 17, "title": "Recursion and the Call Stack", "status": "locked" },
+      { "id": 18, "title": "Quicksort", "status": "locked" },
+      { "id": 19, "title": "Hash Tables", "status": "locked" },
+      { "id": 20, "title": "Graphs and Breadth-First Search (BFS)", "status": "locked" }
     ],
     "trophy": { "title": "Chapter 5 Trophy", "status": "locked" }
   },
   {
     "id": 6,
-    "title": "Chapter 6. Algorithmic Thinking",
+    "title": "Chapter 6. Advanced Algorithms",
     "lessons": [
-      { "id": 21, "title": "How to Solve Problems Step by Step", "status": "locked" },
-      { "id": 22, "title": "What Any Program Consists Of", "status": "locked" }
+      { "id": 21, "title": "Greedy Algorithms", "status": "locked" },
+      { "id": 22, "title": "Dynamic Programming", "status": "locked" },
+      { "id": 23, "title": "How to Solve Problems Step by Step", "status": "locked" }
     ],
     "trophy": { "title": "Chapter 6 Trophy", "status": "locked" }
   }

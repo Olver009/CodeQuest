@@ -1,0 +1,8 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Лавровый венок -->
+    <path d="M 7 20 C 2 16 2 8 7 4 M 17 20 C 22 16 22 8 17 4" stroke="#FFD700" stroke-width="2" stroke-linecap="round" />
+    <path d="M 7 17 L 4 15 M 6 13 L 3 11 M 6 9 L 4 7 M 7 6 L 6 4 M 17 17 L 20 15 M 18 13 L 21 11 M 18 9 L 20 7 M 17 6 L 18 4" stroke="#FFD700" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Звезда -->
+    <path d="M 12 6 L 13.5 9 L 17 9 L 14 11.5 L 15.5 15 L 12 12.5 L 8.5 15 L 10 11.5 L 7 9 L 10.5 9 Z" fill="#FFD700"/>
+    <circle cx="12" cy="12" r="8" stroke="#FFD700" stroke-width="1" stroke-dasharray="2 2"/>
+</svg>

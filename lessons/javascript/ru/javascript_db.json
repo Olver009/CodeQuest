@@ -1,15 +1,13 @@
 {
   "lessons": {
     "1": {
-      "id": 1,
-      "check_type": "console",
-      "title": "JavaScript: что это и где работает",
-      "theory": "## Что такое JavaScript\n\nJavaScript — **язык программирования**. HTML — разметка, CSS — стили, JS — **логика**. Позволяет делать сайты интерактивными.\n\n## Где работает\n\n- **В браузере** — Chrome, Firefox, Safari содержат движки (V8, SpiderMonkey).\n- **На сервере** — Node.js.\n- **В мобильных/десктопных** — React Native, Electron (VS Code, Slack).\n\n## Как подключить к HTML\n\n```html\n<script>\n  console.log(\"Привет\");\n</script>\n```\n\nИли файлом: `<script src=\"script.js\"></script>`.\n\n`<script>` ставят **в конце** `<body>`, чтобы DOM успел построиться.\n\n## JS не HTML и не CSS\n\n- HTML — **структура**\n- CSS — **внешний вид**\n- JS — **поведение**\n\nЕсли `<button>` — кнопка, `background: red` — красная, то `button.addEventListener(\"click\", ...)` — что при клике.\n\n## Первая программа\n\n```js\nconsole.log(\"Hello, world!\");\n```\n\n`console.log` — аналог `print` (Python) и `System.out.println` (Java).\n\n## Что будет, если\n\n- Забыть `;` — JS простит (ASI), но лучше ставить.\n- `<script>` до `<body>` — `querySelector` вернёт `null`.\n\n## Частая ошибка\n\n`<script>` в `<head>` без `defer` — выполнится до построения DOM.\n\n## Итог\n\n- JS — язык программирования\n- Работает в браузере и в Node.js\n- Подключается через `<script>`\n- `console.log` — вывод",
+      "id": 1, "check_type": "console", "title": "JavaScript: что это и где работает",
+      "theory": "## Что такое JavaScript\n\nJavaScript — **язык программирования**. HTML — разметка, CSS — стили, JS — **логика**. Делает сайты интерактивными.\n\n## Где работает\n\n- **В браузере** — Chrome, Firefox, Safari содержат движки (V8, SpiderMonkey).\n- **На сервере** — Node.js.\n- **В мобильных/десктопных** — React Native, Electron (VS Code, Slack).\n\n## Как подключить к HTML\n\n```html\n<script>\n  console.log(\"Привет\");\n</script>\n```\n\nИли файлом: `<script src=\"script.js\"></script>`.\n\n`<script>` ставят **в конце** `<body>`, чтобы DOM успел построиться.\n\n## JS не HTML и не CSS\n\n- HTML — **структура**\n- CSS — **внешний вид**\n- JS — **поведение**\n\nЕсли `<button>` — кнопка, `background: red` — красная, то `button.addEventListener(\"click\", ...)` — что при клике.\n\n## Первая программа\n\n```js\nconsole.log(\"Hello, world!\");\n```\n\n`console.log` — аналог `print` (Python) и `System.out.println` (Java).\n\n## Что будет, если\n\n- Забыть `;` — JS простит (ASI), но лучше ставить.\n- `<script>` до `<body>` — `querySelector` вернёт `null`.\n\n## Частая ошибка\n\n`<script>` в `<head>` без `defer` — выполнится до построения DOM.\n\n## Итог\n\n- JS — язык программирования\n- Работает в браузере и в Node.js\n- Подключается через `<script>`\n- `console.log` — вывод",
       "questions": [
-        { "text": "Что такое JavaScript?", "options": ["Разметка", "Язык программирования", "Стили", "База данных"], "answer": 1, "explanation": "JS — язык программирования. HTML — разметка, CSS — стили." },
-        { "text": "Где работает JS?", "options": ["Только в браузере", "Только на сервере", "В браузере и в Node.js", "Только в мобильных"], "answer": 2, "explanation": "Браузер + Node.js." },
-        { "text": "Куда ставить `<script>`?", "options": ["В `<head>`", "В конце `<body>` или с `defer`", "Перед `<!DOCTYPE>`", "В `<title>`"], "answer": 1, "explanation": "Чтобы DOM успел построиться." },
-        { "text": "Что делает `console.log`?", "options": ["Печатает в консоль", "Создаёт переменную", "Меняет стиль", "Открывает окно"], "answer": 0, "explanation": "Аналог `print`." }
+        {"text": "Что такое JavaScript?", "options": ["Разметка", "Язык программирования", "Стили", "База данных"], "answer": 1, "explanation": "JS — язык программирования. HTML — разметка, CSS — стили."},
+        {"text": "Где работает JS?", "options": ["Только в браузере", "Только на сервере", "В браузере и в Node.js", "Только в мобильных"], "answer": 2, "explanation": "Браузер + Node.js."},
+        {"text": "Куда ставить `<script>`?", "options": ["В `<head>`", "В конце `<body>` или с `defer`", "Перед `<!DOCTYPE>`", "В `<title>`"], "answer": 1, "explanation": "Чтобы DOM успел построиться."},
+        {"text": "Что делает `console.log`?", "options": ["Печатает в консоль", "Создаёт переменную", "Меняет стиль", "Открывает окно"], "answer": 0, "explanation": "Аналог `print`."}
       ],
       "practice": {
         "description": "Выведи через `console.log` три строки:\n```\nJavaScript\nУрок 1\nГотово\n```",
@@ -19,15 +17,13 @@
       }
     },
     "2": {
-      "id": 2,
-      "check_type": "console",
-      "title": "Консоль, console.log",
-      "theory": "## Зачем консоль\n\nПока не добрались до DOM — весь вывод в **консоль разработчика**. F12 → Console. Там `console.log`, ошибки, предупреждения.\n\n## console.log\n\n```js\nconsole.log(\"Привет\");\nconsole.log(42);\nconsole.log(3 + 4);\n```\n\nВыводит `Привет`, `42`, `7`.\n\nПринимает **любое** количество аргументов:\n\n```js\nconsole.log(\"Возраст:\", 25);  // Возраст: 25\n```\n\nJS сам ставит пробел между аргументами.\n\n## Кавычки\n\n`\"Привет\"`, `'Привет'`, `` `Привет` `` — эквивалентны. Для шаблонных строк — backticks (урок 5).\n\n## Без кавычек — переменная\n\n```js\nconsole.log(Привет); // ReferenceError: Привет is not defined\n```\n\n## console.warn и console.error\n\n```js\nconsole.warn(\"внимание\");\nconsole.error(\"ошибка\");\n```\n\nВыводят с пометкой.\n\n## В браузере vs Node.js\n\n- В браузере — F12 → Console.\n- В Node.js — терминал (`node script.js`).\n\nСинтаксис один.\n\n## Что будет, если\n\n- `console.log()` без аргументов — пустая строка.\n- `console.log(\"a\", \"b\")` — `a b`.\n\n## Частая ошибка\n\n`print(\"x\")` по привычке из Python. В JS — `console.log`.\n\n## Итог\n\n- `console.log(...)` — вывод\n- Любое количество аргументов\n- `console.warn`, `console.error`\n- Без кавычек — попытка обратиться к переменной",
+      "id": 2, "check_type": "console", "title": "Консоль, console.log",
+      "theory": "## Зачем консоль\n\nПока не добрались до DOM — весь вывод в **консоль разработчика**. F12 → Console. Там `console.log`, ошибки, предупреждения.\n\n## console.log\n\n```js\nconsole.log(\"Привет\");\nconsole.log(42);\nconsole.log(3 + 4);\n```\n\nВыводит `Привет`, `42`, `7`.\n\nПринимает **любое** количество аргументов:\n\n```js\nconsole.log(\"Возраст:\", 25);  // Возраст: 25\n```\n\nJS сам ставит пробел между аргументами.\n\n## Кавычки\n\n`\"Привет\"`, `'Привет'`, `` `Привет` `` — эквивалентны. Для шаблонных строк — backticks (урок 6).\n\n## Без кавычек — переменная\n\n```js\nconsole.log(Привет); // ReferenceError: Привет is not defined\n```\n\n## console.warn и console.error\n\n```js\nconsole.warn(\"внимание\");\nconsole.error(\"ошибка\");\n```\n\nВыводят с пометкой.\n\n## В браузере vs Node.js\n\n- В браузере — F12 → Console.\n- В Node.js — терминал (`node script.js`).\n\nСинтаксис один.\n\n## Что будет, если\n\n- `console.log()` без аргументов — пустая строка.\n- `console.log(\"a\", \"b\")` — `a b`.\n\n## Частая ошибка\n\n`print(\"x\")` по привычке из Python. В JS — `console.log`.\n\n## Итог\n\n- `console.log(...)` — вывод\n- Любое количество аргументов\n- `console.warn`, `console.error`\n- Без кавычек — попытка обратиться к переменной",
       "questions": [
-        { "text": "Что выведет `console.log(\"Hello\")`?", "options": ["Hello", "\"Hello\"", "'Hello'", "console"], "answer": 0, "explanation": "Без кавычек." },
-        { "text": "Что при `console.log(Hello)` без кавычек?", "options": ["Hello", "ReferenceError", "null", "Пустая строка"], "answer": 1, "explanation": "Hello — переменная, её нет — ошибка." },
-        { "text": "Что выведет `console.log(\"x\", 5)`?", "options": ["x5", "x 5", "\"x\" 5", "Ошибка"], "answer": 1, "explanation": "JS ставит пробел между аргументами." },
-        { "text": "Какие кавычки валидны?", "options": ["Только \"", "Только '", "Только `", "Все три"], "answer": 3, "explanation": "Все — валидны." }
+        {"text": "Что выведет `console.log(\"Hello\")`?", "options": ["Hello", "\"Hello\"", "'Hello'", "console"], "answer": 0, "explanation": "Без кавычек."},
+        {"text": "Что при `console.log(Hello)` без кавычек?", "options": ["Hello", "ReferenceError", "null", "Пустая строка"], "answer": 1, "explanation": "Hello — переменная, её нет — ошибка."},
+        {"text": "Что выведет `console.log(\"x\", 5)`?", "options": ["x5", "x 5", "\"x\" 5", "Ошибка"], "answer": 1, "explanation": "JS ставит пробел между аргументами."},
+        {"text": "Какие кавычки валидны?", "options": ["Только \"", "Только '", "Только `", "Все три"], "answer": 3, "explanation": "Все — валидны."}
       ],
       "practice": {
         "description": "Выведи через `console.log` пять строк:\n```\nJS\n3\nПривет\n42\nГотово\n```",
@@ -37,16 +33,31 @@
       }
     },
     "3": {
-      "id": 3,
-      "check_type": "console",
-      "title": "let и const",
+      "id": 3, "check_type": "console", "title": "Отладка в браузере",
+      "theory": "## Зачем отладка\n\nКод будет ломаться. **Отладка** — найти почему. Без неё сидишь и смотришь на сломанный вывод.\n\n## F12 → Console\n\nОткрывает инструменты разработчика. Вкладка **Console** показывает ошибки и вывод `console.log`. Что-то сломалось — смотри **сюда первым делом**.\n\n## Чтение ошибок\n\n```\nUncaught ReferenceError: foo is not defined\n    at script.js:5\n```\n\n- `ReferenceError` — тип ошибки\n- `foo is not defined` — что не так\n- `script.js:5` — файл и номер строки\n\n## Частые типы ошибок\n\n- **ReferenceError** — переменная не определена\n- **TypeError** — неправильный тип (вызов числа как функции, `null.foo`)\n- **SyntaxError** — структура кода сломана, ничего не запускается\n- **RangeError** — число за пределом допустимого\n\n## console.table / console.dir\n\n```js\nconsole.table([{a: 1}, {a: 2}]);   // красивая таблица\nconsole.dir(obj);                   // раскрываемый объект\n```\n\n## Точки остановки (breakpoints)\n\nF12 → вкладка **Sources** → клик на номер строки. Код остановится там при следующем запуске. Наведи на переменную — увидишь значение. Шагай через F10 / F11.\n\nМощнее `console.log` — видишь всё на паузе.\n\n## Оператор debugger\n\n```js\ndebugger;   // пауза, если DevTools открыт\n```\n\nДешёвый способ поставить breakpoint.\n\n## Что будет, если\n\n- Игнорировать сообщение об ошибке — 90% ответа там.\n- `console.log` везде вместо breakpoint.\n\n## Частая ошибка\n\nГадать вместо чтения. Браузер точно говорит, что и где. Читай.\n\n## Итог\n\n- F12 → Console — читать ошибки\n- ReferenceError, TypeError, SyntaxError\n- Breakpoints в Sources\n- `debugger;` — пауза inline\n- Сообщение об ошибке говорит, где",
+      "questions": [
+        {"text": "Где в браузере видно ошибки JS?", "options": ["В адресной строке", "F12 → Console", "В настройках", "В панели CSS"], "answer": 1, "explanation": "Console показывает ошибки."},
+        {"text": "Что означает `ReferenceError`?", "options": ["Не тот тип", "Переменная не определена", "Синтаксис сломан", "Выход за предел"], "answer": 1, "explanation": "Переменной нет."},
+        {"text": "Что такое breakpoint?", "options": ["Ошибка", "Точка остановки в отладчике", "Переменная", "Правило CSS"], "answer": 1, "explanation": "Код останавливается."},
+        {"text": "Что делает `debugger;`?", "options": ["Ничего", "Пауза, если DevTools открыт", "Бросает ошибку", "Логирует"], "answer": 1, "explanation": "Inline breakpoint."},
+        {"text": "Какая ошибка означает, что код вообще не запустится?", "options": ["TypeError", "ReferenceError", "SyntaxError", "RangeError"], "answer": 2, "explanation": "SyntaxError — парсинг падает."}
+      ],
+      "practice": {
+        "description": "Дан код с ошибкой:\n```js\nlet x = 5;\nconsole.log(xx);\n```\n\n1. Запусти — увидишь `ReferenceError`.\n2. **Исправь** опечатку.\n\nВыведи `5`.",
+        "starter": "let x = 5;\nconsole.log(xx);\n",
+        "expected": "5",
+        "must_contain": ["console.log", "x"]
+      }
+    },
+    "4": {
+      "id": 4, "check_type": "console", "title": "let и const",
       "theory": "## Два способа\n\n`let` — переменная. `const` — константа. `var` — **устаревшее**, не используй.\n\n```js\nlet age = 25;\nconst PI = 3.14;\n```\n\n## let можно менять\n\n```js\nlet x = 10;\nx = 20;          // ок\nconsole.log(x);  // 20\n```\n\n## const нельзя\n\n```js\nconst y = 10;\ny = 20;          // TypeError\n```\n\n## Правило\n\nПо умолчанию — `const`. Меняешь — `let`.\n\n## Почему не var\n\n`var` — старый способ с багами:\n1. **Функциональная** область видимости (вылезает из `if`)\n2. **Хойстинг** (можно использовать до объявления)\n\n```js\nif (true) { var a = 1; }\nconsole.log(a); // 1 — вылез\n\nif (true) { let b = 1; }\nconsole.log(b); // ReferenceError\n```\n\n## const и объекты\n\n`const` запрещает **переприсваивание**, но не изменение содержимого:\n\n```js\nconst obj = { a: 1 };\nobj.a = 2;         // ок\nobj = { b: 3 };    // TypeError\n```\n\n## Имена\n\ncamelCase: `userName`, `totalPrice`.\n\n## Что будет, если\n\n- `let x = 1; let x = 2;` — SyntaxError.\n- `const x;` — SyntaxError, нужна инициализация.\n\n## Частая ошибка\n\nПривычка `var` из старых уроков.\n\n## Итог\n\n- `let` — меняется\n- `const` — не меняется\n- `var` — устарел\n- По умолчанию — `const`",
       "questions": [
-        { "text": "Какую переменную нельзя переприсвоить?", "options": ["let", "const", "var", "все можно"], "answer": 1, "explanation": "`const` — константа." },
-        { "text": "Что при `const x = 5; x = 10;`?", "options": ["x = 10", "TypeError", "SyntaxError", "Ничего"], "answer": 1, "explanation": "`const` запрещает." },
-        { "text": "Что выбрать по умолчанию?", "options": ["var", "let", "const", "не важно"], "answer": 2, "explanation": "`const`, если не меняется." },
-        { "text": "Можно ли менять поля `const`-объекта?", "options": ["Нет", "Да, но не переприсваивать", "Только с let", "Только с var"], "answer": 1, "explanation": "Переприсваивание запрещено, поля — можно." },
-        { "text": "Почему не `var`?", "options": ["Медленный", "Функциональная область + хойстинг", "Не работает", "Запрещён"], "answer": 1, "explanation": "`var` вылезает из блока." }
+        {"text": "Какую переменную нельзя переприсвоить?", "options": ["let", "const", "var", "все можно"], "answer": 1, "explanation": "`const` — константа."},
+        {"text": "Что при `const x = 5; x = 10;`?", "options": ["x = 10", "TypeError", "SyntaxError", "Ничего"], "answer": 1, "explanation": "`const` запрещает."},
+        {"text": "Что выбрать по умолчанию?", "options": ["var", "let", "const", "не важно"], "answer": 2, "explanation": "`const`, если не меняется."},
+        {"text": "Можно ли менять поля `const`-объекта?", "options": ["Нет", "Да, но не переприсваивать", "Только с let", "Только с var"], "answer": 1, "explanation": "Переприсваивание запрещено, поля — можно."},
+        {"text": "Почему не `var`?", "options": ["Медленный", "Функциональная область + хойстинг", "Не работает", "Запрещён"], "answer": 1, "explanation": "`var` вылезает из блока."}
       ],
       "practice": {
         "description": "Создай:\n- `const name = \"Аня\"`\n- `let age = 25`\n- прибавь 1: `age = age + 1`\n- выведи `Аня` и `26`\n\nВидимый текст: `Аня` и `26` на разных строках.",
@@ -55,17 +66,15 @@
         "must_contain": ["const name", "let age", "age = age + 1", "console.log"]
       }
     },
-    "4": {
-      "id": 4,
-      "check_type": "console",
-      "title": "Типы и typeof",
+    "5": {
+      "id": 5, "check_type": "console", "title": "Типы и typeof",
       "theory": "## Основные типы\n\n| Тип | Пример |\n|---|---|\n| `number` | `42`, `3.14` |\n| `string` | `\"привет\"` |\n| `boolean` | `true`, `false` |\n| `undefined` | «не задано» |\n| `null` | «пусто» |\n| `object` | `{}`, `[]` |\n\n## number\n\nВсе числа — один тип:\n\n```js\nconsole.log(typeof 42);     // number\nconsole.log(typeof 3.14);   // number\n```\n\n## boolean\n\n`true`/`false`, с маленькой:\n\n```js\nconsole.log(typeof true);   // boolean\n```\n\n## undefined vs null\n\n- `undefined` — переменная без значения\n- `null` — явно «пусто»\n\n```js\nlet x;\nconsole.log(x);          // undefined\n\nlet y = null;\nconsole.log(y);          // null\n```\n\n## typeof\n\n```js\ntypeof 42          // \"number\"\ntypeof \"hi\"        // \"string\"\ntypeof true        // \"boolean\"\ntypeof undefined   // \"undefined\"\ntypeof null        // \"object\"  ← баг JS\ntypeof {}          // \"object\"\n```\n\n`typeof null` — `\"object\"`, историческая ошибка.\n\n## Что будет, если\n\n- `typeof someVar` где `someVar` не объявлена — `\"undefined\"` (не ошибка).\n\n## Частая ошибка\n\n`True`/`False` с большой буквы. В JS только `true`/`false`.\n\n## Итог\n\n- `number`, `string`, `boolean`, `undefined`, `null`, `object`\n- `typeof x` — тип\n- `typeof null` = `\"object\"`\n- `undefined` — не задано, `null` — явно пусто",
       "questions": [
-        { "text": "Что вернёт `typeof 3.14`?", "options": ["float", "number", "double", "int"], "answer": 1, "explanation": "Все числа — `number`." },
-        { "text": "Что вернёт `typeof \"5\"`?", "options": ["number", "string", "int", "boolean"], "answer": 1, "explanation": "В кавычках — строка." },
-        { "text": "Что вернёт `typeof null`?", "options": ["null", "object", "undefined", "boolean"], "answer": 1, "explanation": "Баг JS — `object`." },
-        { "text": "Разница `undefined` и `null`?", "options": ["Одно", "undefined — не задано, null — явно пусто", "null — ошибка", "undefined — только для чисел"], "answer": 1, "explanation": "`undefined` — система, `null` — программист." },
-        { "text": "Что при `let x; console.log(x)`?", "options": ["null", "undefined", "0", "Ошибка"], "answer": 1, "explanation": "Без значения — `undefined`." }
+        {"text": "Что вернёт `typeof 3.14`?", "options": ["float", "number", "double", "int"], "answer": 1, "explanation": "Все числа — `number`."},
+        {"text": "Что вернёт `typeof \"5\"`?", "options": ["number", "string", "int", "boolean"], "answer": 1, "explanation": "В кавычках — строка."},
+        {"text": "Что вернёт `typeof null`?", "options": ["null", "object", "undefined", "boolean"], "answer": 1, "explanation": "Баг JS — `object`."},
+        {"text": "Разница `undefined` и `null`?", "options": ["Одно", "undefined — не задано, null — явно пусто", "null — ошибка", "undefined — только для чисел"], "answer": 1, "explanation": "`undefined` — система, `null` — программист."},
+        {"text": "Что при `let x; console.log(x)`?", "options": ["null", "undefined", "0", "Ошибка"], "answer": 1, "explanation": "Без значения — `undefined`."}
       ],
       "practice": {
         "description": "Выведи типы пяти значений через `typeof`:\n```\nnumber\nstring\nboolean\nundefined\nobject\n```\n\nЗначения: `42`, `\"hi\"`, `true`, `undefined`, `null`.",
@@ -74,17 +83,15 @@
         "must_contain": ["typeof", "console.log", "undefined", "null"]
       }
     },
-    "5": {
-      "id": 5,
-      "check_type": "console",
-      "title": "Строки",
+    "6": {
+      "id": 6, "check_type": "console", "title": "Строки",
       "theory": "## Кавычки\n\n```js\n\"double\"\n'single'\n`backtick`\n```\n\nВнутри `\"...\"` можно `'`, внутри `'...'` можно `\"`.\n\n## Шаблонные строки\n\nBackticks + `${...}`:\n\n```js\nconst name = \"Аня\";\nconst age = 25;\nconsole.log(`Привет, ${name}! Тебе ${age} лет.`);\n```\n\nВнутри `${}` — любое выражение: `` `${2 + 3}` `` → `5`.\n\n## length\n\n```js\nconsole.log(\"Привет\".length);   // 6\n```\n\nСвойство, не метод.\n\n## Методы\n\n```js\ns.toUpperCase()     // верхний\ns.toLowerCase()     // нижний\ns.trim()            // пробелы по краям\ns.includes(\"sub\")   // содержит\ns.indexOf(\"sub\")    // индекс или -1\ns.slice(0, 3)       // от 0 до 3 (не включая)\ns.replace(\"a\", \"b\") // заменить\ns.split(\",\")        // в массив\n```\n\nСтроки неизменяемы — методы возвращают новую:\n\n```js\nlet s = \"Java\";\ns.toUpperCase();\nconsole.log(s);   // \"Java\"\n```\n\n## Что будет, если\n\n- `s.length()` — ошибка, `length` — свойство.\n- `s[0] = \"X\"` — молча не сработает.\n\n## Частая ошибка\n\n`\"a\" + 5 + 6` → `\"a56\"`, не `\"a11\"`. Слева направо.\n\n## Итог\n\n- Три вида кавычек, для интерполяции — backticks\n- `` `${expr}` ``\n- `length` — свойство\n- Методы возвращают новую строку",
       "questions": [
-        { "text": "Что выведет `` console.log(`Привет, ${name}`) `` при `name = \"Аня\"`?", "options": ["Привет, name", "Привет, Аня", "Привет, ${name}", "Ошибка"], "answer": 1, "explanation": "Внутри `${}` — переменная." },
-        { "text": "Что выведет `console.log(\"a\" + 5 + 6)`?", "options": ["a11", "a56", "56a", "Ошибка"], "answer": 1, "explanation": "Слева направо." },
-        { "text": "Что вернёт `\"Hello\".length`?", "options": ["5", "6", "4", "Ошибка"], "answer": 0, "explanation": "5 символов." },
-        { "text": "Что вернёт `\"abc\".toUpperCase()`?", "options": ["abc", "ABC", "ошибка", "undefined"], "answer": 1, "explanation": "Верхний регистр." },
-        { "text": "Изменит ли `s.toUpperCase()` переменную?", "options": ["Да", "Нет, строки неизменяемы", "Только если const", "Только если let"], "answer": 1, "explanation": "Метод возвращает новую строку." }
+        {"text": "Что выведет `` console.log(`Привет, ${name}`) `` при `name = \"Аня\"`?", "options": ["Привет, name", "Привет, Аня", "Привет, ${name}", "Ошибка"], "answer": 1, "explanation": "`${}` — переменная."},
+        {"text": "Что выведет `console.log(\"a\" + 5 + 6)`?", "options": ["a11", "a56", "56a", "Ошибка"], "answer": 1, "explanation": "Слева направо."},
+        {"text": "Что вернёт `\"Hello\".length`?", "options": ["5", "6", "4", "Ошибка"], "answer": 0, "explanation": "5 символов."},
+        {"text": "Что вернёт `\"abc\".toUpperCase()`?", "options": ["abc", "ABC", "ошибка", "undefined"], "answer": 1, "explanation": "Верхний регистр."},
+        {"text": "Изменит ли `s.toUpperCase()` переменную?", "options": ["Да", "Нет, строки неизменяемы", "Только если const", "Только если let"], "answer": 1, "explanation": "Метод возвращает новую строку."}
       ],
       "practice": {
         "description": "Дано:\n```\nconst name = \"Аня\";\nconst age = 25;\n```\n\nВыведи через шаблонные строки:\n```\nПривет, Аня!\nТебе 25 лет.\nАня в верхнем: АНЯ\n```",
@@ -93,17 +100,15 @@
         "must_contain": ["`", "${", "toUpperCase", "console.log"]
       }
     },
-    "6": {
-      "id": 6,
-      "check_type": "console",
-      "title": "Числа",
+    "7": {
+      "id": 7, "check_type": "console", "title": "Числа",
       "theory": "## Один тип number\n\n`5` и `5.0` — одно. Нет `int`/`float`.\n\n## Операторы\n\n```js\nconsole.log(7 + 3);   // 10\nconsole.log(7 - 3);   // 4\nconsole.log(7 * 3);   // 21\nconsole.log(7 / 3);   // 2.333...\nconsole.log(7 % 3);   // 1\nconsole.log(2 ** 10); // 1024\n```\n\n## Деление на ноль\n\n```js\nconsole.log(10 / 0);    // Infinity\nconsole.log(0 / 0);     // NaN\n```\n\n## NaN\n\n**Not a Number** — результат плохой операции:\n\n```js\nconsole.log(\"abc\" * 2);  // NaN\n```\n\nПроверка: `Number.isNaN(x)`.\n\n## Math\n\n```js\nMath.round(3.7)    // 4\nMath.floor(3.9)    // 3\nMath.ceil(3.1)     // 4\nMath.abs(-5)       // 5\nMath.max(1, 5, 3)  // 5\nMath.min(1, 5, 3)  // 1\nMath.sqrt(16)      // 4\nMath.random()      // 0 ≤ x < 1\n```\n\n## toFixed\n\n```js\n(3.14159).toFixed(2)   // \"3.14\" — строка!\n```\n\n## Преобразование\n\n```js\nNumber(\"42\")    // 42\nNumber(\"abc\")   // NaN\nparseInt(\"42\")  // 42\nparseFloat(\"3.14\") // 3.14\n```\n\n## Что будет, если\n\n- `0.1 + 0.2` → `0.30000000000000004` — плавающая точка.\n- `\"5\" - 3` → `2`, но `\"5\" + 3` → `\"53\"`.\n\n## Частая ошибка\n\n`toFixed` возвращает строку, не число.\n\n## Итог\n\n- Один `number`\n- `Infinity`, `NaN`\n- `Math.*`\n- `toFixed(n)` — строка\n- `parseInt`, `parseFloat`, `Number`",
       "questions": [
-        { "text": "Что выведет `console.log(10 / 0)`?", "options": ["0", "NaN", "Infinity", "Ошибка"], "answer": 2, "explanation": "`Infinity`." },
-        { "text": "Что выведет `console.log(0 / 0)`?", "options": ["0", "NaN", "Infinity", "Ошибка"], "answer": 1, "explanation": "`NaN`." },
-        { "text": "Что делает `Math.floor(3.9)`?", "options": ["4", "3", "3.9", "Ошибка"], "answer": 1, "explanation": "Вниз — 3." },
-        { "text": "Что вернёт `(3.14).toFixed(1)`?", "options": ["3.1 (число)", "\"3.1\" (строка)", "3", "3.14"], "answer": 1, "explanation": "`toFixed` — строка." },
-        { "text": "Что выведет `console.log(\"5\" - 3)`?", "options": ["\"53\"", "2", "NaN", "Ошибка"], "answer": 1, "explanation": "`-` приводит к числу." }
+        {"text": "Что выведет `console.log(10 / 0)`?", "options": ["0", "NaN", "Infinity", "Ошибка"], "answer": 2, "explanation": "`Infinity`."},
+        {"text": "Что выведет `console.log(0 / 0)`?", "options": ["0", "NaN", "Infinity", "Ошибка"], "answer": 1, "explanation": "`NaN`."},
+        {"text": "Что делает `Math.floor(3.9)`?", "options": ["4", "3", "3.9", "Ошибка"], "answer": 1, "explanation": "Вниз — 3."},
+        {"text": "Что вернёт `(3.14).toFixed(1)`?", "options": ["3.1 (число)", "\"3.1\" (строка)", "3", "3.14"], "answer": 1, "explanation": "`toFixed` — строка."},
+        {"text": "Что выведет `console.log(\"5\" - 3)`?", "options": ["\"53\"", "2", "NaN", "Ошибка"], "answer": 1, "explanation": "`-` приводит к числу."}
       ],
       "practice": {
         "description": "Дано `let x = 3.14159;`. Выведи:\n```\n7\n3.14\n4\n1024\n```\n\n- `Math.round(3.7)`\n- `x.toFixed(2)` (число как строка)\n- `Math.ceil(3.1)`\n- `2 ** 10`",
@@ -112,17 +117,15 @@
         "must_contain": ["Math.round", "toFixed", "Math.ceil", "**", "console.log"]
       }
     },
-    "7": {
-      "id": 7,
-      "check_type": "console",
-      "title": "Приведение типов, == vs ===",
-      "theory": "## == vs ===\n\nДва оператора сравнения:\n\n- `==` — **нестрогое**, с приведением типов\n- `===` — **строгое**, без приведения\n\n**Всегда используй `===`.**\n\n## Пример\n\n```js\nconsole.log(5 == \"5\");    // true  — \"5\" превратилось в 5\nconsole.log(5 === \"5\");   // false — разные типы\nconsole.log(null == undefined);  // true\nconsole.log(null === undefined); // false\n```\n\n`==` — источник странных багов.\n\n## `!=` и `!==`\n\nАналогично: `!==` — строгое «не равно».\n\n## Явное приведение\n\n```js\nNumber(\"42\")    // 42\nNumber(\"abc\")   // NaN\nString(42)      // \"42\"\nBoolean(0)      // false\nBoolean(1)      // true\nBoolean(\"\")     // false\nBoolean(\"hi\")   // true\n```\n\n## Правда и ложь (truthy/falsy)\n\nВ условиях **приводится к boolean**:\n\n**Falsy** (ложь): `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`.\n\n**Truthy** — всё остальное, включая `\"0\"`, `[]`, `{}`.\n\n```js\nif (\"\") console.log(\"не сработает\");\nif (\"0\") console.log(\"сработает — непустая строка\");\nif ([]) console.log(\"сработает — пустой массив truthy\");\n```\n\n## `+` и приведение\n\n`+` — **строковый**, если хоть один операнд строка:\n\n```js\nconsole.log(\"5\" + 3);   // \"53\"\nconsole.log(5 + 3);     // 8\n```\n\n`- * /` — числовые, приводят:\n\n```js\nconsole.log(\"5\" - 3);   // 2\nconsole.log(\"5\" * \"2\"); // 10\n```\n\n## Что будет, если\n\n- `if (x == null)` — true для `null` и `undefined`.\n- `if (x === null)` — только `null`.\n\n## Частая ошибка\n\n`if (x == 0)` — `\"\"`, `false`, `0` — все true. Строгое `=== 0` только `0`.\n\n## Итог\n\n- `===` и `!==` — строгие, всегда их\n- `==` приводит типы, источник багов\n- `Number/String/Boolean` — явное\n- Falsy: `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`\n- `+` строковый, `- * /` числовые",
+    "8": {
+      "id": 8, "check_type": "console", "title": "Приведение типов, == vs ===",
+      "theory": "## == vs ===\n\nДва оператора сравнения:\n\n- `==` — **нестрогое**, с приведением типов\n- `===` — **строгое**, без приведения\n\n**Всегда используй `===`.**\n\n## Пример\n\n```js\nconsole.log(5 == \"5\");    // true  — \"5\" превратилось в 5\nconsole.log(5 === \"5\");   // false — разные типы\nconsole.log(null == undefined);  // true\nconsole.log(null === undefined); // false\n```\n\n`==` — источник странных багов.\n\n## `!=` и `!==`\n\nАналогично: `!==` — строгое «не равно».\n\n## Явное приведение\n\n```js\nNumber(\"42\")    // 42\nNumber(\"abc\")   // NaN\nString(42)      // \"42\"\nBoolean(0)      // false\nBoolean(1)      // true\nBoolean(\"\")     // false\nBoolean(\"hi\")   // true\n```\n\n## Правда и ложь (truthy/falsy)\n\nВ условиях **приводится к boolean**:\n\n**Falsy**: `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`.\n\n**Truthy** — всё остальное, включая `\"0\"`, `[]`, `{}`.\n\n```js\nif (\"\") console.log(\"не сработает\");\nif (\"0\") console.log(\"сработает — непустая строка\");\nif ([]) console.log(\"сработает — пустой массив truthy\");\n```\n\n## `+` и приведение\n\n`+` — **строковый**, если хоть один операнд строка:\n\n```js\nconsole.log(\"5\" + 3);   // \"53\"\nconsole.log(5 + 3);     // 8\n```\n\n`- * /` — числовые, приводят:\n\n```js\nconsole.log(\"5\" - 3);   // 2\nconsole.log(\"5\" * \"2\"); // 10\n```\n\n## Что будет, если\n\n- `if (x == null)` — true для `null` и `undefined`.\n- `if (x === null)` — только `null`.\n\n## Частая ошибка\n\n`if (x == 0)` — `\"\"`, `false`, `0` — все true. Строгое `=== 0` только `0`.\n\n## Итог\n\n- `===` и `!==` — строгие, всегда их\n- `==` приводит типы, источник багов\n- `Number/String/Boolean` — явное\n- Falsy: `false`, `0`, `\"\"`, `null`, `undefined`, `NaN`\n- `+` строковый, `- * /` числовые",
       "questions": [
-        { "text": "Что выведет `console.log(5 == \"5\")`?", "options": ["true", "false", "Ошибка", "5"], "answer": 0, "explanation": "`==` приводит к числу." },
-        { "text": "Что выведет `console.log(5 === \"5\")`?", "options": ["true", "false", "Ошибка", "5"], "answer": 1, "explanation": "`===` без приведения — разные типы." },
-        { "text": "Что из этого falsy?", "options": ["\"0\"", "[]", "0", "{}"], "answer": 2, "explanation": "`0` — falsy. `\"0\"`, `[]`, `{}` — truthy." },
-        { "text": "Что выведет `console.log(\"5\" + 3)`?", "options": ["8", "\"53\"", "NaN", "Ошибка"], "answer": 1, "explanation": "`+` со строкой — конкатенация." },
-        { "text": "Какое сравнение использовать?", "options": ["==", "===", "=", "!="], "answer": 1, "explanation": "`===` — строгое, всегда." }
+        {"text": "Что выведет `console.log(5 == \"5\")`?", "options": ["true", "false", "Ошибка", "5"], "answer": 0, "explanation": "`==` приводит к числу."},
+        {"text": "Что выведет `console.log(5 === \"5\")`?", "options": ["true", "false", "Ошибка", "5"], "answer": 1, "explanation": "`===` без приведения."},
+        {"text": "Что из этого falsy?", "options": ["\"0\"", "[]", "0", "{}"], "answer": 2, "explanation": "`0` — falsy. `\"0\"`, `[]`, `{}` — truthy."},
+        {"text": "Что выведет `console.log(\"5\" + 3)`?", "options": ["8", "\"53\"", "NaN", "Ошибка"], "answer": 1, "explanation": "`+` со строкой — конкатенация."},
+        {"text": "Какое сравнение использовать?", "options": ["==", "===", "=", "!="], "answer": 1, "explanation": "`===` — строгое, всегда."}
       ],
       "practice": {
         "description": "Дано:\n```\nlet a = \"5\";\nlet b = 5;\n```\n\nВыведи:\n```\na == b: true\na === b: false\nNumber(a) + b: 10\n```",
@@ -131,53 +134,47 @@
         "must_contain": ["a == b", "a === b", "Number(a)", "console.log"]
       }
     },
-    "8": {
-      "id": 8,
-      "check_type": "console",
-      "title": "if / else, тернарный",
+    "9": {
+      "id": 9, "check_type": "console", "title": "if / else, тернарный",
       "theory": "## Синтаксис\n\n```js\nif (x > 0) {\n  console.log(\"+\");\n} else if (x < 0) {\n  console.log(\"-\");\n} else {\n  console.log(\"0\");\n}\n```\n\nУсловие в `()`, тело в `{}`. Как в Java.\n\n## Операторы\n\n`==` (не используй), `===`, `!==`, `<`, `>`, `<=`, `>=`.\n\n## Логические\n\n`&&` — и, `||` — или, `!` — не.\n\n```js\nif (age >= 18 && hasPassport) { }\nif (name === \"Аня\" || name === \"Ваня\") { }\n```\n\n## Тернарный\n\n```js\nlet s = x > 0 ? \"плюс\" : \"минус\";\n```\n\n`условие ? если_да : если_нет`.\n\n## Truthy/falsy в условии\n\n```js\nif (name) { }\n```\n\n`name = \"\"` — false, `name = \"Аня\"` — true. Не всегда очевидно — иногда лучше `if (name !== \"\")`.\n\n## Что будет, если\n\n- `if (x = 5)` — `=` присваивание, не ошибка. `x` станет `5`, условие — truthy. Используй `===`.\n- `if (x > 0);` — `;` отсекает тело.\n\n## Частая ошибка\n\n`if (name == \"Аня\")` — `==`. Используй `===`.\n\n## Итог\n\n- `if (условие) { }` — скобки и фигурные\n- `&&`, `||`, `!`\n- `a ? b : c` — тернарный\n- `===` вместо `==`\n- Truthy/falsy в условии",
       "questions": [
-        { "text": "Что выведет `console.log(5 > 3)`?", "options": ["5", "true", "false", "Ошибка"], "answer": 1, "explanation": "5 > 3 — true." },
-        { "text": "Как записать `если a и b`?", "options": ["if (a and b)", "if (a && b)", "if (a & b)", "if a && b"], "answer": 1, "explanation": "`&&` — и." },
-        { "text": "Что выведет `let x = -3; let s = x > 0 ? \"плюс\" : \"минус\"; console.log(s)`?", "options": ["плюс", "минус", "-3", "Ошибка"], "answer": 1, "explanation": "Условие ложно — вторая ветка." },
-        { "text": "Что не так с `if (x = 5)`?", "options": ["Ошибка", "`=` вместо `===`, присваивание", "Нужны фигурные", "Работает"], "answer": 1, "explanation": "`=` присваивает, не сравнивает." },
-        { "text": "Какое значение falsy в условии?", "options": ["\"0\"", "[]", "\"\"", "{}"], "answer": 2, "explanation": "Пустая строка — false." }
+        {"text": "Что выведет `console.log(5 > 3)`?", "options": ["5", "true", "false", "Ошибка"], "answer": 1, "explanation": "5 > 3 — true."},
+        {"text": "Как записать `если a и b`?", "options": ["if (a and b)", "if (a && b)", "if (a & b)", "if a && b"], "answer": 1, "explanation": "`&&` — и."},
+        {"text": "Что выведет `let x = -3; let s = x > 0 ? \"плюс\" : \"минус\"; console.log(s)`?", "options": ["плюс", "минус", "-3", "Ошибка"], "answer": 1, "explanation": "Условие ложно — вторая ветка."},
+        {"text": "Что не так с `if (x = 5)`?", "options": ["Ошибка", "`=` вместо `===`, присваивание", "Нужны фигурные", "Работает"], "answer": 1, "explanation": "`=` присваивает, не сравнивает."},
+        {"text": "Какое значение falsy в условии?", "options": ["\"0\"", "[]", "\"\"", "{}"], "answer": 2, "explanation": "Пустая строка — false."}
       ],
       "practice": {
-        "description": "Дано `let score = 78;`. Выведи оценку:\n- `>= 90` → `Отлично`\n- `>= 75` → `Хорошо`\n- `>= 60` → `Удовлетворительно`\n- иначе → `Неудовлетворительно`\n\nДля `78` ожидается:\n```\nХорошо\n```",
+        "description": "Дано `let score = 78;`. Выведи оценку:\n- `>= 90` → `Отлично`\n- `>= 75` → `Хорошо`\n- `>= 60` → `Удовлетворительно`\n- иначе → `Плохо`\n\nДля `78`:\n```\nХорошо\n```",
         "starter": "let score = 78;\n// TODO\n",
         "expected": "Хорошо",
         "must_contain": ["if", "else if", "else", "score >= 90", "score >= 75", "score >= 60", "console.log"]
       }
     },
-    "9": {
-      "id": 9,
-      "check_type": "console",
-      "title": "switch",
-      "theory": "## Синтаксис\n\n```js\nswitch (day) {\n  case 1:\n    console.log(\"Пн\");\n    break;\n  case 2:\n    console.log(\"Вт\");\n    break;\n  default:\n    console.log(\"Другой\");\n}\n```\n\n- `switch (выражение)` — любое значение\n- `break` обязателен, иначе **fall-through**\n- `default` — если ни один `case` не подошёл\n\n## Fall-through\n\n```js\nswitch (x) {\n  case 1:\n  case 2:\n    console.log(\"1 или 2\");\n    break;\n}\n```\n\nПустые `case` объединяются.\n\n## switch vs if\n\n`switch` — точное совпадение. `if` — диапазоны.\n\n## Что будет, если\n\n- Забыть `break` — провал в следующие `case`.\n- Нет `default` и совпадения — ничего не выполнится.\n\n## Частая ошибка\n\nЗабыть `break` — программа выполнит лишние `case`.\n\n## Итог\n\n- `switch (значение) { case X: ... break; }`\n- `break` — иначе провал\n- `default` — иначе ничего\n- Группировка: пустые `case`",
+    "10": {
+      "id": 10, "check_type": "console", "title": "switch",
+      "theory": "## Синтаксис\n\n```js\nswitch (day) {\n  case 1:\n    console.log(\"Пн\");\n    break;\n  case 2:\n    console.log(\"Вт\");\n    break;\n  default:\n    console.log(\"Другой\");\n}\n```\n\n- `switch (значение)` — любое значение\n- `break` обязателен, иначе **fall-through**\n- `default` — если ни один case не подошёл\n\n## Fall-through\n\n```js\nswitch (x) {\n  case 1:\n  case 2:\n    console.log(\"1 или 2\");\n    break;\n}\n```\n\nПустые case объединяются.\n\n## switch vs if\n\n`switch` — точное совпадение. `if` — диапазоны.\n\n## Что будет, если\n\n- Забыть `break` — провал в следующий `case`.\n- Нет `default` и нет совпадения — ничего не выполнится.\n\n## Частая ошибка\n\nЗабыть `break` — лишние case выполнятся.\n\n## Итог\n\n- `switch (значение) { case X: ... break; }`\n- `break` — иначе провал\n- `default` — иначе ничего\n- Группировка: пустые case",
       "questions": [
-        { "text": "Что выведет?\n```\nlet x = 2;\nswitch (x) {\n  case 1: console.log(\"one\");\n  case 2: console.log(\"two\");\n  case 3: console.log(\"three\");\n}\n```", "options": ["two", "two\\nthree", "one\\ntwo\\nthree", "Ошибка"], "answer": 1, "explanation": "Нет `break` — провал." },
-        { "text": "Зачем `default`?", "options": ["Обязательный", "Если ничего не подошло", "Завершает", "Ошибка"], "answer": 1, "explanation": "Аналог `else`." },
-        { "text": "Что делает `break`?", "options": ["Завершает программу", "Выходит из switch", "Пропускает", "default"], "answer": 1, "explanation": "Останавливает провал." },
-        { "text": "Для чего `switch`?", "options": ["Диапазоны", "Точное совпадение", "Циклы", "Ошибки"], "answer": 1, "explanation": "Диапазоны — `if`." }
+        {"text": "Что выведет?\n```\nlet x = 2;\nswitch (x) {\n  case 1: console.log(\"one\");\n  case 2: console.log(\"two\");\n  case 3: console.log(\"three\");\n}\n```", "options": ["two", "two\\nthree", "one\\ntwo\\nthree", "Ошибка"], "answer": 1, "explanation": "Нет `break` — провал."},
+        {"text": "Зачем `default`?", "options": ["Обязательный", "Если ничего не подошло", "Завершает", "Ошибка"], "answer": 1, "explanation": "Аналог `else`."},
+        {"text": "Что делает `break`?", "options": ["Завершает программу", "Выходит из switch", "Пропускает", "default"], "answer": 1, "explanation": "Останавливает провал."},
+        {"text": "Для чего `switch`?", "options": ["Диапазоны", "Точное совпадение", "Циклы", "Ошибки"], "answer": 1, "explanation": "Диапазоны — `if`."}
       ],
       "practice": {
-        "description": "Дано `let grade = \"B\";`. Через `switch`:\n- `\"A\"` → `Отлично`\n- `\"B\"` → `Хорошо`\n- `\"C\"` → `Удовлетворительно`\n- иначе → `Неизвестно`\n\nДля `B` ожидается:\n```\nХорошо\n```",
+        "description": "Дано `let grade = \"B\";`. Через `switch`:\n- `\"A\"` → `Отлично`\n- `\"B\"` → `Хорошо`\n- `\"C\"` → `Удовлетворительно`\n- иначе → `Неизвестно`\n\nДля `B`:\n```\nХорошо\n```",
         "starter": "let grade = \"B\";\n// TODO\n",
         "expected": "Хорошо",
         "must_contain": ["switch", "case \"A\"", "case \"B\"", "case \"C\"", "default", "break", "console.log"]
       }
     },
-    "10": {
-      "id": 10,
-      "check_type": "console",
-      "title": "for, while, do-while",
-      "theory": "## for\n\n```js\nfor (let i = 1; i <= 5; i++) {\n  console.log(i);\n}\n```\n\nТри части через `;`: инициализация, условие, шаг.\n\n## while\n\n```js\nlet i = 1;\nwhile (i <= 5) {\n  console.log(i);\n  i++;\n}\n```\n\nПроверка **до** тела.\n\n## do-while\n\n```js\nlet i = 1;\ndo {\n  console.log(i);\n  i++;\n} while (i <= 5);\n```\n\nПроверка **после** — хотя бы раз.\n\n## Вложенные\n\n```js\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 2; j++) {\n    console.log(i, j);\n  }\n}\n```\n\n## Что будет, если\n\n- Забыть `i++` — бесконечный цикл.\n- `let i` в `for` — область видимости **внутри цикла**.\n\n## Частая ошибка\n\n`for (var i = ...)` — `i` вылезет наружу. Только `let`.\n\n## Итог\n\n- `for (init; cond; step)`\n- `while (cond)`\n- `do { } while (cond);`\n- Без шага — бесконечный\n- `let i` в `for` — блочная область",
+    "11": {
+      "id": 11, "check_type": "console", "title": "for, while, do-while",
+      "theory": "## for\n\n```js\nfor (let i = 1; i <= 5; i++) {\n  console.log(i);\n}\n```\n\nТри части через `;`: init, условие, шаг.\n\n## while\n\n```js\nlet i = 1;\nwhile (i <= 5) {\n  console.log(i);\n  i++;\n}\n```\n\nПроверка **до** тела.\n\n## do-while\n\n```js\nlet i = 1;\ndo {\n  console.log(i);\n  i++;\n} while (i <= 5);\n```\n\nПроверка **после** — хотя бы раз.\n\n## Вложенные\n\n```js\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 2; j++) {\n    console.log(i, j);\n  }\n}\n```\n\n## Что будет, если\n\n- Забыть `i++` — бесконечный цикл.\n- `let i` в `for` — область **внутри цикла**.\n\n## Частая ошибка\n\n`for (var i = ...)` — `i` вылезет наружу. Только `let`.\n\n## Итог\n\n- `for (init; cond; step)`\n- `while (cond)`\n- `do { } while (cond);`\n- Без шага — бесконечный\n- `let i` в `for` — блочная область",
       "questions": [
-        { "text": "Сколько раз?\n```\nfor (let i = 0; i < 3; i++) { }\n```", "options": ["2", "3", "4", "Бесконечно"], "answer": 1, "explanation": "i = 0, 1, 2." },
-        { "text": "Чем `do-while` отличается от `while`?", "options": ["Ничем", "`do-while` проверяет после", "`do-while` без условия", "`while` быстрее"], "answer": 1, "explanation": "Хотя бы раз." },
-        { "text": "Что при забытом `i++`?", "options": ["Не запустится", "Синтаксис", "Бесконечный цикл", "Один раз"], "answer": 2, "explanation": "Условие всегда true." },
-        { "text": "Что предпочтительнее в `for`: `let` или `var`?", "options": ["var", "let", "оба", "не важно"], "answer": 1, "explanation": "`let` — блочная область." }
+        {"text": "Сколько раз?\n```\nfor (let i = 0; i < 3; i++) { }\n```", "options": ["2", "3", "4", "Бесконечно"], "answer": 1, "explanation": "i = 0, 1, 2."},
+        {"text": "Чем `do-while` отличается от `while`?", "options": ["Ничем", "`do-while` проверяет после", "`do-while` без условия", "`while` быстрее"], "answer": 1, "explanation": "Хотя бы раз."},
+        {"text": "Что при забытом `i++`?", "options": ["Не запустится", "Синтаксис", "Бесконечный цикл", "Один раз"], "answer": 2, "explanation": "Условие всегда true."},
+        {"text": "Что предпочтительнее в `for`: `let` или `var`?", "options": ["var", "let", "оба", "не важно"], "answer": 1, "explanation": "`let` — блочная область."}
       ],
       "practice": {
         "description": "Выведи через `for` числа `1..5`:\n```\n1\n2\n3\n4\n5\n```",
@@ -186,16 +183,14 @@
         "must_contain": ["for", "console.log"]
       }
     },
-    "11": {
-      "id": 11,
-      "check_type": "console",
-      "title": "break, continue",
+    "12": {
+      "id": 12, "check_type": "console", "title": "break, continue",
       "theory": "## break — выйти\n\n```js\nfor (let i = 0; i < 10; i++) {\n  if (i === 3) break;\n  console.log(i);\n}\n```\n\nВывод: `0 1 2`.\n\n## continue — пропустить итерацию\n\n```js\nfor (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}\n```\n\nВывод: `0 1 3 4`.\n\n## Разница\n\n| `break` | `continue` |\n|---|---|\n| Выходит **насовсем** | Пропускает **одну** итерацию |\n\n## break во вложенных\n\n```js\nfor (let i = 0; i < 3; i++) {\n  for (let j = 0; j < 3; j++) {\n    if (j === 1) break;\n    console.log(i, j);\n  }\n}\n```\n\nВыходит только из **внутреннего**.\n\n## while True + break\n\n```js\nwhile (true) {\n  let cmd = \"выход\";\n  if (cmd === \"выход\") break;\n}\n```\n\nКлассический паттерн.\n\n## Что будет, если\n\n- `break` вне цикла — SyntaxError.\n- `continue` в `switch` — работает, но запутанно.\n\n## Частая ошибка\n\nДумать, что `break` выходит из всех циклов. Только из текущего.\n\n## Итог\n\n- `break` — выйти\n- `continue` — пропустить итерацию\n- `break` во вложенных — только из внутреннего\n- `while (true) + break` — стандарт",
       "questions": [
-        { "text": "Что выведет?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 3) break;\n  console.log(i);\n}\n```", "options": ["0 1 2", "0 1 2 3", "0 1 2 4", "3 4"], "answer": 0, "explanation": "На i=3 break до вывода." },
-        { "text": "Что выведет?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}\n```", "options": ["0 1", "0 1 2", "0 1 3 4", "0 1 2 3 4"], "answer": 2, "explanation": "Пропуск i=2." },
-        { "text": "Разница break и continue?", "options": ["Одно", "break — выйти, continue — пропустить", "break быстрее", "continue только в while"], "answer": 1, "explanation": "break — весь цикл, continue — одна итерация." },
-        { "text": "break во вложенных — из какого?", "options": ["Из обоих", "Только из внутреннего", "Только из внешнего", "Ошибка"], "answer": 1, "explanation": "Только текущий." }
+        {"text": "Что выведет?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 3) break;\n  console.log(i);\n}\n```", "options": ["0 1 2", "0 1 2 3", "0 1 2 4", "3 4"], "answer": 0, "explanation": "На i=3 break до вывода."},
+        {"text": "Что выведет?\n```\nfor (let i = 0; i < 5; i++) {\n  if (i === 2) continue;\n  console.log(i);\n}\n```", "options": ["0 1", "0 1 2", "0 1 3 4", "0 1 2 3 4"], "answer": 2, "explanation": "Пропуск i=2."},
+        {"text": "Разница break и continue?", "options": ["Одно", "break — выйти, continue — пропустить", "break быстрее", "continue только в while"], "answer": 1, "explanation": "break — весь цикл, continue — одна итерация."},
+        {"text": "break во вложенных — из какого?", "options": ["Из обоих", "Только из внутреннего", "Только из внешнего", "Ошибка"], "answer": 1, "explanation": "Только текущий."}
       ],
       "practice": {
         "description": "Выведи через `for` числа `1..10`, пропуская чётные (`continue`):\n```\n1\n3\n5\n7\n9\n```",
@@ -204,296 +199,195 @@
         "must_contain": ["for", "continue", "% 2", "console.log"]
       }
     },
-    "12": {
-      "id": 12,
-      "check_type": "console",
-      "title": "Function declaration",
-      "theory": "## Зачем функции\n\nРазбить программу на куски: переиспользование, читаемость. Одна функция — одна задача.\n\n## Объявление\n\n```js\nfunction sum(a, b) {\n  return a + b;\n}\n\nconsole.log(sum(2, 3)); // 5\n```\n\n- `function` — ключевое слово\n- `sum` — имя\n- `(a, b)` — параметры\n- `return` — вернуть\n\n## Вызов\n\n`sum(2, 3)` — аргументы. Порядок важен.\n\n## Без return — undefined\n\n```js\nfunction f() {\n  let x = 10;\n}\nconsole.log(f());  // undefined\n```\n\nФункция без `return` возвращает `undefined`.\n\n## return завершает\n\n```js\nfunction check(x) {\n  if (x > 0) return \"плюс\";\n  return \"не плюс\";\n  console.log(\"никогда\");\n}\n```\n\n## Параметры — копии\n\n```js\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);  // 5\n```\n\nПримитивы — по значению. Объекты/массивы — по ссылке.\n\n## Что будет, если\n\n- Вызвать до объявления — работает, `function` хойстится.\n- Забыть `return` — `undefined`.\n\n## Частая ошибка\n\n`function f() { return 5; }` — норма. `function f() { return 5 };` — `;` после `}` не нужна.\n\n## Итог\n\n- `function имя(параметры) { return ...; }`\n- Без `return` — `undefined`\n- `return` завершает\n- Примитивы — копии",
-      "questions": [
-        { "text": "Что вернёт?\n```\nfunction f(x) { return x * 2; }\nf(5);\n```", "options": ["5", "10", "Ошибка", "0"], "answer": 1, "explanation": "5 * 2 = 10." },
-        { "text": "Что вернёт функция без `return`?", "options": ["0", "null", "undefined", "Ошибка"], "answer": 2, "explanation": "Без `return` — `undefined`." },
-        { "text": "Что выведет?\n```\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);\n```", "options": ["100", "5", "0", "Ошибка"], "answer": 1, "explanation": "Примитивы — копии." },
-        { "text": "Где можно вызвать функцию declaration?", "options": ["Только после", "Только до", "До или после — хойстится", "Никогда"], "answer": 2, "explanation": "`function` хойстится." }
-      ],
-      "practice": {
-        "description": "Создай две функции:\n- `square(x)` — возвращает `x * x`\n- `isEven(x)` — `true` если чётное\n\nВыведи:\n```\n49\nfalse\ntrue\n```\n\nЧерез `square(7)`, `isEven(7)`, `isEven(8)`.", "starter": "// TODO\n", "expected": "49\nfalse\ntrue", "must_contain": ["function square", "function isEven", "return", "% 2 === 0", "console.log"] }
-    },
     "13": {
-      "id": 13,
-      "check_type": "console",
-      "title": "Arrow functions",
-      "theory": "## Function expression\n\nФункция как значение:\n\n```js\nconst sum = function(a, b) {\n  return a + b;\n};\n```\n\n`sum` — переменная с функцией.\n\n## Стрелочные\n\nКороче:\n\n```js\nconst sum = (a, b) => a + b;\nconsole.log(sum(2, 3)); // 5\n```\n\n- `=>` вместо `function`\n- Одно выражение — `return` неявный\n- Один параметр — можно без `()`: `x => x * 2`\n\n## С блоком\n\n```js\nconst sum = (a, b) => {\n  const result = a + b;\n  return result;\n};\n```\n\nЕсть `{}` — `return` нужен явно.\n\n## Без параметров\n\n```js\nconst hi = () => console.log(\"hi\");\n```\n\n## Отличие от function\n\n- Нет своего `this` (важно в DOM, урок 24)\n- Нельзя использовать как конструктор\n- Хойстинга нет — объявить **до** вызова\n\n## Что будет, если\n\n- `const f = x => x * 2; f(3);` — 6.\n- `const f = () => 5;` — возвращает 5.\n- `const f = () => { 5 };` — `undefined` (нет `return`).\n\n## Частая ошибка\n\n`() => { 5 }` — фигурные с выражением без `return` — вернёт `undefined`.\n\n## Итог\n\n- `(a, b) => a + b` — краткая\n- `() => { ...; return ...; }` — блок\n- Один параметр — без `()`\n- Нет хойстинга",
+      "id": 13, "check_type": "console", "title": "Объявление функции",
+      "theory": "## Зачем функции\n\nРазбить программу на куски: переиспользование, читаемость. Одна функция — одна задача.\n\n## Объявление\n\n```js\nfunction sum(a, b) {\n  return a + b;\n}\n\nconsole.log(sum(2, 3)); // 5\n```\n\n- `function` — ключевое слово\n- `sum` — имя\n- `(a, b)` — параметры\n- `return` — вернуть значение\n\n## Вызов\n\n`sum(2, 3)` — аргументы. Порядок важен.\n\n## Без return — undefined\n\n```js\nfunction f() {\n  let x = 10;\n}\nconsole.log(f());  // undefined\n```\n\n## return завершает функцию\n\n```js\nfunction check(x) {\n  if (x > 0) return \"плюс\";\n  return \"не плюс\";\n  console.log(\"никогда\");\n}\n```\n\n## Параметры — копии\n\n```js\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);  // 5\n```\n\nПримитивы — по значению. Объекты/массивы — по ссылке.\n\n## Что будет, если\n\n- Вызвать до объявления — работает, `function` хойстится.\n- Забыть `return` — `undefined`.\n\n## Частая ошибка\n\n`function f() { return 5; }` — норм. `function f() { return 5 };` — `;` после `}` не нужна.\n\n## Итог\n\n- `function имя(параметры) { return ...; }`\n- Без `return` — `undefined`\n- `return` завершает\n- Примитивы — копии",
       "questions": [
-        { "text": "Что вернёт `const f = x => x * 2; f(5)`?", "options": ["5", "10", "Ошибка", "undefined"], "answer": 1, "explanation": "5 * 2 = 10." },
-        { "text": "Что вернёт `const f = () => { 5 }; f()`?", "options": ["5", "undefined", "Ошибка", "null"], "answer": 1, "explanation": "С `{}` — нужен `return`, без него `undefined`." },
-        { "text": "Что вернёт `const f = () => 5; f()`?", "options": ["5", "undefined", "Ошибка", "null"], "answer": 0, "explanation": "Без `{}` — неявный return." },
-        { "text": "Можно ли вызвать стрелочную до объявления?", "options": ["Да", "Нет, нет хойстинга", "Только в strict", "Только в main"], "answer": 1, "explanation": "Хойстинг только у `function`." }
+        {"text": "Что вернёт?\n```\nfunction f(x) { return x * 2; }\nf(5);\n```", "options": ["5", "10", "Ошибка", "0"], "answer": 1, "explanation": "5 * 2 = 10."},
+        {"text": "Что вернёт функция без `return`?", "options": ["0", "null", "undefined", "Ошибка"], "answer": 2, "explanation": "Без `return` — `undefined`."},
+        {"text": "Что выведет?\n```\nfunction f(x) { x = 100; }\nlet a = 5;\nf(a);\nconsole.log(a);\n```", "options": ["100", "5", "0", "Ошибка"], "answer": 1, "explanation": "Примитивы — копии."},
+        {"text": "Где можно вызвать function declaration?", "options": ["Только после", "Только до", "До или после — хойстится", "Никогда"], "answer": 2, "explanation": "`function` хойстится."}
       ],
       "practice": {
-        "description": "Создай три стрелочные функции:\n- `square` — `x => x * x`\n- `double` — `x => x * 2`\n- `isPositive` — `x => x > 0`\n\nВыведи:\n```\n9\n6\ntrue\n```", "starter": "// TODO\n", "expected": "9\n6\ntrue", "must_contain": ["=>", "square", "double", "isPositive", "console.log"] }
+        "description": "Создай две функции:\n- `square(x)` — возвращает `x * x`\n- `isEven(x)` — `true` если чётное\n\nВыведи:\n```\n49\nfalse\ntrue\n```\n\nЧерез `square(7)`, `isEven(7)`, `isEven(8)`.",
+        "starter": "// TODO\n",
+        "expected": "49\nfalse\ntrue",
+        "must_contain": ["function square", "function isEven", "return", "% 2 === 0", "console.log"]
+      }
     },
     "14": {
-      "id": 14,
-      "check_type": "console",
-      "title": "Параметры и rest",
-      "theory": "## Значения по умолчанию\n\n```js\nfunction greet(name = \"гость\") {\n  return `Привет, ${name}!`;\n}\nconsole.log(greet(\"Аня\"));  // Привет, Аня!\nconsole.log(greet());        // Привет, гость!\n```\n\n## Rest (...)\n\nСобрать все аргументы в массив:\n\n```js\nfunction sumAll(...nums) {\n  let total = 0;\n  for (const n of nums) total += n;\n  return total;\n}\nconsole.log(sumAll(1, 2, 3, 4));  // 10\n```\n\n`...nums` — массив всех переданных.\n\n## Обычные + rest\n\n```js\nfunction log(prefix, ...items) {\n  console.log(prefix, ...items);\n}\nlog(\"A\", 1, 2, 3);  // A 1 2 3\n```\n\n`...items` — после обычных.\n\n## Spread\n\n`...` работает и в обратную сторону:\n\n```js\nconst arr = [1, 2, 3];\nconsole.log(Math.max(...arr));  // 3\nconsole.log([0, ...arr, 4]);    // [0, 1, 2, 3, 4]\n```\n\n## Что будет, если\n\n- `function f(a, ...rest, b)` — SyntaxError, rest должен быть последним.\n- `greet(null)` — `null`, не дефолт.\n\n## Частая ошибка\n\n`greet()` без аргумента при `function greet(name)` — `undefined`, не пустая строка.\n\n## Итог\n\n- `param = default` — дефолт\n- `...rest` — все лишние в массив\n- Rest — последним\n- Spread — раскрыть массив",
+      "id": 14, "check_type": "console", "title": "Стрелочные функции",
+      "theory": "## Function expression\n\nФункция как значение:\n\n```js\nconst sum = function(a, b) {\n  return a + b;\n};\n```\n\n`sum` — переменная с функцией.\n\n## Стрелочные\n\nКороче:\n\n```js\nconst sum = (a, b) => a + b;\nconsole.log(sum(2, 3)); // 5\n```\n\n- `=>` вместо `function`\n- Одно выражение — `return` неявный\n- Один параметр — можно без `()`: `x => x * 2`\n\n## С блоком\n\n```js\nconst sum = (a, b) => {\n  const result = a + b;\n  return result;\n};\n```\n\nЕсть `{}` — `return` нужен явно.\n\n## Без параметров\n\n```js\nconst hi = () => console.log(\"hi\");\n```\n\n## Отличие от function\n\n- Нет своего `this` (важно в DOM, урок 27)\n- Нельзя использовать как конструктор\n- Хойстинга нет — объявить **до** вызова\n\n## Что будет, если\n\n- `const f = x => x * 2; f(3);` — 6.\n- `const f = () => 5;` — возвращает 5.\n- `const f = () => { 5 };` — `undefined` (нет `return`).\n\n## Частая ошибка\n\n`() => { 5 }` — фигурные с выражением без `return` — вернёт `undefined`.\n\n## Итог\n\n- `(a, b) => a + b` — краткая\n- `() => { ...; return ...; }` — блок\n- Один параметр — без `()`\n- Нет хойстинга",
       "questions": [
-        { "text": "Что выведет `function g(name = \"гость\") { return name; } g()`?", "options": ["undefined", "гость", "null", "Ошибка"], "answer": 1, "explanation": "Дефолт сработал." },
-        { "text": "Что делает `...nums`?", "options": ["Умножает", "Собирает аргументы в массив", "Раскрывает массив", "Ошибка"], "answer": 1, "explanation": "Rest — в массив." },
-        { "text": "Где должен быть rest?", "options": ["Первым", "Последним", "В середине", "Не важно"], "answer": 1, "explanation": "Только последним." },
-        { "text": "Что делает `Math.max(...arr)`?", "options": ["Ошибка", "Раскрывает массив в аргументы", "Сумма", "Среднее"], "answer": 1, "explanation": "Spread — раскрывает." }
+        {"text": "Что вернёт `const f = x => x * 2; f(5)`?", "options": ["5", "10", "Ошибка", "undefined"], "answer": 1, "explanation": "5 * 2 = 10."},
+        {"text": "Что вернёт `const f = () => { 5 }; f()`?", "options": ["5", "undefined", "Ошибка", "null"], "answer": 1, "explanation": "С `{}` — нужен `return`, без него `undefined`."},
+        {"text": "Что вернёт `const f = () => 5; f()`?", "options": ["5", "undefined", "Ошибка", "null"], "answer": 0, "explanation": "Без `{}` — неявный return."},
+        {"text": "Можно ли вызвать стрелочную до объявления?", "options": ["Да", "Нет, нет хойстинга", "Только в strict", "Только в main"], "answer": 1, "explanation": "Хойстинг только у `function`."}
       ],
       "practice": {
-        "description": "Создай:\n- `sumAll(...nums)` — сумма всех аргументов\n- `greet(name = \"гость\")` — `\"Привет, <name>!\"`\n\nВыведи:\n```\n10\nПривет, Аня!\nПривет, гость!\n```", "starter": "// TODO\n", "expected": "10\nПривет, Аня!\nПривет, гость!", "must_contain": ["...nums", "name =", "console.log"] }
+        "description": "Создай три стрелочные функции:\n- `square` — `x => x * x`\n- `double` — `x => x * 2`\n- `isPositive` — `x => x > 0`\n\nВыведи:\n```\n9\n6\ntrue\n```",
+        "starter": "// TODO\n",
+        "expected": "9\n6\ntrue",
+        "must_contain": ["=>", "square", "double", "isPositive", "console.log"]
+      }
     },
     "15": {
-      "id": 15,
-      "check_type": "console",
-      "title": "Область видимости, замыкания",
-      "theory": "## Область видимости\n\nПеременная живёт в **блоке**, где объявлена (`{}`):\n\n```js\nif (true) {\n  let x = 10;\n}\nconsole.log(x); // ReferenceError\n```\n\n## Глобальная vs локальная\n\nПеременная вне функции — глобальная, видна везде. Внутри — только там:\n\n```js\nlet x = 100;\nfunction f() {\n  console.log(x); // 100 — видит глобальную\n}\n```\n\n## Тень (shadowing)\n\nЛокальная перекрывает глобальную:\n\n```js\nlet x = 100;\nfunction f() {\n  let x = 200;\n  console.log(x); // 200\n}\nf();\nconsole.log(x); // 100 — глобальная не тронута\n```\n\n## Замыкание (closure)\n\nФункция «запоминает» переменные из места, где была создана:\n\n```js\nfunction makeCounter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = makeCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n\n`count` живёт между вызовами. Это **замыкание**.\n\n## Практическая польза\n\nСкрыть состояние, создать фабрику:\n\n```js\nfunction greet(greeting) {\n  return (name) => `${greeting}, ${name}!`;\n}\nconst hi = greet(\"Привет\");\nconsole.log(hi(\"Аня\"));  // Привет, Аня!\n```\n\n## Что будет, если\n\n- Обратиться к локальной снаружи — ReferenceError.\n- `var` в функции — вылезет из `if`, но не из функции.\n\n## Частая ошибка\n\nДумать, что функция без `let` внутри меняет глобальную. Нет, создаст локальную (в strict mode — ошибка).\n\n## Итог\n\n- Переменная живёт в блоке\n- Локальная перекрывает глобальную\n- Замыкание — функция помнит окружение\n- Счётчик через замыкание — классика",
+      "id": 15, "check_type": "console", "title": "Параметры и rest",
+      "theory": "## Значения по умолчанию\n\n```js\nfunction greet(name = \"гость\") {\n  return `Привет, ${name}!`;\n}\nconsole.log(greet(\"Аня\"));  // Привет, Аня!\nconsole.log(greet());        // Привет, гость!\n```\n\n## Rest (...)\n\nСобрать все аргументы в массив:\n\n```js\nfunction sumAll(...nums) {\n  let total = 0;\n  for (const n of nums) total += n;\n  return total;\n}\nconsole.log(sumAll(1, 2, 3, 4));  // 10\n```\n\n`...nums` — массив всех переданных.\n\n## Обычные + rest\n\n```js\nfunction log(prefix, ...items) {\n  console.log(prefix, ...items);\n}\nlog(\"A\", 1, 2, 3);  // A 1 2 3\n```\n\n`...items` — после обычных.\n\n## Spread\n\n`...` работает и в обратную сторону:\n\n```js\nconst arr = [1, 2, 3];\nconsole.log(Math.max(...arr));  // 3\nconsole.log([0, ...arr, 4]);    // [0, 1, 2, 3, 4]\n```\n\n## Что будет, если\n\n- `function f(a, ...rest, b)` — SyntaxError, rest должен быть последним.\n- `greet(null)` — `null`, не дефолт.\n\n## Частая ошибка\n\n`greet()` без аргумента при `function greet(name)` — `undefined`, не пустая строка.\n\n## Итог\n\n- `param = default` — дефолт\n- `...rest` — все лишние в массив\n- Rest — последним\n- Spread — раскрыть массив",
       "questions": [
-        { "text": "Что выведет?\n```\nfunction f() { let x = 10; }\nf();\nconsole.log(x);\n```", "options": ["10", "undefined", "ReferenceError", "0"], "answer": 2, "explanation": "`x` — локальная, снаружи нет." },
-        { "text": "Что выведет?\n```\nlet x = 100;\nfunction f() { let x = 200; console.log(x); }\nf();\n```", "options": ["100", "200", "Ошибка", "undefined"], "answer": 1, "explanation": "Локальная перекрывает." },
-        { "text": "Что такое замыкание?", "options": ["Цикл", "Функция помнит окружение", "Ошибка", "Объект"], "answer": 1, "explanation": "Замыкание — сохранение переменных." },
-        { "text": "Что выведет второй вызов counter()?", "options": ["1", "2", "0", "undefined"], "answer": 1, "explanation": "`count` живёт между вызовами." }
+        {"text": "Что выведет `function g(name = \"гость\") { return name; } g()`?", "options": ["undefined", "гость", "null", "Ошибка"], "answer": 1, "explanation": "Дефолт сработал."},
+        {"text": "Что делает `...nums`?", "options": ["Умножает", "Собирает аргументы в массив", "Раскрывает массив", "Ошибка"], "answer": 1, "explanation": "Rest — в массив."},
+        {"text": "Где должен быть rest?", "options": ["Первым", "Последним", "В середине", "Не важно"], "answer": 1, "explanation": "Только последним."},
+        {"text": "Что делает `Math.max(...arr)`?", "options": ["Ошибка", "Раскрывает массив в аргументы", "Сумма", "Среднее"], "answer": 1, "explanation": "Spread — раскрывает."}
       ],
       "practice": {
-        "description": "Создай `makeCounter()` — возвращает функцию, которая при вызове увеличивает счётчик и возвращает его. Выведи `1`, `2`, `3` (три вызова).\n\nВидимый текст: `1`, `2`, `3` на разных строках.", "starter": "// TODO: makeCounter\n", "expected": "1\n2\n3", "must_contain": ["function", "let count = 0", "return function", "console.log"] }
+        "description": "Создай:\n- `sumAll(...nums)` — сумма всех аргументов\n- `greet(name = \"гость\")` — `\"Привет, <name>!\"`\n\nВыведи:\n```\n10\nПривет, Аня!\nПривет, гость!\n```",
+        "starter": "// TODO\n",
+        "expected": "10\nПривет, Аня!\nПривет, гость!",
+        "must_contain": ["...nums", "name =", "console.log"]
+      }
     },
     "16": {
-      "id": 16,
-      "check_type": "console",
-      "title": "Массивы",
-      "theory": "## Что такое массив\n\n```js\nconst fruits = [\"яблоко\", \"банан\", \"вишня\"];\nconst nums = [3, 7, 1, 9, 4];\nconst empty = [];\n```\n\n## Индексы\n\nС нуля: `arr[0]` — первый, `arr[arr.length - 1]` — последний.\n\n```js\nconsole.log(fruits[0]);  // яблоко\nconsole.log(fruits[2]);  // вишня\nconsole.log(fruits[-1]); // undefined — отрицательные не работают\n```\n\n## length\n\nСвойство, не метод:\n\n```js\nconsole.log(fruits.length);  // 3\n```\n\n## Изменение\n\nМассивы **изменяемы**:\n\n```js\nfruits[1] = \"груша\";\nconsole.log(fruits);  // [\"яблоко\", \"груша\", \"вишня\"]\n```\n\n## Перебор\n\n```js\nfor (const f of fruits) {\n  console.log(f);\n}\n```\n\n`for...of` — значения.\n\n```js\nfor (let i = 0; i < fruits.length; i++) {\n  console.log(fruits[i]);\n}\n```\n\n## Вложенные\n\n```js\nconst matrix = [\n  [1, 2, 3],\n  [4, 5, 6]\n];\nconsole.log(matrix[1][2]); // 6\n```\n\n## Что будет, если\n\n- `arr[10]` — `undefined`, не ошибка.\n- `arr.length = 2` — обрежет массив.\n\n## Частая ошибка\n\n`arr[-1]` — `undefined`, не последний. Для последнего — `arr[arr.length - 1]`.\n\n## Итог\n\n- `[a, b, c]` — массив\n- Индексы с 0\n- `length` — свойство\n- `arr[i] = x` — изменение\n- `for...of` — перебор",
+      "id": 16, "check_type": "console", "title": "Область видимости, замыкания",
+      "theory": "## Область видимости\n\nПеременная живёт в **блоке**, где объявлена (`{}`):\n\n```js\nif (true) {\n  let x = 10;\n}\nconsole.log(x); // ReferenceError\n```\n\n## Глобальная vs локальная\n\nПеременная вне функции — глобальная, видна везде. Внутри — только там:\n\n```js\nlet x = 100;\nfunction f() {\n  console.log(x); // 100 — видит глобальную\n}\n```\n\n## Тень (shadowing)\n\nЛокальная перекрывает глобальную:\n\n```js\nlet x = 100;\nfunction f() {\n  let x = 200;\n  console.log(x); // 200\n}\nf();\nconsole.log(x); // 100 — глобальная не тронута\n```\n\n## Замыкание (closure)\n\nФункция «запоминает» переменные из места, где была создана:\n\n```js\nfunction makeCounter() {\n  let count = 0;\n  return function() {\n    count++;\n    return count;\n  };\n}\n\nconst counter = makeCounter();\nconsole.log(counter()); // 1\nconsole.log(counter()); // 2\n```\n\n`count` живёт между вызовами. Это **замыкание**.\n\n## Практическая польза\n\nСкрыть состояние, создать фабрику:\n\n```js\nfunction greet(greeting) {\n  return (name) => `${greeting}, ${name}!`;\n}\nconst hi = greet(\"Привет\");\nconsole.log(hi(\"Аня\"));  // Привет, Аня!\n```\n\n## Что будет, если\n\n- Обратиться к локальной снаружи — ReferenceError.\n- `var` в функции — вылезет из `if`, но не из функции.\n\n## Частая ошибка\n\nДумать, что функция без `let` внутри меняет глобальную. Нет, создаст локальную (в strict mode — ошибка).\n\n## Итог\n\n- Переменная живёт в блоке\n- Локальная перекрывает глобальную\n- Замыкание — функция помнит окружение\n- Счётчик через замыкание — классика",
       "questions": [
-        { "text": "Что выведет `[10, 20, 30][1]`?", "options": ["10", "20", "30", "Ошибка"], "answer": 1, "explanation": "Индекс 1 — второй." },
-        { "text": "Что вернёт `[1, 2, 3].length`?", "options": ["2", "3", "4", "Ошибка"], "answer": 1, "explanation": "3 элемента." },
-        { "text": "Что при `[1, 2, 3][10]`?", "options": ["0", "null", "undefined", "Ошибка"], "answer": 2, "explanation": "За пределами — `undefined`." },
-        { "text": "Что при `[1, 2, 3][-1]`?", "options": ["3", "1", "undefined", "Ошибка"], "answer": 2, "explanation": "Отрицательные индексы не работают." },
-        { "text": "Как последний элемент?", "options": ["arr[-1]", "arr[arr.length]", "arr[arr.length - 1]", "arr.last()"], "answer": 2, "explanation": "`length - 1`." }
+        {"text": "Что выведет?\n```\nfunction f() { let x = 10; }\nf();\nconsole.log(x);\n```", "options": ["10", "undefined", "ReferenceError", "0"], "answer": 2, "explanation": "`x` — локальная, снаружи нет."},
+        {"text": "Что выведет?\n```\nlet x = 100;\nfunction f() { let x = 200; console.log(x); }\nf();\n```", "options": ["100", "200", "Ошибка", "undefined"], "answer": 1, "explanation": "Локальная перекрывает."},
+        {"text": "Что такое замыкание?", "options": ["Цикл", "Функция помнит окружение", "Ошибка", "Объект"], "answer": 1, "explanation": "Замыкание — сохранение переменных."},
+        {"text": "Что выведет второй вызов counter()?", "options": ["1", "2", "0", "undefined"], "answer": 1, "explanation": "`count` живёт между вызовами."}
       ],
       "practice": {
-        "description": "Дан массив `const nums = [4, 8, 15, 16, 23, 42];`. Выведи:\n```\n4\n42\n6\n```", "starter": "const nums = [4, 8, 15, 16, 23, 42];\n// TODO\n", "expected": "4\n42\n6", "must_contain": ["nums[0]", "nums[nums.length - 1]", "nums.length", "console.log"] }
+        "description": "Создай `makeCounter()` — возвращает функцию, которая при вызове увеличивает счётчик и возвращает его. Выведи `1`, `2`, `3` (три вызова).\n\nВидимый текст: `1`, `2`, `3` на разных строках.",
+        "starter": "// TODO: makeCounter\n",
+        "expected": "1\n2\n3",
+        "must_contain": ["function", "let count = 0", "return function", "console.log"]
+      }
     },
     "17": {
-      "id": 17,
-      "check_type": "console",
-      "title": "Методы массивов",
-      "theory": "## push / pop\n\n```js\narr.push(x)   // в конец, возвращает новую length\narr.pop()     // из конца, возвращает удалённый\n```\n\n## shift / unshift\n\n```js\narr.unshift(x)  // в начало\narr.shift()     // из начала\n```\n\n## slice — копия\n\n```js\n[1, 2, 3, 4].slice(1, 3)   // [2, 3]\n[1, 2, 3, 4].slice(-2)     // [3, 4]\n```\n\nНе меняет исходный.\n\n## splice — изменить\n\n```js\nlet arr = [1, 2, 3, 4];\narr.splice(1, 2);        // удалить 2 элемента с индекса 1 → [3, 4]\narr.splice(1, 0, 99);    // вставить 99 в позицию 1\n```\n\nМеняет **на месте**.\n\n## includes / indexOf\n\n```js\n[1, 2, 3].includes(2)      // true\n[1, 2, 3].indexOf(2)       // 1\n[1, 2, 3].indexOf(99)      // -1\n```\n\n## forEach — перебор\n\n```js\n[1, 2, 3].forEach(n => console.log(n * 2));\n// 2 4 6\n```\n\n## join\n\n```js\n[1, 2, 3].join(\"-\")   // \"1-2-3\"\n```\n\n## reverse\n\n```js\n[1, 2, 3].reverse()   // [3, 2, 1] — меняет на месте\n```\n\n## Что будет, если\n\n- `push` возвращает новую длину, не массив.\n- `slice` — копия, `splice` — мутация.\n\n## Частая ошибка\n\n`arr = arr.push(x)` — `arr` станет числом (новая длина). Просто `arr.push(x)`.\n\n## Итог\n\n- `push/pop/shift/unshift` — концы\n- `slice` — копия, `splice` — изменить\n- `forEach` — перебор\n- `join` — в строку\n- `reverse` — на месте",
+      "id": 17, "check_type": "console", "title": "Массивы",
+      "theory": "## Что такое массив\n\n```js\nconst fruits = [\"яблоко\", \"банан\", \"вишня\"];\nconst nums = [3, 7, 1, 9, 4];\nconst empty = [];\n```\n\n## Индексы\n\nС нуля: `arr[0]` — первый, `arr[arr.length - 1]` — последний.\n\n```js\nconsole.log(fruits[0]);  // яблоко\nconsole.log(fruits[2]);  // вишня\nconsole.log(fruits[-1]); // undefined — отрицательные не работают\n```\n\n## length\n\nСвойство, не метод:\n\n```js\nconsole.log(fruits.length);  // 3\n```\n\n## Изменение\n\nМассивы **изменяемы**:\n\n```js\nfruits[1] = \"груша\";\nconsole.log(fruits);  // [\"яблоко\", \"груша\", \"вишня\"]\n```\n\n## Перебор\n\n```js\nfor (const f of fruits) {\n  console.log(f);\n}\n```\n\n`for...of` — значения.\n\n```js\nfor (let i = 0; i < fruits.length; i++) {\n  console.log(fruits[i]);\n}\n```\n\n## Вложенные\n\n```js\nconst matrix = [\n  [1, 2, 3],\n  [4, 5, 6]\n];\nconsole.log(matrix[1][2]); // 6\n```\n\n## Что будет, если\n\n- `arr[10]` — `undefined`, не ошибка.\n- `arr.length = 2` — обрежет массив.\n\n## Частая ошибка\n\n`arr[-1]` — `undefined`, не последний. Для последнего — `arr[arr.length - 1]`.\n\n## Итог\n\n- `[a, b, c]` — массив\n- Индексы с 0\n- `length` — свойство\n- `arr[i] = x` — изменение\n- `for...of` — перебор",
       "questions": [
-        { "text": "Что делает `arr.push(5)`?", "options": ["Удаляет", "Добавляет в конец", "Добавляет в начало", "Сортирует"], "answer": 1, "explanation": "В конец." },
-        { "text": "Разница `slice` и `splice`?", "options": ["Одно", "slice — копия, splice — менять на месте", "splice быстрее", "slice только для строк"], "answer": 1, "explanation": "slice — копия, splice — мутация." },
-        { "text": "Что вернёт `[1, 2, 3].includes(2)`?", "options": ["1", "true", "2", "false"], "answer": 1, "explanation": "true — есть 2." },
-        { "text": "Что вернёт `[1, 2, 3].join(\"-\")`?", "options": ["[1, 2, 3]", "\"1-2-3\"", "\"123\"", "Ошибка"], "answer": 1, "explanation": "Через дефис." },
-        { "text": "Что вернёт `[1, 2, 3].pop()`?", "options": ["[1, 2]", "3", "1", "Ошибка"], "answer": 1, "explanation": "Удалённый — 3." }
+        {"text": "Что выведет `[10, 20, 30][1]`?", "options": ["10", "20", "30", "Ошибка"], "answer": 1, "explanation": "Индекс 1 — второй."},
+        {"text": "Что вернёт `[1, 2, 3].length`?", "options": ["2", "3", "4", "Ошибка"], "answer": 1, "explanation": "3 элемента."},
+        {"text": "Что при `[1, 2, 3][10]`?", "options": ["0", "null", "undefined", "Ошибка"], "answer": 2, "explanation": "За пределами — `undefined`."},
+        {"text": "Что при `[1, 2, 3][-1]`?", "options": ["3", "1", "undefined", "Ошибка"], "answer": 2, "explanation": "Отрицательные индексы не работают."},
+        {"text": "Как последний элемент?", "options": ["arr[-1]", "arr[arr.length]", "arr[arr.length - 1]", "arr.last()"], "answer": 2, "explanation": "`length - 1`."}
       ],
       "practice": {
-        "description": "Дан массив `const nums = [1, 2, 3];`. Сделай:\n- `nums.push(4)`\n- `nums.unshift(0)`\n- выведи `nums.join(\",\")`\n- выведи `nums.length`\n\nВидимый текст:\n```\n0,1,2,3,4\n5\n```", "starter": "const nums = [1, 2, 3];\n// TODO\n", "expected": "0,1,2,3,4\n5", "must_contain": [".push(", ".unshift(", ".join(", ".length", "console.log"] }
+        "description": "Дан массив `const nums = [4, 8, 15, 16, 23, 42];`. Выведи:\n```\n4\n42\n6\n```",
+        "starter": "const nums = [4, 8, 15, 16, 23, 42];\n// TODO\n",
+        "expected": "4\n42\n6",
+        "must_contain": ["nums[0]", "nums[nums.length - 1]", "nums.length", "console.log"]
+      }
     },
     "18": {
-      "id": 18,
-      "check_type": "console",
-      "title": "map, filter, reduce",
-      "theory": "## map — преобразовать каждый\n\n```js\nconst nums = [1, 2, 3];\nconst doubled = nums.map(n => n * 2);\nconsole.log(doubled); // [2, 4, 6]\n```\n\nВозвращает **новый** массив той же длины.\n\n## filter — оставить подходящие\n\n```js\nconst evens = nums.filter(n => n % 2 === 0);\nconsole.log(evens); // [2]\n```\n\nВозвращает новый массив подмножества.\n\n## reduce — свести к одному\n\n```js\nconst sum = nums.reduce((acc, n) => acc + n, 0);\nconsole.log(sum); // 6\n```\n\n`(acc, n) => ..., начальное_значение`.\n\n- `acc` — аккумулятор\n- `n` — текущий элемент\n- `0` — старт\n\n## Пример: сумма\n\n```js\n[1, 2, 3, 4].reduce((acc, n) => acc + n, 0);  // 10\n```\n\nПошагово: 0 + 1 = 1, 1 + 2 = 3, 3 + 3 = 6, 6 + 4 = 10.\n\n## Цепочка\n\n```js\nconst result = nums\n  .filter(n => n > 1)\n  .map(n => n * 10);\nconsole.log(result); // [20, 30]\n```\n\n## Что будет, если\n\n- Без начального значения в `reduce` — первым acc будет `[0]`.\n- `map` без `return` в теле со стрелкой и `{}` — массив `undefined`.\n\n## Частая ошибка\n\n`map(n => { n * 2 })` — без `return` вернёт массив `undefined`. Либо без `{}`, либо с `return`.\n\n## Итог\n\n- `map` — преобразовать\n- `filter` — оставить\n- `reduce` — свести\n- Цепочки — сила JS",
+      "id": 18, "check_type": "console", "title": "Методы массивов",
+      "theory": "## push / pop\n\n```js\narr.push(x)   // в конец, возвращает новую length\narr.pop()     // из конца, возвращает удалённый\n```\n\n## shift / unshift\n\n```js\narr.unshift(x)  // в начало\narr.shift()     // из начала\n```\n\n## slice — копия\n\n```js\n[1, 2, 3, 4].slice(1, 3)   // [2, 3]\n[1, 2, 3, 4].slice(-2)     // [3, 4]\n```\n\nНе меняет исходный.\n\n## splice — изменить\n\n```js\nlet arr = [1, 2, 3, 4];\narr.splice(1, 2);        // удалить 2 элемента с индекса 1 → [3, 4]\narr.splice(1, 0, 99);    // вставить 99 в позицию 1\n```\n\nМеняет **на месте**.\n\n## includes / indexOf\n\n```js\n[1, 2, 3].includes(2)      // true\n[1, 2, 3].indexOf(2)       // 1\n[1, 2, 3].indexOf(99)      // -1\n```\n\n## forEach — перебор\n\n```js\n[1, 2, 3].forEach(n => console.log(n * 2));\n// 2 4 6\n```\n\n## join\n\n```js\n[1, 2, 3].join(\"-\")   // \"1-2-3\"\n```\n\n## reverse\n\n```js\n[1, 2, 3].reverse()   // [3, 2, 1] — меняет на месте\n```\n\n## Что будет, если\n\n- `push` возвращает новую длину, не массив.\n- `slice` — копия, `splice` — мутация.\n\n## Частая ошибка\n\n`arr = arr.push(x)` — `arr` станет числом (новая длина). Просто `arr.push(x)`.\n\n## Итог\n\n- `push/pop/shift/unshift` — концы\n- `slice` — копия, `splice` — изменить\n- `forEach` — перебор\n- `join` — в строку\n- `reverse` — на месте",
       "questions": [
-        { "text": "Что вернёт `[1, 2, 3].map(n => n * 2)`?", "options": ["[1, 2, 3]", "[2, 4, 6]", "[1, 4, 9]", "6"], "answer": 1, "explanation": "Умножает каждый." },
-        { "text": "Что вернёт `[1, 2, 3, 4].filter(n => n % 2 === 0)`?", "options": ["[1, 3]", "[2, 4]", "[1, 2, 3, 4]", "2"], "answer": 1, "explanation": "Только чётные." },
-        { "text": "Что вернёт `[1, 2, 3].reduce((a, n) => a + n, 0)`?", "options": ["[1, 2, 3]", "6", "3", "0"], "answer": 1, "explanation": "1+2+3 = 6." },
-        { "text": "Что не так с `[1, 2].map(n => { n * 2 })`?", "options": ["Синтаксис", "Нет return — массив undefined", "Работает", "Нужен filter"], "answer": 1, "explanation": "`{}` + стрелка — нужен `return`." },
-        { "text": "Что делает `reduce`?", "options": ["Меняет каждый", "Фильтрует", "Сводит к одному", "Копирует"], "answer": 2, "explanation": "К одному значению." }
+        {"text": "Что делает `arr.push(5)`?", "options": ["Удаляет", "Добавляет в конец", "Добавляет в начало", "Сортирует"], "answer": 1, "explanation": "В конец."},
+        {"text": "Разница `slice` и `splice`?", "options": ["Одно", "slice — копия, splice — менять на месте", "splice быстрее", "slice только для строк"], "answer": 1, "explanation": "slice — копия, splice — мутация."},
+        {"text": "Что вернёт `[1, 2, 3].includes(2)`?", "options": ["1", "true", "2", "false"], "answer": 1, "explanation": "true — есть 2."},
+        {"text": "Что вернёт `[1, 2, 3].join(\"-\")`?", "options": ["[1, 2, 3]", "\"1-2-3\"", "\"123\"", "Ошибка"], "answer": 1, "explanation": "Через дефис."},
+        {"text": "Что вернёт `[1, 2, 3].pop()`?", "options": ["[1, 2]", "3", "1", "Ошибка"], "answer": 1, "explanation": "Удалённый — 3."}
       ],
       "practice": {
-        "description": "Дан массив `const nums = [1, 2, 3, 4, 5];`. Получи:\n- `doubled` — удвоенные (`map`)\n- `evens` — чётные (`filter`)\n- `sum` — сумма (`reduce`)\n\nВыведи:\n```\n2,4,6,8,10\n2,4\n15\n```\n\nВсе через `.join(\",\")` для массивов.", "starter": "const nums = [1, 2, 3, 4, 5];\n// TODO\n", "expected": "2,4,6,8,10\n2,4\n15", "must_contain": [".map(", ".filter(", ".reduce(", ".join(", "console.log"] }
+        "description": "Дан массив `const nums = [1, 2, 3];`. Сделай:\n- `nums.push(4)`\n- `nums.unshift(0)`\n- выведи `nums.join(\",\")`\n- выведи `nums.length`\n\nВидимый текст:\n```\n0,1,2,3,4\n5\n```",
+        "starter": "const nums = [1, 2, 3];\n// TODO\n",
+        "expected": "0,1,2,3,4\n5",
+        "must_contain": [".push(", ".unshift(", ".join(", ".length", "console.log"]
+      }
     },
     "19": {
-      "id": 19,
-      "check_type": "console",
-      "title": "Объекты",
-      "theory": "## Что такое объект\n\n`{ ключ: значение }` — набор пар. Как `dict` в Python.\n\n```js\nconst user = {\n  name: \"Аня\",\n  age: 25,\n  city: \"Москва\"\n};\n```\n\n## Доступ\n\nДва способа:\n\n```js\nconsole.log(user.name);       // Аня\nconsole.log(user[\"age\"]);     // 25\n```\n\nКвадратные скобки — для динамических ключей.\n\n## Изменение\n\n```js\nuser.age = 26;              // изменение\nuser.email = \"a@mail.com\";  // добавление\ndelete user.city;           // удаление\n```\n\n## in\n\n```js\nconsole.log(\"name\" in user);  // true\nconsole.log(\"email\" in user); // false\n```\n\n## Object.keys / values / entries\n\n```js\nObject.keys(user)     // [\"name\", \"age\", \"city\"]\nObject.values(user)   // [\"Аня\", 25, \"Москва\"]\nObject.entries(user)  // [[\"name\", \"Аня\"], ...]\n```\n\n## Перебор\n\n```js\nfor (const key in user) {\n  console.log(key, user[key]);\n}\n```\n\n`for...in` — ключи.\n\n## Вложенные\n\n```js\nconst data = {\n  user: { name: \"Аня\" },\n  scores: [1, 2, 3]\n};\nconsole.log(data.user.name);  // Аня\nconsole.log(data.scores[1]);  // 2\n```\n\n## Что будет, если\n\n- `user.name` для отсутствующего — `undefined`.\n- `user[\"age\"]` — работает, `user[age]` — попытка найти переменную `age`.\n\n## Частая ошибка\n\n`user.name` (точка) для ключа с пробелом — только `user[\"first name\"]`.\n\n## Итог\n\n- `{ k: v }` — объект\n- `obj.key` / `obj[\"key\"]`\n- `delete`, `in`\n- `Object.keys/values/entries`\n- `for...in` — ключи",
+      "id": 19, "check_type": "console", "title": "map, filter, reduce",
+      "theory": "## map — преобразовать каждый\n\n```js\nconst nums = [1, 2, 3];\nconst doubled = nums.map(n => n * 2);\nconsole.log(doubled); // [2, 4, 6]\n```\n\nВозвращает **новый** массив той же длины.\n\n## filter — оставить подходящие\n\n```js\nconst evens = nums.filter(n => n % 2 === 0);\nconsole.log(evens); // [2]\n```\n\nВозвращает новый массив подмножества.\n\n## reduce — свести к одному\n\n```js\nconst sum = nums.reduce((acc, n) => acc + n, 0);\nconsole.log(sum); // 6\n```\n\n`(acc, n) => ..., начальное_значение`.\n\n- `acc` — аккумулятор\n- `n` — текущий элемент\n- `0` — старт\n\n## Пример: сумма\n\n```js\n[1, 2, 3, 4].reduce((acc, n) => acc + n, 0);  // 10\n```\n\nПошагово: 0 + 1 = 1, 1 + 2 = 3, 3 + 3 = 6, 6 + 4 = 10.\n\n## Цепочка\n\n```js\nconst result = nums\n  .filter(n => n > 1)\n  .map(n => n * 10);\nconsole.log(result); // [20, 30]\n```\n\n## Что будет, если\n\n- Без начального значения в `reduce` — первым acc будет `[0]`.\n- `map` без `return` в теле со стрелкой и `{}` — массив `undefined`.\n\n## Частая ошибка\n\n`map(n => { n * 2 })` — без `return` вернёт массив `undefined`. Либо без `{}`, либо с `return`.\n\n## Итог\n\n- `map` — преобразовать\n- `filter` — оставить\n- `reduce` — свести\n- Цепочки — сила JS",
       "questions": [
-        { "text": "Что выведет `({ name: \"Аня\" }).name`?", "options": ["name", "Аня", "undefined", "Ошибка"], "answer": 1, "explanation": "Доступ по ключу." },
-        { "text": "Что при `obj.missing`?", "options": ["Ошибка", "null", "undefined", "0"], "answer": 2, "explanation": "Нет ключа — `undefined`." },
-        { "text": "Как проверить наличие ключа?", "options": ["\"key\" in obj", "obj.has(\"key\")", "obj.key === true", "len(obj)"], "answer": 0, "explanation": "`in`." },
-        { "text": "Что возвращает `Object.keys(obj)`?", "options": ["Значения", "Массив ключей", "Пары", "Размер"], "answer": 1, "explanation": "Ключи." },
-        { "text": "Как удалить ключ?", "options": ["delete obj.key", "obj.remove(\"key\")", "obj.key = null", "pop"], "answer": 0, "explanation": "`delete`." }
+        {"text": "Что вернёт `[1, 2, 3].map(n => n * 2)`?", "options": ["[1, 2, 3]", "[2, 4, 6]", "[1, 4, 9]", "6"], "answer": 1, "explanation": "Умножает каждый."},
+        {"text": "Что вернёт `[1, 2, 3, 4].filter(n => n % 2 === 0)`?", "options": ["[1, 3]", "[2, 4]", "[1, 2, 3, 4]", "2"], "answer": 1, "explanation": "Только чётные."},
+        {"text": "Что вернёт `[1, 2, 3].reduce((a, n) => a + n, 0)`?", "options": ["[1, 2, 3]", "6", "3", "0"], "answer": 1, "explanation": "1+2+3 = 6."},
+        {"text": "Что не так с `[1, 2].map(n => { n * 2 })`?", "options": ["Синтаксис", "Нет return — массив undefined", "Работает", "Нужен filter"], "answer": 1, "explanation": "`{}` + стрелка — нужен `return`."},
+        {"text": "Что делает `reduce`?", "options": ["Меняет каждый", "Фильтрует", "Сводит к одному", "Копирует"], "answer": 2, "explanation": "К одному значению."}
       ],
       "practice": {
-        "description": "Создай `const user = { name: \"Иван\", age: 30 }`. Сделай:\n1. `user.city = \"Москва\"`\n2. `user.age = 31`\n3. выведи `Object.keys(user).join(\",\")`\n4. выведи `user.age`\n\nВидимый текст:\n```\nname,age,city\n31\n```", "starter": "const user = { name: \"Иван\", age: 30 };\n// TODO\n", "expected": "name,age,city\n31", "must_contain": ["Object.keys", ".join(", "user.age", "console.log"] }
+        "description": "Дан массив `const nums = [1, 2, 3, 4, 5];`. Получи:\n- `doubled` — удвоенные (`map`)\n- `evens` — чётные (`filter`)\n- `sum` — сумма (`reduce`)\n\nВыведи:\n```\n2,4,6,8,10\n2,4\n15\n```\n\nВсе через `.join(\",\")` для массивов.",
+        "starter": "const nums = [1, 2, 3, 4, 5];\n// TODO\n",
+        "expected": "2,4,6,8,10\n2,4\n15",
+        "must_contain": [".map(", ".filter(", ".reduce(", ".join(", "console.log"]
+      }
     },
     "20": {
-      "id": 20,
-      "check_type": "dom",
-      "title": "DOM, querySelector",
-      "theory": "## Что такое DOM\n\nDOM — **Document Object Model**. Браузер парсит HTML в дерево объектов. JS может это дерево читать и менять.\n\n`document` — корневой объект.\n\n## querySelector\n\nНайти **первый** элемент по CSS-селектору:\n\n```js\nconst title = document.querySelector(\"h1\");\nconst byId = document.querySelector(\"#title\");\nconst byClass = document.querySelector(\".card\");\n```\n\nСелекторы — как в CSS: `#id`, `.class`, `tag`, `[attr]`.\n\n## querySelectorAll\n\nНайти **все**:\n\n```js\nconst items = document.querySelectorAll(\"li\");\nconsole.log(items.length);  // количество\nitems.forEach(el => console.log(el.textContent));\n```\n\nВозвращает `NodeList` (похож на массив).\n\n## Если элемента нет\n\n```js\nconst x = document.querySelector(\"#nope\");\nconsole.log(x);  // null\n```\n\nПроверяй на `null` перед использованием.\n\n## Когда DOM доступен\n\n`<script>` должен идти **после** элементов или с `defer`. Иначе `querySelector` вернёт `null`.\n\n## textContent и innerHTML\n\n- `el.textContent` — только текст\n- `el.innerHTML` — HTML внутри\n\n## Что будет, если\n\n- `querySelector(null)` — TypeError.\n- Неверный селектор — `null`.\n\n## Частая ошибка\n\nСкрипт в `<head>` без `defer` — DOM ещё не построен.\n\n## Итог\n\n- DOM — дерево объектов\n- `document.querySelector` — первый\n- `querySelectorAll` — все\n- Селекторы CSS\n- Нет элемента — `null`",
+      "id": 20, "check_type": "console", "title": "Объекты",
+      "theory": "## Что такое объект\n\n`{ ключ: значение }` — набор пар. Как `dict` в Python.\n\n```js\nconst user = {\n  name: \"Аня\",\n  age: 25,\n  city: \"Москва\"\n};\n```\n\n## Доступ\n\nДва способа:\n\n```js\nconsole.log(user.name);       // Аня\nconsole.log(user[\"age\"]);     // 25\n```\n\nКвадратные скобки — для динамических ключей.\n\n## Изменение\n\n```js\nuser.age = 26;              // изменение\nuser.email = \"a@mail.com\";  // добавление\ndelete user.city;           // удаление\n```\n\n## in\n\n```js\nconsole.log(\"name\" in user);  // true\nconsole.log(\"email\" in user); // false\n```\n\n## Object.keys / values / entries\n\n```js\nObject.keys(user)     // [\"name\", \"age\", \"city\"]\nObject.values(user)   // [\"Аня\", 25, \"Москва\"]\nObject.entries(user)  // [[\"name\", \"Аня\"], ...]\n```\n\n## Перебор\n\n```js\nfor (const key in user) {\n  console.log(key, user[key]);\n}\n```\n\n`for...in` — ключи.\n\n## Вложенные\n\n```js\nconst data = {\n  user: { name: \"Аня\" },\n  scores: [1, 2, 3]\n};\nconsole.log(data.user.name);  // Аня\nconsole.log(data.scores[1]);  // 2\n```\n\n## Что будет, если\n\n- `user.name` для отсутствующего — `undefined`.\n- `user[\"age\"]` — работает, `user[age]` — попытка найти переменную `age`.\n\n## Частая ошибка\n\n`user.name` (точка) для ключа с пробелом — только `user[\"first name\"]`.\n\n## Итог\n\n- `{ k: v }` — объект\n- `obj.key` / `obj[\"key\"]`\n- `delete`, `in`\n- `Object.keys/values/entries`\n- `for...in` — ключи",
       "questions": [
-        { "text": "Что делает `querySelector`?", "options": ["Все", "Первый по селектору", "Удаляет", "Создаёт"], "answer": 1, "explanation": "Первый." },
-        { "text": "Что при отсутствии элемента?", "options": ["Ошибка", "null", "undefined", "Пустой объект"], "answer": 1, "explanation": "`null`." },
-        { "text": "Какой селектор для id `title`?", "options": ["title", "#title", ".title", "id=title"], "answer": 1, "explanation": "`#id`." },
-        { "text": "Что такое DOM?", "options": ["Стили", "Дерево объектов", "База данных", "Файл"], "answer": 1, "explanation": "DOM — дерево." },
-        { "text": "Где ставить `<script>` для работы с DOM?", "options": ["В `<head>`", "После элементов или с `defer`", "Перед DOCTYPE", "В `<title>`"], "answer": 1, "explanation": "После DOM или `defer`." }
+        {"text": "Что выведет `({ name: \"Аня\" }).name`?", "options": ["name", "Аня", "undefined", "Ошибка"], "answer": 1, "explanation": "Доступ по ключу."},
+        {"text": "Что при `obj.missing`?", "options": ["Ошибка", "null", "undefined", "0"], "answer": 2, "explanation": "Нет ключа — `undefined`."},
+        {"text": "Как проверить наличие ключа?", "options": ["\"key\" in obj", "obj.has(\"key\")", "obj.key === true", "len(obj)"], "answer": 0, "explanation": "`in`."},
+        {"text": "Что возвращает `Object.keys(obj)`?", "options": ["Значения", "Массив ключей", "Пары", "Размер"], "answer": 1, "explanation": "Ключи."},
+        {"text": "Как удалить ключ?", "options": ["delete obj.key", "obj.remove(\"key\")", "obj.key = null", "pop"], "answer": 0, "explanation": "`delete`."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<h1 id=\"title\">Заголовок</h1>\n```\n\nЧерез JS в `<script>` получи `#title` через `querySelector` и запиши в `textContent` текст \"Новый заголовок\".\n\nВидимый текст: `Новый заголовок`",
-        "starter": "<h1 id=\"title\">Заголовок</h1>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Новый заголовок",
-        "must_contain": ["querySelector", "textContent"]
+        "description": "Создай `const user = { name: \"Иван\", age: 30 }`. Сделай:\n1. `user.city = \"Москва\"`\n2. `user.age = 31`\n3. выведи `Object.keys(user).join(\",\")`\n4. выведи `user.age`\n\nВидимый текст:\n```\nname,age,city\n31\n```",
+        "starter": "const user = { name: \"Иван\", age: 30 };\n// TODO\n",
+        "expected": "name,age,city\n31",
+        "must_contain": ["Object.keys", ".join(", "user.age", "console.log"]
       }
     },
     "21": {
-      "id": 21,
-      "check_type": "dom",
-      "title": "textContent, innerHTML",
-      "theory": "## textContent\n\n**Текст** элемента, без HTML:\n\n```js\nconst el = document.querySelector(\"#box\");\nel.textContent = \"Привет\";\n```\n\nЕсли было `<b>старый</b>` — станет просто `Привет`, теги не отрендерятся.\n\n## innerHTML\n\n**HTML** внутри элемента:\n\n```js\nel.innerHTML = \"<b>Жирный</b>\";\n```\n\nТег `<b>` отрендерится как жирный.\n\n## Чтение\n\n```js\nel.textContent   // текст\nel.innerHTML    // HTML\n```\n\n## textContent vs innerHTML\n\n- `textContent` — только текст, **безопасно**.\n- `innerHTML` — рендерит HTML, **опасно** с пользовательскими данными (XSS).\n\nПример XSS:\n\n```js\nel.innerHTML = \"<script>alert('xss')</script>\";\n```\n\nВставит скрипт.\n\n## Когда что\n\n- Текст от пользователя — `textContent`\n- Своя разметка — `innerHTML` (если уверен)\n- Форматирование — `createElement` (урок 23)\n\n## Что будет, если\n\n- `el.textContent = \"<b>x</b>\"` — покажет `<b>x</b>` буквально.\n- `el.innerHTML = \"<b>x</b>\"` — покажет жирный x.\n\n## Частая ошибка\n\n`innerHTML` для пользовательского ввода — XSS. Всегда `textContent`.\n\n## Итог\n\n- `textContent` — текст\n- `innerHTML` — HTML\n- `textContent` — безопасно\n- `innerHTML` — XSS-риск",
+      "id": 21, "check_type": "console", "title": "Деструктуризация",
+      "theory": "## Деструктуризация объектов\n\n```js\nconst user = { name: \"Аня\", age: 25 };\nconst { name, age } = user;\nconsole.log(name);   // Аня\nconsole.log(age);    // 25\n```\n\nДостать поля в переменные.\n\n## Переименование\n\n```js\nconst { name: userName } = user;\nconsole.log(userName);   // Аня\n```\n\n## Дефолт\n\n```js\nconst { name, city = \"неизвестно\" } = user;\nconsole.log(city);   // неизвестно\n```\n\n## Деструктуризация массива\n\n```js\nconst [first, second] = [10, 20, 30];\nconsole.log(first);   // 10\nconsole.log(second);  // 20\n```\n\n## Пропуск элементов\n\n```js\nconst [, second] = [10, 20, 30];\nconsole.log(second);  // 20\n```\n\n## Rest\n\n```js\nconst [head, ...tail] = [1, 2, 3, 4];\nconsole.log(head);  // 1\nconsole.log(tail);  // [2, 3, 4]\n```\n\n## Параметры функции\n\n```js\nfunction greet({ name, age }) {\n  console.log(`${name}, ${age}`);\n}\ngreet({ name: \"Аня\", age: 25 });\n```\n\nЧасто в React и современном коде.\n\n## Обмен\n\n```js\nlet a = 1, b = 2;\n[a, b] = [b, a];\nconsole.log(a, b);   // 2 1\n```\n\n## Вложенная\n\n```js\nconst { user: { name } } = { user: { name: \"Аня\" } };\nconsole.log(name);   // Аня\n```\n\n## Что будет, если\n\n- `const { foo } = user` где нет `foo` — `undefined`, не ошибка.\n- Обращение к вложенной, когда родитель отсутствует — `TypeError`.\n\n## Итог\n\n- `const { a, b } = obj` — достать поля\n- `{ a: newA }` — переименовать\n- `{ a = 5 }` — дефолт\n- `[x, y] = arr` — массив\n- `[x, ...rest]` — rest\n- Параметры: `function f({ a, b })`",
       "questions": [
-        { "text": "Что покажет `el.textContent = \"<b>hi</b>\"`?", "options": ["жирный hi", "<b>hi</b>", "hi", "Ошибка"], "answer": 1, "explanation": "`textContent` — как текст, теги не рендерятся." },
-        { "text": "Что покажет `el.innerHTML = \"<b>hi</b>\"`?", "options": ["жирный hi", "<b>hi</b>", "hi", "Ошибка"], "answer": 0, "explanation": "HTML рендерится." },
-        { "text": "Что безопаснее с вводом пользователя?", "options": ["innerHTML", "textContent", "одинаково", "оба опасны"], "answer": 1, "explanation": "`textContent` не рендерит HTML." },
-        { "text": "Что такое XSS?", "options": ["Ошибка", "Вставка чужого скрипта через HTML", "Стиль", "Анимация"], "answer": 1, "explanation": "Cross-Site Scripting." }
+        {"text": "Что установит `const { a } = { a: 1, b: 2 }`?", "options": ["1", "2", "{a: 1}", "undefined"], "answer": 0, "explanation": "Поле `a`."},
+        {"text": "Как переименовать `a` в `x`?", "options": ["const { a: x }", "const { x: a }", "const { a as x }", "const { a } = x"], "answer": 0, "explanation": "`a: x`."},
+        {"text": "Что установит `const [first, ...rest] = [1, 2, 3]`?", "options": ["first=1, rest=[2,3]", "first=[1], rest=[2,3]", "first=1, rest=2", "Ошибка"], "answer": 0, "explanation": "Первый + rest."},
+        {"text": "Как обменять `a` и `b`?", "options": ["[a, b] = [b, a]", "a, b = b, a", "swap(a, b)", "temp"], "answer": 0, "explanation": "Деструктуризация-обмен."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<div id=\"box\"></div>\n```\n\nЧерез JS:\n1. `#box`.textContent = \"Просто текст\"\n2. Создай `<p>` внутри через `innerHTML` = \"<p>Абзац</p>\" — но **после** этого измени `textContent` на \"Итог\"\n\nВидимый текст: `Итог`",
-        "starter": "<div id=\"box\"></div>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Итог",
-        "must_contain": ["querySelector", "textContent"]
+        "description": "Дано `const user = { name: \"Иван\", age: 30, city: \"Москва\" };`.\n\n1. Деструктурируй `name` и `age`\n2. Деструктурируй с дефолтом `country = \"RU\"`\n3. Из `[10, 20, 30, 40]` достань `first` и rest\n\nВыведи:\n```\nИван 30\nИван, RU\n10, [20, 30, 40]\n```",
+        "starter": "const user = { name: \"Иван\", age: 30, city: \"Москва\" };\n// TODO\n",
+        "expected": "Иван 30\nИван, RU\n10, [20, 30, 40]",
+        "must_contain": ["const {", "const [", "...", "console.log"]
       }
     },
     "22": {
-      "id": 22,
-      "check_type": "dom",
-      "title": "Стили и классы",
-      "theory": "## style\n\nПрямое изменение CSS через JS:\n\n```js\nel.style.color = \"red\";\nel.style.fontSize = \"20px\";\nel.style.backgroundColor = \"yellow\";\n```\n\nВ JS — camelCase: `background-color` → `backgroundColor`.\n\n## classList\n\nРабота с классами:\n\n```js\nel.classList.add(\"active\");       // добавить\nel.classList.remove(\"active\");    // убрать\nel.classList.toggle(\"active\");    // переключить\nel.classList.contains(\"active\");  // проверить\n```\n\n`classList` — удобнее, чем строкой в `el.className`.\n\n## className\n\n```js\nel.className = \"card active\";     // перезапишет все классы\n```\n\nИспользуй `classList`, чтобы не стереть остальное.\n\n## Стиль vs класс\n\n- `el.style.color = \"red\"` — **inline**-стиль\n- `classList.add(\"red\")` + CSS `.red { color: red }` — через класс\n\nКласс предпочтительнее — разделяет HTML и CSS.\n\n## Что будет, если\n\n- `el.style.background-color` — SyntaxError (дефис — минус). Нужно `backgroundColor`.\n- `el.className = \"new\"` — сотрёт все старые классы.\n\n## Частая ошибка\n\nДефис в JS-стилях. Всегда camelCase.\n\n## Итог\n\n- `el.style.color = \"...\"` — inline\n- `el.classList.add/remove/toggle` — через классы\n- `classList` лучше `className`\n- В JS — camelCase",
+      "id": 22, "check_type": "console", "title": "Классы ES6",
+      "theory": "## Класс\n\n```js\nclass Animal {\n  constructor(name) {\n    this.name = name;\n  }\n\n  speak() {\n    console.log(`${this.name} издаёт звук`);\n  }\n}\n\nconst a = new Animal(\"Рекс\");\na.speak();   // Рекс издаёт звук\n```\n\n- `class` — ключевое слово\n- `constructor` — вызывается при `new`\n- `this.name = name` — сохранение поля\n- Метод — просто функция внутри, без `function`\n\n## Наследование\n\n```js\nclass Dog extends Animal {\n  speak() {\n    console.log(`${this.name}: Гав!`);\n  }\n}\n\nconst d = new Dog(\"Рекс\");\nd.speak();   // Рекс: Гав!\n```\n\n`extends` — наследует поля и методы. Переопределение — просто объявить снова.\n\n## super\n\n```js\nclass Dog extends Animal {\n  constructor(name, breed) {\n    super(name);          // конструктор родителя\n    this.breed = breed;\n  }\n}\n```\n\n`super(...)` — вызвать конструктор родителя. Должен быть **первой строкой** в конструкторе наследника.\n\n## Геттеры / сеттеры\n\n```js\nclass Circle {\n  constructor(r) { this.r = r; }\n  get area() { return Math.PI * this.r ** 2; }\n}\nconst c = new Circle(2);\nconsole.log(c.area);   // 12.566\n```\n\n`get` — метод-свойство.\n\n## Статические\n\n```js\nclass Math2 {\n  static square(x) { return x * x; }\n}\nconsole.log(Math2.square(4));   // 16\n```\n\n`static` — на классе, не на объекте.\n\n## Под капотом\n\nКлассы — синтаксический сахар над прототипами. Но используй `class` — чище и безопаснее.\n\n## Что будет, если\n\n- Забыть `new` — `TypeError: cannot call class without new`.\n- `this` потерян при передаче метода — `bind` или arrow-поле.\n- Забыть `super()` в наследнике с конструктором — `ReferenceError`.\n\n## Частая ошибка\n\n`const a = Animal(\"Рекс\")` без `new`. Всегда `new Animal(...)`.\n\n## Итог\n\n- `class Name { constructor() {} method() {} }`\n- `new Name(...)`\n- `extends` — наследование\n- `super(...)` — вызов родителя\n- `get` / `set` — свойства\n- `static` — на классе",
       "questions": [
-        { "text": "Как задать красный цвет через JS?", "options": ["el.style.color = \"red\"", "el.style.background-color = \"red\"", "el.color = \"red\"", "el.style[\"color\"] = red"], "answer": 0, "explanation": "`el.style.color`." },
-        { "text": "Как добавить класс `active`?", "options": ["el.className += active", "el.classList.add(\"active\")", "el.addClass(\"active\")", "el.class += active"], "answer": 1, "explanation": "`classList.add`." },
-        { "text": "Что делает `classList.toggle(\"x\")`?", "options": ["Добавляет", "Убирает", "Переключает", "Проверяет"], "answer": 2, "explanation": "Toggle — переключение." },
-        { "text": "Что лучше: `style` или `classList`?", "options": ["style", "classList", "одинаково", "зависит"], "answer": 1, "explanation": "`classList` — отделяет CSS." },
-        { "text": "Как `background-color` в JS?", "options": ["background-color", "backgroundColor", "background_color", "bg-color"], "answer": 1, "explanation": "camelCase." }
+        {"text": "Что такое класс в JS?", "options": ["Объект", "Шаблон для объектов", "Только функция", "Модуль"], "answer": 1, "explanation": "Шаблон."},
+        {"text": "Что делает `extends`?", "options": ["Копирует", "Наследует от родителя", "Расширяет массив", "Удаляет"], "answer": 1, "explanation": "Наследование."},
+        {"text": "Когда вызывается `constructor`?", "options": ["При вызове метода", "При `new`", "При импорте", "Никогда"], "answer": 1, "explanation": "`new` вызывает."},
+        {"text": "Что делает `super()`?", "options": ["Создаёт объект", "Вызывает конструктор родителя", "Завершает класс", "Ошибка"], "answer": 1, "explanation": "Конструктор родителя."},
+        {"text": "Где `static` метод?", "options": ["На объекте", "На классе", "На прототипе", "На поле"], "answer": 1, "explanation": "На самом классе."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<div id=\"box\">Текст</div>\n```\n\nЧерез JS:\n1. Добавь класс `active`\n2. Установи inline-стиль `color` = `\"red\"`\n\nОжидаемо: элемент `<div>` с классом `active` и стилем `color: red`.\n\nВидимый текст: `Текст`",
-        "starter": "<div id=\"box\">Текст</div>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Текст",
-        "must_contain": ["classList.add", ".style.color", "querySelector"]
+        "description": "Создай `class Animal` с `constructor(name)` и `speak()` → `\"<name> издаёт звук\"`.\n\n`class Dog extends Animal` — переопределяет `speak` → `\"<name>: Гав!\"`.\n\nСоздай `new Animal(\"Загадка\")` и `new Dog(\"Рекс\")`, вызови `speak()` у обоих.\n\nВидимый текст:\n```\nЗагадка издаёт звук\nРекс: Гав!\n```",
+        "starter": "// TODO\n",
+        "expected": "Загадка издаёт звук\nРекс: Гав!",
+        "must_contain": ["class Animal", "class Dog extends Animal", "constructor", "speak", "console.log"]
       }
     },
     "23": {
-      "id": 23,
-      "check_type": "dom",
-      "title": "createElement, appendChild",
-      "theory": "## Создание\n\n```js\nconst p = document.createElement(\"p\");\np.textContent = \"Новый абзац\";\n```\n\n`p` — новый элемент, ещё нигде в DOM.\n\n## Вставка\n\n```js\nparent.appendChild(p);\n```\n\n`parent` — родитель. `appendChild` — в конец.\n\n## Другие способы\n\n```js\nparent.append(p, text);   // несколько\nparent.prepend(p);        // в начало\nparent.before(p);         // перед parent\nparent.after(p);          // после\n```\n\n## Удаление\n\n```js\nel.remove();           // удалить себя\nparent.removeChild(el); // через родителя\n```\n\n## Сборка списка\n\n```js\nconst ul = document.querySelector(\"#list\");\n[\"Молоко\", \"Хлеб\", \"Яйца\"].forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  ul.appendChild(li);\n});\n```\n\n## Почему не innerHTML\n\n`innerHTML +=` пересоздаёт всё, теряет слушатели. `createElement` + `append` — точечно.\n\n## Что будет, если\n\n- Вставить элемент дважды — перенесётся, не скопируется.\n- `appendChild(null)` — TypeError.\n\n## Частая ошибка\n\n`parent.appendChild(\"<p>x</p>\")` — `appendChild` принимает **элемент**, не строку. Строку — через `innerHTML` или `textContent`.\n\n## Итог\n\n- `createElement(\"p\")` — создать\n- `parent.appendChild(el)` — вставить\n- `el.remove()` — удалить\n- Не путать с `innerHTML`",
-      "questions": [
-        { "text": "Что делает `createElement`?", "options": ["Ищет", "Создаёт элемент", "Удаляет", "Меняет"], "answer": 1, "explanation": "Создаёт новый." },
-        { "text": "Что делает `appendChild`?", "options": ["Удаляет", "Вставляет в конец родителя", "Ищет", "Копирует"], "answer": 1, "explanation": "В конец." },
-        { "text": "Принимает ли `appendChild` строку?", "options": ["Да", "Нет, только элемент", "Только HTML", "Только с textContent"], "answer": 1, "explanation": "Только элемент." },
-        { "text": "Как удалить элемент?", "options": ["el.delete()", "el.remove()", "delete el", "el = null"], "answer": 1, "explanation": "`el.remove()`." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<ul id=\"list\"></ul>\n```\n\nЧерез JS создай три `<li>` с текстами \"Молоко\", \"Хлеб\", \"Яйца\" и добавь в `#list`.\n\nВидимый текст: `Молоко Хлеб Яйца`",
-        "starter": "<ul id=\"list\"></ul>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Молоко Хлеб Яйца",
-        "must_contain": ["createElement", "appendChild", "textContent", "querySelector"]
-      }
-    },
-    "24": {
-      "id": 24,
-      "check_type": "dom",
-      "title": "addEventListener, click",
-      "theory": "## Что такое событие\n\nПользователь кликнул — **событие**. JS может **слушать** события и реагировать.\n\n## addEventListener\n\n```js\nbutton.addEventListener(\"click\", () => {\n  console.log(\"кликнули\");\n});\n```\n\nПервый аргумент — тип события, второй — обработчик (функция).\n\n## Частые события\n\n- `click` — клик\n- `submit` — отправка формы\n- `input` — ввод в поле\n- `keydown` — нажатие клавиши\n- `mouseover` / `mouseout` — наведение\n\n## Несколько слушателей\n\n```js\nbtn.addEventListener(\"click\", () => console.log(\"A\"));\nbtn.addEventListener(\"click\", () => console.log(\"B\"));\n```\n\nОба сработают.\n\n## Удаление\n\n```js\nfunction onClick() { console.log(\"раз\"); }\nbtn.addEventListener(\"click\", onClick);\nbtn.removeEventListener(\"click\", onClick);\n```\n\nНужна **та же** ссылка на функцию.\n\n## Анонимные vs именованные\n\nАнонимные нельзя удалить. Для сложной логики — именованные.\n\n## onclick vs addEventListener\n\n`el.onclick = fn` — работает, но перезаписывается. `addEventListener` — можно несколько. Лучше `addEventListener`.\n\n## Что будет, если\n\n- Опечатка в `\"clikc\"` — слушатель добавится, но не сработает.\n- `btn.addEventListener(\"click\", alert)` — `alert` без `()` вызывается при клике, `alert()` — сразу.\n\n## Частая ошибка\n\n`addEventListener(\"click\", fn())` — вызвал функцию сразу. Нужно `fn` без скобок.\n\n## Итог\n\n- `addEventListener(\"click\", fn)`\n- `fn` без `()`\n- Частые: `click`, `submit`, `input`, `keydown`\n- `removeEventListener` — та же ссылка\n- Лучше `addEventListener`, не `onclick`",
-      "questions": [
-        { "text": "Что делает `addEventListener`?", "options": ["Удаляет", "Слушает событие", "Создаёт", "Меняет"], "answer": 1, "explanation": "Добавляет слушателя." },
-        { "text": "Как передать обработчик?", "options": ["fn()", "fn", "fn = () =>", "call(fn)"], "answer": 1, "explanation": "Без `()` — иначе вызов сразу." },
-        { "text": "Сколько слушателей на одно событие?", "options": ["1", "2", "любое", "нельзя"], "answer": 2, "explanation": "`addEventListener` — можно несколько." },
-        { "text": "Какое событие — клик?", "options": ["press", "click", "tap", "touch"], "answer": 1, "explanation": "`click`." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<button id=\"btn\">Нажми</button>\n<p id=\"out\"></p>\n```\n\nЧерез JS: при клике на `#btn` записывай в `#out` текст \"Кликнули\".\n\nИзначально видимый текст: `Нажми` (после клика появится `Кликнули`, но проверяется только структура).",
-        "starter": "<button id=\"btn\">Нажми</button>\n<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Нажми",
-        "must_contain": ["addEventListener", "click", "textContent", "querySelector"]
-      }
-    },
-    "25": {
-      "id": 25,
-      "check_type": "dom",
-      "title": "Формы, submit, preventDefault",
-      "theory": "## submit\n\nСобытие отправки формы:\n\n```js\nconst form = document.querySelector(\"form\");\nform.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n  console.log(\"отправка перехвачена\");\n});\n```\n\nПо умолчанию submit **перезагружает** страницу. `preventDefault()` отменяет стандартное поведение.\n\n## preventDefault\n\n```js\nevent.preventDefault();\n```\n\nОстанавливает действие по умолчанию. Для кликов — переход по ссылке, для форм — отправка.\n\n## Значение поля\n\n```js\nconst input = document.querySelector(\"#name\");\nconst value = input.value;\n```\n\n`value` — что введено.\n\n## Пример\n\n```js\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  const text = input.value;\n  output.textContent = text;\n});\n```\n\n## reset\n\n```js\nform.reset();  // очистить поля\ninput.value = \"\";  // очистить одно\n```\n\n## input\n\nСобытие `input` — при каждом изменении:\n\n```js\ninput.addEventListener(\"input\", () => {\n  console.log(input.value);\n});\n```\n\n## Что будет, если\n\n- Забыть `preventDefault` — страница перезагрузится, JS не успеет.\n- `e.preventDefault` без `()` — не вызовется.\n\n## Частая ошибка\n\n`submit` без `preventDefault` — перезагрузка. Всегда отменяй.\n\n## Итог\n\n- `submit` — на форме\n- `preventDefault()` — отменить\n- `input.value` — значение\n- `form.reset()` — очистить\n- `input` — на каждое изменение",
-      "questions": [
-        { "text": "Что делает `preventDefault`?", "options": ["Отменяет действие", "Отправляет", "Меняет стиль", "Удаляет"], "answer": 0, "explanation": "Стандартное поведение отменяется." },
-        { "text": "Что при `submit` без `preventDefault`?", "options": ["Ничего", "Перезагрузка страницы", "Ошибка", "Отправка"], "answer": 1, "explanation": "По умолчанию форма перезагружает." },
-        { "text": "Как получить значение поля?", "options": ["input.text", "input.value", "input.get()", "input.content"], "answer": 1, "explanation": "`value`." },
-        { "text": "Как очистить форму?", "options": ["form.clear()", "form.reset()", "form.empty()", "form.delete()"], "answer": 1, "explanation": "`reset`." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Отправить</button>\n</form>\n<p id=\"out\"></p>\n```\n\nЧерез JS: на `submit` у `#f` — `preventDefault`, записывай `#inp.value` в `#out.textContent`.\n\nИзначальный видимый текст: `Отправить`",
-        "starter": "<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Отправить</button>\n</form>\n<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
-        "expected": "Отправить",
-        "must_contain": ["addEventListener", "submit", "preventDefault", ".value", "textContent"]
-      }
-    },
-    "26": {
-      "id": 26,
-      "check_type": "dom",
-      "title": "Клавиатура",
-      "theory": "## keydown\n\n```js\ndocument.addEventListener(\"keydown\", (event) => {\n  console.log(event.key);\n});\n```\n\nСрабатывает при нажатии клавиши.\n\n## event.key\n\n`event.key` — символ или имя:\n\n- `\"a\"` — буква\n- `\"Enter\"` — Enter\n- `\"Escape\"` — Esc\n- `\"ArrowUp\"` / `\"ArrowDown\"` — стрелки\n- `\" \"` — пробел\n\n## Другие свойства\n\n- `event.code` — физический код (`\"KeyA\"`, `\"Space\"`)\n- `event.ctrlKey` / `shiftKey` / `altKey` — модификаторы (true/false)\n\n```js\ndocument.addEventListener(\"keydown\", (e) => {\n  if (e.ctrlKey && e.key === \"s\") {\n    e.preventDefault();\n    console.log(\"сохранение перехвачено\");\n  }\n});\n```\n\n## keyup\n\n```js\ndocument.addEventListener(\"keyup\", (e) => {\n  console.log(\"отпустили\", e.key);\n});\n```\n\nСрабатывает при отпускании.\n\n## Что будет, если\n\n- `event.key` для мёртвых клавиш (Shift) — `\"Shift\"`.\n- `preventDefault` на всех keydown — сломает Tab, стрелки.\n\n## Частая ошибка\n\n`event.keyCode` — устаревшее. Используй `event.key`.\n\n## Итог\n\n- `keydown` — нажатие\n- `event.key` — символ или имя\n- `ctrlKey` / `shiftKey` — модификаторы\n- `keyCode` — устарел",
-      "questions": [
-        { "text": "Что в `event.key` для Enter?", "options": ["\"13\"", "\"Enter\"", "\"return\"", "13"], "answer": 1, "explanation": "Имя — `\"Enter\"`." },
-        { "text": "Что делает `keydown`?", "options": ["Нажатие", "Отпускание", "Клик", "Ввод"], "answer": 0, "explanation": "Нажатие." },
-        { "text": "Как проверить Ctrl?", "options": ["event.ctrl", "event.ctrlKey", "event.Ctrl", "event.key === \"Ctrl\""], "answer": 1, "explanation": "`ctrlKey`." },
-        { "text": "Что устарело?", "options": ["event.key", "event.code", "event.keyCode", "event.ctrlKey"], "answer": 2, "explanation": "`keyCode` — устарело." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<p id=\"out\"></p>\n```\n\nЧерез JS: слушай `keydown` на `document`, записывай `event.key` в `#out.textContent`.\n\nИзначально пусто.",
-        "starter": "<p id=\"out\"></p>\n<script>\n  // TODO\n</script>\n",
-        "expected": "",
-        "must_contain": ["addEventListener", "keydown", "event.key", "textContent"]
-      }
-    },
-    "27": {
-      "id": 27,
-      "check_type": "dom",
-      "title": "Проект: счётчик",
-      "theory": "## Что делаем\n\nСчётчик с кнопками + и −. Применяем: DOM, события, изменение текста.\n\n## HTML\n\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\n## JS\n\n```js\nlet count = 0;\nconst value = document.querySelector(\"#value\");\nconst inc = document.querySelector(\"#inc\");\nconst dec = document.querySelector(\"#dec\");\n\ninc.addEventListener(\"click\", () => {\n  count++;\n  value.textContent = count;\n});\n\ndec.addEventListener(\"click\", () => {\n  count--;\n  value.textContent = count;\n});\n```\n\n## Проверки\n\n- `count` — переменная, хранит текущее\n- `textContent` — обновляется\n- `addEventListener` на двух кнопках\n- `++` / `--`\n\n## Что будет, если\n\n- `value.textContent = count++` — покажет старое, потом ++.\n- Забыть обновить `textContent` — цифра не меняется.\n\n## Частая ошибка\n\n`count = value.textContent + 1` — конкатенация строк. Нужен `Number(...)` или числовой `count` в JS.\n\n## Итог\n\n- `let count` — состояние\n- `addEventListener` на кнопках\n- `textContent` — обновить\n- `count++` / `count--`",
-      "questions": [
-        { "text": "Что делает `textContent = count`?", "options": ["Меняет", "Показывает значение", "Удаляет", "Создаёт"], "answer": 1, "explanation": "Обновляет текст элемента." },
-        { "text": "Где хранится состояние счётчика?", "options": ["В DOM", "В переменной", "В HTML", "В CSS"], "answer": 1, "explanation": "В переменной `count`." },
-        { "text": "Что при `value.textContent = count++`?", "options": ["Сразу новое", "Старое, потом ++", "Ошибка", "undefined"], "answer": 1, "explanation": "Постфиксный ++ вернёт старое." },
-        { "text": "Как изменить число на 1?", "options": ["count = count + 1", "count++", "count += 1", "все варианты"], "answer": 3, "explanation": "Все три работают." }
-      ],
-      "practice": {
-        "description": "HTML:\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\nЧерез JS сделай счётчик: `#inc` прибавляет 1, `#dec` убавляет 1, `#value` показывает число.\n\nИзначально видимый текст: `− 0 +`",
-        "starter": "<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n<script>\n  // TODO\n</script>\n",
-        "expected": "− 0 +",
-        "must_contain": ["addEventListener", "click", "textContent", "count++", "count--"]
-      }
-    },
-    "28": {
-      "id": 28,
-      "check_type": "dom",
-      "title": "DOM, querySelector",
+      "id": 23, "check_type": "dom", "title": "DOM, querySelector",
       "theory": "## Что такое DOM\n\nDOM — **Document Object Model**. Браузер парсит HTML в дерево объектов. JS читает и меняет это дерево.\n\n`document` — корневой объект.\n\n## querySelector\n\nНайти **первый** элемент по CSS-селектору:\n\n```js\nconst title = document.querySelector(\"h1\");\nconst byId = document.querySelector(\"#title\");\nconst byClass = document.querySelector(\".card\");\n```\n\nСелекторы как в CSS: `#id`, `.class`, `tag`, `[attr]`.\n\n## querySelectorAll\n\nНайти **все**:\n\n```js\nconst items = document.querySelectorAll(\"li\");\nconsole.log(items.length);\nitems.forEach(el => console.log(el.textContent));\n```\n\nВозвращает `NodeList` (похож на массив).\n\n## Если элемента нет\n\n```js\nconst x = document.querySelector(\"#nope\");\nconsole.log(x); // null\n```\n\nПроверяй на `null`.\n\n## Когда DOM доступен\n\n`<script>` — после элементов или с `defer`. Иначе `querySelector` вернёт `null`.\n\n## Что будет, если\n\n- `querySelector(null)` — TypeError.\n- Неверный селектор — `null`.\n\n## Частая ошибка\n\nСкрипт в `<head>` без `defer` — DOM ещё не построен.\n\n## Итог\n\n- DOM — дерево объектов\n- `querySelector` — первый\n- `querySelectorAll` — все\n- CSS-селекторы\n- Нет элемента — `null`",
       "questions": [
-        { "text": "Что делает `querySelector`?", "options": ["Все", "Первый по селектору", "Удаляет", "Создаёт"], "answer": 1, "explanation": "Первый." },
-        { "text": "Что при отсутствии элемента?", "options": ["Ошибка", "null", "undefined", "Пустой объект"], "answer": 1, "explanation": "`null`." },
-        { "text": "Селектор для id `title`?", "options": ["title", "#title", ".title", "id=title"], "answer": 1, "explanation": "`#id`." },
-        { "text": "Где ставить `<script>` для работы с DOM?", "options": ["В `<head>`", "После элементов или с `defer`", "Перед DOCTYPE", "В `<title>`"], "answer": 1, "explanation": "После DOM или `defer`." }
+        {"text": "Что делает `querySelector`?", "options": ["Все", "Первый по селектору", "Удаляет", "Создаёт"], "answer": 1, "explanation": "Первый."},
+        {"text": "Что при отсутствии элемента?", "options": ["Ошибка", "null", "undefined", "Пустой объект"], "answer": 1, "explanation": "`null`."},
+        {"text": "Селектор для id `title`?", "options": ["title", "#title", ".title", "id=title"], "answer": 1, "explanation": "`#id`."},
+        {"text": "Где ставить `<script>` для работы с DOM?", "options": ["В `<head>`", "После элементов или с `defer`", "Перед DOCTYPE", "В `<title>`"], "answer": 1, "explanation": "После DOM или `defer`."}
       ],
       "practice": {
-        "description": "HTML:\n```html\n<h1 id=\"title\">Заголовок</h1>\n```\n\nЧерез JS: получи `#title` через `querySelector`, установи `textContent` = \"Новый заголовок\".\n\nВидимый текст: `Новый заголовок`",
+        "description": "HTML:\n```html\n<h1 id=\"title\">Заголовок</h1>\n```\n\nЧерез JS в `<script>` получи `#title` через `querySelector`, установи `textContent` в \"Новый заголовок\".\n\nВидимый текст: `Новый заголовок`",
         "starter": "<h1 id=\"title\">Заголовок</h1>\n<script>\n  // TODO\n</script>\n",
         "expected": "Новый заголовок",
         "must_contain": ["querySelector", "textContent"]
       }
     },
-    "29": {
-      "id": 29,
-      "check_type": "dom",
-      "title": "textContent, innerHTML",
-      "theory": "## textContent\n\n**Текст** элемента, без HTML:\n\n```js\nconst el = document.querySelector(\"#box\");\nel.textContent = \"Привет\";\n```\n\nЕсли было `<b>старый</b>` — станет просто `Привет`, теги не отрендерятся.\n\n## innerHTML\n\n**HTML** внутри элемента:\n\n```js\nel.innerHTML = \"<b>Жирный</b>\";\n```\n\nТег `<b>` отрендерится.\n\n## textContent vs innerHTML\n\n- `textContent` — только текст, **безопасно**.\n- `innerHTML` — рендерит HTML, **опасно** с пользовательскими данными (XSS).\n\nПример XSS:\n\n```js\nel.innerHTML = \"<script>alert('xss')</script>\";\n```\n\n## Когда что\n\n- Текст от пользователя — `textContent`\n- Своя разметка — `innerHTML` (если уверен)\n- Форматирование — `createElement` (урок 31)\n\n## Что будет, если\n\n- `el.textContent = \"<b>x</b>\"` — покажет `<b>x</b>` буквально.\n- `el.innerHTML = \"<b>x</b>\"` — покажет жирный x.\n\n## Частая ошибка\n\n`innerHTML` для пользовательского ввода — XSS. Всегда `textContent`.\n\n## Итог\n\n- `textContent` — текст\n- `innerHTML` — HTML\n- `textContent` — безопасно\n- `innerHTML` — XSS-риск",
+    "24": {
+      "id": 24, "check_type": "dom", "title": "textContent, innerHTML",
+      "theory": "## textContent\n\n**Текст** элемента, без HTML:\n\n```js\nconst el = document.querySelector(\"#box\");\nel.textContent = \"Привет\";\n```\n\nЕсли было `<b>старый</b>` — станет просто `Привет`, теги не отрендерятся.\n\n## innerHTML\n\n**HTML** внутри элемента:\n\n```js\nel.innerHTML = \"<b>Жирный</b>\";\n```\n\nТег `<b>` отрендерится жирным.\n\n## textContent vs innerHTML\n\n- `textContent` — только текст, **безопасно**.\n- `innerHTML` — рендерит HTML, **опасно** с пользовательскими данными (XSS).\n\nПример XSS:\n\n```js\nel.innerHTML = \"<script>alert('xss')</script>\";\n```\n\nВставит скрипт.\n\n## Когда что\n\n- Текст от пользователя — `textContent`\n- Своя разметка — `innerHTML` (если уверен)\n- Форматирование — `createElement` (урок 26)\n\n## Что будет, если\n\n- `el.textContent = \"<b>x</b>\"` — покажет `<b>x</b>` буквально.\n- `el.innerHTML = \"<b>x</b>\"` — покажет жирный x.\n\n## Частая ошибка\n\n`innerHTML` для пользовательского ввода — XSS. Всегда `textContent`.\n\n## Итог\n\n- `textContent` — текст\n- `innerHTML` — HTML\n- `textContent` — безопасно\n- `innerHTML` — XSS-риск",
       "questions": [
-        { "text": "Что покажет `el.textContent = \"<b>hi</b>\"`?", "options": ["жирный hi", "<b>hi</b>", "hi", "Ошибка"], "answer": 1, "explanation": "`textContent` — теги не рендерятся." },
-        { "text": "Что покажет `el.innerHTML = \"<b>hi</b>\"`?", "options": ["жирный hi", "<b>hi</b>", "hi", "Ошибка"], "answer": 0, "explanation": "HTML рендерится." },
-        { "text": "Что безопаснее с вводом пользователя?", "options": ["innerHTML", "textContent", "одинаково", "оба опасны"], "answer": 1, "explanation": "`textContent` не рендерит HTML." },
-        { "text": "Что такое XSS?", "options": ["Ошибка", "Вставка чужого скрипта через HTML", "Стиль", "Анимация"], "answer": 1, "explanation": "Cross-Site Scripting." }
+        {"text": "Что покажет `el.textContent = \"<b>hi</b>\"`?", "options": ["жирный hi", "<b>hi</b>", "hi", "Ошибка"], "answer": 1, "explanation": "`textContent` — теги не рендерятся."},
+        {"text": "Что покажет `el.innerHTML = \"<b>hi</b>\"`?", "options": ["жирный hi", "<b>hi</b>", "hi", "Ошибка"], "answer": 0, "explanation": "HTML рендерится."},
+        {"text": "Что безопаснее с вводом пользователя?", "options": ["innerHTML", "textContent", "одинаково", "оба опасны"], "answer": 1, "explanation": "`textContent` не рендерит HTML."},
+        {"text": "Что такое XSS?", "options": ["Ошибка", "Вставка чужого скрипта через HTML", "Стиль", "Анимация"], "answer": 1, "explanation": "Cross-Site Scripting."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<div id=\"box\"></div>\n```\n\nЧерез JS:\n1. `textContent` = \"Просто текст\"\n2. `innerHTML` = \"<p>Абзац</p>\" — **после** этого измени `textContent` на \"Итог\"\n\nВидимый текст: `Итог`",
@@ -502,17 +396,15 @@
         "must_contain": ["querySelector", "textContent"]
       }
     },
-    "30": {
-      "id": 30,
-      "check_type": "dom",
-      "title": "Стили и классы",
-      "theory": "## style\n\nПрямое изменение CSS через JS:\n\n```js\nel.style.color = \"red\";\nel.style.fontSize = \"20px\";\nel.style.backgroundColor = \"yellow\";\n```\n\nВ JS — camelCase: `background-color` → `backgroundColor`.\n\n## classList\n\nРабота с классами:\n\n```js\nel.classList.add(\"active\");\nel.classList.remove(\"active\");\nel.classList.toggle(\"active\");\nel.classList.contains(\"active\");\n```\n\n`classList` — удобнее, чем `el.className`.\n\n## className\n\n```js\nel.className = \"card active\";  // перезапишет все классы\n```\n\nИспользуй `classList`, чтобы не стереть остальное.\n\n## Стиль vs класс\n\n- `el.style.color = \"red\"` — **inline**-стиль\n- `classList.add(\"red\")` + CSS `.red { color: red }` — через класс\n\nКласс предпочтительнее — разделяет HTML и CSS.\n\n## Что будет, если\n\n- `el.style.background-color` — SyntaxError (дефис). Нужно `backgroundColor`.\n- `el.className = \"new\"` — сотрёт старые классы.\n\n## Частая ошибка\n\nДефис в JS-стилях. Всегда camelCase.\n\n## Итог\n\n- `el.style.color = \"...\"` — inline\n- `el.classList.add/remove/toggle` — через классы\n- `classList` лучше `className`\n- В JS — camelCase",
+    "25": {
+      "id": 25, "check_type": "dom", "title": "Стили и классы",
+      "theory": "## style\n\nПрямое изменение CSS через JS:\n\n```js\nel.style.color = \"red\";\nel.style.fontSize = \"20px\";\nel.style.backgroundColor = \"yellow\";\n```\n\nВ JS — camelCase: `background-color` → `backgroundColor`.\n\n## classList\n\nРабота с классами:\n\n```js\nel.classList.add(\"active\");\nel.classList.remove(\"active\");\nel.classList.toggle(\"active\");\nel.classList.contains(\"active\");\n```\n\n`classList` — удобнее, чем строка в `el.className`.\n\n## className\n\n```js\nel.className = \"card active\";  // перезапишет все классы\n```\n\nИспользуй `classList`, чтобы не стереть остальное.\n\n## Стиль vs класс\n\n- `el.style.color = \"red\"` — **inline**-стиль\n- `classList.add(\"red\")` + CSS `.red { color: red }` — через класс\n\nКласс предпочтительнее — разделяет HTML и CSS.\n\n## Что будет, если\n\n- `el.style.background-color` — SyntaxError (дефис). Нужно `backgroundColor`.\n- `el.className = \"new\"` — сотрёт все старые классы.\n\n## Частая ошибка\n\nДефис в JS-стилях. Всегда camelCase.\n\n## Итог\n\n- `el.style.color = \"...\"` — inline\n- `el.classList.add/remove/toggle` — через классы\n- `classList` лучше `className`\n- В JS — camelCase",
       "questions": [
-        { "text": "Как задать красный цвет через JS?", "options": ["el.style.color = \"red\"", "el.style.background-color = \"red\"", "el.color = \"red\"", "el.style[\"color\"] = red"], "answer": 0, "explanation": "`el.style.color`." },
-        { "text": "Как добавить класс `active`?", "options": ["el.className += active", "el.classList.add(\"active\")", "el.addClass(\"active\")", "el.class += active"], "answer": 1, "explanation": "`classList.add`." },
-        { "text": "Что делает `classList.toggle(\"x\")`?", "options": ["Добавляет", "Убирает", "Переключает", "Проверяет"], "answer": 2, "explanation": "Toggle — переключение." },
-        { "text": "Что лучше: `style` или `classList`?", "options": ["style", "classList", "одинаково", "зависит"], "answer": 1, "explanation": "`classList` — отделяет CSS." },
-        { "text": "Как `background-color` в JS?", "options": ["background-color", "backgroundColor", "background_color", "bg-color"], "answer": 1, "explanation": "camelCase." }
+        {"text": "Как задать красный цвет через JS?", "options": ["el.style.color = \"red\"", "el.style.background-color = \"red\"", "el.color = \"red\"", "el.style[\"color\"] = red"], "answer": 0, "explanation": "`el.style.color`."},
+        {"text": "Как добавить класс `active`?", "options": ["el.className += active", "el.classList.add(\"active\")", "el.addClass(\"active\")", "el.class += active"], "answer": 1, "explanation": "`classList.add`."},
+        {"text": "Что делает `classList.toggle(\"x\")`?", "options": ["Добавляет", "Убирает", "Переключает", "Проверяет"], "answer": 2, "explanation": "Toggle — переключение."},
+        {"text": "Что лучше: `style` или `classList`?", "options": ["style", "classList", "одинаково", "зависит"], "answer": 1, "explanation": "`classList` — отделяет CSS."},
+        {"text": "Как `background-color` в JS?", "options": ["background-color", "backgroundColor", "background_color", "bg-color"], "answer": 1, "explanation": "camelCase."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<div id=\"box\">Текст</div>\n```\n\nЧерез JS:\n1. Добавь класс `active`\n2. Установи inline-стиль `color` = `\"red\"`\n\nВидимый текст: `Текст`",
@@ -521,16 +413,14 @@
         "must_contain": ["classList.add", ".style.color", "querySelector"]
       }
     },
-    "31": {
-      "id": 31,
-      "check_type": "dom",
-      "title": "createElement, appendChild",
-      "theory": "## Создание\n\n```js\nconst p = document.createElement(\"p\");\np.textContent = \"Новый абзац\";\n```\n\n`p` — новый элемент, ещё не в DOM.\n\n## Вставка\n\n```js\nparent.appendChild(p);\n```\n\n`appendChild` — в конец.\n\n## Другие способы\n\n```js\nparent.append(p, text);\nparent.prepend(p);\nparent.before(p);\nparent.after(p);\n```\n\n## Удаление\n\n```js\nel.remove();\nparent.removeChild(el);\n```\n\n## Сборка списка\n\n```js\nconst ul = document.querySelector(\"#list\");\n[\"Молоко\", \"Хлеб\", \"Яйца\"].forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  ul.appendChild(li);\n});\n```\n\n## Почему не innerHTML\n\n`innerHTML +=` пересоздаёт всё, теряет слушатели. `createElement` + `append` — точечно.\n\n## Что будет, если\n\n- Вставить элемент дважды — перенесётся, не скопируется.\n- `appendChild(null)` — TypeError.\n\n## Частая ошибка\n\n`parent.appendChild(\"<p>x</p>\")` — `appendChild` принимает **элемент**, не строку. Строку — через `innerHTML`.\n\n## Итог\n\n- `createElement(\"p\")` — создать\n- `parent.appendChild(el)` — вставить\n- `el.remove()` — удалить\n- Не путать с `innerHTML`",
+    "26": {
+      "id": 26, "check_type": "dom", "title": "createElement, appendChild",
+      "theory": "## Создание\n\n```js\nconst p = document.createElement(\"p\");\np.textContent = \"Новый абзац\";\n```\n\n`p` — новый элемент, ещё нигде в DOM.\n\n## Вставка\n\n```js\nparent.appendChild(p);\n```\n\n`appendChild` — в конец.\n\n## Другие\n\n```js\nparent.append(p, text);\nparent.prepend(p);\nparent.before(p);\nparent.after(p);\n```\n\n## Удаление\n\n```js\nel.remove();\nparent.removeChild(el);\n```\n\n## Сборка списка\n\n```js\nconst ul = document.querySelector(\"#list\");\n[\"Молоко\", \"Хлеб\", \"Яйца\"].forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  ul.appendChild(li);\n});\n```\n\n## Почему не innerHTML\n\n`innerHTML +=` пересоздаёт всё, теряет слушатели. `createElement` + `append` — точечно.\n\n## Что будет, если\n\n- Вставить элемент дважды — перенесётся, не скопируется.\n- `appendChild(null)` — TypeError.\n\n## Частая ошибка\n\n`parent.appendChild(\"<p>x</p>\")` — `appendChild` принимает **элемент**, не строку. Строку — через `innerHTML`.\n\n## Итог\n\n- `createElement(\"p\")` — создать\n- `parent.appendChild(el)` — вставить\n- `el.remove()` — удалить\n- Не путать с `innerHTML`",
       "questions": [
-        { "text": "Что делает `createElement`?", "options": ["Ищет", "Создаёт элемент", "Удаляет", "Меняет"], "answer": 1, "explanation": "Создаёт новый." },
-        { "text": "Что делает `appendChild`?", "options": ["Удаляет", "Вставляет в конец родителя", "Ищет", "Копирует"], "answer": 1, "explanation": "В конец." },
-        { "text": "Принимает ли `appendChild` строку?", "options": ["Да", "Нет, только элемент", "Только HTML", "Только с textContent"], "answer": 1, "explanation": "Только элемент." },
-        { "text": "Как удалить элемент?", "options": ["el.delete()", "el.remove()", "delete el", "el = null"], "answer": 1, "explanation": "`el.remove()`." }
+        {"text": "Что делает `createElement`?", "options": ["Ищет", "Создаёт элемент", "Удаляет", "Меняет"], "answer": 1, "explanation": "Создаёт новый."},
+        {"text": "Что делает `appendChild`?", "options": ["Удаляет", "Вставляет в конец родителя", "Ищет", "Копирует"], "answer": 1, "explanation": "В конец."},
+        {"text": "Принимает ли `appendChild` строку?", "options": ["Да", "Нет, только элемент", "Только HTML", "Только с textContent"], "answer": 1, "explanation": "Только элемент."},
+        {"text": "Как удалить элемент?", "options": ["el.delete()", "el.remove()", "delete el", "el = null"], "answer": 1, "explanation": "`el.remove()`."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<ul id=\"list\"></ul>\n```\n\nЧерез JS создай три `<li>` с текстами \"Молоко\", \"Хлеб\", \"Яйца\" и добавь в `#list`.\n\nВидимый текст: `Молоко Хлеб Яйца`",
@@ -539,16 +429,14 @@
         "must_contain": ["createElement", "appendChild", "textContent", "querySelector"]
       }
     },
-    "32": {
-      "id": 32,
-      "check_type": "dom",
-      "title": "addEventListener, click",
+    "27": {
+      "id": 27, "check_type": "dom", "title": "addEventListener, click",
       "theory": "## Что такое событие\n\nПользователь кликнул — **событие**. JS может **слушать** события и реагировать.\n\n## addEventListener\n\n```js\nbutton.addEventListener(\"click\", () => {\n  console.log(\"кликнули\");\n});\n```\n\nПервый аргумент — тип события, второй — обработчик.\n\n## Частые события\n\n- `click` — клик\n- `submit` — отправка формы\n- `input` — ввод в поле\n- `keydown` — нажатие клавиши\n- `mouseover` / `mouseout` — наведение\n\n## Несколько слушателей\n\n```js\nbtn.addEventListener(\"click\", () => console.log(\"A\"));\nbtn.addEventListener(\"click\", () => console.log(\"B\"));\n```\n\nОба сработают.\n\n## Удаление\n\n```js\nfunction onClick() { console.log(\"раз\"); }\nbtn.addEventListener(\"click\", onClick);\nbtn.removeEventListener(\"click\", onClick);\n```\n\nНужна **та же** ссылка на функцию.\n\n## onclick vs addEventListener\n\n`el.onclick = fn` — работает, но перезаписывается. `addEventListener` — можно несколько. Лучше `addEventListener`.\n\n## Что будет, если\n\n- Опечатка `\"clikc\"` — слушатель добавится, но не сработает.\n- `btn.addEventListener(\"click\", alert)` — `alert` без `()` вызывается при клике, `alert()` — сразу.\n\n## Частая ошибка\n\n`addEventListener(\"click\", fn())` — вызвал функцию сразу. Нужно `fn` без скобок.\n\n## Итог\n\n- `addEventListener(\"click\", fn)`\n- `fn` без `()`\n- Частые: `click`, `submit`, `input`, `keydown`\n- `removeEventListener` — та же ссылка\n- Лучше `addEventListener`, не `onclick`",
       "questions": [
-        { "text": "Что делает `addEventListener`?", "options": ["Удаляет", "Слушает событие", "Создаёт", "Меняет"], "answer": 1, "explanation": "Добавляет слушателя." },
-        { "text": "Как передать обработчик?", "options": ["fn()", "fn", "fn = () =>", "call(fn)"], "answer": 1, "explanation": "Без `()` — иначе вызов сразу." },
-        { "text": "Сколько слушателей на одно событие?", "options": ["1", "2", "любое", "нельзя"], "answer": 2, "explanation": "`addEventListener` — можно несколько." },
-        { "text": "Какое событие — клик?", "options": ["press", "click", "tap", "touch"], "answer": 1, "explanation": "`click`." }
+        {"text": "Что делает `addEventListener`?", "options": ["Удаляет", "Слушает событие", "Создаёт", "Меняет"], "answer": 1, "explanation": "Добавляет слушателя."},
+        {"text": "Как передать обработчик?", "options": ["fn()", "fn", "fn = () =>", "call(fn)"], "answer": 1, "explanation": "Без `()` — иначе вызов сразу."},
+        {"text": "Сколько слушателей на одно событие?", "options": ["1", "2", "любое", "нельзя"], "answer": 2, "explanation": "`addEventListener` — можно несколько."},
+        {"text": "Какое событие — клик?", "options": ["press", "click", "tap", "touch"], "answer": 1, "explanation": "`click`."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<button id=\"btn\">Нажми</button>\n<p id=\"out\"></p>\n```\n\nЧерез JS: при клике на `#btn` — `#out` текст \"Кликнули\".\n\nИзначальный видимый текст: `Нажми`",
@@ -557,16 +445,14 @@
         "must_contain": ["addEventListener", "click", "textContent", "querySelector"]
       }
     },
-    "33": {
-      "id": 33,
-      "check_type": "dom",
-      "title": "Формы, submit, preventDefault",
+    "28": {
+      "id": 28, "check_type": "dom", "title": "Формы, submit, preventDefault",
       "theory": "## submit\n\nСобытие отправки формы:\n\n```js\nconst form = document.querySelector(\"form\");\nform.addEventListener(\"submit\", (event) => {\n  event.preventDefault();\n  console.log(\"отправка перехвачена\");\n});\n```\n\nПо умолчанию submit **перезагружает** страницу. `preventDefault()` отменяет.\n\n## preventDefault\n\n```js\nevent.preventDefault();\n```\n\nОстанавливает действие по умолчанию. Для кликов — переход по ссылке, для форм — отправка.\n\n## Значение поля\n\n```js\nconst input = document.querySelector(\"#name\");\nconst value = input.value;\n```\n\n`value` — что введено.\n\n## Пример\n\n```js\nform.addEventListener(\"submit\", (e) => {\n  e.preventDefault();\n  const text = input.value;\n  output.textContent = text;\n});\n```\n\n## reset\n\n```js\nform.reset();\ninput.value = \"\";\n```\n\n## input\n\nСобытие `input` — при каждом изменении:\n\n```js\ninput.addEventListener(\"input\", () => {\n  console.log(input.value);\n});\n```\n\n## Что будет, если\n\n- Забыть `preventDefault` — страница перезагрузится.\n- `e.preventDefault` без `()` — не вызовется.\n\n## Частая ошибка\n\n`submit` без `preventDefault` — перезагрузка. Всегда отменяй.\n\n## Итог\n\n- `submit` — на форме\n- `preventDefault()` — отменить\n- `input.value` — значение\n- `form.reset()` — очистить\n- `input` — на каждое изменение",
       "questions": [
-        { "text": "Что делает `preventDefault`?", "options": ["Отменяет действие", "Отправляет", "Меняет стиль", "Удаляет"], "answer": 0, "explanation": "Стандартное поведение отменяется." },
-        { "text": "Что при `submit` без `preventDefault`?", "options": ["Ничего", "Перезагрузка", "Ошибка", "Отправка"], "answer": 1, "explanation": "Форма перезагружает." },
-        { "text": "Как получить значение поля?", "options": ["input.text", "input.value", "input.get()", "input.content"], "answer": 1, "explanation": "`value`." },
-        { "text": "Как очистить форму?", "options": ["form.clear()", "form.reset()", "form.empty()", "form.delete()"], "answer": 1, "explanation": "`reset`." }
+        {"text": "Что делает `preventDefault`?", "options": ["Отменяет действие", "Отправляет", "Меняет стиль", "Удаляет"], "answer": 0, "explanation": "Стандартное поведение отменяется."},
+        {"text": "Что при `submit` без `preventDefault`?", "options": ["Ничего", "Перезагрузка", "Ошибка", "Отправка"], "answer": 1, "explanation": "Форма перезагружает."},
+        {"text": "Как получить значение поля?", "options": ["input.text", "input.value", "input.get()", "input.content"], "answer": 1, "explanation": "`value`."},
+        {"text": "Как очистить форму?", "options": ["form.clear()", "form.reset()", "form.empty()", "form.delete()"], "answer": 1, "explanation": "`reset`."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<form id=\"f\">\n  <input id=\"inp\" type=\"text\">\n  <button type=\"submit\">Отправить</button>\n</form>\n<p id=\"out\"></p>\n```\n\nЧерез JS: на `submit` у `#f` — `preventDefault`, записывай `#inp.value` в `#out.textContent`.\n\nИзначальный видимый текст: `Отправить`",
@@ -575,16 +461,14 @@
         "must_contain": ["addEventListener", "submit", "preventDefault", ".value", "textContent"]
       }
     },
-    "34": {
-      "id": 34,
-      "check_type": "dom",
-      "title": "Клавиатура",
+    "29": {
+      "id": 29, "check_type": "dom", "title": "Клавиатура",
       "theory": "## keydown\n\n```js\ndocument.addEventListener(\"keydown\", (event) => {\n  console.log(event.key);\n});\n```\n\nСрабатывает при нажатии клавиши.\n\n## event.key\n\n- `\"a\"` — буква\n- `\"Enter\"` — Enter\n- `\"Escape\"` — Esc\n- `\"ArrowUp\"` / `\"ArrowDown\"` — стрелки\n- `\" \"` — пробел\n\n## Модификаторы\n\n- `event.code` — физический код (`\"KeyA\"`, `\"Space\"`)\n- `event.ctrlKey` / `shiftKey` / `altKey` — true/false\n\n```js\ndocument.addEventListener(\"keydown\", (e) => {\n  if (e.ctrlKey && e.key === \"s\") {\n    e.preventDefault();\n    console.log(\"сохранение перехвачено\");\n  }\n});\n```\n\n## keyup\n\n```js\ndocument.addEventListener(\"keyup\", (e) => {\n  console.log(\"отпустили\", e.key);\n});\n```\n\n## Что будет, если\n\n- `event.key` для Shift — `\"Shift\"`.\n- `preventDefault` на всех keydown — сломает Tab, стрелки.\n\n## Частая ошибка\n\n`event.keyCode` — устаревшее. Используй `event.key`.\n\n## Итог\n\n- `keydown` — нажатие\n- `event.key` — символ или имя\n- `ctrlKey` / `shiftKey` — модификаторы\n- `keyCode` — устарел",
       "questions": [
-        { "text": "Что в `event.key` для Enter?", "options": ["\"13\"", "\"Enter\"", "\"return\"", "13"], "answer": 1, "explanation": "Имя — `\"Enter\"`." },
-        { "text": "Что делает `keydown`?", "options": ["Нажатие", "Отпускание", "Клик", "Ввод"], "answer": 0, "explanation": "Нажатие." },
-        { "text": "Как проверить Ctrl?", "options": ["event.ctrl", "event.ctrlKey", "event.Ctrl", "event.key === \"Ctrl\""], "answer": 1, "explanation": "`ctrlKey`." },
-        { "text": "Что устарело?", "options": ["event.key", "event.code", "event.keyCode", "event.ctrlKey"], "answer": 2, "explanation": "`keyCode`." }
+        {"text": "Что в `event.key` для Enter?", "options": ["\"13\"", "\"Enter\"", "\"return\"", "13"], "answer": 1, "explanation": "Имя — `\"Enter\"`."},
+        {"text": "Что делает `keydown`?", "options": ["Нажатие", "Отпускание", "Клик", "Ввод"], "answer": 0, "explanation": "Нажатие."},
+        {"text": "Как проверить Ctrl?", "options": ["event.ctrl", "event.ctrlKey", "event.Ctrl", "event.key === \"Ctrl\""], "answer": 1, "explanation": "`ctrlKey`."},
+        {"text": "Что устарело?", "options": ["event.key", "event.code", "event.keyCode", "event.ctrlKey"], "answer": 2, "explanation": "`keyCode`."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<p id=\"out\"></p>\n```\n\nЧерез JS: слушай `keydown` на `document`, записывай `event.key` в `#out.textContent`.\n\nИзначально пусто.",
@@ -593,106 +477,14 @@
         "must_contain": ["addEventListener", "keydown", "event.key", "textContent"]
       }
     },
-    "35": {
-      "id": 35,
-      "check_type": "console",
-      "title": "Event loop и setTimeout",
-      "theory": "## Что такое event loop\n\nJS — **однопоточный**, но умеет делать несколько вещей «одновременно» через event loop. Синхронный код выполняется сразу, асинхронный — откладывается в очередь.\n\n## setTimeout\n\n```js\nsetTimeout(() => {\n  console.log(\"Через 2 секунды\");\n}, 2000);\n```\n\nПервый аргумент — функция, второй — задержка (мс).\n\n## Порядок\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nconsole.log(\"2\");\n// 1, 2, 3 — не 1, 3, 2\n```\n\nsetTimeout с 0 всё равно откладывается: сначала весь синхронный код.\n\n## clearTimeout\n\n```js\nconst id = setTimeout(() => console.log(\"не сработает\"), 1000);\nclearTimeout(id);\n```\n\n## setInterval\n\n```js\nconst id = setInterval(() => console.log(\"тик\"), 1000);\n// clearInterval(id); — остановить\n```\n\nКаждые N мс.\n\n## Как работает event loop\n\n1. Синхронный код выполняется до конца.\n2. Потом — микротаски (Promise, queueMicrotask).\n3. Потом — макротаски (setTimeout, setInterval, события).\n4. Повтор с шага 2.\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nPromise.resolve().then(() => console.log(\"2\"));\n// 1, 2, 3 — микротаски раньше макротасок\n```\n\n## Что будет, если\n\n- `setTimeout` с задержкой 0 — всё равно асинхронно.\n- Забыть `clearInterval` — утечка (таймер работает вечно).\n\n## Частая ошибка\n\nЖдать, что `setTimeout(fn, 0)` выполнится до следующей строки. Нет, только после синхронного кода.\n\n## Итог\n\n- JS однопоточный, но с event loop\n- `setTimeout(fn, ms)` — через N мс\n- `setInterval(fn, ms)` — каждые N мс\n- Сначала синхронный код, потом микро, потом макро\n- `clearTimeout` / `clearInterval`",
-      "questions": [
-        { "text": "Что делает `setTimeout(fn, 1000)`?", "options": ["Сразу", "Через 1000 мс", "Каждые 1000 мс", "Ошибка"], "answer": 1, "explanation": "Через 1 секунду, один раз." },
-        { "text": "Что выведет: log 1, setTimeout 0, log 2?", "options": ["1, 3, 2", "1, 2, 3", "2, 1, 3", "3, 1, 2"], "answer": 1, "explanation": "Сначала синхронный — 1, 2, потом отложенный — 3." },
-        { "text": "Что делает `clearInterval(id)`?", "options": ["Запускает", "Останавливает интервал", "Создаёт", "Ничего"], "answer": 1, "explanation": "Останавливает." },
-        { "text": "Что выполняется первым: микротаски или макротаски?", "options": ["Макро", "Микро", "Одновременно", "Зависит от ОС"], "answer": 1, "explanation": "Микро (Promise) раньше макро (setTimeout)." }
-      ],
-      "practice": {
-        "description": "Выведи `1`, `2`, `3` в правильном порядке через `setTimeout`:\n- синхронно `1`\n- `setTimeout` с `2`\n- синхронно `3`\n\nПорядок вывода должен быть `1, 3, 2`. Это демонстрирует, что `setTimeout` асинхронный.",
-        "starter": "// TODO\n",
-        "expected": "1\n3\n2",
-        "must_contain": ["setTimeout", "console.log"]
-      }
-    },
-    "36": {
-      "id": 36,
-      "check_type": "console",
-      "title": "Promise",
-      "theory": "## Что такое Promise\n\nPromise — объект, представляющий **будущее значение**. Три состояния:\n- **pending** — ожидание\n- **fulfilled** — успех (resolve)\n- **rejected** — ошибка (reject)\n\n## Создание\n\n```js\nconst p = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"готово\"), 1000);\n});\n```\n\n## Использование\n\n```js\np.then(result => console.log(result));  // \"готово\"\np.catch(error => console.log(error));\n```\n\n## reject\n\n```js\nconst p = new Promise((resolve, reject) => {\n  reject(new Error(\"что-то пошло не так\"));\n});\np.catch(err => console.log(err.message));\n```\n\n## Цепочки\n\n```js\nfetchData()\n  .then(a => doSomething(a))\n  .then(b => doAnother(b))\n  .catch(err => console.log(err));\n```\n\n## Promise.all\n\nВсе параллельно, ждёт всех:\n\n```js\nPromise.all([p1, p2, p3]).then(results => {\n  console.log(results);  // массив результатов\n});\n```\n\nЕсли хоть один rejected — весь Promise.all rejected.\n\n## Promise.race\n\nПервый завершившийся:\n\n```js\nPromise.race([slow, fast]).then(result => console.log(result));\n```\n\n## Проглатывание ошибок\n\n`.catch` в конце цепочки ловит любую ошибку выше.\n\n## Что будет, если\n\n- Забыть `.catch` — unhandled rejection.\n- `resolve()` дважды — второй вызов игнорируется.\n\n## Частая ошибка\n\nПутать `Promise` с самой функцией. `Promise` — возвращаемое значение.\n\n## Итог\n\n- `new Promise((resolve, reject) => {})`\n- `.then` — успех, `.catch` — ошибка\n- `Promise.all` — все параллельно\n- `Promise.race` — первый\n- Всегда добавляй `.catch`",
-      "questions": [
-        { "text": "Сколько состояний у Promise?", "options": ["1", "2", "3", "4"], "answer": 2, "explanation": "pending, fulfilled, rejected." },
-        { "text": "Что делает `.then(fn)`?", "options": ["Ошибку", "Успех", "Ничего", "Отменяет"], "answer": 1, "explanation": "Успех." },
-        { "text": "Что делает `.catch(fn)`?", "options": ["Ошибку", "Успех", "Создаёт", "Удаляет"], "answer": 0, "explanation": "Ошибку." },
-        { "text": "Что делает `Promise.all([p1, p2])`?", "options": ["Первый", "Все параллельно, ждёт всех", "Ошибку", "Отменяет"], "answer": 1, "explanation": "Все." }
-      ],
-      "practice": {
-        "description": "Создай Promise, который через `resolve(\"готово\")` без задержки отдаёт результат. Через `.then` выведи его.\n\nВидимый текст: `готово`",
-        "starter": "// TODO\n",
-        "expected": "готово",
-        "must_contain": ["new Promise", "resolve", ".then", "console.log"]
-      }
-    },
-    "37": {
-      "id": 37,
-      "check_type": "console",
-      "title": "async / await",
-      "theory": "## Что такое async\n\n`async` делает функцию асинхронной — она всегда возвращает Promise:\n\n```js\nasync function greet() {\n  return \"Привет\";\n}\ngreet().then(r => console.log(r));  // Привет\n```\n\n## await\n\nВнутри `async`-функции `await` ждёт Promise:\n\n```js\nasync function main() {\n  const result = await fetchData();\n  console.log(result);\n}\n```\n\nКод после `await` выполнится, когда Promise разрешится.\n\n## try / catch\n\n```js\nasync function main() {\n  try {\n    const data = await fetchData();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Ошибка:\", err.message);\n  }\n}\n```\n\n`await` на rejected Promise бросает исключение.\n\n## Последовательный await\n\n```js\nconst a = await fetchA();  // ждём\nconst b = await fetchB();  // ждём\n```\n\nОдин за другим. Если не зависят — используй `Promise.all`:\n\n```js\nconst [a, b] = await Promise.all([fetchA(), fetchB()]);\n```\n\nПараллельно — быстрее.\n\n## await вне async\n\nТолько в top-level модулях (ES2022). В обычном скрипте — синтаксическая ошибка.\n\n## Отличие от .then\n\n- `.then` — цепочки, `.catch`\n- `async/await` — выглядит как синхронный код, читается лучше\n\nОдно и то же под капотом.\n\n## Что будет, если\n\n- `await` без `async` — SyntaxError.\n- Забыть try/catch вокруг await — ошибка всплывёт.\n\n## Частая ошибка\n\n`await` в цикле `for...of` — каждый ждёт. В `Promise.all` — параллельно. Выбор зависит от задачи.\n\n## Итог\n\n- `async function` — возвращает Promise\n- `await` — ждёт Promise\n- `try / catch` — ловит ошибки\n- `Promise.all` для параллельности\n- Синтаксис проще, чем `.then`",
-      "questions": [
-        { "text": "Что делает `async`?", "options": ["Ничего", "Функция возвращает Promise", "Ускоряет", "Ошибка"], "answer": 1, "explanation": "Всегда Promise." },
-        { "text": "Что делает `await`?", "options": ["Ждёт Promise", "Создаёт", "Удаляет", "Ничего"], "answer": 0, "explanation": "Ждёт." },
-        { "text": "Как поймать ошибку при `await`?", "options": ["try/catch", "if/else", "for", "Promise"], "answer": 0, "explanation": "try/catch." },
-        { "text": "Как делать параллельно?", "options": ["await по очереди", "Promise.all", "for", "setTimeout"], "answer": 1, "explanation": "`Promise.all`." }
-      ],
-      "practice": {
-        "description": "Создай `async function main()`, внутри `const result = await Promise.resolve(\"готово\")`, выведи `result`.\n\nВидимый текст: `готово`",
-        "starter": "// TODO\n",
-        "expected": "готово",
-        "must_contain": ["async", "await", "console.log"]
-      }
-    },
-    "38": {
-      "id": 38,
-      "check_type": "console",
-      "title": "fetch и API",
-      "theory": "## Что такое fetch\n\n`fetch` — встроенная функция для HTTP-запросов. Возвращает Promise.\n\n```js\nfetch(\"https://api.example.com/data\")\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(err => console.log(err));\n```\n\n## Response\n\n`fetch` возвращает `Response`-объект:\n\n- `response.ok` — `true` если 200–299\n- `response.status` — код (200, 404, 500)\n- `response.json()` — парсит JSON, возвращает Promise\n- `response.text()` — текст\n\n## Проверка статуса\n\n```js\nfetch(url).then(res => {\n  if (!res.ok) throw new Error(\"HTTP \" + res.status);\n  return res.json();\n});\n```\n\n`fetch` **не бросает** на 404/500 — только на сетевые ошибки. Проверяй `res.ok`.\n\n## async / await\n\n```js\nasync function loadData() {\n  try {\n    const response = await fetch(url);\n    if (!response.ok) throw new Error(\"HTTP \" + response.status);\n    const data = await response.json();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Ошибка:\", err.message);\n  }\n}\n```\n\n## POST\n\n```js\nfetch(url, {\n  method: \"POST\",\n  headers: { \"Content-Type\": \"application/json\" },\n  body: JSON.stringify({ name: \"Аня\" })\n});\n```\n\n## Что будет, если\n\n- Забыть `response.json()` — получишь Response, не данные.\n- Проверять только `.catch` без `res.ok` — 404 пройдёт как успех.\n- CORS-политика может блокировать.\n\n## Частая ошибка\n\nДумать, что `fetch` бросает на 404. Не бросает. Проверяй `res.ok`.\n\n## Итог\n\n- `fetch(url)` — Promise\n- `res.json()` / `res.text()`\n- `res.ok` — проверка статуса\n- `fetch` не бросает на 4xx/5xx\n- POST — `method`, `headers`, `body`",
-      "questions": [
-        { "text": "Что возвращает `fetch`?", "options": ["Данные", "Response Promise", "Строку", "Массив"], "answer": 1, "explanation": "Promise с Response." },
-        { "text": "Как получить JSON из Response?", "options": ["res.text()", "res.json()", "res.data", "res.parse()"], "answer": 1, "explanation": "`res.json()`." },
-        { "text": "Бросает ли `fetch` на 404?", "options": ["Да", "Нет, проверяй res.ok", "Иногда", "Только на 500"], "answer": 1, "explanation": "Только на сетевые ошибки." },
-        { "text": "Что делает `res.ok`?", "options": ["Возвращает true если 200-299", "Всегда true", "Всегда false", "Ошибка"], "answer": 0, "explanation": "Проверка статуса." }
-      ],
-      "practice": {
-        "description": "Создай `async`-функцию, которая:\n1. Имитирует fetch: `const res = await Promise.resolve({ ok: true })`\n2. Если `res.ok` — выведи `Успех`\n\nВидимый текст: `Успех`",
-        "starter": "// TODO\n",
-        "expected": "Успех",
-        "must_contain": ["async", "await", "res.ok", "console.log"]
-      }
-    },
-    "39": {
-      "id": 39,
-      "check_type": "console",
-      "title": "import / export",
-      "theory": "## Зачем модули\n\nОдин файл на 1000 строк — ад. Модули позволяют разбить код на файлы с чёткими границами.\n\n## export\n\n```js\n// utils.js\nexport function add(a, b) {\n  return a + b;\n}\nexport const PI = 3.14;\nexport default function multiply(a, b) {\n  return a * b;\n}\n```\n\n- `export` — **именованные** экспорты (сколько угодно)\n- `export default` — **один** дефолтный\n\n## import\n\n```js\n// main.js\nimport { add, PI } from \"./utils.js\";\nimport multiply from \"./utils.js\";  // дефолтный\n```\n\n## Переименование\n\n```js\nimport { add as sum } from \"./utils.js\";\n```\n\n## import *\n\n```js\nimport * as utils from \"./utils.js\";\nconsole.log(utils.add(1, 2));\n```\n\n## В браузере\n\n`<script type=\"module\" src=\"main.js\"></script>` — `type=\"module\"` обязателен.\n\n## В Node.js\n\n- `.mjs` — модуль\n- `.js` с `\"type\": \"module\"` в `package.json`\n\n## Динамический import\n\n```js\nconst module = await import(\"./utils.js\");\n```\n\nЛенивая загрузка.\n\n## Что будет, если\n\n- Забыть `type=\"module\"` — `import` не работает в браузере.\n- Опечатка в пути — `Module not found`.\n- Импортировать именованный как дефолтный — `undefined`.\n\n## Частая ошибка\n\nПутать именованный и дефолтный импорт. `import { add }` — для `export function add`. `import multiply` — для `export default`.\n\n## Итог\n\n- `export` — именованный\n- `export default` — один\n- `import { x }` / `import x`\n- В браузере — `type=\"module\"`\n- `as` — переименование",
-      "questions": [
-        { "text": "Сколько default-экспортов на файл?", "options": ["1", "2", "любое", "0"], "answer": 0, "explanation": "Один." },
-        { "text": "Как импортировать именованный `add`?", "options": ["import add from", "import { add } from", "import * as add", "require"], "answer": 1, "explanation": "`import { add }`." },
-        { "text": "Что нужно в браузере для модулей?", "options": ["type=\"module\"", "type=\"js\"", "async", "Ничего"], "answer": 0, "explanation": "`type=\"module\"`." },
-        { "text": "Что делает `as`?", "options": ["Удаляет", "Переименовывает", "Создаёт", "Ошибка"], "answer": 1, "explanation": "`add as sum`." }
-      ],
-      "practice": {
-        "description": "В одном файле (модули имитируем):\n1. Функция `add(a, b)`\n2. `const PI = 3.14`\n3. Выведи `add(2, 3)` и `PI`\n\n```\n5\n3.14\n```",
-        "starter": "// TODO\n",
-        "expected": "5\n3.14",
-        "must_contain": ["function add", "const PI", "console.log"]
-      }
-    },
-    "40": {
-      "id": 40,
-      "check_type": "dom",
-      "title": "Проект: счётчик",
+    "30": {
+      "id": 30, "check_type": "dom", "title": "Проект: счётчик",
       "theory": "## Что делаем\n\nСчётчик с кнопками + и −. Применяем: DOM, события, изменение текста.\n\n## HTML\n\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\n## JS\n\n```js\nlet count = 0;\nconst value = document.querySelector(\"#value\");\nconst inc = document.querySelector(\"#inc\");\nconst dec = document.querySelector(\"#dec\");\n\ninc.addEventListener(\"click\", () => {\n  count++;\n  value.textContent = count;\n});\n\ndec.addEventListener(\"click\", () => {\n  count--;\n  value.textContent = count;\n});\n```\n\n## Проверки\n\n- `count` — переменная\n- `textContent` — обновляется\n- `addEventListener` на двух кнопках\n- `++` / `--`\n\n## Что будет, если\n\n- `value.textContent = count++` — покажет старое.\n- Забыть `textContent` — цифра не меняется.\n\n## Частая ошибка\n\n`count = value.textContent + 1` — конкатенация строк.\n\n## Итог\n\n- `let count` — состояние\n- `addEventListener` на кнопках\n- `textContent` — обновить\n- `count++` / `count--`",
       "questions": [
-        { "text": "Что делает `textContent = count`?", "options": ["Меняет", "Показывает значение", "Удаляет", "Создаёт"], "answer": 1, "explanation": "Обновляет текст." },
-        { "text": "Где хранится состояние?", "options": ["В DOM", "В переменной", "В HTML", "В CSS"], "answer": 1, "explanation": "В `count`." },
-        { "text": "Что при `value.textContent = count++`?", "options": ["Сразу новое", "Старое, потом ++", "Ошибка", "undefined"], "answer": 1, "explanation": "Постфиксный ++ возвращает старое." },
-        { "text": "Как изменить число на 1?", "options": ["count = count + 1", "count++", "count += 1", "все варианты"], "answer": 3, "explanation": "Все три работают." }
+        {"text": "Что делает `textContent = count`?", "options": ["Меняет", "Показывает значение", "Удаляет", "Создаёт"], "answer": 1, "explanation": "Обновляет текст."},
+        {"text": "Где хранится состояние?", "options": ["В DOM", "В переменной", "В HTML", "В CSS"], "answer": 1, "explanation": "В `count`."},
+        {"text": "Что при `value.textContent = count++`?", "options": ["Сразу новое", "Старое, потом ++", "Ошибка", "undefined"], "answer": 1, "explanation": "Постфиксный ++ возвращает старое."},
+        {"text": "Как изменить число на 1?", "options": ["count = count + 1", "count++", "count += 1", "все варианты"], "answer": 3, "explanation": "Все три работают."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<button id=\"dec\">−</button>\n<span id=\"value\">0</span>\n<button id=\"inc\">+</button>\n```\n\nЧерез JS: `#inc` прибавляет 1, `#dec` убавляет 1, `#value` показывает число.\n\nИзначальный видимый текст: `− 0 +`",
@@ -701,16 +493,110 @@
         "must_contain": ["addEventListener", "click", "textContent", "count++", "count--"]
       }
     },
-    "41": {
-      "id": 41,
-      "check_type": "dom",
-      "title": "Итоговая: TODO-лист",
-      "theory": "## Что делаем\n\nДобавление задач через input + кнопка. Всё вместе: DOM, createElement, appendChild, события, формы.\n\n## HTML\n\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Добавить</button>\n<ul id=\"list\"></ul>\n```\n\n## JS\n\n```js\nconst inp = document.querySelector(\"#inp\");\nconst add = document.querySelector(\"#add\");\nconst list = document.querySelector(\"#list\");\n\nadd.addEventListener(\"click\", () => {\n  const text = inp.value.trim();\n  if (!text) return;\n\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n\n  inp.value = \"\";\n});\n```\n\n## Разбор\n\n- `querySelector` — найти\n- `addEventListener` — на кнопку\n- `inp.value.trim()` — значение без пробелов\n- `if (!text) return` — пропустить пустое\n- `createElement(\"li\")` — создать\n- `appendChild` — добавить\n- `inp.value = \"\"` — очистить\n\n## Проверки\n\n- Событие на кнопку\n- Создание + вставка\n- Очистка поля\n- Пропуск пустого ввода\n\n## Что будет, если\n\n- Не очищать `inp.value` — можно добавить одно и то же много раз.\n- Не проверять пустое — пустые `<li>`.\n\n## Частая ошибка\n\n`inp.value += \" \"` — копится текст. Нужно `inp.value = \"\"`.\n\n## Итог\n\n- `querySelector` + `addEventListener` + `createElement`\n- `trim()` — убрать пробелы\n- `if (!text) return` — пропустить\n- Очистка поля после добавления",
+    "31": {
+      "id": 31, "check_type": "dom", "title": "localStorage",
+      "theory": "## Что это\n\n`localStorage` — key-value хранилище в браузере. Сохраняется между перезагрузками и сессиями. Лимит ~5 МБ.\n\n## API\n\n```js\nlocalStorage.setItem(\"key\", \"value\");\nlocalStorage.getItem(\"key\");     // значение или null\nlocalStorage.removeItem(\"key\");\nlocalStorage.clear();            // стереть всё\n```\n\n## Только строки\n\n`localStorage` хранит **только строки**. Числа и объекты — сериализуй:\n\n```js\nlocalStorage.setItem(\"count\", \"5\");\nlet n = Number(localStorage.getItem(\"count\"));\n```\n\n## Объекты и массивы\n\nЧерез JSON:\n\n```js\nconst user = { name: \"Аня\", age: 25 };\nlocalStorage.setItem(\"user\", JSON.stringify(user));\n\nconst raw = localStorage.getItem(\"user\");\nconst parsed = raw ? JSON.parse(raw) : null;\nconsole.log(parsed.name);   // Аня\n```\n\n## Счётчик с сохранением\n\n```js\nlet count = Number(localStorage.getItem(\"count\")) || 0;\nvalue.textContent = count;\n\ninc.addEventListener(\"click\", () => {\n  count++;\n  value.textContent = count;\n  localStorage.setItem(\"count\", count);\n});\n```\n\n`|| 0` — fallback на случай `null`.\n\n## sessionStorage\n\nТот же API, но очищается при закрытии вкладки.\n\n## Что будет, если\n\n- `localStorage.setItem(\"x\", 42)` — сохранится как `\"42\"`.\n- `JSON.parse(null)` — падает. Защищай `?`.\n- Хранить большой объект — quota exceeded.\n\n## Частая ошибка\n\nЗабыть `JSON.stringify` — объект станет `\"[object Object]\"`.\n\n## Итог\n\n- `setItem/getItem/removeItem/clear`\n- Только строки\n- `JSON.stringify` / `JSON.parse` для объектов\n- `sessionStorage` — на вкладку",
       "questions": [
-        { "text": "Что делает `inp.value.trim()`?", "options": ["Очищает", "Убирает пробелы по краям", "Меняет", "Ошибка"], "answer": 1, "explanation": "`trim` — пробелы по краям." },
-        { "text": "Что делает `if (!text) return`?", "options": ["Ошибка", "Пропускает пустое", "Добавляет", "Удаляет"], "answer": 1, "explanation": "Пустая строка — falsy, выходим." },
-        { "text": "Как очистить поле?", "options": ["inp.clear()", "inp.value = \"\"", "inp.textContent = \"\"", "delete inp.value"], "answer": 1, "explanation": "`value = \"\"`." },
-        { "text": "Что делает `appendChild`?", "options": ["Удаляет", "Вставляет в конец", "Ищет", "Копирует"], "answer": 1, "explanation": "В конец." }
+        {"text": "Что сохранит `localStorage.setItem(\"x\", 42)`?", "options": ["Число 42", "Строку \"42\"", "Ошибка", "null"], "answer": 1, "explanation": "Всегда строки."},
+        {"text": "Что вернёт `localStorage.getItem(\"missing\")`?", "options": ["\"\"", "undefined", "null", "Ошибка"], "answer": 2, "explanation": "`null`."},
+        {"text": "Как сохранить объект?", "options": ["setItem(\"k\", obj)", "setItem(\"k\", JSON.stringify(obj))", "setItem(\"k\", String(obj))", "setItem obj"], "answer": 1, "explanation": "JSON stringify."},
+        {"text": "Отличие от sessionStorage?", "options": ["Одно", "sessionStorage очищается при закрытии вкладки", "localStorage меньше", "sessionStorage вообще не сохраняет"], "answer": 1, "explanation": "Session — на вкладку."}
+      ],
+      "practice": {
+        "description": "Создай `const user = { name: \"Аня\", age: 25 };`.\n\n1. `localStorage.setItem(\"user\", JSON.stringify(user))`\n2. прочитай через `JSON.parse`, выведи name\n\nДля проверки (browser sandbox): выведи `Аня`.\n\nЕсли `localStorage` недоступен — используй временный объект:\n```\nconst store = {};\nstore.user = JSON.stringify(user);\nconsole.log(JSON.parse(store.user).name);\n```",
+        "starter": "const user = { name: \"Аня\", age: 25 };\n// TODO\n",
+        "expected": "Аня",
+        "must_contain": ["JSON.stringify", "JSON.parse", "console.log"]
+      }
+    },
+    "32": {
+      "id": 32, "check_type": "console", "title": "Event loop и setTimeout",
+      "theory": "## Что такое event loop\n\nJS — **однопоточный**, но умеет делать несколько вещей «одновременно» через event loop. Синхронный код выполняется сразу, асинхронный — откладывается в очередь.\n\n## setTimeout\n\n```js\nsetTimeout(() => {\n  console.log(\"Через 2 секунды\");\n}, 2000);\n```\n\nПервый аргумент — функция, второй — задержка (мс).\n\n## Порядок\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nconsole.log(\"2\");\n// 1, 2, 3 — не 1, 3, 2\n```\n\nsetTimeout с 0 всё равно откладывается: сначала весь синхронный код.\n\n## clearTimeout\n\n```js\nconst id = setTimeout(() => console.log(\"не сработает\"), 1000);\nclearTimeout(id);\n```\n\n## setInterval\n\n```js\nconst id = setInterval(() => console.log(\"тик\"), 1000);\n// clearInterval(id); — остановить\n```\n\nКаждые N мс.\n\n## Как работает event loop\n\n1. Синхронный код выполняется до конца.\n2. Потом — микротаски (Promise, queueMicrotask).\n3. Потом — макротаски (setTimeout, setInterval, события).\n4. Повтор с шага 2.\n\n```js\nconsole.log(\"1\");\nsetTimeout(() => console.log(\"3\"), 0);\nPromise.resolve().then(() => console.log(\"2\"));\n// 1, 2, 3 — микротаски раньше макротасок\n```\n\n## Что будет, если\n\n- `setTimeout` с задержкой 0 — всё равно асинхронно.\n- Забыть `clearInterval` — утечка (таймер работает вечно).\n\n## Частая ошибка\n\nЖдать, что `setTimeout(fn, 0)` выполнится до следующей строки. Нет, только после синхронного кода.\n\n## Итог\n\n- JS однопоточный, но с event loop\n- `setTimeout(fn, ms)` — через N мс\n- `setInterval(fn, ms)` — каждые N мс\n- Сначала синхронный код, потом микро, потом макро\n- `clearTimeout` / `clearInterval`",
+      "questions": [
+        {"text": "Что делает `setTimeout(fn, 1000)`?", "options": ["Сразу", "Через 1000 мс", "Каждые 1000 мс", "Ошибка"], "answer": 1, "explanation": "Через 1 секунду, один раз."},
+        {"text": "Что выведет: log 1, setTimeout 0, log 2?", "options": ["1, 3, 2", "1, 2, 3", "2, 1, 3", "3, 1, 2"], "answer": 1, "explanation": "Сначала синхронный — 1, 2, потом отложенный — 3."},
+        {"text": "Что делает `clearInterval(id)`?", "options": ["Запускает", "Останавливает интервал", "Создаёт", "Ничего"], "answer": 1, "explanation": "Останавливает."},
+        {"text": "Что выполняется первым: микротаски или макротаски?", "options": ["Макро", "Микро", "Одновременно", "Зависит от ОС"], "answer": 1, "explanation": "Микро (Promise) раньше макро (setTimeout)."}
+      ],
+      "practice": {
+        "description": "Выведи `1`, `2`, `3` в правильном порядке через `setTimeout`:\n- синхронно `1`\n- `setTimeout` с `2`\n- синхронно `3`\n\nПорядок вывода должен быть `1, 3, 2`.",
+        "starter": "// TODO\n",
+        "expected": "1\n3\n2",
+        "must_contain": ["setTimeout", "console.log"]
+      }
+    },
+    "33": {
+      "id": 33, "check_type": "console", "title": "Promise",
+      "theory": "## Что такое Promise\n\nPromise — объект, представляющий **будущее значение**. Три состояния:\n- **pending** — ожидание\n- **fulfilled** — успех (resolve)\n- **rejected** — ошибка (reject)\n\n## Создание\n\n```js\nconst p = new Promise((resolve, reject) => {\n  setTimeout(() => resolve(\"готово\"), 1000);\n});\n```\n\n## Использование\n\n```js\np.then(result => console.log(result));  // \"готово\"\np.catch(error => console.log(error));\n```\n\n## reject\n\n```js\nconst p = new Promise((resolve, reject) => {\n  reject(new Error(\"что-то пошло не так\"));\n});\np.catch(err => console.log(err.message));\n```\n\n## Цепочки\n\n```js\nfetchData()\n  .then(a => doSomething(a))\n  .then(b => doAnother(b))\n  .catch(err => console.log(err));\n```\n\n## Promise.all\n\nВсе параллельно, ждёт всех:\n\n```js\nPromise.all([p1, p2, p3]).then(results => {\n  console.log(results);  // массив результатов\n});\n```\n\nЕсли хоть один rejected — весь Promise.all rejected.\n\n## Promise.race\n\nПервый завершившийся:\n\n```js\nPromise.race([slow, fast]).then(result => console.log(result));\n```\n\n## Проглатывание ошибок\n\n`.catch` в конце цепочки ловит любую ошибку выше.\n\n## Что будет, если\n\n- Забыть `.catch` — unhandled rejection.\n- `resolve()` дважды — второй вызов игнорируется.\n\n## Частая ошибка\n\nПутать `Promise` с самой функцией. `Promise` — возвращаемое значение.\n\n## Итог\n\n- `new Promise((resolve, reject) => {})`\n- `.then` — успех, `.catch` — ошибка\n- `Promise.all` — все параллельно\n- `Promise.race` — первый\n- Всегда добавляй `.catch`",
+      "questions": [
+        {"text": "Сколько состояний у Promise?", "options": ["1", "2", "3", "4"], "answer": 2, "explanation": "pending, fulfilled, rejected."},
+        {"text": "Что делает `.then(fn)`?", "options": ["Ошибку", "Успех", "Ничего", "Отменяет"], "answer": 1, "explanation": "Успех."},
+        {"text": "Что делает `.catch(fn)`?", "options": ["Ошибку", "Успех", "Создаёт", "Удаляет"], "answer": 0, "explanation": "Ошибку."},
+        {"text": "Что делает `Promise.all([p1, p2])`?", "options": ["Первый", "Все параллельно, ждёт всех", "Ошибку", "Отменяет"], "answer": 1, "explanation": "Все."}
+      ],
+      "practice": {
+        "description": "Создай Promise, который через `resolve(\"готово\")` без задержки отдаёт результат. Через `.then` выведи его.\n\nВидимый текст: `готово`",
+        "starter": "// TODO\n",
+        "expected": "готово",
+        "must_contain": ["new Promise", "resolve", ".then", "console.log"]
+      }
+    },
+    "34": {
+      "id": 34, "check_type": "console", "title": "async / await",
+      "theory": "## Что такое async\n\n`async` делает функцию асинхронной — она всегда возвращает Promise:\n\n```js\nasync function greet() {\n  return \"Привет\";\n}\ngreet().then(r => console.log(r));  // Привет\n```\n\n## await\n\nВнутри `async`-функции `await` ждёт Promise:\n\n```js\nasync function main() {\n  const result = await fetchData();\n  console.log(result);\n}\n```\n\nКод после `await` выполнится, когда Promise разрешится.\n\n## try / catch\n\n```js\nasync function main() {\n  try {\n    const data = await fetchData();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Ошибка:\", err.message);\n  }\n}\n```\n\n`await` на rejected Promise бросает исключение.\n\n## Последовательный await\n\n```js\nconst a = await fetchA();  // ждём\nconst b = await fetchB();  // ждём\n```\n\nОдин за другим. Если не зависят — используй `Promise.all`:\n\n```js\nconst [a, b] = await Promise.all([fetchA(), fetchB()]);\n```\n\nПараллельно — быстрее.\n\n## await вне async\n\nТолько в top-level модулях (ES2022). В обычном скрипте — синтаксическая ошибка.\n\n## Отличие от .then\n\n- `.then` — цепочки, `.catch`\n- `async/await` — выглядит как синхронный код, читается лучше\n\nОдно и то же под капотом.\n\n## Что будет, если\n\n- `await` без `async` — SyntaxError.\n- Забыть try/catch вокруг await — ошибка всплывёт.\n\n## Частая ошибка\n\n`await` в цикле `for...of` — каждый ждёт. В `Promise.all` — параллельно. Выбор зависит от задачи.\n\n## Итог\n\n- `async function` — возвращает Promise\n- `await` — ждёт Promise\n- `try / catch` — ловит ошибки\n- `Promise.all` для параллельности\n- Синтаксис проще, чем `.then`",
+      "questions": [
+        {"text": "Что делает `async`?", "options": ["Ничего", "Функция возвращает Promise", "Ускоряет", "Ошибка"], "answer": 1, "explanation": "Всегда Promise."},
+        {"text": "Что делает `await`?", "options": ["Ждёт Promise", "Создаёт", "Удаляет", "Ничего"], "answer": 0, "explanation": "Ждёт."},
+        {"text": "Как поймать ошибку при `await`?", "options": ["try/catch", "if/else", "for", "Promise"], "answer": 0, "explanation": "try/catch."},
+        {"text": "Как делать параллельно?", "options": ["await по очереди", "Promise.all", "for", "setTimeout"], "answer": 1, "explanation": "`Promise.all`."}
+      ],
+      "practice": {
+        "description": "Создай `async function main()`, внутри `const result = await Promise.resolve(\"готово\")`, выведи `result`.\n\nВидимый текст: `готово`",
+        "starter": "// TODO\n",
+        "expected": "готово",
+        "must_contain": ["async", "await", "console.log"]
+      }
+    },
+    "35": {
+      "id": 35, "check_type": "console", "title": "fetch и API",
+      "theory": "## Что такое fetch\n\n`fetch` — встроенная функция для HTTP-запросов. Возвращает Promise.\n\n```js\nfetch(\"https://api.example.com/data\")\n  .then(response => response.json())\n  .then(data => console.log(data))\n  .catch(err => console.log(err));\n```\n\n## Response\n\n`fetch` возвращает `Response`-объект:\n\n- `response.ok` — `true` если 200–299\n- `response.status` — код (200, 404, 500)\n- `response.json()` — парсит JSON, возвращает Promise\n- `response.text()` — текст\n\n## Проверка статуса\n\n```js\nfetch(url).then(res => {\n  if (!res.ok) throw new Error(\"HTTP \" + res.status);\n  return res.json();\n});\n```\n\n`fetch` **не бросает** на 404/500 — только на сетевые ошибки. Проверяй `res.ok`.\n\n## async / await\n\n```js\nasync function loadData() {\n  try {\n    const response = await fetch(url);\n    if (!response.ok) throw new Error(\"HTTP \" + response.status);\n    const data = await response.json();\n    console.log(data);\n  } catch (err) {\n    console.log(\"Ошибка:\", err.message);\n  }\n}\n```\n\n## POST\n\n```js\nfetch(url, {\n  method: \"POST\",\n  headers: { \"Content-Type\": \"application/json\" },\n  body: JSON.stringify({ name: \"Аня\" })\n});\n```\n\n## Что будет, если\n\n- Забыть `response.json()` — получишь Response, не данные.\n- Проверять только `.catch` без `res.ok` — 404 пройдёт как успех.\n- CORS-политика может блокировать.\n\n## Частая ошибка\n\nДумать, что `fetch` бросает на 404. Не бросает. Проверяй `res.ok`.\n\n## Итог\n\n- `fetch(url)` — Promise\n- `res.json()` / `res.text()`\n- `res.ok` — проверка статуса\n- `fetch` не бросает на 4xx/5xx\n- POST — `method`, `headers`, `body`",
+      "questions": [
+        {"text": "Что возвращает `fetch`?", "options": ["Данные", "Response Promise", "Строку", "Массив"], "answer": 1, "explanation": "Promise с Response."},
+        {"text": "Как получить JSON из Response?", "options": ["res.text()", "res.json()", "res.data", "res.parse()"], "answer": 1, "explanation": "`res.json()`."},
+        {"text": "Бросает ли `fetch` на 404?", "options": ["Да", "Нет, проверяй res.ok", "Иногда", "Только на 500"], "answer": 1, "explanation": "Только на сетевые ошибки."},
+        {"text": "Что делает `res.ok`?", "options": ["Возвращает true если 200-299", "Всегда true", "Всегда false", "Ошибка"], "answer": 0, "explanation": "Проверка статуса."}
+      ],
+      "practice": {
+        "description": "Создай `async`-функцию, которая:\n1. Имитирует fetch: `const res = await Promise.resolve({ ok: true })`\n2. Если `res.ok` — выведи `Успех`\n\nВидимый текст: `Успех`",
+        "starter": "// TODO\n",
+        "expected": "Успех",
+        "must_contain": ["async", "await", "res.ok", "console.log"]
+      }
+    },
+    "36": {
+      "id": 36, "check_type": "console", "title": "import / export",
+      "theory": "## Зачем модули\n\nОдин файл на 1000 строк — ад. Модули позволяют разбить код на файлы с чёткими границами.\n\n## export\n\n```js\n// utils.js\nexport function add(a, b) {\n  return a + b;\n}\nexport const PI = 3.14;\nexport default function multiply(a, b) {\n  return a * b;\n}\n```\n\n- `export` — **именованные** экспорты (сколько угодно)\n- `export default` — **один** дефолтный\n\n## import\n\n```js\n// main.js\nimport { add, PI } from \"./utils.js\";\nimport multiply from \"./utils.js\";  // дефолтный\n```\n\n## Переименование\n\n```js\nimport { add as sum } from \"./utils.js\";\n```\n\n## import *\n\n```js\nimport * as utils from \"./utils.js\";\nconsole.log(utils.add(1, 2));\n```\n\n## В браузере\n\n`<script type=\"module\" src=\"main.js\"></script>` — `type=\"module\"` обязателен.\n\n## В Node.js\n\n- `.mjs` — модуль\n- `.js` с `\"type\": \"module\"` в `package.json`\n\n## Динамический import\n\n```js\nconst module = await import(\"./utils.js\");\n```\n\nЛенивая загрузка.\n\n## Что будет, если\n\n- Забыть `type=\"module\"` — `import` не работает в браузере.\n- Опечатка в пути — `Module not found`.\n- Импортировать именованный как дефолтный — `undefined`.\n\n## Частая ошибка\n\nПутать именованный и дефолтный импорт. `import { add }` — для `export function add`. `import multiply` — для `export default`.\n\n## Итог\n\n- `export` — именованный\n- `export default` — один\n- `import { x }` / `import x`\n- В браузере — `type=\"module\"`\n- `as` — переименование",
+      "questions": [
+        {"text": "Сколько default-экспортов на файл?", "options": ["1", "2", "любое", "0"], "answer": 0, "explanation": "Один."},
+        {"text": "Как импортировать именованный `add`?", "options": ["import add from", "import { add } from", "import * as add", "require"], "answer": 1, "explanation": "`import { add }`."},
+        {"text": "Что нужно в браузере для модулей?", "options": ["type=\"module\"", "type=\"js\"", "async", "Ничего"], "answer": 0, "explanation": "`type=\"module\"`."},
+        {"text": "Что делает `as`?", "options": ["Удаляет", "Переименовывает", "Создаёт", "Ошибка"], "answer": 1, "explanation": "`add as sum`."}
+      ],
+      "practice": {
+        "description": "В одном файле (модули имитируем):\n1. Функция `add(a, b)`\n2. `const PI = 3.14`\n3. Выведи `add(2, 3)` и `PI`\n\n```\n5\n3.14\n```",
+        "starter": "// TODO\n",
+        "expected": "5\n3.14",
+        "must_contain": ["function add", "const PI", "console.log"]
+      }
+    },
+    "37": {
+      "id": 37, "check_type": "dom", "title": "Итоговая: TODO-лист",
+      "theory": "## Что делаем\n\nДобавление задач через input + кнопка. Всё вместе: DOM, createElement, appendChild, события, формы, localStorage.\n\n## HTML\n\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Добавить</button>\n<ul id=\"list\"></ul>\n```\n\n## JS\n\n```js\nconst inp = document.querySelector(\"#inp\");\nconst add = document.querySelector(\"#add\");\nconst list = document.querySelector(\"#list\");\n\nadd.addEventListener(\"click\", () => {\n  const text = inp.value.trim();\n  if (!text) return;\n\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n\n  inp.value = \"\";\n});\n```\n\n## Разбор\n\n- `querySelector` — найти\n- `addEventListener` — на кнопку\n- `inp.value.trim()` — значение без пробелов\n- `if (!text) return` — пропустить пустое\n- `createElement(\"li\")` — создать\n- `appendChild` — добавить\n- `inp.value = \"\"` — очистить\n\n## С сохранением в localStorage\n\n```js\nconst saved = JSON.parse(localStorage.getItem(\"tasks\") || \"[]\");\nsaved.forEach(text => {\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n});\n\nadd.addEventListener(\"click\", () => {\n  const text = inp.value.trim();\n  if (!text) return;\n  const li = document.createElement(\"li\");\n  li.textContent = text;\n  list.appendChild(li);\n  const all = [...list.children].map(c => c.textContent);\n  localStorage.setItem(\"tasks\", JSON.stringify(all));\n  inp.value = \"\";\n});\n```\n\n## Проверки\n\n- Событие на кнопку\n- Создание + вставка\n- Очистка поля\n- Пропуск пустого\n- Сохранение через localStorage\n\n## Что будет, если\n\n- Не очищать `inp.value` — можно добавить одно и то же много раз.\n- Не проверять пустое — пустые `<li>`.\n- Забыть `JSON.stringify` — сохранится `[object Object]`.\n\n## Частая ошибка\n\n`inp.value += \" \"` — копится текст. Нужно `inp.value = \"\"`.\n\n## Итог\n\n- `querySelector` + `addEventListener` + `createElement`\n- `trim()` — убрать пробелы\n- `if (!text) return` — пропустить\n- Очистка поля после добавления\n- `localStorage` для сохранения",
+      "questions": [
+        {"text": "Что делает `inp.value.trim()`?", "options": ["Очищает", "Убирает пробелы по краям", "Меняет", "Ошибка"], "answer": 1, "explanation": "`trim` — пробелы по краям."},
+        {"text": "Что делает `if (!text) return`?", "options": ["Ошибка", "Пропускает пустое", "Добавляет", "Удаляет"], "answer": 1, "explanation": "Пустая строка — falsy, выходим."},
+        {"text": "Как очистить поле?", "options": ["inp.clear()", "inp.value = \"\"", "inp.textContent = \"\"", "delete inp.value"], "answer": 1, "explanation": "`value = \"\"`."},
+        {"text": "Что делает `appendChild`?", "options": ["Удаляет", "Вставляет в конец", "Ищет", "Копирует"], "answer": 1, "explanation": "В конец."}
       ],
       "practice": {
         "description": "HTML:\n```html\n<input id=\"inp\" type=\"text\">\n<button id=\"add\">Добавить</button>\n<ul id=\"list\"></ul>\n```\n\nЧерез JS:\n1. Клик на `#add`\n2. Берём `#inp.value`, `trim()`\n3. Если пусто — выходим\n4. Создаём `<li>` с текстом, добавляем в `#list`\n5. Очищаем `#inp.value`\n\nИзначальный видимый текст: `Добавить`",

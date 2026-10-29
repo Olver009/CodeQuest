@@ -2,685 +2,427 @@
   "lessons": {
     "1": {
       "id": 1,
-      "title": "What Is an Algorithm and a Program",
-      "theory": "## An algorithm is a recipe\nAn algorithm is an exact sequence of steps to solve a task. The computer does not understand meaning — it executes basic commands. A program is an instruction for the computer.\n\n## Why the computer is \"dumb\"\nIf you tell a human \"make tea\", they will figure it out. You have to tell the computer: \"take a cup\", \"pour water\". Programming is the skill of breaking the complex into simple steps.\n\n## Program state\nA program has state: the values in memory right now. Each command changes the state. The order of commands is logic. The computer will not guess what you meant — it will do exactly what is written.",
+      "title": "What Is an Algorithm. Program = Input → Processing → Output",
+      "theory": "## An algorithm is a recipe\n\nAn algorithm is an exact sequence of steps to solve a task. Not \"something like that\", but \"step 1, step 2, step 3, and stop under this condition\".\n\nThe computer does not understand meaning. It executes basic commands: \"put into memory\", \"compare\", \"jump to another line\". A program is an instruction for the computer.\n\n## Why the computer is \"dumb\"\n\nTell a human \"make tea\" — they will figure it out. You have to tell the computer: \"take a cup\", \"pour water\", \"put in a teabag\". Programming is the skill of breaking the complex into simple steps that allow no ambiguity.\n\n## Any program = three parts\n\n1. **Input** — where the data comes from (user, file, memory).\n2. **Processing** — logic: calculations, conditions, loops, functions.\n3. **Output** — where the result goes (screen, file, memory).\n\nExample: a calculator. Input — two numbers and an operation. Processing — add/subtract. Output — show the result.\n\nExample: find the maximum. Input — a list of numbers. Processing — traverse and compare. Output — the largest one.\n\nIf you do not understand where input, processing, and output are — you do not understand the task. Start there.\n\n## Order matters\n\nThe program executes top to bottom, line by line. Swap two lines — the result may change. If one uses the result of another, the order is critical.",
       "questions": [
-        {
-          "text": "What is an algorithm?",
-          "options": ["Any program", "An exact sequence of steps to solve a task", "A programming language", "A computer device"],
-          "answer": 1,
-          "explanation": "An algorithm is the solution logic. A program is the algorithm in a specific language."
-        },
-        {
-          "text": "Why can't a computer guess what we meant?",
-          "options": ["It can't think — it executes commands", "It knows the language poorly", "It has little memory", "You have to explain twice"],
-          "answer": 0,
-          "explanation": "The computer is an executor. If you write something wrong, it will make a mistake."
-        },
-        {
-          "text": "What is \"program state\"?",
-          "options": ["The screen", "The values in memory at the current moment", "Line count", "An error"],
-          "answer": 1,
-          "explanation": "State is a snapshot of memory plus execution position."
-        },
-        {
-          "text": "If you swap two commands, will the result change?",
-          "options": ["Always", "Never", "It depends on their relationship", "Error"],
-          "answer": 2,
-          "explanation": "If one uses the result of another, the order is critical."
-        }
-      ]
+        {"text": "What is an algorithm?", "options": ["Any program", "An exact sequence of steps to solve a task", "A programming language", "A computer device"], "answer": 1, "explanation": "An algorithm is the solution logic. A program is the algorithm in a specific language."},
+        {"text": "Why can't a computer guess what we meant?", "options": ["It can't think — it executes commands literally", "It knows the language poorly", "It has little memory", "You have to explain twice"], "answer": 0, "explanation": "The computer is an executor. If written wrong — it will make a mistake."},
+        {"text": "What three parts does any program consist of?", "options": ["Input, processing, output", "Beginning, middle, end", "Variables, loops, functions", "Files, memory, screen"], "answer": 0, "explanation": "The classic scheme. Everything else is inside processing."},
+        {"text": "If you swap two commands, will the result change?", "options": ["Always", "Never", "Depends on their relationship", "Error"], "answer": 2, "explanation": "If one uses the result of another — order matters."},
+        {"text": "In the task 'find the average of numbers', where is the processing?", "options": ["Input of numbers", "Summation and division by count", "Printing the result", "Starting the program"], "answer": 1, "explanation": "Input — get numbers. Processing — sum and divide. Output — print."}
+      ],
+      "practice": {
+        "description": "Break the task into three parts (input / processing / output) and write pseudocode.\n\n**Task:** the program asks for two numbers, adds them, and prints the result.\n\nWrite using keywords `input`, `output`, and regular operations. Format:\n```\ninput a\ninput b\nresult = a + b\noutput result\n```\n\n⚠️ Required in code: `input`, `output`, `+`.",
+        "starter": "# Input\n\n# Processing\n\n# Output\n",
+        "expected": "input a\ninput b\nresult = a + b\noutput result",
+        "must_contain": ["input", "output", "+"]
+      }
     },
     "2": {
       "id": 2,
-      "title": "Memory and Variables: Where Data Comes From",
-      "theory": "## Memory is like a cabinet\nMemory is cells with addresses. It's inconvenient for a human to remember addresses, so variables are used.\n\n## A variable is a label\n`x = 5` means: \"find a cell, put 5 in it, and label it x\". If you write `x = 10`, the old value is erased.\n\n## Right and left side\nIn `x = x + 1`, the right side (old x + 1) is computed first, and only then is the result placed in the left side (into x).\n\n## Common mistake\nConfusing the name and the value. `x = y` does not link them forever. It means \"take the value from y and put it into x\".",
+      "title": "Program State. Memory and Variables",
+      "theory": "## Memory as a closet\n\nMemory is a set of cells with addresses. It is inconvenient for humans to remember addresses, so variables are used.\n\n## A variable is a label\n\n`x = 5` means: \"find a cell, put 5 and hang the label x\". If then `x = 10` — the old value is erased, the label stays on the same cell.\n\n## Program state\n\nThe state is **the values of all variables right now** plus the execution position (which line is next).\n\nEach command changes the state. A program is a sequence of state changes.\n\nExample:\n```\nx = 5      # state: x=5\nx = 10     # state: x=10\ny = x + 1  # state: x=10, y=11\n```\n\n## Right and left side\n\nIn `x = x + 1` the right side is evaluated first (old x + 1), and only then the result is placed in the left side (in x).\n\n## Common mistake\n\nConfusing name and value. `x = y` does not bind them forever. It means \"take the value from y and put it into x\". Afterwards, either can change independently.",
       "questions": [
-        {
-          "text": "What happens on `x = 10`?",
-          "options": ["A new variable is created", "10 is written into the cell x, the old one is erased", "A comparison", "Nothing"],
-          "answer": 1,
-          "explanation": "Assignment overwrites the old value."
-        },
-        {
-          "text": "What does this output?\n```\nx = 5\ny = x\nx = 10\nprint y\n```",
-          "options": ["5", "10", "15", "Error"],
-          "answer": 0,
-          "explanation": "y gets a copy of x's value (5). Then x changes, but y already holds 5."
-        },
-        {
-          "text": "What does `x = x + 1` do?",
-          "options": ["Creates x", "Compares x with 1", "Takes the old x, adds 1, writes back", "Deletes x"],
-          "answer": 2,
-          "explanation": "The right side is computed first, then the result is written into x."
-        },
-        {
-          "text": "Why are variables called \"labels\"?",
-          "options": ["They stick onto the screen", "They provide a convenient name for a memory cell", "They change color", "They are deleted"],
-          "answer": 1,
-          "explanation": "A name is a reference to memory for human convenience."
-        }
-      ]
+        {"text": "What happens on `x = 10` if x was 5?", "options": ["A new variable is created", "10 is written into x, old 5 is erased", "Comparison", "Nothing"], "answer": 1, "explanation": "Assignment overwrites the old value."},
+        {"text": "What will this print?\n```\nx = 5\ny = x\nx = 10\noutput y\n```", "options": ["5", "10", "15", "Error"], "answer": 0, "explanation": "y gets a copy of x (5). Then x changes, but y already holds 5."},
+        {"text": "What does `x = x + 1` do?", "options": ["Creates x", "Compares x with 1", "Takes old x, adds 1, puts it back", "Deletes x"], "answer": 2, "explanation": "Right side first, then result into x."},
+        {"text": "What is 'program state'?", "options": ["The screen", "Values of variables at the current moment + execution position", "Line count", "An error"], "answer": 1, "explanation": "A snapshot of memory and position."},
+        {"text": "Why are variables called 'labels'?", "options": ["They stick to the screen", "They give a convenient name to a memory cell", "They change color", "They are deleted"], "answer": 1, "explanation": "The name is a reference to memory for human convenience."}
+      ],
+      "practice": {
+        "description": "Given three commands:\n```\na = 3\nb = a + 2\na = 10\n```\n\n**Answer in code:**\n1. What does `b` equal after execution? (write to `b_result`)\n2. What does `a` equal after execution? (write to `a_result`)\n\nPrint both via `output`.\n\n**Expected output:**\n```\n5\n10\n```\n\n⚠️ `b` gets 3 + 2 = 5 before `a` changes to 10. Then `a = 10` no longer affects `b`.",
+        "starter": "a = 3\nb = a + 2\na = 10\n\nb_result = \na_result = \n\noutput b_result\noutput a_result\n",
+        "expected": "5\n10",
+        "must_contain": ["b_result", "a_result", "output"]
+      }
     },
     "3": {
       "id": 3,
-      "title": "Expressions: How a Computer Computes",
-      "theory": "## What an expression is\nA combination of data and operations that produces a result. `2 + 2` is an expression.\n\n## Operator precedence\nMultiplication and division come before addition. `2 + 2 * 2` is `2 + 4 = 6`.\n\n## Parentheses\nChange the order. `(2 + 2) * 2 = 8`. Parentheses tell the computer: \"do this first\".\n\n## Modulo\nOperator `%` gives the remainder. `10 % 3 = 1`. Needed to check for evenness and split numbers.",
+      "title": "Expressions: How the Computer Calculates",
+      "theory": "## What an expression is\n\nA combination of data and operations giving a result. `2 + 2` is an expression. `x * y + 5` is an expression.\n\n## Operator precedence\n\nLike in math:\n1. Parentheses — first\n2. Multiplication and division — before addition\n3. Addition and subtraction — last\n\n`2 + 2 * 2` = `2 + 4 = 6`. Not 8.\n\nNot sure — use parentheses. No shame in that.\n\n## Parentheses\n\nChange the order. `(2 + 2) * 2 = 8`. Parentheses tell the computer: \"do this first\".\n\n## Remainder\n\nThe `%` operator gives the remainder. `10 % 3 = 1` (10 = 3*3 + 1).\n\nWhy:\n- Parity: `n % 2 == 0` — even\n- Divisibility: `n % 5 == 0` — divisible by 5\n- Last digit: `1234 % 10 = 4`\n- Cyclicity: `14 % 12 = 2` (clock)\n\n## Division\n\nRegular `/` gives a fraction. Integer `//` drops the remainder: `7 // 2 = 3`.\n\n## Result types\n\nAdding numbers — a number. Concatenating strings — a string. Mixing without conversion: `5 + \"5\"` — an error in most languages.",
       "questions": [
-        {
-          "text": "What is `2 + 3 * 4`?",
-          "options": ["20", "14", "24", "9"],
-          "answer": 1,
-          "explanation": "Multiplication first (12), then addition (14)."
-        },
-        {
-          "text": "What is `%` for?",
-          "options": ["For division", "For remainder", "For power", "For comparison"],
-          "answer": 1,
-          "explanation": "Remainder shows whether a number divides evenly."
-        },
-        {
-          "text": "What is `10 % 3`?",
-          "options": ["3", "1", "0", "3.33"],
-          "answer": 1,
-          "explanation": "10 = 3*3 + 1. Remainder 1."
-        },
-        {
-          "text": "What do parentheses do in `(2 + 3) * 4`?",
-          "options": ["Nothing", "Force the addition to run first", "Delete numbers", "Change the type"],
-          "answer": 1,
-          "explanation": "Parentheses change precedence."
-        }
-      ]
+        {"text": "What is `2 + 3 * 4`?", "options": ["20", "14", "24", "9"], "answer": 1, "explanation": "Multiplication first (12), then addition (14)."},
+        {"text": "Why do we need the `%` operator?", "options": ["For division", "To get the remainder", "For power", "For comparison"], "answer": 1, "explanation": "Remainder shows whether a number divides evenly."},
+        {"text": "What is `10 % 3`?", "options": ["3", "1", "0", "3.33"], "answer": 1, "explanation": "10 = 3*3 + 1. Remainder 1."},
+        {"text": "What does the parenthesis in `(2 + 3) * 4` do?", "options": ["Nothing", "Forces the addition to execute first", "Deletes numbers", "Changes type"], "answer": 1, "explanation": "Parentheses change precedence."},
+        {"text": "How to check that n is divisible by 5?", "options": ["n / 5 == 0", "n % 5 == 0", "n // 5 == 0", "n == 5"], "answer": 1, "explanation": "Divisible — remainder 0."}
+      ],
+      "practice": {
+        "description": "Given `n = 1234`. Compute via `output`:\n\n1. Last digit (`n % 10`)\n2. Number of full hundreds (`n // 100`)\n3. Parity check (`n % 2 == 0`) — output `even` or `odd`\n\n**Expected output:**\n```\n4\n12\neven\n```\n\n⚠️ Required: `%`, `//`, `==`.",
+        "starter": "n = 1234\n\noutput n % 10\noutput n // 100\n# if ... output ...\n",
+        "expected": "4\n12\neven",
+        "must_contain": ["%", "//", "==", "output"]
+      }
     },
     "4": {
       "id": 4,
-      "title": "Input and Output: Dialogue with a Program",
-      "theory": "## Output\n`print` shows data on screen. The only way to see what is inside.\n\n## Input\n`input` waits until the user types text and returns it.\n\n## Why input is a string\nThe computer does not know what you will enter: a number or a word. So by default it reads everything as text (a string). If you need math, you have to convert explicitly: `number(input())`.\n\n## Common mistake\nForgetting to convert input. `2` + `3` gives `23` instead of `5` because it concatenates strings.",
+      "title": "Logic: Comparisons and AND/OR/NOT",
+      "theory": "## Comparisons\n\nThe computer can compare. The result is **true** or **false**.\n\nOperators: `==` (equal), `!=` (not equal), `>` (greater), `<` (less), `>=`, `<=`.\n\n`5 > 3` — true. `5 == 5` — true. `5 == 3` — false.\n\n**Important:** `=` is assignment (put), `==` is comparison (ask). Do not confuse them.\n\n## Why connectives\n\nOne condition is not enough. \"Number greater than 0 and less than 10\" — two conditions joined by \"AND\".\n\n## AND\n\nTrue only if **both** are true.\n\n`true AND true` = true\n`true AND false` = false\n`false AND false` = false\n\n## OR\n\nTrue if **at least one** is true.\n\n`true OR false` = true\n`false OR false` = false\n\n## NOT\n\nFlips. `NOT true` = false. `NOT false` = true.\n\n## Precedence\n\nParentheses → NOT → AND → OR. Not sure — parentheses.\n\n## Common mistake\n\nWriting `x > 0 AND < 10`. Each comparison must be complete: `x > 0 AND x < 10`.",
       "questions": [
-        {
-          "text": "What does `print` do?",
-          "options": ["Reads keyboard", "Shows data on screen", "Saves to file", "Deletes variables"],
-          "answer": 1,
-          "explanation": "Output shows the result of work."
-        },
-        {
-          "text": "What does `input` return?",
-          "options": ["A number", "A string (text)", "A boolean", "An array"],
-          "answer": 1,
-          "explanation": "By default it's text."
-        },
-        {
-          "text": "Why can `2` + `3` give `23`?",
-          "options": ["The computer broke", "These are strings, they concatenate", "2+3=23", "Language error"],
-          "answer": 1,
-          "explanation": "+ for strings is concatenation."
-        },
-        {
-          "text": "Why is type conversion needed?",
-          "options": ["To slow things down", "So the computer understands these are numbers, not text", "For saving", "Not needed"],
-          "answer": 1,
-          "explanation": "Conversion enables math."
-        }
-      ]
+        {"text": "What returns `true AND false`?", "options": ["true", "false", "Error", "Depends"], "answer": 1, "explanation": "AND requires both true."},
+        {"text": "What returns `true OR false`?", "options": ["true", "false", "Error", "Depends"], "answer": 0, "explanation": "OR requires at least one true."},
+        {"text": "How to check that x is between 0 and 10 inclusive?", "options": ["x > 0 AND x < 10", "x >= 0 AND x <= 10", "x > 0 OR x < 10", "x == 0"], "answer": 1, "explanation": "Inclusive — use >= and <=. Both conditions joined by AND."},
+        {"text": "What does `NOT (5 > 3)` do?", "options": ["True", "False, since 5>3 is true", "Error", "Returns 5"], "answer": 1, "explanation": "Negation of true is false."},
+        {"text": "What is wrong with `x > 0 AND < 10`?", "options": ["Syntax error — second comparison incomplete", "Works", "Should be OR instead of AND", "Should be NOT"], "answer": 0, "explanation": "Each comparison must be complete: `x > 0 AND x < 10`."}
+      ],
+      "practice": {
+        "description": "Given `x = 7`. Check three conditions and output each (`true` or `false`):\n1. `x > 0 AND x < 10` — in range\n2. `x < 0 OR x > 100` — out of range\n3. `NOT (x == 7)` — negation of equality\n\n**Expected output:**\n```\ntrue\nfalse\nfalse\n```\n\n⚠️ Required: `AND`, `OR`, `NOT`, `output`.",
+        "starter": "x = 7\n\noutput x > 0 AND x < 10\n# ...\n",
+        "expected": "true\nfalse\nfalse",
+        "must_contain": ["AND", "OR", "NOT", "output"]
+      }
     },
     "5": {
       "id": 5,
-      "title": "Branching: How a Program Makes Decisions",
-      "theory": "## Linear code is boring\nIf a program just executes commands top-down, it doesn't react to the situation. We need logic.\n\n## Comparison\nThe computer can compare. The result is true or false. `5 > 3` is true.\n\n## Condition\n`if` checks a condition. If true, the block executes. `else` is the fallback (if the condition is false).\n\n## Common mistake\nConfusing `=` (assignment) and `==` (comparison). One equals puts, two equals ask.",
+      "title": "Branching. Nesting and Order of Checks",
+      "theory": "## Why conditions\n\nUntil now the program executed all lines in a row. But often you need to run code **only under a condition**: \"if age ≥ 18 — let in\".\n\n## If / else if / else\n\n```\nif x > 10:\n    output \"big\"\nelse if x > 5:\n    output \"medium\"\nelse:\n    output \"small\"\n```\n\n1. The computer checks top to bottom.\n2. **Only the first** matching block executes.\n3. Others are skipped, even if their conditions are also true.\n\n## Order matters\n\nIf you swap them — it breaks. `x > 5` will catch everything > 5, and `x > 10` will no longer fire.\n\n**Rule:** strict conditions above, weak below.\n\n## Nesting\n\nCondition inside a condition. The second is checked only if the first is true.\n\n```\nif age >= 18:\n    if has_passport:\n        output \"allowed\"\n```\n\nIf age < 18 — the inner condition is not even checked.\n\n## When nesting, when AND\n\n- `if a AND b:` — if reactions to \"both true\" and \"otherwise\" are the same.\n- Nesting — if different combinations have different reactions.\n\n## Common mistake\n\nMany independent `if` instead of `else if`. All matching ones will execute — not what you need.",
       "questions": [
-        {
-          "text": "What is a logical expression?",
-          "options": ["Math", "An expression producing true or false", "A string", "An error"],
-          "answer": 1,
-          "explanation": "Used in conditions."
-        },
-        {
-          "text": "How is `=` different from `==`?",
-          "options": ["Nothing", "`=` assigns, `==` compares", "The reverse", "Only for strings"],
-          "answer": 1,
-          "explanation": "Assignment changes, comparison asks."
-        },
-        {
-          "text": "What happens if the condition is false and there is no `else`?",
-          "options": ["Crash", "Nothing executes", "The `if` body runs", "Asks again"],
-          "answer": 1,
-          "explanation": "The block is skipped."
-        },
-        {
-          "text": "What does this output?\n```\nx = 10\nif x > 5:\n    print \"Yes\"\nelse:\n    print \"No\"\n```",
-          "options": ["Yes", "No", "10", "Error"],
-          "answer": 0,
-          "explanation": "10 > 5 — true."
-        }
-      ]
+        {"text": "How does `else if` differ from a new `if`?", "options": ["No difference", "`else if` is checked only if previous ones are false", "Works only with numbers", "Faster"], "answer": 1, "explanation": "It is a continuation of the chain. One block in the chain."},
+        {"text": "What will this print?\n```\nx = 0\nif x > 0:\n    output \"+\"\nelse if x < 0:\n    output \"-\"\nelse:\n    output \"0\"\n```", "options": ["+", "-", "0", "Nothing"], "answer": 2, "explanation": "0 is not greater and not less. The else block."},
+        {"text": "Why does the order of if/elif matter?", "options": ["It checks from the end", "The first true fires — a weak condition above will catch", "Doesn't matter", "elif always fires"], "answer": 1, "explanation": "Because of 'one block' — a weak condition above will catch cases of a strict one."},
+        {"text": "What will this print?\n```\nx = 15\nif x > 10:\n    output \"A\"\nelse if x > 5:\n    output \"B\"\n```", "options": ["A", "B", "A and B", "Nothing"], "answer": 0, "explanation": "The first is true — the rest are skipped."},
+        {"text": "Why check edge cases?", "options": ["For beauty", "Errors most often happen at range boundaries", "For slowness", "Required"], "answer": 1, "explanation": "Boundaries are frequent places of errors (0, negatives, empty)."}
+      ],
+      "practice": {
+        "description": "Given `score = 78`. Output the category:\n- `>= 90` → `excellent`\n- `>= 70` → `good`\n- `>= 50` → `satisfactory`\n- otherwise → `bad`\n\n**Expected output:**\n```\ngood\n```\n\n⚠️ Use `if / else if / else`, order — from strict to weak.",
+        "starter": "score = 78\n\nif score >= 90:\n    output \"excellent\"\n# ...\n",
+        "expected": "good",
+        "must_contain": ["if", "else if", "else", "output"]
+      }
     },
     "6": {
       "id": 6,
-      "title": "Logical Operators: AND, OR, NOT",
-      "theory": "## Why connectives\nOne condition is often not enough. \"The number is greater than 0 and less than 10\" — two conditions.\n\n## AND\nTrue only if both are true.\n\n## OR\nTrue if at least one is true.\n\n## NOT\nFlips true to false and false to true.\n\n## Common mistake\nWriting `x > 0 and < 10`. Each comparison must be complete: `x > 0 and x < 10`.",
+      "title": "Loops. while and for",
+      "theory": "## Why loops\n\nIf you need to do 100 identical actions, writing 100 lines is silly. You need a loop.\n\n## 'While' loop\n\nRuns while the condition is true.\n\n```\ni = 0\nwhile i < 5:\n    output i\n    i = i + 1\n```\n\nThree parts:\n1. **Initialization:** `i = 0` (before the loop)\n2. **Condition:** `i < 5`\n3. **Change:** `i = i + 1` (inside)\n\nForgot the change — infinite loop (condition always true).\n\n## 'For' loop\n\nWhen the number of repetitions is known:\n\n```\nfor i from 1 to 5:\n    output i\n```\n\nIt changes the counter itself. No need to think about `i = i + 1`.\n\n## How many times\n\n- `while i < 5` with i=0 — 5 times (0,1,2,3,4).\n- `for i from 1 to 5` — 5 times (1,2,3,4,5).\n- `for i from 0 to n-1` — n times.\n\n## When which\n\n- **while** — you don't know how many. Depends on a condition (password, command, event).\n- **for** — you know the count (1..n, \"for each element\").\n\n## Common mistake\n\nForgetting to change the variable in while. Or the opposite — changing the counter manually in for (not needed, it does it itself).",
       "questions": [
-        {
-          "text": "What does `true AND false` return?",
-          "options": ["true", "false", "Error", "Depends"],
-          "answer": 1,
-          "explanation": "AND requires both."
-        },
-        {
-          "text": "What does `true OR false` return?",
-          "options": ["true", "false", "Error", "Depends"],
-          "answer": 0,
-          "explanation": "OR requires at least one."
-        },
-        {
-          "text": "How to check that x is from 0 to 10?",
-          "options": ["x > 0 and x < 10", "x > 0 or x < 10", "x > 0 and < 10", "x > 0 or x > 10"],
-          "answer": 0,
-          "explanation": "Two full conditions with AND."
-        },
-        {
-          "text": "What does `not (5 > 3)` do?",
-          "options": ["True", "False, since 5>3 is true", "Error", "Returns 5"],
-          "answer": 1,
-          "explanation": "Negation of true is false."
-        }
-      ]
+        {"text": "How many times will this run?\n```\ni = 0\nwhile i < 3:\n    output i\n    i = i + 1\n```", "options": ["1", "2", "3", "Infinite"], "answer": 2, "explanation": "i = 0, 1, 2 — three iterations."},
+        {"text": "What happens if the change is missing in while?", "options": ["1 time", "Syntax error", "Infinite loop", "Auto-add"], "answer": 2, "explanation": "Condition always true. Endless loop."},
+        {"text": "How many times will `for i from 1 to 5` run?", "options": ["4", "5", "6", "Infinite"], "answer": 1, "explanation": "i = 1, 2, 3, 4, 5 — five iterations."},
+        {"text": "When is while better than for?", "options": ["You know the count", "You don't know — waiting for an event", "Always", "Only for numbers"], "answer": 1, "explanation": "while — for 'until event'. for — when you know the iteration count."},
+        {"text": "What is wrong?\n```\nwhile i < 5:\n    output i\n    i = i + 1\n```", "options": ["Syntax", "i is not initialized before the loop — error", "Works", "Should be for"], "answer": 1, "explanation": "`i` was not created. First access — error. Initialization is required."}
+      ],
+      "practice": {
+        "description": "Using `while`, output the numbers from 1 to 5 (each on a new line).\n\n**Expected output:**\n```\n1\n2\n3\n4\n5\n```\n\n⚠️ Not `for` — only `while`. All three parts are required: initialization, condition, change.",
+        "starter": "i = 1\nwhile i <= 5:\n    output i\n    # ...\n",
+        "expected": "1\n2\n3\n4\n5",
+        "must_contain": ["while", "output"]
+      }
     },
     "7": {
       "id": 7,
-      "title": "Nesting and Order of Checks",
-      "theory": "## Chain of conditions\n`if ... else if ... else`. The computer checks top-down and executes only the first matching block.\n\n## Order matters\nIf `x > 0` comes first and `x > 10` after, then for 20 the first fires and the second is not reached.\n\n## Nesting\nConditions inside conditions. The inner is checked only inside the outer.\n\n## Boundaries\nCheck 0, negatives, empty strings. Bugs hide at the boundary.\n\n## Common mistake\nMany independent `if` instead of `else if`. All matching ones will run.",
+      "title": "Patterns: Accumulator, Counter, Flag",
+      "theory": "## Why patterns\n\nSome constructs repeat from task to task. They are called **patterns**. Learning them is like learning chess openings: you don't reinvent each time.\n\n## Accumulator\n\nA variable that collects the result piece by piece.\n\n```\ntotal = 0\nfor i from 1 to 5:\n    total = total + i\noutput total   # 15\n```\n\n**Three positions:**\n1. Before the loop — create with initial value (`0`).\n2. Inside — update.\n3. After — use.\n\nFor sum — `0`. For product — `1` (0 would zero it out). For maximum — the first element (not 0! otherwise negatives won't be found).\n\n**Common mistake:** declaring the accumulator inside the loop. It resets on every iteration.\n\n## Counter\n\nCounts the number of events. `count = count + 1`.\n\n```\nevens = 0\nfor n in [1, 2, 3, 4, 5]:\n    if n % 2 == 0:\n        evens = evens + 1\noutput evens   # 2\n```\n\nCounter = accumulator adding 1. Also **before** the loop.\n\n## Flag\n\nA logical variable (true/false). Answers the question \"did the event happen?\".\n\n```\nfound = false\nfor n in [3, 5, 7]:\n    if n == 5:\n        found = true\noutput found   # true\n```\n\nFlag — before the loop (`false`). Changed on the event.\n\n## The difference\n\n- **Accumulator** — how much total (sum).\n- **Counter** — how many times (count).\n- **Flag** — did it happen or not (yes/no).",
       "questions": [
-        {
-          "text": "How is `else if` different from a new `if`?",
-          "options": ["Nothing", "`else if` is checked only if the previous were false", "Works only with numbers", "Faster"],
-          "answer": 1,
-          "explanation": "It continues the chain."
-        },
-        {
-          "text": "What does this output?\n```\nx = 0\nif x > 0:\n    print \"+\"\nelse if x < 0:\n    print \"-\"\nelse:\n    print \"0\"\n```",
-          "options": ["+", "-", "0", "Nothing"],
-          "answer": 2,
-          "explanation": "0 is neither greater nor less. The `else` block."
-        },
-        {
-          "text": "Why test edge cases?",
-          "options": ["For beauty", "Bugs most often occur at range boundaries", "For slowness", "Requirement"],
-          "answer": 1,
-          "explanation": "Boundaries are a common place for bugs."
-        },
-        {
-          "text": "What is wrong with two `if` in a row (x>10 and x>5)?",
-          "options": ["Nothing", "For x=15 both letters print", "Need `or`", "Need `not`"],
-          "answer": 1,
-          "explanation": "Need `else if` for exclusion."
-        }
-      ]
+        {"text": "What will this print?\n```\ntotal = 0\nfor i from 1 to 3:\n    total = total + i\noutput total\n```", "options": ["3", "6", "1", "0"], "answer": 1, "explanation": "1+2+3 = 6."},
+        {"text": "Why does sum start with 0?", "options": ["Just convention", "0 is neutral for addition", "Otherwise error", "For beauty"], "answer": 1, "explanation": "0 + x = x."},
+        {"text": "What if `total = 0` is inside the loop?", "options": ["6", "3", "0", "Last value, not the sum"], "answer": 3, "explanation": "Resets each time. After i=3 total = 3, not 6."},
+        {"text": "Where to initialize the counter?", "options": ["Inside the loop", "Before the loop", "After the loop", "Not needed"], "answer": 1, "explanation": "Before, so it accumulates."},
+        {"text": "How does counter differ from flag?", "options": ["No difference", "Counter counts events, flag — whether it happened", "Flag is faster", "Counter for numbers"], "answer": 1, "explanation": "Different purposes."},
+        {"text": "Where to start the search for the maximum?", "options": ["From 0", "From the first element", "From the last", "From the length"], "answer": 1, "explanation": "Starting with 0 — with all negatives, 0 stays as the 'maximum'. Start with the first element."}
+      ],
+      "practice": {
+        "description": "Given a list:\n```\nnums = [4, -2, 7, 0, -5, 8, -1, 3, 0, 6]\n```\n\nCompute three things via patterns:\n1. **Sum** of all numbers (accumulator)\n2. **Count** of positive numbers (counter)\n3. **Flag** — whether the number 8 is in the list (true/false)\n\n**Expected output:**\n```\n20\n5\ntrue\n```\n\nVerification: sum 4-2+7+0-5+8-1+3+0+6 = 20. Positives: 4, 7, 8, 3, 6 — five. 8 present → true.\n\n⚠️ All three variables — **before** the loop. One loop or three — your choice.",
+        "starter": "nums = [4, -2, 7, 0, -5, 8, -1, 3, 0, 6]\ntotal = 0\npositives = 0\nhas_eight = false\n\n# loop\n\noutput total\noutput positives\noutput has_eight\n",
+        "expected": "20\n5\ntrue",
+        "must_contain": ["for", "if", "total", "positives", "has_eight", "output"]
+      }
     },
     "8": {
       "id": 8,
-      "title": "Data Types and Conversion",
-      "theory": "## Why types\nA computer distinguishes numbers and text. Numbers add, text concatenates. Types are the rules of the game.\n\n## Basic types\nNumbers, strings, boolean.\n\n## Conversion\nExplicit turning of a string into a number (on input) or a number into a string. `number(\"5\")`.\n\n## Implicit conversion\nThe language tries to guess the type. Dangerous: `\"5\" + 3` may give `\"53\"` or `8`. Better be explicit.\n\n## Common mistake\nForgetting to convert input. The string `\"5\"` does not work in math.",
+      "title": "Nested Loops",
+      "theory": "## A loop inside a loop\n\nThe outer loop takes a step, the inner loop runs its whole range. And so on for each outer step.\n\n```\nfor i from 1 to 3:\n    for j from 1 to 2:\n        output i, j\n```\n\nOutput:\n```\n1 1\n1 2\n2 1\n2 2\n3 1\n3 2\n```\n\n## How many iterations\n\nN outer steps × M inner steps = N*M.\n\n3 × 2 = 6 iterations. 10 × 10 = 100. 1000 × 1000 = million — already slow.\n\n## Why\n\n- Tables (multiplication table)\n- Matrices (rows and columns)\n- Enumerating combinations (pairs, triples)\n\n## Accumulator in nested loops\n\nDepends on what we count.\n\n**Total sum across all iterations** — accumulator **before** the outer:\n```\ntotal = 0\nfor i from 1 to 3:\n    for j from 1 to 3:\n        total = total + j\noutput total   # 0+1+2 three times = 9\n```\n\n**Sum per row separately** — accumulator **inside the outer, before the inner**:\n```\nfor i from 1 to 3:\n    row_total = 0\n    for j from 1 to 3:\n        row_total = row_total + j\n    output row_total   # 3, 3, 3\n```\n\nIf placed before the outer — you get 3, 6, 9 (cumulative sum between rows).\n\n## break in nested loops\n\n`break` exits **only the current** loop. The inner stops, the outer continues.\n\nTo break both — need a flag:\n```\nstop = false\nfor i from 1 to 3:\n    if stop: break\n    for j from 1 to 3:\n        if j == 2:\n            stop = true\n            break\n```\n\n## Common mistake\n\nUsing the same variable for both loops. The inner overwrites the outer.\n\n## Advice\n\n2 levels — normal. 3 — already hard to read. 4+ — rewrite (extract into a function).",
       "questions": [
-        {
-          "text": "What does `\"2\" + \"3\"` output?",
-          "options": ["5", "23", "6", "Error"],
-          "answer": 1,
-          "explanation": "Strings concatenate."
-        },
-        {
-          "text": "What does `number()` do?",
-          "options": ["String to number", "Number to string", "Deletes", "Rounds"],
-          "answer": 0,
-          "explanation": "Turns text into a math number."
-        },
-        {
-          "text": "What happens on `number(\"abc\")`?",
-          "options": ["0", "Error", "Nothing", "\"abc\""],
-          "answer": 1,
-          "explanation": "\"abc\" is not a number."
-        },
-        {
-          "text": "Why make conversion explicit?",
-          "options": ["For clarity and predictability", "For speed", "For saving", "Not necessary"],
-          "answer": 0,
-          "explanation": "Protects against unexpected concatenations."
-        }
-      ]
+        {"text": "How many iterations?\n```\nfor i from 1 to 3:\n    for j from 1 to 4:\n        output i, j\n```", "options": ["3", "4", "7", "12"], "answer": 3, "explanation": "3 × 4 = 12."},
+        {"text": "What will this print?\n```\nfor i from 1 to 2:\n    for j from 1 to 2:\n        output i\n```", "options": ["1 2", "1 1 2 2", "1 2 1 2", "2 2 1 1"], "answer": 1, "explanation": "For i=1 two outputs of 1, for i=2 two outputs of 2."},
+        {"text": "Where is the accumulator for a sum per row?", "options": ["Before the outer", "Inside the outer, before the inner", "Inside the inner", "After the outer"], "answer": 1, "explanation": "Needs a fresh one per row — reset on each outer iteration."},
+        {"text": "What's wrong if both loops use `i`?", "options": ["Nothing", "The inner overwrites `i` of the outer", "Infinite", "Error"], "answer": 1, "explanation": "Need different variables."},
+        {"text": "Where does `break` in nested loops exit?", "options": ["From both", "Only from the inner", "Only from the outer", "Error"], "answer": 1, "explanation": "break exits only the current (inner). The outer continues."}
+      ],
+      "practice": {
+        "description": "Given a matrix:\n```\ndata = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n```\n\nFind the **sum of each row separately**. Output three numbers.\n\n**Expected output:**\n```\n6\n15\n24\n```\n\n⚠️ Accumulator — **inside the outer, before the inner**. Otherwise you get a cumulative sum between rows.",
+        "starter": "data = [\n    [1, 2, 3],\n    [4, 5, 6],\n    [7, 8, 9]\n]\n\nfor i from 0 to length(data)-1:\n    row_sum = 0\n    # for j ...\n    output row_sum\n",
+        "expected": "6\n15\n24",
+        "must_contain": ["for", "row_sum", "output"]
+      }
     },
     "9": {
       "id": 9,
-      "title": "Why Loops Are Needed. Types of Loops",
-      "theory": "## Repetition\nIf you need to do 100 identical actions, writing 100 lines is silly. You need a loop.\n\n## while loop\nRuns while the condition is true. Used when the number of repetitions is unknown. The key is to change the variable inside, otherwise infinite loop.\n\n## for loop\nUsed when the number of repetitions is known. It changes the counter itself.\n\n## Common mistake\nForgetting to change the variable in `while`. The program hangs.",
+      "title": "Arrays and Indices",
+      "theory": "## Why arrays\n\nOne variable — one value. An array — many values under one name.\n\n```\nnums = [10, 20, 30, 40]\n```\n\n`nums` — the whole set. `nums[0]` — the first element.\n\n## Indices\n\nNumbering from 0. `nums[0]` — first, `nums[1]` — second, `nums[2]` — third.\n\nLength — how many elements. `length(nums) = 4`. Last index = length - 1 = 3.\n\n## Negative indices\n\nIn some languages (Python) from the end: `nums[-1]` — last, `nums[-2]` — second-to-last. Convenient when you don't want to compute `length - 1`.\n\n## Out of bounds\n\n`nums[5]` for an array of 4 elements — error. No such index. Rule: **last index = length - 1**.\n\nCommon mistake: loop `for i from 0 to length(nums)` — on the last step `i = length` and `nums[i]` crashes. Must be `to length(nums) - 1` or (in languages with `range`) `for i in range(len(nums))`, which gives 0..len-1.\n\n## Arrays — contiguous in memory\n\nArray elements lie in memory **contiguously**. That's why `nums[100]` is instant (address = start + 100 * size). Fast — O(1).\n\n## Modification\n\n```\nnums[1] = 99   # replaced the second element\n```\n\nYou can change any by index.",
       "questions": [
-        {
-          "text": "When is `while` better?",
-          "options": ["When the number of repetitions is unknown", "When you need 5 times", "When there is an array", "Always"],
-          "answer": 0,
-          "explanation": "`while` depends on the condition."
-        },
-        {
-          "text": "What happens if the variable in `while` isn't changed?",
-          "options": ["Error", "Infinite loop", "Nothing", "The loop won't start"],
-          "answer": 1,
-          "explanation": "Condition always true."
-        },
-        {
-          "text": "How is `for` more convenient than `while`?",
-          "options": ["Faster", "It changes the counter itself, fewer chances to err", "Requires no conditions", "Works with text"],
-          "answer": 1,
-          "explanation": "It takes the routine off your hands."
-        },
-        {
-          "text": "How many times does this run?\n```\nfor i from 1 to 4:\n    print i\n```",
-          "options": ["3", "4", "5", "Infinite"],
-          "answer": 1,
-          "explanation": "i = 1, 2, 3, 4 (4 times)."
-        }
-      ]
+        {"text": "What will this print?\n```\nnums = [10, 20, 30]\noutput nums[1]\n```", "options": ["10", "20", "30", "Error"], "answer": 1, "explanation": "Indices from 0: 0=10, 1=20, 2=30."},
+        {"text": "Last index for length 4?", "options": ["4", "3", "5", "0"], "answer": 1, "explanation": "Length minus 1."},
+        {"text": "What about `nums[3]` if length is 3?", "options": ["0", "Last", "Out-of-bounds error", "Nothing"], "answer": 2, "explanation": "Indices 0, 1, 2. No third."},
+        {"text": "How to replace the second element?", "options": ["nums[2] = 99", "nums[1] = 99", "nums = 99", "nums[0] = 99"], "answer": 1, "explanation": "The second has index 1."},
+        {"text": "Why is index access fast?", "options": ["Elements are contiguous — address computed immediately", "Arrays are small", "The computer guesses", "It's not fast"], "answer": 0, "explanation": "Address = start + i * size. O(1)."}
+      ],
+      "practice": {
+        "description": "Given an array:\n```\ncolors = [\"red\", \"green\", \"blue\", \"yellow\"]\n```\n\nOutput four lines:\n1. First element\n2. Second element\n3. Last (via `length - 1` or via `-1` if the language allows)\n4. Length of the array\n\n**Expected output:**\n```\nred\ngreen\nyellow\n4\n```",
+        "starter": "colors = [\"red\", \"green\", \"blue\", \"yellow\"]\n\noutput colors[0]\n# ...\n",
+        "expected": "red\ngreen\nyellow\n4",
+        "must_contain": ["colors[", "length", "output"]
+      }
     },
     "10": {
       "id": 10,
-      "title": "Pattern: Accumulator",
-      "theory": "## What it is\nA variable that collects the result piece by piece (sum, product).\n\n## Initialization rule\nFor sum — 0. For product — 1. The value must be neutral.\n\n## How it works\nEach step adds the current value to the accumulator.\n\n## Common mistake\nDeclaring the accumulator inside the loop. It resets each iteration and ends up holding the last value, not the sum.",
+      "title": "Array Traversal. Search, Filter, Maximum",
+      "theory": "## Traversal\n\nGo through all elements — with a loop.\n\n```\nfor i from 0 to length(nums) - 1:\n    output nums[i]\n```\n\nOr in languages with \"for each\":\n```\nfor n in nums:\n    output n\n```\n\nIf you only need the element — the second. If you need the index (compare neighbors, modify) — the first.\n\n## Three classic tasks\n\n**Search** — find an element or establish presence:\n```\nfound = false\nfor n in nums:\n    if n == 7:\n        found = true\noutput found\n```\n\nFlag + traversal. Often with `break` — found, no need to search further.\n\n**Filter** — collect matching into a new array:\n```\nresult = []\nfor n in nums:\n    if n > 0:\n        result = result + [n]   # or result.append(n)\noutput result\n```\n\nResult — a new array. Original unchanged.\n\n**Maximum** — the largest value:\n```\nmax = nums[0]\nfor n in nums:\n    if n > max:\n        max = n\noutput max\n```\n\nStart with the **first** element, not 0. Otherwise with all negatives, 0 stays as the 'maximum'.\n\n## Minimum — mirror\n\n`<` instead of `>`. Start — also from the first element.\n\n## Empty array\n\n`nums = []` — `nums[0]` crashes. Check `length(nums) == 0` before searching for the maximum.\n\n## With index\n\nSometimes you need not only the max but also its position. Then you keep **two** variables:\n```\nmax = nums[0]\nmax_idx = 0\nfor i from 0 to length(nums)-1:\n    if nums[i] > max:\n        max = nums[i]\n        max_idx = i\n```",
       "questions": [
-        {
-          "text": "What does this output?\n```\ntotal = 0\nfor i from 1 to 3:\n    total = total + i\nprint total\n```",
-          "options": ["3", "6", "1", "0"],
-          "answer": 1,
-          "explanation": "1+2+3=6."
-        },
-        {
-          "text": "Why does the sum start at 0?",
-          "options": ["Custom", "0 is neutral for addition", "Otherwise error", "For beauty"],
-          "answer": 1,
-          "explanation": "0 + x = x."
-        },
-        {
-          "text": "What happens if `total = 0` is inside the loop?",
-          "options": ["6", "3", "0", "Error"],
-          "answer": 1,
-          "explanation": "It resets. After i=3 the total is 3."
-        },
-        {
-          "text": "Where to start product accumulation?",
-          "options": ["At 0", "At 1", "At -1", "Doesn't matter"],
-          "answer": 1,
-          "explanation": "1 * x = x."
-        }
-      ]
+        {"text": "What does filtering do?", "options": ["Changes the original", "Collects matching into a new array", "Sorts", "Finds one element"], "answer": 1, "explanation": "Selection by condition. Result — a new array."},
+        {"text": "Why can't the maximum start from 0?", "options": ["It can", "If all are negative, 0 will be greater", "0 is not a number", "Should start from 1"], "answer": 1, "explanation": "0 will skew the result."},
+        {"text": "What will this print?\n```\na = [1, 2, 3, 4]\nmax = a[0]\nfor x in a:\n    if x > max:\n        max = x\noutput max\n```", "options": ["1", "4", "10", "0"], "answer": 1, "explanation": "Maximum is 4."},
+        {"text": "How to find whether 7 is present?", "options": ["output a", "Flag: if x == 7: found = true, traversal", "length(a)", "a[7]"], "answer": 1, "explanation": "Traversal and flag."},
+        {"text": "When do you need the index, not the element?", "options": ["Always", "For swap or comparing neighbors", "Never", "For strings"], "answer": 1, "explanation": "When position matters."}
+      ],
+      "practice": {
+        "description": "Given an array:\n```\nnums = [5, 12, 3, 8, 20, 7, 8]\n```\n\nFind **three values**:\n1. Maximum\n2. Minimum\n3. Count of numbers greater than 7\n\n**Expected output:**\n```\n20\n3\n4\n```\n\nVerification: max = 20, min = 3, greater than 7: 12, 8, 20, 8 = 4.\n\n⚠️ Max and min — start with `nums[0]`, not 0.",
+        "starter": "nums = [5, 12, 3, 8, 20, 7, 8]\nmax = nums[0]\nmin = nums[0]\ngreater_than_7 = 0\n\n# loop\n\noutput max\noutput min\noutput greater_than_7\n",
+        "expected": "20\n3\n4",
+        "must_contain": ["for", "if", "max", "min", "greater_than_7", "output"]
+      }
     },
     "11": {
       "id": 11,
-      "title": "Pattern: Counter and Flag",
-      "theory": "## Counter\nCounts the number of events. `count = count + 1`.\n\n## Flag\nA boolean variable (true/false). Answers \"did the event happen?\"\n\n## Difference\nCounter — how many. Flag — happened or not.\n\n## Common mistake\nForgetting to initialize before the loop.",
+      "title": "Swap and Simple Sorting",
+      "theory": "## Swap — exchanging values\n\nTask: swap two values.\n\n**With a third variable (classic):**\n```\ntemp = a\na = b\nb = temp\n```\n\nFirst saved `a` into `temp`, then `b` into `a`, then `temp` into `b`.\n\n**Without temp — dangerous:**\n```\na = b\nb = a   # error — a is already b\n```\n\nBoth become `b`. Old `a` is lost.\n\n**In some languages (Python) — one line:**\n```\na, b = b, a\n```\nSimultaneously: a gets b, b gets a.\n\n## Why\n\nSwap is the basis of sorting. If two elements are out of order — swap them.\n\n## Bubble sort\n\nIdea: compare neighbors, if left is greater — swap. Large ones \"bubble up\" to the end.\n\n```\nfor i from 0 to length(nums) - 1:\n    for j from 0 to length(nums) - 2:\n        if nums[j] > nums[j+1]:\n            swap(nums[j], nums[j+1])\n```\n\nOuter loop — n passes. Inner — compare neighbors. Swap when out of order.\n\n## Complexity\n\nN × N = **O(n²)**. For 10 000 — 100 million operations. Slow. Quicksort (later) — O(n log n).\n\n## Selection sort\n\nAnother idea: on each step find the minimum among the remaining and place it at the beginning. Also O(n²), but better than bubble by a constant.\n\n## Common mistake\n\nBubble sort with `to length(nums)` inside — out of bounds. Need `to length(nums) - 2` (for `nums[j+1]`).",
       "questions": [
-        {
-          "text": "What does this output?\n```\ncount = 0\nfor i from 1 to 5:\n    if i > 2:\n        count += 1\nprint count\n```",
-          "options": ["2", "3", "5", "0"],
-          "answer": 1,
-          "explanation": "3, 4, 5 — three numbers."
-        },
-        {
-          "text": "What is a flag?",
-          "options": ["A number", "A true/false variable", "A string", "A loop"],
-          "answer": 1,
-          "explanation": "A logical variable."
-        },
-        {
-          "text": "Where to initialize the counter?",
-          "options": ["Inside the loop", "Before the loop", "After the loop", "Not needed"],
-          "answer": 1,
-          "explanation": "Before, so it accumulates."
-        },
-        {
-          "text": "How is counter different from flag?",
-          "options": ["Nothing", "Counter counts occurrences, flag answers whether an event happened", "Flag faster", "Counter only for numbers"],
-          "answer": 1,
-          "explanation": "Different purposes."
-        }
-      ]
+        {"text": "What happens without a temporary variable?\n```\na = 1\nb = 2\na = b\nb = a\n```", "options": ["a=2, b=1", "a=2, b=2", "a=1, b=1", "Error"], "answer": 1, "explanation": "a becomes 2, b also 2. Old a lost."},
+        {"text": "How to swap correctly?", "options": ["a=b; b=a", "temp=a; a=b; b=temp", "a=a+b; b=a-b", "b=a; a=b"], "answer": 1, "explanation": "Need temp to save old a."},
+        {"text": "What does `a, b = b, a` do?", "options": ["Nothing", "Swaps values simultaneously", "Assigns a into b twice", "Error"], "answer": 1, "explanation": "Simultaneous assignment. Works in Python and some others."},
+        {"text": "What is bubble sort's complexity?", "options": ["O(n)", "O(log n)", "O(n²)", "O(n log n)"], "answer": 2, "explanation": "Two loops of n — n × n."},
+        {"text": "Why `break` in bubble sort?", "options": ["Not needed", "If a pass had no swaps — the array is already sorted, no point continuing", "For start speed", "Error"], "answer": 1, "explanation": "Optimization: no swaps in a pass — sort finished. Can exit."}
+      ],
+      "practice": {
+        "description": "Implement **bubble sort** for `[5, 3, 8, 2, 6]`.\n\nSteps:\n- Outer loop — n times.\n- Inner — compare neighbors `nums[j]` and `nums[j+1]`.\n- If left is greater — swap.\n\nOutput the result.\n\n**Expected output:**\n```\n[2, 3, 5, 6, 8]\n```\n\n⚠️ Inner loop — `to length(nums) - 2` so `nums[j+1]` does not fly out. Swap — via a temporary variable.",
+        "starter": "nums = [5, 3, 8, 2, 6]\n\n# two loops + swap\n\noutput nums\n",
+        "expected": "[2, 3, 5, 6, 8]",
+        "must_contain": ["for", "if", "swap", "output"]
+      }
     },
     "12": {
       "id": 12,
-      "title": "Nested Loops",
-      "theory": "## A loop in a loop\nThe outer loop takes a step, the inner loop runs its full range. And so on for each step of the outer loop.\n\n## How many iterations\nN outer steps * M inner steps = N*M.\n\n## Why\nTables, matrices, enumerating combinations.\n\n## Common mistake\nUsing the same variable for both loops (the inner overwrites the outer).",
+      "title": "Functions. Parameters, Return, Scope",
+      "theory": "## Copy-paste is evil\n\nIf code repeats, it is hard to change. Changed the logic — find all copies, edit each.\n\n## Function\n\nA named block of code. We give a **name to the meaning**. Call by name when needed.\n\n```\nfunction greet(name):\n    output \"Hello, \" + name\n\ngreet(\"Anna\")\ngreet(\"Ivan\")\n```\n\n## Black box\n\nWe don't care how the function is built inside. What matters is what it takes (**input**) and what it returns (**output**).\n\n## Parameters and return\n\n**Parameters** — what the function takes. **Return** — what it gives back.\n\n```\nfunction sum(a, b):\n    return a + b\n\nresult = sum(2, 3)\noutput result   # 5\n```\n\n`return` gives the value back to the caller. Without it the function returns \"nothing\" (None in Python).\n\n## Output vs return\n\n- **Output** — show on the screen. The value is lost, cannot be used.\n- **Return** — give the value. You can work with it further.\n\n```\nfunction f1(a, b):\n    output a + b      # prints, but does not return\n\nfunction f2(a, b):\n    return a + b      # returns\n\nx = f1(2, 3)   # prints 5, but x = nothing\nx = f2(2, 3)   # x = 5, prints nothing\n```\n\n## Scope\n\nVariables created **inside a function** are **local**. Visible only inside. Not visible outside.\n\n```\nfunction f():\n    x = 5\n\nf()\noutput x   # error — x does not exist outside\n```\n\nThat's good: functions do not interfere with each other.\n\n## Global\n\nVariables **outside functions** are global. Visible everywhere (in some languages — with caveats).\n\nBut changing globals inside a function is **bad practice**. Better to pass a parameter and return the result.\n\n## Common mistake\n\nForgetting to `return`. The function \"did something\" but gave nothing back. Then the result is \"nothing\", and it's unclear why.",
       "questions": [
-        {
-          "text": "How many times does the inner loop run?\n```\nfor i from 1 to 3:\n    for j from 1 to 4:\n        print i\n```",
-          "options": ["3", "4", "7", "12"],
-          "answer": 3,
-          "explanation": "3 * 4 = 12."
-        },
-        {
-          "text": "What does this output?\n```\nfor i from 1 to 2:\n    for j from 1 to 2:\n        print i\n```",
-          "options": ["1 2", "1 1 2 2", "1 2 1 2", "2 2 1 1"],
-          "answer": 1,
-          "explanation": "For i=1 two prints of 1, for i=2 two prints of 2."
-        },
-        {
-          "text": "What is wrong if both loops use `i`?",
-          "options": ["Nothing", "Inner overwrites the outer `i`", "Infinite", "Error"],
-          "answer": 1,
-          "explanation": "Different variables needed."
-        },
-        {
-          "text": "How to read nested loops?",
-          "options": ["Bottom-up", "Outer slow, inner fast", "Simultaneously", "Inner only"],
-          "answer": 1,
-          "explanation": "Outer sets the context, inner works within."
-        }
-      ]
+        {"text": "When is the function code executed?", "options": ["At declaration", "At call", "Always", "Never"], "answer": 1, "explanation": "Declaration is a recipe, call is cooking."},
+        {"text": "How does return differ from output?", "options": ["No difference", "Return gives a value to the code, output only shows", "Output is faster", "Return only for numbers"], "answer": 1, "explanation": "Different mechanisms. With return you can keep working."},
+        {"text": "What's wrong?\n```\nfunction f(a):\n    a * 2\n```", "options": ["Nothing", "No `return` — the result is lost", "Need `output`", "Syntax error"], "answer": 1, "explanation": "The function will compute but not give out. The result is 'nothing'."},
+        {"text": "What will this print?\n```\nfunction f(a, b):\n    return a + b\noutput f(1, 2) + f(3, 4)\n```", "options": ["3", "7", "10", "Error"], "answer": 2, "explanation": "3 + 7 = 10. Returned values can be added."},
+        {"text": "What about accessing a local variable from outside the function?", "options": ["5", "Error — the variable does not exist outside", "0", "Nothing"], "answer": 1, "explanation": "Local is visible only inside. Outside — error."},
+        {"text": "Why is changing globals inside a function bad?", "options": ["Slow", "Hard to track who changes what — then hard to debug", "Doesn't work", "Forbidden"], "answer": 1, "explanation": "Globals are easily changed in different places. Better — parameters and return."}
+      ],
+      "practice": {
+        "description": "Write three functions:\n1. `sum(a, b)` — returns a + b\n2. `max(a, b)` — returns the greater\n3. `greet(name)` — returns the string `Hello, name!`\n\nCall:\n- `output sum(2, 3)`\n- `output max(10, 7)`\n- `output greet(\"Anna\")`\n\n**Expected output:**\n```\n5\n10\nHello, Anna!\n```\n\n⚠️ All three — via `return`, not `output` inside. Otherwise you get nothing outside.",
+        "starter": "function sum(a, b):\n    # ...\n\nfunction max(a, b):\n    # ...\n\nfunction greet(name):\n    # ...\n\noutput sum(2, 3)\noutput max(10, 7)\noutput greet(\"Anna\")\n",
+        "expected": "5\n10\nHello, Anna!",
+        "must_contain": ["function", "return", "output"]
+      }
     },
     "13": {
       "id": 13,
-      "title": "Why Functions Are Needed. The Black Box",
-      "theory": "## Copy-paste is evil\nIf code repeats, it is hard to change.\n\n## Function\nA named block. We give meaning a name. We call by name when needed.\n\n## Black box\nWe don't care how the function is built inside. What matters is what it takes (input) and what it returns (output).\n\n## Common mistake\nThinking the function runs when it is declared. Only when it is called.",
+      "title": "Tracing and Debugging",
+      "theory": "## What tracing is\n\nTracing is **executing code by hand**, line by line, recording variable states. This is the main skill of debugging.\n\n## How to do it\n\n1. Take a sheet (or open a notepad).\n2. Draw a table: line / variables after execution.\n3. Go through the code top to bottom.\n4. After each line, record the current values.\n5. When you reach an output — write down what is printed.\n\n## Example\n\n```\nx = 5\ny = 10\nif x > y:\n    output \"x is greater\"\nelse:\n    output \"y is greater\"\nx = x + y\noutput x\n```\n\nTracing:\n```\nline              x      y      output\nx = 5             5      -\ny = 10            5      10\nif x > y          5      10     (5 > 10 — false)\n    else          5      10     \"y is greater\"\nx = x + y         15     10\noutput x          15     10     15\n```\n\nResult: \"y is greater\", then 15.\n\n## Why\n\nIf the code \"does not work\", you don't know where it broke. Tracing shows **at which moment** the value became wrong.\n\n## Debugging in real life\n\n1. **Read the error.** The error message says: type, location. Don't ignore it.\n2. **Find the place.** The line from the message.\n3. **Understand expected and actual.** Trace up to that line.\n4. **Fix.** One small change.\n5. **Re-check.** Several times — with different inputs.\n\n## Common mistakes\n\n- **Off-by-one.** Loop `to n` instead of `to n-1` — out of bounds.\n- **Sign.** `x > 0` instead of `x >= 0`. At the boundary — diverges.\n- **Assignment vs comparison.** `x = 5` instead of `x == 5`.\n- **Forgot to return.** Function \"did\", but the result is lost.\n- **Accumulator inside a loop.** Resets each time.\n\n## Advice\n\nIf you don't understand what's happening — **add output**. `output x` after each line. Watch what changes. Then remove.\n\nMany think debugging is for beginners. In fact, it's 50% of a programmer's work.",
       "questions": [
-        {
-          "text": "When does the function code run?",
-          "options": ["On declaration", "On call", "Always", "Never"],
-          "answer": 1,
-          "explanation": "Declaration is a recipe, call is cooking."
-        },
-        {
-          "text": "Why functions?",
-          "options": ["For length", "To avoid code duplication and give meaning a name", "For complexity", "Requirement"],
-          "answer": 1,
-          "explanation": "Modularity and reuse."
-        },
-        {
-          "text": "What does this output?\n```\nfunction f():\n    print \"A\"\nprint \"B\"\nf()\n```",
-          "options": ["A B", "B A", "A", "B"],
-          "answer": 1,
-          "explanation": "B first, then the f call."
-        },
-        {
-          "text": "What if the function is declared but not called?",
-          "options": ["Nothing", "It runs", "Error", "Prints the name"],
-          "answer": 0,
-          "explanation": "Without a call the code doesn't run."
-        }
-      ]
+        {"text": "What is tracing?", "options": ["Running the program", "Manually executing code with state recording", "Searching the internet", "Compiling"], "answer": 1, "explanation": "You go line by line, writing down values."},
+        {"text": "What does the code from the example print for x=5, y=10?", "options": ["x is greater, 15", "y is greater, 15", "x is greater, 5", "y is greater, 10"], "answer": 1, "explanation": "5 > 10 false → \"y is greater\". Then x = 5+10 = 15."},
+        {"text": "What to do first on an error?", "options": ["Rewrite the code", "Read the error message", "Delete", "Give up"], "answer": 1, "explanation": "The message tells the type and location."},
+        {"text": "What is off-by-one?", "options": ["Error by one (boundaries)", "Error in one place", "Missing one line", "Loop error"], "answer": 0, "explanation": "Classic: `to n` instead of `to n-1` or `<=` instead of `<`."},
+        {"text": "If you don't understand what's happening in the code — what to do?", "options": ["Google", "Add `output` after suspicious lines", "Rewrite", "Close"], "answer": 1, "explanation": "Output shows real values. Remove when understood."}
+      ],
+      "practice": {
+        "description": "Trace the code:\n```\na = 2\nb = 3\nc = a * b\na = c + 1\nb = a - b\noutput a\noutput b\n```\n\nAnswer in code: what do a and b equal at the end? Write to `a_final` and `b_final`, output both.\n\n**Expected output:**\n```\n7\n4\n```\n\nHint: go line by line. After each — record a, b, c.",
+        "starter": "a = 2\nb = 3\nc = a * b\na = c + 1\nb = a - b\n\na_final = \nb_final = \n\noutput a_final\noutput b_final\n",
+        "expected": "7\n4",
+        "must_contain": ["a_final", "b_final", "output"]
+      }
     },
     "14": {
       "id": 14,
-      "title": "Parameters and Return Value",
-      "theory": "## Inputs and outputs\nParameters are what the function takes. Return is what it gives back.\n\n## Print vs Return\nPrint shows on screen. Return gives the value back into the code. With a return you can keep working.\n\n## Why return\nTo combine: `f(f(2))`.\n\n## Common mistake\nForgetting `return`. The function gives back \"nothing\".",
+      "title": "Complexity: Big O",
+      "theory": "## Why\n\nOne algorithm is faster than another. How to compare without running? Count **the number of operations** depending on input size n.\n\nThis is **Big O** — \"order of growth\".\n\n## Main classes\n\n- **O(1)** — constant. One operation regardless of n. Example: `nums[100]` — index access.\n- **O(log n)** — logarithm. Each step halves the task. Example: binary search.\n- **O(n)** — linear. One pass over n elements. Example: find the maximum.\n- **O(n log n)** — n × log n. Example: quicksort.\n- **O(n²)** — square. Two nested loops over n. Example: bubble sort.\n- **O(2^n)** — exponential. Each step doubles work. Example: enumerate subsets. Only for small n.\n\n## Comparison on numbers\n\nn = 1000:\n- O(1) — 1\n- O(log n) — 10\n- O(n) — 1000\n- O(n log n) — 10 000\n- O(n²) — 1 000 000\n- O(2^n) — a number with 300 digits. Impossible.\n\nAt n = 1 000 000 the difference is catastrophic.\n\n## Rules\n\n1. **Worst case.** Big O is usually about the worst scenario.\n2. **Constants dropped.** O(2n) = O(n). O(n/26) = O(n). O(100) = O(1).\n3. **Only the main term.** O(n² + n) = O(n²). At large n, n² dominates.\n4. **About growth, not seconds.** On small data O(n²) may beat O(n log n) due to constants. On large data — no.\n\n## How to determine\n\n- One loop over n — O(n)\n- Two nested loops over n — O(n²)\n- Loop where the counter multiplies/divides by 2 — O(log n)\n- No loop — O(1)\n- Recursion — by the formula (T(n) = ...)\n\n## Why in practice\n\nChoice of structure/algorithm determines whether the program runs a second or a day. For n = 100 — everything is fast. For n = 10⁹ — only O(log n) and O(n).\n\n## Common mistake\n\n\"O(2n) is better than O(3n)\". No — both are O(n). On large data the constant difference is irrelevant compared to the growth order.",
       "questions": [
-        {
-          "text": "What does this output?\n```\nfunction f(a):\n    return a * 2\nprint f(3)\n```",
-          "options": ["3", "6", "Error", "Nothing"],
-          "answer": 1,
-          "explanation": "f(3) returns 6."
-        },
-        {
-          "text": "How is return different from print?",
-          "options": ["Nothing", "Return gives a value, print shows it", "Print faster", "Return only for numbers"],
-          "answer": 1,
-          "explanation": "Different mechanisms."
-        },
-        {
-          "text": "What is wrong?\n```\nfunction f(a):\n    a * 2\n```",
-          "options": ["Nothing", "No return", "Need print", "Error"],
-          "answer": 1,
-          "explanation": "The result is lost."
-        },
-        {
-          "text": "What does this output?\n```\nfunction f(a,b):\n    return a + b\nprint f(1, 2) + f(3, 4)\n```",
-          "options": ["3", "7", "10", "Error"],
-          "answer": 2,
-          "explanation": "3 + 7 = 10."
-        }
-      ]
+        {"text": "What does O(n) describe?", "options": ["Seconds", "Growth of operations in the worst case as n grows", "Memory", "Average per core"], "answer": 1, "explanation": "About operations growth, worst case."},
+        {"text": "How many checks maximum for 128 elements with binary search?", "options": ["7", "8", "64", "128"], "answer": 0, "explanation": "log₂(128) = 7."},
+        {"text": "Why is O(n/26) = O(n)?", "options": ["26 is a constant, dropped", "Power of two", "Error", "Only for search"], "answer": 0, "explanation": "At large n coefficients do not matter."},
+        {"text": "What is faster at 1 000 000?", "options": ["O(n) — ~1 000 000", "O(log n) — ~20", "Same", "Depends on language"], "answer": 1, "explanation": "log₂(1 000 000) ≈ 20."},
+        {"text": "Two nested loops over n — what complexity?", "options": ["O(n)", "O(2n)", "O(n²)", "O(log n)"], "answer": 2, "explanation": "n × n = n²."},
+        {"text": "What does Big O describe by default?", "options": ["Average", "Worst", "Best", "All"], "answer": 1, "explanation": "By default — worst case."}
+      ],
+      "practice": {
+        "description": "Determine the complexity of each algorithm (write a string `O(...)`):\n\n1. Find an element by index in an array: `nums[500]`\n2. Go through the whole array and find the maximum\n3. Two nested loops `for i from 1 to n: for j from 1 to n:`\n4. Binary search\n5. A program without loops: `x = 5; y = x + 1`\n\nOutput **five lines** with answers.\n\n**Expected output:**\n```\nO(1)\nO(n)\nO(n^2)\nO(log n)\nO(1)\n```",
+        "starter": "# 1.\n# 2.\n# 3.\n# 4.\n# 5.\n\n# output ...\n",
+        "expected": "O(1)\nO(n)\nO(n^2)\nO(log n)\nO(1)",
+        "must_contain": ["O(1)", "O(n)", "O(n^2)", "O(log n)", "output"]
+      }
     },
     "15": {
       "id": 15,
-      "title": "Scope",
-      "theory": "## Local variables\nCreated inside a function, visible only there. Outside they don't exist.\n\n## Global\nOuter variables are visible inside (for reading). Changing them inside a function is bad practice.\n\n## Isolation\nA function should not break someone else's variables.\n\n## Common mistake\nThinking a function can return a variable by name. Only via `return`.",
+      "title": "Binary Search",
+      "theory": "## Task\n\nGiven a **sorted** array. Find the index of the target. If not present — return \"nothing\".\n\nExample: `[1, 3, 5, 7, 9]`, searching for `7`. Answer: index 3.\n\n## Simple search\n\nTraverse left to right — up to n checks. For 4 billion — 4 billion steps.\n\n## Binary search\n\nTake the **middle**, compare:\n- Matched — found.\n- Middle is greater — search left (everything right is also greater).\n- Less — search right.\n\nEach step **discards half**. For 4 billion — 32 steps instead of 4 billion.\n\n## Algorithm\n\n```\narr = [1, 3, 5, 7, 9]\nitem = 3\n\nlow = 0\nhigh = length(arr) - 1\nresult = nothing\n\nwhile low <= high:\n    mid = (low + high) // 2\n    guess = arr[mid]\n    if guess == item:\n        result = mid\n        break\n    else if guess > item:\n        high = mid - 1\n    else:\n        low = mid + 1\n\noutput result   # 1\n```\n\n## Why sorting is needed\n\nBinary search concludes \"everything right is greater\" — true **only** if the array is sorted. On `[9, 1, 5, 3, 7]` the search goes wrong and may return \"nothing\" even though the element exists.\n\n## Complexity\n\nO(log n). For n = 1 000 000 — ~20 steps. For n = 4 billion — ~32.\n\n## Edge cases\n\n- Target smaller than first or greater than last — not found, but the loop runs.\n- One element — works.\n- Empty array — `high = -1`, `low = 0`, `low > high` — loop does not enter.\n- Duplicates — returns any of them, not necessarily the first.\n\n## Common mistake\n\n`high = mid` instead of `high = mid - 1`. May loop forever or find wrong. The middle is already checked — can be excluded.",
       "questions": [
-        {
-          "text": "What happens?\n```\nfunction f():\n    x = 5\nf()\nprint x\n```",
-          "options": ["5", "Error", "0", "Nothing"],
-          "answer": 1,
-          "explanation": "x is local."
-        },
-        {
-          "text": "What does this output?\n```\nx = 10\nfunction f():\n    print x\nf()\n```",
-          "options": ["10", "Error", "0", "Nothing"],
-          "answer": 0,
-          "explanation": "The global is readable."
-        },
-        {
-          "text": "How to pass a value outside?",
-          "options": ["Via global", "Via return", "Via print", "Nowhere"],
-          "answer": 1,
-          "explanation": "Return is the right way."
-        },
-        {
-          "text": "Parameters are...",
-          "options": ["Global", "Local names inside the function", "Constants", "Error"],
-          "answer": 1,
-          "explanation": "Exist only inside."
-        }
-      ]
+        {"text": "Why does binary search require a sorted array?", "options": ["Works on unsorted too", "Discards half based on order — without sorting it may discard the right one", "Sorts itself", "Returns nothing"], "answer": 1, "explanation": "Without order you may discard the half where the target is."},
+        {"text": "How many checks maximum for 128 elements?", "options": ["7", "8", "64", "128"], "answer": 0, "explanation": "log₂(128) = 7."},
+        {"text": "What is faster at 1 000 000 elements?", "options": ["Linear — ~1 000 000", "Binary — ~20", "Same", "Depends on language"], "answer": 1, "explanation": "log₂(1 000 000) ≈ 20."},
+        {"text": "What is wrong with `high = mid` instead of `high = mid - 1`?", "options": ["Nothing", "May loop forever or find wrong", "Slower", "Error"], "answer": 1, "explanation": "The middle is already checked. Not excluding it — loses the range."},
+        {"text": "What is the complexity?", "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"], "answer": 1, "explanation": "Each step — half."},
+        {"text": "How many steps for 4 billion?", "options": ["32", "400", "4 billion", "2"], "answer": 0, "explanation": "log₂(4 billion) ≈ 32."}
+      ],
+      "practice": {
+        "description": "Implement binary search for `[1, 3, 5, 7, 9]` searching for `3`.\n\n**Without a function** — linear code with `while`.\n\nSteps:\n1. `arr = [1, 3, 5, 7, 9]`, `item = 3`\n2. `low = 0`, `high = length(arr) - 1`\n3. `result = nothing`\n4. `while low <= high:` — middle, compare, discard half\n5. `output result`\n\n**Expected output:**\n```\n1\n```\n\n⚠️ Required: `while`, `length`, `//`, `break`, `nothing`, `output`.",
+        "starter": "arr = [1, 3, 5, 7, 9]\nitem = 3\n\nlow = 0\nhigh = length(arr) - 1\nresult = nothing\n\n# while ...\n\noutput result\n",
+        "expected": "1",
+        "must_contain": ["while", "length", "break", "nothing", "output"]
+      }
     },
     "16": {
       "id": 16,
-      "title": "Recursion",
-      "theory": "## A function calls itself\nRecursion is a function calling itself with a smaller argument.\n\n## Base case\nRequired exit condition. Without it — infinity and stack overflow.\n\n## How to read\nfactorial(3) = 3 * factorial(2) = ... = 6.\n\n## Common mistake\nForgetting the base case or not shrinking the argument.",
+      "title": "Selection Sort",
+      "theory": "## Idea\n\nFind the **smallest** element, place it first. From the remaining — the smallest, second. And so on.\n\n## How it works\n\nOriginal: `[5, 3, 6, 2, 10]`.\n- Minimum 2, place it first → `[2, 3, 6, 5, 10]`\n- From remaining (3, 6, 5, 10) minimum 3, place second → `[2, 3, 6, 5, 10]`\n- From remaining (6, 5, 10) minimum 5, third → `[2, 3, 5, 6, 10]`\n- ... done.\n\n## Implementation via a new array\n\n```\nfunction find_smallest(arr):\n    smallest = arr[0]\n    smallest_idx = 0\n    for i from 1 to length(arr) - 1:\n        if arr[i] < smallest:\n            smallest = arr[i]\n            smallest_idx = i\n    return smallest_idx\n\nfunction selection_sort(arr):\n    new_arr = []\n    for _ from 0 to length(arr) - 1:\n        idx = find_smallest(arr)\n        new_arr = new_arr + [arr[idx]]\n        arr = arr without element idx   # pop\n    return new_arr\n```\n\nThe original array \"shrinks\" — we don't find the same minimum twice.\n\n## Complexity\n\n`find_smallest` — O(n). Called n times. Total **O(n²)**.\n\nFor 10 000 — 100 million operations. Slow. Quicksort (later) — O(n log n).\n\n## Comparison with bubble\n\nBoth O(n²). But selection has **fewer swaps** — one swap per position. For cases where swap is expensive (large objects), selection is better.\n\n## Common mistake\n\nNot removing the found minimum. Then on the next iteration you find the same — duplicate.",
       "questions": [
-        {
-          "text": "What does factorial(3) return?",
-          "options": ["3", "6", "1", "9"],
-          "answer": 1,
-          "explanation": "3 * 2 * 1 = 6."
-        },
-        {
-          "text": "What is required in recursion?",
-          "options": ["Loop", "Base case (exit condition)", "Array", "Print"],
-          "answer": 1,
-          "explanation": "Without base — infinity."
-        },
-        {
-          "text": "What happens without the base case?",
-          "options": ["0", "Stack overflow", "1", "Syntax error"],
-          "answer": 1,
-          "explanation": "Infinite calls."
-        },
-        {
-          "text": "What does factorial(1) return?",
-          "options": ["0", "1", "2", "Error"],
-          "answer": 1,
-          "explanation": "Base."
-        }
-      ]
+        {"text": "What is selection sort's complexity?", "options": ["O(n)", "O(log n)", "O(n²)", "O(n log n)"], "answer": 2, "explanation": "Outer n times, inner search for minimum — O(n). Total n × n."},
+        {"text": "Why remove the minimum in the new-array implementation?", "options": ["Speeds up", "Removes the found one so it isn't found again", "Pretty", "Not needed"], "answer": 1, "explanation": "Without removal, the next search finds the same."},
+        {"text": "What does `find_smallest` do?", "options": ["Sorts", "Returns the index of the minimum element", "Deletes", "Searches by value"], "answer": 1, "explanation": "Returns the position of the minimum."},
+        {"text": "How is selection better than bubble?", "options": ["Faster by O", "Fewer swaps (one per position)", "No loops", "No array"], "answer": 1, "explanation": "Both O(n²), but selection has fewer swap operations."},
+        {"text": "How many swaps for an array of n elements?", "options": ["1", "n", "n²", "log n"], "answer": 1, "explanation": "One swap per position — n total."}
+      ],
+      "practice": {
+        "description": "Implement selection sort for `[5, 3, 8, 2, 6]`.\n\nTwo functions:\n1. `find_smallest(arr)` — index of minimum\n2. `selection_sort(arr)` — new array: n times find minimum, add to new, remove from original (`remove arr[idx]`)\n\nOutput the result.\n\n**Expected output:**\n```\n[2, 3, 5, 6, 8]\n```",
+        "starter": "function find_smallest(arr):\n    # ...\n\nfunction selection_sort(arr):\n    # ...\n\noutput selection_sort([5, 3, 8, 2, 6])\n",
+        "expected": "[2, 3, 5, 6, 8]",
+        "must_contain": ["function", "return", "output"]
+      }
     },
     "17": {
       "id": 17,
-      "title": "What Is an Array and Indices",
-      "theory": "## Why an array\nOne variable — one value. An array — many values under one name.\n\n## Indices\nZero-based. `a[0]` — first.\n\n## Length\nLast index = length - 1.\n\n## Common mistake\nOut of bounds (a[3] with length 3).",
+      "title": "Recursion and the Call Stack",
+      "theory": "## What recursion is\n\nA function calls **itself**. Strange at first, but often shorter than loops.\n\nExample: factorial. `n! = n × (n-1)!`.\n```\nfunction fact(n):\n    if n == 1:\n        return 1\n    return n * fact(n - 1)\n```\n\n`fact(3)` = 3 * fact(2) = 3 * 2 * fact(1) = 3 * 2 * 1 = 6.\n\n## Base and recursive case\n\n**Base** — when to stop. **Recursive** — how to reduce to a smaller task.\n\nWithout base — infinite calls and stack overflow.\n\n## Call stack\n\nWhile `fact(5)` runs, **all** intermediate calls hang in memory. This is the **call stack**.\n\n`fact(5)` waits for `fact(4)`, that waits for `fact(3)`, ... down to `fact(1)`. Like a stack of plates: each new one on top, take from top too (LIFO).\n\n```\nfact(1)   ← returns first\nfact(2)\nfact(3)\nfact(4)\nfact(5)   ← first call, waiting\n```\n\nWhen `fact(1)` returns 1 — the stack \"unwinds\": `fact(2)` = 2*1 = 2, `fact(3)` = 3*2 = 6, etc.\n\n## Overflow\n\nIf you forget the base — the function calls itself forever, the stack overflows: `RecursionError: maximum recursion depth exceeded`. Depth is limited (~1000 in Python).\n\n## Recursion vs loop\n\nAny recursion can be rewritten as a loop. The loop is usually faster (no call overhead). But recursion is **clearer** for tasks where the task reduces to a subtask: tree traversal, sorting, parsing.\n\nMotto: \"Loops speed up the program. Recursion speeds up the programmer\".\n\n## When recursion is natural\n\n- Task reduces to a smaller one of the same type (factorial, Fibonacci, folder traversal)\n- Structure is hierarchical (directory tree, nested lists)\n- Easier to describe through itself\n\nFor simple counters — loop is simpler.",
       "questions": [
-        {
-          "text": "What does this output?\n```\na = [5, 10, 15]\nprint a[1]\n```",
-          "options": ["5", "10", "15", "Error"],
-          "answer": 1,
-          "explanation": "Zero-based."
-        },
-        {
-          "text": "Last index for length 4?",
-          "options": ["4", "3", "5", "0"],
-          "answer": 1,
-          "explanation": "Length - 1."
-        },
-        {
-          "text": "What happens on a[3] if length is 3?",
-          "options": ["0", "Last", "Out-of-bounds error", "Nothing"],
-          "answer": 2,
-          "explanation": "Indices 0, 1, 2."
-        },
-        {
-          "text": "How to replace the second element?",
-          "options": ["a[2] = 99", "a[1] = 99", "a = 99", "a[0] = 99"],
-          "answer": 1,
-          "explanation": "The second has index 1."
-        }
-      ]
+        {"text": "What is recursion?", "options": ["A loop with a condition", "A function calls itself", "Nested function", "Error"], "answer": 1, "explanation": "The function calls itself with modified arguments."},
+        {"text": "What happens without a base case?", "options": ["Returns nothing", "Stack overflow", "Works anyway", "Faster"], "answer": 1, "explanation": "Without a stop, calls accumulate to the limit, then error."},
+        {"text": "What will this print?\n```\nfunction f(n):\n    if n == 0:\n        return\n    output n\n    f(n - 1)\nf(3)\n```", "options": ["1 2 3", "3 2 1", "0 1 2 3", "Error"], "answer": 1, "explanation": "Prints 3, calls f(2). 2, f(1). 1, f(0) — return. Output 3, 2, 1."},
+        {"text": "What does `fact(5) = 5 * fact(4)` do?", "options": ["Error", "Reduces to a smaller task — the idea of recursion", "Infinite loop", "Nothing"], "answer": 1, "explanation": "5! reduces to 4!, that to 3!, down to base."},
+        {"text": "Where are intermediate calls stored?", "options": ["In a variable", "In the call stack", "In a file", "Nowhere"], "answer": 1, "explanation": "All unfinished calls wait in the stack. LIFO."},
+        {"text": "What is better for a counter 1..100?", "options": ["Recursion", "For loop", "Same", "while"], "answer": 1, "explanation": "For a counter — loop. Recursion — when the task reduces to a smaller one."}
+      ],
+      "practice": {
+        "description": "Write two recursive functions:\n1. `countdown(n)` — prints from n to 1. Base — `n == 0`.\n2. `factorial(n)` — factorial. Base — `n == 1` → return 1.\n\nCall:\n- `countdown(3)` — outputs 3, 2, 1\n- `output factorial(5)` — 120\n\n**Expected output:**\n```\n3\n2\n1\n120\n```",
+        "starter": "function countdown(n):\n    # ...\n\nfunction factorial(n):\n    # ...\n\ncountdown(3)\noutput factorial(5)\n",
+        "expected": "3\n2\n1\n120",
+        "must_contain": ["function", "return", "countdown", "factorial", "output"]
+      }
     },
     "18": {
       "id": 18,
-      "title": "Traversing an Array",
-      "theory": "## Iteration\nA loop by index or by element.\n\n## By elements\n`for x in a` — if you only need the element.\n\n## By indices\n`for i from 0 to length-1` — if you need the index.\n\n## Common mistake\n`i <= length(a)` instead of `<`. Out of bounds.",
+      "title": "Quicksort",
+      "theory": "## Idea\n\nChoose a **pivot** element. Split the array into two parts: less than pivot and greater. Recursively sort each. Concatenate.\n\n## Algorithm\n\n```\nfunction quicksort(arr):\n    if length(arr) < 2:\n        return arr      # base: 0 or 1 element — already sorted\n    pivot = arr[0]\n    less = []\n    greater = []\n    for i from 1 to length(arr) - 1:\n        if arr[i] < pivot:\n            less = less + [arr[i]]\n        else:\n            greater = greater + [arr[i]]\n    return quicksort(less) + [pivot] + quicksort(greater)\n```\n\nExample: `[5, 3, 6, 2, 10]`.\n- pivot = 5. less = [3, 2], greater = [6, 10].\n- quicksort([3, 2]) → pivot=3, less=[2], greater=[]. → [2, 3].\n- quicksort([6, 10]) → pivot=6, less=[], greater=[10]. → [6, 10].\n- Concatenate: [2, 3] + [5] + [6, 10] = [2, 3, 5, 6, 10].\n\n## Complexity\n\n**Average case: O(n log n).** Each split — O(n). Recursion depth — log n (each time we split in two).\n\n**Worst case: O(n²).** If pivot is always min or max — the array is not split in half but cut one by one. For example, an already-sorted array and pivot = first element.\n\n**In practice** — fast. Often a random pivot is chosen to avoid the worst case.\n\n## Comparison\n\n| Sort | Average | Worst | Memory |\n|---|---|---|---|\n| Bubble | O(n²) | O(n²) | O(1) |\n| Selection | O(n²) | O(n²) | O(1) |\n| Quick | O(n log n) | O(n²) | O(log n) |\n| Merge | O(n log n) | O(n log n) | O(n) |\n\n## Recursion base\n\nAn array of 0 or 1 element is already sorted. Without this base — infinite recursion.\n\n## Common mistake\n\nForgetting the base or comparing with `pivot` via `<=` instead of `<` (or vice versa) — you may get infinite recursion on duplicates.",
       "questions": [
-        {
-          "text": "What does this output?\n```\nfor x in [1, 2, 3]:\n    print x\n```",
-          "options": ["1 2 3", "0 1 2", "3", "Error"],
-          "answer": 0,
-          "explanation": "Iterating elements."
-        },
-        {
-          "text": "What is wrong?\n```\nfor i from 0 to length(a):\n    print a[i]\n```",
-          "options": ["Nothing", "Out of bounds", "Need from 1", "Need while"],
-          "answer": 1,
-          "explanation": "Last i = length(a) — error."
-        },
-        {
-          "text": "How to compute the sum?",
-          "options": ["print a", "Accumulator + iteration", "length(a)", "a[0] + a[1]"],
-          "answer": 1,
-          "explanation": "Needs a loop."
-        },
-        {
-          "text": "When is the index needed?",
-          "options": ["Always", "For swap or comparing neighbors", "Never", "For strings"],
-          "answer": 1,
-          "explanation": "When the position matters."
-        }
-      ]
+        {"text": "What is quicksort's average complexity?", "options": ["O(n)", "O(log n)", "O(n log n)", "O(n²)"], "answer": 2, "explanation": "Average — n log n. Worst — n² (on an already-sorted array with a bad pivot)."},
+        {"text": "What is a pivot?", "options": ["First element", "The reference element for splitting", "Last", "Middle"], "answer": 1, "explanation": "Any. Often first or random."},
+        {"text": "What is the recursion base in quicksort?", "options": ["Length 0 or 1", "Length 5", "Empty pivot", "No base"], "answer": 0, "explanation": "0 or 1 element — already sorted. Return as is."},
+        {"text": "When does quicksort give O(n²)?", "options": ["Always", "When pivot is bad — always min or max", "On random data", "On short arrays"], "answer": 1, "explanation": "Already-sorted array with pivot = first → cut one by one, O(n²)."},
+        {"text": "Why randomize the pivot?", "options": ["Pretty", "To avoid the worst case on sorted arrays", "Faster on small", "No reason"], "answer": 1, "explanation": "Random pivot gives O(n log n) on average even on bad inputs."},
+        {"text": "What is faster — bubble or quicksort?", "options": ["Bubble", "quicksort — O(n log n) vs O(n²)", "Same", "Depends on language"], "answer": 1, "explanation": "O(n log n) at large n is dramatically faster than O(n²)."}
+      ],
+      "practice": {
+        "description": "Implement quicksort for `[5, 3, 8, 2, 6]`.\n\nSteps:\n- Base: `if length(arr) < 2: return arr`\n- `pivot = arr[0]`\n- Go through the rest: less into `less`, others into `greater`\n- `return quicksort(less) + [pivot] + quicksort(greater)`\n\nOutput the result.\n\n**Expected output:**\n```\n[2, 3, 5, 6, 8]\n```",
+        "starter": "function quicksort(arr):\n    # ...\n\noutput quicksort([5, 3, 8, 2, 6])\n",
+        "expected": "[2, 3, 5, 6, 8]",
+        "must_contain": ["function", "return", "quicksort", "output"]
+      }
     },
     "19": {
       "id": 19,
-      "title": "Search, Filter, Maximum",
-      "theory": "## Filtering\nCollect matching items into a new array.\n\n## Search\nFind the first or establish existence (flag).\n\n## Maximum\nStart from the first element, not 0 (otherwise negatives won't be found).\n\n## Foundation\nIteration + condition.",
+      "title": "Hash Tables",
+      "theory": "## Problem\n\nThere is a phone book: name → phone. You want to find the phone by name. Linear search — O(n). Slow for large.\n\n## Hash table idea\n\nA **hash function** turns a key into a number (index). The string \"Anna\" → number 3. We put the value into cell 3.\n\nThen to find \"Anna\" — compute the hash (3 again), go to cell 3. Instant — **O(1)**.\n\n## What a hash function must do\n\n1. **Determinism.** The same key → always the same number.\n2. **Uniformity.** Different keys — into different cells (as much as possible).\n\n## Collisions\n\nDifferent keys may give the same hash. For example, \"Anna\" → 3 and \"Ivan\" → 3. This is a **collision**.\n\nSolution — store a **list** of values in a cell. If two keys are in the same cell, check both.\n\n## Performance\n\n- **Average case: O(1)** for insert, search, delete.\n- **Worst case: O(n).** If all keys land in one cell (bad hash function or attack) — linear search.\n\nIn practice hash functions are good — O(1).\n\n## Applications\n\n- **Dictionaries (dict)** — everywhere. `d[\"key\"]` in O(1).\n- **Sets** — checking `x in set` in O(1).\n- **Cache** — save the computed by key, then take ready.\n- **Deduplication** — remove duplicates from a list.\n- **Counting frequencies** — how many times a word appears.\n\n## Example: counting frequencies\n\n```\nwords = [\"a\", \"b\", \"a\", \"c\", \"b\"]\ncount = {}\nfor w in words:\n    if w in count:\n        count[w] = count[w] + 1\n    else:\n        count[w] = 1\noutput count   # {a: 2, b: 2, c: 1}\n```\n\nO(n) — one pass.\n\n## Hash table vs array\n\n- **Array** — key = index 0..n-1. Fast, but indices are numbers only.\n- **Hash table** — key = any (string, number). Fast, but uses more memory.\n\n## Common mistake\n\nBad hash function. If it returns few different values — many collisions — O(n) instead of O(1).\n\n## Built-in\n\nIn any modern language there is: `dict` (Python), `HashMap` (Java), `unordered_map` (C++), `object` (JS). Use them, don't write your own hash table.",
       "questions": [
-        {
-          "text": "What does filtering do?",
-          "options": ["Changes the array", "Collects matching", "Sorts", "Finds one"],
-          "answer": 1,
-          "explanation": "Selection by condition."
-        },
-        {
-          "text": "Why not start the maximum at 0?",
-          "options": ["You can", "If all are negative, 0 will be greater", "0 is not a number", "Need from 1"],
-          "answer": 1,
-          "explanation": "0 distorts the result."
-        },
-        {
-          "text": "What does this output?\n```\na = [1, 2, 3, 4]\nmax = a[0]\nfor x in a:\n    if x > max:\n        max = x\nprint max\n```",
-          "options": ["1", "4", "10", "0"],
-          "answer": 1,
-          "explanation": "Maximum 4."
-        },
-        {
-          "text": "How to check whether 7 exists?",
-          "options": ["print a", "Flag: if x == 7: found = true", "length(a)", "a[7]"],
-          "answer": 1,
-          "explanation": "Iteration and flag."
-        }
-      ]
+        {"text": "What is the average search complexity in a hash table?", "options": ["O(1)", "O(log n)", "O(n)", "O(n²)"], "answer": 0, "explanation": "Average — O(1). Compute the hash, go to the cell."},
+        {"text": "What is a collision?", "options": ["Error", "Two different keys give the same hash", "Data loss", "Slow insert"], "answer": 1, "explanation": "Different keys — one cell. Solved by a list."},
+        {"text": "What does a hash function need?", "options": ["Determinism and uniformity", "Speed", "Pretty name", "Return a string"], "answer": 0, "explanation": "One key — one hash. Different keys — different cells."},
+        {"text": "What is faster for checking 'is the element present'?", "options": ["Array (linear search)", "Hash table (set)", "Same", "Depends on size"], "answer": 1, "explanation": "Hash table — O(1). Array — O(n)."},
+        {"text": "What is deduplication via a hash table?", "options": ["Sorting", "Remove duplicates", "Find minimum", "Nothing"], "answer": 1, "explanation": "Put all into a set — duplicates disappear automatically."},
+        {"text": "Worst case of search in a hash table?", "options": ["O(1)", "O(log n)", "O(n) — all keys in one cell", "O(n²)"], "answer": 2, "explanation": "With a bad hash function, all in one cell → linear search."}
+      ],
+      "practice": {
+        "description": "Given a list of words:\n```\nwords = [\"cat\", \"dog\", \"cat\", \"hedgehog\", \"dog\", \"cat\"]\n```\n\nCount frequencies via a hash table (dictionary), output in the format:\n```\ncat: 3\ndog: 2\nhedgehog: 1\n```\n\n⚠️ The order of keys in a real dictionary may differ. For checking, output in any order.\n\n⚠️ Required: `dictionary`, `if key in`, `+= 1`, `else`, `output`.",
+        "starter": "words = [\"cat\", \"dog\", \"cat\", \"hedgehog\", \"dog\", \"cat\"]\ncount = {}\n\n# loop\n\n# output pairs\n",
+        "expected": "cat: 3\ndog: 2\nhedgehog: 1",
+        "must_contain": ["for", "if", "count", "output"]
+      }
     },
     "20": {
       "id": 20,
-      "title": "Sorting and Swap",
-      "theory": "## Swap\nExchange values. Needs a temporary variable.\n\n## Without temp\n`a = b; b = a` erases the old a. Both become b.\n\n## Find max and swap\nThe foundation of selection sort.\n\n## Common mistake\nSwap without a third variable.",
+      "title": "Graphs and Breadth-First Search (BFS)",
+      "theory": "## What a graph is\n\nA graph is a set of **vertices** (nodes) and **edges** (connections). Examples:\n- Friends: Anna is friends with Ivan, Ivan with Masha.\n- Cities and roads.\n- Web pages and links.\n\n## Kinds\n\n- **Undirected** — connection both ways (friendship).\n- **Directed** — connection one way (subscription).\n- **Weighted** — an edge has a weight (distance).\n\n## How to represent in code\n\n**Adjacency list** — for each vertex a list of neighbors.\n```\ngraph = {\n    \"Anna\": [\"Ivan\", \"Masha\"],\n    \"Ivan\": [\"Anna\", \"Petya\"],\n    \"Masha\": [\"Anna\"],\n    \"Petya\": [\"Ivan\"]\n}\n```\n\n## Breadth-First Search (BFS)\n\nIdea: first everyone at distance 1, then everyone at distance 2, then 3... Like ripples on water.\n\n**Why:** find the **shortest path** in an unweighted graph.\n\n**Algorithm:**\n```\nfunction bfs(graph, start, target):\n    queue = [start]\n    visited = {start}\n    \n    while queue is not empty:\n        node = queue.take_first\n        if node == target:\n            return \"found\"\n        for neighbor in graph[node]:\n            if neighbor not in visited:\n                visited.add(neighbor)\n                queue.add(neighbor)\n    \n    return \"no path\"\n```\n\n## Queue\n\nA **Queue** is \"first in, first out\" (FIFO). Unlike a stack (LIFO). BFS uses a queue: process first what we found earlier.\n\n## Complexity\n\nO(V + E) — V vertices, E edges. Each vertex and each edge processed once.\n\n## BFS vs DFS\n\n- **BFS** — queue. Finds **shortest** path in unweighted. Wider.\n- **DFS** — stack (or recursion). Does not find the shortest, but simpler for full traversal.\n\n## BFS applications\n\n- Shortest path in a maze\n- Graph connectivity check\n- \"At distance N steps\" search\n- Social networks: \"friends of friends\"\n\n## Common mistake\n\nForgetting `visited`. Without it you may loop: Anna → Ivan → Anna → Ivan... `visited` guarantees each vertex is processed once.",
       "questions": [
-        {
-          "text": "What happens without a temp?\n```\na = 1\nb = 2\na = b\nb = a\n```",
-          "options": ["a=2, b=1", "a=2, b=2", "a=1, b=1", "Error"],
-          "answer": 1,
-          "explanation": "a becomes 2, b also 2."
-        },
-        {
-          "text": "How to swap correctly?",
-          "options": ["a=b; b=a", "t=a; a=b; b=t", "a=a+b; b=a-b", "b=a; a=b"],
-          "answer": 1,
-          "explanation": "Need t."
-        },
-        {
-          "text": "Where to start the maximum search?",
-          "options": ["At 0", "At the first element", "At the last", "At length"],
-          "answer": 1,
-          "explanation": "So negatives don't distort."
-        },
-        {
-          "text": "Why find the index of the maximum?",
-          "options": ["Not needed", "To swap or use the position", "For speed", "Error"],
-          "answer": 1,
-          "explanation": "For further actions."
-        }
-      ]
+        {"text": "What is a graph?", "options": ["An array", "A set of vertices and edges", "A list", "A number"], "answer": 1, "explanation": "Vertices (nodes) and edges (connections)."},
+        {"text": "What does BFS use?", "options": ["Stack (LIFO)", "Queue (FIFO)", "Array", "Hash table"], "answer": 1, "explanation": "Queue. Process first what we found earlier."},
+        {"text": "Why `visited`?", "options": ["For speed", "So a vertex is not processed twice and no loop", "For memory", "Not needed"], "answer": 1, "explanation": "Without it you can go around a cycle forever."},
+        {"text": "What does BFS find in an unweighted graph?", "options": ["Any path", "Shortest path", "All paths", "Nothing"], "answer": 1, "explanation": "BFS goes level by level — the first time target is met, it's the shortest path."},
+        {"text": "What is BFS complexity?", "options": ["O(V)", "O(E)", "O(V + E)", "O(V * E)"], "answer": 2, "explanation": "Each vertex and each edge is processed once."},
+        {"text": "How does BFS differ from DFS?", "options": ["BFS — queue, DFS — stack", "BFS is faster", "DFS does not work", "Same"], "answer": 0, "explanation": "BFS — FIFO, finds shortest. DFS — LIFO, goes deeper."}
+      ],
+      "practice": {
+        "description": "Given a friendship graph:\n```\ngraph = {\n    \"Anna\": [\"Ivan\", \"Masha\"],\n    \"Ivan\": [\"Anna\", \"Petya\"],\n    \"Masha\": [\"Anna\"],\n    \"Petya\": [\"Ivan\", \"Olga\"],\n    \"Olga\": [\"Petya\"]\n}\n```\n\nImplement **BFS** from \"Anna\" to \"Olga\". Output `found` if a path exists, `no path` if not.\n\n**Expected output:**\n```\nfound\n```\n\n⚠️ Required: `function bfs`, `queue`, `visited`, `while`, `if`, `output`.",
+        "starter": "graph = {\n    \"Anna\": [\"Ivan\", \"Masha\"],\n    \"Ivan\": [\"Anna\", \"Petya\"],\n    \"Masha\": [\"Anna\"],\n    \"Petya\": [\"Ivan\", \"Olga\"],\n    \"Olga\": [\"Petya\"]\n}\n\nfunction bfs(graph, start, target):\n    # ...\n\noutput bfs(graph, \"Anna\", \"Olga\")\n",
+        "expected": "found",
+        "must_contain": ["function", "bfs", "visited", "while", "output"]
+      }
     },
     "21": {
       "id": 21,
-      "title": "How to Solve Problems Step by Step",
-      "theory": "## Decomposition\nBreak a big task into small ones.\n\n## Steps\n1. Understand inputs and outputs.\n2. Split into subtasks.\n3. Write pseudocode.\n4. Check at boundaries.\n\n## Debugging\nIf it doesn't work — walk through step by step manually.\n\n## Common mistake\nTrying to write all the code at once without thinking through the steps.",
+      "title": "Greedy Algorithms",
+      "theory": "## Idea\n\nAt each step choose the **locally best** solution, without thinking about the future. Sometimes this gives the global optimum, sometimes not.\n\n## When it works\n\nWhen the task has the **greedy choice property**: locally best leads to globally best.\n\n## Example 1: coin change\n\nTask: give change with minimum coins. Coins: 1, 5, 10, 25.\n\nGreedy: take the largest coin ≤ remainder. Repeat.\n\nChange 63:\n- 25 → remainder 38\n- 25 → 13\n- 10 → 3\n- 1 + 1 + 1 → 0\n\nTotal 6 coins. Optimal?\n\n**Works if coin denominations are \"nice\".** If coins, for example, 1, 3, 4 — greedy may fail. Change 6: greedy takes 4+1+1 = 3 coins. But 3+3 = 2 coins is possible.\n\n## Example 2: knapsack problem (fractional)\n\nThere is a knapsack of capacity W, items with weight and value. You can take **fractions** of items.\n\nGreedy: take by maximum unit value (value / weight). Works for fractional knapsack.\n\nFor **integer** knapsack (0/1) greedy does not work — need dynamic programming (next lesson).\n\n## Example 3: interval covering\n\nTask: cover as many non-overlapping intervals as possible. Greedy: sort by end, take the first, then the next that starts after the end of the previous. Works.\n\n## Example 4: travelling salesman\n\nGreedy: always go to the nearest city. **Does not work** — optimal route may require a long step.\n\n## Pros and cons\n\n**Pros:** simple, fast (often O(n log n) due to sorting).\n**Cons:** not always optimal. Need to **prove** greedy works for your task.\n\n## How to verify\n\nEither prove mathematically, or compare with brute force on small examples. If greedy gives the same answer — probably works. But not a guarantee.\n\n## Complexity\n\nUsually O(n log n) — sort + one pass. Sometimes O(n).\n\n## Common mistake\n\nApplying greedy where it doesn't work. Ask: \"what if locally worse but globally better?\" If such a scenario is possible — greedy is not suitable.",
       "questions": [
-        {
-          "text": "Where to start solving a problem?",
-          "options": ["With code", "By understanding input and output", "By googling", "By creating an array"],
-          "answer": 1,
-          "explanation": "Understanding the data is the base."
-        },
-        {
-          "text": "Why decomposition?",
-          "options": ["To complicate", "To solve the task in parts", "For beauty", "Requirement"],
-          "answer": 1,
-          "explanation": "The big is broken into small."
-        },
-        {
-          "text": "How to test a solution?",
-          "options": ["Randomly", "On edge values", "Only at 0", "Not at all"],
-          "answer": 1,
-          "explanation": "Boundaries are the key."
-        },
-        {
-          "text": "What to do if it doesn't work?",
-          "options": ["Delete", "Walk through the steps manually", "Give up", "Rewrite"],
-          "answer": 1,
-          "explanation": "Tracing."
-        }
-      ]
+        {"text": "What is a greedy algorithm?", "options": ["Random", "At each step — locally best", "Brute force", "Recursion"], "answer": 1, "explanation": "Locally best without thinking about the future."},
+        {"text": "Does greedy always give the optimum?", "options": ["Yes", "No — depends on the task", "Only for sorting", "Only for graphs"], "answer": 1, "explanation": "Only if the task has the greedy choice property."},
+        {"text": "What is the complexity usually?", "options": ["O(1)", "O(log n)", "O(n log n)", "O(2^n)"], "answer": 2, "explanation": "Sort + pass."},
+        {"text": "Does greedy work for the integer knapsack (0/1)?", "options": ["Yes", "No — need dynamic programming", "Only for small", "Always"], "answer": 1, "explanation": "Greedy is not optimal for the integer knapsack. For fractional — works."},
+        {"text": "How to check that greedy works?", "options": ["Run it", "Prove or compare with brute force on small", "Google", "Nowhere"], "answer": 1, "explanation": "Proof or empirical check."}
+      ],
+      "practice": {
+        "description": "Greedy task: give change with minimum coins. Coins: 1, 5, 10, 25. Change: 63.\n\nGreedy: take the largest coin ≤ remainder. Repeat.\n\nOutput the **count** of coins.\n\n**Expected output:**\n```\n6\n```\n\nBreakdown: 25 + 25 + 10 + 1 + 1 + 1 = 63. Six coins.\n\n⚠️ Required: `function`, `while`, `if`, `output`.",
+        "starter": "coins = [25, 10, 5, 1]\namount = 63\ncount = 0\n\n# greedy\n\noutput count\n",
+        "expected": "6",
+        "must_contain": ["while", "if", "count", "output"]
+      }
     },
     "22": {
       "id": 22,
-      "title": "What Any Program Consists Of",
-      "theory": "## Base\nAny program consists of:\n1. Input (read).\n2. Processing (logic, loops, functions).\n3. Output (result).\n\n## State\nThe program changes memory. Variables hold the state.\n\n## Algorithm\nA sequence of actions. Written in any language.\n\n## Next\nNow you know the base. The next step is the syntax of a specific language (Python).",
+      "title": "Dynamic Programming",
+      "theory": "## Problem\n\nSometimes a task is solved through subproblems, but if you compute each **anew**, it becomes very slow (exponential).\n\nExample: Fibonacci numbers.\n```\nfunction fib(n):\n    if n <= 1: return n\n    return fib(n-1) + fib(n-2)\n```\n\n`fib(5)` = `fib(4) + fib(3)`. Each `fib(4)` computes `fib(3)` again, etc. `fib(30)` — billions of calls. Slow.\n\n## DP idea\n\n**Remember** already-solved subproblems. If the answer is known — take the ready one.\n\n```\nmemo = {}\nfunction fib(n):\n    if n <= 1: return n\n    if n in memo: return memo[n]\n    result = fib(n-1) + fib(n-2)\n    memo[n] = result\n    return result\n```\n\nEach `fib(n)` computed **once**. O(n).\n\nThis is **memoization** — top-down DP.\n\n## Bottom-up\n\nAnother approach — start with small and go to large:\n```\nfunction fib(n):\n    dp = [0, 1]\n    for i from 2 to n:\n        dp[i] = dp[i-1] + dp[i-2]\n    return dp[n]\n```\n\nAlso O(n), but without recursion — no stack overflow.\n\n## When DP applies\n\nTwo conditions:\n1. **Optimal substructure** — the task is solved via subproblems of the same type.\n2. **Overlapping subproblems** — the same subproblems appear many times.\n\nIf subproblems **do not overlap** — it is \"divide and conquer\" (merge sort), DP is not needed.\n\n## Classic tasks\n\n- **Fibonacci** — numbers.\n- **0/1 knapsack** — which items to take for maximum value.\n- **Longest common subsequence (LCS)** — string comparison.\n- **Shortest path** — Bellman-Ford.\n- **Coin change** — minimum coins for change.\n\n## Example: coin change\n\nTask: minimum coins for sum N. Coins 1, 5, 10, 25. Greedy may fail — DP gives the exact answer.\n\n```\nfunction min_coins(coins, n):\n    dp = [infinity] * (n + 1)\n    dp[0] = 0\n    for i from 1 to n:\n        for c in coins:\n            if c <= i:\n                dp[i] = min(dp[i], dp[i - c] + 1)\n    return dp[n]\n```\n\nO(n * k), where k is the number of coins.\n\n## Complexity\n\nUsually O(n) or O(n * W), where W is the size of an additional dimension (capacity, sum). Memory — O(n) or O(n * W).\n\n## Common mistake\n\nApplying DP when subproblems **do not overlap**. Then simple recursion / divide-and-conquer.\n\n## DP vs greedy\n\n- **Greedy** — faster, but not always optimal.\n- **DP** — always optimal (if applicable), but slower — O(n) / O(n * W).\n\nIf greedy works — use it. If not — DP.",
       "questions": [
-        {
-          "text": "What does a program consist of?",
-          "options": ["Only loops", "Input, processing, output", "Only functions", "Variables"],
-          "answer": 1,
-          "explanation": "The classic scheme."
-        },
-        {
-          "text": "What holds state?",
-          "options": ["Functions", "Variables", "Loops", "Output"],
-          "answer": 1,
-          "explanation": "Memory/variables."
-        },
-        {
-          "text": "What is an algorithm?",
-          "options": ["Python syntax", "Solution logic", "Error", "Array"],
-          "answer": 1,
-          "explanation": "An algorithm is a sequence of steps."
-        },
-        {
-          "text": "What is next after understanding code?",
-          "options": ["Nothing", "Learning a language's syntax", "Only algorithms", "Only databases"],
-          "answer": 1,
-          "explanation": "Now you can move to Python."
-        }
-      ]
+        {"text": "What is DP?", "options": ["Random search", "Remembering solved subproblems", "Sorting", "Brute force"], "answer": 1, "explanation": "Memoization or bottom-up. Do not compute the same twice."},
+        {"text": "When is DP applicable?", "options": ["Always", "When subproblems overlap", "Only for numbers", "Only for graphs"], "answer": 1, "explanation": "Need optimal substructure + overlapping subproblems."},
+        {"text": "What does memoization do?", "options": ["Slows down", "Remembers the result by input", "Speeds up sorting", "Nothing"], "answer": 1, "explanation": "Save to a dictionary. Next time — take ready."},
+        {"text": "What is fib complexity via DP?", "options": ["O(1)", "O(log n)", "O(n)", "O(2^n)"], "answer": 2, "explanation": "Each number — once. O(n). Without DP — exponential."},
+        {"text": "Top-down vs bottom-up?", "options": ["Same", "Top-down — with recursion, bottom-up — with a loop from small to large", "Top-down is faster", "Bottom-up — only for graphs"], "answer": 1, "explanation": "Top-down — with memo + recursion. Bottom-up — fill array from bottom."},
+        {"text": "DP vs greedy?", "options": ["Same", "DP always optimal (if applicable), greedy — faster but may fail", "Greedy is better", "DP is always slower"], "answer": 1, "explanation": "Greedy — O(n log n) or O(n). DP — O(n) / O(nW), but exact."}
+      ],
+      "practice": {
+        "description": "Implement `fib(n)` via DP (bottom-up, array).\n\nFor `n = 10` you should get `55`.\n\nSteps:\n- If n <= 1 — return n\n- `dp = [0, 1]`\n- Loop from 2 to n: `dp[i] = dp[i-1] + dp[i-2]`\n- Return `dp[n]`\n\nOutput `fib(10)`.\n\n**Expected output:**\n```\n55\n```",
+        "starter": "function fib(n):\n    # ...\n\noutput fib(10)\n",
+        "expected": "55",
+        "must_contain": ["function", "fib", "return", "output"]
+      }
+    },
+    "23": {
+      "id": 23,
+      "title": "How to Solve Problems Step by Step",
+      "theory": "## Decomposition\n\nBreak a big task into small ones. Each — simple enough to be written in 10-20 lines.\n\n## Steps\n\n1. **Understand input and output.** What is given? What is needed? Example input → output.\n2. **Break into subtasks.** What steps are needed?\n3. **Write pseudocode.** In plain language, no syntax.\n4. **Check on paper.** Walk through the pseudocode with an example by hand.\n5. **Only then code.** From the pseudocode.\n6. **Check on boundaries.** 0, empty, negatives, maximum, maximum+1.\n7. **Debug.** If it doesn't work — trace.\n\n## Example\n\nTask: find two numbers in an array that sum to target.\n\n1. Input: array and target. Output: pair or \"none\".\n2. Subtasks: iterate all pairs, check the sum.\n3. Pseudocode:\n```\nfunction find_pair(arr, target):\n    for i from 0 to length(arr) - 1:\n        for j from i+1 to length(arr) - 1:\n            if arr[i] + arr[j] == target:\n                return (i, j)\n    return nothing\n```\n4. Check: `[2, 7, 11, 15]`, target = 9. i=0 (2), j=1 (7) → 2+7=9 → (0, 1). Works.\n5. Code.\n6. Boundaries: empty array (loops do not run — returns nothing). One element (one loop — returns nothing). Duplicates (i < j — ok). Negatives (works without changes).\n\n## Boundaries — where errors hide\n\nCheck:\n- **0 and 1** (empty, one element)\n- **Negatives** (if the task is about \"positives\" — do not miss)\n- **Maximum** (if there is a limit — what at the limit and limit+1)\n- **Empty strings / None**\n- **Duplicates** (if uniqueness matters)\n\n## Debugging\n\nIf it doesn't work:\n1. Read the error.\n2. Find the line.\n3. Tracing — what value at this moment? What was expected?\n4. Fix **one** place.\n5. Re-check, with different inputs.\n\n## Testing\n\nBefore shipping, check:\n- Normal case (2-3 different)\n- Boundary: 0, 1, empty\n- Boundary: maximum\n- Invalid input (if the program accepts input)\n\n## Common mistake\n\nTrying to write the whole code at once, without thinking through the steps. Or writing code and \"thinking along the way\". Pseudocode first. Always.",
+      "questions": [
+        {"text": "Where to start solving a task?", "options": ["With code", "With understanding input and output", "With searching the internet", "With creating an array"], "answer": 1, "explanation": "Understanding data is the base."},
+        {"text": "Why decomposition?", "options": ["To complicate", "To solve the task in parts", "For beauty", "Required"], "answer": 1, "explanation": "Big broken into small."},
+        {"text": "How to check the solution?", "options": ["At random", "On boundary values (0, 1, empty, max)", "Only on 0", "Nowhere"], "answer": 1, "explanation": "Boundaries are the main place of errors."},
+        {"text": "What to do if it does not work?", "options": ["Delete", "Trace — walk through step by step by hand", "Give up", "Rewrite"], "answer": 1, "explanation": "Tracing shows where the value became wrong."},
+        {"text": "Why pseudocode before code?", "options": ["Pretty", "Think through the logic without a language — errors are cheaper", "For speed", "Required"], "answer": 1, "explanation": "On paper errors are easier to fix."},
+        {"text": "Which of these are boundary cases for an array?", "options": ["Only maximum", "Empty, one element, all same, maximum", "Only negative", "Only empty"], "answer": 1, "explanation": "Everything on range boundaries."}
+      ],
+      "practice": {
+        "description": "Solve the task via **decomposition**:\n\n**Task:** given an array of numbers. Find two numbers that sum to 9. Return their indices or `none`.\n\n```\narr = [2, 7, 11, 15]\n```\n\nAnswer: `(0, 1)` — because `arr[0] + arr[1] = 2 + 7 = 9`.\n\nWrite a function `find_pair(arr, target)`:\n- Double loop: i from 0, j from i+1\n- If `arr[i] + arr[j] == target` — return the pair\n- Otherwise — return `none`\n\nOutput the result for `arr` and `target = 9`.\n\n**Expected output:**\n```\n(0, 1)\n```\n\n⚠️ Check boundaries: empty array, one element — should not crash.",
+        "starter": "function find_pair(arr, target):\n    # ...\n\narr = [2, 7, 11, 15]\noutput find_pair(arr, 9)\n",
+        "expected": "(0, 1)",
+        "must_contain": ["function", "for", "if", "return", "output"]
+      }
     }
   }
 }

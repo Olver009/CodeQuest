@@ -1,169 +1,78 @@
 [
-  {
-    "id": 1,
-    "title": "Introduction",
-    "lessons": [
-      { "id": 1, "title": "First Program", "status": "current" },
-      { "id": 2, "title": "Variables", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 2,
-    "title": "Data Types",
-    "lessons": [
-      { "id": 3, "title": "Data Types", "status": "locked" },
-      { "id": 4, "title": "Arithmetic", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 3,
-    "title": "Input, output and f-strings",
-    "lessons": [
-      { "id": 5, "title": "Keyboard input", "status": "locked" },
-      { "id": 6, "title": "Type conversion", "status": "locked" },
-      { "id": 7, "title": "f-strings and formatting", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 4,
-    "title": "Conditions",
-    "lessons": [
-      { "id": 8, "title": "The if construct", "status": "locked" },
-      { "id": 9, "title": "Branching: elif and else", "status": "locked" },
-      { "id": 10, "title": "Comparison operators", "status": "locked" },
-      { "id": 11, "title": "Logical operators", "status": "locked" },
-      { "id": 12, "title": "Nested conditions", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 5,
-    "title": "Loops",
-    "lessons": [
-      { "id": 13, "title": "The while loop", "status": "locked" },
-      { "id": 14, "title": "The for loop and range", "status": "locked" },
-      { "id": 15, "title": "break and continue", "status": "locked" },
-      { "id": 16, "title": "Nested loops", "status": "locked" },
-      { "id": 17, "title": "Summary: Loops", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 6,
-    "title": "Lists",
-    "lessons": [
-      { "id": 18, "title": "Lists: introduction", "status": "locked" },
-      { "id": 19, "title": "List slices", "status": "locked" },
-      { "id": 20, "title": "List methods", "status": "locked" },
-      { "id": 21, "title": "List functions", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 7,
-    "title": "★ Algorithmics",
-    "lessons": [
-      { "id": 200, "title": "Pattern: Accumulator", "status": "locked" },
-      { "id": 201, "title": "Pattern: Counter", "status": "locked" },
-      { "id": 202, "title": "Pattern: Maximum/minimum search", "status": "locked" },
-      { "id": 203, "title": "Pattern: Filtering", "status": "locked" },
-      { "id": 204, "title": "Pattern: Value swap", "status": "locked" },
-      { "id": 205, "title": "Pattern: Traversing nested structures", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 8,
-    "title": "📖 Grokking Algorithms",
-    "lessons": [
-      { "id": 100, "title": "Chapter 1: Binary search and Big O", "type": "book", "status": "locked" },
-      { "id": 101, "title": "Chapter 2: Selection sort and arrays", "type": "book", "status": "locked" },
-      { "id": 102, "title": "Chapter 3: Recursion and the stack", "type": "book", "status": "locked" }
-    ],
-    "trophy": { "title": "Book Trophy", "status": "locked" }
-  },
-  {
-    "id": 9,
-    "title": "Dictionaries",
-    "lessons": [
-      { "id": 22, "title": "Dictionaries: introduction", "status": "locked" },
-      { "id": 23, "title": "Dictionary methods", "status": "locked" },
-      { "id": 24, "title": "Nested structures", "status": "locked" },
-      { "id": 25, "title": "Tuples", "status": "locked" },
-      { "id": 26, "title": "Sets", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 10,
-    "title": "Functions",
-    "lessons": [
-      { "id": 27, "title": "Defining functions", "status": "locked" },
-      { "id": 28, "title": "Arguments", "status": "locked" },
-      { "id": 29, "title": "return", "status": "locked" },
-      { "id": 30, "title": "Scope", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 11,
-    "title": "Strings in depth",
-    "lessons": [
-      { "id": 31, "title": "String methods", "status": "locked" },
-      { "id": 32, "title": "String checks", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 12,
-    "title": "Files and errors",
-    "lessons": [
-      { "id": 33, "title": "Reading files", "status": "locked" },
-      { "id": 34, "title": "Writing files", "status": "locked" },
-      { "id": 35, "title": "try/except", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 13,
-    "title": "Modules",
-    "lessons": [
-      { "id": 36, "title": "import and the standard library", "status": "locked" },
-      { "id": 37, "title": "pip and venv", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 14,
-    "title": "OOP",
-    "lessons": [
-      { "id": 38, "title": "Classes and objects", "status": "locked" },
-      { "id": 39, "title": "Class methods", "status": "locked" },
-      { "id": 40, "title": "Constructor __init__", "status": "locked" },
-      { "id": 41, "title": "Inheritance", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 15,
-    "title": "Advanced",
-    "lessons": [
-      { "id": 42, "title": "List comprehension", "status": "locked" },
-      { "id": 43, "title": "Generators", "status": "locked" },
-      { "id": 44, "title": "JSON", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 16,
-    "title": "Git and final",
-    "lessons": [
-      { "id": 45, "title": "Git and GitHub", "status": "locked" },
-      { "id": 46, "title": "Final project", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  }
+  {"id": 1, "title": "Chapter 1. Introduction", "lessons": [
+    {"id": 1, "title": "How to Run a Program: Terminal", "status": "current"},
+    {"id": 2, "title": "First Program: print", "status": "locked"},
+    {"id": 3, "title": "How to Read Errors", "status": "locked"}
+  ], "trophy": {"title": "Chapter 1 Trophy", "status": "locked"}},
+  {"id": 2, "title": "Chapter 2. Variables and Types", "lessons": [
+    {"id": 4, "title": "Variables", "status": "locked"},
+    {"id": 5, "title": "Data Types", "status": "locked"},
+    {"id": 6, "title": "Arithmetic", "status": "locked"}
+  ], "trophy": {"title": "Chapter 2 Trophy", "status": "locked"}},
+  {"id": 3, "title": "Chapter 3. Input, Output, f-strings", "lessons": [
+    {"id": 7, "title": "f-strings and Formatting", "status": "locked"},
+    {"id": 8, "title": "Keyboard Input", "status": "locked"},
+    {"id": 9, "title": "Type Conversion", "status": "locked"}
+  ], "trophy": {"title": "Chapter 3 Trophy", "status": "locked"}},
+  {"id": 4, "title": "Chapter 4. Conditions", "lessons": [
+    {"id": 10, "title": "Comparison Operators", "status": "locked"},
+    {"id": 11, "title": "The if Statement", "status": "locked"},
+    {"id": 12, "title": "elif and else", "status": "locked"},
+    {"id": 13, "title": "Logical Operators", "status": "locked"},
+    {"id": 14, "title": "Nested Conditions", "status": "locked"}
+  ], "trophy": {"title": "Chapter 4 Trophy", "status": "locked"}},
+  {"id": 5, "title": "Chapter 5. Functions", "lessons": [
+    {"id": 15, "title": "Defining a Function", "status": "locked"},
+    {"id": 16, "title": "Arguments", "status": "locked"},
+    {"id": 17, "title": "return", "status": "locked"},
+    {"id": 18, "title": "Scope", "status": "locked"}
+  ], "trophy": {"title": "Chapter 5 Trophy", "status": "locked"}},
+  {"id": 6, "title": "Chapter 6. Tracing and Debugging", "lessons": [
+    {"id": 19, "title": "Tracing and Common Errors", "status": "locked"}
+  ], "trophy": {"title": "Chapter 6 Trophy", "status": "locked"}},
+  {"id": 7, "title": "Chapter 7. Loops", "lessons": [
+    {"id": 20, "title": "while Loop", "status": "locked"},
+    {"id": 21, "title": "for Loop and range", "status": "locked"},
+    {"id": 22, "title": "break and continue", "status": "locked"},
+    {"id": 23, "title": "Nested Loops", "status": "locked"}
+  ], "trophy": {"title": "Chapter 7 Trophy", "status": "locked"}},
+  {"id": 8, "title": "Chapter 8. Strings", "lessons": [
+    {"id": 24, "title": "String Methods", "status": "locked"},
+    {"id": 25, "title": "String Checks", "status": "locked"}
+  ], "trophy": {"title": "Chapter 8 Trophy", "status": "locked"}},
+  {"id": 9, "title": "Chapter 9. Lists", "lessons": [
+    {"id": 26, "title": "Lists: Introduction", "status": "locked"},
+    {"id": 27, "title": "Slices", "status": "locked"},
+    {"id": 28, "title": "List Methods", "status": "locked"},
+    {"id": 29, "title": "Functions for Lists and Built-ins", "status": "locked"}
+  ], "trophy": {"title": "Chapter 9 Trophy", "status": "locked"}},
+  {"id": 10, "title": "Chapter 10. Dictionaries and Structures", "lessons": [
+    {"id": 30, "title": "Dictionaries: Introduction", "status": "locked"},
+    {"id": 31, "title": "Dictionary Methods", "status": "locked"},
+    {"id": 32, "title": "Nested Structures", "status": "locked"},
+    {"id": 33, "title": "Tuples", "status": "locked"},
+    {"id": 34, "title": "Sets", "status": "locked"}
+  ], "trophy": {"title": "Chapter 10 Trophy", "status": "locked"}},
+  {"id": 11, "title": "Chapter 11. Testing", "lessons": [
+    {"id": 35, "title": "Testing and Boundary Cases", "status": "locked"}
+  ], "trophy": {"title": "Chapter 11 Trophy", "status": "locked"}},
+  {"id": 12, "title": "Chapter 12. Files and Errors", "lessons": [
+    {"id": 36, "title": "Reading and Writing Files", "status": "locked"},
+    {"id": 37, "title": "try/except", "status": "locked"}
+  ], "trophy": {"title": "Chapter 12 Trophy", "status": "locked"}},
+  {"id": 13, "title": "Chapter 13. JSON and Modules", "lessons": [
+    {"id": 38, "title": "import and Standard Library", "status": "locked"},
+    {"id": 39, "title": "JSON", "status": "locked"}
+  ], "trophy": {"title": "Chapter 13 Trophy", "status": "locked"}},
+  {"id": 14, "title": "Chapter 14. List Comprehension", "lessons": [
+    {"id": 40, "title": "List Comprehension", "status": "locked"}
+  ], "trophy": {"title": "Chapter 14 Trophy", "status": "locked"}},
+  {"id": 15, "title": "Chapter 15. OOP", "lessons": [
+    {"id": 41, "title": "Classes and Objects", "status": "locked"},
+    {"id": 42, "title": "Methods and __init__ Constructor", "status": "locked"},
+    {"id": 43, "title": "Inheritance", "status": "locked"}
+  ], "trophy": {"title": "Chapter 15 Trophy", "status": "locked"}},
+  {"id": 16, "title": "Chapter 16. Final", "lessons": [
+    {"id": 44, "title": "Final Project", "status": "locked"}
+  ], "trophy": {"title": "Chapter 16 Trophy", "status": "locked"}}
 ]

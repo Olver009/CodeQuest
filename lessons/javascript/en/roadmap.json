@@ -1,134 +1,65 @@
 [
-  {
-    "id": 1,
-    "title": "Introduction",
-    "lessons": [
-      { "id": 1, "title": "JavaScript: What It Is and Where It Runs", "status": "current" },
-      { "id": 2, "title": "Console, console.log", "status": "locked" },
-      { "id": 3, "title": "let and const", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 2,
-    "title": "Data Types",
-    "lessons": [
-      { "id": 4, "title": "Types and typeof", "status": "locked" },
-      { "id": 5, "title": "Strings", "status": "locked" },
-      { "id": 6, "title": "Numbers", "status": "locked" },
-      { "id": 7, "title": "Type Coercion, == vs ===", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 3,
-    "title": "Conditionals and Loops",
-    "lessons": [
-      { "id": 8, "title": "if / else, Ternary", "status": "locked" },
-      { "id": 9, "title": "switch", "status": "locked" },
-      { "id": 10, "title": "for, while, do-while", "status": "locked" },
-      { "id": 11, "title": "break, continue", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 4,
-    "title": "Functions",
-    "lessons": [
-      { "id": 12, "title": "Function Declaration", "status": "locked" },
-      { "id": 13, "title": "Arrow Functions", "status": "locked" },
-      { "id": 14, "title": "Parameters and Rest", "status": "locked" },
-      { "id": 15, "title": "Scope, Closures", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 5,
-    "title": "Arrays and Objects",
-    "lessons": [
-      { "id": 16, "title": "Arrays", "status": "locked" },
-      { "id": 17, "title": "Array Methods", "status": "locked" },
-      { "id": 18, "title": "map, filter, reduce", "status": "locked" },
-      { "id": 19, "title": "Objects", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 6,
-    "title": "Destructuring, Spread, Errors",
-    "lessons": [
-      { "id": 20, "title": "Destructuring", "status": "locked" },
-      { "id": 21, "title": "Spread and Rest for Arrays and Objects", "status": "locked" },
-      { "id": 22, "title": "try / catch, Errors", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 7,
-    "title": "Set, Map, Regex",
-    "lessons": [
-      { "id": 23, "title": "Set and Map", "status": "locked" },
-      { "id": 24, "title": "Regular Expressions", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 8,
-    "title": "Classes and this",
-    "lessons": [
-      { "id": 25, "title": "this and Context", "status": "locked" },
-      { "id": 26, "title": "Classes: constructor, Methods", "status": "locked" },
-      { "id": 27, "title": "Inheritance, extends, super", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 9,
-    "title": "DOM",
-    "lessons": [
-      { "id": 28, "title": "DOM, querySelector", "status": "locked" },
-      { "id": 29, "title": "textContent, innerHTML", "status": "locked" },
-      { "id": 30, "title": "Styles and Classes", "status": "locked" },
-      { "id": 31, "title": "createElement, appendChild", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 10,
-    "title": "Events",
-    "lessons": [
-      { "id": 32, "title": "addEventListener, click", "status": "locked" },
-      { "id": 33, "title": "Forms, submit, preventDefault", "status": "locked" },
-      { "id": 34, "title": "Keyboard Events", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 11,
-    "title": "Asynchrony",
-    "lessons": [
-      { "id": 35, "title": "Event Loop and setTimeout", "status": "locked" },
-      { "id": 36, "title": "Promise", "status": "locked" },
-      { "id": 37, "title": "async / await", "status": "locked" },
-      { "id": 38, "title": "fetch and APIs", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 12,
-    "title": "Modules",
-    "lessons": [
-      { "id": 39, "title": "import / export", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  },
-  {
-    "id": 13,
-    "title": "Practice",
-    "lessons": [
-      { "id": 40, "title": "Project: Counter", "status": "locked" },
-      { "id": 41, "title": "Final: TODO List", "status": "locked" }
-    ],
-    "trophy": { "title": "Chapter Trophy", "status": "locked" }
-  }
+  {"id": 1, "title": "Chapter 1. Introduction", "lessons": [
+    {"id": 1, "title": "What JavaScript Is and Where It Runs", "status": "current"},
+    {"id": 2, "title": "Console, console.log", "status": "locked"},
+    {"id": 3, "title": "Debugging in the Browser", "status": "locked"}
+  ], "trophy": {"title": "Chapter 1 Trophy", "status": "locked"}},
+  {"id": 2, "title": "Chapter 2. Variables and Types", "lessons": [
+    {"id": 4, "title": "let and const", "status": "locked"},
+    {"id": 5, "title": "Types and typeof", "status": "locked"}
+  ], "trophy": {"title": "Chapter 2 Trophy", "status": "locked"}},
+  {"id": 3, "title": "Chapter 3. Strings, Numbers, Coercion", "lessons": [
+    {"id": 6, "title": "Strings", "status": "locked"},
+    {"id": 7, "title": "Numbers", "status": "locked"},
+    {"id": 8, "title": "Type Coercion, == vs ===", "status": "locked"}
+  ], "trophy": {"title": "Chapter 3 Trophy", "status": "locked"}},
+  {"id": 4, "title": "Chapter 4. Conditionals and Loops", "lessons": [
+    {"id": 9, "title": "if / else, Ternary", "status": "locked"},
+    {"id": 10, "title": "switch", "status": "locked"},
+    {"id": 11, "title": "for, while, do-while", "status": "locked"},
+    {"id": 12, "title": "break, continue", "status": "locked"}
+  ], "trophy": {"title": "Chapter 4 Trophy", "status": "locked"}},
+  {"id": 5, "title": "Chapter 5. Functions", "lessons": [
+    {"id": 13, "title": "Function Declaration", "status": "locked"},
+    {"id": 14, "title": "Arrow Functions", "status": "locked"},
+    {"id": 15, "title": "Parameters and Rest", "status": "locked"},
+    {"id": 16, "title": "Scope, Closures", "status": "locked"}
+  ], "trophy": {"title": "Chapter 5 Trophy", "status": "locked"}},
+  {"id": 6, "title": "Chapter 6. Arrays and Objects", "lessons": [
+    {"id": 17, "title": "Arrays", "status": "locked"},
+    {"id": 18, "title": "Array Methods", "status": "locked"},
+    {"id": 19, "title": "map, filter, reduce", "status": "locked"},
+    {"id": 20, "title": "Objects", "status": "locked"}
+  ], "trophy": {"title": "Chapter 6 Trophy", "status": "locked"}},
+  {"id": 7, "title": "Chapter 7. Destructuring and Classes", "lessons": [
+    {"id": 21, "title": "Destructuring", "status": "locked"},
+    {"id": 22, "title": "ES6 Classes", "status": "locked"}
+  ], "trophy": {"title": "Chapter 7 Trophy", "status": "locked"}},
+  {"id": 8, "title": "Chapter 8. DOM", "lessons": [
+    {"id": 23, "title": "DOM, querySelector", "status": "locked"},
+    {"id": 24, "title": "textContent, innerHTML", "status": "locked"},
+    {"id": 25, "title": "Styles and Classes", "status": "locked"},
+    {"id": 26, "title": "createElement, appendChild", "status": "locked"}
+  ], "trophy": {"title": "Chapter 8 Trophy", "status": "locked"}},
+  {"id": 9, "title": "Chapter 9. Events", "lessons": [
+    {"id": 27, "title": "addEventListener, click", "status": "locked"},
+    {"id": 28, "title": "Forms, submit, preventDefault", "status": "locked"},
+    {"id": 29, "title": "Keyboard", "status": "locked"}
+  ], "trophy": {"title": "Chapter 9 Trophy", "status": "locked"}},
+  {"id": 10, "title": "Chapter 10. Practice", "lessons": [
+    {"id": 30, "title": "Project: Counter", "status": "locked"},
+    {"id": 31, "title": "localStorage", "status": "locked"}
+  ], "trophy": {"title": "Chapter 10 Trophy", "status": "locked"}},
+  {"id": 11, "title": "Chapter 11. Asynchrony", "lessons": [
+    {"id": 32, "title": "Event Loop and setTimeout", "status": "locked"},
+    {"id": 33, "title": "Promise", "status": "locked"},
+    {"id": 34, "title": "async / await", "status": "locked"},
+    {"id": 35, "title": "fetch and API", "status": "locked"}
+  ], "trophy": {"title": "Chapter 11 Trophy", "status": "locked"}},
+  {"id": 12, "title": "Chapter 12. Modules", "lessons": [
+    {"id": 36, "title": "import / export", "status": "locked"}
+  ], "trophy": {"title": "Chapter 12 Trophy", "status": "locked"}},
+  {"id": 13, "title": "Chapter 13. Final", "lessons": [
+    {"id": 37, "title": "Final: TODO List", "status": "locked"}
+  ], "trophy": {"title": "Chapter 13 Trophy", "status": "locked"}}
 ]

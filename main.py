@@ -778,56 +778,78 @@ LANG_ACHIEVEMENTS = {
     "python": [
         {"id": "ach_py_start",     "icon": "ach-py-start.svg",     "lessons": 1},
         {"id": "ach_py_ten",       "icon": "ach-py-ten.svg",       "lessons": 10},
-        {"id": "ach_py_master",    "icon": "ach-py-master.svg",    "lessons": 45},
+        {"id": "ach_py_half",      "icon": "ach-py-half.svg"},
+        {"id": "ach_py_almost",    "icon": "ach-py-almost.svg"},
+        {"id": "ach_py_master",    "icon": "ach-py-master.svg"},
         {"id": "ach_py_collector", "icon": "ach-py-collector.svg", "trophies": 5},
     ],
     "java": [
         {"id": "ach_java_start",     "icon": "ach-java-start.svg",     "lessons": 1},
-        {"id": "ach_java_coffee",    "icon": "ach-java-coffee.svg",    "lessons": 10},
-        {"id": "ach_java_oop",       "icon": "ach-java-oop.svg",       "lessons": 35},
+        {"id": "ach_java_ten",       "icon": "ach-java-ten.svg",       "lessons": 10},
+        {"id": "ach_java_half",      "icon": "ach-java-half.svg"},
+        {"id": "ach_java_almost",    "icon": "ach-java-almost.svg"},
+        {"id": "ach_java_master",    "icon": "ach-java-master.svg"},
         {"id": "ach_java_collector", "icon": "ach-java-collector.svg", "trophies": 5},
     ],
     "cpp": [
-        {"id": "ach_cpp_start",   "icon": "ach-cpp-start.svg",   "lessons": 1},
-        {"id": "ach_cpp_ten",     "icon": "ach-cpp-ten.svg",     "lessons": 10},
-        {"id": "ach_cpp_master",  "icon": "ach-cpp-master.svg",  "lessons": 40},
+        {"id": "ach_cpp_start",  "icon": "ach-cpp-start.svg",  "lessons": 1},
+        {"id": "ach_cpp_ten",    "icon": "ach-cpp-ten.svg",    "lessons": 10},
+        {"id": "ach_cpp_half",   "icon": "ach-cpp-half.svg"},
+        {"id": "ach_cpp_almost", "icon": "ach-cpp-almost.svg"},
+        {"id": "ach_cpp_master", "icon": "ach-cpp-master.svg"},
     ],
     "c": [
-        {"id": "ach_c_start",   "icon": "ach-c-start.svg",   "lessons": 1},
-        {"id": "ach_c_ten",     "icon": "ach-c-ten.svg",     "lessons": 10},
-        {"id": "ach_c_master",  "icon": "ach-c-master.svg",  "lessons": 30},
+        {"id": "ach_c_start",  "icon": "ach-c-start.svg",  "lessons": 1},
+        {"id": "ach_c_ten",    "icon": "ach-c-ten.svg",    "lessons": 10},
+        {"id": "ach_c_half",   "icon": "ach-c-half.svg"},
+        {"id": "ach_c_almost", "icon": "ach-c-almost.svg"},
+        {"id": "ach_c_master", "icon": "ach-c-master.svg"},
     ],
     "javascript": [
-        {"id": "ach_js_start",   "icon": "ach-js-start.svg",   "lessons": 1},
-        {"id": "ach_js_ten",     "icon": "ach-js-ten.svg",     "lessons": 10},
-        {"id": "ach_js_master",  "icon": "ach-js-master.svg",  "lessons": 40},
+        {"id": "ach_js_start",  "icon": "ach-js-start.svg",  "lessons": 1},
+        {"id": "ach_js_ten",    "icon": "ach-js-ten.svg",    "lessons": 10},
+        {"id": "ach_js_half",   "icon": "ach-js-half.svg"},
+        {"id": "ach_js_almost", "icon": "ach-js-almost.svg"},
+        {"id": "ach_js_master", "icon": "ach-js-master.svg"},
     ],
     "html": [
         {"id": "ach_html_start",  "icon": "ach-html-start.svg",  "lessons": 1},
         {"id": "ach_html_ten",    "icon": "ach-html-ten.svg",    "lessons": 10},
-        {"id": "ach_html_master", "icon": "ach-html-master.svg", "lessons": 40},
+        {"id": "ach_html_half",   "icon": "ach-html-half.svg"},
+        {"id": "ach_html_almost", "icon": "ach-html-almost.svg"},
+        {"id": "ach_html_master", "icon": "ach-html-master.svg"},
     ],
     "css": [
         {"id": "ach_css_start",  "icon": "ach-css-start.svg",  "lessons": 1},
         {"id": "ach_css_ten",    "icon": "ach-css-ten.svg",    "lessons": 10},
-        {"id": "ach_css_master", "icon": "ach-css-master.svg", "lessons": 30},
+        {"id": "ach_css_half",   "icon": "ach-css-half.svg"},
+        {"id": "ach_css_almost", "icon": "ach-css-almost.svg"},
+        {"id": "ach_css_master", "icon": "ach-css-master.svg"},
     ],
     "prog": [
         {"id": "ach_prog_start",  "icon": "ach-prog-start.svg",  "lessons": 1},
         {"id": "ach_prog_ten",    "icon": "ach-prog-ten.svg",    "lessons": 10},
-        {"id": "ach_prog_master", "icon": "ach-prog-master.svg", "lessons": 20},
+        {"id": "ach_prog_half",   "icon": "ach-prog-half.svg"},
+        {"id": "ach_prog_almost", "icon": "ach-prog-almost.svg"},
+        {"id": "ach_prog_master", "icon": "ach-prog-master.svg"},
     ],
 }
 
 GLOBAL_ACHIEVEMENTS = [
-    {"id": "ach_streak_3",     "icon": "ach-global-fire.svg",         "streak": 3},
-    {"id": "ach_streak_7",     "icon": "ach-global-fire-7.svg",       "streak": 7},
-    {"id": "ach_streak_30",    "icon": "ach-global-fire-30.svg",      "streak": 30},
-    {"id": "ach_first_trophy", "icon": "ach-global-trophy.svg",       "trophies": 1},
-    {"id": "ach_all_trophies", "icon": "ach-global-star.svg",         "trophies": 10},
-    {"id": "ach_polyglot",     "icon": "ach-global-polyglot.svg",     "langs": 2},
-    {"id": "ach_polyglot_pro", "icon": "ach-global-polyglot-pro.svg", "langs": 4},
-    {"id": "ach_polyglot_max", "icon": "ach-global-polyglot-max.svg", "langs": 8},
+    {"id": "ach_streak_3",          "icon": "ach-global-fire.svg",         "streak": 3},
+    {"id": "ach_streak_7",          "icon": "ach-global-fire-7.svg",       "streak": 7},
+    {"id": "ach_streak_30",         "icon": "ach-global-fire-30.svg",      "streak": 30},
+    {"id": "ach_first_trophy",      "icon": "ach-global-trophy.svg",       "trophies": 1},
+    {"id": "ach_all_trophies",      "icon": "ach-global-star.svg",         "trophies": 10},
+    {"id": "ach_polyglot",          "icon": "ach-global-polyglot.svg",     "langs": 2},
+    {"id": "ach_polyglot_pro",      "icon": "ach-global-polyglot-pro.svg", "langs": 4},
+    {"id": "ach_polyglot_max",      "icon": "ach-global-polyglot-max.svg", "langs": 8},
+    {"id": "ach_marathon",          "icon": "ach-global-marathon.svg"},
+    {"id": "ach_perfectionist",     "icon": "ach-global-perfectionist.svg"},
+    {"id": "ach_all_half",          "icon": "ach-global-half.svg"},
+    {"id": "ach_all_almost",        "icon": "ach-global-almost.svg"},
+    {"id": "ach_codequest_master",  "icon": "ach-global-master.svg"},
+    {"id": "ach_legend",            "icon": "ach-global-legend.svg"},
 ]
 GLOBAL_STORAGE_KEY = "global_achievements"
 
@@ -880,29 +902,87 @@ def check_achievements():
             streak = get_streak_status()['streak']
             started_langs = sum(1 for l in LANGUAGES if sum(_lang_progress(data, l)) > 0)
 
+            # Считаем тоталы для текущего языка и для всех языков сразу
+            l_total, t_total = _course_totals(lang)
+            gl_total_l = sum(_course_totals(l)[0] for l in LANGUAGES)
+            gl_total_t = sum(_course_totals(l)[1] for l in LANGUAGES)
+
+            gl_done_l = sum(_lang_progress(data, l)[0] for l in LANGUAGES)
+            gl_done_t = sum(_lang_progress(data, l)[1] for l in LANGUAGES)
+
             new_achievements = []
 
+            # --- АЧИВКИ ЯЗЫКА ---
             lang_key = f"{lang}_achievements"
             lang_unlocked = data.get(lang_key, [])
+
             for ach in LANG_ACHIEVEMENTS.get(lang, []):
                 if ach['id'] in lang_unlocked:
                     continue
+
+                # Динамические ачивки
+                if ach['id'] == f"ach_{lang}_half":
+                    if l_total > 0 and lessons * 2 >= l_total:
+                        lang_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+                if ach['id'] == f"ach_{lang}_almost":
+                    if l_total > 0 and lessons * 10 >= l_total * 9:
+                        lang_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+                if ach['id'] == f"ach_{lang}_master":
+                    if l_total > 0 and lessons >= l_total:
+                        lang_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+
+                # Стандартные
                 if _requirement_met(ach, lessons, trophies, streak, started_langs):
                     lang_unlocked.append(ach['id'])
                     new_achievements.append(ach['id'])
+
             data[lang_key] = lang_unlocked
 
+            # --- ГЛОБАЛЬНЫЕ АЧИВКИ ---
             global_unlocked = data.get(GLOBAL_STORAGE_KEY, [])
+            perfect_count = sum(1 for k, v in data.items() if k.startswith('perfect_quiz_') and v)
+
+            # Проверка, все ли языковые ачивки получены (для Легенды)
+            all_lang_achievements = all(
+                all(a['id'] in data.get(f"{l}_achievements", []) for a in LANG_ACHIEVEMENTS.get(l, []))
+                for l in LANGUAGES
+            )
+
             for ach in GLOBAL_ACHIEVEMENTS:
                 if ach['id'] in global_unlocked:
                     continue
+
+                if ach['id'] == 'ach_marathon':
+                    if gl_done_l >= 100: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+                if ach['id'] == 'ach_perfectionist':
+                    if perfect_count >= 10: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+                if ach['id'] == 'ach_all_half':
+                    if gl_total_l > 0 and gl_done_l * 2 >= gl_total_l: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+                if ach['id'] == 'ach_all_almost':
+                    if gl_total_l > 0 and gl_done_l * 10 >= gl_total_l * 9: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+                if ach['id'] == 'ach_codequest_master':
+                    if gl_total_l > 0 and gl_done_l >= gl_total_l: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+                if ach['id'] == 'ach_legend':
+                    if gl_total_l > 0 and gl_done_l >= gl_total_l and gl_done_t >= gl_total_t and all_lang_achievements:
+                        global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
+                    continue
+
+                # Стандартные (стрик, полиглот)
                 if _requirement_met(ach, lessons, trophies, streak, started_langs):
                     global_unlocked.append(ach['id'])
                     new_achievements.append(ach['id'])
+
             data[GLOBAL_STORAGE_KEY] = global_unlocked
 
             return new_achievements
-
         return update_data(mutate)
     except Exception as e:
         print("Ошибка проверки ачивок:", e)
@@ -929,9 +1009,12 @@ def get_time_stats():
         day_str = (date.today() - timedelta(days=i)).isoformat()
         week_seconds += time_spent.get(day_str, 0)
 
+    all_time_seconds = sum(time_spent.values())
+
     return {
         "today_minutes": today_seconds // 60,
-        "week_minutes": week_seconds // 60
+        "week_minutes": week_seconds // 60,
+        "all_time_minutes": all_time_seconds // 60
     }
 
 window = webview.create_window(
