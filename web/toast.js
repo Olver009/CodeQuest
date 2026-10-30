@@ -1,4 +1,4 @@
-function showToast(message, type = 'success') {
+function showToast(message, type = 'success', subtitle = '', iconUrl = '') {
     let container = document.getElementById('toast-container');
     if (!container) {
         container = document.createElement('div');
@@ -9,8 +9,23 @@ function showToast(message, type = 'success') {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
 
-    const icon = type === 'error' ? '❌' : '🏆'; // Заменил галочку на кубок для ачивок
-    toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+    // Если передали картинку — показываем её, иначе галочку/крестик
+    let iconHtml;
+    if (iconUrl) {
+        iconHtml = `<img src="${iconUrl}" style="width:28px; height:28px; object-fit:contain; flex-shrink:0;" onerror="this.outerHTML='<div class=\\'toast-icon\\' style=\\'color:#22c55e;\\'>✓</div>'">`;
+    } else {
+        const icon = type === 'error' ? '✕' : '✓';
+        const iconColor = type === 'error' ? '#ef4444' : '#22c55e';
+        iconHtml = `<div class="toast-icon" style="color: ${iconColor};">${icon}</div>`;
+    }
+
+    toast.innerHTML = `
+        ${iconHtml}
+        <div class="toast-text">
+            ${message}
+            ${subtitle ? `<small>${subtitle}</small>` : ''}
+        </div>
+    `;
 
     container.appendChild(toast);
 

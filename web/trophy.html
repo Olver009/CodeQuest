@@ -484,7 +484,9 @@
             pywebview.api.check_achievements().then(newAchs => {
                 if (newAchs && newAchs.length > 0) {
                     playAchievementSound();
-                    newAchs.forEach(ach => { showToast(t('ach_unlocked') + ': ' + t(ach), 'success'); });
+                    newAchs.forEach(ach => {
+                        showToast(t('ach_unlocked') + ': ' + t(ach.id), 'success', '', 'icons/' + ach.icon);
+                    });
                 }
             });
         }

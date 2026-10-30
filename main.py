@@ -8,8 +8,12 @@ import shutil
 import subprocess
 import re
 import atexit
+import configparser
+import urllib.request
+import webbrowser
 import tkinter as tk
 from datetime import date, timedelta
+
 
 try:
     import winpty
@@ -902,7 +906,6 @@ def check_achievements():
             streak = get_streak_status()['streak']
             started_langs = sum(1 for l in LANGUAGES if sum(_lang_progress(data, l)) > 0)
 
-            # Считаем тоталы для текущего языка и для всех языков сразу
             l_total, t_total = _course_totals(lang)
             gl_total_l = sum(_course_totals(l)[0] for l in LANGUAGES)
             gl_total_t = sum(_course_totals(l)[1] for l in LANGUAGES)
@@ -917,27 +920,27 @@ def check_achievements():
             lang_unlocked = data.get(lang_key, [])
 
             for ach in LANG_ACHIEVEMENTS.get(lang, []):
-                if ach['id'] in lang_unlocked:
+                ach_id = ach['id']
+                if ach_id in lang_unlocked:
                     continue
 
-                # Динамические ачивки
-                if ach['id'] == f"ach_{lang}_half":
-                    if l_total > 0 and lessons * 2 >= l_total:
-                        lang_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
-                if ach['id'] == f"ach_{lang}_almost":
-                    if l_total > 0 and lessons * 10 >= l_total * 9:
-                        lang_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
-                if ach['id'] == f"ach_{lang}_master":
-                    if l_total > 0 and lessons >= l_total:
-                        lang_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
+                has_req = any(k in ach for k in ('lessons', 'trophies', 'streak', 'langs'))
+                unlocked = False
 
-                # Стандартные
-                if _requirement_met(ach, lessons, trophies, streak, started_langs):
-                    lang_unlocked.append(ach['id'])
-                    new_achievements.append(ach['id'])
+                if not has_req:
+                    # Динамические: определяем по суффиксу, чтобы не зависеть от кода языка
+                    if ach_id.endswith('_half'):
+                        unlocked = (l_total > 0 and lessons * 2 >= l_total)
+                    elif ach_id.endswith('_almost'):
+                        unlocked = (l_total > 0 and lessons * 10 >= l_total * 9)
+                    elif ach_id.endswith('_master'):
+                        unlocked = (l_total > 0 and lessons >= l_total)
+                else:
+                    unlocked = _requirement_met(ach, lessons, trophies, streak, started_langs)
+
+                if unlocked:
+                    lang_unlocked.append(ach_id)
+                    new_achievements.append({"id": ach_id, "icon": ach.get('icon', 'lesson-all.svg')})
 
             data[lang_key] = lang_unlocked
 
@@ -945,44 +948,41 @@ def check_achievements():
             global_unlocked = data.get(GLOBAL_STORAGE_KEY, [])
             perfect_count = sum(1 for k, v in data.items() if k.startswith('perfect_quiz_') and v)
 
-            # Проверка, все ли языковые ачивки получены (для Легенды)
             all_lang_achievements = all(
                 all(a['id'] in data.get(f"{l}_achievements", []) for a in LANG_ACHIEVEMENTS.get(l, []))
                 for l in LANGUAGES
             )
 
             for ach in GLOBAL_ACHIEVEMENTS:
-                if ach['id'] in global_unlocked:
+                ach_id = ach['id']
+                if ach_id in global_unlocked:
                     continue
 
-                if ach['id'] == 'ach_marathon':
-                    if gl_done_l >= 100: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
-                if ach['id'] == 'ach_perfectionist':
-                    if perfect_count >= 10: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
-                if ach['id'] == 'ach_all_half':
-                    if gl_total_l > 0 and gl_done_l * 2 >= gl_total_l: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
-                if ach['id'] == 'ach_all_almost':
-                    if gl_total_l > 0 and gl_done_l * 10 >= gl_total_l * 9: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
-                if ach['id'] == 'ach_codequest_master':
-                    if gl_total_l > 0 and gl_done_l >= gl_total_l: global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
-                if ach['id'] == 'ach_legend':
-                    if gl_total_l > 0 and gl_done_l >= gl_total_l and gl_done_t >= gl_total_t and all_lang_achievements:
-                        global_unlocked.append(ach['id']); new_achievements.append(ach['id'])
-                    continue
+                unlocked = False
+                if ach_id == 'ach_marathon':
+                    unlocked = (gl_done_l >= 100)
+                elif ach_id == 'ach_perfectionist':
+                    unlocked = (perfect_count >= 10)
+                elif ach_id == 'ach_all_half':
+                    unlocked = (gl_total_l > 0 and gl_done_l * 2 >= gl_total_l)
+                elif ach_id == 'ach_all_almost':
+                    unlocked = (gl_total_l > 0 and gl_done_l * 10 >= gl_total_l * 9)
+                elif ach_id == 'ach_codequest_master':
+                    unlocked = (gl_total_l > 0 and gl_done_l >= gl_total_l)
+                elif ach_id == 'ach_legend':
+                    unlocked = (gl_total_l > 0 and gl_done_l >= gl_total_l
+                                and gl_done_t >= gl_total_t and all_lang_achievements)
+                elif _requirement_met(ach, lessons, trophies, streak, started_langs):
+                    unlocked = True
 
-                # Стандартные (стрик, полиглот)
-                if _requirement_met(ach, lessons, trophies, streak, started_langs):
-                    global_unlocked.append(ach['id'])
-                    new_achievements.append(ach['id'])
+                if unlocked:
+                    global_unlocked.append(ach_id)
+                    new_achievements.append({"id": ach_id, "icon": ach.get('icon', 'lesson-all.svg')})
 
             data[GLOBAL_STORAGE_KEY] = global_unlocked
 
             return new_achievements
+
         return update_data(mutate)
     except Exception as e:
         print("Ошибка проверки ачивок:", e)
@@ -1016,6 +1016,39 @@ def get_time_stats():
         "week_minutes": week_seconds // 60,
         "all_time_minutes": all_time_seconds // 60
     }
+
+def get_app_version():
+    try:
+        config = configparser.ConfigParser()
+        config.read(os.path.join(APP_ROOT, "version.ini"))
+        return f"{config.get('Version', 'Major')}.{config.get('Version', 'Minor')}.{config.get('Version', 'Patch')}"
+    except Exception:
+        return "1.1.1" # fallback
+
+def check_updates():
+    try:
+        req = urllib.request.Request(
+            "https://api.github.com/repos/Olver009/CodeQuest/releases/latest",
+            headers={'User-Agent': 'CodeQuest-App'}
+        )
+        with urllib.request.urlopen(req, timeout=5) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            latest_tag = data.get("tag_name", "").lstrip("v")
+            current_version = get_app_version()
+
+            # Сравниваем версии по частям (например, 1.1.1 vs 1.1.2)
+            current_parts = [int(x) for x in current_version.split('.')]
+            latest_parts = [int(x) for x in latest_tag.split('.')]
+
+            if latest_parts > current_parts:
+                return {"update_available": True, "version": latest_tag, "url": data.get("html_url")}
+        return {"update_available": False}
+    except Exception as e:
+        return {"error": str(e)}
+
+def open_url(url):
+    webbrowser.open(url)
+    return True
 
 window = webview.create_window(
     "CodeQuest",
@@ -1057,7 +1090,9 @@ window.expose(
     get_lang_stats,
     get_all_lang_stats,
     add_time_spent,
-    get_time_stats
+    get_time_stats,
+    check_updates,
+    open_url
 )
 
 def on_window_restored():

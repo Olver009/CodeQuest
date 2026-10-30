@@ -191,8 +191,7 @@
                 "c": "icons/c.svg", "javascript": "icons/javascript.svg", "html": "icons/html.svg",
                 "css": "icons/css.svg", "prog": "icons/prog.svg"
             };
-            document.getElementById('lang-progress-list').innerHTML = allStats.map(s => {
-                const percent = s.total > 0 ? (s.done / s.total) * 100 : 0;
+            document.getElementById('lang-progress-list').innerHTML = allStats.sort((a, b) => b.done - a.done).map(s => {                const percent = s.total > 0 ? (s.done / s.total) * 100 : 0;
                 return `<div class="lang-row ${s.done === 0 ? 'idle' : ''}">
                     <img class="lang-row-icon" src="${langIcons[s.lang] || 'icons/prog.svg'}" alt="" onerror="this.style.display='none'">
                     <div class="lang-row-main">

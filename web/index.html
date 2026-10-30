@@ -188,6 +188,33 @@
   window.addEventListener('pywebviewready', async () => {
     await applyLanguage();
 
+    // --- Проверка обновлений ---
+    try {
+      const updateInfo = await pywebview.api.check_updates();
+      if (updateInfo && updateInfo.update_available) {
+        showToast(
+                `Доступно обновление: v${updateInfo.version}!`,
+                'success',
+                'Нажмите, чтобы скачать с GitHub',
+                ''
+        );
+        // Делаем тост кликабельным
+        setTimeout(() => {
+          const toasts = document.querySelectorAll('#toast-container .toast');
+          if (toasts.length > 0) {
+            const lastToast = toasts[toasts.length - 1];
+            lastToast.style.cursor = 'pointer';
+            lastToast.onclick = () => {
+              pywebview.api.open_url(updateInfo.url);
+              lastToast.remove();
+            };
+          }
+        }, 100);
+      }
+    } catch (e) {
+      console.log("Ошибка проверки обновлений:", e);
+    }
+
     const savedProgress = await pywebview.api.load_data();
 
     // Применяем тему (если выбрана светлая)
