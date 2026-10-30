@@ -80,7 +80,7 @@ winpty_agents = [
 
 # Без агентов ConPTY в datas запуск кода ученика падает с 0xc0000142:
 # в бандл попадают только DLL, а OpenConsole.exe — нет.
-datas = collect('web', 'web') + [('lessons', 'lessons'), ('runtime', 'runtime')] + winpty_agents
+datas = collect('web', 'web') + [('lessons', 'lessons'), ('runtime', 'runtime'), ('version.ini', '.')] + winpty_agents
 
 a = Analysis(
     ['main.py'],

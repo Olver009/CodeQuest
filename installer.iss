@@ -27,7 +27,11 @@ DefaultGroupName={#MyAppName}
 DisableProgramGroupPage=yes
 LicenseFile=LICENSE
 OutputDir=release
-OutputBaseFilename=CodeQuest-Setup-{#AppVersion}
+#ifdef CoreOnly
+  OutputBaseFilename=CodeQuest-Setup-Core-{#AppVersion}
+#else
+  OutputBaseFilename=CodeQuest-Setup-Full-{#AppVersion}
+#endif
 SetupIconFile=icon.ico
 UninstallDisplayIcon={app}\{#MyAppExeName}
 UninstallDisplayName={#MyAppName}
@@ -43,6 +47,7 @@ ArchitecturesInstallIn64BitMode=x64compatible
 CloseApplications=yes
 RestartApplications=no
 
+
 [Languages]
 Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -53,6 +58,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 ; Весь бандл PyInstaller (onedir): CodeQuest.exe + _internal\ с портативным Python, уроками и интерфейсом.
 Source: "dist\CodeQuest\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+#ifndef CoreOnly
+Source: "dist\CodeQuest\_internal\runtime\*"; DestDir: "{app}\_internal\runtime"; Flags: recursesubdirs
+#endif
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

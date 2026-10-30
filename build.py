@@ -59,10 +59,13 @@ def find_iscc():
 
 def build_app():
     run([sys.executable, "-m", "PyInstaller", "CodeQuest.spec", "--noconfirm"])
+    shutil.copy(os.path.join(ROOT, "version.ini"), os.path.join(ROOT, "dist", "CodeQuest", "version.ini"))
 
 
 def build_installer(version):
-    run([find_iscc(), "installer.iss", "/DAppVersion=" + version])
+    iscc = find_iscc()
+    run([iscc, "installer.iss", "/DAppVersion=" + version])
+    run([iscc, "installer.iss", "/DAppVersion=" + version, "/DCoreOnly"])
 
 
 def zip_tree(zf, base, arc_prefix, top_excludes=SOURCE_EXCLUDE_TOP):
@@ -130,3 +133,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

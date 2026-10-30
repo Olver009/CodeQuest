@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+  <script src="update.js"></script>
   <meta charset="utf-8">
   <title>CodeQuest</title>
   <link rel="stylesheet" href="style.css">
@@ -187,6 +188,8 @@
 
   window.addEventListener('pywebviewready', async () => {
     await applyLanguage();
+
+    await checkForUpdatesAndShowBanner();
 
     // --- Проверка обновлений ---
     try {

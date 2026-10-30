@@ -1018,14 +1018,25 @@ def get_time_stats():
     }
 
 def get_app_version():
-    try:
-        config = configparser.ConfigParser()
-        config.read(os.path.join(APP_ROOT, "version.ini"))
-        return f"{config.get('Version', 'Major')}.{config.get('Version', 'Minor')}.{config.get('Version', 'Patch')}"
-    except Exception:
-        return "1.1.1" # fallback
+    candidates = [
+        os.path.join(APP_ROOT, "version.ini"),
+        os.path.join(APP_ROOT, "_internal", "version.ini"),
+    ]
+    if hasattr(sys, "_MEIPASS"):
+        candidates.append(os.path.join(sys._MEIPASS, "version.ini"))
+    for path in candidates:
+        if path and os.path.exists(path):
+            try:
+                config = configparser.ConfigParser()
+                config.read(path)
+                return f"{config.get('Version', 'Major')}.{config.get('Version', 'Minor')}.{config.get('Version', 'Patch')}"
+            except Exception:
+                continue
+    return "0.0.0"
 
 def check_updates():
+    if not getattr(sys, "frozen", False):
+        return {"update_available": False}
     try:
         req = urllib.request.Request(
             "https://api.github.com/repos/Olver009/CodeQuest/releases/latest",
@@ -1036,13 +1047,70 @@ def check_updates():
             latest_tag = data.get("tag_name", "").lstrip("v")
             current_version = get_app_version()
 
-            # Сравниваем версии по частям (например, 1.1.1 vs 1.1.2)
-            current_parts = [int(x) for x in current_version.split('.')]
-            latest_parts = [int(x) for x in latest_tag.split('.')]
+            if not latest_tag:
+                return {"update_available": False}
+            try:
+                current_parts = [int(x) for x in current_version.split('.')]
+                latest_parts = [int(x) for x in latest_tag.split('.')]
+            except ValueError:
+                return {"update_available": False}
 
             if latest_parts > current_parts:
-                return {"update_available": True, "version": latest_tag, "url": data.get("html_url")}
+                core_url = None
+                full_url = None
+                for asset in data.get("assets", []):
+                    name = asset.get("name", "")
+                    if not name.endswith(".exe"):
+                        continue
+                    if "Setup-Core" in name:
+                        core_url = asset["browser_download_url"]
+                    elif "Setup-Full" in name:
+                        full_url = asset["browser_download_url"]
+
+                if not core_url and not full_url:
+                    return {"update_available": False}
+
+                # Есть ли runtime в текущей установке
+                runtime_exists = os.path.exists(
+                    os.path.join(APP_ROOT, "_internal", "runtime", "python", "python.exe")
+                )
+                return {
+                    "update_available": True,
+                    "version": latest_tag,
+                    "core_url": core_url,
+                    "full_url": full_url,
+                    "runtime_exists": runtime_exists,
+                }
         return {"update_available": False}
+    except Exception as e:
+        return {"error": str(e)}
+
+def download_and_install_update(download_url):
+    if not getattr(sys, "frozen", False):
+        return {"error": "Автообновление только для установленной версии"}
+    if not os.path.exists(os.path.join(APP_ROOT, "unins000.exe")):
+        return {"error": "Портативная версия: обновитесь вручную с GitHub"}
+    if not download_url:
+        return {"error": "Ссылка на установщик не найдена"}
+
+    try:
+        tmp_dir = tempfile.gettempdir()
+        installer_path = os.path.join(tmp_dir, "CodeQuest-Setup-Update.exe")
+
+        req = urllib.request.Request(download_url, headers={'User-Agent': 'CodeQuest-App'})
+        with urllib.request.urlopen(req) as response, open(installer_path, 'wb') as out_file:
+            shutil.copyfileobj(response, out_file)
+
+        subprocess.Popen([
+            installer_path,
+            "/SILENT",
+            "/CLOSEAPPLICATIONS",
+            "/NORESTART",
+            "/SUPPRESSMSGBOXES"
+        ], creationflags=CREATE_NO_WINDOW)
+
+        threading.Timer(2.0, lambda: window.destroy()).start()
+        return {"success": True}
     except Exception as e:
         return {"error": str(e)}
 
